@@ -1,0 +1,9 @@
+package entities
+
+// //////////////////////////////////////////////////////////////////////////////
+// Do not modify this file, it is automatically generated
+// //////////////////////////////////////////////////////////////////////////////
+type Remote struct {
+	ActivityList    *[]string `json:"activity_list,omitempty"`
+	CurrentActivity *string   `json:"current_activity,omitempty"`
+}
