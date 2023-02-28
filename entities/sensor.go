@@ -16,7 +16,7 @@ type Sensor struct {
 
 func GetSensor(attributes map[string]interface{}) *Sensor {
 	var s Sensor
-	FillFields(&s, attributes)
+	fillFields(&s, attributes)
 	s.Additional = attributes
 	return &s
 }

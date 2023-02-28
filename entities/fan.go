@@ -18,7 +18,7 @@ type Fan struct {
 
 func GetFan(attributes map[string]interface{}) *Fan {
 	var f Fan
-	FillFields(&f, attributes)
+	fillFields(&f, attributes)
 	f.Additional = attributes
 	return &f
 }

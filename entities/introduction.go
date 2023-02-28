@@ -10,7 +10,7 @@ type Introduction struct {
 
 func GetIntroduction(attributes map[string]interface{}) *Introduction {
 	var i Introduction
-	FillFields(&i, attributes)
+	fillFields(&i, attributes)
 	i.Additional = attributes
 	return &i
 }

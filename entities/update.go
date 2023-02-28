@@ -17,7 +17,7 @@ type Update struct {
 
 func GetUpdate(attributes map[string]interface{}) *Update {
 	var u Update
-	FillFields(&u, attributes)
+	fillFields(&u, attributes)
 	u.Additional = attributes
 	return &u
 }

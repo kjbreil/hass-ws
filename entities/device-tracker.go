@@ -20,7 +20,7 @@ type DeviceTracker struct {
 
 func GetDeviceTracker(attributes map[string]interface{}) *DeviceTracker {
 	var d DeviceTracker
-	FillFields(&d, attributes)
+	fillFields(&d, attributes)
 	d.Additional = attributes
 	return &d
 }

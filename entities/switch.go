@@ -13,7 +13,7 @@ type Switch struct {
 
 func GetSwitch(attributes map[string]interface{}) *Switch {
 	var s Switch
-	FillFields(&s, attributes)
+	fillFields(&s, attributes)
 	s.Additional = attributes
 	return &s
 }

@@ -34,7 +34,7 @@ type Climate struct {
 
 func GetClimate(attributes map[string]interface{}) *Climate {
 	var c Climate
-	FillFields(&c, attributes)
+	fillFields(&c, attributes)
 	c.Additional = attributes
 	return &c
 }

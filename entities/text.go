@@ -15,7 +15,7 @@ type Text struct {
 
 func GetText(attributes map[string]interface{}) *Text {
 	var t Text
-	FillFields(&t, attributes)
+	fillFields(&t, attributes)
 	t.Additional = attributes
 	return &t
 }

@@ -17,7 +17,7 @@ type Number struct {
 
 func GetNumber(attributes map[string]interface{}) *Number {
 	var n Number
-	FillFields(&n, attributes)
+	fillFields(&n, attributes)
 	n.Additional = attributes
 	return &n
 }

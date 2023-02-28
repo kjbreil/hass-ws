@@ -1,12 +1,12 @@
 package entities
 
 import (
-	"log"
+	"fmt"
 	"reflect"
 	"strings"
 )
 
-func FillFields(object interface{}, attributes map[string]interface{}) {
+func fillFields(object interface{}, attributes map[string]interface{}) {
 
 	v := reflect.ValueOf(object).Elem()
 	t := reflect.TypeOf(object).Elem()
@@ -33,7 +33,7 @@ func FillFields(object interface{}, attributes map[string]interface{}) {
 				ss := toStringSlice(d)
 				v.Field(i).Set(reflect.ValueOf(&ss))
 			default:
-				log.Panicln("cannot do ", ty)
+				panic(fmt.Errorf("not setup to handle %s in fillFields", ty))
 			}
 			delete(attributes, tg)
 		}

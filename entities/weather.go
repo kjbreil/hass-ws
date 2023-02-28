@@ -28,7 +28,7 @@ type Weather struct {
 
 func GetWeather(attributes map[string]interface{}) *Weather {
 	var w Weather
-	FillFields(&w, attributes)
+	fillFields(&w, attributes)
 	w.Additional = attributes
 	return &w
 }

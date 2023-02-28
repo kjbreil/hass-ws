@@ -16,7 +16,7 @@ type Lock struct {
 
 func GetLock(attributes map[string]interface{}) *Lock {
 	var l Lock
-	FillFields(&l, attributes)
+	fillFields(&l, attributes)
 	l.Additional = attributes
 	return &l
 }

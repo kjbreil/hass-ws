@@ -12,7 +12,7 @@ type Select struct {
 
 func GetSelect(attributes map[string]interface{}) *Select {
 	var s Select
-	FillFields(&s, attributes)
+	fillFields(&s, attributes)
 	s.Additional = attributes
 	return &s
 }

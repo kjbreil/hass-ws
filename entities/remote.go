@@ -12,7 +12,7 @@ type Remote struct {
 
 func GetRemote(attributes map[string]interface{}) *Remote {
 	var r Remote
-	FillFields(&r, attributes)
+	fillFields(&r, attributes)
 	r.Additional = attributes
 	return &r
 }

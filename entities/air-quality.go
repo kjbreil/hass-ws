@@ -22,7 +22,7 @@ type AirQuality struct {
 
 func GetAirQuality(attributes map[string]interface{}) *AirQuality {
 	var a AirQuality
-	FillFields(&a, attributes)
+	fillFields(&a, attributes)
 	a.Additional = attributes
 	return &a
 }

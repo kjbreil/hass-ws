@@ -59,6 +59,9 @@ func (c *Client) Connect() error {
 				log.Panicln(err)
 				return
 			}
+			c.OnType.Run(read)
+			c.OnEntity.Run(read)
+
 			c.onMessage(*read)
 		}
 	}()

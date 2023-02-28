@@ -13,7 +13,7 @@ type AlarmControlPanel struct {
 
 func GetAlarmControlPanel(attributes map[string]interface{}) *AlarmControlPanel {
 	var a AlarmControlPanel
-	FillFields(&a, attributes)
+	fillFields(&a, attributes)
 	a.Additional = attributes
 	return &a
 }

@@ -17,7 +17,7 @@ type Cover struct {
 
 func GetCover(attributes map[string]interface{}) *Cover {
 	var c Cover
-	FillFields(&c, attributes)
+	fillFields(&c, attributes)
 	c.Additional = attributes
 	return &c
 }

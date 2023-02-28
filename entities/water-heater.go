@@ -10,7 +10,7 @@ type WaterHeater struct {
 
 func GetWaterHeater(attributes map[string]interface{}) *WaterHeater {
 	var w WaterHeater
-	FillFields(&w, attributes)
+	fillFields(&w, attributes)
 	w.Additional = attributes
 	return &w
 }

@@ -12,7 +12,7 @@ type BinarySensor struct {
 
 func GetBinarySensor(attributes map[string]interface{}) *BinarySensor {
 	var b BinarySensor
-	FillFields(&b, attributes)
+	fillFields(&b, attributes)
 	b.Additional = attributes
 	return &b
 }

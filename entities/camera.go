@@ -18,7 +18,7 @@ type Camera struct {
 
 func GetCamera(attributes map[string]interface{}) *Camera {
 	var c Camera
-	FillFields(&c, attributes)
+	fillFields(&c, attributes)
 	c.Additional = attributes
 	return &c
 }

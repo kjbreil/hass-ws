@@ -18,7 +18,7 @@ type Humidifier struct {
 
 func GetHumidifier(attributes map[string]interface{}) *Humidifier {
 	var h Humidifier
-	FillFields(&h, attributes)
+	fillFields(&h, attributes)
 	h.Additional = attributes
 	return &h
 }

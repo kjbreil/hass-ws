@@ -5,13 +5,14 @@
 package main
 
 import (
+	"fmt"
 	"github.com/gorilla/websocket"
 	hass_ws "github.com/kjbreil/hass-ws"
+	"github.com/kjbreil/hass-ws/entities"
 	"github.com/kjbreil/hass-ws/model"
 	"log"
 	"os"
 	"os/signal"
-	"strings"
 )
 
 func main() {
@@ -25,16 +26,23 @@ func main() {
 	})
 
 	c.AddSubscription(model.EventTypeAll)
+	c.OnType.OnClimate = func(message *model.Message, newAttrs, oldAttrs *entities.Climate) {
+		fmt.Println(message)
+	}
+
+	c.OnEntity["climate.kitchen"] = func(message *model.Message) {
+		fmt.Println(message)
+	}
 	c.SetOnMessage(func(message model.Message) {
 		if message.Event != nil && message.Event.EventType != nil {
 			if !message.Event.EventType.Valid() {
 				log.Println(string(message.Raw))
 			}
-			if *message.Event.EventType == model.EventTypeStateChanged {
-				if message.Event != nil && strings.Contains(*message.Event.Data.EntityId, "climate") {
-					log.Println(string(message.Raw))
-				}
-			}
+			//if *message.Event.EventType == model.EventTypeStateChanged {
+			//	if message.Event != nil && strings.Contains(*message.Event.Data.EntityId, "binary_sensor") {
+			//		log.Println(string(message.Raw))
+			//	}
+			//}
 		}
 	})
 

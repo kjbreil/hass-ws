@@ -19,7 +19,7 @@ type MediaPlayer struct {
 
 func GetMediaPlayer(attributes map[string]interface{}) *MediaPlayer {
 	var m MediaPlayer
-	FillFields(&m, attributes)
+	fillFields(&m, attributes)
 	m.Additional = attributes
 	return &m
 }

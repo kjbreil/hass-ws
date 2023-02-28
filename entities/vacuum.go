@@ -17,7 +17,7 @@ type Vacuum struct {
 
 func GetVacuum(attributes map[string]interface{}) *Vacuum {
 	var v Vacuum
-	FillFields(&v, attributes)
+	fillFields(&v, attributes)
 	v.Additional = attributes
 	return &v
 }

@@ -12,7 +12,7 @@ type Siren struct {
 
 func GetSiren(attributes map[string]interface{}) *Siren {
 	var s Siren
-	FillFields(&s, attributes)
+	fillFields(&s, attributes)
 	s.Additional = attributes
 	return &s
 }

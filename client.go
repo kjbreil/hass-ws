@@ -16,6 +16,9 @@ type Client struct {
 	onMessage     func(message model.Message)
 
 	eventWatch map[string]func(event model.Event)
+
+	OnType   model.OnTypeHandlers
+	OnEntity model.OnEntityHandlers
 }
 
 func NewClient(c *Config) (*Client, error) {
@@ -26,6 +29,7 @@ func NewClient(c *Config) (*Client, error) {
 			log.Panicln("onMessage handler not setup")
 		},
 		subscriptions: make(map[model.EventType]int),
+		OnEntity:      make(model.OnEntityHandlers),
 	}
 	return client, nil
 }

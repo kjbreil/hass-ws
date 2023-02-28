@@ -10,7 +10,7 @@ type Button struct {
 
 func GetButton(attributes map[string]interface{}) *Button {
 	var b Button
-	FillFields(&b, attributes)
+	fillFields(&b, attributes)
 	b.Additional = attributes
 	return &b
 }

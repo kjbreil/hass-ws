@@ -26,7 +26,7 @@ type Light struct {
 
 func GetLight(attributes map[string]interface{}) *Light {
 	var l Light
-	FillFields(&l, attributes)
+	fillFields(&l, attributes)
 	l.Additional = attributes
 	return &l
 }
