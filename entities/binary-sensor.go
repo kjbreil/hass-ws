@@ -4,6 +4,15 @@ package entities
 // Do not modify this file, it is automatically generated
 // //////////////////////////////////////////////////////////////////////////////
 type BinarySensor struct {
-	DeviceClass *string `json:"device_class,omitempty"`
-	IsOn        *bool   `json:"is_on,omitempty"`
+	Additional   map[string]interface{} `json:"additional,omitempty"`
+	DeviceClass  *string                `json:"device_class,omitempty"`
+	FriendlyName *string                `json:"friendly_name,omitempty"`
+	IsOn         *bool                  `json:"is_on,omitempty"`
+}
+
+func GetBinarySensor(attributes map[string]interface{}) *BinarySensor {
+	var b BinarySensor
+	FillFields(&b, attributes)
+	b.Additional = attributes
+	return &b
 }

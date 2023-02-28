@@ -1,5 +1,9 @@
 package model
 
+import (
+	"encoding/json"
+)
+
 type Message struct {
 	ID          *int        `json:"id,omitempty"`
 	Type        MessageType `json:"type"`
@@ -37,4 +41,15 @@ func (mt MessageType) Valid() bool {
 type Error struct {
 	Code    string `json:"code"`
 	Message string `json:"message"`
+}
+
+func ParseMessage(msgJson []byte) (Message, error) {
+	var message Message
+
+	err := json.Unmarshal(msgJson, &message)
+	if err != nil {
+		return message, err
+	}
+
+	return message, nil
 }

@@ -4,6 +4,15 @@ package entities
 // Do not modify this file, it is automatically generated
 // //////////////////////////////////////////////////////////////////////////////
 type Siren struct {
-	AvailableTones *[]string `json:"available_tones,omitempty"`
-	IsOn           *bool     `json:"is_on,omitempty"`
+	Additional     map[string]interface{} `json:"additional,omitempty"`
+	AvailableTones *[]string              `json:"available_tones,omitempty"`
+	FriendlyName   *string                `json:"friendly_name,omitempty"`
+	IsOn           *bool                  `json:"is_on,omitempty"`
+}
+
+func GetSiren(attributes map[string]interface{}) *Siren {
+	var s Siren
+	FillFields(&s, attributes)
+	s.Additional = attributes
+	return &s
 }
