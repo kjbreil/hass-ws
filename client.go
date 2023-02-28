@@ -28,7 +28,6 @@ func NewClient(c *Config) (*Client, error) {
 	client := &Client{
 		config: *c,
 		onMessage: func(message model.Message) {
-			log.Panicln("onMessage handler not setup")
 		},
 		subscriptions: make(map[model.EventType]int),
 		OnEntity:      make(model.OnEntityHandlers),

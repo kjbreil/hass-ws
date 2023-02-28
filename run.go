@@ -22,6 +22,5 @@ func (c *Client) run() {
 
 		c.OnType.Run(message)
 		c.OnEntity.Run(message)
-		c.onMessage(*message)
 	}
 }
