@@ -12,8 +12,9 @@ type Message struct {
 
 	EventType *EventType `json:"event_type,omitempty"`
 
-	Error *Error `json:"error,omitempty"`
-	Event *Event `json:"event,omitempty"`
+	Error  *Error   `json:"error,omitempty"`
+	Event  *Event   `json:"event,omitempty"`
+	Result []Result `json:"result,omitempty"`
 
 	Raw []byte `json:"-"`
 }
@@ -27,11 +28,20 @@ const (
 	MessageTypeSubscribeEvents              = "subscribe_events"
 	MessageTypeSubscribeTrigger             = "subscribe_trigger"
 	MessageTypeEvent                        = "event"
+	MessageTypeGetStates                    = "get_states"
+	MessageTypeGetServices                  = "get_services"
 )
 
 func (mt MessageType) Valid() bool {
 	switch mt {
-	case MessageTypeAuthRequired, MessageTypeAuth, MessageTypeAuthOK, MessageTypeSubscribeEvents, MessageTypeSubscribeTrigger, MessageTypeEvent:
+	case MessageTypeAuthRequired,
+		MessageTypeAuth,
+		MessageTypeAuthOK,
+		MessageTypeSubscribeEvents,
+		MessageTypeSubscribeTrigger,
+		MessageTypeEvent,
+		MessageTypeGetStates,
+		MessageTypeGetServices:
 		return true
 	}
 

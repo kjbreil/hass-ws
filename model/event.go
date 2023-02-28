@@ -8,9 +8,10 @@ type EventType string
 
 const (
 	EventTypeAll              EventType = "all"
-	EventTypeStateChanged               = "state_changed"
-	EventTypeCallService                = "call_service"
-	EventTypePysScriptRunning           = "pyscript_running"
+	EventTypeState            EventType = "state"
+	EventTypeStateChanged     EventType = "state_changed"
+	EventTypeCallService      EventType = "call_service"
+	EventTypePysScriptRunning EventType = "pyscript_running"
 )
 
 func (et EventType) Valid() bool {
@@ -27,7 +28,7 @@ func (et EventType) Valid() bool {
 
 type Event struct {
 	Data      *Data      `json:"data,omitempty"`
-	EventType *EventType `json:"event_type,omitempty"`
+	EventType EventType  `json:"event_type,omitempty"`
 	TimeFired *time.Time `json:"time_fired,omitempty"`
 	Origin    *string    `json:"origin,omitempty"`
 	Context   *Context   `json:"context,omitempty"`

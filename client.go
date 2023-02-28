@@ -17,6 +17,8 @@ type Client struct {
 
 	eventWatch map[string]func(event model.Event)
 
+	callbacks map[int]chan *model.Message
+
 	OnType   model.OnTypeHandlers
 	OnEntity model.OnEntityHandlers
 }
@@ -30,6 +32,7 @@ func NewClient(c *Config) (*Client, error) {
 		},
 		subscriptions: make(map[model.EventType]int),
 		OnEntity:      make(model.OnEntityHandlers),
+		callbacks:     make(map[int]chan *model.Message),
 	}
 	return client, nil
 }
@@ -44,6 +47,49 @@ func (c *Client) AddSubscription(eventType model.EventType) {
 
 func (c *Client) WriteMessage(messageType int, data []byte) error {
 	return c.client.WriteMessage(messageType, data)
+}
+
+// GetStates requests all the current states and runs them through the handlers
+func (c *Client) GetStates() {
+	callback := make(chan *model.Message)
+	_ = c.sendWithCallback(&model.Message{
+		Type: model.MessageTypeGetStates,
+	}, callback)
+	message := <-callback
+	close(callback)
+
+	c.OnType.RunStates(message)
+	c.OnEntity.RunStates(message)
+	return
+}
+
+//func (c *Client) GetServices() *model.Message {
+//	callback := make(chan *model.Message)
+//	_ = c.sendWithCallback(&model.Message{
+//		Type: model.MessageTypeGetServices,
+//	}, callback)
+//	message := <-callback
+//	close(callback)
+//	os.WriteFile("services.json", message.Raw, 0666)
+//	return message
+//}
+
+func (c *Client) sendWithCallback(msg *model.Message, callback chan *model.Message) error {
+	if msg.Type != model.MessageTypeAuth {
+		c.id++
+		msg.ID = &c.id
+		c.callbacks[c.id] = callback
+	}
+
+	d, _ := json.Marshal(msg)
+	err := c.client.WriteMessage(websocket.TextMessage, d)
+	if err != nil {
+		return err
+	}
+	if !msg.Type.Valid() {
+		log.Panicf("unknown message type: %s\n", msg.Type)
+	}
+	return nil
 }
 
 func (c *Client) send(msg *model.Message) error {

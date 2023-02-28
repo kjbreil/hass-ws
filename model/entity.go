@@ -244,6 +244,666 @@ func (o *OnTypeHandlers) Run(message *Message) {
 		o.OnWeather(message, newAttrs, oldAttrs)
 	}
 }
+func (o *OnTypeHandlers) RunStates(message *Message) {
+	if message.Result == nil {
+		return
+	}
+	for _, r := range message.Result {
+		entityType := strings.Split(*r.EntityId, ".")[0]
+		switch entityType {
+		case "air_quality":
+			if o.OnAirQuality == nil {
+				continue
+			}
+			newAttrs := entities.GetAirQuality(r.Attributes)
+			newMsg := &Message{
+				Event: &Event{
+					Context: r.Context,
+					Data: &Data{
+						EntityId: r.EntityId,
+						NewState: &State{
+							Attributes:  r.Attributes,
+							Context:     r.Context,
+							EntityId:    r.EntityId,
+							LastChanged: r.LastChanged,
+							LastUpdated: r.LastUpdated,
+							State:       r.State,
+						},
+						OldState: nil,
+					},
+					EventType: EventTypeState,
+				},
+				ID:   message.ID,
+				Type: MessageTypeEvent,
+			}
+			o.OnAirQuality(newMsg, newAttrs, nil)
+		case "alarm_control_panel":
+			if o.OnAlarmControlPanel == nil {
+				continue
+			}
+			newAttrs := entities.GetAlarmControlPanel(r.Attributes)
+			newMsg := &Message{
+				Event: &Event{
+					Context: r.Context,
+					Data: &Data{
+						EntityId: r.EntityId,
+						NewState: &State{
+							Attributes:  r.Attributes,
+							Context:     r.Context,
+							EntityId:    r.EntityId,
+							LastChanged: r.LastChanged,
+							LastUpdated: r.LastUpdated,
+							State:       r.State,
+						},
+						OldState: nil,
+					},
+					EventType: EventTypeState,
+				},
+				ID:   message.ID,
+				Type: MessageTypeEvent,
+			}
+			o.OnAlarmControlPanel(newMsg, newAttrs, nil)
+		case "binary_sensor":
+			if o.OnBinarySensor == nil {
+				continue
+			}
+			newAttrs := entities.GetBinarySensor(r.Attributes)
+			newMsg := &Message{
+				Event: &Event{
+					Context: r.Context,
+					Data: &Data{
+						EntityId: r.EntityId,
+						NewState: &State{
+							Attributes:  r.Attributes,
+							Context:     r.Context,
+							EntityId:    r.EntityId,
+							LastChanged: r.LastChanged,
+							LastUpdated: r.LastUpdated,
+							State:       r.State,
+						},
+						OldState: nil,
+					},
+					EventType: EventTypeState,
+				},
+				ID:   message.ID,
+				Type: MessageTypeEvent,
+			}
+			o.OnBinarySensor(newMsg, newAttrs, nil)
+		case "button":
+			if o.OnButton == nil {
+				continue
+			}
+			newAttrs := entities.GetButton(r.Attributes)
+			newMsg := &Message{
+				Event: &Event{
+					Context: r.Context,
+					Data: &Data{
+						EntityId: r.EntityId,
+						NewState: &State{
+							Attributes:  r.Attributes,
+							Context:     r.Context,
+							EntityId:    r.EntityId,
+							LastChanged: r.LastChanged,
+							LastUpdated: r.LastUpdated,
+							State:       r.State,
+						},
+						OldState: nil,
+					},
+					EventType: EventTypeState,
+				},
+				ID:   message.ID,
+				Type: MessageTypeEvent,
+			}
+			o.OnButton(newMsg, newAttrs, nil)
+		case "camera":
+			if o.OnCamera == nil {
+				continue
+			}
+			newAttrs := entities.GetCamera(r.Attributes)
+			newMsg := &Message{
+				Event: &Event{
+					Context: r.Context,
+					Data: &Data{
+						EntityId: r.EntityId,
+						NewState: &State{
+							Attributes:  r.Attributes,
+							Context:     r.Context,
+							EntityId:    r.EntityId,
+							LastChanged: r.LastChanged,
+							LastUpdated: r.LastUpdated,
+							State:       r.State,
+						},
+						OldState: nil,
+					},
+					EventType: EventTypeState,
+				},
+				ID:   message.ID,
+				Type: MessageTypeEvent,
+			}
+			o.OnCamera(newMsg, newAttrs, nil)
+		case "climate":
+			if o.OnClimate == nil {
+				continue
+			}
+			newAttrs := entities.GetClimate(r.Attributes)
+			newMsg := &Message{
+				Event: &Event{
+					Context: r.Context,
+					Data: &Data{
+						EntityId: r.EntityId,
+						NewState: &State{
+							Attributes:  r.Attributes,
+							Context:     r.Context,
+							EntityId:    r.EntityId,
+							LastChanged: r.LastChanged,
+							LastUpdated: r.LastUpdated,
+							State:       r.State,
+						},
+						OldState: nil,
+					},
+					EventType: EventTypeState,
+				},
+				ID:   message.ID,
+				Type: MessageTypeEvent,
+			}
+			o.OnClimate(newMsg, newAttrs, nil)
+		case "cover":
+			if o.OnCover == nil {
+				continue
+			}
+			newAttrs := entities.GetCover(r.Attributes)
+			newMsg := &Message{
+				Event: &Event{
+					Context: r.Context,
+					Data: &Data{
+						EntityId: r.EntityId,
+						NewState: &State{
+							Attributes:  r.Attributes,
+							Context:     r.Context,
+							EntityId:    r.EntityId,
+							LastChanged: r.LastChanged,
+							LastUpdated: r.LastUpdated,
+							State:       r.State,
+						},
+						OldState: nil,
+					},
+					EventType: EventTypeState,
+				},
+				ID:   message.ID,
+				Type: MessageTypeEvent,
+			}
+			o.OnCover(newMsg, newAttrs, nil)
+		case "device_tracker":
+			if o.OnDeviceTracker == nil {
+				continue
+			}
+			newAttrs := entities.GetDeviceTracker(r.Attributes)
+			newMsg := &Message{
+				Event: &Event{
+					Context: r.Context,
+					Data: &Data{
+						EntityId: r.EntityId,
+						NewState: &State{
+							Attributes:  r.Attributes,
+							Context:     r.Context,
+							EntityId:    r.EntityId,
+							LastChanged: r.LastChanged,
+							LastUpdated: r.LastUpdated,
+							State:       r.State,
+						},
+						OldState: nil,
+					},
+					EventType: EventTypeState,
+				},
+				ID:   message.ID,
+				Type: MessageTypeEvent,
+			}
+			o.OnDeviceTracker(newMsg, newAttrs, nil)
+		case "fan":
+			if o.OnFan == nil {
+				continue
+			}
+			newAttrs := entities.GetFan(r.Attributes)
+			newMsg := &Message{
+				Event: &Event{
+					Context: r.Context,
+					Data: &Data{
+						EntityId: r.EntityId,
+						NewState: &State{
+							Attributes:  r.Attributes,
+							Context:     r.Context,
+							EntityId:    r.EntityId,
+							LastChanged: r.LastChanged,
+							LastUpdated: r.LastUpdated,
+							State:       r.State,
+						},
+						OldState: nil,
+					},
+					EventType: EventTypeState,
+				},
+				ID:   message.ID,
+				Type: MessageTypeEvent,
+			}
+			o.OnFan(newMsg, newAttrs, nil)
+		case "humidifier":
+			if o.OnHumidifier == nil {
+				continue
+			}
+			newAttrs := entities.GetHumidifier(r.Attributes)
+			newMsg := &Message{
+				Event: &Event{
+					Context: r.Context,
+					Data: &Data{
+						EntityId: r.EntityId,
+						NewState: &State{
+							Attributes:  r.Attributes,
+							Context:     r.Context,
+							EntityId:    r.EntityId,
+							LastChanged: r.LastChanged,
+							LastUpdated: r.LastUpdated,
+							State:       r.State,
+						},
+						OldState: nil,
+					},
+					EventType: EventTypeState,
+				},
+				ID:   message.ID,
+				Type: MessageTypeEvent,
+			}
+			o.OnHumidifier(newMsg, newAttrs, nil)
+		case "introduction":
+			if o.OnIntroduction == nil {
+				continue
+			}
+			newAttrs := entities.GetIntroduction(r.Attributes)
+			newMsg := &Message{
+				Event: &Event{
+					Context: r.Context,
+					Data: &Data{
+						EntityId: r.EntityId,
+						NewState: &State{
+							Attributes:  r.Attributes,
+							Context:     r.Context,
+							EntityId:    r.EntityId,
+							LastChanged: r.LastChanged,
+							LastUpdated: r.LastUpdated,
+							State:       r.State,
+						},
+						OldState: nil,
+					},
+					EventType: EventTypeState,
+				},
+				ID:   message.ID,
+				Type: MessageTypeEvent,
+			}
+			o.OnIntroduction(newMsg, newAttrs, nil)
+		case "light":
+			if o.OnLight == nil {
+				continue
+			}
+			newAttrs := entities.GetLight(r.Attributes)
+			newMsg := &Message{
+				Event: &Event{
+					Context: r.Context,
+					Data: &Data{
+						EntityId: r.EntityId,
+						NewState: &State{
+							Attributes:  r.Attributes,
+							Context:     r.Context,
+							EntityId:    r.EntityId,
+							LastChanged: r.LastChanged,
+							LastUpdated: r.LastUpdated,
+							State:       r.State,
+						},
+						OldState: nil,
+					},
+					EventType: EventTypeState,
+				},
+				ID:   message.ID,
+				Type: MessageTypeEvent,
+			}
+			o.OnLight(newMsg, newAttrs, nil)
+		case "lock":
+			if o.OnLock == nil {
+				continue
+			}
+			newAttrs := entities.GetLock(r.Attributes)
+			newMsg := &Message{
+				Event: &Event{
+					Context: r.Context,
+					Data: &Data{
+						EntityId: r.EntityId,
+						NewState: &State{
+							Attributes:  r.Attributes,
+							Context:     r.Context,
+							EntityId:    r.EntityId,
+							LastChanged: r.LastChanged,
+							LastUpdated: r.LastUpdated,
+							State:       r.State,
+						},
+						OldState: nil,
+					},
+					EventType: EventTypeState,
+				},
+				ID:   message.ID,
+				Type: MessageTypeEvent,
+			}
+			o.OnLock(newMsg, newAttrs, nil)
+		case "media_player":
+			if o.OnMediaPlayer == nil {
+				continue
+			}
+			newAttrs := entities.GetMediaPlayer(r.Attributes)
+			newMsg := &Message{
+				Event: &Event{
+					Context: r.Context,
+					Data: &Data{
+						EntityId: r.EntityId,
+						NewState: &State{
+							Attributes:  r.Attributes,
+							Context:     r.Context,
+							EntityId:    r.EntityId,
+							LastChanged: r.LastChanged,
+							LastUpdated: r.LastUpdated,
+							State:       r.State,
+						},
+						OldState: nil,
+					},
+					EventType: EventTypeState,
+				},
+				ID:   message.ID,
+				Type: MessageTypeEvent,
+			}
+			o.OnMediaPlayer(newMsg, newAttrs, nil)
+		case "number":
+			if o.OnNumber == nil {
+				continue
+			}
+			newAttrs := entities.GetNumber(r.Attributes)
+			newMsg := &Message{
+				Event: &Event{
+					Context: r.Context,
+					Data: &Data{
+						EntityId: r.EntityId,
+						NewState: &State{
+							Attributes:  r.Attributes,
+							Context:     r.Context,
+							EntityId:    r.EntityId,
+							LastChanged: r.LastChanged,
+							LastUpdated: r.LastUpdated,
+							State:       r.State,
+						},
+						OldState: nil,
+					},
+					EventType: EventTypeState,
+				},
+				ID:   message.ID,
+				Type: MessageTypeEvent,
+			}
+			o.OnNumber(newMsg, newAttrs, nil)
+		case "remote":
+			if o.OnRemote == nil {
+				continue
+			}
+			newAttrs := entities.GetRemote(r.Attributes)
+			newMsg := &Message{
+				Event: &Event{
+					Context: r.Context,
+					Data: &Data{
+						EntityId: r.EntityId,
+						NewState: &State{
+							Attributes:  r.Attributes,
+							Context:     r.Context,
+							EntityId:    r.EntityId,
+							LastChanged: r.LastChanged,
+							LastUpdated: r.LastUpdated,
+							State:       r.State,
+						},
+						OldState: nil,
+					},
+					EventType: EventTypeState,
+				},
+				ID:   message.ID,
+				Type: MessageTypeEvent,
+			}
+			o.OnRemote(newMsg, newAttrs, nil)
+		case "select":
+			if o.OnSelect == nil {
+				continue
+			}
+			newAttrs := entities.GetSelect(r.Attributes)
+			newMsg := &Message{
+				Event: &Event{
+					Context: r.Context,
+					Data: &Data{
+						EntityId: r.EntityId,
+						NewState: &State{
+							Attributes:  r.Attributes,
+							Context:     r.Context,
+							EntityId:    r.EntityId,
+							LastChanged: r.LastChanged,
+							LastUpdated: r.LastUpdated,
+							State:       r.State,
+						},
+						OldState: nil,
+					},
+					EventType: EventTypeState,
+				},
+				ID:   message.ID,
+				Type: MessageTypeEvent,
+			}
+			o.OnSelect(newMsg, newAttrs, nil)
+		case "sensor":
+			if o.OnSensor == nil {
+				continue
+			}
+			newAttrs := entities.GetSensor(r.Attributes)
+			newMsg := &Message{
+				Event: &Event{
+					Context: r.Context,
+					Data: &Data{
+						EntityId: r.EntityId,
+						NewState: &State{
+							Attributes:  r.Attributes,
+							Context:     r.Context,
+							EntityId:    r.EntityId,
+							LastChanged: r.LastChanged,
+							LastUpdated: r.LastUpdated,
+							State:       r.State,
+						},
+						OldState: nil,
+					},
+					EventType: EventTypeState,
+				},
+				ID:   message.ID,
+				Type: MessageTypeEvent,
+			}
+			o.OnSensor(newMsg, newAttrs, nil)
+		case "siren":
+			if o.OnSiren == nil {
+				continue
+			}
+			newAttrs := entities.GetSiren(r.Attributes)
+			newMsg := &Message{
+				Event: &Event{
+					Context: r.Context,
+					Data: &Data{
+						EntityId: r.EntityId,
+						NewState: &State{
+							Attributes:  r.Attributes,
+							Context:     r.Context,
+							EntityId:    r.EntityId,
+							LastChanged: r.LastChanged,
+							LastUpdated: r.LastUpdated,
+							State:       r.State,
+						},
+						OldState: nil,
+					},
+					EventType: EventTypeState,
+				},
+				ID:   message.ID,
+				Type: MessageTypeEvent,
+			}
+			o.OnSiren(newMsg, newAttrs, nil)
+		case "switch":
+			if o.OnSwitch == nil {
+				continue
+			}
+			newAttrs := entities.GetSwitch(r.Attributes)
+			newMsg := &Message{
+				Event: &Event{
+					Context: r.Context,
+					Data: &Data{
+						EntityId: r.EntityId,
+						NewState: &State{
+							Attributes:  r.Attributes,
+							Context:     r.Context,
+							EntityId:    r.EntityId,
+							LastChanged: r.LastChanged,
+							LastUpdated: r.LastUpdated,
+							State:       r.State,
+						},
+						OldState: nil,
+					},
+					EventType: EventTypeState,
+				},
+				ID:   message.ID,
+				Type: MessageTypeEvent,
+			}
+			o.OnSwitch(newMsg, newAttrs, nil)
+		case "text":
+			if o.OnText == nil {
+				continue
+			}
+			newAttrs := entities.GetText(r.Attributes)
+			newMsg := &Message{
+				Event: &Event{
+					Context: r.Context,
+					Data: &Data{
+						EntityId: r.EntityId,
+						NewState: &State{
+							Attributes:  r.Attributes,
+							Context:     r.Context,
+							EntityId:    r.EntityId,
+							LastChanged: r.LastChanged,
+							LastUpdated: r.LastUpdated,
+							State:       r.State,
+						},
+						OldState: nil,
+					},
+					EventType: EventTypeState,
+				},
+				ID:   message.ID,
+				Type: MessageTypeEvent,
+			}
+			o.OnText(newMsg, newAttrs, nil)
+		case "update":
+			if o.OnUpdate == nil {
+				continue
+			}
+			newAttrs := entities.GetUpdate(r.Attributes)
+			newMsg := &Message{
+				Event: &Event{
+					Context: r.Context,
+					Data: &Data{
+						EntityId: r.EntityId,
+						NewState: &State{
+							Attributes:  r.Attributes,
+							Context:     r.Context,
+							EntityId:    r.EntityId,
+							LastChanged: r.LastChanged,
+							LastUpdated: r.LastUpdated,
+							State:       r.State,
+						},
+						OldState: nil,
+					},
+					EventType: EventTypeState,
+				},
+				ID:   message.ID,
+				Type: MessageTypeEvent,
+			}
+			o.OnUpdate(newMsg, newAttrs, nil)
+		case "vacuum":
+			if o.OnVacuum == nil {
+				continue
+			}
+			newAttrs := entities.GetVacuum(r.Attributes)
+			newMsg := &Message{
+				Event: &Event{
+					Context: r.Context,
+					Data: &Data{
+						EntityId: r.EntityId,
+						NewState: &State{
+							Attributes:  r.Attributes,
+							Context:     r.Context,
+							EntityId:    r.EntityId,
+							LastChanged: r.LastChanged,
+							LastUpdated: r.LastUpdated,
+							State:       r.State,
+						},
+						OldState: nil,
+					},
+					EventType: EventTypeState,
+				},
+				ID:   message.ID,
+				Type: MessageTypeEvent,
+			}
+			o.OnVacuum(newMsg, newAttrs, nil)
+		case "water_heater":
+			if o.OnWaterHeater == nil {
+				continue
+			}
+			newAttrs := entities.GetWaterHeater(r.Attributes)
+			newMsg := &Message{
+				Event: &Event{
+					Context: r.Context,
+					Data: &Data{
+						EntityId: r.EntityId,
+						NewState: &State{
+							Attributes:  r.Attributes,
+							Context:     r.Context,
+							EntityId:    r.EntityId,
+							LastChanged: r.LastChanged,
+							LastUpdated: r.LastUpdated,
+							State:       r.State,
+						},
+						OldState: nil,
+					},
+					EventType: EventTypeState,
+				},
+				ID:   message.ID,
+				Type: MessageTypeEvent,
+			}
+			o.OnWaterHeater(newMsg, newAttrs, nil)
+		case "weather":
+			if o.OnWeather == nil {
+				continue
+			}
+			newAttrs := entities.GetWeather(r.Attributes)
+			newMsg := &Message{
+				Event: &Event{
+					Context: r.Context,
+					Data: &Data{
+						EntityId: r.EntityId,
+						NewState: &State{
+							Attributes:  r.Attributes,
+							Context:     r.Context,
+							EntityId:    r.EntityId,
+							LastChanged: r.LastChanged,
+							LastUpdated: r.LastUpdated,
+							State:       r.State,
+						},
+						OldState: nil,
+					},
+					EventType: EventTypeState,
+				},
+				ID:   message.ID,
+				Type: MessageTypeEvent,
+			}
+			o.OnWeather(newMsg, newAttrs, nil)
+		}
+	}
+}
 
 type OnEntityHandlers map[string]func(message *Message)
 
@@ -254,6 +914,38 @@ func (o OnEntityHandlers) Run(message *Message) {
 	for k, v := range o {
 		if k == *message.Event.Data.EntityId {
 			v(message)
+		}
+	}
+}
+func (o OnEntityHandlers) RunStates(message *Message) {
+	if message.Result == nil {
+		return
+	}
+	for _, r := range message.Result {
+		for k, v := range o {
+			if k == *r.EntityId {
+				newMsg := &Message{
+					Event: &Event{
+						Context: r.Context,
+						Data: &Data{
+							EntityId: r.EntityId,
+							NewState: &State{
+								Attributes:  r.Attributes,
+								Context:     r.Context,
+								EntityId:    r.EntityId,
+								LastChanged: r.LastChanged,
+								LastUpdated: r.LastUpdated,
+								State:       r.State,
+							},
+							OldState: nil,
+						},
+						EventType: EventTypeState,
+					},
+					ID:   message.ID,
+					Type: MessageTypeEvent,
+				}
+				v(newMsg)
+			}
 		}
 	}
 }

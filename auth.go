@@ -54,15 +54,25 @@ func (c *Client) Connect() error {
 
 	go func() {
 		for {
-			read, err := c.read()
+			message, err := c.read()
 			if err != nil {
 				log.Panicln(err)
 				return
 			}
-			c.OnType.Run(read)
-			c.OnEntity.Run(read)
+			if message.ID != nil {
 
-			c.onMessage(*read)
+				for i, callback := range c.callbacks {
+					if i == *message.ID {
+						delete(c.callbacks, i)
+						callback <- message
+						return
+					}
+				}
+			}
+
+			c.OnType.Run(message)
+			c.OnEntity.Run(message)
+			c.onMessage(*message)
 		}
 	}()
 

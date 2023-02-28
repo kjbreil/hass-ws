@@ -22,7 +22,7 @@ func main() {
 	c, _ := hass_ws.NewClient(&hass_ws.Config{
 		Host:  "192.168.1.12",
 		Port:  8123,
-		Token: "",
+		Token: "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJlN2RkMmM5YWFmZTc0YjQ3OThhNmYyNjZhNDhlOWM5YyIsImlhdCI6MTY3NzYwNjgyNywiZXhwIjoxOTkyOTY2ODI3fQ.eaakG0hyuVma5iR9nsq3FwAT4QVLEDSI6rv0h34KTJU",
 	})
 
 	c.AddSubscription(model.EventTypeAll)
@@ -34,7 +34,8 @@ func main() {
 		fmt.Println(message)
 	}
 	c.SetOnMessage(func(message model.Message) {
-		if message.Event != nil && message.Event.EventType != nil {
+		if message.Event != nil {
+			//log.Println(string(message.Raw))
 			if !message.Event.EventType.Valid() {
 				log.Println(string(message.Raw))
 			}
@@ -50,6 +51,9 @@ func main() {
 	if err != nil {
 		log.Panicln(err)
 	}
+
+	c.GetStates()
+	//c.GetServices()
 	for {
 		select {
 		case <-interrupt:
