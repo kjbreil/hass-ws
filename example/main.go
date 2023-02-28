@@ -22,7 +22,7 @@ func main() {
 	c, _ := hass_ws.NewClient(&hass_ws.Config{
 		Host:  "192.168.1.12",
 		Port:  8123,
-		Token: "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJlN2RkMmM5YWFmZTc0YjQ3OThhNmYyNjZhNDhlOWM5YyIsImlhdCI6MTY3NzYwNjgyNywiZXhwIjoxOTkyOTY2ODI3fQ.eaakG0hyuVma5iR9nsq3FwAT4QVLEDSI6rv0h34KTJU",
+		Token: "",
 	})
 
 	c.AddSubscription(model.EventTypeAll)

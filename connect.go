@@ -4,7 +4,6 @@ import (
 	"fmt"
 	"github.com/gorilla/websocket"
 	"github.com/kjbreil/hass-ws/model"
-	"log"
 	"net/url"
 )
 
@@ -52,29 +51,7 @@ func (c *Client) Connect() error {
 		}
 	}
 
-	go func() {
-		for {
-			message, err := c.read()
-			if err != nil {
-				log.Panicln(err)
-				return
-			}
-			if message.ID != nil {
-
-				for i, callback := range c.callbacks {
-					if i == *message.ID {
-						delete(c.callbacks, i)
-						callback <- message
-						return
-					}
-				}
-			}
-
-			c.OnType.Run(message)
-			c.OnEntity.Run(message)
-			c.onMessage(*message)
-		}
-	}()
+	go c.run()
 
 	return nil
 }
