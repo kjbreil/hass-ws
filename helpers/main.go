@@ -2,17 +2,22 @@ package main
 
 import (
 	"fmt"
+	"github.com/Jeffail/gabs/v2"
 	"github.com/dave/jennifer/jen"
 	"github.com/iancoleman/strcase"
 	"log"
 	"sort"
+	"strings"
 )
 
 func main() {
 
 	devices := DevicesInit()
 
-	external := make(map[string]*jen.File)
+	servicesJson, _ := gabs.ParseJSONFile("./helpers/services.json")
+
+	entities := make(map[string]*jen.File)
+	services := make(map[string]*jen.File)
 	models := make(map[string]*jen.File)
 
 	fileList := []string{
@@ -23,14 +28,21 @@ func main() {
 		"entity",
 	}
 
-	outFolder := "entities"
+	entitiesFolder := "entities"
+	servicesFolder := "services"
 	modelFolder := "model"
 
 	for _, v := range append(DeviceNames, fileList...) {
-		external[v] = jen.NewFilePathName(fmt.Sprintf("./%s/%s.go", outFolder, v), outFolder)
-		external[v].Comment("////////////////////////////////////////////////////////////////////////////////")
-		external[v].Comment("Do not modify this file, it is automatically generated")
-		external[v].Comment("////////////////////////////////////////////////////////////////////////////////")
+		entities[v] = jen.NewFilePathName(fmt.Sprintf("./%s/%s.go", entitiesFolder, v), entitiesFolder)
+		entities[v].Comment("////////////////////////////////////////////////////////////////////////////////")
+		entities[v].Comment("Do not modify this file, it is automatically generated")
+		entities[v].Comment("////////////////////////////////////////////////////////////////////////////////")
+	}
+	for _, v := range append(DeviceNames, fileList...) {
+		services[v] = jen.NewFilePathName(fmt.Sprintf("./%s/%s.go", entitiesFolder, v), servicesFolder)
+		services[v].Comment("////////////////////////////////////////////////////////////////////////////////")
+		services[v].Comment("Do not modify this file, it is automatically generated")
+		services[v].Comment("////////////////////////////////////////////////////////////////////////////////")
 	}
 
 	for _, v := range modelsFileList {
@@ -42,7 +54,8 @@ func main() {
 
 	fileList = []string{"types"}
 
-	external["types"].Type().Id("Entity").Interface()
+	entities["types"].Type().Id("Entity").Interface()
+	entities["types"].Type().Id("Additional").Map(jen.String()).Interface()
 
 	for _, d := range devices {
 
@@ -63,7 +76,7 @@ func main() {
 		for _, v := range []string{
 			"additional",
 		} {
-			st[v] = append(st[v], jen.Id(strcase.ToCamel(v)).Map(jen.String()).Interface().Tag(map[string]string{"json": v + ",omitempty"}))
+			st[v] = append(st[v], jen.Id(strcase.ToCamel(v)).Id("Additional").Tag(map[string]string{"json": v + ",omitempty"}))
 		}
 
 		sortedKeys := []string{}
@@ -71,7 +84,7 @@ func main() {
 			sortedKeys = append(sortedKeys, key)
 		}
 		sort.Strings(sortedKeys)
-		external[d.Name].Type().Id(strcase.ToCamel(d.Name)).StructFunc(
+		entities[d.Name].Type().Id(strcase.ToCamel(d.Name)).StructFunc(
 			func(g *jen.Group) {
 				for _, key := range sortedKeys {
 					v := st[key]
@@ -82,7 +95,7 @@ func main() {
 			},
 		)
 
-		external[d.Name].Func().
+		entities[d.Name].Func().
 			Id(fmt.Sprintf("Get%s", strcase.ToCamel(d.Name))).
 			Params(jen.Id("attributes").Map(jen.String()).Interface()).
 			Op("*").Id(strcase.ToCamel(d.Name)).
@@ -92,6 +105,81 @@ func main() {
 				jen.Id(string(strcase.ToLowerCamel(d.Name)[0])).Dot("Additional").Op("=").Id("attributes"),
 				jen.Return(jen.Op("&").Id(string(strcase.ToLowerCamel(d.Name)[0]))),
 			)
+
+		// Services
+
+		if d.Name == "climate" {
+			services[d.Name].Type().Id(strcase.ToCamel(d.Name)).Struct(
+				jen.Id("EntityId").String(),
+			)
+
+			enumMap := make(map[string]map[string]struct{})
+
+			//services[d.Name].Func().Id(strcase.ToCamel(d.Name))
+
+			camelName := strcase.ToCamel(d.Name)
+			firstLetter := string(camelName[0])
+
+			deviceServices := servicesJson.Search("service_result", "climate")
+			for k, v := range deviceServices.ChildrenMap() {
+				services[d.Name].Func().Params(jen.Id(firstLetter).Op("*").Id(camelName)).
+					Id(fmt.Sprintf(strcase.ToCamel(k))).
+					ParamsFunc(func(g *jen.Group) {
+						for fn, f := range v.Path("fields").ChildrenMap() {
+							selector := f.Path("selector")
+							if selector != nil {
+								sm := selector.ChildrenMap()
+
+								if _, ok := sm["text"]; ok {
+									g.Add(jen.Id(fn).String())
+								}
+
+								if _, ok := sm["number"]; ok {
+									g.Add(jen.Id(fn).Int())
+								}
+
+								if s, ok := sm["select"]; ok {
+									options := s.ChildrenMap()["options"].Children()
+									if options != nil {
+
+										for _, o := range options {
+											fmt.Println(o.Path("value").String())
+											if _, ok := enumMap[strcase.ToCamel(fn)]; !ok {
+												enumMap[strcase.ToCamel(fn)] = make(map[string]struct{})
+											}
+											enumMap[strcase.ToCamel(fn)][strings.Trim(o.Path("value").String(), "\"")] = struct{}{}
+										}
+										g.Add(jen.Id(strcase.ToLowerCamel(fn)).Id(strcase.ToCamel(fn)))
+									}
+
+									fmt.Println(options)
+									//g.Add(jen.Id(fn).String())
+								}
+
+								fmt.Println(fn, f)
+							}
+						}
+					}).
+					Op("*").Id(strcase.ToCamel(d.Name)).
+					Block(
+						jen.Var().Id(string(strcase.ToLowerCamel(d.Name)[0])).Id(strcase.ToCamel(d.Name)),
+						jen.Return(jen.Op("&").Id(string(strcase.ToLowerCamel(d.Name)[0]))),
+					)
+			}
+
+			for k, v := range enumMap {
+				typeName := strcase.ToCamel(k)
+				services[d.Name].Type().Id(typeName).String()
+				services[d.Name].Const().DefsFunc(func(g *jen.Group) {
+
+					for o := range v {
+						varName := strcase.ToCamel(o)
+
+						g.Add(jen.Id(fmt.Sprintf("%s%s", typeName, varName)).Id(typeName).Op("=").Lit(o))
+					}
+				})
+			}
+		}
 
 	}
 
@@ -262,9 +350,17 @@ func main() {
 		)
 	}
 
-	for k, v := range external {
-		v.Save(fmt.Sprintf("./%s/%s.go", outFolder, k))
+	for k, v := range entities {
+		v.Save(fmt.Sprintf("./%s/%s.go", entitiesFolder, k))
 	}
+
+	for k, v := range services {
+		err := v.Save(fmt.Sprintf("./%s/%s.go", servicesFolder, k))
+		if err != nil {
+			log.Panicln(err)
+		}
+	}
+
 	for k, v := range models {
 		err := v.Save(fmt.Sprintf("./%s/%s.go", modelFolder, k))
 		if err != nil {
