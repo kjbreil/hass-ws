@@ -6,6 +6,7 @@ func (c *Client) run() {
 	for {
 		message, err := c.read()
 		if err != nil {
+			// TODO: Handle Auth Error properly
 			log.Panicln(err)
 			return
 		}

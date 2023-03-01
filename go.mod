@@ -8,3 +8,5 @@ require (
 	github.com/gorilla/websocket v1.5.0
 	github.com/iancoleman/strcase v0.2.0
 )
+
+require github.com/Jeffail/gabs/v2 v2.7.0

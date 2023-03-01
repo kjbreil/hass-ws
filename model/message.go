@@ -12,9 +12,10 @@ type Message struct {
 
 	EventType *EventType `json:"event_type,omitempty"`
 
-	Error  *Error   `json:"error,omitempty"`
-	Event  *Event   `json:"event,omitempty"`
-	Result []Result `json:"result,omitempty"`
+	Error         *Error                 `json:"error,omitempty"`
+	Event         *Event                 `json:"event,omitempty"`
+	Result        []Result               `json:"result,omitempty"`
+	ServiceResult map[string]interface{} `json:"service_result,omitempty"`
 
 	Raw []byte `json:"-"`
 }

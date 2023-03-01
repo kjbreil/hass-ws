@@ -5,11 +5,10 @@
 package main
 
 import (
-	"fmt"
 	"github.com/gorilla/websocket"
 	hass_ws "github.com/kjbreil/hass-ws"
-	"github.com/kjbreil/hass-ws/entities"
 	"github.com/kjbreil/hass-ws/model"
+	"github.com/kjbreil/hass-ws/services"
 	"log"
 	"os"
 	"os/signal"
@@ -25,14 +24,14 @@ func main() {
 		Token: "",
 	})
 
-	c.AddSubscription(model.EventTypeAll)
-	c.OnType.OnClimate = func(message *model.Message, newAttrs, oldAttrs *entities.Climate) {
-		fmt.Println(message)
-	}
-
-	c.OnEntity["climate.kitchen"] = func(message *model.Message) {
-		fmt.Println(message)
-	}
+	//c.AddSubscription(model.EventTypeAll)
+	//c.OnType.OnClimate = func(message *model.Message, newAttrs, oldAttrs *entities.Climate) {
+	//	fmt.Println(message)
+	//}
+	//
+	//c.OnEntity["climate.kitchen"] = func(message *model.Message) {
+	//	fmt.Println(message)
+	//}
 	c.SetOnMessage(func(message model.Message) {
 		if message.Event != nil {
 			//log.Println(string(message.Raw))
@@ -52,7 +51,18 @@ func main() {
 		log.Panicln(err)
 	}
 
-	c.GetStates()
+	high := 78
+	low := 60
+	mode := services.HvacModeHeatCool
+	c.CallService(services.NewClimateSetTemperature(
+		[]string{"climate.kitchen"},
+		&mode,
+		&high,
+		&low,
+		nil,
+	))
+
+	//c.GetStates()
 	//c.GetServices()
 	for {
 		select {

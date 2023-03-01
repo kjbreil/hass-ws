@@ -5,6 +5,7 @@ import (
 	"github.com/gorilla/websocket"
 	"github.com/kjbreil/hass-ws/model"
 	"net/url"
+	"time"
 )
 
 type Config struct {
@@ -53,5 +54,6 @@ func (c *Client) Connect() error {
 
 	go c.run()
 
+	time.Sleep(1 * time.Second)
 	return nil
 }
