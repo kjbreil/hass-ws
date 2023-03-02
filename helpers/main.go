@@ -282,11 +282,11 @@ func main() {
 			jen.Id("o").Op("*").Id("OnTypeHandlers"),
 		).Id("Run").Params(
 			jen.Id("message").Op("*").Id("Message"),
-		).Block(
+		).Bool().Block(
 			jen.If(jen.Id("message").Dot("Event").Op("==").Id("nil").Op("||").
 				Id("message").Dot("Event").Dot("Data").Op("==").Id("nil").Op("||").
 				Id("message").Dot("Event").Dot("Data").Dot("EntityId").Op("==").Id("nil")).
-				Block(jen.Return()),
+				Block(jen.Return().False()),
 			jen.Id("entityType").Op(":=").Qual("strings", "Split").Params(
 				jen.Op("*").Id("message").Dot("Event").Dot("Data").Dot("EntityId"),
 				jen.Lit("."),
@@ -297,14 +297,15 @@ func main() {
 					camelName := strcase.ToCamel(sortedKeys[i])
 					underName := strcase.ToSnake(sortedKeys[i])
 					g.Add(jen.Case(jen.Lit(underName)).Block(
-						jen.If(jen.Id("o").Dot(fmt.Sprintf("On%s", camelName)).Op("==").Id("nil")).Block(jen.Return()),
+						jen.If(jen.Id("o").Dot(fmt.Sprintf("On%s", camelName)).Op("==").Id("nil")).Block(jen.Return().True()),
 						jen.Id("newAttrs").Op(":=").Qual("github.com/kjbreil/hass-ws/entities", fmt.Sprintf("Get%s", camelName)).Params(jen.Id("message").Dot("Event").Dot("Data").Dot("NewState").Dot("Attributes")),
 						jen.Id("oldAttrs").Op(":=").Qual("github.com/kjbreil/hass-ws/entities", fmt.Sprintf("Get%s", camelName)).Params(jen.Id("message").Dot("Event").Dot("Data").Dot("OldState").Dot("Attributes")),
 						jen.Id("o").Dot(fmt.Sprintf("On%s", camelName)).Params(jen.Id("message"), jen.Id("newAttrs"), jen.Id("oldAttrs")),
 					))
-					// .Params(jen.Id("message").Id("newAttrs").Id("oldAttrs"))
+
 				}
 			}),
+			jen.Return().False(),
 		)
 
 		models[v].Func().Params(
@@ -368,16 +369,18 @@ func main() {
 			jen.Id("o").Id("OnEntityHandlers"),
 		).Id("Run").Params(
 			jen.Id("message").Op("*").Id("Message"),
-		).Block(
+		).Bool().Block(
 			jen.If(jen.Id("message").Dot("Event").Op("==").Id("nil").Op("||").
 				Id("message").Dot("Event").Dot("Data").Op("==").Id("nil").Op("||").
 				Id("message").Dot("Event").Dot("Data").Dot("EntityId").Op("==").Id("nil")).
-				Block(jen.Return()),
+				Block(jen.Return().False()),
 			jen.For(jen.Id("k").Op(",").Id("v").Op(":=").Range().Id("o")).Block(
 				jen.If(jen.Id("k").Op("==").Op("*").Id("message").Dot("Event").Dot("Data").Dot("EntityId").Block(
 					jen.Id("v").Call(jen.Id("message")),
+					jen.Return().True(),
 				)),
 			),
+			jen.Return().False(),
 		)
 
 		models[v].Func().Params(

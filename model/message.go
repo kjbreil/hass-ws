@@ -20,6 +20,34 @@ type Message struct {
 	Raw []byte `json:"-"`
 }
 
+func (m *Message) EntityID() string {
+	if m.Event != nil && m.Event.Data != nil && m.Event.Data.EntityId != nil {
+		return *m.Event.Data.EntityId
+	}
+	return ""
+}
+func (m *Message) State() string {
+	if m.Event != nil &&
+		m.Event.Data != nil &&
+		m.Event.Data.NewState != nil &&
+		m.Event.Data.NewState.State != nil {
+		return *m.Event.Data.NewState.State
+	}
+	return ""
+}
+
+func (m *Message) FriendlyName() string {
+	if m.Event != nil &&
+		m.Event.Data != nil &&
+		m.Event.Data.NewState != nil &&
+		m.Event.Data.NewState.Attributes != nil {
+		if fn, ok := m.Event.Data.NewState.Attributes["friendly_name"]; ok {
+			return fn.(string)
+		}
+	}
+	return ""
+}
+
 type MessageType string
 
 const (
@@ -29,6 +57,7 @@ const (
 	MessageTypeSubscribeEvents              = "subscribe_events"
 	MessageTypeSubscribeTrigger             = "subscribe_trigger"
 	MessageTypeEvent                        = "event"
+	MessageTypePing                         = "ping"
 	MessageTypeGetStates                    = "get_states"
 	MessageTypeGetServices                  = "get_services"
 )
@@ -41,6 +70,7 @@ func (mt MessageType) Valid() bool {
 		MessageTypeSubscribeEvents,
 		MessageTypeSubscribeTrigger,
 		MessageTypeEvent,
+		MessageTypePing,
 		MessageTypeGetStates,
 		MessageTypeGetServices:
 		return true

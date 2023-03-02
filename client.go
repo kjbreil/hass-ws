@@ -1,12 +1,13 @@
 package hass_ws
 
 import (
+	"context"
 	"encoding/json"
-	"fmt"
-	"github.com/gorilla/websocket"
 	"github.com/kjbreil/hass-ws/model"
 	"github.com/kjbreil/hass-ws/services"
 	"log"
+	"nhooyr.io/websocket"
+	"time"
 )
 
 type Client struct {
@@ -15,22 +16,28 @@ type Client struct {
 	id     int
 
 	subscriptions map[model.EventType]int
-	onMessage     func(message model.Message)
+	OnMessage     func(message model.Message)
+	OnUnhandled   func(message model.Message)
 
 	eventWatch map[string]func(event model.Event)
 
 	callbacks map[int]chan *model.Message
+
+	ctx    context.Context
+	cancel context.CancelFunc
 
 	OnType   model.OnTypeHandlers
 	OnEntity model.OnEntityHandlers
 }
 
 func NewClient(c *Config) (*Client, error) {
-
+	ctx, cancelFunc := context.WithCancel(context.Background())
 	client := &Client{
-		config: *c,
-		onMessage: func(message model.Message) {
-		},
+		config:        *c,
+		OnMessage:     nil,
+		OnUnhandled:   nil,
+		ctx:           ctx,
+		cancel:        cancelFunc,
 		subscriptions: make(map[model.EventType]int),
 		OnEntity:      make(model.OnEntityHandlers),
 		callbacks:     make(map[int]chan *model.Message),
@@ -38,50 +45,59 @@ func NewClient(c *Config) (*Client, error) {
 	return client, nil
 }
 
-func (c *Client) SetOnMessage(handlerFunc func(message model.Message)) {
-	c.onMessage = handlerFunc
-}
-
 func (c *Client) AddSubscription(eventType model.EventType) {
 	c.subscriptions[eventType] = -1
 }
 
-func (c *Client) WriteMessage(messageType int, data []byte) error {
-	return c.client.WriteMessage(messageType, data)
+func (c *Client) WriteMessage(messageType websocket.MessageType, data []byte) error {
+	return c.client.Write(c.ctx, messageType, data)
 }
 
 // GetStates requests all the current states and runs them through the handlers
 func (c *Client) GetStates() {
 	callback := make(chan *model.Message)
-	_ = c.sendWithCallback(&model.Message{
+	_, _ = c.sendWithCallback(&model.Message{
 		Type: model.MessageTypeGetStates,
 	}, callback)
-	message := <-callback
-	close(callback)
+	go func() {
+		message := <-callback
+		close(callback)
 
-	c.OnType.RunStates(message)
-	c.OnEntity.RunStates(message)
+		c.OnType.RunStates(message)
+		c.OnEntity.RunStates(message)
+	}()
 	return
 }
 
 func (c *Client) GetServices() *model.Message {
 	callback := make(chan *model.Message)
-	_ = c.sendWithCallback(&model.Message{
+	id, _ := c.sendWithCallback(&model.Message{
 		Type: model.MessageTypeGetServices,
 	}, callback)
-	message := <-callback
-	close(callback)
-	return message
+	ticker := time.NewTicker(time.Second * 10)
+	select {
+	case <-ticker.C:
+		delete(c.callbacks, id)
+		close(callback)
+
+		return nil
+	case message := <-callback:
+		close(callback)
+		return message
+	}
+
 }
 
-func (c *Client) CallService(service services.Service) bool {
+func (c *Client) CallService(service services.Service) (bool, services.Service) {
 	service.SetID(c.NextID())
 	callback := make(chan *model.Message)
 	_ = c.sendStringWithCallback(service.JSON(), callback)
 	message := <-callback
 	close(callback)
-	fmt.Println(message)
-	return true
+	if message.Success == nil {
+		return false, service
+	}
+	return *message.Success, service
 }
 
 func (c *Client) NextID() *int {
@@ -90,29 +106,30 @@ func (c *Client) NextID() *int {
 }
 
 func (c *Client) sendStringWithCallback(msg string, callback chan *model.Message) error {
+	c.callbacks[c.id] = callback
 
-	err := c.client.WriteMessage(websocket.TextMessage, []byte(msg))
+	err := c.client.Write(c.ctx, websocket.MessageText, []byte(msg))
 	if err != nil {
 		return err
 	}
 	return nil
 }
 
-func (c *Client) sendWithCallback(msg *model.Message, callback chan *model.Message) error {
+func (c *Client) sendWithCallback(msg *model.Message, callback chan *model.Message) (int, error) {
 	if msg.Type != model.MessageTypeAuth {
 		msg.ID = c.NextID()
 		c.callbacks[c.id] = callback
 	}
 
 	d, _ := json.Marshal(msg)
-	err := c.client.WriteMessage(websocket.TextMessage, d)
+	err := c.client.Write(c.ctx, websocket.MessageText, d)
 	if err != nil {
-		return err
+		return *msg.ID, err
 	}
 	if !msg.Type.Valid() {
 		log.Panicf("unknown message type: %s\n", msg.Type)
 	}
-	return nil
+	return *msg.ID, nil
 }
 
 func (c *Client) send(msg *model.Message) error {
@@ -121,7 +138,7 @@ func (c *Client) send(msg *model.Message) error {
 	}
 
 	d, _ := json.Marshal(msg)
-	err := c.client.WriteMessage(websocket.TextMessage, d)
+	err := c.client.Write(c.ctx, websocket.MessageText, d)
 	if err != nil {
 		return err
 	}
@@ -132,7 +149,7 @@ func (c *Client) send(msg *model.Message) error {
 }
 
 func (c *Client) read() (*model.Message, error) {
-	_, message, err := c.client.ReadMessage()
+	_, message, err := c.client.Read(c.ctx)
 	if err != nil {
 		return nil, err
 	}
@@ -168,8 +185,11 @@ func (c *Client) read() (*model.Message, error) {
 }
 
 func (c *Client) Close() error {
+	// close the context
+	c.cancel()
+	// TODO: Chain errors
 	var err error
-	err = c.client.Close()
+	err = c.client.Close(websocket.StatusNormalClosure, "")
 	if err != nil {
 		return err
 	}

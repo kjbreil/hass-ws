@@ -61,188 +61,189 @@ type OnTypeHandlers struct {
 	OnWeather           OnWeatherHandler
 }
 
-func (o *OnTypeHandlers) Run(message *Message) {
+func (o *OnTypeHandlers) Run(message *Message) bool {
 	if message.Event == nil || message.Event.Data == nil || message.Event.Data.EntityId == nil {
-		return
+		return false
 	}
 	entityType := strings.Split(*message.Event.Data.EntityId, ".")[0]
 	switch entityType {
 	case "air_quality":
 		if o.OnAirQuality == nil {
-			return
+			return true
 		}
 		newAttrs := entities.GetAirQuality(message.Event.Data.NewState.Attributes)
 		oldAttrs := entities.GetAirQuality(message.Event.Data.OldState.Attributes)
 		o.OnAirQuality(message, newAttrs, oldAttrs)
 	case "alarm_control_panel":
 		if o.OnAlarmControlPanel == nil {
-			return
+			return true
 		}
 		newAttrs := entities.GetAlarmControlPanel(message.Event.Data.NewState.Attributes)
 		oldAttrs := entities.GetAlarmControlPanel(message.Event.Data.OldState.Attributes)
 		o.OnAlarmControlPanel(message, newAttrs, oldAttrs)
 	case "binary_sensor":
 		if o.OnBinarySensor == nil {
-			return
+			return true
 		}
 		newAttrs := entities.GetBinarySensor(message.Event.Data.NewState.Attributes)
 		oldAttrs := entities.GetBinarySensor(message.Event.Data.OldState.Attributes)
 		o.OnBinarySensor(message, newAttrs, oldAttrs)
 	case "button":
 		if o.OnButton == nil {
-			return
+			return true
 		}
 		newAttrs := entities.GetButton(message.Event.Data.NewState.Attributes)
 		oldAttrs := entities.GetButton(message.Event.Data.OldState.Attributes)
 		o.OnButton(message, newAttrs, oldAttrs)
 	case "camera":
 		if o.OnCamera == nil {
-			return
+			return true
 		}
 		newAttrs := entities.GetCamera(message.Event.Data.NewState.Attributes)
 		oldAttrs := entities.GetCamera(message.Event.Data.OldState.Attributes)
 		o.OnCamera(message, newAttrs, oldAttrs)
 	case "climate":
 		if o.OnClimate == nil {
-			return
+			return true
 		}
 		newAttrs := entities.GetClimate(message.Event.Data.NewState.Attributes)
 		oldAttrs := entities.GetClimate(message.Event.Data.OldState.Attributes)
 		o.OnClimate(message, newAttrs, oldAttrs)
 	case "cover":
 		if o.OnCover == nil {
-			return
+			return true
 		}
 		newAttrs := entities.GetCover(message.Event.Data.NewState.Attributes)
 		oldAttrs := entities.GetCover(message.Event.Data.OldState.Attributes)
 		o.OnCover(message, newAttrs, oldAttrs)
 	case "device_tracker":
 		if o.OnDeviceTracker == nil {
-			return
+			return true
 		}
 		newAttrs := entities.GetDeviceTracker(message.Event.Data.NewState.Attributes)
 		oldAttrs := entities.GetDeviceTracker(message.Event.Data.OldState.Attributes)
 		o.OnDeviceTracker(message, newAttrs, oldAttrs)
 	case "fan":
 		if o.OnFan == nil {
-			return
+			return true
 		}
 		newAttrs := entities.GetFan(message.Event.Data.NewState.Attributes)
 		oldAttrs := entities.GetFan(message.Event.Data.OldState.Attributes)
 		o.OnFan(message, newAttrs, oldAttrs)
 	case "humidifier":
 		if o.OnHumidifier == nil {
-			return
+			return true
 		}
 		newAttrs := entities.GetHumidifier(message.Event.Data.NewState.Attributes)
 		oldAttrs := entities.GetHumidifier(message.Event.Data.OldState.Attributes)
 		o.OnHumidifier(message, newAttrs, oldAttrs)
 	case "introduction":
 		if o.OnIntroduction == nil {
-			return
+			return true
 		}
 		newAttrs := entities.GetIntroduction(message.Event.Data.NewState.Attributes)
 		oldAttrs := entities.GetIntroduction(message.Event.Data.OldState.Attributes)
 		o.OnIntroduction(message, newAttrs, oldAttrs)
 	case "light":
 		if o.OnLight == nil {
-			return
+			return true
 		}
 		newAttrs := entities.GetLight(message.Event.Data.NewState.Attributes)
 		oldAttrs := entities.GetLight(message.Event.Data.OldState.Attributes)
 		o.OnLight(message, newAttrs, oldAttrs)
 	case "lock":
 		if o.OnLock == nil {
-			return
+			return true
 		}
 		newAttrs := entities.GetLock(message.Event.Data.NewState.Attributes)
 		oldAttrs := entities.GetLock(message.Event.Data.OldState.Attributes)
 		o.OnLock(message, newAttrs, oldAttrs)
 	case "media_player":
 		if o.OnMediaPlayer == nil {
-			return
+			return true
 		}
 		newAttrs := entities.GetMediaPlayer(message.Event.Data.NewState.Attributes)
 		oldAttrs := entities.GetMediaPlayer(message.Event.Data.OldState.Attributes)
 		o.OnMediaPlayer(message, newAttrs, oldAttrs)
 	case "number":
 		if o.OnNumber == nil {
-			return
+			return true
 		}
 		newAttrs := entities.GetNumber(message.Event.Data.NewState.Attributes)
 		oldAttrs := entities.GetNumber(message.Event.Data.OldState.Attributes)
 		o.OnNumber(message, newAttrs, oldAttrs)
 	case "remote":
 		if o.OnRemote == nil {
-			return
+			return true
 		}
 		newAttrs := entities.GetRemote(message.Event.Data.NewState.Attributes)
 		oldAttrs := entities.GetRemote(message.Event.Data.OldState.Attributes)
 		o.OnRemote(message, newAttrs, oldAttrs)
 	case "select":
 		if o.OnSelect == nil {
-			return
+			return true
 		}
 		newAttrs := entities.GetSelect(message.Event.Data.NewState.Attributes)
 		oldAttrs := entities.GetSelect(message.Event.Data.OldState.Attributes)
 		o.OnSelect(message, newAttrs, oldAttrs)
 	case "sensor":
 		if o.OnSensor == nil {
-			return
+			return true
 		}
 		newAttrs := entities.GetSensor(message.Event.Data.NewState.Attributes)
 		oldAttrs := entities.GetSensor(message.Event.Data.OldState.Attributes)
 		o.OnSensor(message, newAttrs, oldAttrs)
 	case "siren":
 		if o.OnSiren == nil {
-			return
+			return true
 		}
 		newAttrs := entities.GetSiren(message.Event.Data.NewState.Attributes)
 		oldAttrs := entities.GetSiren(message.Event.Data.OldState.Attributes)
 		o.OnSiren(message, newAttrs, oldAttrs)
 	case "switch":
 		if o.OnSwitch == nil {
-			return
+			return true
 		}
 		newAttrs := entities.GetSwitch(message.Event.Data.NewState.Attributes)
 		oldAttrs := entities.GetSwitch(message.Event.Data.OldState.Attributes)
 		o.OnSwitch(message, newAttrs, oldAttrs)
 	case "text":
 		if o.OnText == nil {
-			return
+			return true
 		}
 		newAttrs := entities.GetText(message.Event.Data.NewState.Attributes)
 		oldAttrs := entities.GetText(message.Event.Data.OldState.Attributes)
 		o.OnText(message, newAttrs, oldAttrs)
 	case "update":
 		if o.OnUpdate == nil {
-			return
+			return true
 		}
 		newAttrs := entities.GetUpdate(message.Event.Data.NewState.Attributes)
 		oldAttrs := entities.GetUpdate(message.Event.Data.OldState.Attributes)
 		o.OnUpdate(message, newAttrs, oldAttrs)
 	case "vacuum":
 		if o.OnVacuum == nil {
-			return
+			return true
 		}
 		newAttrs := entities.GetVacuum(message.Event.Data.NewState.Attributes)
 		oldAttrs := entities.GetVacuum(message.Event.Data.OldState.Attributes)
 		o.OnVacuum(message, newAttrs, oldAttrs)
 	case "water_heater":
 		if o.OnWaterHeater == nil {
-			return
+			return true
 		}
 		newAttrs := entities.GetWaterHeater(message.Event.Data.NewState.Attributes)
 		oldAttrs := entities.GetWaterHeater(message.Event.Data.OldState.Attributes)
 		o.OnWaterHeater(message, newAttrs, oldAttrs)
 	case "weather":
 		if o.OnWeather == nil {
-			return
+			return true
 		}
 		newAttrs := entities.GetWeather(message.Event.Data.NewState.Attributes)
 		oldAttrs := entities.GetWeather(message.Event.Data.OldState.Attributes)
 		o.OnWeather(message, newAttrs, oldAttrs)
 	}
+	return false
 }
 func (o *OnTypeHandlers) RunStates(message *Message) {
 	if message.Result == nil {
@@ -907,15 +908,17 @@ func (o *OnTypeHandlers) RunStates(message *Message) {
 
 type OnEntityHandlers map[string]func(message *Message)
 
-func (o OnEntityHandlers) Run(message *Message) {
+func (o OnEntityHandlers) Run(message *Message) bool {
 	if message.Event == nil || message.Event.Data == nil || message.Event.Data.EntityId == nil {
-		return
+		return false
 	}
 	for k, v := range o {
 		if k == *message.Event.Data.EntityId {
 			v(message)
+			return true
 		}
 	}
+	return false
 }
 func (o OnEntityHandlers) RunStates(message *Message) {
 	if message.Result == nil {

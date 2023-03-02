@@ -5,8 +5,9 @@
 package main
 
 import (
-	"github.com/gorilla/websocket"
+	"fmt"
 	hass_ws "github.com/kjbreil/hass-ws"
+	"github.com/kjbreil/hass-ws/entities"
 	"github.com/kjbreil/hass-ws/model"
 	"github.com/kjbreil/hass-ws/services"
 	"log"
@@ -24,54 +25,64 @@ func main() {
 		Token: "",
 	})
 
-	//c.AddSubscription(model.EventTypeAll)
-	//c.OnType.OnClimate = func(message *model.Message, newAttrs, oldAttrs *entities.Climate) {
-	//	fmt.Println(message)
-	//}
-	//
-	//c.OnEntity["climate.kitchen"] = func(message *model.Message) {
-	//	fmt.Println(message)
-	//}
-	c.SetOnMessage(func(message model.Message) {
-		if message.Event != nil {
-			//log.Println(string(message.Raw))
-			if !message.Event.EventType.Valid() {
-				log.Println(string(message.Raw))
-			}
-			//if *message.Event.EventType == model.EventTypeStateChanged {
-			//	if message.Event != nil && strings.Contains(*message.Event.Data.EntityId, "binary_sensor") {
-			//		log.Println(string(message.Raw))
-			//	}
-			//}
-		}
-	})
+	// Subscribe to all events
+	c.AddSubscription(model.EventTypeAll)
+
+	// Setup a handler for sensor updates
+	// use message.FriendlyName() rather than newAttr.FriendlyName and need to check for nil
+	c.OnType.OnSensor = func(message *model.Message, newAttrs, oldAttrs *entities.Sensor) {
+		fmt.Printf("Sensor: %s - %s - %s\n", message.EntityID(), message.FriendlyName(), message.State())
+	}
+
+	// setup handler for single entity updates
+	c.OnEntity["climate.kitchen"] = func(message *model.Message) {
+		fmt.Printf("Sensor: %s - %s\n", message.FriendlyName(), message.State())
+	}
+
+	// Set a message handler to run on every message even if hit by other message handlers
+	c.OnMessage = func(message model.Message) {
+		// some processing code
+	}
+
+	// Set a message handler to run when both OnType and OnEntity did not run
+	c.OnUnhandled = func(message model.Message) {
+		// some processing code
+	}
 
 	err := c.Connect()
 	if err != nil {
 		log.Panicln(err)
 	}
 
+	// Call a service
 	high := 78
 	low := 60
 	mode := services.HvacModeHeatCool
-	c.CallService(services.NewClimateSetTemperature(
+	success, _ := c.CallService(services.NewClimateSetTemperature(
 		[]string{"climate.kitchen"},
 		&mode,
 		&high,
 		&low,
 		nil,
 	))
+	if !success {
+		log.Panicln("service did not return a success")
+	}
 
-	//c.GetStates()
-	//c.GetServices()
+	// Get all states, they ar ethen run through the OnType and OnEntity handlers but not OnMessage or OnUnhandled
+	c.GetStates()
+
+	// Get all the services, in ServiceResults its a map[string]interface{} and not easy to work with
+	ss := c.GetServices()
+	for sn := range ss.ServiceResult {
+		fmt.Printf("Service %s returned\n", sn)
+	}
+
 	for {
 		select {
 		case <-interrupt:
-			log.Println("interrupt")
 
-			// Cleanly close the connection by sending a close message and then
-			// waiting (with timeout) for the server to close the connection.
-			err := c.WriteMessage(websocket.CloseMessage, websocket.FormatCloseMessage(websocket.CloseNormalClosure, ""))
+			err := c.Close()
 			if err != nil {
 				log.Println("write close:", err)
 				return

@@ -2,9 +2,9 @@ package hass_ws
 
 import (
 	"fmt"
-	"github.com/gorilla/websocket"
 	"github.com/kjbreil/hass-ws/model"
 	"net/url"
+	"nhooyr.io/websocket"
 	"time"
 )
 
@@ -18,7 +18,8 @@ func (c *Client) Connect() error {
 	var err error
 	u := url.URL{Scheme: "ws", Host: fmt.Sprintf("%s:%d", c.config.Host, c.config.Port), Path: "/api/websocket"}
 
-	c.client, _, err = websocket.DefaultDialer.Dial(u.String(), nil)
+	c.client, _, err = websocket.Dial(c.ctx, u.String(), nil)
+	c.client.SetReadLimit(32768 * 100)
 	if err != nil {
 		return fmt.Errorf("dial: %w", err)
 	}
@@ -52,8 +53,10 @@ func (c *Client) Connect() error {
 		}
 	}
 
-	go c.run()
+	c.run()
 
-	time.Sleep(1 * time.Second)
+	// this is needed because Home Assistant might not respond with authorization fast enough
+	// TODO: make authorization into a callback
+	time.Sleep(400 * time.Millisecond)
 	return nil
 }
