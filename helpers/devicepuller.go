@@ -126,7 +126,7 @@ func splitDocument(devicename string) (map[string]attributes, error) {
 				}
 			}
 
-			if len(header) == 4 && header[0] == "Name" && header[1] == "Type" && header[2] == "Default" && header[3] == "Description" {
+			if len(header) == 4 && header[0] == "name" && header[1] == "Type" && header[2] == "Default" && header[3] == "Description" {
 				for _, b := range body {
 					atr := attributes{
 						Name:     b[0],

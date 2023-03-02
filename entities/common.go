@@ -12,7 +12,7 @@ func fillFields(object interface{}, attributes map[string]interface{}) {
 	t := reflect.TypeOf(object).Elem()
 	for i := 0; i < v.NumField(); i++ {
 		//d := v.Field(i)
-		//n := t.Field(i).Name
+		//n := t.Field(i).name
 		tg := strings.Split(t.Field(i).Tag.Get("json"), ",")[0]
 		if d, ok := attributes[tg]; ok {
 			if !v.Field(i).CanSet() {

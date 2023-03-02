@@ -116,12 +116,12 @@ func main() {
 				jen.Return(jen.Op("&").Id(string(strcase.ToLowerCamel(d.Name)[0]))),
 			)
 
-		// Services
+		// services
 	}
 
-	for _, d := range servicesList {
-		camelName := strcase.ToCamel(d.Name)
-		deviceServices := servicesJson.Search("service_result", d.Name)
+	for _, d := range servicesList.services {
+		camelName := strcase.ToCamel(d.name)
+		deviceServices := servicesJson.Search("service_result", d.name)
 
 		sortedServices := []string{}
 		for k := range deviceServices.ChildrenMap() {
@@ -137,8 +137,8 @@ func main() {
 			//lowerServiceTypeName := strcase.ToLowerCamel(serviceTypeName)
 			firstLetter := string(strcase.ToLowerCamel(serviceTypeName)[0])
 
-			services[d.Name].Comment(fmt.Sprintf("New%s creates the object that can be sent to Home Assistant for domain %s, service %s", serviceTypeName, d.Name, k))
-			services[d.Name].Comment(fmt.Sprintf("%s ", v.Path("description").String()))
+			services[d.name].Comment(fmt.Sprintf("New%s creates the object that can be sent to Home Assistant for domain %s, service %s", serviceTypeName, d.name, k))
+			services[d.name].Comment(fmt.Sprintf("%s ", v.Path("description").String()))
 
 			var parameterKeys []string
 
@@ -194,7 +194,7 @@ func main() {
 					).Tag(map[string]string{"json": "target" + ",omitempty"}))
 				})
 
-			services[d.Name].Func().
+			services[d.name].Func().
 				Id(fmt.Sprintf("New%s", serviceTypeName)).
 				ParamsFunc(func(g *jen.Group) {
 					g.Add(jen.Id("entities").Index().String())
@@ -205,7 +205,7 @@ func main() {
 				}).
 				Op("*").Id(serviceTypeName).
 				Block(
-					jen.Id("serviceDomain").Op(":=").Lit(d.Name),
+					jen.Id("serviceDomain").Op(":=").Lit(d.name),
 					jen.Id("serviceType").Op(":=").Lit("call_service"),
 					jen.Id("serviceService").Op(":=").Lit(k),
 					jen.Id(firstLetter).Op(":=").Op("&").Id(serviceTypeName).Values(jen.Dict{
@@ -233,13 +233,13 @@ func main() {
 					}),
 					jen.Return(jen.Id(firstLetter)),
 				)
-			services[d.Name].Add(typeHold)
-			services[d.Name].Func().Params(jen.Id(firstLetter).Op("*").Id(serviceTypeName)).Id("JSON").Params().String().Block(
+			services[d.name].Add(typeHold)
+			services[d.name].Func().Params(jen.Id(firstLetter).Op("*").Id(serviceTypeName)).Id("JSON").Params().String().Block(
 				jen.List(jen.Id("data"), jen.Id("_")).Op(":=").Qual("encoding/json", "Marshal").Params(jen.Id(firstLetter)),
 				jen.Return(jen.String().Params(jen.Id("data"))),
 			)
 
-			services[d.Name].Func().Params(jen.Id(firstLetter).Op("*").Id(serviceTypeName)).Id("SetID").Params(jen.Id("id").Op("*").Int()).Block(
+			services[d.name].Func().Params(jen.Id(firstLetter).Op("*").Id(serviceTypeName)).Id("SetID").Params(jen.Id("id").Op("*").Int()).Block(
 				jen.Id(firstLetter).Dot("Id").Op("=").Id("id"),
 			)
 
