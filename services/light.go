@@ -2,10 +2,10 @@ package services
 
 import "encoding/json"
 
-// //////////////////////////////////////////////////////////////////////////////
+////////////////////////////////////////////////////////////////////////////////
 // Do not modify this file, it is automatically generated
-// //////////////////////////////////////////////////////////////////////////////
-//
+////////////////////////////////////////////////////////////////////////////////
+
 // NewLightToggle creates the object that can be sent to Home Assistant for domain light, service toggle
 // "Toggles one or more lights, from on to off, or, off to on, based on their current state.\n"
 func NewLightToggle(entities []string, brightness *int, brightnessPct *int, colorName *ColorName, effect *string, flash *Flash, kelvin *int, profile *string, transition *int) *LightToggle {

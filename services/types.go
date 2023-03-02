@@ -1,21 +1,46 @@
 package services
 
-// //////////////////////////////////////////////////////////////////////////////
+////////////////////////////////////////////////////////////////////////////////
 // Do not modify this file, it is automatically generated
-// //////////////////////////////////////////////////////////////////////////////
+////////////////////////////////////////////////////////////////////////////////
+
 type Service interface {
 	SetID(id *int)
 	JSON() string
 }
-type Level string
+type ColorName string
 
 const (
-	LevelError    Level = "error"
-	LevelFatal    Level = "fatal"
-	LevelCritical Level = "critical"
-	LevelDebug    Level = "debug"
-	LevelInfo     Level = "info"
-	LevelWarning  Level = "warning"
+	ColorNameNull ColorName = "null"
+)
+
+type CommandType string
+
+const (
+	CommandTypeNull CommandType = "null"
+)
+
+type Direction string
+
+const (
+	DirectionForward Direction = "forward"
+	DirectionReverse Direction = "reverse"
+)
+
+type Enqueue string
+
+const (
+	EnqueueAdd     Enqueue = "add"
+	EnqueueNext    Enqueue = "next"
+	EnqueuePlay    Enqueue = "play"
+	EnqueueReplace Enqueue = "replace"
+)
+
+type Flash string
+
+const (
+	FlashLong  Flash = "long"
+	FlashShort Flash = "short"
 )
 
 type Format string
@@ -24,17 +49,27 @@ const (
 	FormatNull Format = "null"
 )
 
-type ColorName string
+type HvacMode string
 
 const (
-	ColorNameNull ColorName = "null"
+	HvacModeAuto     HvacMode = "auto"
+	HvacModeCool     HvacMode = "cool"
+	HvacModeDry      HvacMode = "dry"
+	HvacModeFanOnly  HvacMode = "fan_only"
+	HvacModeHeat     HvacMode = "heat"
+	HvacModeHeatCool HvacMode = "heat_cool"
+	HvacModeOff      HvacMode = "off"
 )
 
-type Flash string
+type Level string
 
 const (
-	FlashLong  Flash = "long"
-	FlashShort Flash = "short"
+	LevelCritical Level = "critical"
+	LevelDebug    Level = "debug"
+	LevelError    Level = "error"
+	LevelFatal    Level = "fatal"
+	LevelInfo     Level = "info"
+	LevelWarning  Level = "warning"
 )
 
 type Mode string
@@ -50,27 +85,28 @@ const (
 	QosNull Qos = "null"
 )
 
-type HvacMode string
+type Repeat string
 
 const (
-	HvacModeAuto     HvacMode = "auto"
-	HvacModeCool     HvacMode = "cool"
-	HvacModeDry      HvacMode = "dry"
-	HvacModeFanOnly  HvacMode = "fan_only"
-	HvacModeHeatCool HvacMode = "heat_cool"
-	HvacModeHeat     HvacMode = "heat"
-	HvacModeOff      HvacMode = "off"
+	RepeatAll Repeat = "all"
+	RepeatOff Repeat = "off"
+	RepeatOne Repeat = "one"
 )
 
-type Direction string
+type RepeatType string
 
 const (
-	DirectionForward Direction = "forward"
-	DirectionReverse Direction = "reverse"
+	RepeatTypeNull RepeatType = "null"
 )
 
-type CommandType string
+type SignatureScheme string
 
 const (
-	CommandTypeNull CommandType = "null"
+	SignatureSchemeNull SignatureScheme = "null"
+)
+
+type Transport string
+
+const (
+	TransportNull Transport = "null"
 )

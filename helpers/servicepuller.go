@@ -5,46 +5,48 @@ import (
 	"github.com/Jeffail/gabs/v2"
 	"github.com/dave/jennifer/jen"
 	"github.com/iancoleman/strcase"
+	"sort"
 	"strings"
 )
 
-var ServiceNames = append([]string{
-	"automation",
-	"backup",
-	"counter",
-	"frontend",
-	"group",
-	"homeassistant",
-	"input_boolean",
-	"input_button",
-	"input_datetime",
-	"input_number",
-	"input_select",
-	"input_text",
-	"logbook",
-	"logger",
-	"min_max",
-	"mqtt",
-	"notify",
-	"persistent_notification",
-	"person",
-	"recorder",
-	"scene",
-	"schedule",
-	"script",
-	"shell_command",
-	"system_log",
-	"template",
-	"timer",
-	"tts",
-	"wake_on_lan",
-	"zone",
-}, DeviceNames...)
+//var ServiceNames = append([]string{
+//	"automation",
+//	"backup",
+//	"counter",
+//	"frontend",
+//	"group",
+//	"homeassistant",
+//	"input_boolean",
+//	"input_button",
+//	"input_datetime",
+//	"input_number",
+//	"input_select",
+//	"input_text",
+//	"logbook",
+//	"logger",
+//	"min_max",
+//	"mqtt",
+//	"notify",
+//	"persistent_notification",
+//	"person",
+//	"recorder",
+//	"scene",
+//	"schedule",
+//	"script",
+//	"shell_command",
+//	"system_log",
+//	"template",
+//	"timer",
+//	"tts",
+//	"wake_on_lan",
+//	"zone",
+//}, DeviceNames...)
 
 type ServiceList struct {
-	services []Domain
-	json     *gabs.Container
-	enums    map[string]map[string]struct{}
+	services     []Domain
+	serviceNames []string
+	json         *gabs.Container
+	enums        map[string]map[string][]string
 }
 
 type Domain struct {
@@ -61,15 +63,18 @@ type Service struct {
 	firstLetter    string
 	parameters     map[string]*jen.Statement
 	parameterKeys  []string
+	description    string
 }
 
 func ServicesInit() ServiceList {
 	var serviceList ServiceList
 
 	serviceList.json, _ = gabs.ParseJSONFile("./helpers/services.json")
-	serviceList.enums = make(map[string]map[string]struct{})
+	serviceList.enums = make(map[string]map[string][]string)
 
-	for _, name := range ServiceNames {
+	serviceList.setServiceNames()
+
+	for _, name := range serviceList.serviceNames {
 		d := Domain{
 			name:      name,
 			camelName: strcase.ToCamel(name),
@@ -81,6 +86,15 @@ func ServicesInit() ServiceList {
 	return serviceList
 }
 
+func (sl *ServiceList) setServiceNames() {
+	deviceServices := sl.json.Search("service_result")
+	// this will range over each service in the json
+	for k := range deviceServices.ChildrenMap() {
+		sl.serviceNames = append(sl.serviceNames, k)
+	}
+
+}
+
 func (sl *ServiceList) setParameters(d *Domain) {
 	deviceServices := sl.json.Search("service_result", d.name)
 	// this will range over each service in the json
@@ -89,8 +103,9 @@ func (sl *ServiceList) setParameters(d *Domain) {
 			name:           k,
 			camelName:      fmt.Sprintf("%s%s", d.camelName, strcase.ToCamel(k)),
 			lowerCamelName: strcase.ToLowerCamel(fmt.Sprintf("%s%s", d.camelName, strcase.ToCamel(k))),
-			firstLetter:    string(k[0]),
+			firstLetter:    string(d.name[0]),
 			parameters:     make(map[string]*jen.Statement),
+			description:    v.Path("description").String(),
 		}
 		for fn, f := range v.Path("fields").ChildrenMap() {
 			selector := f.Path("selector")
@@ -109,9 +124,12 @@ func (sl *ServiceList) setParameters(d *Domain) {
 					if options != nil {
 						for _, o := range options {
 							if _, ok := sl.enums[strcase.ToCamel(fn)]; !ok {
-								sl.enums[strcase.ToCamel(fn)] = make(map[string]struct{})
+								sl.enums[strcase.ToCamel(fn)] = make(map[string][]string)
 							}
-							sl.enums[strcase.ToCamel(fn)][strings.Trim(o.Path("value").String(), "\"")] = struct{}{}
+
+							enumName := strings.Trim(o.Path("value").String(), "\"")
+							sl.enums[strcase.ToCamel(fn)][enumName] = append(sl.enums[strcase.ToCamel(fn)][enumName], fmt.Sprintf("%s: %s", d.name, s.name))
+
 						}
 						s.parameters[fn] = jen.Id(strcase.ToCamel(fn))
 					}
@@ -121,11 +139,14 @@ func (sl *ServiceList) setParameters(d *Domain) {
 		for key := range s.parameters {
 			s.parameterKeys = append(s.parameterKeys, key)
 		}
+		sort.Strings(s.parameterKeys)
+
 		// assign service to domain services
 		d.services[k] = s
 	}
 	for key := range d.services {
 		d.servicesKey = append(d.servicesKey, key)
 	}
+	sort.Strings(d.servicesKey)
 
 }
