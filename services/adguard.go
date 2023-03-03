@@ -8,7 +8,7 @@ import "encoding/json"
 
 // NewAdguardAddUrl creates the object that can be sent to Home Assistant for domain adguard, service add_url
 // "Add a new filter subscription to AdGuard Home."
-func NewAdguardAddUrl(target Target, adguardAddUrlParams AdguardAddUrlParams) *AdguardAddUrl {
+func NewAdguardAddUrl(target Target, adguardAddUrlParams *AdguardAddUrlParams) *AdguardAddUrl {
 	serviceDomain := "adguard"
 	serviceType := "call_service"
 	serviceService := "add_url"
@@ -20,7 +20,7 @@ func NewAdguardAddUrl(target Target, adguardAddUrlParams AdguardAddUrlParams) *A
 			Target:  target,
 			Type:    &serviceType,
 		},
-		ServiceData: adguardAddUrlParams,
+		ServiceData: *adguardAddUrlParams,
 	}
 	return a
 }
@@ -44,7 +44,7 @@ func (a *AdguardAddUrl) SetID(id *int) {
 
 // NewAdguardDisableUrl creates the object that can be sent to Home Assistant for domain adguard, service disable_url
 // "Disables a filter subscription in AdGuard Home."
-func NewAdguardDisableUrl(target Target, adguardDisableUrlParams AdguardDisableUrlParams) *AdguardDisableUrl {
+func NewAdguardDisableUrl(target Target, adguardDisableUrlParams *AdguardDisableUrlParams) *AdguardDisableUrl {
 	serviceDomain := "adguard"
 	serviceType := "call_service"
 	serviceService := "disable_url"
@@ -56,7 +56,7 @@ func NewAdguardDisableUrl(target Target, adguardDisableUrlParams AdguardDisableU
 			Target:  target,
 			Type:    &serviceType,
 		},
-		ServiceData: adguardDisableUrlParams,
+		ServiceData: *adguardDisableUrlParams,
 	}
 	return a
 }
@@ -79,7 +79,7 @@ func (a *AdguardDisableUrl) SetID(id *int) {
 
 // NewAdguardEnableUrl creates the object that can be sent to Home Assistant for domain adguard, service enable_url
 // "Enables a filter subscription in AdGuard Home."
-func NewAdguardEnableUrl(target Target, adguardEnableUrlParams AdguardEnableUrlParams) *AdguardEnableUrl {
+func NewAdguardEnableUrl(target Target, adguardEnableUrlParams *AdguardEnableUrlParams) *AdguardEnableUrl {
 	serviceDomain := "adguard"
 	serviceType := "call_service"
 	serviceService := "enable_url"
@@ -91,7 +91,7 @@ func NewAdguardEnableUrl(target Target, adguardEnableUrlParams AdguardEnableUrlP
 			Target:  target,
 			Type:    &serviceType,
 		},
-		ServiceData: adguardEnableUrlParams,
+		ServiceData: *adguardEnableUrlParams,
 	}
 	return a
 }
@@ -114,7 +114,7 @@ func (a *AdguardEnableUrl) SetID(id *int) {
 
 // NewAdguardRefresh creates the object that can be sent to Home Assistant for domain adguard, service refresh
 // "Refresh all filter subscriptions in AdGuard Home."
-func NewAdguardRefresh(target Target, adguardRefreshParams AdguardRefreshParams) *AdguardRefresh {
+func NewAdguardRefresh(target Target) *AdguardRefresh {
 	serviceDomain := "adguard"
 	serviceType := "call_service"
 	serviceService := "refresh"
@@ -126,16 +126,15 @@ func NewAdguardRefresh(target Target, adguardRefreshParams AdguardRefreshParams)
 			Target:  target,
 			Type:    &serviceType,
 		},
-		ServiceData: adguardRefreshParams,
+		ServiceData: nil,
 	}
 	return a
 }
 
 type AdguardRefresh struct {
 	ServiceBase
-	ServiceData AdguardRefreshParams `json:"service_data,omitempty"`
+	ServiceData interface{} `json:"service_data,omitempty"`
 }
-type AdguardRefreshParams struct{}
 
 func (a *AdguardRefresh) JSON() string {
 	data, _ := json.Marshal(a)
@@ -147,7 +146,7 @@ func (a *AdguardRefresh) SetID(id *int) {
 
 // NewAdguardRemoveUrl creates the object that can be sent to Home Assistant for domain adguard, service remove_url
 // "Removes a filter subscription from AdGuard Home."
-func NewAdguardRemoveUrl(target Target, adguardRemoveUrlParams AdguardRemoveUrlParams) *AdguardRemoveUrl {
+func NewAdguardRemoveUrl(target Target, adguardRemoveUrlParams *AdguardRemoveUrlParams) *AdguardRemoveUrl {
 	serviceDomain := "adguard"
 	serviceType := "call_service"
 	serviceService := "remove_url"
@@ -159,7 +158,7 @@ func NewAdguardRemoveUrl(target Target, adguardRemoveUrlParams AdguardRemoveUrlP
 			Target:  target,
 			Type:    &serviceType,
 		},
-		ServiceData: adguardRemoveUrlParams,
+		ServiceData: *adguardRemoveUrlParams,
 	}
 	return a
 }
