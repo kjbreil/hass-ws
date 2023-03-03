@@ -8,7 +8,7 @@ import "encoding/json"
 
 // NewFrontendReloadThemes creates the object that can be sent to Home Assistant for domain frontend, service reload_themes
 // "Reload themes from YAML configuration."
-func NewFrontendReloadThemes(target Target, frontendReloadThemesParams FrontendReloadThemesParams) *FrontendReloadThemes {
+func NewFrontendReloadThemes(target Target) *FrontendReloadThemes {
 	serviceDomain := "frontend"
 	serviceType := "call_service"
 	serviceService := "reload_themes"
@@ -20,16 +20,15 @@ func NewFrontendReloadThemes(target Target, frontendReloadThemesParams FrontendR
 			Target:  target,
 			Type:    &serviceType,
 		},
-		ServiceData: frontendReloadThemesParams,
+		ServiceData: nil,
 	}
 	return f
 }
 
 type FrontendReloadThemes struct {
 	ServiceBase
-	ServiceData FrontendReloadThemesParams `json:"service_data,omitempty"`
+	ServiceData interface{} `json:"service_data,omitempty"`
 }
-type FrontendReloadThemesParams struct{}
 
 func (f *FrontendReloadThemes) JSON() string {
 	data, _ := json.Marshal(f)
@@ -41,7 +40,7 @@ func (f *FrontendReloadThemes) SetID(id *int) {
 
 // NewFrontendSetTheme creates the object that can be sent to Home Assistant for domain frontend, service set_theme
 // "Set a theme unless the client selected per-device theme."
-func NewFrontendSetTheme(target Target, frontendSetThemeParams FrontendSetThemeParams) *FrontendSetTheme {
+func NewFrontendSetTheme(target Target, frontendSetThemeParams *FrontendSetThemeParams) *FrontendSetTheme {
 	serviceDomain := "frontend"
 	serviceType := "call_service"
 	serviceService := "set_theme"
@@ -53,7 +52,7 @@ func NewFrontendSetTheme(target Target, frontendSetThemeParams FrontendSetThemeP
 			Target:  target,
 			Type:    &serviceType,
 		},
-		ServiceData: frontendSetThemeParams,
+		ServiceData: *frontendSetThemeParams,
 	}
 	return f
 }

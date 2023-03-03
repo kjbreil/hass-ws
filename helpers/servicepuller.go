@@ -3,7 +3,6 @@ package main
 import (
 	"fmt"
 	"github.com/Jeffail/gabs/v2"
-	"github.com/dave/jennifer/jen"
 	"github.com/iancoleman/strcase"
 	"sort"
 	"strings"
@@ -28,7 +27,7 @@ type Service struct {
 	camelName      string
 	lowerCamelName string
 	firstLetter    string
-	parameters     map[string]*jen.Statement
+	parameters     map[string]string
 	parameterKeys  []string
 	description    string
 }
@@ -71,7 +70,7 @@ func (sl *ServiceList) setParameters(d *Domain) {
 			camelName:      fmt.Sprintf("%s%s", d.camelName, strcase.ToCamel(k)),
 			lowerCamelName: strcase.ToLowerCamel(fmt.Sprintf("%s%s", d.camelName, strcase.ToCamel(k))),
 			firstLetter:    string(d.name[0]),
-			parameters:     make(map[string]*jen.Statement),
+			parameters:     make(map[string]string),
 			description:    v.Path("description").String(),
 		}
 		for fn, f := range v.Path("fields").ChildrenMap() {
@@ -81,13 +80,13 @@ func (sl *ServiceList) setParameters(d *Domain) {
 				sm := selector.ChildrenMap()
 
 				if _, ok := sm["text"]; ok {
-					s.parameters[fn] = jen.String()
+					s.parameters[fn] = "string"
 				}
 				if _, ok := sm["number"]; ok {
-					s.parameters[fn] = jen.Float64()
+					s.parameters[fn] = "float64"
 				}
 				if _, ok := sm["color_temp"]; ok {
-					s.parameters[fn] = jen.Float64()
+					s.parameters[fn] = "float64"
 				}
 				if se, ok := sm["select"]; ok {
 					options := se.ChildrenMap()["options"].Children()
@@ -104,7 +103,7 @@ func (sl *ServiceList) setParameters(d *Domain) {
 							sl.enums[strcase.ToCamel(fn)][enumName] = append(sl.enums[strcase.ToCamel(fn)][enumName], fmt.Sprintf("%s: %s", d.name, s.name))
 
 						}
-						s.parameters[fn] = jen.Id(strcase.ToCamel(fn))
+						s.parameters[fn] = strcase.ToCamel(fn)
 					}
 				}
 

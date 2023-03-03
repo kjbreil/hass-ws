@@ -8,7 +8,7 @@ import "encoding/json"
 
 // NewInputSelectReload creates the object that can be sent to Home Assistant for domain input_select, service reload
 // "Reload the input_select configuration."
-func NewInputSelectReload(target Target, inputSelectReloadParams InputSelectReloadParams) *InputSelectReload {
+func NewInputSelectReload(target Target) *InputSelectReload {
 	serviceDomain := "input_select"
 	serviceType := "call_service"
 	serviceService := "reload"
@@ -20,16 +20,15 @@ func NewInputSelectReload(target Target, inputSelectReloadParams InputSelectRelo
 			Target:  target,
 			Type:    &serviceType,
 		},
-		ServiceData: inputSelectReloadParams,
+		ServiceData: nil,
 	}
 	return i
 }
 
 type InputSelectReload struct {
 	ServiceBase
-	ServiceData InputSelectReloadParams `json:"service_data,omitempty"`
+	ServiceData interface{} `json:"service_data,omitempty"`
 }
-type InputSelectReloadParams struct{}
 
 func (i *InputSelectReload) JSON() string {
 	data, _ := json.Marshal(i)
@@ -41,7 +40,7 @@ func (i *InputSelectReload) SetID(id *int) {
 
 // NewInputSelectSelectFirst creates the object that can be sent to Home Assistant for domain input_select, service select_first
 // "Select the first option of an input select entity."
-func NewInputSelectSelectFirst(target Target, inputSelectSelectFirstParams InputSelectSelectFirstParams) *InputSelectSelectFirst {
+func NewInputSelectSelectFirst(target Target) *InputSelectSelectFirst {
 	serviceDomain := "input_select"
 	serviceType := "call_service"
 	serviceService := "select_first"
@@ -53,16 +52,15 @@ func NewInputSelectSelectFirst(target Target, inputSelectSelectFirstParams Input
 			Target:  target,
 			Type:    &serviceType,
 		},
-		ServiceData: inputSelectSelectFirstParams,
+		ServiceData: nil,
 	}
 	return i
 }
 
 type InputSelectSelectFirst struct {
 	ServiceBase
-	ServiceData InputSelectSelectFirstParams `json:"service_data,omitempty"`
+	ServiceData interface{} `json:"service_data,omitempty"`
 }
-type InputSelectSelectFirstParams struct{}
 
 func (i *InputSelectSelectFirst) JSON() string {
 	data, _ := json.Marshal(i)
@@ -74,7 +72,7 @@ func (i *InputSelectSelectFirst) SetID(id *int) {
 
 // NewInputSelectSelectLast creates the object that can be sent to Home Assistant for domain input_select, service select_last
 // "Select the last option of an input select entity."
-func NewInputSelectSelectLast(target Target, inputSelectSelectLastParams InputSelectSelectLastParams) *InputSelectSelectLast {
+func NewInputSelectSelectLast(target Target) *InputSelectSelectLast {
 	serviceDomain := "input_select"
 	serviceType := "call_service"
 	serviceService := "select_last"
@@ -86,16 +84,15 @@ func NewInputSelectSelectLast(target Target, inputSelectSelectLastParams InputSe
 			Target:  target,
 			Type:    &serviceType,
 		},
-		ServiceData: inputSelectSelectLastParams,
+		ServiceData: nil,
 	}
 	return i
 }
 
 type InputSelectSelectLast struct {
 	ServiceBase
-	ServiceData InputSelectSelectLastParams `json:"service_data,omitempty"`
+	ServiceData interface{} `json:"service_data,omitempty"`
 }
-type InputSelectSelectLastParams struct{}
 
 func (i *InputSelectSelectLast) JSON() string {
 	data, _ := json.Marshal(i)
@@ -107,7 +104,7 @@ func (i *InputSelectSelectLast) SetID(id *int) {
 
 // NewInputSelectSelectNext creates the object that can be sent to Home Assistant for domain input_select, service select_next
 // "Select the next options of an input select entity."
-func NewInputSelectSelectNext(target Target, inputSelectSelectNextParams InputSelectSelectNextParams) *InputSelectSelectNext {
+func NewInputSelectSelectNext(target Target) *InputSelectSelectNext {
 	serviceDomain := "input_select"
 	serviceType := "call_service"
 	serviceService := "select_next"
@@ -119,16 +116,15 @@ func NewInputSelectSelectNext(target Target, inputSelectSelectNextParams InputSe
 			Target:  target,
 			Type:    &serviceType,
 		},
-		ServiceData: inputSelectSelectNextParams,
+		ServiceData: nil,
 	}
 	return i
 }
 
 type InputSelectSelectNext struct {
 	ServiceBase
-	ServiceData InputSelectSelectNextParams `json:"service_data,omitempty"`
+	ServiceData interface{} `json:"service_data,omitempty"`
 }
-type InputSelectSelectNextParams struct{}
 
 func (i *InputSelectSelectNext) JSON() string {
 	data, _ := json.Marshal(i)
@@ -140,7 +136,7 @@ func (i *InputSelectSelectNext) SetID(id *int) {
 
 // NewInputSelectSelectOption creates the object that can be sent to Home Assistant for domain input_select, service select_option
 // "Select an option of an input select entity."
-func NewInputSelectSelectOption(target Target, inputSelectSelectOptionParams InputSelectSelectOptionParams) *InputSelectSelectOption {
+func NewInputSelectSelectOption(target Target, inputSelectSelectOptionParams *InputSelectSelectOptionParams) *InputSelectSelectOption {
 	serviceDomain := "input_select"
 	serviceType := "call_service"
 	serviceService := "select_option"
@@ -152,7 +148,7 @@ func NewInputSelectSelectOption(target Target, inputSelectSelectOptionParams Inp
 			Target:  target,
 			Type:    &serviceType,
 		},
-		ServiceData: inputSelectSelectOptionParams,
+		ServiceData: *inputSelectSelectOptionParams,
 	}
 	return i
 }
@@ -175,7 +171,7 @@ func (i *InputSelectSelectOption) SetID(id *int) {
 
 // NewInputSelectSelectPrevious creates the object that can be sent to Home Assistant for domain input_select, service select_previous
 // "Select the previous options of an input select entity."
-func NewInputSelectSelectPrevious(target Target, inputSelectSelectPreviousParams InputSelectSelectPreviousParams) *InputSelectSelectPrevious {
+func NewInputSelectSelectPrevious(target Target) *InputSelectSelectPrevious {
 	serviceDomain := "input_select"
 	serviceType := "call_service"
 	serviceService := "select_previous"
@@ -187,16 +183,15 @@ func NewInputSelectSelectPrevious(target Target, inputSelectSelectPreviousParams
 			Target:  target,
 			Type:    &serviceType,
 		},
-		ServiceData: inputSelectSelectPreviousParams,
+		ServiceData: nil,
 	}
 	return i
 }
 
 type InputSelectSelectPrevious struct {
 	ServiceBase
-	ServiceData InputSelectSelectPreviousParams `json:"service_data,omitempty"`
+	ServiceData interface{} `json:"service_data,omitempty"`
 }
-type InputSelectSelectPreviousParams struct{}
 
 func (i *InputSelectSelectPrevious) JSON() string {
 	data, _ := json.Marshal(i)
@@ -208,7 +203,7 @@ func (i *InputSelectSelectPrevious) SetID(id *int) {
 
 // NewInputSelectSetOptions creates the object that can be sent to Home Assistant for domain input_select, service set_options
 // "Set the options of an input select entity."
-func NewInputSelectSetOptions(target Target, inputSelectSetOptionsParams InputSelectSetOptionsParams) *InputSelectSetOptions {
+func NewInputSelectSetOptions(target Target) *InputSelectSetOptions {
 	serviceDomain := "input_select"
 	serviceType := "call_service"
 	serviceService := "set_options"
@@ -220,16 +215,15 @@ func NewInputSelectSetOptions(target Target, inputSelectSetOptionsParams InputSe
 			Target:  target,
 			Type:    &serviceType,
 		},
-		ServiceData: inputSelectSetOptionsParams,
+		ServiceData: nil,
 	}
 	return i
 }
 
 type InputSelectSetOptions struct {
 	ServiceBase
-	ServiceData InputSelectSetOptionsParams `json:"service_data,omitempty"`
+	ServiceData interface{} `json:"service_data,omitempty"`
 }
-type InputSelectSetOptionsParams struct{}
 
 func (i *InputSelectSetOptions) JSON() string {
 	data, _ := json.Marshal(i)

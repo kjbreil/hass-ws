@@ -8,7 +8,7 @@ import "encoding/json"
 
 // NewVesyncUpdateDevices creates the object that can be sent to Home Assistant for domain vesync, service update_devices
 // "Add new VeSync devices to Home Assistant"
-func NewVesyncUpdateDevices(target Target, vesyncUpdateDevicesParams VesyncUpdateDevicesParams) *VesyncUpdateDevices {
+func NewVesyncUpdateDevices(target Target) *VesyncUpdateDevices {
 	serviceDomain := "vesync"
 	serviceType := "call_service"
 	serviceService := "update_devices"
@@ -20,16 +20,15 @@ func NewVesyncUpdateDevices(target Target, vesyncUpdateDevicesParams VesyncUpdat
 			Target:  target,
 			Type:    &serviceType,
 		},
-		ServiceData: vesyncUpdateDevicesParams,
+		ServiceData: nil,
 	}
 	return v
 }
 
 type VesyncUpdateDevices struct {
 	ServiceBase
-	ServiceData VesyncUpdateDevicesParams `json:"service_data,omitempty"`
+	ServiceData interface{} `json:"service_data,omitempty"`
 }
-type VesyncUpdateDevicesParams struct{}
 
 func (v *VesyncUpdateDevices) JSON() string {
 	data, _ := json.Marshal(v)

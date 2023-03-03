@@ -8,7 +8,7 @@ import "encoding/json"
 
 // NewTimerCancel creates the object that can be sent to Home Assistant for domain timer, service cancel
 // "Cancel a timer."
-func NewTimerCancel(target Target, timerCancelParams TimerCancelParams) *TimerCancel {
+func NewTimerCancel(target Target) *TimerCancel {
 	serviceDomain := "timer"
 	serviceType := "call_service"
 	serviceService := "cancel"
@@ -20,16 +20,15 @@ func NewTimerCancel(target Target, timerCancelParams TimerCancelParams) *TimerCa
 			Target:  target,
 			Type:    &serviceType,
 		},
-		ServiceData: timerCancelParams,
+		ServiceData: nil,
 	}
 	return t
 }
 
 type TimerCancel struct {
 	ServiceBase
-	ServiceData TimerCancelParams `json:"service_data,omitempty"`
+	ServiceData interface{} `json:"service_data,omitempty"`
 }
-type TimerCancelParams struct{}
 
 func (t *TimerCancel) JSON() string {
 	data, _ := json.Marshal(t)
@@ -41,7 +40,7 @@ func (t *TimerCancel) SetID(id *int) {
 
 // NewTimerFinish creates the object that can be sent to Home Assistant for domain timer, service finish
 // "Finish a timer."
-func NewTimerFinish(target Target, timerFinishParams TimerFinishParams) *TimerFinish {
+func NewTimerFinish(target Target) *TimerFinish {
 	serviceDomain := "timer"
 	serviceType := "call_service"
 	serviceService := "finish"
@@ -53,16 +52,15 @@ func NewTimerFinish(target Target, timerFinishParams TimerFinishParams) *TimerFi
 			Target:  target,
 			Type:    &serviceType,
 		},
-		ServiceData: timerFinishParams,
+		ServiceData: nil,
 	}
 	return t
 }
 
 type TimerFinish struct {
 	ServiceBase
-	ServiceData TimerFinishParams `json:"service_data,omitempty"`
+	ServiceData interface{} `json:"service_data,omitempty"`
 }
-type TimerFinishParams struct{}
 
 func (t *TimerFinish) JSON() string {
 	data, _ := json.Marshal(t)
@@ -74,7 +72,7 @@ func (t *TimerFinish) SetID(id *int) {
 
 // NewTimerPause creates the object that can be sent to Home Assistant for domain timer, service pause
 // "Pause a timer."
-func NewTimerPause(target Target, timerPauseParams TimerPauseParams) *TimerPause {
+func NewTimerPause(target Target) *TimerPause {
 	serviceDomain := "timer"
 	serviceType := "call_service"
 	serviceService := "pause"
@@ -86,16 +84,15 @@ func NewTimerPause(target Target, timerPauseParams TimerPauseParams) *TimerPause
 			Target:  target,
 			Type:    &serviceType,
 		},
-		ServiceData: timerPauseParams,
+		ServiceData: nil,
 	}
 	return t
 }
 
 type TimerPause struct {
 	ServiceBase
-	ServiceData TimerPauseParams `json:"service_data,omitempty"`
+	ServiceData interface{} `json:"service_data,omitempty"`
 }
-type TimerPauseParams struct{}
 
 func (t *TimerPause) JSON() string {
 	data, _ := json.Marshal(t)
@@ -107,7 +104,7 @@ func (t *TimerPause) SetID(id *int) {
 
 // NewTimerReload creates the object that can be sent to Home Assistant for domain timer, service reload
 // ""
-func NewTimerReload(target Target, timerReloadParams TimerReloadParams) *TimerReload {
+func NewTimerReload(target Target) *TimerReload {
 	serviceDomain := "timer"
 	serviceType := "call_service"
 	serviceService := "reload"
@@ -119,16 +116,15 @@ func NewTimerReload(target Target, timerReloadParams TimerReloadParams) *TimerRe
 			Target:  target,
 			Type:    &serviceType,
 		},
-		ServiceData: timerReloadParams,
+		ServiceData: nil,
 	}
 	return t
 }
 
 type TimerReload struct {
 	ServiceBase
-	ServiceData TimerReloadParams `json:"service_data,omitempty"`
+	ServiceData interface{} `json:"service_data,omitempty"`
 }
-type TimerReloadParams struct{}
 
 func (t *TimerReload) JSON() string {
 	data, _ := json.Marshal(t)
@@ -140,7 +136,7 @@ func (t *TimerReload) SetID(id *int) {
 
 // NewTimerStart creates the object that can be sent to Home Assistant for domain timer, service start
 // "Start a timer"
-func NewTimerStart(target Target, timerStartParams TimerStartParams) *TimerStart {
+func NewTimerStart(target Target, timerStartParams *TimerStartParams) *TimerStart {
 	serviceDomain := "timer"
 	serviceType := "call_service"
 	serviceService := "start"
@@ -152,7 +148,7 @@ func NewTimerStart(target Target, timerStartParams TimerStartParams) *TimerStart
 			Target:  target,
 			Type:    &serviceType,
 		},
-		ServiceData: timerStartParams,
+		ServiceData: *timerStartParams,
 	}
 	return t
 }

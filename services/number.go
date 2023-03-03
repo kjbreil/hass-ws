@@ -8,7 +8,7 @@ import "encoding/json"
 
 // NewNumberSetValue creates the object that can be sent to Home Assistant for domain number, service set_value
 // "Set the value of a Number entity."
-func NewNumberSetValue(target Target, numberSetValueParams NumberSetValueParams) *NumberSetValue {
+func NewNumberSetValue(target Target, numberSetValueParams *NumberSetValueParams) *NumberSetValue {
 	serviceDomain := "number"
 	serviceType := "call_service"
 	serviceService := "set_value"
@@ -20,7 +20,7 @@ func NewNumberSetValue(target Target, numberSetValueParams NumberSetValueParams)
 			Target:  target,
 			Type:    &serviceType,
 		},
-		ServiceData: numberSetValueParams,
+		ServiceData: *numberSetValueParams,
 	}
 	return n
 }

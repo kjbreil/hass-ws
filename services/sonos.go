@@ -8,7 +8,7 @@ import "encoding/json"
 
 // NewSonosClearSleepTimer creates the object that can be sent to Home Assistant for domain sonos, service clear_sleep_timer
 // "Clear a Sonos timer."
-func NewSonosClearSleepTimer(target Target, sonosClearSleepTimerParams SonosClearSleepTimerParams) *SonosClearSleepTimer {
+func NewSonosClearSleepTimer(target Target) *SonosClearSleepTimer {
 	serviceDomain := "sonos"
 	serviceType := "call_service"
 	serviceService := "clear_sleep_timer"
@@ -20,16 +20,15 @@ func NewSonosClearSleepTimer(target Target, sonosClearSleepTimerParams SonosClea
 			Target:  target,
 			Type:    &serviceType,
 		},
-		ServiceData: sonosClearSleepTimerParams,
+		ServiceData: nil,
 	}
 	return s
 }
 
 type SonosClearSleepTimer struct {
 	ServiceBase
-	ServiceData SonosClearSleepTimerParams `json:"service_data,omitempty"`
+	ServiceData interface{} `json:"service_data,omitempty"`
 }
-type SonosClearSleepTimerParams struct{}
 
 func (s *SonosClearSleepTimer) JSON() string {
 	data, _ := json.Marshal(s)
@@ -41,7 +40,7 @@ func (s *SonosClearSleepTimer) SetID(id *int) {
 
 // NewSonosPlayQueue creates the object that can be sent to Home Assistant for domain sonos, service play_queue
 // "Start playing the queue from the first item."
-func NewSonosPlayQueue(target Target, sonosPlayQueueParams SonosPlayQueueParams) *SonosPlayQueue {
+func NewSonosPlayQueue(target Target, sonosPlayQueueParams *SonosPlayQueueParams) *SonosPlayQueue {
 	serviceDomain := "sonos"
 	serviceType := "call_service"
 	serviceService := "play_queue"
@@ -53,7 +52,7 @@ func NewSonosPlayQueue(target Target, sonosPlayQueueParams SonosPlayQueueParams)
 			Target:  target,
 			Type:    &serviceType,
 		},
-		ServiceData: sonosPlayQueueParams,
+		ServiceData: *sonosPlayQueueParams,
 	}
 	return s
 }
@@ -76,7 +75,7 @@ func (s *SonosPlayQueue) SetID(id *int) {
 
 // NewSonosRemoveFromQueue creates the object that can be sent to Home Assistant for domain sonos, service remove_from_queue
 // "Removes an item from the queue."
-func NewSonosRemoveFromQueue(target Target, sonosRemoveFromQueueParams SonosRemoveFromQueueParams) *SonosRemoveFromQueue {
+func NewSonosRemoveFromQueue(target Target, sonosRemoveFromQueueParams *SonosRemoveFromQueueParams) *SonosRemoveFromQueue {
 	serviceDomain := "sonos"
 	serviceType := "call_service"
 	serviceService := "remove_from_queue"
@@ -88,7 +87,7 @@ func NewSonosRemoveFromQueue(target Target, sonosRemoveFromQueueParams SonosRemo
 			Target:  target,
 			Type:    &serviceType,
 		},
-		ServiceData: sonosRemoveFromQueueParams,
+		ServiceData: *sonosRemoveFromQueueParams,
 	}
 	return s
 }
@@ -111,7 +110,7 @@ func (s *SonosRemoveFromQueue) SetID(id *int) {
 
 // NewSonosRestore creates the object that can be sent to Home Assistant for domain sonos, service restore
 // "Restore a snapshot of the media player."
-func NewSonosRestore(target Target, sonosRestoreParams SonosRestoreParams) *SonosRestore {
+func NewSonosRestore(target Target) *SonosRestore {
 	serviceDomain := "sonos"
 	serviceType := "call_service"
 	serviceService := "restore"
@@ -123,16 +122,15 @@ func NewSonosRestore(target Target, sonosRestoreParams SonosRestoreParams) *Sono
 			Target:  target,
 			Type:    &serviceType,
 		},
-		ServiceData: sonosRestoreParams,
+		ServiceData: nil,
 	}
 	return s
 }
 
 type SonosRestore struct {
 	ServiceBase
-	ServiceData SonosRestoreParams `json:"service_data,omitempty"`
+	ServiceData interface{} `json:"service_data,omitempty"`
 }
-type SonosRestoreParams struct{}
 
 func (s *SonosRestore) JSON() string {
 	data, _ := json.Marshal(s)
@@ -144,7 +142,7 @@ func (s *SonosRestore) SetID(id *int) {
 
 // NewSonosSetSleepTimer creates the object that can be sent to Home Assistant for domain sonos, service set_sleep_timer
 // "Set a Sonos timer."
-func NewSonosSetSleepTimer(target Target, sonosSetSleepTimerParams SonosSetSleepTimerParams) *SonosSetSleepTimer {
+func NewSonosSetSleepTimer(target Target, sonosSetSleepTimerParams *SonosSetSleepTimerParams) *SonosSetSleepTimer {
 	serviceDomain := "sonos"
 	serviceType := "call_service"
 	serviceService := "set_sleep_timer"
@@ -156,7 +154,7 @@ func NewSonosSetSleepTimer(target Target, sonosSetSleepTimerParams SonosSetSleep
 			Target:  target,
 			Type:    &serviceType,
 		},
-		ServiceData: sonosSetSleepTimerParams,
+		ServiceData: *sonosSetSleepTimerParams,
 	}
 	return s
 }
@@ -179,7 +177,7 @@ func (s *SonosSetSleepTimer) SetID(id *int) {
 
 // NewSonosSnapshot creates the object that can be sent to Home Assistant for domain sonos, service snapshot
 // "Take a snapshot of the media player."
-func NewSonosSnapshot(target Target, sonosSnapshotParams SonosSnapshotParams) *SonosSnapshot {
+func NewSonosSnapshot(target Target) *SonosSnapshot {
 	serviceDomain := "sonos"
 	serviceType := "call_service"
 	serviceService := "snapshot"
@@ -191,16 +189,15 @@ func NewSonosSnapshot(target Target, sonosSnapshotParams SonosSnapshotParams) *S
 			Target:  target,
 			Type:    &serviceType,
 		},
-		ServiceData: sonosSnapshotParams,
+		ServiceData: nil,
 	}
 	return s
 }
 
 type SonosSnapshot struct {
 	ServiceBase
-	ServiceData SonosSnapshotParams `json:"service_data,omitempty"`
+	ServiceData interface{} `json:"service_data,omitempty"`
 }
-type SonosSnapshotParams struct{}
 
 func (s *SonosSnapshot) JSON() string {
 	data, _ := json.Marshal(s)
@@ -212,7 +209,7 @@ func (s *SonosSnapshot) SetID(id *int) {
 
 // NewSonosUpdateAlarm creates the object that can be sent to Home Assistant for domain sonos, service update_alarm
 // "Updates an alarm with new time and volume settings."
-func NewSonosUpdateAlarm(target Target, sonosUpdateAlarmParams SonosUpdateAlarmParams) *SonosUpdateAlarm {
+func NewSonosUpdateAlarm(target Target, sonosUpdateAlarmParams *SonosUpdateAlarmParams) *SonosUpdateAlarm {
 	serviceDomain := "sonos"
 	serviceType := "call_service"
 	serviceService := "update_alarm"
@@ -224,7 +221,7 @@ func NewSonosUpdateAlarm(target Target, sonosUpdateAlarmParams SonosUpdateAlarmP
 			Target:  target,
 			Type:    &serviceType,
 		},
-		ServiceData: sonosUpdateAlarmParams,
+		ServiceData: *sonosUpdateAlarmParams,
 	}
 	return s
 }

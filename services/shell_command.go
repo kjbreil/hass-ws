@@ -8,7 +8,7 @@ import "encoding/json"
 
 // NewShellCommandShutdownTyr creates the object that can be sent to Home Assistant for domain shell_command, service shutdown_tyr
 // ""
-func NewShellCommandShutdownTyr(target Target, shellCommandShutdownTyrParams ShellCommandShutdownTyrParams) *ShellCommandShutdownTyr {
+func NewShellCommandShutdownTyr(target Target) *ShellCommandShutdownTyr {
 	serviceDomain := "shell_command"
 	serviceType := "call_service"
 	serviceService := "shutdown_tyr"
@@ -20,16 +20,15 @@ func NewShellCommandShutdownTyr(target Target, shellCommandShutdownTyrParams She
 			Target:  target,
 			Type:    &serviceType,
 		},
-		ServiceData: shellCommandShutdownTyrParams,
+		ServiceData: nil,
 	}
 	return s
 }
 
 type ShellCommandShutdownTyr struct {
 	ServiceBase
-	ServiceData ShellCommandShutdownTyrParams `json:"service_data,omitempty"`
+	ServiceData interface{} `json:"service_data,omitempty"`
 }
-type ShellCommandShutdownTyrParams struct{}
 
 func (s *ShellCommandShutdownTyr) JSON() string {
 	data, _ := json.Marshal(s)
@@ -41,7 +40,7 @@ func (s *ShellCommandShutdownTyr) SetID(id *int) {
 
 // NewShellCommandStartNcbp creates the object that can be sent to Home Assistant for domain shell_command, service start_ncbp
 // ""
-func NewShellCommandStartNcbp(target Target, shellCommandStartNcbpParams ShellCommandStartNcbpParams) *ShellCommandStartNcbp {
+func NewShellCommandStartNcbp(target Target) *ShellCommandStartNcbp {
 	serviceDomain := "shell_command"
 	serviceType := "call_service"
 	serviceService := "start_ncbp"
@@ -53,16 +52,15 @@ func NewShellCommandStartNcbp(target Target, shellCommandStartNcbpParams ShellCo
 			Target:  target,
 			Type:    &serviceType,
 		},
-		ServiceData: shellCommandStartNcbpParams,
+		ServiceData: nil,
 	}
 	return s
 }
 
 type ShellCommandStartNcbp struct {
 	ServiceBase
-	ServiceData ShellCommandStartNcbpParams `json:"service_data,omitempty"`
+	ServiceData interface{} `json:"service_data,omitempty"`
 }
-type ShellCommandStartNcbpParams struct{}
 
 func (s *ShellCommandStartNcbp) JSON() string {
 	data, _ := json.Marshal(s)
@@ -74,7 +72,7 @@ func (s *ShellCommandStartNcbp) SetID(id *int) {
 
 // NewShellCommandStopNcbp creates the object that can be sent to Home Assistant for domain shell_command, service stop_ncbp
 // ""
-func NewShellCommandStopNcbp(target Target, shellCommandStopNcbpParams ShellCommandStopNcbpParams) *ShellCommandStopNcbp {
+func NewShellCommandStopNcbp(target Target) *ShellCommandStopNcbp {
 	serviceDomain := "shell_command"
 	serviceType := "call_service"
 	serviceService := "stop_ncbp"
@@ -86,16 +84,15 @@ func NewShellCommandStopNcbp(target Target, shellCommandStopNcbpParams ShellComm
 			Target:  target,
 			Type:    &serviceType,
 		},
-		ServiceData: shellCommandStopNcbpParams,
+		ServiceData: nil,
 	}
 	return s
 }
 
 type ShellCommandStopNcbp struct {
 	ServiceBase
-	ServiceData ShellCommandStopNcbpParams `json:"service_data,omitempty"`
+	ServiceData interface{} `json:"service_data,omitempty"`
 }
-type ShellCommandStopNcbpParams struct{}
 
 func (s *ShellCommandStopNcbp) JSON() string {
 	data, _ := json.Marshal(s)

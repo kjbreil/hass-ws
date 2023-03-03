@@ -8,7 +8,7 @@ import "encoding/json"
 
 // NewInputButtonPress creates the object that can be sent to Home Assistant for domain input_button, service press
 // "Press the input button entity."
-func NewInputButtonPress(target Target, inputButtonPressParams InputButtonPressParams) *InputButtonPress {
+func NewInputButtonPress(target Target) *InputButtonPress {
 	serviceDomain := "input_button"
 	serviceType := "call_service"
 	serviceService := "press"
@@ -20,16 +20,15 @@ func NewInputButtonPress(target Target, inputButtonPressParams InputButtonPressP
 			Target:  target,
 			Type:    &serviceType,
 		},
-		ServiceData: inputButtonPressParams,
+		ServiceData: nil,
 	}
 	return i
 }
 
 type InputButtonPress struct {
 	ServiceBase
-	ServiceData InputButtonPressParams `json:"service_data,omitempty"`
+	ServiceData interface{} `json:"service_data,omitempty"`
 }
-type InputButtonPressParams struct{}
 
 func (i *InputButtonPress) JSON() string {
 	data, _ := json.Marshal(i)
@@ -41,7 +40,7 @@ func (i *InputButtonPress) SetID(id *int) {
 
 // NewInputButtonReload creates the object that can be sent to Home Assistant for domain input_button, service reload
 // ""
-func NewInputButtonReload(target Target, inputButtonReloadParams InputButtonReloadParams) *InputButtonReload {
+func NewInputButtonReload(target Target) *InputButtonReload {
 	serviceDomain := "input_button"
 	serviceType := "call_service"
 	serviceService := "reload"
@@ -53,16 +52,15 @@ func NewInputButtonReload(target Target, inputButtonReloadParams InputButtonRelo
 			Target:  target,
 			Type:    &serviceType,
 		},
-		ServiceData: inputButtonReloadParams,
+		ServiceData: nil,
 	}
 	return i
 }
 
 type InputButtonReload struct {
 	ServiceBase
-	ServiceData InputButtonReloadParams `json:"service_data,omitempty"`
+	ServiceData interface{} `json:"service_data,omitempty"`
 }
-type InputButtonReloadParams struct{}
 
 func (i *InputButtonReload) JSON() string {
 	data, _ := json.Marshal(i)

@@ -8,7 +8,7 @@ import "encoding/json"
 
 // NewGroupReload creates the object that can be sent to Home Assistant for domain group, service reload
 // "Reload group configuration, entities, and notify services."
-func NewGroupReload(target Target, groupReloadParams GroupReloadParams) *GroupReload {
+func NewGroupReload(target Target) *GroupReload {
 	serviceDomain := "group"
 	serviceType := "call_service"
 	serviceService := "reload"
@@ -20,16 +20,15 @@ func NewGroupReload(target Target, groupReloadParams GroupReloadParams) *GroupRe
 			Target:  target,
 			Type:    &serviceType,
 		},
-		ServiceData: groupReloadParams,
+		ServiceData: nil,
 	}
 	return g
 }
 
 type GroupReload struct {
 	ServiceBase
-	ServiceData GroupReloadParams `json:"service_data,omitempty"`
+	ServiceData interface{} `json:"service_data,omitempty"`
 }
-type GroupReloadParams struct{}
 
 func (g *GroupReload) JSON() string {
 	data, _ := json.Marshal(g)
@@ -41,7 +40,7 @@ func (g *GroupReload) SetID(id *int) {
 
 // NewGroupRemove creates the object that can be sent to Home Assistant for domain group, service remove
 // "Remove a user group."
-func NewGroupRemove(target Target, groupRemoveParams GroupRemoveParams) *GroupRemove {
+func NewGroupRemove(target Target) *GroupRemove {
 	serviceDomain := "group"
 	serviceType := "call_service"
 	serviceService := "remove"
@@ -53,16 +52,15 @@ func NewGroupRemove(target Target, groupRemoveParams GroupRemoveParams) *GroupRe
 			Target:  target,
 			Type:    &serviceType,
 		},
-		ServiceData: groupRemoveParams,
+		ServiceData: nil,
 	}
 	return g
 }
 
 type GroupRemove struct {
 	ServiceBase
-	ServiceData GroupRemoveParams `json:"service_data,omitempty"`
+	ServiceData interface{} `json:"service_data,omitempty"`
 }
-type GroupRemoveParams struct{}
 
 func (g *GroupRemove) JSON() string {
 	data, _ := json.Marshal(g)
@@ -74,7 +72,7 @@ func (g *GroupRemove) SetID(id *int) {
 
 // NewGroupSet creates the object that can be sent to Home Assistant for domain group, service set
 // "Create/Update a user group."
-func NewGroupSet(target Target, groupSetParams GroupSetParams) *GroupSet {
+func NewGroupSet(target Target, groupSetParams *GroupSetParams) *GroupSet {
 	serviceDomain := "group"
 	serviceType := "call_service"
 	serviceService := "set"
@@ -86,7 +84,7 @@ func NewGroupSet(target Target, groupSetParams GroupSetParams) *GroupSet {
 			Target:  target,
 			Type:    &serviceType,
 		},
-		ServiceData: groupSetParams,
+		ServiceData: *groupSetParams,
 	}
 	return g
 }

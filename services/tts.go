@@ -8,7 +8,7 @@ import "encoding/json"
 
 // NewTtsClearCache creates the object that can be sent to Home Assistant for domain tts, service clear_cache
 // "Remove all text-to-speech cache files and RAM cache."
-func NewTtsClearCache(target Target, ttsClearCacheParams TtsClearCacheParams) *TtsClearCache {
+func NewTtsClearCache(target Target) *TtsClearCache {
 	serviceDomain := "tts"
 	serviceType := "call_service"
 	serviceService := "clear_cache"
@@ -20,16 +20,15 @@ func NewTtsClearCache(target Target, ttsClearCacheParams TtsClearCacheParams) *T
 			Target:  target,
 			Type:    &serviceType,
 		},
-		ServiceData: ttsClearCacheParams,
+		ServiceData: nil,
 	}
 	return t
 }
 
 type TtsClearCache struct {
 	ServiceBase
-	ServiceData TtsClearCacheParams `json:"service_data,omitempty"`
+	ServiceData interface{} `json:"service_data,omitempty"`
 }
-type TtsClearCacheParams struct{}
 
 func (t *TtsClearCache) JSON() string {
 	data, _ := json.Marshal(t)
@@ -41,7 +40,7 @@ func (t *TtsClearCache) SetID(id *int) {
 
 // NewTtsCloudSay creates the object that can be sent to Home Assistant for domain tts, service cloud_say
 // "Say something using text-to-speech on a media player with cloud."
-func NewTtsCloudSay(target Target, ttsCloudSayParams TtsCloudSayParams) *TtsCloudSay {
+func NewTtsCloudSay(target Target, ttsCloudSayParams *TtsCloudSayParams) *TtsCloudSay {
 	serviceDomain := "tts"
 	serviceType := "call_service"
 	serviceService := "cloud_say"
@@ -53,7 +52,7 @@ func NewTtsCloudSay(target Target, ttsCloudSayParams TtsCloudSayParams) *TtsClou
 			Target:  target,
 			Type:    &serviceType,
 		},
-		ServiceData: ttsCloudSayParams,
+		ServiceData: *ttsCloudSayParams,
 	}
 	return t
 }
@@ -77,7 +76,7 @@ func (t *TtsCloudSay) SetID(id *int) {
 
 // NewTtsGoogleTranslateSay creates the object that can be sent to Home Assistant for domain tts, service google_translate_say
 // "Say something using text-to-speech on a media player with google_translate."
-func NewTtsGoogleTranslateSay(target Target, ttsGoogleTranslateSayParams TtsGoogleTranslateSayParams) *TtsGoogleTranslateSay {
+func NewTtsGoogleTranslateSay(target Target, ttsGoogleTranslateSayParams *TtsGoogleTranslateSayParams) *TtsGoogleTranslateSay {
 	serviceDomain := "tts"
 	serviceType := "call_service"
 	serviceService := "google_translate_say"
@@ -89,7 +88,7 @@ func NewTtsGoogleTranslateSay(target Target, ttsGoogleTranslateSayParams TtsGoog
 			Target:  target,
 			Type:    &serviceType,
 		},
-		ServiceData: ttsGoogleTranslateSayParams,
+		ServiceData: *ttsGoogleTranslateSayParams,
 	}
 	return t
 }

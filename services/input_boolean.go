@@ -8,7 +8,7 @@ import "encoding/json"
 
 // NewInputBooleanReload creates the object that can be sent to Home Assistant for domain input_boolean, service reload
 // "Reload the input_boolean configuration"
-func NewInputBooleanReload(target Target, inputBooleanReloadParams InputBooleanReloadParams) *InputBooleanReload {
+func NewInputBooleanReload(target Target) *InputBooleanReload {
 	serviceDomain := "input_boolean"
 	serviceType := "call_service"
 	serviceService := "reload"
@@ -20,16 +20,15 @@ func NewInputBooleanReload(target Target, inputBooleanReloadParams InputBooleanR
 			Target:  target,
 			Type:    &serviceType,
 		},
-		ServiceData: inputBooleanReloadParams,
+		ServiceData: nil,
 	}
 	return i
 }
 
 type InputBooleanReload struct {
 	ServiceBase
-	ServiceData InputBooleanReloadParams `json:"service_data,omitempty"`
+	ServiceData interface{} `json:"service_data,omitempty"`
 }
-type InputBooleanReloadParams struct{}
 
 func (i *InputBooleanReload) JSON() string {
 	data, _ := json.Marshal(i)
@@ -41,7 +40,7 @@ func (i *InputBooleanReload) SetID(id *int) {
 
 // NewInputBooleanToggle creates the object that can be sent to Home Assistant for domain input_boolean, service toggle
 // "Toggle an input boolean"
-func NewInputBooleanToggle(target Target, inputBooleanToggleParams InputBooleanToggleParams) *InputBooleanToggle {
+func NewInputBooleanToggle(target Target) *InputBooleanToggle {
 	serviceDomain := "input_boolean"
 	serviceType := "call_service"
 	serviceService := "toggle"
@@ -53,16 +52,15 @@ func NewInputBooleanToggle(target Target, inputBooleanToggleParams InputBooleanT
 			Target:  target,
 			Type:    &serviceType,
 		},
-		ServiceData: inputBooleanToggleParams,
+		ServiceData: nil,
 	}
 	return i
 }
 
 type InputBooleanToggle struct {
 	ServiceBase
-	ServiceData InputBooleanToggleParams `json:"service_data,omitempty"`
+	ServiceData interface{} `json:"service_data,omitempty"`
 }
-type InputBooleanToggleParams struct{}
 
 func (i *InputBooleanToggle) JSON() string {
 	data, _ := json.Marshal(i)
@@ -74,7 +72,7 @@ func (i *InputBooleanToggle) SetID(id *int) {
 
 // NewInputBooleanTurnOff creates the object that can be sent to Home Assistant for domain input_boolean, service turn_off
 // "Turn off an input boolean"
-func NewInputBooleanTurnOff(target Target, inputBooleanTurnOffParams InputBooleanTurnOffParams) *InputBooleanTurnOff {
+func NewInputBooleanTurnOff(target Target) *InputBooleanTurnOff {
 	serviceDomain := "input_boolean"
 	serviceType := "call_service"
 	serviceService := "turn_off"
@@ -86,16 +84,15 @@ func NewInputBooleanTurnOff(target Target, inputBooleanTurnOffParams InputBoolea
 			Target:  target,
 			Type:    &serviceType,
 		},
-		ServiceData: inputBooleanTurnOffParams,
+		ServiceData: nil,
 	}
 	return i
 }
 
 type InputBooleanTurnOff struct {
 	ServiceBase
-	ServiceData InputBooleanTurnOffParams `json:"service_data,omitempty"`
+	ServiceData interface{} `json:"service_data,omitempty"`
 }
-type InputBooleanTurnOffParams struct{}
 
 func (i *InputBooleanTurnOff) JSON() string {
 	data, _ := json.Marshal(i)
@@ -107,7 +104,7 @@ func (i *InputBooleanTurnOff) SetID(id *int) {
 
 // NewInputBooleanTurnOn creates the object that can be sent to Home Assistant for domain input_boolean, service turn_on
 // "Turn on an input boolean"
-func NewInputBooleanTurnOn(target Target, inputBooleanTurnOnParams InputBooleanTurnOnParams) *InputBooleanTurnOn {
+func NewInputBooleanTurnOn(target Target) *InputBooleanTurnOn {
 	serviceDomain := "input_boolean"
 	serviceType := "call_service"
 	serviceService := "turn_on"
@@ -119,16 +116,15 @@ func NewInputBooleanTurnOn(target Target, inputBooleanTurnOnParams InputBooleanT
 			Target:  target,
 			Type:    &serviceType,
 		},
-		ServiceData: inputBooleanTurnOnParams,
+		ServiceData: nil,
 	}
 	return i
 }
 
 type InputBooleanTurnOn struct {
 	ServiceBase
-	ServiceData InputBooleanTurnOnParams `json:"service_data,omitempty"`
+	ServiceData interface{} `json:"service_data,omitempty"`
 }
-type InputBooleanTurnOnParams struct{}
 
 func (i *InputBooleanTurnOn) JSON() string {
 	data, _ := json.Marshal(i)

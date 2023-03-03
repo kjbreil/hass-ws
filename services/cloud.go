@@ -8,7 +8,7 @@ import "encoding/json"
 
 // NewCloudRemoteConnect creates the object that can be sent to Home Assistant for domain cloud, service remote_connect
 // "Make instance UI available outside over NabuCasa cloud"
-func NewCloudRemoteConnect(target Target, cloudRemoteConnectParams CloudRemoteConnectParams) *CloudRemoteConnect {
+func NewCloudRemoteConnect(target Target) *CloudRemoteConnect {
 	serviceDomain := "cloud"
 	serviceType := "call_service"
 	serviceService := "remote_connect"
@@ -20,16 +20,15 @@ func NewCloudRemoteConnect(target Target, cloudRemoteConnectParams CloudRemoteCo
 			Target:  target,
 			Type:    &serviceType,
 		},
-		ServiceData: cloudRemoteConnectParams,
+		ServiceData: nil,
 	}
 	return c
 }
 
 type CloudRemoteConnect struct {
 	ServiceBase
-	ServiceData CloudRemoteConnectParams `json:"service_data,omitempty"`
+	ServiceData interface{} `json:"service_data,omitempty"`
 }
-type CloudRemoteConnectParams struct{}
 
 func (c *CloudRemoteConnect) JSON() string {
 	data, _ := json.Marshal(c)
@@ -41,7 +40,7 @@ func (c *CloudRemoteConnect) SetID(id *int) {
 
 // NewCloudRemoteDisconnect creates the object that can be sent to Home Assistant for domain cloud, service remote_disconnect
 // "Disconnect UI from NabuCasa cloud"
-func NewCloudRemoteDisconnect(target Target, cloudRemoteDisconnectParams CloudRemoteDisconnectParams) *CloudRemoteDisconnect {
+func NewCloudRemoteDisconnect(target Target) *CloudRemoteDisconnect {
 	serviceDomain := "cloud"
 	serviceType := "call_service"
 	serviceService := "remote_disconnect"
@@ -53,16 +52,15 @@ func NewCloudRemoteDisconnect(target Target, cloudRemoteDisconnectParams CloudRe
 			Target:  target,
 			Type:    &serviceType,
 		},
-		ServiceData: cloudRemoteDisconnectParams,
+		ServiceData: nil,
 	}
 	return c
 }
 
 type CloudRemoteDisconnect struct {
 	ServiceBase
-	ServiceData CloudRemoteDisconnectParams `json:"service_data,omitempty"`
+	ServiceData interface{} `json:"service_data,omitempty"`
 }
-type CloudRemoteDisconnectParams struct{}
 
 func (c *CloudRemoteDisconnect) JSON() string {
 	data, _ := json.Marshal(c)

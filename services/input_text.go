@@ -8,7 +8,7 @@ import "encoding/json"
 
 // NewInputTextReload creates the object that can be sent to Home Assistant for domain input_text, service reload
 // "Reload the input_text configuration."
-func NewInputTextReload(target Target, inputTextReloadParams InputTextReloadParams) *InputTextReload {
+func NewInputTextReload(target Target) *InputTextReload {
 	serviceDomain := "input_text"
 	serviceType := "call_service"
 	serviceService := "reload"
@@ -20,16 +20,15 @@ func NewInputTextReload(target Target, inputTextReloadParams InputTextReloadPara
 			Target:  target,
 			Type:    &serviceType,
 		},
-		ServiceData: inputTextReloadParams,
+		ServiceData: nil,
 	}
 	return i
 }
 
 type InputTextReload struct {
 	ServiceBase
-	ServiceData InputTextReloadParams `json:"service_data,omitempty"`
+	ServiceData interface{} `json:"service_data,omitempty"`
 }
-type InputTextReloadParams struct{}
 
 func (i *InputTextReload) JSON() string {
 	data, _ := json.Marshal(i)
@@ -41,7 +40,7 @@ func (i *InputTextReload) SetID(id *int) {
 
 // NewInputTextSetValue creates the object that can be sent to Home Assistant for domain input_text, service set_value
 // "Set the value of an input text entity."
-func NewInputTextSetValue(target Target, inputTextSetValueParams InputTextSetValueParams) *InputTextSetValue {
+func NewInputTextSetValue(target Target, inputTextSetValueParams *InputTextSetValueParams) *InputTextSetValue {
 	serviceDomain := "input_text"
 	serviceType := "call_service"
 	serviceService := "set_value"
@@ -53,7 +52,7 @@ func NewInputTextSetValue(target Target, inputTextSetValueParams InputTextSetVal
 			Target:  target,
 			Type:    &serviceType,
 		},
-		ServiceData: inputTextSetValueParams,
+		ServiceData: *inputTextSetValueParams,
 	}
 	return i
 }

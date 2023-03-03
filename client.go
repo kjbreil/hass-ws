@@ -1,3 +1,5 @@
+//go:generate go run ./helpers/
+
 package hass_ws
 
 import (

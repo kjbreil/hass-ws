@@ -8,7 +8,7 @@ import "encoding/json"
 
 // NewCoverCloseCover creates the object that can be sent to Home Assistant for domain cover, service close_cover
 // "Close all or specified cover."
-func NewCoverCloseCover(target Target, coverCloseCoverParams CoverCloseCoverParams) *CoverCloseCover {
+func NewCoverCloseCover(target Target) *CoverCloseCover {
 	serviceDomain := "cover"
 	serviceType := "call_service"
 	serviceService := "close_cover"
@@ -20,16 +20,15 @@ func NewCoverCloseCover(target Target, coverCloseCoverParams CoverCloseCoverPara
 			Target:  target,
 			Type:    &serviceType,
 		},
-		ServiceData: coverCloseCoverParams,
+		ServiceData: nil,
 	}
 	return c
 }
 
 type CoverCloseCover struct {
 	ServiceBase
-	ServiceData CoverCloseCoverParams `json:"service_data,omitempty"`
+	ServiceData interface{} `json:"service_data,omitempty"`
 }
-type CoverCloseCoverParams struct{}
 
 func (c *CoverCloseCover) JSON() string {
 	data, _ := json.Marshal(c)
@@ -41,7 +40,7 @@ func (c *CoverCloseCover) SetID(id *int) {
 
 // NewCoverCloseCoverTilt creates the object that can be sent to Home Assistant for domain cover, service close_cover_tilt
 // "Close all or specified cover tilt."
-func NewCoverCloseCoverTilt(target Target, coverCloseCoverTiltParams CoverCloseCoverTiltParams) *CoverCloseCoverTilt {
+func NewCoverCloseCoverTilt(target Target) *CoverCloseCoverTilt {
 	serviceDomain := "cover"
 	serviceType := "call_service"
 	serviceService := "close_cover_tilt"
@@ -53,16 +52,15 @@ func NewCoverCloseCoverTilt(target Target, coverCloseCoverTiltParams CoverCloseC
 			Target:  target,
 			Type:    &serviceType,
 		},
-		ServiceData: coverCloseCoverTiltParams,
+		ServiceData: nil,
 	}
 	return c
 }
 
 type CoverCloseCoverTilt struct {
 	ServiceBase
-	ServiceData CoverCloseCoverTiltParams `json:"service_data,omitempty"`
+	ServiceData interface{} `json:"service_data,omitempty"`
 }
-type CoverCloseCoverTiltParams struct{}
 
 func (c *CoverCloseCoverTilt) JSON() string {
 	data, _ := json.Marshal(c)
@@ -74,7 +72,7 @@ func (c *CoverCloseCoverTilt) SetID(id *int) {
 
 // NewCoverOpenCover creates the object that can be sent to Home Assistant for domain cover, service open_cover
 // "Open all or specified cover."
-func NewCoverOpenCover(target Target, coverOpenCoverParams CoverOpenCoverParams) *CoverOpenCover {
+func NewCoverOpenCover(target Target) *CoverOpenCover {
 	serviceDomain := "cover"
 	serviceType := "call_service"
 	serviceService := "open_cover"
@@ -86,16 +84,15 @@ func NewCoverOpenCover(target Target, coverOpenCoverParams CoverOpenCoverParams)
 			Target:  target,
 			Type:    &serviceType,
 		},
-		ServiceData: coverOpenCoverParams,
+		ServiceData: nil,
 	}
 	return c
 }
 
 type CoverOpenCover struct {
 	ServiceBase
-	ServiceData CoverOpenCoverParams `json:"service_data,omitempty"`
+	ServiceData interface{} `json:"service_data,omitempty"`
 }
-type CoverOpenCoverParams struct{}
 
 func (c *CoverOpenCover) JSON() string {
 	data, _ := json.Marshal(c)
@@ -107,7 +104,7 @@ func (c *CoverOpenCover) SetID(id *int) {
 
 // NewCoverOpenCoverTilt creates the object that can be sent to Home Assistant for domain cover, service open_cover_tilt
 // "Open all or specified cover tilt."
-func NewCoverOpenCoverTilt(target Target, coverOpenCoverTiltParams CoverOpenCoverTiltParams) *CoverOpenCoverTilt {
+func NewCoverOpenCoverTilt(target Target) *CoverOpenCoverTilt {
 	serviceDomain := "cover"
 	serviceType := "call_service"
 	serviceService := "open_cover_tilt"
@@ -119,16 +116,15 @@ func NewCoverOpenCoverTilt(target Target, coverOpenCoverTiltParams CoverOpenCove
 			Target:  target,
 			Type:    &serviceType,
 		},
-		ServiceData: coverOpenCoverTiltParams,
+		ServiceData: nil,
 	}
 	return c
 }
 
 type CoverOpenCoverTilt struct {
 	ServiceBase
-	ServiceData CoverOpenCoverTiltParams `json:"service_data,omitempty"`
+	ServiceData interface{} `json:"service_data,omitempty"`
 }
-type CoverOpenCoverTiltParams struct{}
 
 func (c *CoverOpenCoverTilt) JSON() string {
 	data, _ := json.Marshal(c)
@@ -140,7 +136,7 @@ func (c *CoverOpenCoverTilt) SetID(id *int) {
 
 // NewCoverSetCoverPosition creates the object that can be sent to Home Assistant for domain cover, service set_cover_position
 // "Move to specific position all or specified cover."
-func NewCoverSetCoverPosition(target Target, coverSetCoverPositionParams CoverSetCoverPositionParams) *CoverSetCoverPosition {
+func NewCoverSetCoverPosition(target Target, coverSetCoverPositionParams *CoverSetCoverPositionParams) *CoverSetCoverPosition {
 	serviceDomain := "cover"
 	serviceType := "call_service"
 	serviceService := "set_cover_position"
@@ -152,7 +148,7 @@ func NewCoverSetCoverPosition(target Target, coverSetCoverPositionParams CoverSe
 			Target:  target,
 			Type:    &serviceType,
 		},
-		ServiceData: coverSetCoverPositionParams,
+		ServiceData: *coverSetCoverPositionParams,
 	}
 	return c
 }
@@ -175,7 +171,7 @@ func (c *CoverSetCoverPosition) SetID(id *int) {
 
 // NewCoverSetCoverTiltPosition creates the object that can be sent to Home Assistant for domain cover, service set_cover_tilt_position
 // "Move to specific position all or specified cover tilt."
-func NewCoverSetCoverTiltPosition(target Target, coverSetCoverTiltPositionParams CoverSetCoverTiltPositionParams) *CoverSetCoverTiltPosition {
+func NewCoverSetCoverTiltPosition(target Target, coverSetCoverTiltPositionParams *CoverSetCoverTiltPositionParams) *CoverSetCoverTiltPosition {
 	serviceDomain := "cover"
 	serviceType := "call_service"
 	serviceService := "set_cover_tilt_position"
@@ -187,7 +183,7 @@ func NewCoverSetCoverTiltPosition(target Target, coverSetCoverTiltPositionParams
 			Target:  target,
 			Type:    &serviceType,
 		},
-		ServiceData: coverSetCoverTiltPositionParams,
+		ServiceData: *coverSetCoverTiltPositionParams,
 	}
 	return c
 }
@@ -210,7 +206,7 @@ func (c *CoverSetCoverTiltPosition) SetID(id *int) {
 
 // NewCoverStopCover creates the object that can be sent to Home Assistant for domain cover, service stop_cover
 // "Stop all or specified cover."
-func NewCoverStopCover(target Target, coverStopCoverParams CoverStopCoverParams) *CoverStopCover {
+func NewCoverStopCover(target Target) *CoverStopCover {
 	serviceDomain := "cover"
 	serviceType := "call_service"
 	serviceService := "stop_cover"
@@ -222,16 +218,15 @@ func NewCoverStopCover(target Target, coverStopCoverParams CoverStopCoverParams)
 			Target:  target,
 			Type:    &serviceType,
 		},
-		ServiceData: coverStopCoverParams,
+		ServiceData: nil,
 	}
 	return c
 }
 
 type CoverStopCover struct {
 	ServiceBase
-	ServiceData CoverStopCoverParams `json:"service_data,omitempty"`
+	ServiceData interface{} `json:"service_data,omitempty"`
 }
-type CoverStopCoverParams struct{}
 
 func (c *CoverStopCover) JSON() string {
 	data, _ := json.Marshal(c)
@@ -243,7 +238,7 @@ func (c *CoverStopCover) SetID(id *int) {
 
 // NewCoverStopCoverTilt creates the object that can be sent to Home Assistant for domain cover, service stop_cover_tilt
 // "Stop all or specified cover."
-func NewCoverStopCoverTilt(target Target, coverStopCoverTiltParams CoverStopCoverTiltParams) *CoverStopCoverTilt {
+func NewCoverStopCoverTilt(target Target) *CoverStopCoverTilt {
 	serviceDomain := "cover"
 	serviceType := "call_service"
 	serviceService := "stop_cover_tilt"
@@ -255,16 +250,15 @@ func NewCoverStopCoverTilt(target Target, coverStopCoverTiltParams CoverStopCove
 			Target:  target,
 			Type:    &serviceType,
 		},
-		ServiceData: coverStopCoverTiltParams,
+		ServiceData: nil,
 	}
 	return c
 }
 
 type CoverStopCoverTilt struct {
 	ServiceBase
-	ServiceData CoverStopCoverTiltParams `json:"service_data,omitempty"`
+	ServiceData interface{} `json:"service_data,omitempty"`
 }
-type CoverStopCoverTiltParams struct{}
 
 func (c *CoverStopCoverTilt) JSON() string {
 	data, _ := json.Marshal(c)
@@ -276,7 +270,7 @@ func (c *CoverStopCoverTilt) SetID(id *int) {
 
 // NewCoverToggle creates the object that can be sent to Home Assistant for domain cover, service toggle
 // "Toggle a cover open/closed."
-func NewCoverToggle(target Target, coverToggleParams CoverToggleParams) *CoverToggle {
+func NewCoverToggle(target Target) *CoverToggle {
 	serviceDomain := "cover"
 	serviceType := "call_service"
 	serviceService := "toggle"
@@ -288,16 +282,15 @@ func NewCoverToggle(target Target, coverToggleParams CoverToggleParams) *CoverTo
 			Target:  target,
 			Type:    &serviceType,
 		},
-		ServiceData: coverToggleParams,
+		ServiceData: nil,
 	}
 	return c
 }
 
 type CoverToggle struct {
 	ServiceBase
-	ServiceData CoverToggleParams `json:"service_data,omitempty"`
+	ServiceData interface{} `json:"service_data,omitempty"`
 }
-type CoverToggleParams struct{}
 
 func (c *CoverToggle) JSON() string {
 	data, _ := json.Marshal(c)
@@ -309,7 +302,7 @@ func (c *CoverToggle) SetID(id *int) {
 
 // NewCoverToggleCoverTilt creates the object that can be sent to Home Assistant for domain cover, service toggle_cover_tilt
 // "Toggle a cover tilt open/closed."
-func NewCoverToggleCoverTilt(target Target, coverToggleCoverTiltParams CoverToggleCoverTiltParams) *CoverToggleCoverTilt {
+func NewCoverToggleCoverTilt(target Target) *CoverToggleCoverTilt {
 	serviceDomain := "cover"
 	serviceType := "call_service"
 	serviceService := "toggle_cover_tilt"
@@ -321,16 +314,15 @@ func NewCoverToggleCoverTilt(target Target, coverToggleCoverTiltParams CoverTogg
 			Target:  target,
 			Type:    &serviceType,
 		},
-		ServiceData: coverToggleCoverTiltParams,
+		ServiceData: nil,
 	}
 	return c
 }
 
 type CoverToggleCoverTilt struct {
 	ServiceBase
-	ServiceData CoverToggleCoverTiltParams `json:"service_data,omitempty"`
+	ServiceData interface{} `json:"service_data,omitempty"`
 }
-type CoverToggleCoverTiltParams struct{}
 
 func (c *CoverToggleCoverTilt) JSON() string {
 	data, _ := json.Marshal(c)

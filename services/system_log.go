@@ -8,7 +8,7 @@ import "encoding/json"
 
 // NewSystemLogClear creates the object that can be sent to Home Assistant for domain system_log, service clear
 // "Clear all log entries."
-func NewSystemLogClear(target Target, systemLogClearParams SystemLogClearParams) *SystemLogClear {
+func NewSystemLogClear(target Target) *SystemLogClear {
 	serviceDomain := "system_log"
 	serviceType := "call_service"
 	serviceService := "clear"
@@ -20,16 +20,15 @@ func NewSystemLogClear(target Target, systemLogClearParams SystemLogClearParams)
 			Target:  target,
 			Type:    &serviceType,
 		},
-		ServiceData: systemLogClearParams,
+		ServiceData: nil,
 	}
 	return s
 }
 
 type SystemLogClear struct {
 	ServiceBase
-	ServiceData SystemLogClearParams `json:"service_data,omitempty"`
+	ServiceData interface{} `json:"service_data,omitempty"`
 }
-type SystemLogClearParams struct{}
 
 func (s *SystemLogClear) JSON() string {
 	data, _ := json.Marshal(s)
@@ -41,7 +40,7 @@ func (s *SystemLogClear) SetID(id *int) {
 
 // NewSystemLogWrite creates the object that can be sent to Home Assistant for domain system_log, service write
 // "Write log entry."
-func NewSystemLogWrite(target Target, systemLogWriteParams SystemLogWriteParams) *SystemLogWrite {
+func NewSystemLogWrite(target Target, systemLogWriteParams *SystemLogWriteParams) *SystemLogWrite {
 	serviceDomain := "system_log"
 	serviceType := "call_service"
 	serviceService := "write"
@@ -53,7 +52,7 @@ func NewSystemLogWrite(target Target, systemLogWriteParams SystemLogWriteParams)
 			Target:  target,
 			Type:    &serviceType,
 		},
-		ServiceData: systemLogWriteParams,
+		ServiceData: *systemLogWriteParams,
 	}
 	return s
 }

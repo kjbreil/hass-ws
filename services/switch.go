@@ -8,7 +8,7 @@ import "encoding/json"
 
 // NewSwitchToggle creates the object that can be sent to Home Assistant for domain switch, service toggle
 // "Toggles a switch state"
-func NewSwitchToggle(target Target, switchToggleParams SwitchToggleParams) *SwitchToggle {
+func NewSwitchToggle(target Target) *SwitchToggle {
 	serviceDomain := "switch"
 	serviceType := "call_service"
 	serviceService := "toggle"
@@ -20,16 +20,15 @@ func NewSwitchToggle(target Target, switchToggleParams SwitchToggleParams) *Swit
 			Target:  target,
 			Type:    &serviceType,
 		},
-		ServiceData: switchToggleParams,
+		ServiceData: nil,
 	}
 	return s
 }
 
 type SwitchToggle struct {
 	ServiceBase
-	ServiceData SwitchToggleParams `json:"service_data,omitempty"`
+	ServiceData interface{} `json:"service_data,omitempty"`
 }
-type SwitchToggleParams struct{}
 
 func (s *SwitchToggle) JSON() string {
 	data, _ := json.Marshal(s)
@@ -41,7 +40,7 @@ func (s *SwitchToggle) SetID(id *int) {
 
 // NewSwitchTurnOff creates the object that can be sent to Home Assistant for domain switch, service turn_off
 // "Turn a switch off"
-func NewSwitchTurnOff(target Target, switchTurnOffParams SwitchTurnOffParams) *SwitchTurnOff {
+func NewSwitchTurnOff(target Target) *SwitchTurnOff {
 	serviceDomain := "switch"
 	serviceType := "call_service"
 	serviceService := "turn_off"
@@ -53,16 +52,15 @@ func NewSwitchTurnOff(target Target, switchTurnOffParams SwitchTurnOffParams) *S
 			Target:  target,
 			Type:    &serviceType,
 		},
-		ServiceData: switchTurnOffParams,
+		ServiceData: nil,
 	}
 	return s
 }
 
 type SwitchTurnOff struct {
 	ServiceBase
-	ServiceData SwitchTurnOffParams `json:"service_data,omitempty"`
+	ServiceData interface{} `json:"service_data,omitempty"`
 }
-type SwitchTurnOffParams struct{}
 
 func (s *SwitchTurnOff) JSON() string {
 	data, _ := json.Marshal(s)
@@ -74,7 +72,7 @@ func (s *SwitchTurnOff) SetID(id *int) {
 
 // NewSwitchTurnOn creates the object that can be sent to Home Assistant for domain switch, service turn_on
 // "Turn a switch on"
-func NewSwitchTurnOn(target Target, switchTurnOnParams SwitchTurnOnParams) *SwitchTurnOn {
+func NewSwitchTurnOn(target Target) *SwitchTurnOn {
 	serviceDomain := "switch"
 	serviceType := "call_service"
 	serviceService := "turn_on"
@@ -86,16 +84,15 @@ func NewSwitchTurnOn(target Target, switchTurnOnParams SwitchTurnOnParams) *Swit
 			Target:  target,
 			Type:    &serviceType,
 		},
-		ServiceData: switchTurnOnParams,
+		ServiceData: nil,
 	}
 	return s
 }
 
 type SwitchTurnOn struct {
 	ServiceBase
-	ServiceData SwitchTurnOnParams `json:"service_data,omitempty"`
+	ServiceData interface{} `json:"service_data,omitempty"`
 }
-type SwitchTurnOnParams struct{}
 
 func (s *SwitchTurnOn) JSON() string {
 	data, _ := json.Marshal(s)

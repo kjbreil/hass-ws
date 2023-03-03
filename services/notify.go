@@ -8,7 +8,7 @@ import "encoding/json"
 
 // NewNotifyMobileAppAsk creates the object that can be sent to Home Assistant for domain notify, service mobile_app_ask
 // "Sends a notification message using the mobile_app_ask integration."
-func NewNotifyMobileAppAsk(target Target, notifyMobileAppAskParams NotifyMobileAppAskParams) *NotifyMobileAppAsk {
+func NewNotifyMobileAppAsk(target Target, notifyMobileAppAskParams *NotifyMobileAppAskParams) *NotifyMobileAppAsk {
 	serviceDomain := "notify"
 	serviceType := "call_service"
 	serviceService := "mobile_app_ask"
@@ -20,7 +20,7 @@ func NewNotifyMobileAppAsk(target Target, notifyMobileAppAskParams NotifyMobileA
 			Target:  target,
 			Type:    &serviceType,
 		},
-		ServiceData: notifyMobileAppAskParams,
+		ServiceData: *notifyMobileAppAskParams,
 	}
 	return n
 }
@@ -44,7 +44,7 @@ func (n *NotifyMobileAppAsk) SetID(id *int) {
 
 // NewNotifyMobileAppFranphone creates the object that can be sent to Home Assistant for domain notify, service mobile_app_franphone
 // "Sends a notification message using the mobile_app_franphone integration."
-func NewNotifyMobileAppFranphone(target Target, notifyMobileAppFranphoneParams NotifyMobileAppFranphoneParams) *NotifyMobileAppFranphone {
+func NewNotifyMobileAppFranphone(target Target, notifyMobileAppFranphoneParams *NotifyMobileAppFranphoneParams) *NotifyMobileAppFranphone {
 	serviceDomain := "notify"
 	serviceType := "call_service"
 	serviceService := "mobile_app_franphone"
@@ -56,7 +56,7 @@ func NewNotifyMobileAppFranphone(target Target, notifyMobileAppFranphoneParams N
 			Target:  target,
 			Type:    &serviceType,
 		},
-		ServiceData: notifyMobileAppFranphoneParams,
+		ServiceData: *notifyMobileAppFranphoneParams,
 	}
 	return n
 }
@@ -80,7 +80,7 @@ func (n *NotifyMobileAppFranphone) SetID(id *int) {
 
 // NewNotifyMobileAppIpad creates the object that can be sent to Home Assistant for domain notify, service mobile_app_ipad
 // "Sends a notification message using the mobile_app_ipad integration."
-func NewNotifyMobileAppIpad(target Target, notifyMobileAppIpadParams NotifyMobileAppIpadParams) *NotifyMobileAppIpad {
+func NewNotifyMobileAppIpad(target Target, notifyMobileAppIpadParams *NotifyMobileAppIpadParams) *NotifyMobileAppIpad {
 	serviceDomain := "notify"
 	serviceType := "call_service"
 	serviceService := "mobile_app_ipad"
@@ -92,7 +92,7 @@ func NewNotifyMobileAppIpad(target Target, notifyMobileAppIpadParams NotifyMobil
 			Target:  target,
 			Type:    &serviceType,
 		},
-		ServiceData: notifyMobileAppIpadParams,
+		ServiceData: *notifyMobileAppIpadParams,
 	}
 	return n
 }
@@ -116,7 +116,7 @@ func (n *NotifyMobileAppIpad) SetID(id *int) {
 
 // NewNotifyMobileAppKioskair creates the object that can be sent to Home Assistant for domain notify, service mobile_app_kioskair
 // "Sends a notification message using the mobile_app_kioskair integration."
-func NewNotifyMobileAppKioskair(target Target, notifyMobileAppKioskairParams NotifyMobileAppKioskairParams) *NotifyMobileAppKioskair {
+func NewNotifyMobileAppKioskair(target Target, notifyMobileAppKioskairParams *NotifyMobileAppKioskairParams) *NotifyMobileAppKioskair {
 	serviceDomain := "notify"
 	serviceType := "call_service"
 	serviceService := "mobile_app_kioskair"
@@ -128,7 +128,7 @@ func NewNotifyMobileAppKioskair(target Target, notifyMobileAppKioskairParams Not
 			Target:  target,
 			Type:    &serviceType,
 		},
-		ServiceData: notifyMobileAppKioskairParams,
+		ServiceData: *notifyMobileAppKioskairParams,
 	}
 	return n
 }
@@ -152,7 +152,7 @@ func (n *NotifyMobileAppKioskair) SetID(id *int) {
 
 // NewNotifyMobileAppLoki creates the object that can be sent to Home Assistant for domain notify, service mobile_app_loki
 // "Sends a notification message using the mobile_app_loki integration."
-func NewNotifyMobileAppLoki(target Target, notifyMobileAppLokiParams NotifyMobileAppLokiParams) *NotifyMobileAppLoki {
+func NewNotifyMobileAppLoki(target Target, notifyMobileAppLokiParams *NotifyMobileAppLokiParams) *NotifyMobileAppLoki {
 	serviceDomain := "notify"
 	serviceType := "call_service"
 	serviceService := "mobile_app_loki"
@@ -164,7 +164,7 @@ func NewNotifyMobileAppLoki(target Target, notifyMobileAppLokiParams NotifyMobil
 			Target:  target,
 			Type:    &serviceType,
 		},
-		ServiceData: notifyMobileAppLokiParams,
+		ServiceData: *notifyMobileAppLokiParams,
 	}
 	return n
 }
@@ -188,7 +188,7 @@ func (n *NotifyMobileAppLoki) SetID(id *int) {
 
 // NewNotifyMobileAppSkadi creates the object that can be sent to Home Assistant for domain notify, service mobile_app_skadi
 // "Sends a notification message using the mobile_app_skadi integration."
-func NewNotifyMobileAppSkadi(target Target, notifyMobileAppSkadiParams NotifyMobileAppSkadiParams) *NotifyMobileAppSkadi {
+func NewNotifyMobileAppSkadi(target Target, notifyMobileAppSkadiParams *NotifyMobileAppSkadiParams) *NotifyMobileAppSkadi {
 	serviceDomain := "notify"
 	serviceType := "call_service"
 	serviceService := "mobile_app_skadi"
@@ -200,7 +200,7 @@ func NewNotifyMobileAppSkadi(target Target, notifyMobileAppSkadiParams NotifyMob
 			Target:  target,
 			Type:    &serviceType,
 		},
-		ServiceData: notifyMobileAppSkadiParams,
+		ServiceData: *notifyMobileAppSkadiParams,
 	}
 	return n
 }
@@ -224,7 +224,7 @@ func (n *NotifyMobileAppSkadi) SetID(id *int) {
 
 // NewNotifyNotify creates the object that can be sent to Home Assistant for domain notify, service notify
 // "Sends a notification message using the notify service."
-func NewNotifyNotify(target Target, notifyNotifyParams NotifyNotifyParams) *NotifyNotify {
+func NewNotifyNotify(target Target, notifyNotifyParams *NotifyNotifyParams) *NotifyNotify {
 	serviceDomain := "notify"
 	serviceType := "call_service"
 	serviceService := "notify"
@@ -236,7 +236,7 @@ func NewNotifyNotify(target Target, notifyNotifyParams NotifyNotifyParams) *Noti
 			Target:  target,
 			Type:    &serviceType,
 		},
-		ServiceData: notifyNotifyParams,
+		ServiceData: *notifyNotifyParams,
 	}
 	return n
 }
@@ -260,7 +260,7 @@ func (n *NotifyNotify) SetID(id *int) {
 
 // NewNotifyPersistentNotification creates the object that can be sent to Home Assistant for domain notify, service persistent_notification
 // "Sends a notification that is visible in the front-end."
-func NewNotifyPersistentNotification(target Target, notifyPersistentNotificationParams NotifyPersistentNotificationParams) *NotifyPersistentNotification {
+func NewNotifyPersistentNotification(target Target, notifyPersistentNotificationParams *NotifyPersistentNotificationParams) *NotifyPersistentNotification {
 	serviceDomain := "notify"
 	serviceType := "call_service"
 	serviceService := "persistent_notification"
@@ -272,7 +272,7 @@ func NewNotifyPersistentNotification(target Target, notifyPersistentNotification
 			Target:  target,
 			Type:    &serviceType,
 		},
-		ServiceData: notifyPersistentNotificationParams,
+		ServiceData: *notifyPersistentNotificationParams,
 	}
 	return n
 }

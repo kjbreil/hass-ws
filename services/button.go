@@ -8,7 +8,7 @@ import "encoding/json"
 
 // NewButtonPress creates the object that can be sent to Home Assistant for domain button, service press
 // "Press the button entity."
-func NewButtonPress(target Target, buttonPressParams ButtonPressParams) *ButtonPress {
+func NewButtonPress(target Target) *ButtonPress {
 	serviceDomain := "button"
 	serviceType := "call_service"
 	serviceService := "press"
@@ -20,16 +20,15 @@ func NewButtonPress(target Target, buttonPressParams ButtonPressParams) *ButtonP
 			Target:  target,
 			Type:    &serviceType,
 		},
-		ServiceData: buttonPressParams,
+		ServiceData: nil,
 	}
 	return b
 }
 
 type ButtonPress struct {
 	ServiceBase
-	ServiceData ButtonPressParams `json:"service_data,omitempty"`
+	ServiceData interface{} `json:"service_data,omitempty"`
 }
-type ButtonPressParams struct{}
 
 func (b *ButtonPress) JSON() string {
 	data, _ := json.Marshal(b)

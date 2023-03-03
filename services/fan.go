@@ -8,7 +8,7 @@ import "encoding/json"
 
 // NewFanDecreaseSpeed creates the object that can be sent to Home Assistant for domain fan, service decrease_speed
 // "Decrease the speed of the fan by one speed or a percentage_step."
-func NewFanDecreaseSpeed(target Target, fanDecreaseSpeedParams FanDecreaseSpeedParams) *FanDecreaseSpeed {
+func NewFanDecreaseSpeed(target Target, fanDecreaseSpeedParams *FanDecreaseSpeedParams) *FanDecreaseSpeed {
 	serviceDomain := "fan"
 	serviceType := "call_service"
 	serviceService := "decrease_speed"
@@ -20,7 +20,7 @@ func NewFanDecreaseSpeed(target Target, fanDecreaseSpeedParams FanDecreaseSpeedP
 			Target:  target,
 			Type:    &serviceType,
 		},
-		ServiceData: fanDecreaseSpeedParams,
+		ServiceData: *fanDecreaseSpeedParams,
 	}
 	return f
 }
@@ -43,7 +43,7 @@ func (f *FanDecreaseSpeed) SetID(id *int) {
 
 // NewFanIncreaseSpeed creates the object that can be sent to Home Assistant for domain fan, service increase_speed
 // "Increase the speed of the fan by one speed or a percentage_step."
-func NewFanIncreaseSpeed(target Target, fanIncreaseSpeedParams FanIncreaseSpeedParams) *FanIncreaseSpeed {
+func NewFanIncreaseSpeed(target Target, fanIncreaseSpeedParams *FanIncreaseSpeedParams) *FanIncreaseSpeed {
 	serviceDomain := "fan"
 	serviceType := "call_service"
 	serviceService := "increase_speed"
@@ -55,7 +55,7 @@ func NewFanIncreaseSpeed(target Target, fanIncreaseSpeedParams FanIncreaseSpeedP
 			Target:  target,
 			Type:    &serviceType,
 		},
-		ServiceData: fanIncreaseSpeedParams,
+		ServiceData: *fanIncreaseSpeedParams,
 	}
 	return f
 }
@@ -78,7 +78,7 @@ func (f *FanIncreaseSpeed) SetID(id *int) {
 
 // NewFanOscillate creates the object that can be sent to Home Assistant for domain fan, service oscillate
 // "Oscillate the fan."
-func NewFanOscillate(target Target, fanOscillateParams FanOscillateParams) *FanOscillate {
+func NewFanOscillate(target Target) *FanOscillate {
 	serviceDomain := "fan"
 	serviceType := "call_service"
 	serviceService := "oscillate"
@@ -90,16 +90,15 @@ func NewFanOscillate(target Target, fanOscillateParams FanOscillateParams) *FanO
 			Target:  target,
 			Type:    &serviceType,
 		},
-		ServiceData: fanOscillateParams,
+		ServiceData: nil,
 	}
 	return f
 }
 
 type FanOscillate struct {
 	ServiceBase
-	ServiceData FanOscillateParams `json:"service_data,omitempty"`
+	ServiceData interface{} `json:"service_data,omitempty"`
 }
-type FanOscillateParams struct{}
 
 func (f *FanOscillate) JSON() string {
 	data, _ := json.Marshal(f)
@@ -111,7 +110,7 @@ func (f *FanOscillate) SetID(id *int) {
 
 // NewFanSetDirection creates the object that can be sent to Home Assistant for domain fan, service set_direction
 // "Set the fan rotation."
-func NewFanSetDirection(target Target, fanSetDirectionParams FanSetDirectionParams) *FanSetDirection {
+func NewFanSetDirection(target Target, fanSetDirectionParams *FanSetDirectionParams) *FanSetDirection {
 	serviceDomain := "fan"
 	serviceType := "call_service"
 	serviceService := "set_direction"
@@ -123,7 +122,7 @@ func NewFanSetDirection(target Target, fanSetDirectionParams FanSetDirectionPara
 			Target:  target,
 			Type:    &serviceType,
 		},
-		ServiceData: fanSetDirectionParams,
+		ServiceData: *fanSetDirectionParams,
 	}
 	return f
 }
@@ -146,7 +145,7 @@ func (f *FanSetDirection) SetID(id *int) {
 
 // NewFanSetPercentage creates the object that can be sent to Home Assistant for domain fan, service set_percentage
 // "Set fan speed percentage."
-func NewFanSetPercentage(target Target, fanSetPercentageParams FanSetPercentageParams) *FanSetPercentage {
+func NewFanSetPercentage(target Target, fanSetPercentageParams *FanSetPercentageParams) *FanSetPercentage {
 	serviceDomain := "fan"
 	serviceType := "call_service"
 	serviceService := "set_percentage"
@@ -158,7 +157,7 @@ func NewFanSetPercentage(target Target, fanSetPercentageParams FanSetPercentageP
 			Target:  target,
 			Type:    &serviceType,
 		},
-		ServiceData: fanSetPercentageParams,
+		ServiceData: *fanSetPercentageParams,
 	}
 	return f
 }
@@ -181,7 +180,7 @@ func (f *FanSetPercentage) SetID(id *int) {
 
 // NewFanSetPresetMode creates the object that can be sent to Home Assistant for domain fan, service set_preset_mode
 // "Set preset mode for a fan device."
-func NewFanSetPresetMode(target Target, fanSetPresetModeParams FanSetPresetModeParams) *FanSetPresetMode {
+func NewFanSetPresetMode(target Target, fanSetPresetModeParams *FanSetPresetModeParams) *FanSetPresetMode {
 	serviceDomain := "fan"
 	serviceType := "call_service"
 	serviceService := "set_preset_mode"
@@ -193,7 +192,7 @@ func NewFanSetPresetMode(target Target, fanSetPresetModeParams FanSetPresetModeP
 			Target:  target,
 			Type:    &serviceType,
 		},
-		ServiceData: fanSetPresetModeParams,
+		ServiceData: *fanSetPresetModeParams,
 	}
 	return f
 }
@@ -216,7 +215,7 @@ func (f *FanSetPresetMode) SetID(id *int) {
 
 // NewFanToggle creates the object that can be sent to Home Assistant for domain fan, service toggle
 // "Toggle the fan on/off."
-func NewFanToggle(target Target, fanToggleParams FanToggleParams) *FanToggle {
+func NewFanToggle(target Target) *FanToggle {
 	serviceDomain := "fan"
 	serviceType := "call_service"
 	serviceService := "toggle"
@@ -228,16 +227,15 @@ func NewFanToggle(target Target, fanToggleParams FanToggleParams) *FanToggle {
 			Target:  target,
 			Type:    &serviceType,
 		},
-		ServiceData: fanToggleParams,
+		ServiceData: nil,
 	}
 	return f
 }
 
 type FanToggle struct {
 	ServiceBase
-	ServiceData FanToggleParams `json:"service_data,omitempty"`
+	ServiceData interface{} `json:"service_data,omitempty"`
 }
-type FanToggleParams struct{}
 
 func (f *FanToggle) JSON() string {
 	data, _ := json.Marshal(f)
@@ -249,7 +247,7 @@ func (f *FanToggle) SetID(id *int) {
 
 // NewFanTurnOff creates the object that can be sent to Home Assistant for domain fan, service turn_off
 // "Turn fan off."
-func NewFanTurnOff(target Target, fanTurnOffParams FanTurnOffParams) *FanTurnOff {
+func NewFanTurnOff(target Target) *FanTurnOff {
 	serviceDomain := "fan"
 	serviceType := "call_service"
 	serviceService := "turn_off"
@@ -261,16 +259,15 @@ func NewFanTurnOff(target Target, fanTurnOffParams FanTurnOffParams) *FanTurnOff
 			Target:  target,
 			Type:    &serviceType,
 		},
-		ServiceData: fanTurnOffParams,
+		ServiceData: nil,
 	}
 	return f
 }
 
 type FanTurnOff struct {
 	ServiceBase
-	ServiceData FanTurnOffParams `json:"service_data,omitempty"`
+	ServiceData interface{} `json:"service_data,omitempty"`
 }
-type FanTurnOffParams struct{}
 
 func (f *FanTurnOff) JSON() string {
 	data, _ := json.Marshal(f)
@@ -282,7 +279,7 @@ func (f *FanTurnOff) SetID(id *int) {
 
 // NewFanTurnOn creates the object that can be sent to Home Assistant for domain fan, service turn_on
 // "Turn fan on."
-func NewFanTurnOn(target Target, fanTurnOnParams FanTurnOnParams) *FanTurnOn {
+func NewFanTurnOn(target Target, fanTurnOnParams *FanTurnOnParams) *FanTurnOn {
 	serviceDomain := "fan"
 	serviceType := "call_service"
 	serviceService := "turn_on"
@@ -294,7 +291,7 @@ func NewFanTurnOn(target Target, fanTurnOnParams FanTurnOnParams) *FanTurnOn {
 			Target:  target,
 			Type:    &serviceType,
 		},
-		ServiceData: fanTurnOnParams,
+		ServiceData: *fanTurnOnParams,
 	}
 	return f
 }

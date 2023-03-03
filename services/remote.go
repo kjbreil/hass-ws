@@ -8,7 +8,7 @@ import "encoding/json"
 
 // NewRemoteDeleteCommand creates the object that can be sent to Home Assistant for domain remote, service delete_command
 // "Deletes a command or a list of commands from the database."
-func NewRemoteDeleteCommand(target Target, remoteDeleteCommandParams RemoteDeleteCommandParams) *RemoteDeleteCommand {
+func NewRemoteDeleteCommand(target Target, remoteDeleteCommandParams *RemoteDeleteCommandParams) *RemoteDeleteCommand {
 	serviceDomain := "remote"
 	serviceType := "call_service"
 	serviceService := "delete_command"
@@ -20,7 +20,7 @@ func NewRemoteDeleteCommand(target Target, remoteDeleteCommandParams RemoteDelet
 			Target:  target,
 			Type:    &serviceType,
 		},
-		ServiceData: remoteDeleteCommandParams,
+		ServiceData: *remoteDeleteCommandParams,
 	}
 	return r
 }
@@ -43,7 +43,7 @@ func (r *RemoteDeleteCommand) SetID(id *int) {
 
 // NewRemoteLearnCommand creates the object that can be sent to Home Assistant for domain remote, service learn_command
 // "Learns a command or a list of commands from a device."
-func NewRemoteLearnCommand(target Target, remoteLearnCommandParams RemoteLearnCommandParams) *RemoteLearnCommand {
+func NewRemoteLearnCommand(target Target, remoteLearnCommandParams *RemoteLearnCommandParams) *RemoteLearnCommand {
 	serviceDomain := "remote"
 	serviceType := "call_service"
 	serviceService := "learn_command"
@@ -55,7 +55,7 @@ func NewRemoteLearnCommand(target Target, remoteLearnCommandParams RemoteLearnCo
 			Target:  target,
 			Type:    &serviceType,
 		},
-		ServiceData: remoteLearnCommandParams,
+		ServiceData: *remoteLearnCommandParams,
 	}
 	return r
 }
@@ -80,7 +80,7 @@ func (r *RemoteLearnCommand) SetID(id *int) {
 
 // NewRemoteSendCommand creates the object that can be sent to Home Assistant for domain remote, service send_command
 // "Sends a command or a list of commands to a device."
-func NewRemoteSendCommand(target Target, remoteSendCommandParams RemoteSendCommandParams) *RemoteSendCommand {
+func NewRemoteSendCommand(target Target, remoteSendCommandParams *RemoteSendCommandParams) *RemoteSendCommand {
 	serviceDomain := "remote"
 	serviceType := "call_service"
 	serviceService := "send_command"
@@ -92,7 +92,7 @@ func NewRemoteSendCommand(target Target, remoteSendCommandParams RemoteSendComma
 			Target:  target,
 			Type:    &serviceType,
 		},
-		ServiceData: remoteSendCommandParams,
+		ServiceData: *remoteSendCommandParams,
 	}
 	return r
 }
@@ -118,7 +118,7 @@ func (r *RemoteSendCommand) SetID(id *int) {
 
 // NewRemoteToggle creates the object that can be sent to Home Assistant for domain remote, service toggle
 // "Toggles a device."
-func NewRemoteToggle(target Target, remoteToggleParams RemoteToggleParams) *RemoteToggle {
+func NewRemoteToggle(target Target) *RemoteToggle {
 	serviceDomain := "remote"
 	serviceType := "call_service"
 	serviceService := "toggle"
@@ -130,16 +130,15 @@ func NewRemoteToggle(target Target, remoteToggleParams RemoteToggleParams) *Remo
 			Target:  target,
 			Type:    &serviceType,
 		},
-		ServiceData: remoteToggleParams,
+		ServiceData: nil,
 	}
 	return r
 }
 
 type RemoteToggle struct {
 	ServiceBase
-	ServiceData RemoteToggleParams `json:"service_data,omitempty"`
+	ServiceData interface{} `json:"service_data,omitempty"`
 }
-type RemoteToggleParams struct{}
 
 func (r *RemoteToggle) JSON() string {
 	data, _ := json.Marshal(r)
@@ -151,7 +150,7 @@ func (r *RemoteToggle) SetID(id *int) {
 
 // NewRemoteTurnOff creates the object that can be sent to Home Assistant for domain remote, service turn_off
 // "Sends the Power Off Command."
-func NewRemoteTurnOff(target Target, remoteTurnOffParams RemoteTurnOffParams) *RemoteTurnOff {
+func NewRemoteTurnOff(target Target) *RemoteTurnOff {
 	serviceDomain := "remote"
 	serviceType := "call_service"
 	serviceService := "turn_off"
@@ -163,16 +162,15 @@ func NewRemoteTurnOff(target Target, remoteTurnOffParams RemoteTurnOffParams) *R
 			Target:  target,
 			Type:    &serviceType,
 		},
-		ServiceData: remoteTurnOffParams,
+		ServiceData: nil,
 	}
 	return r
 }
 
 type RemoteTurnOff struct {
 	ServiceBase
-	ServiceData RemoteTurnOffParams `json:"service_data,omitempty"`
+	ServiceData interface{} `json:"service_data,omitempty"`
 }
-type RemoteTurnOffParams struct{}
 
 func (r *RemoteTurnOff) JSON() string {
 	data, _ := json.Marshal(r)
@@ -184,7 +182,7 @@ func (r *RemoteTurnOff) SetID(id *int) {
 
 // NewRemoteTurnOn creates the object that can be sent to Home Assistant for domain remote, service turn_on
 // "Sends the Power On Command."
-func NewRemoteTurnOn(target Target, remoteTurnOnParams RemoteTurnOnParams) *RemoteTurnOn {
+func NewRemoteTurnOn(target Target, remoteTurnOnParams *RemoteTurnOnParams) *RemoteTurnOn {
 	serviceDomain := "remote"
 	serviceType := "call_service"
 	serviceService := "turn_on"
@@ -196,7 +194,7 @@ func NewRemoteTurnOn(target Target, remoteTurnOnParams RemoteTurnOnParams) *Remo
 			Target:  target,
 			Type:    &serviceType,
 		},
-		ServiceData: remoteTurnOnParams,
+		ServiceData: *remoteTurnOnParams,
 	}
 	return r
 }

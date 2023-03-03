@@ -8,7 +8,7 @@ import "encoding/json"
 
 // NewPersonReload creates the object that can be sent to Home Assistant for domain person, service reload
 // "Reload the person configuration."
-func NewPersonReload(target Target, personReloadParams PersonReloadParams) *PersonReload {
+func NewPersonReload(target Target) *PersonReload {
 	serviceDomain := "person"
 	serviceType := "call_service"
 	serviceService := "reload"
@@ -20,16 +20,15 @@ func NewPersonReload(target Target, personReloadParams PersonReloadParams) *Pers
 			Target:  target,
 			Type:    &serviceType,
 		},
-		ServiceData: personReloadParams,
+		ServiceData: nil,
 	}
 	return p
 }
 
 type PersonReload struct {
 	ServiceBase
-	ServiceData PersonReloadParams `json:"service_data,omitempty"`
+	ServiceData interface{} `json:"service_data,omitempty"`
 }
-type PersonReloadParams struct{}
 
 func (p *PersonReload) JSON() string {
 	data, _ := json.Marshal(p)

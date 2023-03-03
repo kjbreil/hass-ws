@@ -8,7 +8,7 @@ import "encoding/json"
 
 // NewUtilityMeterCalibrate creates the object that can be sent to Home Assistant for domain utility_meter, service calibrate
 // "Calibrates a utility meter sensor."
-func NewUtilityMeterCalibrate(target Target, utilityMeterCalibrateParams UtilityMeterCalibrateParams) *UtilityMeterCalibrate {
+func NewUtilityMeterCalibrate(target Target, utilityMeterCalibrateParams *UtilityMeterCalibrateParams) *UtilityMeterCalibrate {
 	serviceDomain := "utility_meter"
 	serviceType := "call_service"
 	serviceService := "calibrate"
@@ -20,7 +20,7 @@ func NewUtilityMeterCalibrate(target Target, utilityMeterCalibrateParams Utility
 			Target:  target,
 			Type:    &serviceType,
 		},
-		ServiceData: utilityMeterCalibrateParams,
+		ServiceData: *utilityMeterCalibrateParams,
 	}
 	return u
 }
@@ -43,7 +43,7 @@ func (u *UtilityMeterCalibrate) SetID(id *int) {
 
 // NewUtilityMeterReset creates the object that can be sent to Home Assistant for domain utility_meter, service reset
 // "Resets all counters of a utility meter."
-func NewUtilityMeterReset(target Target, utilityMeterResetParams UtilityMeterResetParams) *UtilityMeterReset {
+func NewUtilityMeterReset(target Target) *UtilityMeterReset {
 	serviceDomain := "utility_meter"
 	serviceType := "call_service"
 	serviceService := "reset"
@@ -55,16 +55,15 @@ func NewUtilityMeterReset(target Target, utilityMeterResetParams UtilityMeterRes
 			Target:  target,
 			Type:    &serviceType,
 		},
-		ServiceData: utilityMeterResetParams,
+		ServiceData: nil,
 	}
 	return u
 }
 
 type UtilityMeterReset struct {
 	ServiceBase
-	ServiceData UtilityMeterResetParams `json:"service_data,omitempty"`
+	ServiceData interface{} `json:"service_data,omitempty"`
 }
-type UtilityMeterResetParams struct{}
 
 func (u *UtilityMeterReset) JSON() string {
 	data, _ := json.Marshal(u)

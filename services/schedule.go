@@ -8,7 +8,7 @@ import "encoding/json"
 
 // NewScheduleReload creates the object that can be sent to Home Assistant for domain schedule, service reload
 // "Reload the schedule configuration"
-func NewScheduleReload(target Target, scheduleReloadParams ScheduleReloadParams) *ScheduleReload {
+func NewScheduleReload(target Target) *ScheduleReload {
 	serviceDomain := "schedule"
 	serviceType := "call_service"
 	serviceService := "reload"
@@ -20,16 +20,15 @@ func NewScheduleReload(target Target, scheduleReloadParams ScheduleReloadParams)
 			Target:  target,
 			Type:    &serviceType,
 		},
-		ServiceData: scheduleReloadParams,
+		ServiceData: nil,
 	}
 	return s
 }
 
 type ScheduleReload struct {
 	ServiceBase
-	ServiceData ScheduleReloadParams `json:"service_data,omitempty"`
+	ServiceData interface{} `json:"service_data,omitempty"`
 }
-type ScheduleReloadParams struct{}
 
 func (s *ScheduleReload) JSON() string {
 	data, _ := json.Marshal(s)

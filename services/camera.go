@@ -8,7 +8,7 @@ import "encoding/json"
 
 // NewCameraDisableMotionDetection creates the object that can be sent to Home Assistant for domain camera, service disable_motion_detection
 // "Disable the motion detection in a camera."
-func NewCameraDisableMotionDetection(target Target, cameraDisableMotionDetectionParams CameraDisableMotionDetectionParams) *CameraDisableMotionDetection {
+func NewCameraDisableMotionDetection(target Target) *CameraDisableMotionDetection {
 	serviceDomain := "camera"
 	serviceType := "call_service"
 	serviceService := "disable_motion_detection"
@@ -20,16 +20,15 @@ func NewCameraDisableMotionDetection(target Target, cameraDisableMotionDetection
 			Target:  target,
 			Type:    &serviceType,
 		},
-		ServiceData: cameraDisableMotionDetectionParams,
+		ServiceData: nil,
 	}
 	return c
 }
 
 type CameraDisableMotionDetection struct {
 	ServiceBase
-	ServiceData CameraDisableMotionDetectionParams `json:"service_data,omitempty"`
+	ServiceData interface{} `json:"service_data,omitempty"`
 }
-type CameraDisableMotionDetectionParams struct{}
 
 func (c *CameraDisableMotionDetection) JSON() string {
 	data, _ := json.Marshal(c)
@@ -41,7 +40,7 @@ func (c *CameraDisableMotionDetection) SetID(id *int) {
 
 // NewCameraEnableMotionDetection creates the object that can be sent to Home Assistant for domain camera, service enable_motion_detection
 // "Enable the motion detection in a camera."
-func NewCameraEnableMotionDetection(target Target, cameraEnableMotionDetectionParams CameraEnableMotionDetectionParams) *CameraEnableMotionDetection {
+func NewCameraEnableMotionDetection(target Target) *CameraEnableMotionDetection {
 	serviceDomain := "camera"
 	serviceType := "call_service"
 	serviceService := "enable_motion_detection"
@@ -53,16 +52,15 @@ func NewCameraEnableMotionDetection(target Target, cameraEnableMotionDetectionPa
 			Target:  target,
 			Type:    &serviceType,
 		},
-		ServiceData: cameraEnableMotionDetectionParams,
+		ServiceData: nil,
 	}
 	return c
 }
 
 type CameraEnableMotionDetection struct {
 	ServiceBase
-	ServiceData CameraEnableMotionDetectionParams `json:"service_data,omitempty"`
+	ServiceData interface{} `json:"service_data,omitempty"`
 }
-type CameraEnableMotionDetectionParams struct{}
 
 func (c *CameraEnableMotionDetection) JSON() string {
 	data, _ := json.Marshal(c)
@@ -74,7 +72,7 @@ func (c *CameraEnableMotionDetection) SetID(id *int) {
 
 // NewCameraPlayStream creates the object that can be sent to Home Assistant for domain camera, service play_stream
 // "Play camera stream on supported media player."
-func NewCameraPlayStream(target Target, cameraPlayStreamParams CameraPlayStreamParams) *CameraPlayStream {
+func NewCameraPlayStream(target Target, cameraPlayStreamParams *CameraPlayStreamParams) *CameraPlayStream {
 	serviceDomain := "camera"
 	serviceType := "call_service"
 	serviceService := "play_stream"
@@ -86,7 +84,7 @@ func NewCameraPlayStream(target Target, cameraPlayStreamParams CameraPlayStreamP
 			Target:  target,
 			Type:    &serviceType,
 		},
-		ServiceData: cameraPlayStreamParams,
+		ServiceData: *cameraPlayStreamParams,
 	}
 	return c
 }
@@ -109,7 +107,7 @@ func (c *CameraPlayStream) SetID(id *int) {
 
 // NewCameraRecord creates the object that can be sent to Home Assistant for domain camera, service record
 // "Record live camera feed."
-func NewCameraRecord(target Target, cameraRecordParams CameraRecordParams) *CameraRecord {
+func NewCameraRecord(target Target, cameraRecordParams *CameraRecordParams) *CameraRecord {
 	serviceDomain := "camera"
 	serviceType := "call_service"
 	serviceService := "record"
@@ -121,7 +119,7 @@ func NewCameraRecord(target Target, cameraRecordParams CameraRecordParams) *Came
 			Target:  target,
 			Type:    &serviceType,
 		},
-		ServiceData: cameraRecordParams,
+		ServiceData: *cameraRecordParams,
 	}
 	return c
 }
@@ -146,7 +144,7 @@ func (c *CameraRecord) SetID(id *int) {
 
 // NewCameraSnapshot creates the object that can be sent to Home Assistant for domain camera, service snapshot
 // "Take a snapshot from a camera."
-func NewCameraSnapshot(target Target, cameraSnapshotParams CameraSnapshotParams) *CameraSnapshot {
+func NewCameraSnapshot(target Target, cameraSnapshotParams *CameraSnapshotParams) *CameraSnapshot {
 	serviceDomain := "camera"
 	serviceType := "call_service"
 	serviceService := "snapshot"
@@ -158,7 +156,7 @@ func NewCameraSnapshot(target Target, cameraSnapshotParams CameraSnapshotParams)
 			Target:  target,
 			Type:    &serviceType,
 		},
-		ServiceData: cameraSnapshotParams,
+		ServiceData: *cameraSnapshotParams,
 	}
 	return c
 }
@@ -181,7 +179,7 @@ func (c *CameraSnapshot) SetID(id *int) {
 
 // NewCameraTurnOff creates the object that can be sent to Home Assistant for domain camera, service turn_off
 // "Turn off camera."
-func NewCameraTurnOff(target Target, cameraTurnOffParams CameraTurnOffParams) *CameraTurnOff {
+func NewCameraTurnOff(target Target) *CameraTurnOff {
 	serviceDomain := "camera"
 	serviceType := "call_service"
 	serviceService := "turn_off"
@@ -193,16 +191,15 @@ func NewCameraTurnOff(target Target, cameraTurnOffParams CameraTurnOffParams) *C
 			Target:  target,
 			Type:    &serviceType,
 		},
-		ServiceData: cameraTurnOffParams,
+		ServiceData: nil,
 	}
 	return c
 }
 
 type CameraTurnOff struct {
 	ServiceBase
-	ServiceData CameraTurnOffParams `json:"service_data,omitempty"`
+	ServiceData interface{} `json:"service_data,omitempty"`
 }
-type CameraTurnOffParams struct{}
 
 func (c *CameraTurnOff) JSON() string {
 	data, _ := json.Marshal(c)
@@ -214,7 +211,7 @@ func (c *CameraTurnOff) SetID(id *int) {
 
 // NewCameraTurnOn creates the object that can be sent to Home Assistant for domain camera, service turn_on
 // "Turn on camera."
-func NewCameraTurnOn(target Target, cameraTurnOnParams CameraTurnOnParams) *CameraTurnOn {
+func NewCameraTurnOn(target Target) *CameraTurnOn {
 	serviceDomain := "camera"
 	serviceType := "call_service"
 	serviceService := "turn_on"
@@ -226,16 +223,15 @@ func NewCameraTurnOn(target Target, cameraTurnOnParams CameraTurnOnParams) *Came
 			Target:  target,
 			Type:    &serviceType,
 		},
-		ServiceData: cameraTurnOnParams,
+		ServiceData: nil,
 	}
 	return c
 }
 
 type CameraTurnOn struct {
 	ServiceBase
-	ServiceData CameraTurnOnParams `json:"service_data,omitempty"`
+	ServiceData interface{} `json:"service_data,omitempty"`
 }
-type CameraTurnOnParams struct{}
 
 func (c *CameraTurnOn) JSON() string {
 	data, _ := json.Marshal(c)

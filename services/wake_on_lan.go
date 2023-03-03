@@ -8,7 +8,7 @@ import "encoding/json"
 
 // NewWakeOnLanSendMagicPacket creates the object that can be sent to Home Assistant for domain wake_on_lan, service send_magic_packet
 // "Send a 'magic packet' to wake up a device with 'Wake-On-LAN' capabilities."
-func NewWakeOnLanSendMagicPacket(target Target, wakeOnLanSendMagicPacketParams WakeOnLanSendMagicPacketParams) *WakeOnLanSendMagicPacket {
+func NewWakeOnLanSendMagicPacket(target Target, wakeOnLanSendMagicPacketParams *WakeOnLanSendMagicPacketParams) *WakeOnLanSendMagicPacket {
 	serviceDomain := "wake_on_lan"
 	serviceType := "call_service"
 	serviceService := "send_magic_packet"
@@ -20,7 +20,7 @@ func NewWakeOnLanSendMagicPacket(target Target, wakeOnLanSendMagicPacketParams W
 			Target:  target,
 			Type:    &serviceType,
 		},
-		ServiceData: wakeOnLanSendMagicPacketParams,
+		ServiceData: *wakeOnLanSendMagicPacketParams,
 	}
 	return w
 }

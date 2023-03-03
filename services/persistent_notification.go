@@ -8,7 +8,7 @@ import "encoding/json"
 
 // NewPersistentNotificationCreate creates the object that can be sent to Home Assistant for domain persistent_notification, service create
 // "Show a notification in the frontend."
-func NewPersistentNotificationCreate(target Target, persistentNotificationCreateParams PersistentNotificationCreateParams) *PersistentNotificationCreate {
+func NewPersistentNotificationCreate(target Target, persistentNotificationCreateParams *PersistentNotificationCreateParams) *PersistentNotificationCreate {
 	serviceDomain := "persistent_notification"
 	serviceType := "call_service"
 	serviceService := "create"
@@ -20,7 +20,7 @@ func NewPersistentNotificationCreate(target Target, persistentNotificationCreate
 			Target:  target,
 			Type:    &serviceType,
 		},
-		ServiceData: persistentNotificationCreateParams,
+		ServiceData: *persistentNotificationCreateParams,
 	}
 	return p
 }
@@ -45,7 +45,7 @@ func (p *PersistentNotificationCreate) SetID(id *int) {
 
 // NewPersistentNotificationDismiss creates the object that can be sent to Home Assistant for domain persistent_notification, service dismiss
 // "Remove a notification from the frontend."
-func NewPersistentNotificationDismiss(target Target, persistentNotificationDismissParams PersistentNotificationDismissParams) *PersistentNotificationDismiss {
+func NewPersistentNotificationDismiss(target Target, persistentNotificationDismissParams *PersistentNotificationDismissParams) *PersistentNotificationDismiss {
 	serviceDomain := "persistent_notification"
 	serviceType := "call_service"
 	serviceService := "dismiss"
@@ -57,7 +57,7 @@ func NewPersistentNotificationDismiss(target Target, persistentNotificationDismi
 			Target:  target,
 			Type:    &serviceType,
 		},
-		ServiceData: persistentNotificationDismissParams,
+		ServiceData: *persistentNotificationDismissParams,
 	}
 	return p
 }
@@ -80,7 +80,7 @@ func (p *PersistentNotificationDismiss) SetID(id *int) {
 
 // NewPersistentNotificationMarkRead creates the object that can be sent to Home Assistant for domain persistent_notification, service mark_read
 // "Mark a notification read."
-func NewPersistentNotificationMarkRead(target Target, persistentNotificationMarkReadParams PersistentNotificationMarkReadParams) *PersistentNotificationMarkRead {
+func NewPersistentNotificationMarkRead(target Target, persistentNotificationMarkReadParams *PersistentNotificationMarkReadParams) *PersistentNotificationMarkRead {
 	serviceDomain := "persistent_notification"
 	serviceType := "call_service"
 	serviceService := "mark_read"
@@ -92,7 +92,7 @@ func NewPersistentNotificationMarkRead(target Target, persistentNotificationMark
 			Target:  target,
 			Type:    &serviceType,
 		},
-		ServiceData: persistentNotificationMarkReadParams,
+		ServiceData: *persistentNotificationMarkReadParams,
 	}
 	return p
 }

@@ -8,7 +8,7 @@ import "encoding/json"
 
 // NewVacuumCleanSpot creates the object that can be sent to Home Assistant for domain vacuum, service clean_spot
 // "Tell the vacuum cleaner to do a spot clean-up."
-func NewVacuumCleanSpot(target Target, vacuumCleanSpotParams VacuumCleanSpotParams) *VacuumCleanSpot {
+func NewVacuumCleanSpot(target Target) *VacuumCleanSpot {
 	serviceDomain := "vacuum"
 	serviceType := "call_service"
 	serviceService := "clean_spot"
@@ -20,16 +20,15 @@ func NewVacuumCleanSpot(target Target, vacuumCleanSpotParams VacuumCleanSpotPara
 			Target:  target,
 			Type:    &serviceType,
 		},
-		ServiceData: vacuumCleanSpotParams,
+		ServiceData: nil,
 	}
 	return v
 }
 
 type VacuumCleanSpot struct {
 	ServiceBase
-	ServiceData VacuumCleanSpotParams `json:"service_data,omitempty"`
+	ServiceData interface{} `json:"service_data,omitempty"`
 }
-type VacuumCleanSpotParams struct{}
 
 func (v *VacuumCleanSpot) JSON() string {
 	data, _ := json.Marshal(v)
@@ -41,7 +40,7 @@ func (v *VacuumCleanSpot) SetID(id *int) {
 
 // NewVacuumLocate creates the object that can be sent to Home Assistant for domain vacuum, service locate
 // "Locate the vacuum cleaner robot."
-func NewVacuumLocate(target Target, vacuumLocateParams VacuumLocateParams) *VacuumLocate {
+func NewVacuumLocate(target Target) *VacuumLocate {
 	serviceDomain := "vacuum"
 	serviceType := "call_service"
 	serviceService := "locate"
@@ -53,16 +52,15 @@ func NewVacuumLocate(target Target, vacuumLocateParams VacuumLocateParams) *Vacu
 			Target:  target,
 			Type:    &serviceType,
 		},
-		ServiceData: vacuumLocateParams,
+		ServiceData: nil,
 	}
 	return v
 }
 
 type VacuumLocate struct {
 	ServiceBase
-	ServiceData VacuumLocateParams `json:"service_data,omitempty"`
+	ServiceData interface{} `json:"service_data,omitempty"`
 }
-type VacuumLocateParams struct{}
 
 func (v *VacuumLocate) JSON() string {
 	data, _ := json.Marshal(v)
@@ -74,7 +72,7 @@ func (v *VacuumLocate) SetID(id *int) {
 
 // NewVacuumPause creates the object that can be sent to Home Assistant for domain vacuum, service pause
 // "Pause the cleaning task."
-func NewVacuumPause(target Target, vacuumPauseParams VacuumPauseParams) *VacuumPause {
+func NewVacuumPause(target Target) *VacuumPause {
 	serviceDomain := "vacuum"
 	serviceType := "call_service"
 	serviceService := "pause"
@@ -86,16 +84,15 @@ func NewVacuumPause(target Target, vacuumPauseParams VacuumPauseParams) *VacuumP
 			Target:  target,
 			Type:    &serviceType,
 		},
-		ServiceData: vacuumPauseParams,
+		ServiceData: nil,
 	}
 	return v
 }
 
 type VacuumPause struct {
 	ServiceBase
-	ServiceData VacuumPauseParams `json:"service_data,omitempty"`
+	ServiceData interface{} `json:"service_data,omitempty"`
 }
-type VacuumPauseParams struct{}
 
 func (v *VacuumPause) JSON() string {
 	data, _ := json.Marshal(v)
@@ -107,7 +104,7 @@ func (v *VacuumPause) SetID(id *int) {
 
 // NewVacuumReturnToBase creates the object that can be sent to Home Assistant for domain vacuum, service return_to_base
 // "Tell the vacuum cleaner to return to its dock."
-func NewVacuumReturnToBase(target Target, vacuumReturnToBaseParams VacuumReturnToBaseParams) *VacuumReturnToBase {
+func NewVacuumReturnToBase(target Target) *VacuumReturnToBase {
 	serviceDomain := "vacuum"
 	serviceType := "call_service"
 	serviceService := "return_to_base"
@@ -119,16 +116,15 @@ func NewVacuumReturnToBase(target Target, vacuumReturnToBaseParams VacuumReturnT
 			Target:  target,
 			Type:    &serviceType,
 		},
-		ServiceData: vacuumReturnToBaseParams,
+		ServiceData: nil,
 	}
 	return v
 }
 
 type VacuumReturnToBase struct {
 	ServiceBase
-	ServiceData VacuumReturnToBaseParams `json:"service_data,omitempty"`
+	ServiceData interface{} `json:"service_data,omitempty"`
 }
-type VacuumReturnToBaseParams struct{}
 
 func (v *VacuumReturnToBase) JSON() string {
 	data, _ := json.Marshal(v)
@@ -140,7 +136,7 @@ func (v *VacuumReturnToBase) SetID(id *int) {
 
 // NewVacuumSendCommand creates the object that can be sent to Home Assistant for domain vacuum, service send_command
 // "Send a raw command to the vacuum cleaner."
-func NewVacuumSendCommand(target Target, vacuumSendCommandParams VacuumSendCommandParams) *VacuumSendCommand {
+func NewVacuumSendCommand(target Target, vacuumSendCommandParams *VacuumSendCommandParams) *VacuumSendCommand {
 	serviceDomain := "vacuum"
 	serviceType := "call_service"
 	serviceService := "send_command"
@@ -152,7 +148,7 @@ func NewVacuumSendCommand(target Target, vacuumSendCommandParams VacuumSendComma
 			Target:  target,
 			Type:    &serviceType,
 		},
-		ServiceData: vacuumSendCommandParams,
+		ServiceData: *vacuumSendCommandParams,
 	}
 	return v
 }
@@ -175,7 +171,7 @@ func (v *VacuumSendCommand) SetID(id *int) {
 
 // NewVacuumSetFanSpeed creates the object that can be sent to Home Assistant for domain vacuum, service set_fan_speed
 // "Set the fan speed of the vacuum cleaner."
-func NewVacuumSetFanSpeed(target Target, vacuumSetFanSpeedParams VacuumSetFanSpeedParams) *VacuumSetFanSpeed {
+func NewVacuumSetFanSpeed(target Target, vacuumSetFanSpeedParams *VacuumSetFanSpeedParams) *VacuumSetFanSpeed {
 	serviceDomain := "vacuum"
 	serviceType := "call_service"
 	serviceService := "set_fan_speed"
@@ -187,7 +183,7 @@ func NewVacuumSetFanSpeed(target Target, vacuumSetFanSpeedParams VacuumSetFanSpe
 			Target:  target,
 			Type:    &serviceType,
 		},
-		ServiceData: vacuumSetFanSpeedParams,
+		ServiceData: *vacuumSetFanSpeedParams,
 	}
 	return v
 }
@@ -210,7 +206,7 @@ func (v *VacuumSetFanSpeed) SetID(id *int) {
 
 // NewVacuumStart creates the object that can be sent to Home Assistant for domain vacuum, service start
 // "Start or resume the cleaning task."
-func NewVacuumStart(target Target, vacuumStartParams VacuumStartParams) *VacuumStart {
+func NewVacuumStart(target Target) *VacuumStart {
 	serviceDomain := "vacuum"
 	serviceType := "call_service"
 	serviceService := "start"
@@ -222,16 +218,15 @@ func NewVacuumStart(target Target, vacuumStartParams VacuumStartParams) *VacuumS
 			Target:  target,
 			Type:    &serviceType,
 		},
-		ServiceData: vacuumStartParams,
+		ServiceData: nil,
 	}
 	return v
 }
 
 type VacuumStart struct {
 	ServiceBase
-	ServiceData VacuumStartParams `json:"service_data,omitempty"`
+	ServiceData interface{} `json:"service_data,omitempty"`
 }
-type VacuumStartParams struct{}
 
 func (v *VacuumStart) JSON() string {
 	data, _ := json.Marshal(v)
@@ -243,7 +238,7 @@ func (v *VacuumStart) SetID(id *int) {
 
 // NewVacuumStartPause creates the object that can be sent to Home Assistant for domain vacuum, service start_pause
 // "Start, pause, or resume the cleaning task."
-func NewVacuumStartPause(target Target, vacuumStartPauseParams VacuumStartPauseParams) *VacuumStartPause {
+func NewVacuumStartPause(target Target) *VacuumStartPause {
 	serviceDomain := "vacuum"
 	serviceType := "call_service"
 	serviceService := "start_pause"
@@ -255,16 +250,15 @@ func NewVacuumStartPause(target Target, vacuumStartPauseParams VacuumStartPauseP
 			Target:  target,
 			Type:    &serviceType,
 		},
-		ServiceData: vacuumStartPauseParams,
+		ServiceData: nil,
 	}
 	return v
 }
 
 type VacuumStartPause struct {
 	ServiceBase
-	ServiceData VacuumStartPauseParams `json:"service_data,omitempty"`
+	ServiceData interface{} `json:"service_data,omitempty"`
 }
-type VacuumStartPauseParams struct{}
 
 func (v *VacuumStartPause) JSON() string {
 	data, _ := json.Marshal(v)
@@ -276,7 +270,7 @@ func (v *VacuumStartPause) SetID(id *int) {
 
 // NewVacuumStop creates the object that can be sent to Home Assistant for domain vacuum, service stop
 // "Stop the current cleaning task."
-func NewVacuumStop(target Target, vacuumStopParams VacuumStopParams) *VacuumStop {
+func NewVacuumStop(target Target) *VacuumStop {
 	serviceDomain := "vacuum"
 	serviceType := "call_service"
 	serviceService := "stop"
@@ -288,16 +282,15 @@ func NewVacuumStop(target Target, vacuumStopParams VacuumStopParams) *VacuumStop
 			Target:  target,
 			Type:    &serviceType,
 		},
-		ServiceData: vacuumStopParams,
+		ServiceData: nil,
 	}
 	return v
 }
 
 type VacuumStop struct {
 	ServiceBase
-	ServiceData VacuumStopParams `json:"service_data,omitempty"`
+	ServiceData interface{} `json:"service_data,omitempty"`
 }
-type VacuumStopParams struct{}
 
 func (v *VacuumStop) JSON() string {
 	data, _ := json.Marshal(v)
@@ -309,7 +302,7 @@ func (v *VacuumStop) SetID(id *int) {
 
 // NewVacuumToggle creates the object that can be sent to Home Assistant for domain vacuum, service toggle
 // ""
-func NewVacuumToggle(target Target, vacuumToggleParams VacuumToggleParams) *VacuumToggle {
+func NewVacuumToggle(target Target) *VacuumToggle {
 	serviceDomain := "vacuum"
 	serviceType := "call_service"
 	serviceService := "toggle"
@@ -321,16 +314,15 @@ func NewVacuumToggle(target Target, vacuumToggleParams VacuumToggleParams) *Vacu
 			Target:  target,
 			Type:    &serviceType,
 		},
-		ServiceData: vacuumToggleParams,
+		ServiceData: nil,
 	}
 	return v
 }
 
 type VacuumToggle struct {
 	ServiceBase
-	ServiceData VacuumToggleParams `json:"service_data,omitempty"`
+	ServiceData interface{} `json:"service_data,omitempty"`
 }
-type VacuumToggleParams struct{}
 
 func (v *VacuumToggle) JSON() string {
 	data, _ := json.Marshal(v)
@@ -342,7 +334,7 @@ func (v *VacuumToggle) SetID(id *int) {
 
 // NewVacuumTurnOff creates the object that can be sent to Home Assistant for domain vacuum, service turn_off
 // "Stop the current cleaning task and return to home."
-func NewVacuumTurnOff(target Target, vacuumTurnOffParams VacuumTurnOffParams) *VacuumTurnOff {
+func NewVacuumTurnOff(target Target) *VacuumTurnOff {
 	serviceDomain := "vacuum"
 	serviceType := "call_service"
 	serviceService := "turn_off"
@@ -354,16 +346,15 @@ func NewVacuumTurnOff(target Target, vacuumTurnOffParams VacuumTurnOffParams) *V
 			Target:  target,
 			Type:    &serviceType,
 		},
-		ServiceData: vacuumTurnOffParams,
+		ServiceData: nil,
 	}
 	return v
 }
 
 type VacuumTurnOff struct {
 	ServiceBase
-	ServiceData VacuumTurnOffParams `json:"service_data,omitempty"`
+	ServiceData interface{} `json:"service_data,omitempty"`
 }
-type VacuumTurnOffParams struct{}
 
 func (v *VacuumTurnOff) JSON() string {
 	data, _ := json.Marshal(v)
@@ -375,7 +366,7 @@ func (v *VacuumTurnOff) SetID(id *int) {
 
 // NewVacuumTurnOn creates the object that can be sent to Home Assistant for domain vacuum, service turn_on
 // "Start a new cleaning task."
-func NewVacuumTurnOn(target Target, vacuumTurnOnParams VacuumTurnOnParams) *VacuumTurnOn {
+func NewVacuumTurnOn(target Target) *VacuumTurnOn {
 	serviceDomain := "vacuum"
 	serviceType := "call_service"
 	serviceService := "turn_on"
@@ -387,16 +378,15 @@ func NewVacuumTurnOn(target Target, vacuumTurnOnParams VacuumTurnOnParams) *Vacu
 			Target:  target,
 			Type:    &serviceType,
 		},
-		ServiceData: vacuumTurnOnParams,
+		ServiceData: nil,
 	}
 	return v
 }
 
 type VacuumTurnOn struct {
 	ServiceBase
-	ServiceData VacuumTurnOnParams `json:"service_data,omitempty"`
+	ServiceData interface{} `json:"service_data,omitempty"`
 }
-type VacuumTurnOnParams struct{}
 
 func (v *VacuumTurnOn) JSON() string {
 	data, _ := json.Marshal(v)

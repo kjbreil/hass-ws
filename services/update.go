@@ -8,7 +8,7 @@ import "encoding/json"
 
 // NewUpdateClearSkipped creates the object that can be sent to Home Assistant for domain update, service clear_skipped
 // "Removes the skipped version marker from an update."
-func NewUpdateClearSkipped(target Target, updateClearSkippedParams UpdateClearSkippedParams) *UpdateClearSkipped {
+func NewUpdateClearSkipped(target Target) *UpdateClearSkipped {
 	serviceDomain := "update"
 	serviceType := "call_service"
 	serviceService := "clear_skipped"
@@ -20,16 +20,15 @@ func NewUpdateClearSkipped(target Target, updateClearSkippedParams UpdateClearSk
 			Target:  target,
 			Type:    &serviceType,
 		},
-		ServiceData: updateClearSkippedParams,
+		ServiceData: nil,
 	}
 	return u
 }
 
 type UpdateClearSkipped struct {
 	ServiceBase
-	ServiceData UpdateClearSkippedParams `json:"service_data,omitempty"`
+	ServiceData interface{} `json:"service_data,omitempty"`
 }
-type UpdateClearSkippedParams struct{}
 
 func (u *UpdateClearSkipped) JSON() string {
 	data, _ := json.Marshal(u)
@@ -41,7 +40,7 @@ func (u *UpdateClearSkipped) SetID(id *int) {
 
 // NewUpdateInstall creates the object that can be sent to Home Assistant for domain update, service install
 // "Install an update for this device or service"
-func NewUpdateInstall(target Target, updateInstallParams UpdateInstallParams) *UpdateInstall {
+func NewUpdateInstall(target Target, updateInstallParams *UpdateInstallParams) *UpdateInstall {
 	serviceDomain := "update"
 	serviceType := "call_service"
 	serviceService := "install"
@@ -53,7 +52,7 @@ func NewUpdateInstall(target Target, updateInstallParams UpdateInstallParams) *U
 			Target:  target,
 			Type:    &serviceType,
 		},
-		ServiceData: updateInstallParams,
+		ServiceData: *updateInstallParams,
 	}
 	return u
 }
@@ -76,7 +75,7 @@ func (u *UpdateInstall) SetID(id *int) {
 
 // NewUpdateSkip creates the object that can be sent to Home Assistant for domain update, service skip
 // "Mark currently available update as skipped."
-func NewUpdateSkip(target Target, updateSkipParams UpdateSkipParams) *UpdateSkip {
+func NewUpdateSkip(target Target) *UpdateSkip {
 	serviceDomain := "update"
 	serviceType := "call_service"
 	serviceService := "skip"
@@ -88,16 +87,15 @@ func NewUpdateSkip(target Target, updateSkipParams UpdateSkipParams) *UpdateSkip
 			Target:  target,
 			Type:    &serviceType,
 		},
-		ServiceData: updateSkipParams,
+		ServiceData: nil,
 	}
 	return u
 }
 
 type UpdateSkip struct {
 	ServiceBase
-	ServiceData UpdateSkipParams `json:"service_data,omitempty"`
+	ServiceData interface{} `json:"service_data,omitempty"`
 }
-type UpdateSkipParams struct{}
 
 func (u *UpdateSkip) JSON() string {
 	data, _ := json.Marshal(u)

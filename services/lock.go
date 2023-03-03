@@ -8,7 +8,7 @@ import "encoding/json"
 
 // NewLockLock creates the object that can be sent to Home Assistant for domain lock, service lock
 // "Lock all or specified locks."
-func NewLockLock(target Target, lockLockParams LockLockParams) *LockLock {
+func NewLockLock(target Target, lockLockParams *LockLockParams) *LockLock {
 	serviceDomain := "lock"
 	serviceType := "call_service"
 	serviceService := "lock"
@@ -20,7 +20,7 @@ func NewLockLock(target Target, lockLockParams LockLockParams) *LockLock {
 			Target:  target,
 			Type:    &serviceType,
 		},
-		ServiceData: lockLockParams,
+		ServiceData: *lockLockParams,
 	}
 	return l
 }
@@ -43,7 +43,7 @@ func (l *LockLock) SetID(id *int) {
 
 // NewLockOpen creates the object that can be sent to Home Assistant for domain lock, service open
 // "Open all or specified locks."
-func NewLockOpen(target Target, lockOpenParams LockOpenParams) *LockOpen {
+func NewLockOpen(target Target, lockOpenParams *LockOpenParams) *LockOpen {
 	serviceDomain := "lock"
 	serviceType := "call_service"
 	serviceService := "open"
@@ -55,7 +55,7 @@ func NewLockOpen(target Target, lockOpenParams LockOpenParams) *LockOpen {
 			Target:  target,
 			Type:    &serviceType,
 		},
-		ServiceData: lockOpenParams,
+		ServiceData: *lockOpenParams,
 	}
 	return l
 }
@@ -78,7 +78,7 @@ func (l *LockOpen) SetID(id *int) {
 
 // NewLockUnlock creates the object that can be sent to Home Assistant for domain lock, service unlock
 // "Unlock all or specified locks."
-func NewLockUnlock(target Target, lockUnlockParams LockUnlockParams) *LockUnlock {
+func NewLockUnlock(target Target, lockUnlockParams *LockUnlockParams) *LockUnlock {
 	serviceDomain := "lock"
 	serviceType := "call_service"
 	serviceService := "unlock"
@@ -90,7 +90,7 @@ func NewLockUnlock(target Target, lockUnlockParams LockUnlockParams) *LockUnlock
 			Target:  target,
 			Type:    &serviceType,
 		},
-		ServiceData: lockUnlockParams,
+		ServiceData: *lockUnlockParams,
 	}
 	return l
 }

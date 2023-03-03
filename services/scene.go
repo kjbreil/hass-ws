@@ -8,7 +8,7 @@ import "encoding/json"
 
 // NewSceneApply creates the object that can be sent to Home Assistant for domain scene, service apply
 // "Activate a scene with configuration."
-func NewSceneApply(target Target, sceneApplyParams SceneApplyParams) *SceneApply {
+func NewSceneApply(target Target, sceneApplyParams *SceneApplyParams) *SceneApply {
 	serviceDomain := "scene"
 	serviceType := "call_service"
 	serviceService := "apply"
@@ -20,7 +20,7 @@ func NewSceneApply(target Target, sceneApplyParams SceneApplyParams) *SceneApply
 			Target:  target,
 			Type:    &serviceType,
 		},
-		ServiceData: sceneApplyParams,
+		ServiceData: *sceneApplyParams,
 	}
 	return s
 }
@@ -43,7 +43,7 @@ func (s *SceneApply) SetID(id *int) {
 
 // NewSceneCreate creates the object that can be sent to Home Assistant for domain scene, service create
 // "Creates a new scene."
-func NewSceneCreate(target Target, sceneCreateParams SceneCreateParams) *SceneCreate {
+func NewSceneCreate(target Target, sceneCreateParams *SceneCreateParams) *SceneCreate {
 	serviceDomain := "scene"
 	serviceType := "call_service"
 	serviceService := "create"
@@ -55,7 +55,7 @@ func NewSceneCreate(target Target, sceneCreateParams SceneCreateParams) *SceneCr
 			Target:  target,
 			Type:    &serviceType,
 		},
-		ServiceData: sceneCreateParams,
+		ServiceData: *sceneCreateParams,
 	}
 	return s
 }
@@ -78,7 +78,7 @@ func (s *SceneCreate) SetID(id *int) {
 
 // NewSceneReload creates the object that can be sent to Home Assistant for domain scene, service reload
 // "Reload the scene configuration."
-func NewSceneReload(target Target, sceneReloadParams SceneReloadParams) *SceneReload {
+func NewSceneReload(target Target) *SceneReload {
 	serviceDomain := "scene"
 	serviceType := "call_service"
 	serviceService := "reload"
@@ -90,16 +90,15 @@ func NewSceneReload(target Target, sceneReloadParams SceneReloadParams) *SceneRe
 			Target:  target,
 			Type:    &serviceType,
 		},
-		ServiceData: sceneReloadParams,
+		ServiceData: nil,
 	}
 	return s
 }
 
 type SceneReload struct {
 	ServiceBase
-	ServiceData SceneReloadParams `json:"service_data,omitempty"`
+	ServiceData interface{} `json:"service_data,omitempty"`
 }
-type SceneReloadParams struct{}
 
 func (s *SceneReload) JSON() string {
 	data, _ := json.Marshal(s)
@@ -111,7 +110,7 @@ func (s *SceneReload) SetID(id *int) {
 
 // NewSceneTurnOn creates the object that can be sent to Home Assistant for domain scene, service turn_on
 // "Activate a scene."
-func NewSceneTurnOn(target Target, sceneTurnOnParams SceneTurnOnParams) *SceneTurnOn {
+func NewSceneTurnOn(target Target, sceneTurnOnParams *SceneTurnOnParams) *SceneTurnOn {
 	serviceDomain := "scene"
 	serviceType := "call_service"
 	serviceService := "turn_on"
@@ -123,7 +122,7 @@ func NewSceneTurnOn(target Target, sceneTurnOnParams SceneTurnOnParams) *SceneTu
 			Target:  target,
 			Type:    &serviceType,
 		},
-		ServiceData: sceneTurnOnParams,
+		ServiceData: *sceneTurnOnParams,
 	}
 	return s
 }

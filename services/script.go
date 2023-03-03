@@ -8,7 +8,7 @@ import "encoding/json"
 
 // NewScriptReload creates the object that can be sent to Home Assistant for domain script, service reload
 // "Reload all the available scripts"
-func NewScriptReload(target Target, scriptReloadParams ScriptReloadParams) *ScriptReload {
+func NewScriptReload(target Target) *ScriptReload {
 	serviceDomain := "script"
 	serviceType := "call_service"
 	serviceService := "reload"
@@ -20,16 +20,15 @@ func NewScriptReload(target Target, scriptReloadParams ScriptReloadParams) *Scri
 			Target:  target,
 			Type:    &serviceType,
 		},
-		ServiceData: scriptReloadParams,
+		ServiceData: nil,
 	}
 	return s
 }
 
 type ScriptReload struct {
 	ServiceBase
-	ServiceData ScriptReloadParams `json:"service_data,omitempty"`
+	ServiceData interface{} `json:"service_data,omitempty"`
 }
-type ScriptReloadParams struct{}
 
 func (s *ScriptReload) JSON() string {
 	data, _ := json.Marshal(s)
@@ -41,7 +40,7 @@ func (s *ScriptReload) SetID(id *int) {
 
 // NewScriptTestScript creates the object that can be sent to Home Assistant for domain script, service test_script
 // ""
-func NewScriptTestScript(target Target, scriptTestScriptParams ScriptTestScriptParams) *ScriptTestScript {
+func NewScriptTestScript(target Target) *ScriptTestScript {
 	serviceDomain := "script"
 	serviceType := "call_service"
 	serviceService := "test_script"
@@ -53,16 +52,15 @@ func NewScriptTestScript(target Target, scriptTestScriptParams ScriptTestScriptP
 			Target:  target,
 			Type:    &serviceType,
 		},
-		ServiceData: scriptTestScriptParams,
+		ServiceData: nil,
 	}
 	return s
 }
 
 type ScriptTestScript struct {
 	ServiceBase
-	ServiceData ScriptTestScriptParams `json:"service_data,omitempty"`
+	ServiceData interface{} `json:"service_data,omitempty"`
 }
-type ScriptTestScriptParams struct{}
 
 func (s *ScriptTestScript) JSON() string {
 	data, _ := json.Marshal(s)
@@ -74,7 +72,7 @@ func (s *ScriptTestScript) SetID(id *int) {
 
 // NewScriptToggle creates the object that can be sent to Home Assistant for domain script, service toggle
 // "Toggle script"
-func NewScriptToggle(target Target, scriptToggleParams ScriptToggleParams) *ScriptToggle {
+func NewScriptToggle(target Target) *ScriptToggle {
 	serviceDomain := "script"
 	serviceType := "call_service"
 	serviceService := "toggle"
@@ -86,16 +84,15 @@ func NewScriptToggle(target Target, scriptToggleParams ScriptToggleParams) *Scri
 			Target:  target,
 			Type:    &serviceType,
 		},
-		ServiceData: scriptToggleParams,
+		ServiceData: nil,
 	}
 	return s
 }
 
 type ScriptToggle struct {
 	ServiceBase
-	ServiceData ScriptToggleParams `json:"service_data,omitempty"`
+	ServiceData interface{} `json:"service_data,omitempty"`
 }
-type ScriptToggleParams struct{}
 
 func (s *ScriptToggle) JSON() string {
 	data, _ := json.Marshal(s)
@@ -107,7 +104,7 @@ func (s *ScriptToggle) SetID(id *int) {
 
 // NewScriptTurnOff creates the object that can be sent to Home Assistant for domain script, service turn_off
 // "Turn off script"
-func NewScriptTurnOff(target Target, scriptTurnOffParams ScriptTurnOffParams) *ScriptTurnOff {
+func NewScriptTurnOff(target Target) *ScriptTurnOff {
 	serviceDomain := "script"
 	serviceType := "call_service"
 	serviceService := "turn_off"
@@ -119,16 +116,15 @@ func NewScriptTurnOff(target Target, scriptTurnOffParams ScriptTurnOffParams) *S
 			Target:  target,
 			Type:    &serviceType,
 		},
-		ServiceData: scriptTurnOffParams,
+		ServiceData: nil,
 	}
 	return s
 }
 
 type ScriptTurnOff struct {
 	ServiceBase
-	ServiceData ScriptTurnOffParams `json:"service_data,omitempty"`
+	ServiceData interface{} `json:"service_data,omitempty"`
 }
-type ScriptTurnOffParams struct{}
 
 func (s *ScriptTurnOff) JSON() string {
 	data, _ := json.Marshal(s)
@@ -140,7 +136,7 @@ func (s *ScriptTurnOff) SetID(id *int) {
 
 // NewScriptTurnOn creates the object that can be sent to Home Assistant for domain script, service turn_on
 // "Turn on script"
-func NewScriptTurnOn(target Target, scriptTurnOnParams ScriptTurnOnParams) *ScriptTurnOn {
+func NewScriptTurnOn(target Target) *ScriptTurnOn {
 	serviceDomain := "script"
 	serviceType := "call_service"
 	serviceService := "turn_on"
@@ -152,16 +148,15 @@ func NewScriptTurnOn(target Target, scriptTurnOnParams ScriptTurnOnParams) *Scri
 			Target:  target,
 			Type:    &serviceType,
 		},
-		ServiceData: scriptTurnOnParams,
+		ServiceData: nil,
 	}
 	return s
 }
 
 type ScriptTurnOn struct {
 	ServiceBase
-	ServiceData ScriptTurnOnParams `json:"service_data,omitempty"`
+	ServiceData interface{} `json:"service_data,omitempty"`
 }
-type ScriptTurnOnParams struct{}
 
 func (s *ScriptTurnOn) JSON() string {
 	data, _ := json.Marshal(s)

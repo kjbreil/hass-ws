@@ -8,7 +8,7 @@ import "encoding/json"
 
 // NewOpnsenseCloseNotice creates the object that can be sent to Home Assistant for domain opnsense, service close_notice
 // "Closes a notice(s)."
-func NewOpnsenseCloseNotice(target Target, opnsenseCloseNoticeParams OpnsenseCloseNoticeParams) *OpnsenseCloseNotice {
+func NewOpnsenseCloseNotice(target Target) *OpnsenseCloseNotice {
 	serviceDomain := "opnsense"
 	serviceType := "call_service"
 	serviceService := "close_notice"
@@ -20,16 +20,15 @@ func NewOpnsenseCloseNotice(target Target, opnsenseCloseNoticeParams OpnsenseClo
 			Target:  target,
 			Type:    &serviceType,
 		},
-		ServiceData: opnsenseCloseNoticeParams,
+		ServiceData: nil,
 	}
 	return o
 }
 
 type OpnsenseCloseNotice struct {
 	ServiceBase
-	ServiceData OpnsenseCloseNoticeParams `json:"service_data,omitempty"`
+	ServiceData interface{} `json:"service_data,omitempty"`
 }
-type OpnsenseCloseNoticeParams struct{}
 
 func (o *OpnsenseCloseNotice) JSON() string {
 	data, _ := json.Marshal(o)
@@ -41,7 +40,7 @@ func (o *OpnsenseCloseNotice) SetID(id *int) {
 
 // NewOpnsenseFileNotice creates the object that can be sent to Home Assistant for domain opnsense, service file_notice
 // "Files a notice(s)."
-func NewOpnsenseFileNotice(target Target, opnsenseFileNoticeParams OpnsenseFileNoticeParams) *OpnsenseFileNotice {
+func NewOpnsenseFileNotice(target Target) *OpnsenseFileNotice {
 	serviceDomain := "opnsense"
 	serviceType := "call_service"
 	serviceService := "file_notice"
@@ -53,16 +52,15 @@ func NewOpnsenseFileNotice(target Target, opnsenseFileNoticeParams OpnsenseFileN
 			Target:  target,
 			Type:    &serviceType,
 		},
-		ServiceData: opnsenseFileNoticeParams,
+		ServiceData: nil,
 	}
 	return o
 }
 
 type OpnsenseFileNotice struct {
 	ServiceBase
-	ServiceData OpnsenseFileNoticeParams `json:"service_data,omitempty"`
+	ServiceData interface{} `json:"service_data,omitempty"`
 }
-type OpnsenseFileNoticeParams struct{}
 
 func (o *OpnsenseFileNotice) JSON() string {
 	data, _ := json.Marshal(o)
@@ -74,7 +72,7 @@ func (o *OpnsenseFileNotice) SetID(id *int) {
 
 // NewOpnsenseRestartService creates the object that can be sent to Home Assistant for domain opnsense, service restart_service
 // "Restarts a service."
-func NewOpnsenseRestartService(target Target, opnsenseRestartServiceParams OpnsenseRestartServiceParams) *OpnsenseRestartService {
+func NewOpnsenseRestartService(target Target) *OpnsenseRestartService {
 	serviceDomain := "opnsense"
 	serviceType := "call_service"
 	serviceService := "restart_service"
@@ -86,16 +84,15 @@ func NewOpnsenseRestartService(target Target, opnsenseRestartServiceParams Opnse
 			Target:  target,
 			Type:    &serviceType,
 		},
-		ServiceData: opnsenseRestartServiceParams,
+		ServiceData: nil,
 	}
 	return o
 }
 
 type OpnsenseRestartService struct {
 	ServiceBase
-	ServiceData OpnsenseRestartServiceParams `json:"service_data,omitempty"`
+	ServiceData interface{} `json:"service_data,omitempty"`
 }
-type OpnsenseRestartServiceParams struct{}
 
 func (o *OpnsenseRestartService) JSON() string {
 	data, _ := json.Marshal(o)
@@ -107,7 +104,7 @@ func (o *OpnsenseRestartService) SetID(id *int) {
 
 // NewOpnsenseSendWol creates the object that can be sent to Home Assistant for domain opnsense, service send_wol
 // "Sends wake-on-lan magic packet."
-func NewOpnsenseSendWol(target Target, opnsenseSendWolParams OpnsenseSendWolParams) *OpnsenseSendWol {
+func NewOpnsenseSendWol(target Target) *OpnsenseSendWol {
 	serviceDomain := "opnsense"
 	serviceType := "call_service"
 	serviceService := "send_wol"
@@ -119,16 +116,15 @@ func NewOpnsenseSendWol(target Target, opnsenseSendWolParams OpnsenseSendWolPara
 			Target:  target,
 			Type:    &serviceType,
 		},
-		ServiceData: opnsenseSendWolParams,
+		ServiceData: nil,
 	}
 	return o
 }
 
 type OpnsenseSendWol struct {
 	ServiceBase
-	ServiceData OpnsenseSendWolParams `json:"service_data,omitempty"`
+	ServiceData interface{} `json:"service_data,omitempty"`
 }
-type OpnsenseSendWolParams struct{}
 
 func (o *OpnsenseSendWol) JSON() string {
 	data, _ := json.Marshal(o)
@@ -140,7 +136,7 @@ func (o *OpnsenseSendWol) SetID(id *int) {
 
 // NewOpnsenseStartService creates the object that can be sent to Home Assistant for domain opnsense, service start_service
 // "Starts a service."
-func NewOpnsenseStartService(target Target, opnsenseStartServiceParams OpnsenseStartServiceParams) *OpnsenseStartService {
+func NewOpnsenseStartService(target Target) *OpnsenseStartService {
 	serviceDomain := "opnsense"
 	serviceType := "call_service"
 	serviceService := "start_service"
@@ -152,16 +148,15 @@ func NewOpnsenseStartService(target Target, opnsenseStartServiceParams OpnsenseS
 			Target:  target,
 			Type:    &serviceType,
 		},
-		ServiceData: opnsenseStartServiceParams,
+		ServiceData: nil,
 	}
 	return o
 }
 
 type OpnsenseStartService struct {
 	ServiceBase
-	ServiceData OpnsenseStartServiceParams `json:"service_data,omitempty"`
+	ServiceData interface{} `json:"service_data,omitempty"`
 }
-type OpnsenseStartServiceParams struct{}
 
 func (o *OpnsenseStartService) JSON() string {
 	data, _ := json.Marshal(o)
@@ -173,7 +168,7 @@ func (o *OpnsenseStartService) SetID(id *int) {
 
 // NewOpnsenseStopService creates the object that can be sent to Home Assistant for domain opnsense, service stop_service
 // "Stops a service."
-func NewOpnsenseStopService(target Target, opnsenseStopServiceParams OpnsenseStopServiceParams) *OpnsenseStopService {
+func NewOpnsenseStopService(target Target) *OpnsenseStopService {
 	serviceDomain := "opnsense"
 	serviceType := "call_service"
 	serviceService := "stop_service"
@@ -185,16 +180,15 @@ func NewOpnsenseStopService(target Target, opnsenseStopServiceParams OpnsenseSto
 			Target:  target,
 			Type:    &serviceType,
 		},
-		ServiceData: opnsenseStopServiceParams,
+		ServiceData: nil,
 	}
 	return o
 }
 
 type OpnsenseStopService struct {
 	ServiceBase
-	ServiceData OpnsenseStopServiceParams `json:"service_data,omitempty"`
+	ServiceData interface{} `json:"service_data,omitempty"`
 }
-type OpnsenseStopServiceParams struct{}
 
 func (o *OpnsenseStopService) JSON() string {
 	data, _ := json.Marshal(o)
@@ -206,7 +200,7 @@ func (o *OpnsenseStopService) SetID(id *int) {
 
 // NewOpnsenseSystemHalt creates the object that can be sent to Home Assistant for domain opnsense, service system_halt
 // "Halts the system."
-func NewOpnsenseSystemHalt(target Target, opnsenseSystemHaltParams OpnsenseSystemHaltParams) *OpnsenseSystemHalt {
+func NewOpnsenseSystemHalt(target Target) *OpnsenseSystemHalt {
 	serviceDomain := "opnsense"
 	serviceType := "call_service"
 	serviceService := "system_halt"
@@ -218,16 +212,15 @@ func NewOpnsenseSystemHalt(target Target, opnsenseSystemHaltParams OpnsenseSyste
 			Target:  target,
 			Type:    &serviceType,
 		},
-		ServiceData: opnsenseSystemHaltParams,
+		ServiceData: nil,
 	}
 	return o
 }
 
 type OpnsenseSystemHalt struct {
 	ServiceBase
-	ServiceData OpnsenseSystemHaltParams `json:"service_data,omitempty"`
+	ServiceData interface{} `json:"service_data,omitempty"`
 }
-type OpnsenseSystemHaltParams struct{}
 
 func (o *OpnsenseSystemHalt) JSON() string {
 	data, _ := json.Marshal(o)
@@ -239,7 +232,7 @@ func (o *OpnsenseSystemHalt) SetID(id *int) {
 
 // NewOpnsenseSystemReboot creates the object that can be sent to Home Assistant for domain opnsense, service system_reboot
 // "Reboots the system."
-func NewOpnsenseSystemReboot(target Target, opnsenseSystemRebootParams OpnsenseSystemRebootParams) *OpnsenseSystemReboot {
+func NewOpnsenseSystemReboot(target Target) *OpnsenseSystemReboot {
 	serviceDomain := "opnsense"
 	serviceType := "call_service"
 	serviceService := "system_reboot"
@@ -251,16 +244,15 @@ func NewOpnsenseSystemReboot(target Target, opnsenseSystemRebootParams OpnsenseS
 			Target:  target,
 			Type:    &serviceType,
 		},
-		ServiceData: opnsenseSystemRebootParams,
+		ServiceData: nil,
 	}
 	return o
 }
 
 type OpnsenseSystemReboot struct {
 	ServiceBase
-	ServiceData OpnsenseSystemRebootParams `json:"service_data,omitempty"`
+	ServiceData interface{} `json:"service_data,omitempty"`
 }
-type OpnsenseSystemRebootParams struct{}
 
 func (o *OpnsenseSystemReboot) JSON() string {
 	data, _ := json.Marshal(o)

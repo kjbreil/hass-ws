@@ -8,7 +8,7 @@ import "encoding/json"
 
 // NewPlexRefreshLibrary creates the object that can be sent to Home Assistant for domain plex, service refresh_library
 // "Refresh a Plex library to scan for new and updated media."
-func NewPlexRefreshLibrary(target Target, plexRefreshLibraryParams PlexRefreshLibraryParams) *PlexRefreshLibrary {
+func NewPlexRefreshLibrary(target Target, plexRefreshLibraryParams *PlexRefreshLibraryParams) *PlexRefreshLibrary {
 	serviceDomain := "plex"
 	serviceType := "call_service"
 	serviceService := "refresh_library"
@@ -20,7 +20,7 @@ func NewPlexRefreshLibrary(target Target, plexRefreshLibraryParams PlexRefreshLi
 			Target:  target,
 			Type:    &serviceType,
 		},
-		ServiceData: plexRefreshLibraryParams,
+		ServiceData: *plexRefreshLibraryParams,
 	}
 	return p
 }
@@ -44,7 +44,7 @@ func (p *PlexRefreshLibrary) SetID(id *int) {
 
 // NewPlexScanForClients creates the object that can be sent to Home Assistant for domain plex, service scan_for_clients
 // "Scan for available clients from the Plex server(s), local network, and plex.tv."
-func NewPlexScanForClients(target Target, plexScanForClientsParams PlexScanForClientsParams) *PlexScanForClients {
+func NewPlexScanForClients(target Target) *PlexScanForClients {
 	serviceDomain := "plex"
 	serviceType := "call_service"
 	serviceService := "scan_for_clients"
@@ -56,16 +56,15 @@ func NewPlexScanForClients(target Target, plexScanForClientsParams PlexScanForCl
 			Target:  target,
 			Type:    &serviceType,
 		},
-		ServiceData: plexScanForClientsParams,
+		ServiceData: nil,
 	}
 	return p
 }
 
 type PlexScanForClients struct {
 	ServiceBase
-	ServiceData PlexScanForClientsParams `json:"service_data,omitempty"`
+	ServiceData interface{} `json:"service_data,omitempty"`
 }
-type PlexScanForClientsParams struct{}
 
 func (p *PlexScanForClients) JSON() string {
 	data, _ := json.Marshal(p)

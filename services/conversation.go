@@ -8,7 +8,7 @@ import "encoding/json"
 
 // NewConversationProcess creates the object that can be sent to Home Assistant for domain conversation, service process
 // "Launch a conversation from a transcribed text."
-func NewConversationProcess(target Target, conversationProcessParams ConversationProcessParams) *ConversationProcess {
+func NewConversationProcess(target Target, conversationProcessParams *ConversationProcessParams) *ConversationProcess {
 	serviceDomain := "conversation"
 	serviceType := "call_service"
 	serviceService := "process"
@@ -20,7 +20,7 @@ func NewConversationProcess(target Target, conversationProcessParams Conversatio
 			Target:  target,
 			Type:    &serviceType,
 		},
-		ServiceData: conversationProcessParams,
+		ServiceData: *conversationProcessParams,
 	}
 	return c
 }
@@ -43,7 +43,7 @@ func (c *ConversationProcess) SetID(id *int) {
 
 // NewConversationReload creates the object that can be sent to Home Assistant for domain conversation, service reload
 // ""
-func NewConversationReload(target Target, conversationReloadParams ConversationReloadParams) *ConversationReload {
+func NewConversationReload(target Target) *ConversationReload {
 	serviceDomain := "conversation"
 	serviceType := "call_service"
 	serviceService := "reload"
@@ -55,16 +55,15 @@ func NewConversationReload(target Target, conversationReloadParams ConversationR
 			Target:  target,
 			Type:    &serviceType,
 		},
-		ServiceData: conversationReloadParams,
+		ServiceData: nil,
 	}
 	return c
 }
 
 type ConversationReload struct {
 	ServiceBase
-	ServiceData ConversationReloadParams `json:"service_data,omitempty"`
+	ServiceData interface{} `json:"service_data,omitempty"`
 }
-type ConversationReloadParams struct{}
 
 func (c *ConversationReload) JSON() string {
 	data, _ := json.Marshal(c)

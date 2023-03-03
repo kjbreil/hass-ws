@@ -8,7 +8,7 @@ import "encoding/json"
 
 // NewTextSetValue creates the object that can be sent to Home Assistant for domain text, service set_value
 // "Set value of a text entity."
-func NewTextSetValue(target Target, textSetValueParams TextSetValueParams) *TextSetValue {
+func NewTextSetValue(target Target, textSetValueParams *TextSetValueParams) *TextSetValue {
 	serviceDomain := "text"
 	serviceType := "call_service"
 	serviceService := "set_value"
@@ -20,7 +20,7 @@ func NewTextSetValue(target Target, textSetValueParams TextSetValueParams) *Text
 			Target:  target,
 			Type:    &serviceType,
 		},
-		ServiceData: textSetValueParams,
+		ServiceData: *textSetValueParams,
 	}
 	return t
 }

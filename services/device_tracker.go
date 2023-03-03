@@ -8,7 +8,7 @@ import "encoding/json"
 
 // NewDeviceTrackerSee creates the object that can be sent to Home Assistant for domain device_tracker, service see
 // "Control tracked device."
-func NewDeviceTrackerSee(target Target, deviceTrackerSeeParams DeviceTrackerSeeParams) *DeviceTrackerSee {
+func NewDeviceTrackerSee(target Target, deviceTrackerSeeParams *DeviceTrackerSeeParams) *DeviceTrackerSee {
 	serviceDomain := "device_tracker"
 	serviceType := "call_service"
 	serviceService := "see"
@@ -20,7 +20,7 @@ func NewDeviceTrackerSee(target Target, deviceTrackerSeeParams DeviceTrackerSeeP
 			Target:  target,
 			Type:    &serviceType,
 		},
-		ServiceData: deviceTrackerSeeParams,
+		ServiceData: *deviceTrackerSeeParams,
 	}
 	return d
 }

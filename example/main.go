@@ -32,11 +32,13 @@ func main() {
 	// use message.FriendlyName() rather than newAttr.FriendlyName and need to check for nil
 	c.OnType.OnSensor = func(message *model.Message, newAttrs, oldAttrs *entities.Sensor) {
 		fmt.Printf("Sensor: %s - %s - %s\n", message.EntityID(), message.FriendlyName(), message.State())
+		c.CallService(services.NewInputBooleanToggle(services.Targets("input_boolean.test_toggle")))
 	}
 
 	// setup handler for single entity updates
 	c.OnEntity["climate.kitchen"] = func(message *model.Message) {
 		fmt.Printf("Sensor: %s - %s\n", message.FriendlyName(), message.State())
+
 	}
 
 	// Set a message handler to run on every message even if hit by other message handlers
@@ -55,19 +57,15 @@ func main() {
 	}
 
 	// Call a service
-	high := 78
-	low := 60
-	mode := services.HvacModeHeatCool
-	success, _ := c.CallService(services.NewClimateSetTemperature(
-		[]string{"climate.kitchen"},
-		&mode,
-		&high,
-		&low,
-		nil,
-	))
-	if !success {
-		log.Panicln("service did not return a success")
-	}
+	high := 78.0
+	low := 60.0
+	mode := services.HvacModeheat_cool
+	c.CallService(services.NewClimateSetTemperature(services.Targets("climate.kitchen"), &services.ClimateSetTemperatureParams{
+		HvacMode:       &mode,
+		TargetTempHigh: &high,
+		TargetTempLow:  &low,
+		Temperature:    nil,
+	}))
 
 	// Get all states, they ar ethen run through the OnType and OnEntity handlers but not OnMessage or OnUnhandled
 	c.GetStates()

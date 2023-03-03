@@ -8,7 +8,7 @@ import "encoding/json"
 
 // NewHomeassistantCheckConfig creates the object that can be sent to Home Assistant for domain homeassistant, service check_config
 // "Check the Home Assistant configuration files for errors. Errors will be displayed in the Home Assistant log."
-func NewHomeassistantCheckConfig(target Target, homeassistantCheckConfigParams HomeassistantCheckConfigParams) *HomeassistantCheckConfig {
+func NewHomeassistantCheckConfig(target Target) *HomeassistantCheckConfig {
 	serviceDomain := "homeassistant"
 	serviceType := "call_service"
 	serviceService := "check_config"
@@ -20,16 +20,15 @@ func NewHomeassistantCheckConfig(target Target, homeassistantCheckConfigParams H
 			Target:  target,
 			Type:    &serviceType,
 		},
-		ServiceData: homeassistantCheckConfigParams,
+		ServiceData: nil,
 	}
 	return h
 }
 
 type HomeassistantCheckConfig struct {
 	ServiceBase
-	ServiceData HomeassistantCheckConfigParams `json:"service_data,omitempty"`
+	ServiceData interface{} `json:"service_data,omitempty"`
 }
-type HomeassistantCheckConfigParams struct{}
 
 func (h *HomeassistantCheckConfig) JSON() string {
 	data, _ := json.Marshal(h)
@@ -41,7 +40,7 @@ func (h *HomeassistantCheckConfig) SetID(id *int) {
 
 // NewHomeassistantReloadConfigEntry creates the object that can be sent to Home Assistant for domain homeassistant, service reload_config_entry
 // "Reload a config entry that matches a target."
-func NewHomeassistantReloadConfigEntry(target Target, homeassistantReloadConfigEntryParams HomeassistantReloadConfigEntryParams) *HomeassistantReloadConfigEntry {
+func NewHomeassistantReloadConfigEntry(target Target, homeassistantReloadConfigEntryParams *HomeassistantReloadConfigEntryParams) *HomeassistantReloadConfigEntry {
 	serviceDomain := "homeassistant"
 	serviceType := "call_service"
 	serviceService := "reload_config_entry"
@@ -53,7 +52,7 @@ func NewHomeassistantReloadConfigEntry(target Target, homeassistantReloadConfigE
 			Target:  target,
 			Type:    &serviceType,
 		},
-		ServiceData: homeassistantReloadConfigEntryParams,
+		ServiceData: *homeassistantReloadConfigEntryParams,
 	}
 	return h
 }
@@ -76,7 +75,7 @@ func (h *HomeassistantReloadConfigEntry) SetID(id *int) {
 
 // NewHomeassistantReloadCoreConfig creates the object that can be sent to Home Assistant for domain homeassistant, service reload_core_config
 // "Reload the core configuration."
-func NewHomeassistantReloadCoreConfig(target Target, homeassistantReloadCoreConfigParams HomeassistantReloadCoreConfigParams) *HomeassistantReloadCoreConfig {
+func NewHomeassistantReloadCoreConfig(target Target) *HomeassistantReloadCoreConfig {
 	serviceDomain := "homeassistant"
 	serviceType := "call_service"
 	serviceService := "reload_core_config"
@@ -88,16 +87,15 @@ func NewHomeassistantReloadCoreConfig(target Target, homeassistantReloadCoreConf
 			Target:  target,
 			Type:    &serviceType,
 		},
-		ServiceData: homeassistantReloadCoreConfigParams,
+		ServiceData: nil,
 	}
 	return h
 }
 
 type HomeassistantReloadCoreConfig struct {
 	ServiceBase
-	ServiceData HomeassistantReloadCoreConfigParams `json:"service_data,omitempty"`
+	ServiceData interface{} `json:"service_data,omitempty"`
 }
-type HomeassistantReloadCoreConfigParams struct{}
 
 func (h *HomeassistantReloadCoreConfig) JSON() string {
 	data, _ := json.Marshal(h)
@@ -109,7 +107,7 @@ func (h *HomeassistantReloadCoreConfig) SetID(id *int) {
 
 // NewHomeassistantRestart creates the object that can be sent to Home Assistant for domain homeassistant, service restart
 // "Restart the Home Assistant service."
-func NewHomeassistantRestart(target Target, homeassistantRestartParams HomeassistantRestartParams) *HomeassistantRestart {
+func NewHomeassistantRestart(target Target) *HomeassistantRestart {
 	serviceDomain := "homeassistant"
 	serviceType := "call_service"
 	serviceService := "restart"
@@ -121,16 +119,15 @@ func NewHomeassistantRestart(target Target, homeassistantRestartParams Homeassis
 			Target:  target,
 			Type:    &serviceType,
 		},
-		ServiceData: homeassistantRestartParams,
+		ServiceData: nil,
 	}
 	return h
 }
 
 type HomeassistantRestart struct {
 	ServiceBase
-	ServiceData HomeassistantRestartParams `json:"service_data,omitempty"`
+	ServiceData interface{} `json:"service_data,omitempty"`
 }
-type HomeassistantRestartParams struct{}
 
 func (h *HomeassistantRestart) JSON() string {
 	data, _ := json.Marshal(h)
@@ -142,7 +139,7 @@ func (h *HomeassistantRestart) SetID(id *int) {
 
 // NewHomeassistantSavePersistentStates creates the object that can be sent to Home Assistant for domain homeassistant, service save_persistent_states
 // "Save the persistent states (for entities derived from RestoreEntity) immediately. Maintain the normal periodic saving interval."
-func NewHomeassistantSavePersistentStates(target Target, homeassistantSavePersistentStatesParams HomeassistantSavePersistentStatesParams) *HomeassistantSavePersistentStates {
+func NewHomeassistantSavePersistentStates(target Target) *HomeassistantSavePersistentStates {
 	serviceDomain := "homeassistant"
 	serviceType := "call_service"
 	serviceService := "save_persistent_states"
@@ -154,16 +151,15 @@ func NewHomeassistantSavePersistentStates(target Target, homeassistantSavePersis
 			Target:  target,
 			Type:    &serviceType,
 		},
-		ServiceData: homeassistantSavePersistentStatesParams,
+		ServiceData: nil,
 	}
 	return h
 }
 
 type HomeassistantSavePersistentStates struct {
 	ServiceBase
-	ServiceData HomeassistantSavePersistentStatesParams `json:"service_data,omitempty"`
+	ServiceData interface{} `json:"service_data,omitempty"`
 }
-type HomeassistantSavePersistentStatesParams struct{}
 
 func (h *HomeassistantSavePersistentStates) JSON() string {
 	data, _ := json.Marshal(h)
@@ -175,7 +171,7 @@ func (h *HomeassistantSavePersistentStates) SetID(id *int) {
 
 // NewHomeassistantSetLocation creates the object that can be sent to Home Assistant for domain homeassistant, service set_location
 // "Update the Home Assistant location."
-func NewHomeassistantSetLocation(target Target, homeassistantSetLocationParams HomeassistantSetLocationParams) *HomeassistantSetLocation {
+func NewHomeassistantSetLocation(target Target, homeassistantSetLocationParams *HomeassistantSetLocationParams) *HomeassistantSetLocation {
 	serviceDomain := "homeassistant"
 	serviceType := "call_service"
 	serviceService := "set_location"
@@ -187,7 +183,7 @@ func NewHomeassistantSetLocation(target Target, homeassistantSetLocationParams H
 			Target:  target,
 			Type:    &serviceType,
 		},
-		ServiceData: homeassistantSetLocationParams,
+		ServiceData: *homeassistantSetLocationParams,
 	}
 	return h
 }
@@ -211,7 +207,7 @@ func (h *HomeassistantSetLocation) SetID(id *int) {
 
 // NewHomeassistantStop creates the object that can be sent to Home Assistant for domain homeassistant, service stop
 // "Stop the Home Assistant service."
-func NewHomeassistantStop(target Target, homeassistantStopParams HomeassistantStopParams) *HomeassistantStop {
+func NewHomeassistantStop(target Target) *HomeassistantStop {
 	serviceDomain := "homeassistant"
 	serviceType := "call_service"
 	serviceService := "stop"
@@ -223,16 +219,15 @@ func NewHomeassistantStop(target Target, homeassistantStopParams HomeassistantSt
 			Target:  target,
 			Type:    &serviceType,
 		},
-		ServiceData: homeassistantStopParams,
+		ServiceData: nil,
 	}
 	return h
 }
 
 type HomeassistantStop struct {
 	ServiceBase
-	ServiceData HomeassistantStopParams `json:"service_data,omitempty"`
+	ServiceData interface{} `json:"service_data,omitempty"`
 }
-type HomeassistantStopParams struct{}
 
 func (h *HomeassistantStop) JSON() string {
 	data, _ := json.Marshal(h)
@@ -244,7 +239,7 @@ func (h *HomeassistantStop) SetID(id *int) {
 
 // NewHomeassistantToggle creates the object that can be sent to Home Assistant for domain homeassistant, service toggle
 // "Generic service to toggle devices on/off under any domain"
-func NewHomeassistantToggle(target Target, homeassistantToggleParams HomeassistantToggleParams) *HomeassistantToggle {
+func NewHomeassistantToggle(target Target) *HomeassistantToggle {
 	serviceDomain := "homeassistant"
 	serviceType := "call_service"
 	serviceService := "toggle"
@@ -256,16 +251,15 @@ func NewHomeassistantToggle(target Target, homeassistantToggleParams Homeassista
 			Target:  target,
 			Type:    &serviceType,
 		},
-		ServiceData: homeassistantToggleParams,
+		ServiceData: nil,
 	}
 	return h
 }
 
 type HomeassistantToggle struct {
 	ServiceBase
-	ServiceData HomeassistantToggleParams `json:"service_data,omitempty"`
+	ServiceData interface{} `json:"service_data,omitempty"`
 }
-type HomeassistantToggleParams struct{}
 
 func (h *HomeassistantToggle) JSON() string {
 	data, _ := json.Marshal(h)
@@ -277,7 +271,7 @@ func (h *HomeassistantToggle) SetID(id *int) {
 
 // NewHomeassistantTurnOff creates the object that can be sent to Home Assistant for domain homeassistant, service turn_off
 // "Generic service to turn devices off under any domain."
-func NewHomeassistantTurnOff(target Target, homeassistantTurnOffParams HomeassistantTurnOffParams) *HomeassistantTurnOff {
+func NewHomeassistantTurnOff(target Target) *HomeassistantTurnOff {
 	serviceDomain := "homeassistant"
 	serviceType := "call_service"
 	serviceService := "turn_off"
@@ -289,16 +283,15 @@ func NewHomeassistantTurnOff(target Target, homeassistantTurnOffParams Homeassis
 			Target:  target,
 			Type:    &serviceType,
 		},
-		ServiceData: homeassistantTurnOffParams,
+		ServiceData: nil,
 	}
 	return h
 }
 
 type HomeassistantTurnOff struct {
 	ServiceBase
-	ServiceData HomeassistantTurnOffParams `json:"service_data,omitempty"`
+	ServiceData interface{} `json:"service_data,omitempty"`
 }
-type HomeassistantTurnOffParams struct{}
 
 func (h *HomeassistantTurnOff) JSON() string {
 	data, _ := json.Marshal(h)
@@ -310,7 +303,7 @@ func (h *HomeassistantTurnOff) SetID(id *int) {
 
 // NewHomeassistantTurnOn creates the object that can be sent to Home Assistant for domain homeassistant, service turn_on
 // "Generic service to turn devices on under any domain."
-func NewHomeassistantTurnOn(target Target, homeassistantTurnOnParams HomeassistantTurnOnParams) *HomeassistantTurnOn {
+func NewHomeassistantTurnOn(target Target) *HomeassistantTurnOn {
 	serviceDomain := "homeassistant"
 	serviceType := "call_service"
 	serviceService := "turn_on"
@@ -322,16 +315,15 @@ func NewHomeassistantTurnOn(target Target, homeassistantTurnOnParams Homeassista
 			Target:  target,
 			Type:    &serviceType,
 		},
-		ServiceData: homeassistantTurnOnParams,
+		ServiceData: nil,
 	}
 	return h
 }
 
 type HomeassistantTurnOn struct {
 	ServiceBase
-	ServiceData HomeassistantTurnOnParams `json:"service_data,omitempty"`
+	ServiceData interface{} `json:"service_data,omitempty"`
 }
-type HomeassistantTurnOnParams struct{}
 
 func (h *HomeassistantTurnOn) JSON() string {
 	data, _ := json.Marshal(h)
@@ -343,7 +335,7 @@ func (h *HomeassistantTurnOn) SetID(id *int) {
 
 // NewHomeassistantUpdateEntity creates the object that can be sent to Home Assistant for domain homeassistant, service update_entity
 // "Force one or more entities to update its data"
-func NewHomeassistantUpdateEntity(target Target, homeassistantUpdateEntityParams HomeassistantUpdateEntityParams) *HomeassistantUpdateEntity {
+func NewHomeassistantUpdateEntity(target Target) *HomeassistantUpdateEntity {
 	serviceDomain := "homeassistant"
 	serviceType := "call_service"
 	serviceService := "update_entity"
@@ -355,16 +347,15 @@ func NewHomeassistantUpdateEntity(target Target, homeassistantUpdateEntityParams
 			Target:  target,
 			Type:    &serviceType,
 		},
-		ServiceData: homeassistantUpdateEntityParams,
+		ServiceData: nil,
 	}
 	return h
 }
 
 type HomeassistantUpdateEntity struct {
 	ServiceBase
-	ServiceData HomeassistantUpdateEntityParams `json:"service_data,omitempty"`
+	ServiceData interface{} `json:"service_data,omitempty"`
 }
-type HomeassistantUpdateEntityParams struct{}
 
 func (h *HomeassistantUpdateEntity) JSON() string {
 	data, _ := json.Marshal(h)

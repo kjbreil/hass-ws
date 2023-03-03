@@ -8,7 +8,7 @@ import "encoding/json"
 
 // NewLightToggle creates the object that can be sent to Home Assistant for domain light, service toggle
 // "Toggles one or more lights, from on to off, or, off to on, based on their current state.\n"
-func NewLightToggle(target Target, lightToggleParams LightToggleParams) *LightToggle {
+func NewLightToggle(target Target, lightToggleParams *LightToggleParams) *LightToggle {
 	serviceDomain := "light"
 	serviceType := "call_service"
 	serviceService := "toggle"
@@ -20,7 +20,7 @@ func NewLightToggle(target Target, lightToggleParams LightToggleParams) *LightTo
 			Target:  target,
 			Type:    &serviceType,
 		},
-		ServiceData: lightToggleParams,
+		ServiceData: *lightToggleParams,
 	}
 	return l
 }
@@ -51,7 +51,7 @@ func (l *LightToggle) SetID(id *int) {
 
 // NewLightTurnOff creates the object that can be sent to Home Assistant for domain light, service turn_off
 // "Turns off one or more lights."
-func NewLightTurnOff(target Target, lightTurnOffParams LightTurnOffParams) *LightTurnOff {
+func NewLightTurnOff(target Target, lightTurnOffParams *LightTurnOffParams) *LightTurnOff {
 	serviceDomain := "light"
 	serviceType := "call_service"
 	serviceService := "turn_off"
@@ -63,7 +63,7 @@ func NewLightTurnOff(target Target, lightTurnOffParams LightTurnOffParams) *Ligh
 			Target:  target,
 			Type:    &serviceType,
 		},
-		ServiceData: lightTurnOffParams,
+		ServiceData: *lightTurnOffParams,
 	}
 	return l
 }
@@ -87,7 +87,7 @@ func (l *LightTurnOff) SetID(id *int) {
 
 // NewLightTurnOn creates the object that can be sent to Home Assistant for domain light, service turn_on
 // "Turn on one or more lights and adjust properties of the light, even when they are turned on already.\n"
-func NewLightTurnOn(target Target, lightTurnOnParams LightTurnOnParams) *LightTurnOn {
+func NewLightTurnOn(target Target, lightTurnOnParams *LightTurnOnParams) *LightTurnOn {
 	serviceDomain := "light"
 	serviceType := "call_service"
 	serviceService := "turn_on"
@@ -99,7 +99,7 @@ func NewLightTurnOn(target Target, lightTurnOnParams LightTurnOnParams) *LightTu
 			Target:  target,
 			Type:    &serviceType,
 		},
-		ServiceData: lightTurnOnParams,
+		ServiceData: *lightTurnOnParams,
 	}
 	return l
 }

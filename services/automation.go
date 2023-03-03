@@ -8,7 +8,7 @@ import "encoding/json"
 
 // NewAutomationReload creates the object that can be sent to Home Assistant for domain automation, service reload
 // "Reload the automation configuration."
-func NewAutomationReload(target Target, automationReloadParams AutomationReloadParams) *AutomationReload {
+func NewAutomationReload(target Target) *AutomationReload {
 	serviceDomain := "automation"
 	serviceType := "call_service"
 	serviceService := "reload"
@@ -20,16 +20,15 @@ func NewAutomationReload(target Target, automationReloadParams AutomationReloadP
 			Target:  target,
 			Type:    &serviceType,
 		},
-		ServiceData: automationReloadParams,
+		ServiceData: nil,
 	}
 	return a
 }
 
 type AutomationReload struct {
 	ServiceBase
-	ServiceData AutomationReloadParams `json:"service_data,omitempty"`
+	ServiceData interface{} `json:"service_data,omitempty"`
 }
-type AutomationReloadParams struct{}
 
 func (a *AutomationReload) JSON() string {
 	data, _ := json.Marshal(a)
@@ -41,7 +40,7 @@ func (a *AutomationReload) SetID(id *int) {
 
 // NewAutomationToggle creates the object that can be sent to Home Assistant for domain automation, service toggle
 // "Toggle (enable / disable) an automation."
-func NewAutomationToggle(target Target, automationToggleParams AutomationToggleParams) *AutomationToggle {
+func NewAutomationToggle(target Target) *AutomationToggle {
 	serviceDomain := "automation"
 	serviceType := "call_service"
 	serviceService := "toggle"
@@ -53,16 +52,15 @@ func NewAutomationToggle(target Target, automationToggleParams AutomationToggleP
 			Target:  target,
 			Type:    &serviceType,
 		},
-		ServiceData: automationToggleParams,
+		ServiceData: nil,
 	}
 	return a
 }
 
 type AutomationToggle struct {
 	ServiceBase
-	ServiceData AutomationToggleParams `json:"service_data,omitempty"`
+	ServiceData interface{} `json:"service_data,omitempty"`
 }
-type AutomationToggleParams struct{}
 
 func (a *AutomationToggle) JSON() string {
 	data, _ := json.Marshal(a)
@@ -74,7 +72,7 @@ func (a *AutomationToggle) SetID(id *int) {
 
 // NewAutomationTrigger creates the object that can be sent to Home Assistant for domain automation, service trigger
 // "Trigger the actions of an automation."
-func NewAutomationTrigger(target Target, automationTriggerParams AutomationTriggerParams) *AutomationTrigger {
+func NewAutomationTrigger(target Target) *AutomationTrigger {
 	serviceDomain := "automation"
 	serviceType := "call_service"
 	serviceService := "trigger"
@@ -86,16 +84,15 @@ func NewAutomationTrigger(target Target, automationTriggerParams AutomationTrigg
 			Target:  target,
 			Type:    &serviceType,
 		},
-		ServiceData: automationTriggerParams,
+		ServiceData: nil,
 	}
 	return a
 }
 
 type AutomationTrigger struct {
 	ServiceBase
-	ServiceData AutomationTriggerParams `json:"service_data,omitempty"`
+	ServiceData interface{} `json:"service_data,omitempty"`
 }
-type AutomationTriggerParams struct{}
 
 func (a *AutomationTrigger) JSON() string {
 	data, _ := json.Marshal(a)
@@ -107,7 +104,7 @@ func (a *AutomationTrigger) SetID(id *int) {
 
 // NewAutomationTurnOff creates the object that can be sent to Home Assistant for domain automation, service turn_off
 // "Disable an automation."
-func NewAutomationTurnOff(target Target, automationTurnOffParams AutomationTurnOffParams) *AutomationTurnOff {
+func NewAutomationTurnOff(target Target) *AutomationTurnOff {
 	serviceDomain := "automation"
 	serviceType := "call_service"
 	serviceService := "turn_off"
@@ -119,16 +116,15 @@ func NewAutomationTurnOff(target Target, automationTurnOffParams AutomationTurnO
 			Target:  target,
 			Type:    &serviceType,
 		},
-		ServiceData: automationTurnOffParams,
+		ServiceData: nil,
 	}
 	return a
 }
 
 type AutomationTurnOff struct {
 	ServiceBase
-	ServiceData AutomationTurnOffParams `json:"service_data,omitempty"`
+	ServiceData interface{} `json:"service_data,omitempty"`
 }
-type AutomationTurnOffParams struct{}
 
 func (a *AutomationTurnOff) JSON() string {
 	data, _ := json.Marshal(a)
@@ -140,7 +136,7 @@ func (a *AutomationTurnOff) SetID(id *int) {
 
 // NewAutomationTurnOn creates the object that can be sent to Home Assistant for domain automation, service turn_on
 // "Enable an automation."
-func NewAutomationTurnOn(target Target, automationTurnOnParams AutomationTurnOnParams) *AutomationTurnOn {
+func NewAutomationTurnOn(target Target) *AutomationTurnOn {
 	serviceDomain := "automation"
 	serviceType := "call_service"
 	serviceService := "turn_on"
@@ -152,16 +148,15 @@ func NewAutomationTurnOn(target Target, automationTurnOnParams AutomationTurnOnP
 			Target:  target,
 			Type:    &serviceType,
 		},
-		ServiceData: automationTurnOnParams,
+		ServiceData: nil,
 	}
 	return a
 }
 
 type AutomationTurnOn struct {
 	ServiceBase
-	ServiceData AutomationTurnOnParams `json:"service_data,omitempty"`
+	ServiceData interface{} `json:"service_data,omitempty"`
 }
-type AutomationTurnOnParams struct{}
 
 func (a *AutomationTurnOn) JSON() string {
 	data, _ := json.Marshal(a)

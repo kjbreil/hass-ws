@@ -8,7 +8,7 @@ import "encoding/json"
 
 // NewSirenToggle creates the object that can be sent to Home Assistant for domain siren, service toggle
 // "Toggles a siren."
-func NewSirenToggle(target Target, sirenToggleParams SirenToggleParams) *SirenToggle {
+func NewSirenToggle(target Target) *SirenToggle {
 	serviceDomain := "siren"
 	serviceType := "call_service"
 	serviceService := "toggle"
@@ -20,16 +20,15 @@ func NewSirenToggle(target Target, sirenToggleParams SirenToggleParams) *SirenTo
 			Target:  target,
 			Type:    &serviceType,
 		},
-		ServiceData: sirenToggleParams,
+		ServiceData: nil,
 	}
 	return s
 }
 
 type SirenToggle struct {
 	ServiceBase
-	ServiceData SirenToggleParams `json:"service_data,omitempty"`
+	ServiceData interface{} `json:"service_data,omitempty"`
 }
-type SirenToggleParams struct{}
 
 func (s *SirenToggle) JSON() string {
 	data, _ := json.Marshal(s)
@@ -41,7 +40,7 @@ func (s *SirenToggle) SetID(id *int) {
 
 // NewSirenTurnOff creates the object that can be sent to Home Assistant for domain siren, service turn_off
 // "Turn siren off."
-func NewSirenTurnOff(target Target, sirenTurnOffParams SirenTurnOffParams) *SirenTurnOff {
+func NewSirenTurnOff(target Target) *SirenTurnOff {
 	serviceDomain := "siren"
 	serviceType := "call_service"
 	serviceService := "turn_off"
@@ -53,16 +52,15 @@ func NewSirenTurnOff(target Target, sirenTurnOffParams SirenTurnOffParams) *Sire
 			Target:  target,
 			Type:    &serviceType,
 		},
-		ServiceData: sirenTurnOffParams,
+		ServiceData: nil,
 	}
 	return s
 }
 
 type SirenTurnOff struct {
 	ServiceBase
-	ServiceData SirenTurnOffParams `json:"service_data,omitempty"`
+	ServiceData interface{} `json:"service_data,omitempty"`
 }
-type SirenTurnOffParams struct{}
 
 func (s *SirenTurnOff) JSON() string {
 	data, _ := json.Marshal(s)
@@ -74,7 +72,7 @@ func (s *SirenTurnOff) SetID(id *int) {
 
 // NewSirenTurnOn creates the object that can be sent to Home Assistant for domain siren, service turn_on
 // "Turn siren on."
-func NewSirenTurnOn(target Target, sirenTurnOnParams SirenTurnOnParams) *SirenTurnOn {
+func NewSirenTurnOn(target Target, sirenTurnOnParams *SirenTurnOnParams) *SirenTurnOn {
 	serviceDomain := "siren"
 	serviceType := "call_service"
 	serviceService := "turn_on"
@@ -86,7 +84,7 @@ func NewSirenTurnOn(target Target, sirenTurnOnParams SirenTurnOnParams) *SirenTu
 			Target:  target,
 			Type:    &serviceType,
 		},
-		ServiceData: sirenTurnOnParams,
+		ServiceData: *sirenTurnOnParams,
 	}
 	return s
 }

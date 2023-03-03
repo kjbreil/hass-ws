@@ -8,7 +8,7 @@ import "encoding/json"
 
 // NewZoneReload creates the object that can be sent to Home Assistant for domain zone, service reload
 // "Reload the YAML-based zone configuration."
-func NewZoneReload(target Target, zoneReloadParams ZoneReloadParams) *ZoneReload {
+func NewZoneReload(target Target) *ZoneReload {
 	serviceDomain := "zone"
 	serviceType := "call_service"
 	serviceService := "reload"
@@ -20,16 +20,15 @@ func NewZoneReload(target Target, zoneReloadParams ZoneReloadParams) *ZoneReload
 			Target:  target,
 			Type:    &serviceType,
 		},
-		ServiceData: zoneReloadParams,
+		ServiceData: nil,
 	}
 	return z
 }
 
 type ZoneReload struct {
 	ServiceBase
-	ServiceData ZoneReloadParams `json:"service_data,omitempty"`
+	ServiceData interface{} `json:"service_data,omitempty"`
 }
-type ZoneReloadParams struct{}
 
 func (z *ZoneReload) JSON() string {
 	data, _ := json.Marshal(z)

@@ -8,7 +8,7 @@ import "encoding/json"
 
 // NewAlarmControlPanelAlarmArmAway creates the object that can be sent to Home Assistant for domain alarm_control_panel, service alarm_arm_away
 // "Send the alarm the command for arm away."
-func NewAlarmControlPanelAlarmArmAway(target Target, alarmControlPanelAlarmArmAwayParams AlarmControlPanelAlarmArmAwayParams) *AlarmControlPanelAlarmArmAway {
+func NewAlarmControlPanelAlarmArmAway(target Target, alarmControlPanelAlarmArmAwayParams *AlarmControlPanelAlarmArmAwayParams) *AlarmControlPanelAlarmArmAway {
 	serviceDomain := "alarm_control_panel"
 	serviceType := "call_service"
 	serviceService := "alarm_arm_away"
@@ -20,7 +20,7 @@ func NewAlarmControlPanelAlarmArmAway(target Target, alarmControlPanelAlarmArmAw
 			Target:  target,
 			Type:    &serviceType,
 		},
-		ServiceData: alarmControlPanelAlarmArmAwayParams,
+		ServiceData: *alarmControlPanelAlarmArmAwayParams,
 	}
 	return a
 }
@@ -43,7 +43,7 @@ func (a *AlarmControlPanelAlarmArmAway) SetID(id *int) {
 
 // NewAlarmControlPanelAlarmArmCustomBypass creates the object that can be sent to Home Assistant for domain alarm_control_panel, service alarm_arm_custom_bypass
 // "Send arm custom bypass command."
-func NewAlarmControlPanelAlarmArmCustomBypass(target Target, alarmControlPanelAlarmArmCustomBypassParams AlarmControlPanelAlarmArmCustomBypassParams) *AlarmControlPanelAlarmArmCustomBypass {
+func NewAlarmControlPanelAlarmArmCustomBypass(target Target, alarmControlPanelAlarmArmCustomBypassParams *AlarmControlPanelAlarmArmCustomBypassParams) *AlarmControlPanelAlarmArmCustomBypass {
 	serviceDomain := "alarm_control_panel"
 	serviceType := "call_service"
 	serviceService := "alarm_arm_custom_bypass"
@@ -55,7 +55,7 @@ func NewAlarmControlPanelAlarmArmCustomBypass(target Target, alarmControlPanelAl
 			Target:  target,
 			Type:    &serviceType,
 		},
-		ServiceData: alarmControlPanelAlarmArmCustomBypassParams,
+		ServiceData: *alarmControlPanelAlarmArmCustomBypassParams,
 	}
 	return a
 }
@@ -78,7 +78,7 @@ func (a *AlarmControlPanelAlarmArmCustomBypass) SetID(id *int) {
 
 // NewAlarmControlPanelAlarmArmHome creates the object that can be sent to Home Assistant for domain alarm_control_panel, service alarm_arm_home
 // "Send the alarm the command for arm home."
-func NewAlarmControlPanelAlarmArmHome(target Target, alarmControlPanelAlarmArmHomeParams AlarmControlPanelAlarmArmHomeParams) *AlarmControlPanelAlarmArmHome {
+func NewAlarmControlPanelAlarmArmHome(target Target, alarmControlPanelAlarmArmHomeParams *AlarmControlPanelAlarmArmHomeParams) *AlarmControlPanelAlarmArmHome {
 	serviceDomain := "alarm_control_panel"
 	serviceType := "call_service"
 	serviceService := "alarm_arm_home"
@@ -90,7 +90,7 @@ func NewAlarmControlPanelAlarmArmHome(target Target, alarmControlPanelAlarmArmHo
 			Target:  target,
 			Type:    &serviceType,
 		},
-		ServiceData: alarmControlPanelAlarmArmHomeParams,
+		ServiceData: *alarmControlPanelAlarmArmHomeParams,
 	}
 	return a
 }
@@ -113,7 +113,7 @@ func (a *AlarmControlPanelAlarmArmHome) SetID(id *int) {
 
 // NewAlarmControlPanelAlarmArmNight creates the object that can be sent to Home Assistant for domain alarm_control_panel, service alarm_arm_night
 // "Send the alarm the command for arm night."
-func NewAlarmControlPanelAlarmArmNight(target Target, alarmControlPanelAlarmArmNightParams AlarmControlPanelAlarmArmNightParams) *AlarmControlPanelAlarmArmNight {
+func NewAlarmControlPanelAlarmArmNight(target Target, alarmControlPanelAlarmArmNightParams *AlarmControlPanelAlarmArmNightParams) *AlarmControlPanelAlarmArmNight {
 	serviceDomain := "alarm_control_panel"
 	serviceType := "call_service"
 	serviceService := "alarm_arm_night"
@@ -125,7 +125,7 @@ func NewAlarmControlPanelAlarmArmNight(target Target, alarmControlPanelAlarmArmN
 			Target:  target,
 			Type:    &serviceType,
 		},
-		ServiceData: alarmControlPanelAlarmArmNightParams,
+		ServiceData: *alarmControlPanelAlarmArmNightParams,
 	}
 	return a
 }
@@ -148,7 +148,7 @@ func (a *AlarmControlPanelAlarmArmNight) SetID(id *int) {
 
 // NewAlarmControlPanelAlarmArmVacation creates the object that can be sent to Home Assistant for domain alarm_control_panel, service alarm_arm_vacation
 // "Send the alarm the command for arm vacation."
-func NewAlarmControlPanelAlarmArmVacation(target Target, alarmControlPanelAlarmArmVacationParams AlarmControlPanelAlarmArmVacationParams) *AlarmControlPanelAlarmArmVacation {
+func NewAlarmControlPanelAlarmArmVacation(target Target, alarmControlPanelAlarmArmVacationParams *AlarmControlPanelAlarmArmVacationParams) *AlarmControlPanelAlarmArmVacation {
 	serviceDomain := "alarm_control_panel"
 	serviceType := "call_service"
 	serviceService := "alarm_arm_vacation"
@@ -160,7 +160,7 @@ func NewAlarmControlPanelAlarmArmVacation(target Target, alarmControlPanelAlarmA
 			Target:  target,
 			Type:    &serviceType,
 		},
-		ServiceData: alarmControlPanelAlarmArmVacationParams,
+		ServiceData: *alarmControlPanelAlarmArmVacationParams,
 	}
 	return a
 }
@@ -183,7 +183,7 @@ func (a *AlarmControlPanelAlarmArmVacation) SetID(id *int) {
 
 // NewAlarmControlPanelAlarmDisarm creates the object that can be sent to Home Assistant for domain alarm_control_panel, service alarm_disarm
 // "Send the alarm the command for disarm."
-func NewAlarmControlPanelAlarmDisarm(target Target, alarmControlPanelAlarmDisarmParams AlarmControlPanelAlarmDisarmParams) *AlarmControlPanelAlarmDisarm {
+func NewAlarmControlPanelAlarmDisarm(target Target, alarmControlPanelAlarmDisarmParams *AlarmControlPanelAlarmDisarmParams) *AlarmControlPanelAlarmDisarm {
 	serviceDomain := "alarm_control_panel"
 	serviceType := "call_service"
 	serviceService := "alarm_disarm"
@@ -195,7 +195,7 @@ func NewAlarmControlPanelAlarmDisarm(target Target, alarmControlPanelAlarmDisarm
 			Target:  target,
 			Type:    &serviceType,
 		},
-		ServiceData: alarmControlPanelAlarmDisarmParams,
+		ServiceData: *alarmControlPanelAlarmDisarmParams,
 	}
 	return a
 }
@@ -218,7 +218,7 @@ func (a *AlarmControlPanelAlarmDisarm) SetID(id *int) {
 
 // NewAlarmControlPanelAlarmTrigger creates the object that can be sent to Home Assistant for domain alarm_control_panel, service alarm_trigger
 // "Send the alarm the command for trigger."
-func NewAlarmControlPanelAlarmTrigger(target Target, alarmControlPanelAlarmTriggerParams AlarmControlPanelAlarmTriggerParams) *AlarmControlPanelAlarmTrigger {
+func NewAlarmControlPanelAlarmTrigger(target Target, alarmControlPanelAlarmTriggerParams *AlarmControlPanelAlarmTriggerParams) *AlarmControlPanelAlarmTrigger {
 	serviceDomain := "alarm_control_panel"
 	serviceType := "call_service"
 	serviceService := "alarm_trigger"
@@ -230,7 +230,7 @@ func NewAlarmControlPanelAlarmTrigger(target Target, alarmControlPanelAlarmTrigg
 			Target:  target,
 			Type:    &serviceType,
 		},
-		ServiceData: alarmControlPanelAlarmTriggerParams,
+		ServiceData: *alarmControlPanelAlarmTriggerParams,
 	}
 	return a
 }

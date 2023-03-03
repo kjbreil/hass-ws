@@ -8,7 +8,7 @@ import "encoding/json"
 
 // NewThermalComfortReload creates the object that can be sent to Home Assistant for domain thermal_comfort, service reload
 // "Reload all Thermal Comfort entities."
-func NewThermalComfortReload(target Target, thermalComfortReloadParams ThermalComfortReloadParams) *ThermalComfortReload {
+func NewThermalComfortReload(target Target) *ThermalComfortReload {
 	serviceDomain := "thermal_comfort"
 	serviceType := "call_service"
 	serviceService := "reload"
@@ -20,16 +20,15 @@ func NewThermalComfortReload(target Target, thermalComfortReloadParams ThermalCo
 			Target:  target,
 			Type:    &serviceType,
 		},
-		ServiceData: thermalComfortReloadParams,
+		ServiceData: nil,
 	}
 	return t
 }
 
 type ThermalComfortReload struct {
 	ServiceBase
-	ServiceData ThermalComfortReloadParams `json:"service_data,omitempty"`
+	ServiceData interface{} `json:"service_data,omitempty"`
 }
-type ThermalComfortReloadParams struct{}
 
 func (t *ThermalComfortReload) JSON() string {
 	data, _ := json.Marshal(t)

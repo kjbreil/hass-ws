@@ -8,7 +8,7 @@ import "encoding/json"
 
 // NewFfmpegRestart creates the object that can be sent to Home Assistant for domain ffmpeg, service restart
 // "Send a restart command to a ffmpeg based sensor."
-func NewFfmpegRestart(target Target, ffmpegRestartParams FfmpegRestartParams) *FfmpegRestart {
+func NewFfmpegRestart(target Target) *FfmpegRestart {
 	serviceDomain := "ffmpeg"
 	serviceType := "call_service"
 	serviceService := "restart"
@@ -20,16 +20,15 @@ func NewFfmpegRestart(target Target, ffmpegRestartParams FfmpegRestartParams) *F
 			Target:  target,
 			Type:    &serviceType,
 		},
-		ServiceData: ffmpegRestartParams,
+		ServiceData: nil,
 	}
 	return f
 }
 
 type FfmpegRestart struct {
 	ServiceBase
-	ServiceData FfmpegRestartParams `json:"service_data,omitempty"`
+	ServiceData interface{} `json:"service_data,omitempty"`
 }
-type FfmpegRestartParams struct{}
 
 func (f *FfmpegRestart) JSON() string {
 	data, _ := json.Marshal(f)
@@ -41,7 +40,7 @@ func (f *FfmpegRestart) SetID(id *int) {
 
 // NewFfmpegStart creates the object that can be sent to Home Assistant for domain ffmpeg, service start
 // "Send a start command to a ffmpeg based sensor."
-func NewFfmpegStart(target Target, ffmpegStartParams FfmpegStartParams) *FfmpegStart {
+func NewFfmpegStart(target Target) *FfmpegStart {
 	serviceDomain := "ffmpeg"
 	serviceType := "call_service"
 	serviceService := "start"
@@ -53,16 +52,15 @@ func NewFfmpegStart(target Target, ffmpegStartParams FfmpegStartParams) *FfmpegS
 			Target:  target,
 			Type:    &serviceType,
 		},
-		ServiceData: ffmpegStartParams,
+		ServiceData: nil,
 	}
 	return f
 }
 
 type FfmpegStart struct {
 	ServiceBase
-	ServiceData FfmpegStartParams `json:"service_data,omitempty"`
+	ServiceData interface{} `json:"service_data,omitempty"`
 }
-type FfmpegStartParams struct{}
 
 func (f *FfmpegStart) JSON() string {
 	data, _ := json.Marshal(f)
@@ -74,7 +72,7 @@ func (f *FfmpegStart) SetID(id *int) {
 
 // NewFfmpegStop creates the object that can be sent to Home Assistant for domain ffmpeg, service stop
 // "Send a stop command to a ffmpeg based sensor."
-func NewFfmpegStop(target Target, ffmpegStopParams FfmpegStopParams) *FfmpegStop {
+func NewFfmpegStop(target Target) *FfmpegStop {
 	serviceDomain := "ffmpeg"
 	serviceType := "call_service"
 	serviceService := "stop"
@@ -86,16 +84,15 @@ func NewFfmpegStop(target Target, ffmpegStopParams FfmpegStopParams) *FfmpegStop
 			Target:  target,
 			Type:    &serviceType,
 		},
-		ServiceData: ffmpegStopParams,
+		ServiceData: nil,
 	}
 	return f
 }
 
 type FfmpegStop struct {
 	ServiceBase
-	ServiceData FfmpegStopParams `json:"service_data,omitempty"`
+	ServiceData interface{} `json:"service_data,omitempty"`
 }
-type FfmpegStopParams struct{}
 
 func (f *FfmpegStop) JSON() string {
 	data, _ := json.Marshal(f)

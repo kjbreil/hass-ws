@@ -8,7 +8,7 @@ import "encoding/json"
 
 // NewInputDatetimeReload creates the object that can be sent to Home Assistant for domain input_datetime, service reload
 // "Reload the input_datetime configuration."
-func NewInputDatetimeReload(target Target, inputDatetimeReloadParams InputDatetimeReloadParams) *InputDatetimeReload {
+func NewInputDatetimeReload(target Target) *InputDatetimeReload {
 	serviceDomain := "input_datetime"
 	serviceType := "call_service"
 	serviceService := "reload"
@@ -20,16 +20,15 @@ func NewInputDatetimeReload(target Target, inputDatetimeReloadParams InputDateti
 			Target:  target,
 			Type:    &serviceType,
 		},
-		ServiceData: inputDatetimeReloadParams,
+		ServiceData: nil,
 	}
 	return i
 }
 
 type InputDatetimeReload struct {
 	ServiceBase
-	ServiceData InputDatetimeReloadParams `json:"service_data,omitempty"`
+	ServiceData interface{} `json:"service_data,omitempty"`
 }
-type InputDatetimeReloadParams struct{}
 
 func (i *InputDatetimeReload) JSON() string {
 	data, _ := json.Marshal(i)
@@ -41,7 +40,7 @@ func (i *InputDatetimeReload) SetID(id *int) {
 
 // NewInputDatetimeSetDatetime creates the object that can be sent to Home Assistant for domain input_datetime, service set_datetime
 // "This can be used to dynamically set the date and/or time."
-func NewInputDatetimeSetDatetime(target Target, inputDatetimeSetDatetimeParams InputDatetimeSetDatetimeParams) *InputDatetimeSetDatetime {
+func NewInputDatetimeSetDatetime(target Target, inputDatetimeSetDatetimeParams *InputDatetimeSetDatetimeParams) *InputDatetimeSetDatetime {
 	serviceDomain := "input_datetime"
 	serviceType := "call_service"
 	serviceService := "set_datetime"
@@ -53,7 +52,7 @@ func NewInputDatetimeSetDatetime(target Target, inputDatetimeSetDatetimeParams I
 			Target:  target,
 			Type:    &serviceType,
 		},
-		ServiceData: inputDatetimeSetDatetimeParams,
+		ServiceData: *inputDatetimeSetDatetimeParams,
 	}
 	return i
 }

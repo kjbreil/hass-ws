@@ -8,7 +8,7 @@ import "encoding/json"
 
 // NewSelectSelectOption creates the object that can be sent to Home Assistant for domain select, service select_option
 // "Select an option of an select entity."
-func NewSelectSelectOption(target Target, selectSelectOptionParams SelectSelectOptionParams) *SelectSelectOption {
+func NewSelectSelectOption(target Target, selectSelectOptionParams *SelectSelectOptionParams) *SelectSelectOption {
 	serviceDomain := "select"
 	serviceType := "call_service"
 	serviceService := "select_option"
@@ -20,7 +20,7 @@ func NewSelectSelectOption(target Target, selectSelectOptionParams SelectSelectO
 			Target:  target,
 			Type:    &serviceType,
 		},
-		ServiceData: selectSelectOptionParams,
+		ServiceData: *selectSelectOptionParams,
 	}
 	return s
 }

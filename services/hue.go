@@ -8,7 +8,7 @@ import "encoding/json"
 
 // NewHueActivateScene creates the object that can be sent to Home Assistant for domain hue, service activate_scene
 // "Activate a Hue scene with more control over the options."
-func NewHueActivateScene(target Target, hueActivateSceneParams HueActivateSceneParams) *HueActivateScene {
+func NewHueActivateScene(target Target, hueActivateSceneParams *HueActivateSceneParams) *HueActivateScene {
 	serviceDomain := "hue"
 	serviceType := "call_service"
 	serviceService := "activate_scene"
@@ -20,7 +20,7 @@ func NewHueActivateScene(target Target, hueActivateSceneParams HueActivateSceneP
 			Target:  target,
 			Type:    &serviceType,
 		},
-		ServiceData: hueActivateSceneParams,
+		ServiceData: *hueActivateSceneParams,
 	}
 	return h
 }
@@ -45,7 +45,7 @@ func (h *HueActivateScene) SetID(id *int) {
 
 // NewHueHueActivateScene creates the object that can be sent to Home Assistant for domain hue, service hue_activate_scene
 // "Activate a hue scene stored in the hue hub."
-func NewHueHueActivateScene(target Target, hueHueActivateSceneParams HueHueActivateSceneParams) *HueHueActivateScene {
+func NewHueHueActivateScene(target Target, hueHueActivateSceneParams *HueHueActivateSceneParams) *HueHueActivateScene {
 	serviceDomain := "hue"
 	serviceType := "call_service"
 	serviceService := "hue_activate_scene"
@@ -57,7 +57,7 @@ func NewHueHueActivateScene(target Target, hueHueActivateSceneParams HueHueActiv
 			Target:  target,
 			Type:    &serviceType,
 		},
-		ServiceData: hueHueActivateSceneParams,
+		ServiceData: *hueHueActivateSceneParams,
 	}
 	return h
 }

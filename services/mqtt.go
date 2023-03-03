@@ -8,7 +8,7 @@ import "encoding/json"
 
 // NewMqttDump creates the object that can be sent to Home Assistant for domain mqtt, service dump
 // "Dump messages on a topic selector to the 'mqtt_dump.txt' file in your configuration folder."
-func NewMqttDump(target Target, mqttDumpParams MqttDumpParams) *MqttDump {
+func NewMqttDump(target Target, mqttDumpParams *MqttDumpParams) *MqttDump {
 	serviceDomain := "mqtt"
 	serviceType := "call_service"
 	serviceService := "dump"
@@ -20,7 +20,7 @@ func NewMqttDump(target Target, mqttDumpParams MqttDumpParams) *MqttDump {
 			Target:  target,
 			Type:    &serviceType,
 		},
-		ServiceData: mqttDumpParams,
+		ServiceData: *mqttDumpParams,
 	}
 	return m
 }
@@ -44,7 +44,7 @@ func (m *MqttDump) SetID(id *int) {
 
 // NewMqttPublish creates the object that can be sent to Home Assistant for domain mqtt, service publish
 // "Publish a message to an MQTT topic."
-func NewMqttPublish(target Target, mqttPublishParams MqttPublishParams) *MqttPublish {
+func NewMqttPublish(target Target, mqttPublishParams *MqttPublishParams) *MqttPublish {
 	serviceDomain := "mqtt"
 	serviceType := "call_service"
 	serviceService := "publish"
@@ -56,7 +56,7 @@ func NewMqttPublish(target Target, mqttPublishParams MqttPublishParams) *MqttPub
 			Target:  target,
 			Type:    &serviceType,
 		},
-		ServiceData: mqttPublishParams,
+		ServiceData: *mqttPublishParams,
 	}
 	return m
 }
@@ -81,7 +81,7 @@ func (m *MqttPublish) SetID(id *int) {
 
 // NewMqttReload creates the object that can be sent to Home Assistant for domain mqtt, service reload
 // "Reload all MQTT entities from YAML."
-func NewMqttReload(target Target, mqttReloadParams MqttReloadParams) *MqttReload {
+func NewMqttReload(target Target) *MqttReload {
 	serviceDomain := "mqtt"
 	serviceType := "call_service"
 	serviceService := "reload"
@@ -93,16 +93,15 @@ func NewMqttReload(target Target, mqttReloadParams MqttReloadParams) *MqttReload
 			Target:  target,
 			Type:    &serviceType,
 		},
-		ServiceData: mqttReloadParams,
+		ServiceData: nil,
 	}
 	return m
 }
 
 type MqttReload struct {
 	ServiceBase
-	ServiceData MqttReloadParams `json:"service_data,omitempty"`
+	ServiceData interface{} `json:"service_data,omitempty"`
 }
-type MqttReloadParams struct{}
 
 func (m *MqttReload) JSON() string {
 	data, _ := json.Marshal(m)

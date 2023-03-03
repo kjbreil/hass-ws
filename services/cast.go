@@ -8,7 +8,7 @@ import "encoding/json"
 
 // NewCastShowLovelaceView creates the object that can be sent to Home Assistant for domain cast, service show_lovelace_view
 // "Show a Lovelace view on a Chromecast."
-func NewCastShowLovelaceView(target Target, castShowLovelaceViewParams CastShowLovelaceViewParams) *CastShowLovelaceView {
+func NewCastShowLovelaceView(target Target, castShowLovelaceViewParams *CastShowLovelaceViewParams) *CastShowLovelaceView {
 	serviceDomain := "cast"
 	serviceType := "call_service"
 	serviceService := "show_lovelace_view"
@@ -20,7 +20,7 @@ func NewCastShowLovelaceView(target Target, castShowLovelaceViewParams CastShowL
 			Target:  target,
 			Type:    &serviceType,
 		},
-		ServiceData: castShowLovelaceViewParams,
+		ServiceData: *castShowLovelaceViewParams,
 	}
 	return c
 }

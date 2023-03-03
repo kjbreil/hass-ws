@@ -8,7 +8,7 @@ import "encoding/json"
 
 // NewCounterConfigure creates the object that can be sent to Home Assistant for domain counter, service configure
 // "Change counter parameters."
-func NewCounterConfigure(target Target, counterConfigureParams CounterConfigureParams) *CounterConfigure {
+func NewCounterConfigure(target Target, counterConfigureParams *CounterConfigureParams) *CounterConfigure {
 	serviceDomain := "counter"
 	serviceType := "call_service"
 	serviceService := "configure"
@@ -20,7 +20,7 @@ func NewCounterConfigure(target Target, counterConfigureParams CounterConfigureP
 			Target:  target,
 			Type:    &serviceType,
 		},
-		ServiceData: counterConfigureParams,
+		ServiceData: *counterConfigureParams,
 	}
 	return c
 }
@@ -47,7 +47,7 @@ func (c *CounterConfigure) SetID(id *int) {
 
 // NewCounterDecrement creates the object that can be sent to Home Assistant for domain counter, service decrement
 // "Decrement a counter."
-func NewCounterDecrement(target Target, counterDecrementParams CounterDecrementParams) *CounterDecrement {
+func NewCounterDecrement(target Target) *CounterDecrement {
 	serviceDomain := "counter"
 	serviceType := "call_service"
 	serviceService := "decrement"
@@ -59,16 +59,15 @@ func NewCounterDecrement(target Target, counterDecrementParams CounterDecrementP
 			Target:  target,
 			Type:    &serviceType,
 		},
-		ServiceData: counterDecrementParams,
+		ServiceData: nil,
 	}
 	return c
 }
 
 type CounterDecrement struct {
 	ServiceBase
-	ServiceData CounterDecrementParams `json:"service_data,omitempty"`
+	ServiceData interface{} `json:"service_data,omitempty"`
 }
-type CounterDecrementParams struct{}
 
 func (c *CounterDecrement) JSON() string {
 	data, _ := json.Marshal(c)
@@ -80,7 +79,7 @@ func (c *CounterDecrement) SetID(id *int) {
 
 // NewCounterIncrement creates the object that can be sent to Home Assistant for domain counter, service increment
 // "Increment a counter."
-func NewCounterIncrement(target Target, counterIncrementParams CounterIncrementParams) *CounterIncrement {
+func NewCounterIncrement(target Target) *CounterIncrement {
 	serviceDomain := "counter"
 	serviceType := "call_service"
 	serviceService := "increment"
@@ -92,16 +91,15 @@ func NewCounterIncrement(target Target, counterIncrementParams CounterIncrementP
 			Target:  target,
 			Type:    &serviceType,
 		},
-		ServiceData: counterIncrementParams,
+		ServiceData: nil,
 	}
 	return c
 }
 
 type CounterIncrement struct {
 	ServiceBase
-	ServiceData CounterIncrementParams `json:"service_data,omitempty"`
+	ServiceData interface{} `json:"service_data,omitempty"`
 }
-type CounterIncrementParams struct{}
 
 func (c *CounterIncrement) JSON() string {
 	data, _ := json.Marshal(c)
@@ -113,7 +111,7 @@ func (c *CounterIncrement) SetID(id *int) {
 
 // NewCounterReset creates the object that can be sent to Home Assistant for domain counter, service reset
 // "Reset a counter."
-func NewCounterReset(target Target, counterResetParams CounterResetParams) *CounterReset {
+func NewCounterReset(target Target) *CounterReset {
 	serviceDomain := "counter"
 	serviceType := "call_service"
 	serviceService := "reset"
@@ -125,16 +123,15 @@ func NewCounterReset(target Target, counterResetParams CounterResetParams) *Coun
 			Target:  target,
 			Type:    &serviceType,
 		},
-		ServiceData: counterResetParams,
+		ServiceData: nil,
 	}
 	return c
 }
 
 type CounterReset struct {
 	ServiceBase
-	ServiceData CounterResetParams `json:"service_data,omitempty"`
+	ServiceData interface{} `json:"service_data,omitempty"`
 }
-type CounterResetParams struct{}
 
 func (c *CounterReset) JSON() string {
 	data, _ := json.Marshal(c)

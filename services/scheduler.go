@@ -8,7 +8,7 @@ import "encoding/json"
 
 // NewSchedulerAdd creates the object that can be sent to Home Assistant for domain scheduler, service add
 // "Create a new schedule entity"
-func NewSchedulerAdd(target Target, schedulerAddParams SchedulerAddParams) *SchedulerAdd {
+func NewSchedulerAdd(target Target, schedulerAddParams *SchedulerAddParams) *SchedulerAdd {
 	serviceDomain := "scheduler"
 	serviceType := "call_service"
 	serviceService := "add"
@@ -20,7 +20,7 @@ func NewSchedulerAdd(target Target, schedulerAddParams SchedulerAddParams) *Sche
 			Target:  target,
 			Type:    &serviceType,
 		},
-		ServiceData: schedulerAddParams,
+		ServiceData: *schedulerAddParams,
 	}
 	return s
 }
@@ -44,7 +44,7 @@ func (s *SchedulerAdd) SetID(id *int) {
 
 // NewSchedulerCopy creates the object that can be sent to Home Assistant for domain scheduler, service copy
 // "Duplicate a schedule entity"
-func NewSchedulerCopy(target Target, schedulerCopyParams SchedulerCopyParams) *SchedulerCopy {
+func NewSchedulerCopy(target Target, schedulerCopyParams *SchedulerCopyParams) *SchedulerCopy {
 	serviceDomain := "scheduler"
 	serviceType := "call_service"
 	serviceService := "copy"
@@ -56,7 +56,7 @@ func NewSchedulerCopy(target Target, schedulerCopyParams SchedulerCopyParams) *S
 			Target:  target,
 			Type:    &serviceType,
 		},
-		ServiceData: schedulerCopyParams,
+		ServiceData: *schedulerCopyParams,
 	}
 	return s
 }
@@ -79,7 +79,7 @@ func (s *SchedulerCopy) SetID(id *int) {
 
 // NewSchedulerEdit creates the object that can be sent to Home Assistant for domain scheduler, service edit
 // "Edit a schedule entity"
-func NewSchedulerEdit(target Target, schedulerEditParams SchedulerEditParams) *SchedulerEdit {
+func NewSchedulerEdit(target Target, schedulerEditParams *SchedulerEditParams) *SchedulerEdit {
 	serviceDomain := "scheduler"
 	serviceType := "call_service"
 	serviceService := "edit"
@@ -91,7 +91,7 @@ func NewSchedulerEdit(target Target, schedulerEditParams SchedulerEditParams) *S
 			Target:  target,
 			Type:    &serviceType,
 		},
-		ServiceData: schedulerEditParams,
+		ServiceData: *schedulerEditParams,
 	}
 	return s
 }
@@ -115,7 +115,7 @@ func (s *SchedulerEdit) SetID(id *int) {
 
 // NewSchedulerRemove creates the object that can be sent to Home Assistant for domain scheduler, service remove
 // "Remove a schedule entity"
-func NewSchedulerRemove(target Target, schedulerRemoveParams SchedulerRemoveParams) *SchedulerRemove {
+func NewSchedulerRemove(target Target) *SchedulerRemove {
 	serviceDomain := "scheduler"
 	serviceType := "call_service"
 	serviceService := "remove"
@@ -127,16 +127,15 @@ func NewSchedulerRemove(target Target, schedulerRemoveParams SchedulerRemovePara
 			Target:  target,
 			Type:    &serviceType,
 		},
-		ServiceData: schedulerRemoveParams,
+		ServiceData: nil,
 	}
 	return s
 }
 
 type SchedulerRemove struct {
 	ServiceBase
-	ServiceData SchedulerRemoveParams `json:"service_data,omitempty"`
+	ServiceData interface{} `json:"service_data,omitempty"`
 }
-type SchedulerRemoveParams struct{}
 
 func (s *SchedulerRemove) JSON() string {
 	data, _ := json.Marshal(s)
@@ -148,7 +147,7 @@ func (s *SchedulerRemove) SetID(id *int) {
 
 // NewSchedulerRunAction creates the object that can be sent to Home Assistant for domain scheduler, service run_action
 // "Execute the action of a schedule, optionally at a given time."
-func NewSchedulerRunAction(target Target, schedulerRunActionParams SchedulerRunActionParams) *SchedulerRunAction {
+func NewSchedulerRunAction(target Target) *SchedulerRunAction {
 	serviceDomain := "scheduler"
 	serviceType := "call_service"
 	serviceService := "run_action"
@@ -160,16 +159,15 @@ func NewSchedulerRunAction(target Target, schedulerRunActionParams SchedulerRunA
 			Target:  target,
 			Type:    &serviceType,
 		},
-		ServiceData: schedulerRunActionParams,
+		ServiceData: nil,
 	}
 	return s
 }
 
 type SchedulerRunAction struct {
 	ServiceBase
-	ServiceData SchedulerRunActionParams `json:"service_data,omitempty"`
+	ServiceData interface{} `json:"service_data,omitempty"`
 }
-type SchedulerRunActionParams struct{}
 
 func (s *SchedulerRunAction) JSON() string {
 	data, _ := json.Marshal(s)

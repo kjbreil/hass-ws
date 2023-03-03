@@ -8,7 +8,7 @@ import "encoding/json"
 
 // NewHumidifierSetHumidity creates the object that can be sent to Home Assistant for domain humidifier, service set_humidity
 // "Set target humidity of humidifier device."
-func NewHumidifierSetHumidity(target Target, humidifierSetHumidityParams HumidifierSetHumidityParams) *HumidifierSetHumidity {
+func NewHumidifierSetHumidity(target Target, humidifierSetHumidityParams *HumidifierSetHumidityParams) *HumidifierSetHumidity {
 	serviceDomain := "humidifier"
 	serviceType := "call_service"
 	serviceService := "set_humidity"
@@ -20,7 +20,7 @@ func NewHumidifierSetHumidity(target Target, humidifierSetHumidityParams Humidif
 			Target:  target,
 			Type:    &serviceType,
 		},
-		ServiceData: humidifierSetHumidityParams,
+		ServiceData: *humidifierSetHumidityParams,
 	}
 	return h
 }
@@ -43,7 +43,7 @@ func (h *HumidifierSetHumidity) SetID(id *int) {
 
 // NewHumidifierSetMode creates the object that can be sent to Home Assistant for domain humidifier, service set_mode
 // "Set mode for humidifier device."
-func NewHumidifierSetMode(target Target, humidifierSetModeParams HumidifierSetModeParams) *HumidifierSetMode {
+func NewHumidifierSetMode(target Target, humidifierSetModeParams *HumidifierSetModeParams) *HumidifierSetMode {
 	serviceDomain := "humidifier"
 	serviceType := "call_service"
 	serviceService := "set_mode"
@@ -55,7 +55,7 @@ func NewHumidifierSetMode(target Target, humidifierSetModeParams HumidifierSetMo
 			Target:  target,
 			Type:    &serviceType,
 		},
-		ServiceData: humidifierSetModeParams,
+		ServiceData: *humidifierSetModeParams,
 	}
 	return h
 }
@@ -78,7 +78,7 @@ func (h *HumidifierSetMode) SetID(id *int) {
 
 // NewHumidifierToggle creates the object that can be sent to Home Assistant for domain humidifier, service toggle
 // "Toggles a humidifier device."
-func NewHumidifierToggle(target Target, humidifierToggleParams HumidifierToggleParams) *HumidifierToggle {
+func NewHumidifierToggle(target Target) *HumidifierToggle {
 	serviceDomain := "humidifier"
 	serviceType := "call_service"
 	serviceService := "toggle"
@@ -90,16 +90,15 @@ func NewHumidifierToggle(target Target, humidifierToggleParams HumidifierToggleP
 			Target:  target,
 			Type:    &serviceType,
 		},
-		ServiceData: humidifierToggleParams,
+		ServiceData: nil,
 	}
 	return h
 }
 
 type HumidifierToggle struct {
 	ServiceBase
-	ServiceData HumidifierToggleParams `json:"service_data,omitempty"`
+	ServiceData interface{} `json:"service_data,omitempty"`
 }
-type HumidifierToggleParams struct{}
 
 func (h *HumidifierToggle) JSON() string {
 	data, _ := json.Marshal(h)
@@ -111,7 +110,7 @@ func (h *HumidifierToggle) SetID(id *int) {
 
 // NewHumidifierTurnOff creates the object that can be sent to Home Assistant for domain humidifier, service turn_off
 // "Turn humidifier device off."
-func NewHumidifierTurnOff(target Target, humidifierTurnOffParams HumidifierTurnOffParams) *HumidifierTurnOff {
+func NewHumidifierTurnOff(target Target) *HumidifierTurnOff {
 	serviceDomain := "humidifier"
 	serviceType := "call_service"
 	serviceService := "turn_off"
@@ -123,16 +122,15 @@ func NewHumidifierTurnOff(target Target, humidifierTurnOffParams HumidifierTurnO
 			Target:  target,
 			Type:    &serviceType,
 		},
-		ServiceData: humidifierTurnOffParams,
+		ServiceData: nil,
 	}
 	return h
 }
 
 type HumidifierTurnOff struct {
 	ServiceBase
-	ServiceData HumidifierTurnOffParams `json:"service_data,omitempty"`
+	ServiceData interface{} `json:"service_data,omitempty"`
 }
-type HumidifierTurnOffParams struct{}
 
 func (h *HumidifierTurnOff) JSON() string {
 	data, _ := json.Marshal(h)
@@ -144,7 +142,7 @@ func (h *HumidifierTurnOff) SetID(id *int) {
 
 // NewHumidifierTurnOn creates the object that can be sent to Home Assistant for domain humidifier, service turn_on
 // "Turn humidifier device on."
-func NewHumidifierTurnOn(target Target, humidifierTurnOnParams HumidifierTurnOnParams) *HumidifierTurnOn {
+func NewHumidifierTurnOn(target Target) *HumidifierTurnOn {
 	serviceDomain := "humidifier"
 	serviceType := "call_service"
 	serviceService := "turn_on"
@@ -156,16 +154,15 @@ func NewHumidifierTurnOn(target Target, humidifierTurnOnParams HumidifierTurnOnP
 			Target:  target,
 			Type:    &serviceType,
 		},
-		ServiceData: humidifierTurnOnParams,
+		ServiceData: nil,
 	}
 	return h
 }
 
 type HumidifierTurnOn struct {
 	ServiceBase
-	ServiceData HumidifierTurnOnParams `json:"service_data,omitempty"`
+	ServiceData interface{} `json:"service_data,omitempty"`
 }
-type HumidifierTurnOnParams struct{}
 
 func (h *HumidifierTurnOn) JSON() string {
 	data, _ := json.Marshal(h)
