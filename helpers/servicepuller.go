@@ -9,39 +9,6 @@ import (
 	"strings"
 )
 
-//var ServiceNames = append([]string{
-//	"automation",
-//	"backup",
-//	"counter",
-//	"frontend",
-//	"group",
-//	"homeassistant",
-//	"input_boolean",
-//	"input_button",
-//	"input_datetime",
-//	"input_number",
-//	"input_select",
-//	"input_text",
-//	"logbook",
-//	"logger",
-//	"min_max",
-//	"mqtt",
-//	"notify",
-//	"persistent_notification",
-//	"person",
-//	"recorder",
-//	"scene",
-//	"schedule",
-//	"script",
-//	"shell_command",
-//	"system_log",
-//	"template",
-//	"timer",
-//	"tts",
-//	"wake_on_lan",
-//	"zone",
-//}, DeviceNames...)
-
 type ServiceList struct {
 	services     []Domain
 	serviceNames []string
@@ -117,7 +84,10 @@ func (sl *ServiceList) setParameters(d *Domain) {
 					s.parameters[fn] = jen.String()
 				}
 				if _, ok := sm["number"]; ok {
-					s.parameters[fn] = jen.Int()
+					s.parameters[fn] = jen.Float64()
+				}
+				if _, ok := sm["color_temp"]; ok {
+					s.parameters[fn] = jen.Float64()
 				}
 				if se, ok := sm["select"]; ok {
 					options := se.ChildrenMap()["options"].Children()
@@ -128,12 +98,16 @@ func (sl *ServiceList) setParameters(d *Domain) {
 							}
 
 							enumName := strings.Trim(o.Path("value").String(), "\"")
+							if enumName == "null" {
+								enumName = strings.Trim(o.String(), "\"")
+							}
 							sl.enums[strcase.ToCamel(fn)][enumName] = append(sl.enums[strcase.ToCamel(fn)][enumName], fmt.Sprintf("%s: %s", d.name, s.name))
 
 						}
 						s.parameters[fn] = jen.Id(strcase.ToCamel(fn))
 					}
 				}
+
 			}
 		}
 		for key := range s.parameters {

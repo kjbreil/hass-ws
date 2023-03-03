@@ -8,7 +8,7 @@ import "encoding/json"
 
 // NewSceneApply creates the object that can be sent to Home Assistant for domain scene, service apply
 // "Activate a scene with configuration."
-func NewSceneApply(entities []string, transition *int) *SceneApply {
+func NewSceneApply(entities []string, transition *float64) *SceneApply {
 	serviceDomain := "scene"
 	serviceType := "call_service"
 	serviceService := "apply"
@@ -17,7 +17,7 @@ func NewSceneApply(entities []string, transition *int) *SceneApply {
 		Id:      nil,
 		Service: &serviceService,
 		ServiceData: struct {
-			Transition *int `json:"transition,omitempty"`
+			Transition *float64 `json:"transition,omitempty"`
 		}{Transition: transition},
 		Target: struct {
 			EntityId []string `json:"entity_id,omitempty"`
@@ -33,7 +33,7 @@ type SceneApply struct {
 	Domain      *string `json:"domain"`
 	Service     *string `json:"service"`
 	ServiceData struct {
-		Transition *int `json:"transition,omitempty"`
+		Transition *float64 `json:"transition,omitempty"`
 	} `json:"service_data,omitempty"`
 	Target struct {
 		EntityId []string `json:"entity_id,omitempty"`
@@ -130,7 +130,7 @@ func (s *SceneReload) SetID(id *int) {
 
 // NewSceneTurnOn creates the object that can be sent to Home Assistant for domain scene, service turn_on
 // "Activate a scene."
-func NewSceneTurnOn(entities []string, transition *int) *SceneTurnOn {
+func NewSceneTurnOn(entities []string, transition *float64) *SceneTurnOn {
 	serviceDomain := "scene"
 	serviceType := "call_service"
 	serviceService := "turn_on"
@@ -139,7 +139,7 @@ func NewSceneTurnOn(entities []string, transition *int) *SceneTurnOn {
 		Id:      nil,
 		Service: &serviceService,
 		ServiceData: struct {
-			Transition *int `json:"transition,omitempty"`
+			Transition *float64 `json:"transition,omitempty"`
 		}{Transition: transition},
 		Target: struct {
 			EntityId []string `json:"entity_id,omitempty"`
@@ -155,7 +155,7 @@ type SceneTurnOn struct {
 	Domain      *string `json:"domain"`
 	Service     *string `json:"service"`
 	ServiceData struct {
-		Transition *int `json:"transition,omitempty"`
+		Transition *float64 `json:"transition,omitempty"`
 	} `json:"service_data,omitempty"`
 	Target struct {
 		EntityId []string `json:"entity_id,omitempty"`

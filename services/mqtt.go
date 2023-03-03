@@ -8,7 +8,7 @@ import "encoding/json"
 
 // NewMqttDump creates the object that can be sent to Home Assistant for domain mqtt, service dump
 // "Dump messages on a topic selector to the 'mqtt_dump.txt' file in your configuration folder."
-func NewMqttDump(entities []string, duration *int, topic *string) *MqttDump {
+func NewMqttDump(entities []string, duration *float64, topic *string) *MqttDump {
 	serviceDomain := "mqtt"
 	serviceType := "call_service"
 	serviceService := "dump"
@@ -17,8 +17,8 @@ func NewMqttDump(entities []string, duration *int, topic *string) *MqttDump {
 		Id:      nil,
 		Service: &serviceService,
 		ServiceData: struct {
-			Duration *int    `json:"duration,omitempty"`
-			Topic    *string `json:"topic,omitempty"`
+			Duration *float64 `json:"duration,omitempty"`
+			Topic    *string  `json:"topic,omitempty"`
 		}{
 			Duration: duration,
 			Topic:    topic,
@@ -37,8 +37,8 @@ type MqttDump struct {
 	Domain      *string `json:"domain"`
 	Service     *string `json:"service"`
 	ServiceData struct {
-		Duration *int    `json:"duration,omitempty"`
-		Topic    *string `json:"topic,omitempty"`
+		Duration *float64 `json:"duration,omitempty"`
+		Topic    *string  `json:"topic,omitempty"`
 	} `json:"service_data,omitempty"`
 	Target struct {
 		EntityId []string `json:"entity_id,omitempty"`

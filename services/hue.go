@@ -8,7 +8,7 @@ import "encoding/json"
 
 // NewHueActivateScene creates the object that can be sent to Home Assistant for domain hue, service activate_scene
 // "Activate a Hue scene with more control over the options."
-func NewHueActivateScene(entities []string, brightness *int, speed *int, transition *int) *HueActivateScene {
+func NewHueActivateScene(entities []string, brightness *float64, speed *float64, transition *float64) *HueActivateScene {
 	serviceDomain := "hue"
 	serviceType := "call_service"
 	serviceService := "activate_scene"
@@ -17,9 +17,9 @@ func NewHueActivateScene(entities []string, brightness *int, speed *int, transit
 		Id:      nil,
 		Service: &serviceService,
 		ServiceData: struct {
-			Brightness *int `json:"brightness,omitempty"`
-			Speed      *int `json:"speed,omitempty"`
-			Transition *int `json:"transition,omitempty"`
+			Brightness *float64 `json:"brightness,omitempty"`
+			Speed      *float64 `json:"speed,omitempty"`
+			Transition *float64 `json:"transition,omitempty"`
 		}{
 			Brightness: brightness,
 			Speed:      speed,
@@ -39,9 +39,9 @@ type HueActivateScene struct {
 	Domain      *string `json:"domain"`
 	Service     *string `json:"service"`
 	ServiceData struct {
-		Brightness *int `json:"brightness,omitempty"`
-		Speed      *int `json:"speed,omitempty"`
-		Transition *int `json:"transition,omitempty"`
+		Brightness *float64 `json:"brightness,omitempty"`
+		Speed      *float64 `json:"speed,omitempty"`
+		Transition *float64 `json:"transition,omitempty"`
 	} `json:"service_data,omitempty"`
 	Target struct {
 		EntityId []string `json:"entity_id,omitempty"`

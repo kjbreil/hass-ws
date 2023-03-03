@@ -50,7 +50,7 @@ func (r *RemoteDeleteCommand) SetID(id *int) {
 
 // NewRemoteLearnCommand creates the object that can be sent to Home Assistant for domain remote, service learn_command
 // "Learns a command or a list of commands from a device."
-func NewRemoteLearnCommand(entities []string, commandType *CommandType, device *string, timeout *int) *RemoteLearnCommand {
+func NewRemoteLearnCommand(entities []string, commandType *CommandType, device *string, timeout *float64) *RemoteLearnCommand {
 	serviceDomain := "remote"
 	serviceType := "call_service"
 	serviceService := "learn_command"
@@ -61,7 +61,7 @@ func NewRemoteLearnCommand(entities []string, commandType *CommandType, device *
 		ServiceData: struct {
 			CommandType *CommandType `json:"command_type,omitempty"`
 			Device      *string      `json:"device,omitempty"`
-			Timeout     *int         `json:"timeout,omitempty"`
+			Timeout     *float64     `json:"timeout,omitempty"`
 		}{
 			CommandType: commandType,
 			Device:      device,
@@ -83,7 +83,7 @@ type RemoteLearnCommand struct {
 	ServiceData struct {
 		CommandType *CommandType `json:"command_type,omitempty"`
 		Device      *string      `json:"device,omitempty"`
-		Timeout     *int         `json:"timeout,omitempty"`
+		Timeout     *float64     `json:"timeout,omitempty"`
 	} `json:"service_data,omitempty"`
 	Target struct {
 		EntityId []string `json:"entity_id,omitempty"`
@@ -100,7 +100,7 @@ func (r *RemoteLearnCommand) SetID(id *int) {
 
 // NewRemoteSendCommand creates the object that can be sent to Home Assistant for domain remote, service send_command
 // "Sends a command or a list of commands to a device."
-func NewRemoteSendCommand(entities []string, delaySecs *int, device *string, holdSecs *int, numRepeats *int) *RemoteSendCommand {
+func NewRemoteSendCommand(entities []string, delaySecs *float64, device *string, holdSecs *float64, numRepeats *float64) *RemoteSendCommand {
 	serviceDomain := "remote"
 	serviceType := "call_service"
 	serviceService := "send_command"
@@ -109,10 +109,10 @@ func NewRemoteSendCommand(entities []string, delaySecs *int, device *string, hol
 		Id:      nil,
 		Service: &serviceService,
 		ServiceData: struct {
-			DelaySecs  *int    `json:"delay_secs,omitempty"`
-			Device     *string `json:"device,omitempty"`
-			HoldSecs   *int    `json:"hold_secs,omitempty"`
-			NumRepeats *int    `json:"num_repeats,omitempty"`
+			DelaySecs  *float64 `json:"delay_secs,omitempty"`
+			Device     *string  `json:"device,omitempty"`
+			HoldSecs   *float64 `json:"hold_secs,omitempty"`
+			NumRepeats *float64 `json:"num_repeats,omitempty"`
 		}{
 			DelaySecs:  delaySecs,
 			Device:     device,
@@ -133,10 +133,10 @@ type RemoteSendCommand struct {
 	Domain      *string `json:"domain"`
 	Service     *string `json:"service"`
 	ServiceData struct {
-		DelaySecs  *int    `json:"delay_secs,omitempty"`
-		Device     *string `json:"device,omitempty"`
-		HoldSecs   *int    `json:"hold_secs,omitempty"`
-		NumRepeats *int    `json:"num_repeats,omitempty"`
+		DelaySecs  *float64 `json:"delay_secs,omitempty"`
+		Device     *string  `json:"device,omitempty"`
+		HoldSecs   *float64 `json:"hold_secs,omitempty"`
+		NumRepeats *float64 `json:"num_repeats,omitempty"`
 	} `json:"service_data,omitempty"`
 	Target struct {
 		EntityId []string `json:"entity_id,omitempty"`

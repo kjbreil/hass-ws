@@ -274,7 +274,7 @@ func (m *MediaPlayerMediaPreviousTrack) SetID(id *int) {
 
 // NewMediaPlayerMediaSeek creates the object that can be sent to Home Assistant for domain media_player, service media_seek
 // "Send the media player the command to seek in current playing media."
-func NewMediaPlayerMediaSeek(entities []string, seekPosition *int) *MediaPlayerMediaSeek {
+func NewMediaPlayerMediaSeek(entities []string, seekPosition *float64) *MediaPlayerMediaSeek {
 	serviceDomain := "media_player"
 	serviceType := "call_service"
 	serviceService := "media_seek"
@@ -283,7 +283,7 @@ func NewMediaPlayerMediaSeek(entities []string, seekPosition *int) *MediaPlayerM
 		Id:      nil,
 		Service: &serviceService,
 		ServiceData: struct {
-			SeekPosition *int `json:"seek_position,omitempty"`
+			SeekPosition *float64 `json:"seek_position,omitempty"`
 		}{SeekPosition: seekPosition},
 		Target: struct {
 			EntityId []string `json:"entity_id,omitempty"`
@@ -299,7 +299,7 @@ type MediaPlayerMediaSeek struct {
 	Domain      *string `json:"domain"`
 	Service     *string `json:"service"`
 	ServiceData struct {
-		SeekPosition *int `json:"seek_position,omitempty"`
+		SeekPosition *float64 `json:"seek_position,omitempty"`
 	} `json:"service_data,omitempty"`
 	Target struct {
 		EntityId []string `json:"entity_id,omitempty"`
@@ -796,7 +796,7 @@ func (m *MediaPlayerVolumeMute) SetID(id *int) {
 
 // NewMediaPlayerVolumeSet creates the object that can be sent to Home Assistant for domain media_player, service volume_set
 // "Set a media player's volume level."
-func NewMediaPlayerVolumeSet(entities []string, volumeLevel *int) *MediaPlayerVolumeSet {
+func NewMediaPlayerVolumeSet(entities []string, volumeLevel *float64) *MediaPlayerVolumeSet {
 	serviceDomain := "media_player"
 	serviceType := "call_service"
 	serviceService := "volume_set"
@@ -805,7 +805,7 @@ func NewMediaPlayerVolumeSet(entities []string, volumeLevel *int) *MediaPlayerVo
 		Id:      nil,
 		Service: &serviceService,
 		ServiceData: struct {
-			VolumeLevel *int `json:"volume_level,omitempty"`
+			VolumeLevel *float64 `json:"volume_level,omitempty"`
 		}{VolumeLevel: volumeLevel},
 		Target: struct {
 			EntityId []string `json:"entity_id,omitempty"`
@@ -821,7 +821,7 @@ type MediaPlayerVolumeSet struct {
 	Domain      *string `json:"domain"`
 	Service     *string `json:"service"`
 	ServiceData struct {
-		VolumeLevel *int `json:"volume_level,omitempty"`
+		VolumeLevel *float64 `json:"volume_level,omitempty"`
 	} `json:"service_data,omitempty"`
 	Target struct {
 		EntityId []string `json:"entity_id,omitempty"`

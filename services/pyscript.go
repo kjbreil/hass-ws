@@ -8,7 +8,7 @@ import "encoding/json"
 
 // NewPyscriptJupyterKernelStart creates the object that can be sent to Home Assistant for domain pyscript, service jupyter_kernel_start
 // "Starts a jupyter kernel for interactive use; Called by Jupyter front end and should generally not be used by users"
-func NewPyscriptJupyterKernelStart(entities []string, controlPort *int, hbPort *int, iopubPort *int, ip *string, kernelName *string, key *string, shellPort *int, signatureScheme *SignatureScheme, stdinPort *int, transport *Transport) *PyscriptJupyterKernelStart {
+func NewPyscriptJupyterKernelStart(entities []string, controlPort *float64, hbPort *float64, iopubPort *float64, ip *string, kernelName *string, key *string, shellPort *float64, signatureScheme *SignatureScheme, stdinPort *float64, transport *Transport) *PyscriptJupyterKernelStart {
 	serviceDomain := "pyscript"
 	serviceType := "call_service"
 	serviceService := "jupyter_kernel_start"
@@ -17,15 +17,15 @@ func NewPyscriptJupyterKernelStart(entities []string, controlPort *int, hbPort *
 		Id:      nil,
 		Service: &serviceService,
 		ServiceData: struct {
-			ControlPort     *int             `json:"control_port,omitempty"`
-			HbPort          *int             `json:"hb_port,omitempty"`
-			IopubPort       *int             `json:"iopub_port,omitempty"`
+			ControlPort     *float64         `json:"control_port,omitempty"`
+			HbPort          *float64         `json:"hb_port,omitempty"`
+			IopubPort       *float64         `json:"iopub_port,omitempty"`
 			Ip              *string          `json:"ip,omitempty"`
 			KernelName      *string          `json:"kernel_name,omitempty"`
 			Key             *string          `json:"key,omitempty"`
-			ShellPort       *int             `json:"shell_port,omitempty"`
+			ShellPort       *float64         `json:"shell_port,omitempty"`
 			SignatureScheme *SignatureScheme `json:"signature_scheme,omitempty"`
-			StdinPort       *int             `json:"stdin_port,omitempty"`
+			StdinPort       *float64         `json:"stdin_port,omitempty"`
 			Transport       *Transport       `json:"transport,omitempty"`
 		}{
 			ControlPort:     controlPort,
@@ -53,15 +53,15 @@ type PyscriptJupyterKernelStart struct {
 	Domain      *string `json:"domain"`
 	Service     *string `json:"service"`
 	ServiceData struct {
-		ControlPort     *int             `json:"control_port,omitempty"`
-		HbPort          *int             `json:"hb_port,omitempty"`
-		IopubPort       *int             `json:"iopub_port,omitempty"`
+		ControlPort     *float64         `json:"control_port,omitempty"`
+		HbPort          *float64         `json:"hb_port,omitempty"`
+		IopubPort       *float64         `json:"iopub_port,omitempty"`
 		Ip              *string          `json:"ip,omitempty"`
 		KernelName      *string          `json:"kernel_name,omitempty"`
 		Key             *string          `json:"key,omitempty"`
-		ShellPort       *int             `json:"shell_port,omitempty"`
+		ShellPort       *float64         `json:"shell_port,omitempty"`
 		SignatureScheme *SignatureScheme `json:"signature_scheme,omitempty"`
-		StdinPort       *int             `json:"stdin_port,omitempty"`
+		StdinPort       *float64         `json:"stdin_port,omitempty"`
 		Transport       *Transport       `json:"transport,omitempty"`
 	} `json:"service_data,omitempty"`
 	Target struct {

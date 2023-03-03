@@ -88,7 +88,7 @@ func (c *ClimateSetFanMode) SetID(id *int) {
 
 // NewClimateSetHumidity creates the object that can be sent to Home Assistant for domain climate, service set_humidity
 // "Set target humidity of climate device."
-func NewClimateSetHumidity(entities []string, humidity *int) *ClimateSetHumidity {
+func NewClimateSetHumidity(entities []string, humidity *float64) *ClimateSetHumidity {
 	serviceDomain := "climate"
 	serviceType := "call_service"
 	serviceService := "set_humidity"
@@ -97,7 +97,7 @@ func NewClimateSetHumidity(entities []string, humidity *int) *ClimateSetHumidity
 		Id:      nil,
 		Service: &serviceService,
 		ServiceData: struct {
-			Humidity *int `json:"humidity,omitempty"`
+			Humidity *float64 `json:"humidity,omitempty"`
 		}{Humidity: humidity},
 		Target: struct {
 			EntityId []string `json:"entity_id,omitempty"`
@@ -113,7 +113,7 @@ type ClimateSetHumidity struct {
 	Domain      *string `json:"domain"`
 	Service     *string `json:"service"`
 	ServiceData struct {
-		Humidity *int `json:"humidity,omitempty"`
+		Humidity *float64 `json:"humidity,omitempty"`
 	} `json:"service_data,omitempty"`
 	Target struct {
 		EntityId []string `json:"entity_id,omitempty"`
@@ -256,7 +256,7 @@ func (c *ClimateSetSwingMode) SetID(id *int) {
 
 // NewClimateSetTemperature creates the object that can be sent to Home Assistant for domain climate, service set_temperature
 // "Set target temperature of climate device."
-func NewClimateSetTemperature(entities []string, hvacMode *HvacMode, targetTempHigh *int, targetTempLow *int, temperature *int) *ClimateSetTemperature {
+func NewClimateSetTemperature(entities []string, hvacMode *HvacMode, targetTempHigh *float64, targetTempLow *float64, temperature *float64) *ClimateSetTemperature {
 	serviceDomain := "climate"
 	serviceType := "call_service"
 	serviceService := "set_temperature"
@@ -266,9 +266,9 @@ func NewClimateSetTemperature(entities []string, hvacMode *HvacMode, targetTempH
 		Service: &serviceService,
 		ServiceData: struct {
 			HvacMode       *HvacMode `json:"hvac_mode,omitempty"`
-			TargetTempHigh *int      `json:"target_temp_high,omitempty"`
-			TargetTempLow  *int      `json:"target_temp_low,omitempty"`
-			Temperature    *int      `json:"temperature,omitempty"`
+			TargetTempHigh *float64  `json:"target_temp_high,omitempty"`
+			TargetTempLow  *float64  `json:"target_temp_low,omitempty"`
+			Temperature    *float64  `json:"temperature,omitempty"`
 		}{
 			HvacMode:       hvacMode,
 			TargetTempHigh: targetTempHigh,
@@ -290,9 +290,9 @@ type ClimateSetTemperature struct {
 	Service     *string `json:"service"`
 	ServiceData struct {
 		HvacMode       *HvacMode `json:"hvac_mode,omitempty"`
-		TargetTempHigh *int      `json:"target_temp_high,omitempty"`
-		TargetTempLow  *int      `json:"target_temp_low,omitempty"`
-		Temperature    *int      `json:"temperature,omitempty"`
+		TargetTempHigh *float64  `json:"target_temp_high,omitempty"`
+		TargetTempLow  *float64  `json:"target_temp_low,omitempty"`
+		Temperature    *float64  `json:"temperature,omitempty"`
 	} `json:"service_data,omitempty"`
 	Target struct {
 		EntityId []string `json:"entity_id,omitempty"`

@@ -8,7 +8,7 @@ import "encoding/json"
 
 // NewCounterConfigure creates the object that can be sent to Home Assistant for domain counter, service configure
 // "Change counter parameters."
-func NewCounterConfigure(entities []string, initial *int, maximum *int, minimum *int, step *int, value *int) *CounterConfigure {
+func NewCounterConfigure(entities []string, initial *float64, maximum *float64, minimum *float64, step *float64, value *float64) *CounterConfigure {
 	serviceDomain := "counter"
 	serviceType := "call_service"
 	serviceService := "configure"
@@ -17,11 +17,11 @@ func NewCounterConfigure(entities []string, initial *int, maximum *int, minimum 
 		Id:      nil,
 		Service: &serviceService,
 		ServiceData: struct {
-			Initial *int `json:"initial,omitempty"`
-			Maximum *int `json:"maximum,omitempty"`
-			Minimum *int `json:"minimum,omitempty"`
-			Step    *int `json:"step,omitempty"`
-			Value   *int `json:"value,omitempty"`
+			Initial *float64 `json:"initial,omitempty"`
+			Maximum *float64 `json:"maximum,omitempty"`
+			Minimum *float64 `json:"minimum,omitempty"`
+			Step    *float64 `json:"step,omitempty"`
+			Value   *float64 `json:"value,omitempty"`
 		}{
 			Initial: initial,
 			Maximum: maximum,
@@ -43,11 +43,11 @@ type CounterConfigure struct {
 	Domain      *string `json:"domain"`
 	Service     *string `json:"service"`
 	ServiceData struct {
-		Initial *int `json:"initial,omitempty"`
-		Maximum *int `json:"maximum,omitempty"`
-		Minimum *int `json:"minimum,omitempty"`
-		Step    *int `json:"step,omitempty"`
-		Value   *int `json:"value,omitempty"`
+		Initial *float64 `json:"initial,omitempty"`
+		Maximum *float64 `json:"maximum,omitempty"`
+		Minimum *float64 `json:"minimum,omitempty"`
+		Step    *float64 `json:"step,omitempty"`
+		Value   *float64 `json:"value,omitempty"`
 	} `json:"service_data,omitempty"`
 	Target struct {
 		EntityId []string `json:"entity_id,omitempty"`

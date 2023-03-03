@@ -46,7 +46,7 @@ func (s *SonosClearSleepTimer) SetID(id *int) {
 
 // NewSonosPlayQueue creates the object that can be sent to Home Assistant for domain sonos, service play_queue
 // "Start playing the queue from the first item."
-func NewSonosPlayQueue(entities []string, queuePosition *int) *SonosPlayQueue {
+func NewSonosPlayQueue(entities []string, queuePosition *float64) *SonosPlayQueue {
 	serviceDomain := "sonos"
 	serviceType := "call_service"
 	serviceService := "play_queue"
@@ -55,7 +55,7 @@ func NewSonosPlayQueue(entities []string, queuePosition *int) *SonosPlayQueue {
 		Id:      nil,
 		Service: &serviceService,
 		ServiceData: struct {
-			QueuePosition *int `json:"queue_position,omitempty"`
+			QueuePosition *float64 `json:"queue_position,omitempty"`
 		}{QueuePosition: queuePosition},
 		Target: struct {
 			EntityId []string `json:"entity_id,omitempty"`
@@ -71,7 +71,7 @@ type SonosPlayQueue struct {
 	Domain      *string `json:"domain"`
 	Service     *string `json:"service"`
 	ServiceData struct {
-		QueuePosition *int `json:"queue_position,omitempty"`
+		QueuePosition *float64 `json:"queue_position,omitempty"`
 	} `json:"service_data,omitempty"`
 	Target struct {
 		EntityId []string `json:"entity_id,omitempty"`
@@ -88,7 +88,7 @@ func (s *SonosPlayQueue) SetID(id *int) {
 
 // NewSonosRemoveFromQueue creates the object that can be sent to Home Assistant for domain sonos, service remove_from_queue
 // "Removes an item from the queue."
-func NewSonosRemoveFromQueue(entities []string, queuePosition *int) *SonosRemoveFromQueue {
+func NewSonosRemoveFromQueue(entities []string, queuePosition *float64) *SonosRemoveFromQueue {
 	serviceDomain := "sonos"
 	serviceType := "call_service"
 	serviceService := "remove_from_queue"
@@ -97,7 +97,7 @@ func NewSonosRemoveFromQueue(entities []string, queuePosition *int) *SonosRemove
 		Id:      nil,
 		Service: &serviceService,
 		ServiceData: struct {
-			QueuePosition *int `json:"queue_position,omitempty"`
+			QueuePosition *float64 `json:"queue_position,omitempty"`
 		}{QueuePosition: queuePosition},
 		Target: struct {
 			EntityId []string `json:"entity_id,omitempty"`
@@ -113,7 +113,7 @@ type SonosRemoveFromQueue struct {
 	Domain      *string `json:"domain"`
 	Service     *string `json:"service"`
 	ServiceData struct {
-		QueuePosition *int `json:"queue_position,omitempty"`
+		QueuePosition *float64 `json:"queue_position,omitempty"`
 	} `json:"service_data,omitempty"`
 	Target struct {
 		EntityId []string `json:"entity_id,omitempty"`
@@ -168,7 +168,7 @@ func (s *SonosRestore) SetID(id *int) {
 
 // NewSonosSetSleepTimer creates the object that can be sent to Home Assistant for domain sonos, service set_sleep_timer
 // "Set a Sonos timer."
-func NewSonosSetSleepTimer(entities []string, sleepTime *int) *SonosSetSleepTimer {
+func NewSonosSetSleepTimer(entities []string, sleepTime *float64) *SonosSetSleepTimer {
 	serviceDomain := "sonos"
 	serviceType := "call_service"
 	serviceService := "set_sleep_timer"
@@ -177,7 +177,7 @@ func NewSonosSetSleepTimer(entities []string, sleepTime *int) *SonosSetSleepTime
 		Id:      nil,
 		Service: &serviceService,
 		ServiceData: struct {
-			SleepTime *int `json:"sleep_time,omitempty"`
+			SleepTime *float64 `json:"sleep_time,omitempty"`
 		}{SleepTime: sleepTime},
 		Target: struct {
 			EntityId []string `json:"entity_id,omitempty"`
@@ -193,7 +193,7 @@ type SonosSetSleepTimer struct {
 	Domain      *string `json:"domain"`
 	Service     *string `json:"service"`
 	ServiceData struct {
-		SleepTime *int `json:"sleep_time,omitempty"`
+		SleepTime *float64 `json:"sleep_time,omitempty"`
 	} `json:"service_data,omitempty"`
 	Target struct {
 		EntityId []string `json:"entity_id,omitempty"`
@@ -248,7 +248,7 @@ func (s *SonosSnapshot) SetID(id *int) {
 
 // NewSonosUpdateAlarm creates the object that can be sent to Home Assistant for domain sonos, service update_alarm
 // "Updates an alarm with new time and volume settings."
-func NewSonosUpdateAlarm(entities []string, alarmId *int, volume *int) *SonosUpdateAlarm {
+func NewSonosUpdateAlarm(entities []string, alarmId *float64, volume *float64) *SonosUpdateAlarm {
 	serviceDomain := "sonos"
 	serviceType := "call_service"
 	serviceService := "update_alarm"
@@ -257,8 +257,8 @@ func NewSonosUpdateAlarm(entities []string, alarmId *int, volume *int) *SonosUpd
 		Id:      nil,
 		Service: &serviceService,
 		ServiceData: struct {
-			AlarmId *int `json:"alarm_id,omitempty"`
-			Volume  *int `json:"volume,omitempty"`
+			AlarmId *float64 `json:"alarm_id,omitempty"`
+			Volume  *float64 `json:"volume,omitempty"`
 		}{
 			AlarmId: alarmId,
 			Volume:  volume,
@@ -277,8 +277,8 @@ type SonosUpdateAlarm struct {
 	Domain      *string `json:"domain"`
 	Service     *string `json:"service"`
 	ServiceData struct {
-		AlarmId *int `json:"alarm_id,omitempty"`
-		Volume  *int `json:"volume,omitempty"`
+		AlarmId *float64 `json:"alarm_id,omitempty"`
+		Volume  *float64 `json:"volume,omitempty"`
 	} `json:"service_data,omitempty"`
 	Target struct {
 		EntityId []string `json:"entity_id,omitempty"`

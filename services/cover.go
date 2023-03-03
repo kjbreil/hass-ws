@@ -160,7 +160,7 @@ func (c *CoverOpenCoverTilt) SetID(id *int) {
 
 // NewCoverSetCoverPosition creates the object that can be sent to Home Assistant for domain cover, service set_cover_position
 // "Move to specific position all or specified cover."
-func NewCoverSetCoverPosition(entities []string, position *int) *CoverSetCoverPosition {
+func NewCoverSetCoverPosition(entities []string, position *float64) *CoverSetCoverPosition {
 	serviceDomain := "cover"
 	serviceType := "call_service"
 	serviceService := "set_cover_position"
@@ -169,7 +169,7 @@ func NewCoverSetCoverPosition(entities []string, position *int) *CoverSetCoverPo
 		Id:      nil,
 		Service: &serviceService,
 		ServiceData: struct {
-			Position *int `json:"position,omitempty"`
+			Position *float64 `json:"position,omitempty"`
 		}{Position: position},
 		Target: struct {
 			EntityId []string `json:"entity_id,omitempty"`
@@ -185,7 +185,7 @@ type CoverSetCoverPosition struct {
 	Domain      *string `json:"domain"`
 	Service     *string `json:"service"`
 	ServiceData struct {
-		Position *int `json:"position,omitempty"`
+		Position *float64 `json:"position,omitempty"`
 	} `json:"service_data,omitempty"`
 	Target struct {
 		EntityId []string `json:"entity_id,omitempty"`
@@ -202,7 +202,7 @@ func (c *CoverSetCoverPosition) SetID(id *int) {
 
 // NewCoverSetCoverTiltPosition creates the object that can be sent to Home Assistant for domain cover, service set_cover_tilt_position
 // "Move to specific position all or specified cover tilt."
-func NewCoverSetCoverTiltPosition(entities []string, tiltPosition *int) *CoverSetCoverTiltPosition {
+func NewCoverSetCoverTiltPosition(entities []string, tiltPosition *float64) *CoverSetCoverTiltPosition {
 	serviceDomain := "cover"
 	serviceType := "call_service"
 	serviceService := "set_cover_tilt_position"
@@ -211,7 +211,7 @@ func NewCoverSetCoverTiltPosition(entities []string, tiltPosition *int) *CoverSe
 		Id:      nil,
 		Service: &serviceService,
 		ServiceData: struct {
-			TiltPosition *int `json:"tilt_position,omitempty"`
+			TiltPosition *float64 `json:"tilt_position,omitempty"`
 		}{TiltPosition: tiltPosition},
 		Target: struct {
 			EntityId []string `json:"entity_id,omitempty"`
@@ -227,7 +227,7 @@ type CoverSetCoverTiltPosition struct {
 	Domain      *string `json:"domain"`
 	Service     *string `json:"service"`
 	ServiceData struct {
-		TiltPosition *int `json:"tilt_position,omitempty"`
+		TiltPosition *float64 `json:"tilt_position,omitempty"`
 	} `json:"service_data,omitempty"`
 	Target struct {
 		EntityId []string `json:"entity_id,omitempty"`

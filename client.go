@@ -26,8 +26,9 @@ type Client struct {
 	ctx    context.Context
 	cancel context.CancelFunc
 
-	OnType   model.OnTypeHandlers
-	OnEntity model.OnEntityHandlers
+	OnType     model.OnTypeHandlers
+	OnEntity   model.OnEntityHandlers
+	OnGetState func(states []model.Result)
 }
 
 func NewClient(c *Config) (*Client, error) {
@@ -62,6 +63,9 @@ func (c *Client) GetStates() {
 	go func() {
 		message := <-callback
 		close(callback)
+		if c.OnGetState != nil {
+			c.OnGetState(message.Result)
+		}
 
 		c.OnType.RunStates(message)
 		c.OnEntity.RunStates(message)
@@ -88,16 +92,15 @@ func (c *Client) GetServices() *model.Message {
 
 }
 
-func (c *Client) CallService(service services.Service) (bool, services.Service) {
+func (c *Client) CallService(service services.Service) {
 	service.SetID(c.NextID())
 	callback := make(chan *model.Message)
 	_ = c.sendStringWithCallback(service.JSON(), callback)
-	message := <-callback
-	close(callback)
-	if message.Success == nil {
-		return false, service
-	}
-	return *message.Success, service
+	go func() {
+		<-callback
+		close(callback)
+	}()
+	return
 }
 
 func (c *Client) NextID() *int {

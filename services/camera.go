@@ -126,7 +126,7 @@ func (c *CameraPlayStream) SetID(id *int) {
 
 // NewCameraRecord creates the object that can be sent to Home Assistant for domain camera, service record
 // "Record live camera feed."
-func NewCameraRecord(entities []string, duration *int, filename *string, lookback *int) *CameraRecord {
+func NewCameraRecord(entities []string, duration *float64, filename *string, lookback *float64) *CameraRecord {
 	serviceDomain := "camera"
 	serviceType := "call_service"
 	serviceService := "record"
@@ -135,9 +135,9 @@ func NewCameraRecord(entities []string, duration *int, filename *string, lookbac
 		Id:      nil,
 		Service: &serviceService,
 		ServiceData: struct {
-			Duration *int    `json:"duration,omitempty"`
-			Filename *string `json:"filename,omitempty"`
-			Lookback *int    `json:"lookback,omitempty"`
+			Duration *float64 `json:"duration,omitempty"`
+			Filename *string  `json:"filename,omitempty"`
+			Lookback *float64 `json:"lookback,omitempty"`
 		}{
 			Duration: duration,
 			Filename: filename,
@@ -157,9 +157,9 @@ type CameraRecord struct {
 	Domain      *string `json:"domain"`
 	Service     *string `json:"service"`
 	ServiceData struct {
-		Duration *int    `json:"duration,omitempty"`
-		Filename *string `json:"filename,omitempty"`
-		Lookback *int    `json:"lookback,omitempty"`
+		Duration *float64 `json:"duration,omitempty"`
+		Filename *string  `json:"filename,omitempty"`
+		Lookback *float64 `json:"lookback,omitempty"`
 	} `json:"service_data,omitempty"`
 	Target struct {
 		EntityId []string `json:"entity_id,omitempty"`

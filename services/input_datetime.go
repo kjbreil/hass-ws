@@ -46,7 +46,7 @@ func (i *InputDatetimeReload) SetID(id *int) {
 
 // NewInputDatetimeSetDatetime creates the object that can be sent to Home Assistant for domain input_datetime, service set_datetime
 // "This can be used to dynamically set the date and/or time."
-func NewInputDatetimeSetDatetime(entities []string, date *string, datetime *string, timestamp *int) *InputDatetimeSetDatetime {
+func NewInputDatetimeSetDatetime(entities []string, date *string, datetime *string, timestamp *float64) *InputDatetimeSetDatetime {
 	serviceDomain := "input_datetime"
 	serviceType := "call_service"
 	serviceService := "set_datetime"
@@ -55,9 +55,9 @@ func NewInputDatetimeSetDatetime(entities []string, date *string, datetime *stri
 		Id:      nil,
 		Service: &serviceService,
 		ServiceData: struct {
-			Date      *string `json:"date,omitempty"`
-			Datetime  *string `json:"datetime,omitempty"`
-			Timestamp *int    `json:"timestamp,omitempty"`
+			Date      *string  `json:"date,omitempty"`
+			Datetime  *string  `json:"datetime,omitempty"`
+			Timestamp *float64 `json:"timestamp,omitempty"`
 		}{
 			Date:      date,
 			Datetime:  datetime,
@@ -77,9 +77,9 @@ type InputDatetimeSetDatetime struct {
 	Domain      *string `json:"domain"`
 	Service     *string `json:"service"`
 	ServiceData struct {
-		Date      *string `json:"date,omitempty"`
-		Datetime  *string `json:"datetime,omitempty"`
-		Timestamp *int    `json:"timestamp,omitempty"`
+		Date      *string  `json:"date,omitempty"`
+		Datetime  *string  `json:"datetime,omitempty"`
+		Timestamp *float64 `json:"timestamp,omitempty"`
 	} `json:"service_data,omitempty"`
 	Target struct {
 		EntityId []string `json:"entity_id,omitempty"`

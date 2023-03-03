@@ -84,7 +84,7 @@ func (s *SirenTurnOff) SetID(id *int) {
 
 // NewSirenTurnOn creates the object that can be sent to Home Assistant for domain siren, service turn_on
 // "Turn siren on."
-func NewSirenTurnOn(entities []string, duration *string, tone *string, volumeLevel *int) *SirenTurnOn {
+func NewSirenTurnOn(entities []string, duration *string, tone *string, volumeLevel *float64) *SirenTurnOn {
 	serviceDomain := "siren"
 	serviceType := "call_service"
 	serviceService := "turn_on"
@@ -93,9 +93,9 @@ func NewSirenTurnOn(entities []string, duration *string, tone *string, volumeLev
 		Id:      nil,
 		Service: &serviceService,
 		ServiceData: struct {
-			Duration    *string `json:"duration,omitempty"`
-			Tone        *string `json:"tone,omitempty"`
-			VolumeLevel *int    `json:"volume_level,omitempty"`
+			Duration    *string  `json:"duration,omitempty"`
+			Tone        *string  `json:"tone,omitempty"`
+			VolumeLevel *float64 `json:"volume_level,omitempty"`
 		}{
 			Duration:    duration,
 			Tone:        tone,
@@ -115,9 +115,9 @@ type SirenTurnOn struct {
 	Domain      *string `json:"domain"`
 	Service     *string `json:"service"`
 	ServiceData struct {
-		Duration    *string `json:"duration,omitempty"`
-		Tone        *string `json:"tone,omitempty"`
-		VolumeLevel *int    `json:"volume_level,omitempty"`
+		Duration    *string  `json:"duration,omitempty"`
+		Tone        *string  `json:"tone,omitempty"`
+		VolumeLevel *float64 `json:"volume_level,omitempty"`
 	} `json:"service_data,omitempty"`
 	Target struct {
 		EntityId []string `json:"entity_id,omitempty"`

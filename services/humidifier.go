@@ -8,7 +8,7 @@ import "encoding/json"
 
 // NewHumidifierSetHumidity creates the object that can be sent to Home Assistant for domain humidifier, service set_humidity
 // "Set target humidity of humidifier device."
-func NewHumidifierSetHumidity(entities []string, humidity *int) *HumidifierSetHumidity {
+func NewHumidifierSetHumidity(entities []string, humidity *float64) *HumidifierSetHumidity {
 	serviceDomain := "humidifier"
 	serviceType := "call_service"
 	serviceService := "set_humidity"
@@ -17,7 +17,7 @@ func NewHumidifierSetHumidity(entities []string, humidity *int) *HumidifierSetHu
 		Id:      nil,
 		Service: &serviceService,
 		ServiceData: struct {
-			Humidity *int `json:"humidity,omitempty"`
+			Humidity *float64 `json:"humidity,omitempty"`
 		}{Humidity: humidity},
 		Target: struct {
 			EntityId []string `json:"entity_id,omitempty"`
@@ -33,7 +33,7 @@ type HumidifierSetHumidity struct {
 	Domain      *string `json:"domain"`
 	Service     *string `json:"service"`
 	ServiceData struct {
-		Humidity *int `json:"humidity,omitempty"`
+		Humidity *float64 `json:"humidity,omitempty"`
 	} `json:"service_data,omitempty"`
 	Target struct {
 		EntityId []string `json:"entity_id,omitempty"`

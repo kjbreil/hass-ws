@@ -8,7 +8,7 @@ import "encoding/json"
 
 // NewDeviceTrackerSee creates the object that can be sent to Home Assistant for domain device_tracker, service see
 // "Control tracked device."
-func NewDeviceTrackerSee(entities []string, battery *int, devId *string, gpsAccuracy *int, hostName *string, locationName *string, mac *string) *DeviceTrackerSee {
+func NewDeviceTrackerSee(entities []string, battery *float64, devId *string, gpsAccuracy *float64, hostName *string, locationName *string, mac *string) *DeviceTrackerSee {
 	serviceDomain := "device_tracker"
 	serviceType := "call_service"
 	serviceService := "see"
@@ -17,12 +17,12 @@ func NewDeviceTrackerSee(entities []string, battery *int, devId *string, gpsAccu
 		Id:      nil,
 		Service: &serviceService,
 		ServiceData: struct {
-			Battery      *int    `json:"battery,omitempty"`
-			DevId        *string `json:"dev_id,omitempty"`
-			GpsAccuracy  *int    `json:"gps_accuracy,omitempty"`
-			HostName     *string `json:"host_name,omitempty"`
-			LocationName *string `json:"location_name,omitempty"`
-			Mac          *string `json:"mac,omitempty"`
+			Battery      *float64 `json:"battery,omitempty"`
+			DevId        *string  `json:"dev_id,omitempty"`
+			GpsAccuracy  *float64 `json:"gps_accuracy,omitempty"`
+			HostName     *string  `json:"host_name,omitempty"`
+			LocationName *string  `json:"location_name,omitempty"`
+			Mac          *string  `json:"mac,omitempty"`
 		}{
 			Battery:      battery,
 			DevId:        devId,
@@ -45,12 +45,12 @@ type DeviceTrackerSee struct {
 	Domain      *string `json:"domain"`
 	Service     *string `json:"service"`
 	ServiceData struct {
-		Battery      *int    `json:"battery,omitempty"`
-		DevId        *string `json:"dev_id,omitempty"`
-		GpsAccuracy  *int    `json:"gps_accuracy,omitempty"`
-		HostName     *string `json:"host_name,omitempty"`
-		LocationName *string `json:"location_name,omitempty"`
-		Mac          *string `json:"mac,omitempty"`
+		Battery      *float64 `json:"battery,omitempty"`
+		DevId        *string  `json:"dev_id,omitempty"`
+		GpsAccuracy  *float64 `json:"gps_accuracy,omitempty"`
+		HostName     *string  `json:"host_name,omitempty"`
+		LocationName *string  `json:"location_name,omitempty"`
+		Mac          *string  `json:"mac,omitempty"`
 	} `json:"service_data,omitempty"`
 	Target struct {
 		EntityId []string `json:"entity_id,omitempty"`

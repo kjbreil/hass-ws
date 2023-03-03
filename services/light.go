@@ -8,7 +8,7 @@ import "encoding/json"
 
 // NewLightToggle creates the object that can be sent to Home Assistant for domain light, service toggle
 // "Toggles one or more lights, from on to off, or, off to on, based on their current state.\n"
-func NewLightToggle(entities []string, brightness *int, brightnessPct *int, colorName *ColorName, effect *string, flash *Flash, kelvin *int, profile *string, transition *int) *LightToggle {
+func NewLightToggle(entities []string, brightness *float64, brightnessPct *float64, colorName *ColorName, colorTemp *float64, effect *string, flash *Flash, kelvin *float64, profile *string, transition *float64) *LightToggle {
 	serviceDomain := "light"
 	serviceType := "call_service"
 	serviceService := "toggle"
@@ -17,18 +17,20 @@ func NewLightToggle(entities []string, brightness *int, brightnessPct *int, colo
 		Id:      nil,
 		Service: &serviceService,
 		ServiceData: struct {
-			Brightness    *int       `json:"brightness,omitempty"`
-			BrightnessPct *int       `json:"brightness_pct,omitempty"`
+			Brightness    *float64   `json:"brightness,omitempty"`
+			BrightnessPct *float64   `json:"brightness_pct,omitempty"`
 			ColorName     *ColorName `json:"color_name,omitempty"`
+			ColorTemp     *float64   `json:"color_temp,omitempty"`
 			Effect        *string    `json:"effect,omitempty"`
 			Flash         *Flash     `json:"flash,omitempty"`
-			Kelvin        *int       `json:"kelvin,omitempty"`
+			Kelvin        *float64   `json:"kelvin,omitempty"`
 			Profile       *string    `json:"profile,omitempty"`
-			Transition    *int       `json:"transition,omitempty"`
+			Transition    *float64   `json:"transition,omitempty"`
 		}{
 			Brightness:    brightness,
 			BrightnessPct: brightnessPct,
 			ColorName:     colorName,
+			ColorTemp:     colorTemp,
 			Effect:        effect,
 			Flash:         flash,
 			Kelvin:        kelvin,
@@ -49,14 +51,15 @@ type LightToggle struct {
 	Domain      *string `json:"domain"`
 	Service     *string `json:"service"`
 	ServiceData struct {
-		Brightness    *int       `json:"brightness,omitempty"`
-		BrightnessPct *int       `json:"brightness_pct,omitempty"`
+		Brightness    *float64   `json:"brightness,omitempty"`
+		BrightnessPct *float64   `json:"brightness_pct,omitempty"`
 		ColorName     *ColorName `json:"color_name,omitempty"`
+		ColorTemp     *float64   `json:"color_temp,omitempty"`
 		Effect        *string    `json:"effect,omitempty"`
 		Flash         *Flash     `json:"flash,omitempty"`
-		Kelvin        *int       `json:"kelvin,omitempty"`
+		Kelvin        *float64   `json:"kelvin,omitempty"`
 		Profile       *string    `json:"profile,omitempty"`
-		Transition    *int       `json:"transition,omitempty"`
+		Transition    *float64   `json:"transition,omitempty"`
 	} `json:"service_data,omitempty"`
 	Target struct {
 		EntityId []string `json:"entity_id,omitempty"`
@@ -73,7 +76,7 @@ func (l *LightToggle) SetID(id *int) {
 
 // NewLightTurnOff creates the object that can be sent to Home Assistant for domain light, service turn_off
 // "Turns off one or more lights."
-func NewLightTurnOff(entities []string, flash *Flash, transition *int) *LightTurnOff {
+func NewLightTurnOff(entities []string, flash *Flash, transition *float64) *LightTurnOff {
 	serviceDomain := "light"
 	serviceType := "call_service"
 	serviceService := "turn_off"
@@ -82,8 +85,8 @@ func NewLightTurnOff(entities []string, flash *Flash, transition *int) *LightTur
 		Id:      nil,
 		Service: &serviceService,
 		ServiceData: struct {
-			Flash      *Flash `json:"flash,omitempty"`
-			Transition *int   `json:"transition,omitempty"`
+			Flash      *Flash   `json:"flash,omitempty"`
+			Transition *float64 `json:"transition,omitempty"`
 		}{
 			Flash:      flash,
 			Transition: transition,
@@ -102,8 +105,8 @@ type LightTurnOff struct {
 	Domain      *string `json:"domain"`
 	Service     *string `json:"service"`
 	ServiceData struct {
-		Flash      *Flash `json:"flash,omitempty"`
-		Transition *int   `json:"transition,omitempty"`
+		Flash      *Flash   `json:"flash,omitempty"`
+		Transition *float64 `json:"transition,omitempty"`
 	} `json:"service_data,omitempty"`
 	Target struct {
 		EntityId []string `json:"entity_id,omitempty"`
@@ -120,7 +123,7 @@ func (l *LightTurnOff) SetID(id *int) {
 
 // NewLightTurnOn creates the object that can be sent to Home Assistant for domain light, service turn_on
 // "Turn on one or more lights and adjust properties of the light, even when they are turned on already.\n"
-func NewLightTurnOn(entities []string, brightness *int, brightnessPct *int, brightnessStep *int, brightnessStepPct *int, colorName *ColorName, effect *string, flash *Flash, kelvin *int, profile *string, transition *int, white *int) *LightTurnOn {
+func NewLightTurnOn(entities []string, brightness *float64, brightnessPct *float64, brightnessStep *float64, brightnessStepPct *float64, colorName *ColorName, colorTemp *float64, effect *string, flash *Flash, kelvin *float64, profile *string, transition *float64, white *float64) *LightTurnOn {
 	serviceDomain := "light"
 	serviceType := "call_service"
 	serviceService := "turn_on"
@@ -129,23 +132,25 @@ func NewLightTurnOn(entities []string, brightness *int, brightnessPct *int, brig
 		Id:      nil,
 		Service: &serviceService,
 		ServiceData: struct {
-			Brightness        *int       `json:"brightness,omitempty"`
-			BrightnessPct     *int       `json:"brightness_pct,omitempty"`
-			BrightnessStep    *int       `json:"brightness_step,omitempty"`
-			BrightnessStepPct *int       `json:"brightness_step_pct,omitempty"`
+			Brightness        *float64   `json:"brightness,omitempty"`
+			BrightnessPct     *float64   `json:"brightness_pct,omitempty"`
+			BrightnessStep    *float64   `json:"brightness_step,omitempty"`
+			BrightnessStepPct *float64   `json:"brightness_step_pct,omitempty"`
 			ColorName         *ColorName `json:"color_name,omitempty"`
+			ColorTemp         *float64   `json:"color_temp,omitempty"`
 			Effect            *string    `json:"effect,omitempty"`
 			Flash             *Flash     `json:"flash,omitempty"`
-			Kelvin            *int       `json:"kelvin,omitempty"`
+			Kelvin            *float64   `json:"kelvin,omitempty"`
 			Profile           *string    `json:"profile,omitempty"`
-			Transition        *int       `json:"transition,omitempty"`
-			White             *int       `json:"white,omitempty"`
+			Transition        *float64   `json:"transition,omitempty"`
+			White             *float64   `json:"white,omitempty"`
 		}{
 			Brightness:        brightness,
 			BrightnessPct:     brightnessPct,
 			BrightnessStep:    brightnessStep,
 			BrightnessStepPct: brightnessStepPct,
 			ColorName:         colorName,
+			ColorTemp:         colorTemp,
 			Effect:            effect,
 			Flash:             flash,
 			Kelvin:            kelvin,
@@ -167,17 +172,18 @@ type LightTurnOn struct {
 	Domain      *string `json:"domain"`
 	Service     *string `json:"service"`
 	ServiceData struct {
-		Brightness        *int       `json:"brightness,omitempty"`
-		BrightnessPct     *int       `json:"brightness_pct,omitempty"`
-		BrightnessStep    *int       `json:"brightness_step,omitempty"`
-		BrightnessStepPct *int       `json:"brightness_step_pct,omitempty"`
+		Brightness        *float64   `json:"brightness,omitempty"`
+		BrightnessPct     *float64   `json:"brightness_pct,omitempty"`
+		BrightnessStep    *float64   `json:"brightness_step,omitempty"`
+		BrightnessStepPct *float64   `json:"brightness_step_pct,omitempty"`
 		ColorName         *ColorName `json:"color_name,omitempty"`
+		ColorTemp         *float64   `json:"color_temp,omitempty"`
 		Effect            *string    `json:"effect,omitempty"`
 		Flash             *Flash     `json:"flash,omitempty"`
-		Kelvin            *int       `json:"kelvin,omitempty"`
+		Kelvin            *float64   `json:"kelvin,omitempty"`
 		Profile           *string    `json:"profile,omitempty"`
-		Transition        *int       `json:"transition,omitempty"`
-		White             *int       `json:"white,omitempty"`
+		Transition        *float64   `json:"transition,omitempty"`
+		White             *float64   `json:"white,omitempty"`
 	} `json:"service_data,omitempty"`
 	Target struct {
 		EntityId []string `json:"entity_id,omitempty"`

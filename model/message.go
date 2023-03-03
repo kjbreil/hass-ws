@@ -2,6 +2,9 @@ package model
 
 import (
 	"encoding/json"
+	"fmt"
+	"strconv"
+	"strings"
 )
 
 type Message struct {
@@ -20,9 +23,22 @@ type Message struct {
 	Raw []byte `json:"-"`
 }
 
-func (m *Message) EntityID() string {
+func (m *Message) DomainEntity() string {
 	if m.Event != nil && m.Event.Data != nil && m.Event.Data.EntityId != nil {
 		return *m.Event.Data.EntityId
+	}
+	return ""
+}
+func (m *Message) Domain() string {
+	if m.Event != nil && m.Event.Data != nil && m.Event.Data.EntityId != nil {
+		return strings.Split(*m.Event.Data.EntityId, ".")[0]
+	}
+	return ""
+}
+
+func (m *Message) EntityID() string {
+	if m.Event != nil && m.Event.Data != nil && m.Event.Data.EntityId != nil {
+		return strings.Join(strings.Split(*m.Event.Data.EntityId, ".")[1:], "")
 	}
 	return ""
 }
@@ -34,6 +50,26 @@ func (m *Message) State() string {
 		return *m.Event.Data.NewState.State
 	}
 	return ""
+}
+
+func (m *Message) StateFloat() (float64, error) {
+	if m.Event != nil &&
+		m.Event.Data != nil &&
+		m.Event.Data.NewState != nil &&
+		m.Event.Data.NewState.State != nil {
+		return strconv.ParseFloat(*m.Event.Data.NewState.State, 64)
+	}
+	return 0, fmt.Errorf("no NewState data")
+}
+
+func (m *Message) Attributes() map[string]interface{} {
+	if m.Event != nil &&
+		m.Event.Data != nil &&
+		m.Event.Data.NewState != nil &&
+		m.Event.Data.NewState.Attributes != nil {
+		return m.Event.Data.NewState.Attributes
+	}
+	return nil
 }
 
 func (m *Message) FriendlyName() string {

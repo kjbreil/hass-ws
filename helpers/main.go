@@ -182,7 +182,7 @@ func main() {
 												jen.Dict{
 													jen.Id("EntityId"):    jen.Id("r").Dot("EntityId"),
 													jen.Id("LastChanged"): jen.Id("r").Dot("LastChanged"),
-													jen.Id("State"):       jen.Id("r").Dot("State"),
+													jen.Id("State"):       jen.Id("r").Dot("EntityState"),
 													jen.Id("Attributes"):  jen.Id("r").Dot("Attributes"),
 													jen.Id("LastUpdated"): jen.Id("r").Dot("LastUpdated"),
 													jen.Id("Context"):     jen.Id("r").Dot("Context"),
@@ -249,7 +249,7 @@ func main() {
 											jen.Dict{
 												jen.Id("EntityId"):    jen.Id("r").Dot("EntityId"),
 												jen.Id("LastChanged"): jen.Id("r").Dot("LastChanged"),
-												jen.Id("State"):       jen.Id("r").Dot("State"),
+												jen.Id("State"):       jen.Id("r").Dot("EntityState"),
 												jen.Id("Attributes"):  jen.Id("r").Dot("Attributes"),
 												jen.Id("LastUpdated"): jen.Id("r").Dot("LastUpdated"),
 												jen.Id("Context"):     jen.Id("r").Dot("Context"),
@@ -272,7 +272,10 @@ func main() {
 	}
 
 	for k, v := range entities {
-		v.Save(fmt.Sprintf("./%s/%s.go", entitiesFolder, k))
+		err := v.Save(fmt.Sprintf("./%s/%s.go", entitiesFolder, k))
+		if err != nil {
+			log.Panicln(err)
+		}
 	}
 
 	for k, v := range models {
@@ -284,7 +287,7 @@ func main() {
 
 }
 
-func GenServices() {
+func GenServices() error {
 	servicesFolder := "services"
 
 	servicesList := ServicesInit()
@@ -419,7 +422,9 @@ func GenServices() {
 	for k, v := range services {
 		err := v.Save(fmt.Sprintf("./%s/%s.go", servicesFolder, k))
 		if err != nil {
-			log.Panicln(err)
+			return err
 		}
 	}
+
+	return nil
 }
