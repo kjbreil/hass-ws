@@ -8,36 +8,29 @@ import "encoding/json"
 
 // NewLockLock creates the object that can be sent to Home Assistant for domain lock, service lock
 // "Lock all or specified locks."
-func NewLockLock(entities []string, code *string) *LockLock {
+func NewLockLock(target Target, lockLockParams LockLockParams) *LockLock {
 	serviceDomain := "lock"
 	serviceType := "call_service"
 	serviceService := "lock"
 	l := &LockLock{
-		Domain:  &serviceDomain,
-		Id:      nil,
-		Service: &serviceService,
-		ServiceData: struct {
-			Code *string `json:"code,omitempty"`
-		}{Code: code},
-		Target: struct {
-			EntityId []string `json:"entity_id,omitempty"`
-		}{EntityId: entities},
-		Type: &serviceType,
+		ServiceBase: ServiceBase{
+			Domain:  &serviceDomain,
+			Id:      nil,
+			Service: &serviceService,
+			Target:  target,
+			Type:    &serviceType,
+		},
+		ServiceData: lockLockParams,
 	}
 	return l
 }
 
 type LockLock struct {
-	Id          *int    `json:"id"`
-	Type        *string `json:"type"`
-	Domain      *string `json:"domain"`
-	Service     *string `json:"service"`
-	ServiceData struct {
-		Code *string `json:"code,omitempty"`
-	} `json:"service_data,omitempty"`
-	Target struct {
-		EntityId []string `json:"entity_id,omitempty"`
-	} `json:"target,omitempty"`
+	ServiceBase
+	ServiceData LockLockParams `json:"service_data,omitempty"`
+}
+type LockLockParams struct {
+	Code *string `json:"code,omitempty"`
 }
 
 func (l *LockLock) JSON() string {
@@ -50,36 +43,29 @@ func (l *LockLock) SetID(id *int) {
 
 // NewLockOpen creates the object that can be sent to Home Assistant for domain lock, service open
 // "Open all or specified locks."
-func NewLockOpen(entities []string, code *string) *LockOpen {
+func NewLockOpen(target Target, lockOpenParams LockOpenParams) *LockOpen {
 	serviceDomain := "lock"
 	serviceType := "call_service"
 	serviceService := "open"
 	l := &LockOpen{
-		Domain:  &serviceDomain,
-		Id:      nil,
-		Service: &serviceService,
-		ServiceData: struct {
-			Code *string `json:"code,omitempty"`
-		}{Code: code},
-		Target: struct {
-			EntityId []string `json:"entity_id,omitempty"`
-		}{EntityId: entities},
-		Type: &serviceType,
+		ServiceBase: ServiceBase{
+			Domain:  &serviceDomain,
+			Id:      nil,
+			Service: &serviceService,
+			Target:  target,
+			Type:    &serviceType,
+		},
+		ServiceData: lockOpenParams,
 	}
 	return l
 }
 
 type LockOpen struct {
-	Id          *int    `json:"id"`
-	Type        *string `json:"type"`
-	Domain      *string `json:"domain"`
-	Service     *string `json:"service"`
-	ServiceData struct {
-		Code *string `json:"code,omitempty"`
-	} `json:"service_data,omitempty"`
-	Target struct {
-		EntityId []string `json:"entity_id,omitempty"`
-	} `json:"target,omitempty"`
+	ServiceBase
+	ServiceData LockOpenParams `json:"service_data,omitempty"`
+}
+type LockOpenParams struct {
+	Code *string `json:"code,omitempty"`
 }
 
 func (l *LockOpen) JSON() string {
@@ -92,36 +78,29 @@ func (l *LockOpen) SetID(id *int) {
 
 // NewLockUnlock creates the object that can be sent to Home Assistant for domain lock, service unlock
 // "Unlock all or specified locks."
-func NewLockUnlock(entities []string, code *string) *LockUnlock {
+func NewLockUnlock(target Target, lockUnlockParams LockUnlockParams) *LockUnlock {
 	serviceDomain := "lock"
 	serviceType := "call_service"
 	serviceService := "unlock"
 	l := &LockUnlock{
-		Domain:  &serviceDomain,
-		Id:      nil,
-		Service: &serviceService,
-		ServiceData: struct {
-			Code *string `json:"code,omitempty"`
-		}{Code: code},
-		Target: struct {
-			EntityId []string `json:"entity_id,omitempty"`
-		}{EntityId: entities},
-		Type: &serviceType,
+		ServiceBase: ServiceBase{
+			Domain:  &serviceDomain,
+			Id:      nil,
+			Service: &serviceService,
+			Target:  target,
+			Type:    &serviceType,
+		},
+		ServiceData: lockUnlockParams,
 	}
 	return l
 }
 
 type LockUnlock struct {
-	Id          *int    `json:"id"`
-	Type        *string `json:"type"`
-	Domain      *string `json:"domain"`
-	Service     *string `json:"service"`
-	ServiceData struct {
-		Code *string `json:"code,omitempty"`
-	} `json:"service_data,omitempty"`
-	Target struct {
-		EntityId []string `json:"entity_id,omitempty"`
-	} `json:"target,omitempty"`
+	ServiceBase
+	ServiceData LockUnlockParams `json:"service_data,omitempty"`
+}
+type LockUnlockParams struct {
+	Code *string `json:"code,omitempty"`
 }
 
 func (l *LockUnlock) JSON() string {

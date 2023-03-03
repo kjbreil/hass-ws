@@ -8,33 +8,28 @@ import "encoding/json"
 
 // NewInputTextReload creates the object that can be sent to Home Assistant for domain input_text, service reload
 // "Reload the input_text configuration."
-func NewInputTextReload(entities []string) *InputTextReload {
+func NewInputTextReload(target Target, inputTextReloadParams InputTextReloadParams) *InputTextReload {
 	serviceDomain := "input_text"
 	serviceType := "call_service"
 	serviceService := "reload"
 	i := &InputTextReload{
-		Domain:      &serviceDomain,
-		Id:          nil,
-		Service:     &serviceService,
-		ServiceData: struct{}{},
-		Target: struct {
-			EntityId []string `json:"entity_id,omitempty"`
-		}{EntityId: entities},
-		Type: &serviceType,
+		ServiceBase: ServiceBase{
+			Domain:  &serviceDomain,
+			Id:      nil,
+			Service: &serviceService,
+			Target:  target,
+			Type:    &serviceType,
+		},
+		ServiceData: inputTextReloadParams,
 	}
 	return i
 }
 
 type InputTextReload struct {
-	Id          *int     `json:"id"`
-	Type        *string  `json:"type"`
-	Domain      *string  `json:"domain"`
-	Service     *string  `json:"service"`
-	ServiceData struct{} `json:"service_data,omitempty"`
-	Target      struct {
-		EntityId []string `json:"entity_id,omitempty"`
-	} `json:"target,omitempty"`
+	ServiceBase
+	ServiceData InputTextReloadParams `json:"service_data,omitempty"`
 }
+type InputTextReloadParams struct{}
 
 func (i *InputTextReload) JSON() string {
 	data, _ := json.Marshal(i)
@@ -46,36 +41,29 @@ func (i *InputTextReload) SetID(id *int) {
 
 // NewInputTextSetValue creates the object that can be sent to Home Assistant for domain input_text, service set_value
 // "Set the value of an input text entity."
-func NewInputTextSetValue(entities []string, value *string) *InputTextSetValue {
+func NewInputTextSetValue(target Target, inputTextSetValueParams InputTextSetValueParams) *InputTextSetValue {
 	serviceDomain := "input_text"
 	serviceType := "call_service"
 	serviceService := "set_value"
 	i := &InputTextSetValue{
-		Domain:  &serviceDomain,
-		Id:      nil,
-		Service: &serviceService,
-		ServiceData: struct {
-			Value *string `json:"value,omitempty"`
-		}{Value: value},
-		Target: struct {
-			EntityId []string `json:"entity_id,omitempty"`
-		}{EntityId: entities},
-		Type: &serviceType,
+		ServiceBase: ServiceBase{
+			Domain:  &serviceDomain,
+			Id:      nil,
+			Service: &serviceService,
+			Target:  target,
+			Type:    &serviceType,
+		},
+		ServiceData: inputTextSetValueParams,
 	}
 	return i
 }
 
 type InputTextSetValue struct {
-	Id          *int    `json:"id"`
-	Type        *string `json:"type"`
-	Domain      *string `json:"domain"`
-	Service     *string `json:"service"`
-	ServiceData struct {
-		Value *string `json:"value,omitempty"`
-	} `json:"service_data,omitempty"`
-	Target struct {
-		EntityId []string `json:"entity_id,omitempty"`
-	} `json:"target,omitempty"`
+	ServiceBase
+	ServiceData InputTextSetValueParams `json:"service_data,omitempty"`
+}
+type InputTextSetValueParams struct {
+	Value *string `json:"value,omitempty"`
 }
 
 func (i *InputTextSetValue) JSON() string {

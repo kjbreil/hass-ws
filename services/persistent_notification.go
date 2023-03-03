@@ -8,44 +8,31 @@ import "encoding/json"
 
 // NewPersistentNotificationCreate creates the object that can be sent to Home Assistant for domain persistent_notification, service create
 // "Show a notification in the frontend."
-func NewPersistentNotificationCreate(entities []string, message *string, notificationId *string, title *string) *PersistentNotificationCreate {
+func NewPersistentNotificationCreate(target Target, persistentNotificationCreateParams PersistentNotificationCreateParams) *PersistentNotificationCreate {
 	serviceDomain := "persistent_notification"
 	serviceType := "call_service"
 	serviceService := "create"
 	p := &PersistentNotificationCreate{
-		Domain:  &serviceDomain,
-		Id:      nil,
-		Service: &serviceService,
-		ServiceData: struct {
-			Message        *string `json:"message,omitempty"`
-			NotificationId *string `json:"notification_id,omitempty"`
-			Title          *string `json:"title,omitempty"`
-		}{
-			Message:        message,
-			NotificationId: notificationId,
-			Title:          title,
+		ServiceBase: ServiceBase{
+			Domain:  &serviceDomain,
+			Id:      nil,
+			Service: &serviceService,
+			Target:  target,
+			Type:    &serviceType,
 		},
-		Target: struct {
-			EntityId []string `json:"entity_id,omitempty"`
-		}{EntityId: entities},
-		Type: &serviceType,
+		ServiceData: persistentNotificationCreateParams,
 	}
 	return p
 }
 
 type PersistentNotificationCreate struct {
-	Id          *int    `json:"id"`
-	Type        *string `json:"type"`
-	Domain      *string `json:"domain"`
-	Service     *string `json:"service"`
-	ServiceData struct {
-		Message        *string `json:"message,omitempty"`
-		NotificationId *string `json:"notification_id,omitempty"`
-		Title          *string `json:"title,omitempty"`
-	} `json:"service_data,omitempty"`
-	Target struct {
-		EntityId []string `json:"entity_id,omitempty"`
-	} `json:"target,omitempty"`
+	ServiceBase
+	ServiceData PersistentNotificationCreateParams `json:"service_data,omitempty"`
+}
+type PersistentNotificationCreateParams struct {
+	Message        *string `json:"message,omitempty"`
+	NotificationId *string `json:"notification_id,omitempty"`
+	Title          *string `json:"title,omitempty"`
 }
 
 func (p *PersistentNotificationCreate) JSON() string {
@@ -58,36 +45,29 @@ func (p *PersistentNotificationCreate) SetID(id *int) {
 
 // NewPersistentNotificationDismiss creates the object that can be sent to Home Assistant for domain persistent_notification, service dismiss
 // "Remove a notification from the frontend."
-func NewPersistentNotificationDismiss(entities []string, notificationId *string) *PersistentNotificationDismiss {
+func NewPersistentNotificationDismiss(target Target, persistentNotificationDismissParams PersistentNotificationDismissParams) *PersistentNotificationDismiss {
 	serviceDomain := "persistent_notification"
 	serviceType := "call_service"
 	serviceService := "dismiss"
 	p := &PersistentNotificationDismiss{
-		Domain:  &serviceDomain,
-		Id:      nil,
-		Service: &serviceService,
-		ServiceData: struct {
-			NotificationId *string `json:"notification_id,omitempty"`
-		}{NotificationId: notificationId},
-		Target: struct {
-			EntityId []string `json:"entity_id,omitempty"`
-		}{EntityId: entities},
-		Type: &serviceType,
+		ServiceBase: ServiceBase{
+			Domain:  &serviceDomain,
+			Id:      nil,
+			Service: &serviceService,
+			Target:  target,
+			Type:    &serviceType,
+		},
+		ServiceData: persistentNotificationDismissParams,
 	}
 	return p
 }
 
 type PersistentNotificationDismiss struct {
-	Id          *int    `json:"id"`
-	Type        *string `json:"type"`
-	Domain      *string `json:"domain"`
-	Service     *string `json:"service"`
-	ServiceData struct {
-		NotificationId *string `json:"notification_id,omitempty"`
-	} `json:"service_data,omitempty"`
-	Target struct {
-		EntityId []string `json:"entity_id,omitempty"`
-	} `json:"target,omitempty"`
+	ServiceBase
+	ServiceData PersistentNotificationDismissParams `json:"service_data,omitempty"`
+}
+type PersistentNotificationDismissParams struct {
+	NotificationId *string `json:"notification_id,omitempty"`
 }
 
 func (p *PersistentNotificationDismiss) JSON() string {
@@ -100,36 +80,29 @@ func (p *PersistentNotificationDismiss) SetID(id *int) {
 
 // NewPersistentNotificationMarkRead creates the object that can be sent to Home Assistant for domain persistent_notification, service mark_read
 // "Mark a notification read."
-func NewPersistentNotificationMarkRead(entities []string, notificationId *string) *PersistentNotificationMarkRead {
+func NewPersistentNotificationMarkRead(target Target, persistentNotificationMarkReadParams PersistentNotificationMarkReadParams) *PersistentNotificationMarkRead {
 	serviceDomain := "persistent_notification"
 	serviceType := "call_service"
 	serviceService := "mark_read"
 	p := &PersistentNotificationMarkRead{
-		Domain:  &serviceDomain,
-		Id:      nil,
-		Service: &serviceService,
-		ServiceData: struct {
-			NotificationId *string `json:"notification_id,omitempty"`
-		}{NotificationId: notificationId},
-		Target: struct {
-			EntityId []string `json:"entity_id,omitempty"`
-		}{EntityId: entities},
-		Type: &serviceType,
+		ServiceBase: ServiceBase{
+			Domain:  &serviceDomain,
+			Id:      nil,
+			Service: &serviceService,
+			Target:  target,
+			Type:    &serviceType,
+		},
+		ServiceData: persistentNotificationMarkReadParams,
 	}
 	return p
 }
 
 type PersistentNotificationMarkRead struct {
-	Id          *int    `json:"id"`
-	Type        *string `json:"type"`
-	Domain      *string `json:"domain"`
-	Service     *string `json:"service"`
-	ServiceData struct {
-		NotificationId *string `json:"notification_id,omitempty"`
-	} `json:"service_data,omitempty"`
-	Target struct {
-		EntityId []string `json:"entity_id,omitempty"`
-	} `json:"target,omitempty"`
+	ServiceBase
+	ServiceData PersistentNotificationMarkReadParams `json:"service_data,omitempty"`
+}
+type PersistentNotificationMarkReadParams struct {
+	NotificationId *string `json:"notification_id,omitempty"`
 }
 
 func (p *PersistentNotificationMarkRead) JSON() string {

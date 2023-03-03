@@ -8,33 +8,28 @@ import "encoding/json"
 
 // NewInputButtonPress creates the object that can be sent to Home Assistant for domain input_button, service press
 // "Press the input button entity."
-func NewInputButtonPress(entities []string) *InputButtonPress {
+func NewInputButtonPress(target Target, inputButtonPressParams InputButtonPressParams) *InputButtonPress {
 	serviceDomain := "input_button"
 	serviceType := "call_service"
 	serviceService := "press"
 	i := &InputButtonPress{
-		Domain:      &serviceDomain,
-		Id:          nil,
-		Service:     &serviceService,
-		ServiceData: struct{}{},
-		Target: struct {
-			EntityId []string `json:"entity_id,omitempty"`
-		}{EntityId: entities},
-		Type: &serviceType,
+		ServiceBase: ServiceBase{
+			Domain:  &serviceDomain,
+			Id:      nil,
+			Service: &serviceService,
+			Target:  target,
+			Type:    &serviceType,
+		},
+		ServiceData: inputButtonPressParams,
 	}
 	return i
 }
 
 type InputButtonPress struct {
-	Id          *int     `json:"id"`
-	Type        *string  `json:"type"`
-	Domain      *string  `json:"domain"`
-	Service     *string  `json:"service"`
-	ServiceData struct{} `json:"service_data,omitempty"`
-	Target      struct {
-		EntityId []string `json:"entity_id,omitempty"`
-	} `json:"target,omitempty"`
+	ServiceBase
+	ServiceData InputButtonPressParams `json:"service_data,omitempty"`
 }
+type InputButtonPressParams struct{}
 
 func (i *InputButtonPress) JSON() string {
 	data, _ := json.Marshal(i)
@@ -46,33 +41,28 @@ func (i *InputButtonPress) SetID(id *int) {
 
 // NewInputButtonReload creates the object that can be sent to Home Assistant for domain input_button, service reload
 // ""
-func NewInputButtonReload(entities []string) *InputButtonReload {
+func NewInputButtonReload(target Target, inputButtonReloadParams InputButtonReloadParams) *InputButtonReload {
 	serviceDomain := "input_button"
 	serviceType := "call_service"
 	serviceService := "reload"
 	i := &InputButtonReload{
-		Domain:      &serviceDomain,
-		Id:          nil,
-		Service:     &serviceService,
-		ServiceData: struct{}{},
-		Target: struct {
-			EntityId []string `json:"entity_id,omitempty"`
-		}{EntityId: entities},
-		Type: &serviceType,
+		ServiceBase: ServiceBase{
+			Domain:  &serviceDomain,
+			Id:      nil,
+			Service: &serviceService,
+			Target:  target,
+			Type:    &serviceType,
+		},
+		ServiceData: inputButtonReloadParams,
 	}
 	return i
 }
 
 type InputButtonReload struct {
-	Id          *int     `json:"id"`
-	Type        *string  `json:"type"`
-	Domain      *string  `json:"domain"`
-	Service     *string  `json:"service"`
-	ServiceData struct{} `json:"service_data,omitempty"`
-	Target      struct {
-		EntityId []string `json:"entity_id,omitempty"`
-	} `json:"target,omitempty"`
+	ServiceBase
+	ServiceData InputButtonReloadParams `json:"service_data,omitempty"`
 }
+type InputButtonReloadParams struct{}
 
 func (i *InputButtonReload) JSON() string {
 	data, _ := json.Marshal(i)

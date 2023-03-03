@@ -8,33 +8,28 @@ import "encoding/json"
 
 // NewBackupCreate creates the object that can be sent to Home Assistant for domain backup, service create
 // "Create a new backup."
-func NewBackupCreate(entities []string) *BackupCreate {
+func NewBackupCreate(target Target, backupCreateParams BackupCreateParams) *BackupCreate {
 	serviceDomain := "backup"
 	serviceType := "call_service"
 	serviceService := "create"
 	b := &BackupCreate{
-		Domain:      &serviceDomain,
-		Id:          nil,
-		Service:     &serviceService,
-		ServiceData: struct{}{},
-		Target: struct {
-			EntityId []string `json:"entity_id,omitempty"`
-		}{EntityId: entities},
-		Type: &serviceType,
+		ServiceBase: ServiceBase{
+			Domain:  &serviceDomain,
+			Id:      nil,
+			Service: &serviceService,
+			Target:  target,
+			Type:    &serviceType,
+		},
+		ServiceData: backupCreateParams,
 	}
 	return b
 }
 
 type BackupCreate struct {
-	Id          *int     `json:"id"`
-	Type        *string  `json:"type"`
-	Domain      *string  `json:"domain"`
-	Service     *string  `json:"service"`
-	ServiceData struct{} `json:"service_data,omitempty"`
-	Target      struct {
-		EntityId []string `json:"entity_id,omitempty"`
-	} `json:"target,omitempty"`
+	ServiceBase
+	ServiceData BackupCreateParams `json:"service_data,omitempty"`
 }
+type BackupCreateParams struct{}
 
 func (b *BackupCreate) JSON() string {
 	data, _ := json.Marshal(b)

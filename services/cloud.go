@@ -8,33 +8,28 @@ import "encoding/json"
 
 // NewCloudRemoteConnect creates the object that can be sent to Home Assistant for domain cloud, service remote_connect
 // "Make instance UI available outside over NabuCasa cloud"
-func NewCloudRemoteConnect(entities []string) *CloudRemoteConnect {
+func NewCloudRemoteConnect(target Target, cloudRemoteConnectParams CloudRemoteConnectParams) *CloudRemoteConnect {
 	serviceDomain := "cloud"
 	serviceType := "call_service"
 	serviceService := "remote_connect"
 	c := &CloudRemoteConnect{
-		Domain:      &serviceDomain,
-		Id:          nil,
-		Service:     &serviceService,
-		ServiceData: struct{}{},
-		Target: struct {
-			EntityId []string `json:"entity_id,omitempty"`
-		}{EntityId: entities},
-		Type: &serviceType,
+		ServiceBase: ServiceBase{
+			Domain:  &serviceDomain,
+			Id:      nil,
+			Service: &serviceService,
+			Target:  target,
+			Type:    &serviceType,
+		},
+		ServiceData: cloudRemoteConnectParams,
 	}
 	return c
 }
 
 type CloudRemoteConnect struct {
-	Id          *int     `json:"id"`
-	Type        *string  `json:"type"`
-	Domain      *string  `json:"domain"`
-	Service     *string  `json:"service"`
-	ServiceData struct{} `json:"service_data,omitempty"`
-	Target      struct {
-		EntityId []string `json:"entity_id,omitempty"`
-	} `json:"target,omitempty"`
+	ServiceBase
+	ServiceData CloudRemoteConnectParams `json:"service_data,omitempty"`
 }
+type CloudRemoteConnectParams struct{}
 
 func (c *CloudRemoteConnect) JSON() string {
 	data, _ := json.Marshal(c)
@@ -46,33 +41,28 @@ func (c *CloudRemoteConnect) SetID(id *int) {
 
 // NewCloudRemoteDisconnect creates the object that can be sent to Home Assistant for domain cloud, service remote_disconnect
 // "Disconnect UI from NabuCasa cloud"
-func NewCloudRemoteDisconnect(entities []string) *CloudRemoteDisconnect {
+func NewCloudRemoteDisconnect(target Target, cloudRemoteDisconnectParams CloudRemoteDisconnectParams) *CloudRemoteDisconnect {
 	serviceDomain := "cloud"
 	serviceType := "call_service"
 	serviceService := "remote_disconnect"
 	c := &CloudRemoteDisconnect{
-		Domain:      &serviceDomain,
-		Id:          nil,
-		Service:     &serviceService,
-		ServiceData: struct{}{},
-		Target: struct {
-			EntityId []string `json:"entity_id,omitempty"`
-		}{EntityId: entities},
-		Type: &serviceType,
+		ServiceBase: ServiceBase{
+			Domain:  &serviceDomain,
+			Id:      nil,
+			Service: &serviceService,
+			Target:  target,
+			Type:    &serviceType,
+		},
+		ServiceData: cloudRemoteDisconnectParams,
 	}
 	return c
 }
 
 type CloudRemoteDisconnect struct {
-	Id          *int     `json:"id"`
-	Type        *string  `json:"type"`
-	Domain      *string  `json:"domain"`
-	Service     *string  `json:"service"`
-	ServiceData struct{} `json:"service_data,omitempty"`
-	Target      struct {
-		EntityId []string `json:"entity_id,omitempty"`
-	} `json:"target,omitempty"`
+	ServiceBase
+	ServiceData CloudRemoteDisconnectParams `json:"service_data,omitempty"`
 }
+type CloudRemoteDisconnectParams struct{}
 
 func (c *CloudRemoteDisconnect) JSON() string {
 	data, _ := json.Marshal(c)

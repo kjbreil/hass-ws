@@ -8,36 +8,29 @@ import "encoding/json"
 
 // NewSelectSelectOption creates the object that can be sent to Home Assistant for domain select, service select_option
 // "Select an option of an select entity."
-func NewSelectSelectOption(entities []string, option *string) *SelectSelectOption {
+func NewSelectSelectOption(target Target, selectSelectOptionParams SelectSelectOptionParams) *SelectSelectOption {
 	serviceDomain := "select"
 	serviceType := "call_service"
 	serviceService := "select_option"
 	s := &SelectSelectOption{
-		Domain:  &serviceDomain,
-		Id:      nil,
-		Service: &serviceService,
-		ServiceData: struct {
-			Option *string `json:"option,omitempty"`
-		}{Option: option},
-		Target: struct {
-			EntityId []string `json:"entity_id,omitempty"`
-		}{EntityId: entities},
-		Type: &serviceType,
+		ServiceBase: ServiceBase{
+			Domain:  &serviceDomain,
+			Id:      nil,
+			Service: &serviceService,
+			Target:  target,
+			Type:    &serviceType,
+		},
+		ServiceData: selectSelectOptionParams,
 	}
 	return s
 }
 
 type SelectSelectOption struct {
-	Id          *int    `json:"id"`
-	Type        *string `json:"type"`
-	Domain      *string `json:"domain"`
-	Service     *string `json:"service"`
-	ServiceData struct {
-		Option *string `json:"option,omitempty"`
-	} `json:"service_data,omitempty"`
-	Target struct {
-		EntityId []string `json:"entity_id,omitempty"`
-	} `json:"target,omitempty"`
+	ServiceBase
+	ServiceData SelectSelectOptionParams `json:"service_data,omitempty"`
+}
+type SelectSelectOptionParams struct {
+	Option *string `json:"option,omitempty"`
 }
 
 func (s *SelectSelectOption) JSON() string {

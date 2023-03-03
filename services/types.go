@@ -8,6 +8,25 @@ type Service interface {
 	SetID(id *int)
 	JSON() string
 }
+type ServiceBase struct {
+	Id      *int    `json:"id"`
+	Type    *string `json:"type"`
+	Domain  *string `json:"domain"`
+	Service *string `json:"service"`
+	Target  Target  `json:"target,omitempty"`
+}
+type Target struct {
+	EntityId []string `json:"entity_id,omitempty"`
+}
+
+func Targets(entities ...string) Target {
+	var t Target
+	for _, e := range entities {
+		t.EntityId = append(t.EntityId, e)
+	}
+	return t
+}
+
 type ColorName string
 
 const (

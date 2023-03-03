@@ -8,33 +8,28 @@ import "encoding/json"
 
 // NewUpdateClearSkipped creates the object that can be sent to Home Assistant for domain update, service clear_skipped
 // "Removes the skipped version marker from an update."
-func NewUpdateClearSkipped(entities []string) *UpdateClearSkipped {
+func NewUpdateClearSkipped(target Target, updateClearSkippedParams UpdateClearSkippedParams) *UpdateClearSkipped {
 	serviceDomain := "update"
 	serviceType := "call_service"
 	serviceService := "clear_skipped"
 	u := &UpdateClearSkipped{
-		Domain:      &serviceDomain,
-		Id:          nil,
-		Service:     &serviceService,
-		ServiceData: struct{}{},
-		Target: struct {
-			EntityId []string `json:"entity_id,omitempty"`
-		}{EntityId: entities},
-		Type: &serviceType,
+		ServiceBase: ServiceBase{
+			Domain:  &serviceDomain,
+			Id:      nil,
+			Service: &serviceService,
+			Target:  target,
+			Type:    &serviceType,
+		},
+		ServiceData: updateClearSkippedParams,
 	}
 	return u
 }
 
 type UpdateClearSkipped struct {
-	Id          *int     `json:"id"`
-	Type        *string  `json:"type"`
-	Domain      *string  `json:"domain"`
-	Service     *string  `json:"service"`
-	ServiceData struct{} `json:"service_data,omitempty"`
-	Target      struct {
-		EntityId []string `json:"entity_id,omitempty"`
-	} `json:"target,omitempty"`
+	ServiceBase
+	ServiceData UpdateClearSkippedParams `json:"service_data,omitempty"`
 }
+type UpdateClearSkippedParams struct{}
 
 func (u *UpdateClearSkipped) JSON() string {
 	data, _ := json.Marshal(u)
@@ -46,36 +41,29 @@ func (u *UpdateClearSkipped) SetID(id *int) {
 
 // NewUpdateInstall creates the object that can be sent to Home Assistant for domain update, service install
 // "Install an update for this device or service"
-func NewUpdateInstall(entities []string, version *string) *UpdateInstall {
+func NewUpdateInstall(target Target, updateInstallParams UpdateInstallParams) *UpdateInstall {
 	serviceDomain := "update"
 	serviceType := "call_service"
 	serviceService := "install"
 	u := &UpdateInstall{
-		Domain:  &serviceDomain,
-		Id:      nil,
-		Service: &serviceService,
-		ServiceData: struct {
-			Version *string `json:"version,omitempty"`
-		}{Version: version},
-		Target: struct {
-			EntityId []string `json:"entity_id,omitempty"`
-		}{EntityId: entities},
-		Type: &serviceType,
+		ServiceBase: ServiceBase{
+			Domain:  &serviceDomain,
+			Id:      nil,
+			Service: &serviceService,
+			Target:  target,
+			Type:    &serviceType,
+		},
+		ServiceData: updateInstallParams,
 	}
 	return u
 }
 
 type UpdateInstall struct {
-	Id          *int    `json:"id"`
-	Type        *string `json:"type"`
-	Domain      *string `json:"domain"`
-	Service     *string `json:"service"`
-	ServiceData struct {
-		Version *string `json:"version,omitempty"`
-	} `json:"service_data,omitempty"`
-	Target struct {
-		EntityId []string `json:"entity_id,omitempty"`
-	} `json:"target,omitempty"`
+	ServiceBase
+	ServiceData UpdateInstallParams `json:"service_data,omitempty"`
+}
+type UpdateInstallParams struct {
+	Version *string `json:"version,omitempty"`
 }
 
 func (u *UpdateInstall) JSON() string {
@@ -88,33 +76,28 @@ func (u *UpdateInstall) SetID(id *int) {
 
 // NewUpdateSkip creates the object that can be sent to Home Assistant for domain update, service skip
 // "Mark currently available update as skipped."
-func NewUpdateSkip(entities []string) *UpdateSkip {
+func NewUpdateSkip(target Target, updateSkipParams UpdateSkipParams) *UpdateSkip {
 	serviceDomain := "update"
 	serviceType := "call_service"
 	serviceService := "skip"
 	u := &UpdateSkip{
-		Domain:      &serviceDomain,
-		Id:          nil,
-		Service:     &serviceService,
-		ServiceData: struct{}{},
-		Target: struct {
-			EntityId []string `json:"entity_id,omitempty"`
-		}{EntityId: entities},
-		Type: &serviceType,
+		ServiceBase: ServiceBase{
+			Domain:  &serviceDomain,
+			Id:      nil,
+			Service: &serviceService,
+			Target:  target,
+			Type:    &serviceType,
+		},
+		ServiceData: updateSkipParams,
 	}
 	return u
 }
 
 type UpdateSkip struct {
-	Id          *int     `json:"id"`
-	Type        *string  `json:"type"`
-	Domain      *string  `json:"domain"`
-	Service     *string  `json:"service"`
-	ServiceData struct{} `json:"service_data,omitempty"`
-	Target      struct {
-		EntityId []string `json:"entity_id,omitempty"`
-	} `json:"target,omitempty"`
+	ServiceBase
+	ServiceData UpdateSkipParams `json:"service_data,omitempty"`
 }
+type UpdateSkipParams struct{}
 
 func (u *UpdateSkip) JSON() string {
 	data, _ := json.Marshal(u)

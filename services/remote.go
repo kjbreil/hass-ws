@@ -8,36 +8,29 @@ import "encoding/json"
 
 // NewRemoteDeleteCommand creates the object that can be sent to Home Assistant for domain remote, service delete_command
 // "Deletes a command or a list of commands from the database."
-func NewRemoteDeleteCommand(entities []string, device *string) *RemoteDeleteCommand {
+func NewRemoteDeleteCommand(target Target, remoteDeleteCommandParams RemoteDeleteCommandParams) *RemoteDeleteCommand {
 	serviceDomain := "remote"
 	serviceType := "call_service"
 	serviceService := "delete_command"
 	r := &RemoteDeleteCommand{
-		Domain:  &serviceDomain,
-		Id:      nil,
-		Service: &serviceService,
-		ServiceData: struct {
-			Device *string `json:"device,omitempty"`
-		}{Device: device},
-		Target: struct {
-			EntityId []string `json:"entity_id,omitempty"`
-		}{EntityId: entities},
-		Type: &serviceType,
+		ServiceBase: ServiceBase{
+			Domain:  &serviceDomain,
+			Id:      nil,
+			Service: &serviceService,
+			Target:  target,
+			Type:    &serviceType,
+		},
+		ServiceData: remoteDeleteCommandParams,
 	}
 	return r
 }
 
 type RemoteDeleteCommand struct {
-	Id          *int    `json:"id"`
-	Type        *string `json:"type"`
-	Domain      *string `json:"domain"`
-	Service     *string `json:"service"`
-	ServiceData struct {
-		Device *string `json:"device,omitempty"`
-	} `json:"service_data,omitempty"`
-	Target struct {
-		EntityId []string `json:"entity_id,omitempty"`
-	} `json:"target,omitempty"`
+	ServiceBase
+	ServiceData RemoteDeleteCommandParams `json:"service_data,omitempty"`
+}
+type RemoteDeleteCommandParams struct {
+	Device *string `json:"device,omitempty"`
 }
 
 func (r *RemoteDeleteCommand) JSON() string {
@@ -50,44 +43,31 @@ func (r *RemoteDeleteCommand) SetID(id *int) {
 
 // NewRemoteLearnCommand creates the object that can be sent to Home Assistant for domain remote, service learn_command
 // "Learns a command or a list of commands from a device."
-func NewRemoteLearnCommand(entities []string, commandType *CommandType, device *string, timeout *float64) *RemoteLearnCommand {
+func NewRemoteLearnCommand(target Target, remoteLearnCommandParams RemoteLearnCommandParams) *RemoteLearnCommand {
 	serviceDomain := "remote"
 	serviceType := "call_service"
 	serviceService := "learn_command"
 	r := &RemoteLearnCommand{
-		Domain:  &serviceDomain,
-		Id:      nil,
-		Service: &serviceService,
-		ServiceData: struct {
-			CommandType *CommandType `json:"command_type,omitempty"`
-			Device      *string      `json:"device,omitempty"`
-			Timeout     *float64     `json:"timeout,omitempty"`
-		}{
-			CommandType: commandType,
-			Device:      device,
-			Timeout:     timeout,
+		ServiceBase: ServiceBase{
+			Domain:  &serviceDomain,
+			Id:      nil,
+			Service: &serviceService,
+			Target:  target,
+			Type:    &serviceType,
 		},
-		Target: struct {
-			EntityId []string `json:"entity_id,omitempty"`
-		}{EntityId: entities},
-		Type: &serviceType,
+		ServiceData: remoteLearnCommandParams,
 	}
 	return r
 }
 
 type RemoteLearnCommand struct {
-	Id          *int    `json:"id"`
-	Type        *string `json:"type"`
-	Domain      *string `json:"domain"`
-	Service     *string `json:"service"`
-	ServiceData struct {
-		CommandType *CommandType `json:"command_type,omitempty"`
-		Device      *string      `json:"device,omitempty"`
-		Timeout     *float64     `json:"timeout,omitempty"`
-	} `json:"service_data,omitempty"`
-	Target struct {
-		EntityId []string `json:"entity_id,omitempty"`
-	} `json:"target,omitempty"`
+	ServiceBase
+	ServiceData RemoteLearnCommandParams `json:"service_data,omitempty"`
+}
+type RemoteLearnCommandParams struct {
+	CommandType *CommandType `json:"command_type,omitempty"`
+	Device      *string      `json:"device,omitempty"`
+	Timeout     *float64     `json:"timeout,omitempty"`
 }
 
 func (r *RemoteLearnCommand) JSON() string {
@@ -100,47 +80,32 @@ func (r *RemoteLearnCommand) SetID(id *int) {
 
 // NewRemoteSendCommand creates the object that can be sent to Home Assistant for domain remote, service send_command
 // "Sends a command or a list of commands to a device."
-func NewRemoteSendCommand(entities []string, delaySecs *float64, device *string, holdSecs *float64, numRepeats *float64) *RemoteSendCommand {
+func NewRemoteSendCommand(target Target, remoteSendCommandParams RemoteSendCommandParams) *RemoteSendCommand {
 	serviceDomain := "remote"
 	serviceType := "call_service"
 	serviceService := "send_command"
 	r := &RemoteSendCommand{
-		Domain:  &serviceDomain,
-		Id:      nil,
-		Service: &serviceService,
-		ServiceData: struct {
-			DelaySecs  *float64 `json:"delay_secs,omitempty"`
-			Device     *string  `json:"device,omitempty"`
-			HoldSecs   *float64 `json:"hold_secs,omitempty"`
-			NumRepeats *float64 `json:"num_repeats,omitempty"`
-		}{
-			DelaySecs:  delaySecs,
-			Device:     device,
-			HoldSecs:   holdSecs,
-			NumRepeats: numRepeats,
+		ServiceBase: ServiceBase{
+			Domain:  &serviceDomain,
+			Id:      nil,
+			Service: &serviceService,
+			Target:  target,
+			Type:    &serviceType,
 		},
-		Target: struct {
-			EntityId []string `json:"entity_id,omitempty"`
-		}{EntityId: entities},
-		Type: &serviceType,
+		ServiceData: remoteSendCommandParams,
 	}
 	return r
 }
 
 type RemoteSendCommand struct {
-	Id          *int    `json:"id"`
-	Type        *string `json:"type"`
-	Domain      *string `json:"domain"`
-	Service     *string `json:"service"`
-	ServiceData struct {
-		DelaySecs  *float64 `json:"delay_secs,omitempty"`
-		Device     *string  `json:"device,omitempty"`
-		HoldSecs   *float64 `json:"hold_secs,omitempty"`
-		NumRepeats *float64 `json:"num_repeats,omitempty"`
-	} `json:"service_data,omitempty"`
-	Target struct {
-		EntityId []string `json:"entity_id,omitempty"`
-	} `json:"target,omitempty"`
+	ServiceBase
+	ServiceData RemoteSendCommandParams `json:"service_data,omitempty"`
+}
+type RemoteSendCommandParams struct {
+	DelaySecs  *float64 `json:"delay_secs,omitempty"`
+	Device     *string  `json:"device,omitempty"`
+	HoldSecs   *float64 `json:"hold_secs,omitempty"`
+	NumRepeats *float64 `json:"num_repeats,omitempty"`
 }
 
 func (r *RemoteSendCommand) JSON() string {
@@ -153,33 +118,28 @@ func (r *RemoteSendCommand) SetID(id *int) {
 
 // NewRemoteToggle creates the object that can be sent to Home Assistant for domain remote, service toggle
 // "Toggles a device."
-func NewRemoteToggle(entities []string) *RemoteToggle {
+func NewRemoteToggle(target Target, remoteToggleParams RemoteToggleParams) *RemoteToggle {
 	serviceDomain := "remote"
 	serviceType := "call_service"
 	serviceService := "toggle"
 	r := &RemoteToggle{
-		Domain:      &serviceDomain,
-		Id:          nil,
-		Service:     &serviceService,
-		ServiceData: struct{}{},
-		Target: struct {
-			EntityId []string `json:"entity_id,omitempty"`
-		}{EntityId: entities},
-		Type: &serviceType,
+		ServiceBase: ServiceBase{
+			Domain:  &serviceDomain,
+			Id:      nil,
+			Service: &serviceService,
+			Target:  target,
+			Type:    &serviceType,
+		},
+		ServiceData: remoteToggleParams,
 	}
 	return r
 }
 
 type RemoteToggle struct {
-	Id          *int     `json:"id"`
-	Type        *string  `json:"type"`
-	Domain      *string  `json:"domain"`
-	Service     *string  `json:"service"`
-	ServiceData struct{} `json:"service_data,omitempty"`
-	Target      struct {
-		EntityId []string `json:"entity_id,omitempty"`
-	} `json:"target,omitempty"`
+	ServiceBase
+	ServiceData RemoteToggleParams `json:"service_data,omitempty"`
 }
+type RemoteToggleParams struct{}
 
 func (r *RemoteToggle) JSON() string {
 	data, _ := json.Marshal(r)
@@ -191,33 +151,28 @@ func (r *RemoteToggle) SetID(id *int) {
 
 // NewRemoteTurnOff creates the object that can be sent to Home Assistant for domain remote, service turn_off
 // "Sends the Power Off Command."
-func NewRemoteTurnOff(entities []string) *RemoteTurnOff {
+func NewRemoteTurnOff(target Target, remoteTurnOffParams RemoteTurnOffParams) *RemoteTurnOff {
 	serviceDomain := "remote"
 	serviceType := "call_service"
 	serviceService := "turn_off"
 	r := &RemoteTurnOff{
-		Domain:      &serviceDomain,
-		Id:          nil,
-		Service:     &serviceService,
-		ServiceData: struct{}{},
-		Target: struct {
-			EntityId []string `json:"entity_id,omitempty"`
-		}{EntityId: entities},
-		Type: &serviceType,
+		ServiceBase: ServiceBase{
+			Domain:  &serviceDomain,
+			Id:      nil,
+			Service: &serviceService,
+			Target:  target,
+			Type:    &serviceType,
+		},
+		ServiceData: remoteTurnOffParams,
 	}
 	return r
 }
 
 type RemoteTurnOff struct {
-	Id          *int     `json:"id"`
-	Type        *string  `json:"type"`
-	Domain      *string  `json:"domain"`
-	Service     *string  `json:"service"`
-	ServiceData struct{} `json:"service_data,omitempty"`
-	Target      struct {
-		EntityId []string `json:"entity_id,omitempty"`
-	} `json:"target,omitempty"`
+	ServiceBase
+	ServiceData RemoteTurnOffParams `json:"service_data,omitempty"`
 }
+type RemoteTurnOffParams struct{}
 
 func (r *RemoteTurnOff) JSON() string {
 	data, _ := json.Marshal(r)
@@ -229,36 +184,29 @@ func (r *RemoteTurnOff) SetID(id *int) {
 
 // NewRemoteTurnOn creates the object that can be sent to Home Assistant for domain remote, service turn_on
 // "Sends the Power On Command."
-func NewRemoteTurnOn(entities []string, activity *string) *RemoteTurnOn {
+func NewRemoteTurnOn(target Target, remoteTurnOnParams RemoteTurnOnParams) *RemoteTurnOn {
 	serviceDomain := "remote"
 	serviceType := "call_service"
 	serviceService := "turn_on"
 	r := &RemoteTurnOn{
-		Domain:  &serviceDomain,
-		Id:      nil,
-		Service: &serviceService,
-		ServiceData: struct {
-			Activity *string `json:"activity,omitempty"`
-		}{Activity: activity},
-		Target: struct {
-			EntityId []string `json:"entity_id,omitempty"`
-		}{EntityId: entities},
-		Type: &serviceType,
+		ServiceBase: ServiceBase{
+			Domain:  &serviceDomain,
+			Id:      nil,
+			Service: &serviceService,
+			Target:  target,
+			Type:    &serviceType,
+		},
+		ServiceData: remoteTurnOnParams,
 	}
 	return r
 }
 
 type RemoteTurnOn struct {
-	Id          *int    `json:"id"`
-	Type        *string `json:"type"`
-	Domain      *string `json:"domain"`
-	Service     *string `json:"service"`
-	ServiceData struct {
-		Activity *string `json:"activity,omitempty"`
-	} `json:"service_data,omitempty"`
-	Target struct {
-		EntityId []string `json:"entity_id,omitempty"`
-	} `json:"target,omitempty"`
+	ServiceBase
+	ServiceData RemoteTurnOnParams `json:"service_data,omitempty"`
+}
+type RemoteTurnOnParams struct {
+	Activity *string `json:"activity,omitempty"`
 }
 
 func (r *RemoteTurnOn) JSON() string {

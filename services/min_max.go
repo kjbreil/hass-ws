@@ -8,33 +8,28 @@ import "encoding/json"
 
 // NewMinMaxReload creates the object that can be sent to Home Assistant for domain min_max, service reload
 // "Reload all min_max entities."
-func NewMinMaxReload(entities []string) *MinMaxReload {
+func NewMinMaxReload(target Target, minMaxReloadParams MinMaxReloadParams) *MinMaxReload {
 	serviceDomain := "min_max"
 	serviceType := "call_service"
 	serviceService := "reload"
 	m := &MinMaxReload{
-		Domain:      &serviceDomain,
-		Id:          nil,
-		Service:     &serviceService,
-		ServiceData: struct{}{},
-		Target: struct {
-			EntityId []string `json:"entity_id,omitempty"`
-		}{EntityId: entities},
-		Type: &serviceType,
+		ServiceBase: ServiceBase{
+			Domain:  &serviceDomain,
+			Id:      nil,
+			Service: &serviceService,
+			Target:  target,
+			Type:    &serviceType,
+		},
+		ServiceData: minMaxReloadParams,
 	}
 	return m
 }
 
 type MinMaxReload struct {
-	Id          *int     `json:"id"`
-	Type        *string  `json:"type"`
-	Domain      *string  `json:"domain"`
-	Service     *string  `json:"service"`
-	ServiceData struct{} `json:"service_data,omitempty"`
-	Target      struct {
-		EntityId []string `json:"entity_id,omitempty"`
-	} `json:"target,omitempty"`
+	ServiceBase
+	ServiceData MinMaxReloadParams `json:"service_data,omitempty"`
 }
+type MinMaxReloadParams struct{}
 
 func (m *MinMaxReload) JSON() string {
 	data, _ := json.Marshal(m)

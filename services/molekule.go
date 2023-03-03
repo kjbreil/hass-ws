@@ -8,33 +8,28 @@ import "encoding/json"
 
 // NewMolekuleUpdateDevices creates the object that can be sent to Home Assistant for domain molekule, service update_devices
 // "Add new Molekule devices to Home Assistant"
-func NewMolekuleUpdateDevices(entities []string) *MolekuleUpdateDevices {
+func NewMolekuleUpdateDevices(target Target, molekuleUpdateDevicesParams MolekuleUpdateDevicesParams) *MolekuleUpdateDevices {
 	serviceDomain := "molekule"
 	serviceType := "call_service"
 	serviceService := "update_devices"
 	m := &MolekuleUpdateDevices{
-		Domain:      &serviceDomain,
-		Id:          nil,
-		Service:     &serviceService,
-		ServiceData: struct{}{},
-		Target: struct {
-			EntityId []string `json:"entity_id,omitempty"`
-		}{EntityId: entities},
-		Type: &serviceType,
+		ServiceBase: ServiceBase{
+			Domain:  &serviceDomain,
+			Id:      nil,
+			Service: &serviceService,
+			Target:  target,
+			Type:    &serviceType,
+		},
+		ServiceData: molekuleUpdateDevicesParams,
 	}
 	return m
 }
 
 type MolekuleUpdateDevices struct {
-	Id          *int     `json:"id"`
-	Type        *string  `json:"type"`
-	Domain      *string  `json:"domain"`
-	Service     *string  `json:"service"`
-	ServiceData struct{} `json:"service_data,omitempty"`
-	Target      struct {
-		EntityId []string `json:"entity_id,omitempty"`
-	} `json:"target,omitempty"`
+	ServiceBase
+	ServiceData MolekuleUpdateDevicesParams `json:"service_data,omitempty"`
 }
+type MolekuleUpdateDevicesParams struct{}
 
 func (m *MolekuleUpdateDevices) JSON() string {
 	data, _ := json.Marshal(m)

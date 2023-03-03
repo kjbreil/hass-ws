@@ -8,41 +8,30 @@ import "encoding/json"
 
 // NewNotifyMobileAppAsk creates the object that can be sent to Home Assistant for domain notify, service mobile_app_ask
 // "Sends a notification message using the mobile_app_ask integration."
-func NewNotifyMobileAppAsk(entities []string, message *string, title *string) *NotifyMobileAppAsk {
+func NewNotifyMobileAppAsk(target Target, notifyMobileAppAskParams NotifyMobileAppAskParams) *NotifyMobileAppAsk {
 	serviceDomain := "notify"
 	serviceType := "call_service"
 	serviceService := "mobile_app_ask"
 	n := &NotifyMobileAppAsk{
-		Domain:  &serviceDomain,
-		Id:      nil,
-		Service: &serviceService,
-		ServiceData: struct {
-			Message *string `json:"message,omitempty"`
-			Title   *string `json:"title,omitempty"`
-		}{
-			Message: message,
-			Title:   title,
+		ServiceBase: ServiceBase{
+			Domain:  &serviceDomain,
+			Id:      nil,
+			Service: &serviceService,
+			Target:  target,
+			Type:    &serviceType,
 		},
-		Target: struct {
-			EntityId []string `json:"entity_id,omitempty"`
-		}{EntityId: entities},
-		Type: &serviceType,
+		ServiceData: notifyMobileAppAskParams,
 	}
 	return n
 }
 
 type NotifyMobileAppAsk struct {
-	Id          *int    `json:"id"`
-	Type        *string `json:"type"`
-	Domain      *string `json:"domain"`
-	Service     *string `json:"service"`
-	ServiceData struct {
-		Message *string `json:"message,omitempty"`
-		Title   *string `json:"title,omitempty"`
-	} `json:"service_data,omitempty"`
-	Target struct {
-		EntityId []string `json:"entity_id,omitempty"`
-	} `json:"target,omitempty"`
+	ServiceBase
+	ServiceData NotifyMobileAppAskParams `json:"service_data,omitempty"`
+}
+type NotifyMobileAppAskParams struct {
+	Message *string `json:"message,omitempty"`
+	Title   *string `json:"title,omitempty"`
 }
 
 func (n *NotifyMobileAppAsk) JSON() string {
@@ -55,41 +44,30 @@ func (n *NotifyMobileAppAsk) SetID(id *int) {
 
 // NewNotifyMobileAppFranphone creates the object that can be sent to Home Assistant for domain notify, service mobile_app_franphone
 // "Sends a notification message using the mobile_app_franphone integration."
-func NewNotifyMobileAppFranphone(entities []string, message *string, title *string) *NotifyMobileAppFranphone {
+func NewNotifyMobileAppFranphone(target Target, notifyMobileAppFranphoneParams NotifyMobileAppFranphoneParams) *NotifyMobileAppFranphone {
 	serviceDomain := "notify"
 	serviceType := "call_service"
 	serviceService := "mobile_app_franphone"
 	n := &NotifyMobileAppFranphone{
-		Domain:  &serviceDomain,
-		Id:      nil,
-		Service: &serviceService,
-		ServiceData: struct {
-			Message *string `json:"message,omitempty"`
-			Title   *string `json:"title,omitempty"`
-		}{
-			Message: message,
-			Title:   title,
+		ServiceBase: ServiceBase{
+			Domain:  &serviceDomain,
+			Id:      nil,
+			Service: &serviceService,
+			Target:  target,
+			Type:    &serviceType,
 		},
-		Target: struct {
-			EntityId []string `json:"entity_id,omitempty"`
-		}{EntityId: entities},
-		Type: &serviceType,
+		ServiceData: notifyMobileAppFranphoneParams,
 	}
 	return n
 }
 
 type NotifyMobileAppFranphone struct {
-	Id          *int    `json:"id"`
-	Type        *string `json:"type"`
-	Domain      *string `json:"domain"`
-	Service     *string `json:"service"`
-	ServiceData struct {
-		Message *string `json:"message,omitempty"`
-		Title   *string `json:"title,omitempty"`
-	} `json:"service_data,omitempty"`
-	Target struct {
-		EntityId []string `json:"entity_id,omitempty"`
-	} `json:"target,omitempty"`
+	ServiceBase
+	ServiceData NotifyMobileAppFranphoneParams `json:"service_data,omitempty"`
+}
+type NotifyMobileAppFranphoneParams struct {
+	Message *string `json:"message,omitempty"`
+	Title   *string `json:"title,omitempty"`
 }
 
 func (n *NotifyMobileAppFranphone) JSON() string {
@@ -102,41 +80,30 @@ func (n *NotifyMobileAppFranphone) SetID(id *int) {
 
 // NewNotifyMobileAppIpad creates the object that can be sent to Home Assistant for domain notify, service mobile_app_ipad
 // "Sends a notification message using the mobile_app_ipad integration."
-func NewNotifyMobileAppIpad(entities []string, message *string, title *string) *NotifyMobileAppIpad {
+func NewNotifyMobileAppIpad(target Target, notifyMobileAppIpadParams NotifyMobileAppIpadParams) *NotifyMobileAppIpad {
 	serviceDomain := "notify"
 	serviceType := "call_service"
 	serviceService := "mobile_app_ipad"
 	n := &NotifyMobileAppIpad{
-		Domain:  &serviceDomain,
-		Id:      nil,
-		Service: &serviceService,
-		ServiceData: struct {
-			Message *string `json:"message,omitempty"`
-			Title   *string `json:"title,omitempty"`
-		}{
-			Message: message,
-			Title:   title,
+		ServiceBase: ServiceBase{
+			Domain:  &serviceDomain,
+			Id:      nil,
+			Service: &serviceService,
+			Target:  target,
+			Type:    &serviceType,
 		},
-		Target: struct {
-			EntityId []string `json:"entity_id,omitempty"`
-		}{EntityId: entities},
-		Type: &serviceType,
+		ServiceData: notifyMobileAppIpadParams,
 	}
 	return n
 }
 
 type NotifyMobileAppIpad struct {
-	Id          *int    `json:"id"`
-	Type        *string `json:"type"`
-	Domain      *string `json:"domain"`
-	Service     *string `json:"service"`
-	ServiceData struct {
-		Message *string `json:"message,omitempty"`
-		Title   *string `json:"title,omitempty"`
-	} `json:"service_data,omitempty"`
-	Target struct {
-		EntityId []string `json:"entity_id,omitempty"`
-	} `json:"target,omitempty"`
+	ServiceBase
+	ServiceData NotifyMobileAppIpadParams `json:"service_data,omitempty"`
+}
+type NotifyMobileAppIpadParams struct {
+	Message *string `json:"message,omitempty"`
+	Title   *string `json:"title,omitempty"`
 }
 
 func (n *NotifyMobileAppIpad) JSON() string {
@@ -149,41 +116,30 @@ func (n *NotifyMobileAppIpad) SetID(id *int) {
 
 // NewNotifyMobileAppKioskair creates the object that can be sent to Home Assistant for domain notify, service mobile_app_kioskair
 // "Sends a notification message using the mobile_app_kioskair integration."
-func NewNotifyMobileAppKioskair(entities []string, message *string, title *string) *NotifyMobileAppKioskair {
+func NewNotifyMobileAppKioskair(target Target, notifyMobileAppKioskairParams NotifyMobileAppKioskairParams) *NotifyMobileAppKioskair {
 	serviceDomain := "notify"
 	serviceType := "call_service"
 	serviceService := "mobile_app_kioskair"
 	n := &NotifyMobileAppKioskair{
-		Domain:  &serviceDomain,
-		Id:      nil,
-		Service: &serviceService,
-		ServiceData: struct {
-			Message *string `json:"message,omitempty"`
-			Title   *string `json:"title,omitempty"`
-		}{
-			Message: message,
-			Title:   title,
+		ServiceBase: ServiceBase{
+			Domain:  &serviceDomain,
+			Id:      nil,
+			Service: &serviceService,
+			Target:  target,
+			Type:    &serviceType,
 		},
-		Target: struct {
-			EntityId []string `json:"entity_id,omitempty"`
-		}{EntityId: entities},
-		Type: &serviceType,
+		ServiceData: notifyMobileAppKioskairParams,
 	}
 	return n
 }
 
 type NotifyMobileAppKioskair struct {
-	Id          *int    `json:"id"`
-	Type        *string `json:"type"`
-	Domain      *string `json:"domain"`
-	Service     *string `json:"service"`
-	ServiceData struct {
-		Message *string `json:"message,omitempty"`
-		Title   *string `json:"title,omitempty"`
-	} `json:"service_data,omitempty"`
-	Target struct {
-		EntityId []string `json:"entity_id,omitempty"`
-	} `json:"target,omitempty"`
+	ServiceBase
+	ServiceData NotifyMobileAppKioskairParams `json:"service_data,omitempty"`
+}
+type NotifyMobileAppKioskairParams struct {
+	Message *string `json:"message,omitempty"`
+	Title   *string `json:"title,omitempty"`
 }
 
 func (n *NotifyMobileAppKioskair) JSON() string {
@@ -196,41 +152,30 @@ func (n *NotifyMobileAppKioskair) SetID(id *int) {
 
 // NewNotifyMobileAppLoki creates the object that can be sent to Home Assistant for domain notify, service mobile_app_loki
 // "Sends a notification message using the mobile_app_loki integration."
-func NewNotifyMobileAppLoki(entities []string, message *string, title *string) *NotifyMobileAppLoki {
+func NewNotifyMobileAppLoki(target Target, notifyMobileAppLokiParams NotifyMobileAppLokiParams) *NotifyMobileAppLoki {
 	serviceDomain := "notify"
 	serviceType := "call_service"
 	serviceService := "mobile_app_loki"
 	n := &NotifyMobileAppLoki{
-		Domain:  &serviceDomain,
-		Id:      nil,
-		Service: &serviceService,
-		ServiceData: struct {
-			Message *string `json:"message,omitempty"`
-			Title   *string `json:"title,omitempty"`
-		}{
-			Message: message,
-			Title:   title,
+		ServiceBase: ServiceBase{
+			Domain:  &serviceDomain,
+			Id:      nil,
+			Service: &serviceService,
+			Target:  target,
+			Type:    &serviceType,
 		},
-		Target: struct {
-			EntityId []string `json:"entity_id,omitempty"`
-		}{EntityId: entities},
-		Type: &serviceType,
+		ServiceData: notifyMobileAppLokiParams,
 	}
 	return n
 }
 
 type NotifyMobileAppLoki struct {
-	Id          *int    `json:"id"`
-	Type        *string `json:"type"`
-	Domain      *string `json:"domain"`
-	Service     *string `json:"service"`
-	ServiceData struct {
-		Message *string `json:"message,omitempty"`
-		Title   *string `json:"title,omitempty"`
-	} `json:"service_data,omitempty"`
-	Target struct {
-		EntityId []string `json:"entity_id,omitempty"`
-	} `json:"target,omitempty"`
+	ServiceBase
+	ServiceData NotifyMobileAppLokiParams `json:"service_data,omitempty"`
+}
+type NotifyMobileAppLokiParams struct {
+	Message *string `json:"message,omitempty"`
+	Title   *string `json:"title,omitempty"`
 }
 
 func (n *NotifyMobileAppLoki) JSON() string {
@@ -243,41 +188,30 @@ func (n *NotifyMobileAppLoki) SetID(id *int) {
 
 // NewNotifyMobileAppSkadi creates the object that can be sent to Home Assistant for domain notify, service mobile_app_skadi
 // "Sends a notification message using the mobile_app_skadi integration."
-func NewNotifyMobileAppSkadi(entities []string, message *string, title *string) *NotifyMobileAppSkadi {
+func NewNotifyMobileAppSkadi(target Target, notifyMobileAppSkadiParams NotifyMobileAppSkadiParams) *NotifyMobileAppSkadi {
 	serviceDomain := "notify"
 	serviceType := "call_service"
 	serviceService := "mobile_app_skadi"
 	n := &NotifyMobileAppSkadi{
-		Domain:  &serviceDomain,
-		Id:      nil,
-		Service: &serviceService,
-		ServiceData: struct {
-			Message *string `json:"message,omitempty"`
-			Title   *string `json:"title,omitempty"`
-		}{
-			Message: message,
-			Title:   title,
+		ServiceBase: ServiceBase{
+			Domain:  &serviceDomain,
+			Id:      nil,
+			Service: &serviceService,
+			Target:  target,
+			Type:    &serviceType,
 		},
-		Target: struct {
-			EntityId []string `json:"entity_id,omitempty"`
-		}{EntityId: entities},
-		Type: &serviceType,
+		ServiceData: notifyMobileAppSkadiParams,
 	}
 	return n
 }
 
 type NotifyMobileAppSkadi struct {
-	Id          *int    `json:"id"`
-	Type        *string `json:"type"`
-	Domain      *string `json:"domain"`
-	Service     *string `json:"service"`
-	ServiceData struct {
-		Message *string `json:"message,omitempty"`
-		Title   *string `json:"title,omitempty"`
-	} `json:"service_data,omitempty"`
-	Target struct {
-		EntityId []string `json:"entity_id,omitempty"`
-	} `json:"target,omitempty"`
+	ServiceBase
+	ServiceData NotifyMobileAppSkadiParams `json:"service_data,omitempty"`
+}
+type NotifyMobileAppSkadiParams struct {
+	Message *string `json:"message,omitempty"`
+	Title   *string `json:"title,omitempty"`
 }
 
 func (n *NotifyMobileAppSkadi) JSON() string {
@@ -290,41 +224,30 @@ func (n *NotifyMobileAppSkadi) SetID(id *int) {
 
 // NewNotifyNotify creates the object that can be sent to Home Assistant for domain notify, service notify
 // "Sends a notification message using the notify service."
-func NewNotifyNotify(entities []string, message *string, title *string) *NotifyNotify {
+func NewNotifyNotify(target Target, notifyNotifyParams NotifyNotifyParams) *NotifyNotify {
 	serviceDomain := "notify"
 	serviceType := "call_service"
 	serviceService := "notify"
 	n := &NotifyNotify{
-		Domain:  &serviceDomain,
-		Id:      nil,
-		Service: &serviceService,
-		ServiceData: struct {
-			Message *string `json:"message,omitempty"`
-			Title   *string `json:"title,omitempty"`
-		}{
-			Message: message,
-			Title:   title,
+		ServiceBase: ServiceBase{
+			Domain:  &serviceDomain,
+			Id:      nil,
+			Service: &serviceService,
+			Target:  target,
+			Type:    &serviceType,
 		},
-		Target: struct {
-			EntityId []string `json:"entity_id,omitempty"`
-		}{EntityId: entities},
-		Type: &serviceType,
+		ServiceData: notifyNotifyParams,
 	}
 	return n
 }
 
 type NotifyNotify struct {
-	Id          *int    `json:"id"`
-	Type        *string `json:"type"`
-	Domain      *string `json:"domain"`
-	Service     *string `json:"service"`
-	ServiceData struct {
-		Message *string `json:"message,omitempty"`
-		Title   *string `json:"title,omitempty"`
-	} `json:"service_data,omitempty"`
-	Target struct {
-		EntityId []string `json:"entity_id,omitempty"`
-	} `json:"target,omitempty"`
+	ServiceBase
+	ServiceData NotifyNotifyParams `json:"service_data,omitempty"`
+}
+type NotifyNotifyParams struct {
+	Message *string `json:"message,omitempty"`
+	Title   *string `json:"title,omitempty"`
 }
 
 func (n *NotifyNotify) JSON() string {
@@ -337,41 +260,30 @@ func (n *NotifyNotify) SetID(id *int) {
 
 // NewNotifyPersistentNotification creates the object that can be sent to Home Assistant for domain notify, service persistent_notification
 // "Sends a notification that is visible in the front-end."
-func NewNotifyPersistentNotification(entities []string, message *string, title *string) *NotifyPersistentNotification {
+func NewNotifyPersistentNotification(target Target, notifyPersistentNotificationParams NotifyPersistentNotificationParams) *NotifyPersistentNotification {
 	serviceDomain := "notify"
 	serviceType := "call_service"
 	serviceService := "persistent_notification"
 	n := &NotifyPersistentNotification{
-		Domain:  &serviceDomain,
-		Id:      nil,
-		Service: &serviceService,
-		ServiceData: struct {
-			Message *string `json:"message,omitempty"`
-			Title   *string `json:"title,omitempty"`
-		}{
-			Message: message,
-			Title:   title,
+		ServiceBase: ServiceBase{
+			Domain:  &serviceDomain,
+			Id:      nil,
+			Service: &serviceService,
+			Target:  target,
+			Type:    &serviceType,
 		},
-		Target: struct {
-			EntityId []string `json:"entity_id,omitempty"`
-		}{EntityId: entities},
-		Type: &serviceType,
+		ServiceData: notifyPersistentNotificationParams,
 	}
 	return n
 }
 
 type NotifyPersistentNotification struct {
-	Id          *int    `json:"id"`
-	Type        *string `json:"type"`
-	Domain      *string `json:"domain"`
-	Service     *string `json:"service"`
-	ServiceData struct {
-		Message *string `json:"message,omitempty"`
-		Title   *string `json:"title,omitempty"`
-	} `json:"service_data,omitempty"`
-	Target struct {
-		EntityId []string `json:"entity_id,omitempty"`
-	} `json:"target,omitempty"`
+	ServiceBase
+	ServiceData NotifyPersistentNotificationParams `json:"service_data,omitempty"`
+}
+type NotifyPersistentNotificationParams struct {
+	Message *string `json:"message,omitempty"`
+	Title   *string `json:"title,omitempty"`
 }
 
 func (n *NotifyPersistentNotification) JSON() string {

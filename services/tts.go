@@ -8,33 +8,28 @@ import "encoding/json"
 
 // NewTtsClearCache creates the object that can be sent to Home Assistant for domain tts, service clear_cache
 // "Remove all text-to-speech cache files and RAM cache."
-func NewTtsClearCache(entities []string) *TtsClearCache {
+func NewTtsClearCache(target Target, ttsClearCacheParams TtsClearCacheParams) *TtsClearCache {
 	serviceDomain := "tts"
 	serviceType := "call_service"
 	serviceService := "clear_cache"
 	t := &TtsClearCache{
-		Domain:      &serviceDomain,
-		Id:          nil,
-		Service:     &serviceService,
-		ServiceData: struct{}{},
-		Target: struct {
-			EntityId []string `json:"entity_id,omitempty"`
-		}{EntityId: entities},
-		Type: &serviceType,
+		ServiceBase: ServiceBase{
+			Domain:  &serviceDomain,
+			Id:      nil,
+			Service: &serviceService,
+			Target:  target,
+			Type:    &serviceType,
+		},
+		ServiceData: ttsClearCacheParams,
 	}
 	return t
 }
 
 type TtsClearCache struct {
-	Id          *int     `json:"id"`
-	Type        *string  `json:"type"`
-	Domain      *string  `json:"domain"`
-	Service     *string  `json:"service"`
-	ServiceData struct{} `json:"service_data,omitempty"`
-	Target      struct {
-		EntityId []string `json:"entity_id,omitempty"`
-	} `json:"target,omitempty"`
+	ServiceBase
+	ServiceData TtsClearCacheParams `json:"service_data,omitempty"`
 }
+type TtsClearCacheParams struct{}
 
 func (t *TtsClearCache) JSON() string {
 	data, _ := json.Marshal(t)
@@ -46,41 +41,30 @@ func (t *TtsClearCache) SetID(id *int) {
 
 // NewTtsCloudSay creates the object that can be sent to Home Assistant for domain tts, service cloud_say
 // "Say something using text-to-speech on a media player with cloud."
-func NewTtsCloudSay(entities []string, language *string, message *string) *TtsCloudSay {
+func NewTtsCloudSay(target Target, ttsCloudSayParams TtsCloudSayParams) *TtsCloudSay {
 	serviceDomain := "tts"
 	serviceType := "call_service"
 	serviceService := "cloud_say"
 	t := &TtsCloudSay{
-		Domain:  &serviceDomain,
-		Id:      nil,
-		Service: &serviceService,
-		ServiceData: struct {
-			Language *string `json:"language,omitempty"`
-			Message  *string `json:"message,omitempty"`
-		}{
-			Language: language,
-			Message:  message,
+		ServiceBase: ServiceBase{
+			Domain:  &serviceDomain,
+			Id:      nil,
+			Service: &serviceService,
+			Target:  target,
+			Type:    &serviceType,
 		},
-		Target: struct {
-			EntityId []string `json:"entity_id,omitempty"`
-		}{EntityId: entities},
-		Type: &serviceType,
+		ServiceData: ttsCloudSayParams,
 	}
 	return t
 }
 
 type TtsCloudSay struct {
-	Id          *int    `json:"id"`
-	Type        *string `json:"type"`
-	Domain      *string `json:"domain"`
-	Service     *string `json:"service"`
-	ServiceData struct {
-		Language *string `json:"language,omitempty"`
-		Message  *string `json:"message,omitempty"`
-	} `json:"service_data,omitempty"`
-	Target struct {
-		EntityId []string `json:"entity_id,omitempty"`
-	} `json:"target,omitempty"`
+	ServiceBase
+	ServiceData TtsCloudSayParams `json:"service_data,omitempty"`
+}
+type TtsCloudSayParams struct {
+	Language *string `json:"language,omitempty"`
+	Message  *string `json:"message,omitempty"`
 }
 
 func (t *TtsCloudSay) JSON() string {
@@ -93,41 +77,30 @@ func (t *TtsCloudSay) SetID(id *int) {
 
 // NewTtsGoogleTranslateSay creates the object that can be sent to Home Assistant for domain tts, service google_translate_say
 // "Say something using text-to-speech on a media player with google_translate."
-func NewTtsGoogleTranslateSay(entities []string, language *string, message *string) *TtsGoogleTranslateSay {
+func NewTtsGoogleTranslateSay(target Target, ttsGoogleTranslateSayParams TtsGoogleTranslateSayParams) *TtsGoogleTranslateSay {
 	serviceDomain := "tts"
 	serviceType := "call_service"
 	serviceService := "google_translate_say"
 	t := &TtsGoogleTranslateSay{
-		Domain:  &serviceDomain,
-		Id:      nil,
-		Service: &serviceService,
-		ServiceData: struct {
-			Language *string `json:"language,omitempty"`
-			Message  *string `json:"message,omitempty"`
-		}{
-			Language: language,
-			Message:  message,
+		ServiceBase: ServiceBase{
+			Domain:  &serviceDomain,
+			Id:      nil,
+			Service: &serviceService,
+			Target:  target,
+			Type:    &serviceType,
 		},
-		Target: struct {
-			EntityId []string `json:"entity_id,omitempty"`
-		}{EntityId: entities},
-		Type: &serviceType,
+		ServiceData: ttsGoogleTranslateSayParams,
 	}
 	return t
 }
 
 type TtsGoogleTranslateSay struct {
-	Id          *int    `json:"id"`
-	Type        *string `json:"type"`
-	Domain      *string `json:"domain"`
-	Service     *string `json:"service"`
-	ServiceData struct {
-		Language *string `json:"language,omitempty"`
-		Message  *string `json:"message,omitempty"`
-	} `json:"service_data,omitempty"`
-	Target struct {
-		EntityId []string `json:"entity_id,omitempty"`
-	} `json:"target,omitempty"`
+	ServiceBase
+	ServiceData TtsGoogleTranslateSayParams `json:"service_data,omitempty"`
+}
+type TtsGoogleTranslateSayParams struct {
+	Language *string `json:"language,omitempty"`
+	Message  *string `json:"message,omitempty"`
 }
 
 func (t *TtsGoogleTranslateSay) JSON() string {

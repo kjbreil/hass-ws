@@ -8,33 +8,28 @@ import "encoding/json"
 
 // NewGroupReload creates the object that can be sent to Home Assistant for domain group, service reload
 // "Reload group configuration, entities, and notify services."
-func NewGroupReload(entities []string) *GroupReload {
+func NewGroupReload(target Target, groupReloadParams GroupReloadParams) *GroupReload {
 	serviceDomain := "group"
 	serviceType := "call_service"
 	serviceService := "reload"
 	g := &GroupReload{
-		Domain:      &serviceDomain,
-		Id:          nil,
-		Service:     &serviceService,
-		ServiceData: struct{}{},
-		Target: struct {
-			EntityId []string `json:"entity_id,omitempty"`
-		}{EntityId: entities},
-		Type: &serviceType,
+		ServiceBase: ServiceBase{
+			Domain:  &serviceDomain,
+			Id:      nil,
+			Service: &serviceService,
+			Target:  target,
+			Type:    &serviceType,
+		},
+		ServiceData: groupReloadParams,
 	}
 	return g
 }
 
 type GroupReload struct {
-	Id          *int     `json:"id"`
-	Type        *string  `json:"type"`
-	Domain      *string  `json:"domain"`
-	Service     *string  `json:"service"`
-	ServiceData struct{} `json:"service_data,omitempty"`
-	Target      struct {
-		EntityId []string `json:"entity_id,omitempty"`
-	} `json:"target,omitempty"`
+	ServiceBase
+	ServiceData GroupReloadParams `json:"service_data,omitempty"`
 }
+type GroupReloadParams struct{}
 
 func (g *GroupReload) JSON() string {
 	data, _ := json.Marshal(g)
@@ -46,33 +41,28 @@ func (g *GroupReload) SetID(id *int) {
 
 // NewGroupRemove creates the object that can be sent to Home Assistant for domain group, service remove
 // "Remove a user group."
-func NewGroupRemove(entities []string) *GroupRemove {
+func NewGroupRemove(target Target, groupRemoveParams GroupRemoveParams) *GroupRemove {
 	serviceDomain := "group"
 	serviceType := "call_service"
 	serviceService := "remove"
 	g := &GroupRemove{
-		Domain:      &serviceDomain,
-		Id:          nil,
-		Service:     &serviceService,
-		ServiceData: struct{}{},
-		Target: struct {
-			EntityId []string `json:"entity_id,omitempty"`
-		}{EntityId: entities},
-		Type: &serviceType,
+		ServiceBase: ServiceBase{
+			Domain:  &serviceDomain,
+			Id:      nil,
+			Service: &serviceService,
+			Target:  target,
+			Type:    &serviceType,
+		},
+		ServiceData: groupRemoveParams,
 	}
 	return g
 }
 
 type GroupRemove struct {
-	Id          *int     `json:"id"`
-	Type        *string  `json:"type"`
-	Domain      *string  `json:"domain"`
-	Service     *string  `json:"service"`
-	ServiceData struct{} `json:"service_data,omitempty"`
-	Target      struct {
-		EntityId []string `json:"entity_id,omitempty"`
-	} `json:"target,omitempty"`
+	ServiceBase
+	ServiceData GroupRemoveParams `json:"service_data,omitempty"`
 }
+type GroupRemoveParams struct{}
 
 func (g *GroupRemove) JSON() string {
 	data, _ := json.Marshal(g)
@@ -84,41 +74,30 @@ func (g *GroupRemove) SetID(id *int) {
 
 // NewGroupSet creates the object that can be sent to Home Assistant for domain group, service set
 // "Create/Update a user group."
-func NewGroupSet(entities []string, name *string, objectId *string) *GroupSet {
+func NewGroupSet(target Target, groupSetParams GroupSetParams) *GroupSet {
 	serviceDomain := "group"
 	serviceType := "call_service"
 	serviceService := "set"
 	g := &GroupSet{
-		Domain:  &serviceDomain,
-		Id:      nil,
-		Service: &serviceService,
-		ServiceData: struct {
-			Name     *string `json:"name,omitempty"`
-			ObjectId *string `json:"object_id,omitempty"`
-		}{
-			Name:     name,
-			ObjectId: objectId,
+		ServiceBase: ServiceBase{
+			Domain:  &serviceDomain,
+			Id:      nil,
+			Service: &serviceService,
+			Target:  target,
+			Type:    &serviceType,
 		},
-		Target: struct {
-			EntityId []string `json:"entity_id,omitempty"`
-		}{EntityId: entities},
-		Type: &serviceType,
+		ServiceData: groupSetParams,
 	}
 	return g
 }
 
 type GroupSet struct {
-	Id          *int    `json:"id"`
-	Type        *string `json:"type"`
-	Domain      *string `json:"domain"`
-	Service     *string `json:"service"`
-	ServiceData struct {
-		Name     *string `json:"name,omitempty"`
-		ObjectId *string `json:"object_id,omitempty"`
-	} `json:"service_data,omitempty"`
-	Target struct {
-		EntityId []string `json:"entity_id,omitempty"`
-	} `json:"target,omitempty"`
+	ServiceBase
+	ServiceData GroupSetParams `json:"service_data,omitempty"`
+}
+type GroupSetParams struct {
+	Name     *string `json:"name,omitempty"`
+	ObjectId *string `json:"object_id,omitempty"`
 }
 
 func (g *GroupSet) JSON() string {

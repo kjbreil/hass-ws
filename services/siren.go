@@ -8,33 +8,28 @@ import "encoding/json"
 
 // NewSirenToggle creates the object that can be sent to Home Assistant for domain siren, service toggle
 // "Toggles a siren."
-func NewSirenToggle(entities []string) *SirenToggle {
+func NewSirenToggle(target Target, sirenToggleParams SirenToggleParams) *SirenToggle {
 	serviceDomain := "siren"
 	serviceType := "call_service"
 	serviceService := "toggle"
 	s := &SirenToggle{
-		Domain:      &serviceDomain,
-		Id:          nil,
-		Service:     &serviceService,
-		ServiceData: struct{}{},
-		Target: struct {
-			EntityId []string `json:"entity_id,omitempty"`
-		}{EntityId: entities},
-		Type: &serviceType,
+		ServiceBase: ServiceBase{
+			Domain:  &serviceDomain,
+			Id:      nil,
+			Service: &serviceService,
+			Target:  target,
+			Type:    &serviceType,
+		},
+		ServiceData: sirenToggleParams,
 	}
 	return s
 }
 
 type SirenToggle struct {
-	Id          *int     `json:"id"`
-	Type        *string  `json:"type"`
-	Domain      *string  `json:"domain"`
-	Service     *string  `json:"service"`
-	ServiceData struct{} `json:"service_data,omitempty"`
-	Target      struct {
-		EntityId []string `json:"entity_id,omitempty"`
-	} `json:"target,omitempty"`
+	ServiceBase
+	ServiceData SirenToggleParams `json:"service_data,omitempty"`
 }
+type SirenToggleParams struct{}
 
 func (s *SirenToggle) JSON() string {
 	data, _ := json.Marshal(s)
@@ -46,33 +41,28 @@ func (s *SirenToggle) SetID(id *int) {
 
 // NewSirenTurnOff creates the object that can be sent to Home Assistant for domain siren, service turn_off
 // "Turn siren off."
-func NewSirenTurnOff(entities []string) *SirenTurnOff {
+func NewSirenTurnOff(target Target, sirenTurnOffParams SirenTurnOffParams) *SirenTurnOff {
 	serviceDomain := "siren"
 	serviceType := "call_service"
 	serviceService := "turn_off"
 	s := &SirenTurnOff{
-		Domain:      &serviceDomain,
-		Id:          nil,
-		Service:     &serviceService,
-		ServiceData: struct{}{},
-		Target: struct {
-			EntityId []string `json:"entity_id,omitempty"`
-		}{EntityId: entities},
-		Type: &serviceType,
+		ServiceBase: ServiceBase{
+			Domain:  &serviceDomain,
+			Id:      nil,
+			Service: &serviceService,
+			Target:  target,
+			Type:    &serviceType,
+		},
+		ServiceData: sirenTurnOffParams,
 	}
 	return s
 }
 
 type SirenTurnOff struct {
-	Id          *int     `json:"id"`
-	Type        *string  `json:"type"`
-	Domain      *string  `json:"domain"`
-	Service     *string  `json:"service"`
-	ServiceData struct{} `json:"service_data,omitempty"`
-	Target      struct {
-		EntityId []string `json:"entity_id,omitempty"`
-	} `json:"target,omitempty"`
+	ServiceBase
+	ServiceData SirenTurnOffParams `json:"service_data,omitempty"`
 }
+type SirenTurnOffParams struct{}
 
 func (s *SirenTurnOff) JSON() string {
 	data, _ := json.Marshal(s)
@@ -84,44 +74,31 @@ func (s *SirenTurnOff) SetID(id *int) {
 
 // NewSirenTurnOn creates the object that can be sent to Home Assistant for domain siren, service turn_on
 // "Turn siren on."
-func NewSirenTurnOn(entities []string, duration *string, tone *string, volumeLevel *float64) *SirenTurnOn {
+func NewSirenTurnOn(target Target, sirenTurnOnParams SirenTurnOnParams) *SirenTurnOn {
 	serviceDomain := "siren"
 	serviceType := "call_service"
 	serviceService := "turn_on"
 	s := &SirenTurnOn{
-		Domain:  &serviceDomain,
-		Id:      nil,
-		Service: &serviceService,
-		ServiceData: struct {
-			Duration    *string  `json:"duration,omitempty"`
-			Tone        *string  `json:"tone,omitempty"`
-			VolumeLevel *float64 `json:"volume_level,omitempty"`
-		}{
-			Duration:    duration,
-			Tone:        tone,
-			VolumeLevel: volumeLevel,
+		ServiceBase: ServiceBase{
+			Domain:  &serviceDomain,
+			Id:      nil,
+			Service: &serviceService,
+			Target:  target,
+			Type:    &serviceType,
 		},
-		Target: struct {
-			EntityId []string `json:"entity_id,omitempty"`
-		}{EntityId: entities},
-		Type: &serviceType,
+		ServiceData: sirenTurnOnParams,
 	}
 	return s
 }
 
 type SirenTurnOn struct {
-	Id          *int    `json:"id"`
-	Type        *string `json:"type"`
-	Domain      *string `json:"domain"`
-	Service     *string `json:"service"`
-	ServiceData struct {
-		Duration    *string  `json:"duration,omitempty"`
-		Tone        *string  `json:"tone,omitempty"`
-		VolumeLevel *float64 `json:"volume_level,omitempty"`
-	} `json:"service_data,omitempty"`
-	Target struct {
-		EntityId []string `json:"entity_id,omitempty"`
-	} `json:"target,omitempty"`
+	ServiceBase
+	ServiceData SirenTurnOnParams `json:"service_data,omitempty"`
+}
+type SirenTurnOnParams struct {
+	Duration    *string  `json:"duration,omitempty"`
+	Tone        *string  `json:"tone,omitempty"`
+	VolumeLevel *float64 `json:"volume_level,omitempty"`
 }
 
 func (s *SirenTurnOn) JSON() string {

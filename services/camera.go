@@ -8,33 +8,28 @@ import "encoding/json"
 
 // NewCameraDisableMotionDetection creates the object that can be sent to Home Assistant for domain camera, service disable_motion_detection
 // "Disable the motion detection in a camera."
-func NewCameraDisableMotionDetection(entities []string) *CameraDisableMotionDetection {
+func NewCameraDisableMotionDetection(target Target, cameraDisableMotionDetectionParams CameraDisableMotionDetectionParams) *CameraDisableMotionDetection {
 	serviceDomain := "camera"
 	serviceType := "call_service"
 	serviceService := "disable_motion_detection"
 	c := &CameraDisableMotionDetection{
-		Domain:      &serviceDomain,
-		Id:          nil,
-		Service:     &serviceService,
-		ServiceData: struct{}{},
-		Target: struct {
-			EntityId []string `json:"entity_id,omitempty"`
-		}{EntityId: entities},
-		Type: &serviceType,
+		ServiceBase: ServiceBase{
+			Domain:  &serviceDomain,
+			Id:      nil,
+			Service: &serviceService,
+			Target:  target,
+			Type:    &serviceType,
+		},
+		ServiceData: cameraDisableMotionDetectionParams,
 	}
 	return c
 }
 
 type CameraDisableMotionDetection struct {
-	Id          *int     `json:"id"`
-	Type        *string  `json:"type"`
-	Domain      *string  `json:"domain"`
-	Service     *string  `json:"service"`
-	ServiceData struct{} `json:"service_data,omitempty"`
-	Target      struct {
-		EntityId []string `json:"entity_id,omitempty"`
-	} `json:"target,omitempty"`
+	ServiceBase
+	ServiceData CameraDisableMotionDetectionParams `json:"service_data,omitempty"`
 }
+type CameraDisableMotionDetectionParams struct{}
 
 func (c *CameraDisableMotionDetection) JSON() string {
 	data, _ := json.Marshal(c)
@@ -46,33 +41,28 @@ func (c *CameraDisableMotionDetection) SetID(id *int) {
 
 // NewCameraEnableMotionDetection creates the object that can be sent to Home Assistant for domain camera, service enable_motion_detection
 // "Enable the motion detection in a camera."
-func NewCameraEnableMotionDetection(entities []string) *CameraEnableMotionDetection {
+func NewCameraEnableMotionDetection(target Target, cameraEnableMotionDetectionParams CameraEnableMotionDetectionParams) *CameraEnableMotionDetection {
 	serviceDomain := "camera"
 	serviceType := "call_service"
 	serviceService := "enable_motion_detection"
 	c := &CameraEnableMotionDetection{
-		Domain:      &serviceDomain,
-		Id:          nil,
-		Service:     &serviceService,
-		ServiceData: struct{}{},
-		Target: struct {
-			EntityId []string `json:"entity_id,omitempty"`
-		}{EntityId: entities},
-		Type: &serviceType,
+		ServiceBase: ServiceBase{
+			Domain:  &serviceDomain,
+			Id:      nil,
+			Service: &serviceService,
+			Target:  target,
+			Type:    &serviceType,
+		},
+		ServiceData: cameraEnableMotionDetectionParams,
 	}
 	return c
 }
 
 type CameraEnableMotionDetection struct {
-	Id          *int     `json:"id"`
-	Type        *string  `json:"type"`
-	Domain      *string  `json:"domain"`
-	Service     *string  `json:"service"`
-	ServiceData struct{} `json:"service_data,omitempty"`
-	Target      struct {
-		EntityId []string `json:"entity_id,omitempty"`
-	} `json:"target,omitempty"`
+	ServiceBase
+	ServiceData CameraEnableMotionDetectionParams `json:"service_data,omitempty"`
 }
+type CameraEnableMotionDetectionParams struct{}
 
 func (c *CameraEnableMotionDetection) JSON() string {
 	data, _ := json.Marshal(c)
@@ -84,36 +74,29 @@ func (c *CameraEnableMotionDetection) SetID(id *int) {
 
 // NewCameraPlayStream creates the object that can be sent to Home Assistant for domain camera, service play_stream
 // "Play camera stream on supported media player."
-func NewCameraPlayStream(entities []string, format *Format) *CameraPlayStream {
+func NewCameraPlayStream(target Target, cameraPlayStreamParams CameraPlayStreamParams) *CameraPlayStream {
 	serviceDomain := "camera"
 	serviceType := "call_service"
 	serviceService := "play_stream"
 	c := &CameraPlayStream{
-		Domain:  &serviceDomain,
-		Id:      nil,
-		Service: &serviceService,
-		ServiceData: struct {
-			Format *Format `json:"format,omitempty"`
-		}{Format: format},
-		Target: struct {
-			EntityId []string `json:"entity_id,omitempty"`
-		}{EntityId: entities},
-		Type: &serviceType,
+		ServiceBase: ServiceBase{
+			Domain:  &serviceDomain,
+			Id:      nil,
+			Service: &serviceService,
+			Target:  target,
+			Type:    &serviceType,
+		},
+		ServiceData: cameraPlayStreamParams,
 	}
 	return c
 }
 
 type CameraPlayStream struct {
-	Id          *int    `json:"id"`
-	Type        *string `json:"type"`
-	Domain      *string `json:"domain"`
-	Service     *string `json:"service"`
-	ServiceData struct {
-		Format *Format `json:"format,omitempty"`
-	} `json:"service_data,omitempty"`
-	Target struct {
-		EntityId []string `json:"entity_id,omitempty"`
-	} `json:"target,omitempty"`
+	ServiceBase
+	ServiceData CameraPlayStreamParams `json:"service_data,omitempty"`
+}
+type CameraPlayStreamParams struct {
+	Format *Format `json:"format,omitempty"`
 }
 
 func (c *CameraPlayStream) JSON() string {
@@ -126,44 +109,31 @@ func (c *CameraPlayStream) SetID(id *int) {
 
 // NewCameraRecord creates the object that can be sent to Home Assistant for domain camera, service record
 // "Record live camera feed."
-func NewCameraRecord(entities []string, duration *float64, filename *string, lookback *float64) *CameraRecord {
+func NewCameraRecord(target Target, cameraRecordParams CameraRecordParams) *CameraRecord {
 	serviceDomain := "camera"
 	serviceType := "call_service"
 	serviceService := "record"
 	c := &CameraRecord{
-		Domain:  &serviceDomain,
-		Id:      nil,
-		Service: &serviceService,
-		ServiceData: struct {
-			Duration *float64 `json:"duration,omitempty"`
-			Filename *string  `json:"filename,omitempty"`
-			Lookback *float64 `json:"lookback,omitempty"`
-		}{
-			Duration: duration,
-			Filename: filename,
-			Lookback: lookback,
+		ServiceBase: ServiceBase{
+			Domain:  &serviceDomain,
+			Id:      nil,
+			Service: &serviceService,
+			Target:  target,
+			Type:    &serviceType,
 		},
-		Target: struct {
-			EntityId []string `json:"entity_id,omitempty"`
-		}{EntityId: entities},
-		Type: &serviceType,
+		ServiceData: cameraRecordParams,
 	}
 	return c
 }
 
 type CameraRecord struct {
-	Id          *int    `json:"id"`
-	Type        *string `json:"type"`
-	Domain      *string `json:"domain"`
-	Service     *string `json:"service"`
-	ServiceData struct {
-		Duration *float64 `json:"duration,omitempty"`
-		Filename *string  `json:"filename,omitempty"`
-		Lookback *float64 `json:"lookback,omitempty"`
-	} `json:"service_data,omitempty"`
-	Target struct {
-		EntityId []string `json:"entity_id,omitempty"`
-	} `json:"target,omitempty"`
+	ServiceBase
+	ServiceData CameraRecordParams `json:"service_data,omitempty"`
+}
+type CameraRecordParams struct {
+	Duration *float64 `json:"duration,omitempty"`
+	Filename *string  `json:"filename,omitempty"`
+	Lookback *float64 `json:"lookback,omitempty"`
 }
 
 func (c *CameraRecord) JSON() string {
@@ -176,36 +146,29 @@ func (c *CameraRecord) SetID(id *int) {
 
 // NewCameraSnapshot creates the object that can be sent to Home Assistant for domain camera, service snapshot
 // "Take a snapshot from a camera."
-func NewCameraSnapshot(entities []string, filename *string) *CameraSnapshot {
+func NewCameraSnapshot(target Target, cameraSnapshotParams CameraSnapshotParams) *CameraSnapshot {
 	serviceDomain := "camera"
 	serviceType := "call_service"
 	serviceService := "snapshot"
 	c := &CameraSnapshot{
-		Domain:  &serviceDomain,
-		Id:      nil,
-		Service: &serviceService,
-		ServiceData: struct {
-			Filename *string `json:"filename,omitempty"`
-		}{Filename: filename},
-		Target: struct {
-			EntityId []string `json:"entity_id,omitempty"`
-		}{EntityId: entities},
-		Type: &serviceType,
+		ServiceBase: ServiceBase{
+			Domain:  &serviceDomain,
+			Id:      nil,
+			Service: &serviceService,
+			Target:  target,
+			Type:    &serviceType,
+		},
+		ServiceData: cameraSnapshotParams,
 	}
 	return c
 }
 
 type CameraSnapshot struct {
-	Id          *int    `json:"id"`
-	Type        *string `json:"type"`
-	Domain      *string `json:"domain"`
-	Service     *string `json:"service"`
-	ServiceData struct {
-		Filename *string `json:"filename,omitempty"`
-	} `json:"service_data,omitempty"`
-	Target struct {
-		EntityId []string `json:"entity_id,omitempty"`
-	} `json:"target,omitempty"`
+	ServiceBase
+	ServiceData CameraSnapshotParams `json:"service_data,omitempty"`
+}
+type CameraSnapshotParams struct {
+	Filename *string `json:"filename,omitempty"`
 }
 
 func (c *CameraSnapshot) JSON() string {
@@ -218,33 +181,28 @@ func (c *CameraSnapshot) SetID(id *int) {
 
 // NewCameraTurnOff creates the object that can be sent to Home Assistant for domain camera, service turn_off
 // "Turn off camera."
-func NewCameraTurnOff(entities []string) *CameraTurnOff {
+func NewCameraTurnOff(target Target, cameraTurnOffParams CameraTurnOffParams) *CameraTurnOff {
 	serviceDomain := "camera"
 	serviceType := "call_service"
 	serviceService := "turn_off"
 	c := &CameraTurnOff{
-		Domain:      &serviceDomain,
-		Id:          nil,
-		Service:     &serviceService,
-		ServiceData: struct{}{},
-		Target: struct {
-			EntityId []string `json:"entity_id,omitempty"`
-		}{EntityId: entities},
-		Type: &serviceType,
+		ServiceBase: ServiceBase{
+			Domain:  &serviceDomain,
+			Id:      nil,
+			Service: &serviceService,
+			Target:  target,
+			Type:    &serviceType,
+		},
+		ServiceData: cameraTurnOffParams,
 	}
 	return c
 }
 
 type CameraTurnOff struct {
-	Id          *int     `json:"id"`
-	Type        *string  `json:"type"`
-	Domain      *string  `json:"domain"`
-	Service     *string  `json:"service"`
-	ServiceData struct{} `json:"service_data,omitempty"`
-	Target      struct {
-		EntityId []string `json:"entity_id,omitempty"`
-	} `json:"target,omitempty"`
+	ServiceBase
+	ServiceData CameraTurnOffParams `json:"service_data,omitempty"`
 }
+type CameraTurnOffParams struct{}
 
 func (c *CameraTurnOff) JSON() string {
 	data, _ := json.Marshal(c)
@@ -256,33 +214,28 @@ func (c *CameraTurnOff) SetID(id *int) {
 
 // NewCameraTurnOn creates the object that can be sent to Home Assistant for domain camera, service turn_on
 // "Turn on camera."
-func NewCameraTurnOn(entities []string) *CameraTurnOn {
+func NewCameraTurnOn(target Target, cameraTurnOnParams CameraTurnOnParams) *CameraTurnOn {
 	serviceDomain := "camera"
 	serviceType := "call_service"
 	serviceService := "turn_on"
 	c := &CameraTurnOn{
-		Domain:      &serviceDomain,
-		Id:          nil,
-		Service:     &serviceService,
-		ServiceData: struct{}{},
-		Target: struct {
-			EntityId []string `json:"entity_id,omitempty"`
-		}{EntityId: entities},
-		Type: &serviceType,
+		ServiceBase: ServiceBase{
+			Domain:  &serviceDomain,
+			Id:      nil,
+			Service: &serviceService,
+			Target:  target,
+			Type:    &serviceType,
+		},
+		ServiceData: cameraTurnOnParams,
 	}
 	return c
 }
 
 type CameraTurnOn struct {
-	Id          *int     `json:"id"`
-	Type        *string  `json:"type"`
-	Domain      *string  `json:"domain"`
-	Service     *string  `json:"service"`
-	ServiceData struct{} `json:"service_data,omitempty"`
-	Target      struct {
-		EntityId []string `json:"entity_id,omitempty"`
-	} `json:"target,omitempty"`
+	ServiceBase
+	ServiceData CameraTurnOnParams `json:"service_data,omitempty"`
 }
+type CameraTurnOnParams struct{}
 
 func (c *CameraTurnOn) JSON() string {
 	data, _ := json.Marshal(c)

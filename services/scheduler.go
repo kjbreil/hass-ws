@@ -8,41 +8,30 @@ import "encoding/json"
 
 // NewSchedulerAdd creates the object that can be sent to Home Assistant for domain scheduler, service add
 // "Create a new schedule entity"
-func NewSchedulerAdd(entities []string, name *string, repeatType *RepeatType) *SchedulerAdd {
+func NewSchedulerAdd(target Target, schedulerAddParams SchedulerAddParams) *SchedulerAdd {
 	serviceDomain := "scheduler"
 	serviceType := "call_service"
 	serviceService := "add"
 	s := &SchedulerAdd{
-		Domain:  &serviceDomain,
-		Id:      nil,
-		Service: &serviceService,
-		ServiceData: struct {
-			Name       *string     `json:"name,omitempty"`
-			RepeatType *RepeatType `json:"repeat_type,omitempty"`
-		}{
-			Name:       name,
-			RepeatType: repeatType,
+		ServiceBase: ServiceBase{
+			Domain:  &serviceDomain,
+			Id:      nil,
+			Service: &serviceService,
+			Target:  target,
+			Type:    &serviceType,
 		},
-		Target: struct {
-			EntityId []string `json:"entity_id,omitempty"`
-		}{EntityId: entities},
-		Type: &serviceType,
+		ServiceData: schedulerAddParams,
 	}
 	return s
 }
 
 type SchedulerAdd struct {
-	Id          *int    `json:"id"`
-	Type        *string `json:"type"`
-	Domain      *string `json:"domain"`
-	Service     *string `json:"service"`
-	ServiceData struct {
-		Name       *string     `json:"name,omitempty"`
-		RepeatType *RepeatType `json:"repeat_type,omitempty"`
-	} `json:"service_data,omitempty"`
-	Target struct {
-		EntityId []string `json:"entity_id,omitempty"`
-	} `json:"target,omitempty"`
+	ServiceBase
+	ServiceData SchedulerAddParams `json:"service_data,omitempty"`
+}
+type SchedulerAddParams struct {
+	Name       *string     `json:"name,omitempty"`
+	RepeatType *RepeatType `json:"repeat_type,omitempty"`
 }
 
 func (s *SchedulerAdd) JSON() string {
@@ -55,36 +44,29 @@ func (s *SchedulerAdd) SetID(id *int) {
 
 // NewSchedulerCopy creates the object that can be sent to Home Assistant for domain scheduler, service copy
 // "Duplicate a schedule entity"
-func NewSchedulerCopy(entities []string, name *string) *SchedulerCopy {
+func NewSchedulerCopy(target Target, schedulerCopyParams SchedulerCopyParams) *SchedulerCopy {
 	serviceDomain := "scheduler"
 	serviceType := "call_service"
 	serviceService := "copy"
 	s := &SchedulerCopy{
-		Domain:  &serviceDomain,
-		Id:      nil,
-		Service: &serviceService,
-		ServiceData: struct {
-			Name *string `json:"name,omitempty"`
-		}{Name: name},
-		Target: struct {
-			EntityId []string `json:"entity_id,omitempty"`
-		}{EntityId: entities},
-		Type: &serviceType,
+		ServiceBase: ServiceBase{
+			Domain:  &serviceDomain,
+			Id:      nil,
+			Service: &serviceService,
+			Target:  target,
+			Type:    &serviceType,
+		},
+		ServiceData: schedulerCopyParams,
 	}
 	return s
 }
 
 type SchedulerCopy struct {
-	Id          *int    `json:"id"`
-	Type        *string `json:"type"`
-	Domain      *string `json:"domain"`
-	Service     *string `json:"service"`
-	ServiceData struct {
-		Name *string `json:"name,omitempty"`
-	} `json:"service_data,omitempty"`
-	Target struct {
-		EntityId []string `json:"entity_id,omitempty"`
-	} `json:"target,omitempty"`
+	ServiceBase
+	ServiceData SchedulerCopyParams `json:"service_data,omitempty"`
+}
+type SchedulerCopyParams struct {
+	Name *string `json:"name,omitempty"`
 }
 
 func (s *SchedulerCopy) JSON() string {
@@ -97,41 +79,30 @@ func (s *SchedulerCopy) SetID(id *int) {
 
 // NewSchedulerEdit creates the object that can be sent to Home Assistant for domain scheduler, service edit
 // "Edit a schedule entity"
-func NewSchedulerEdit(entities []string, name *string, repeatType *RepeatType) *SchedulerEdit {
+func NewSchedulerEdit(target Target, schedulerEditParams SchedulerEditParams) *SchedulerEdit {
 	serviceDomain := "scheduler"
 	serviceType := "call_service"
 	serviceService := "edit"
 	s := &SchedulerEdit{
-		Domain:  &serviceDomain,
-		Id:      nil,
-		Service: &serviceService,
-		ServiceData: struct {
-			Name       *string     `json:"name,omitempty"`
-			RepeatType *RepeatType `json:"repeat_type,omitempty"`
-		}{
-			Name:       name,
-			RepeatType: repeatType,
+		ServiceBase: ServiceBase{
+			Domain:  &serviceDomain,
+			Id:      nil,
+			Service: &serviceService,
+			Target:  target,
+			Type:    &serviceType,
 		},
-		Target: struct {
-			EntityId []string `json:"entity_id,omitempty"`
-		}{EntityId: entities},
-		Type: &serviceType,
+		ServiceData: schedulerEditParams,
 	}
 	return s
 }
 
 type SchedulerEdit struct {
-	Id          *int    `json:"id"`
-	Type        *string `json:"type"`
-	Domain      *string `json:"domain"`
-	Service     *string `json:"service"`
-	ServiceData struct {
-		Name       *string     `json:"name,omitempty"`
-		RepeatType *RepeatType `json:"repeat_type,omitempty"`
-	} `json:"service_data,omitempty"`
-	Target struct {
-		EntityId []string `json:"entity_id,omitempty"`
-	} `json:"target,omitempty"`
+	ServiceBase
+	ServiceData SchedulerEditParams `json:"service_data,omitempty"`
+}
+type SchedulerEditParams struct {
+	Name       *string     `json:"name,omitempty"`
+	RepeatType *RepeatType `json:"repeat_type,omitempty"`
 }
 
 func (s *SchedulerEdit) JSON() string {
@@ -144,33 +115,28 @@ func (s *SchedulerEdit) SetID(id *int) {
 
 // NewSchedulerRemove creates the object that can be sent to Home Assistant for domain scheduler, service remove
 // "Remove a schedule entity"
-func NewSchedulerRemove(entities []string) *SchedulerRemove {
+func NewSchedulerRemove(target Target, schedulerRemoveParams SchedulerRemoveParams) *SchedulerRemove {
 	serviceDomain := "scheduler"
 	serviceType := "call_service"
 	serviceService := "remove"
 	s := &SchedulerRemove{
-		Domain:      &serviceDomain,
-		Id:          nil,
-		Service:     &serviceService,
-		ServiceData: struct{}{},
-		Target: struct {
-			EntityId []string `json:"entity_id,omitempty"`
-		}{EntityId: entities},
-		Type: &serviceType,
+		ServiceBase: ServiceBase{
+			Domain:  &serviceDomain,
+			Id:      nil,
+			Service: &serviceService,
+			Target:  target,
+			Type:    &serviceType,
+		},
+		ServiceData: schedulerRemoveParams,
 	}
 	return s
 }
 
 type SchedulerRemove struct {
-	Id          *int     `json:"id"`
-	Type        *string  `json:"type"`
-	Domain      *string  `json:"domain"`
-	Service     *string  `json:"service"`
-	ServiceData struct{} `json:"service_data,omitempty"`
-	Target      struct {
-		EntityId []string `json:"entity_id,omitempty"`
-	} `json:"target,omitempty"`
+	ServiceBase
+	ServiceData SchedulerRemoveParams `json:"service_data,omitempty"`
 }
+type SchedulerRemoveParams struct{}
 
 func (s *SchedulerRemove) JSON() string {
 	data, _ := json.Marshal(s)
@@ -182,33 +148,28 @@ func (s *SchedulerRemove) SetID(id *int) {
 
 // NewSchedulerRunAction creates the object that can be sent to Home Assistant for domain scheduler, service run_action
 // "Execute the action of a schedule, optionally at a given time."
-func NewSchedulerRunAction(entities []string) *SchedulerRunAction {
+func NewSchedulerRunAction(target Target, schedulerRunActionParams SchedulerRunActionParams) *SchedulerRunAction {
 	serviceDomain := "scheduler"
 	serviceType := "call_service"
 	serviceService := "run_action"
 	s := &SchedulerRunAction{
-		Domain:      &serviceDomain,
-		Id:          nil,
-		Service:     &serviceService,
-		ServiceData: struct{}{},
-		Target: struct {
-			EntityId []string `json:"entity_id,omitempty"`
-		}{EntityId: entities},
-		Type: &serviceType,
+		ServiceBase: ServiceBase{
+			Domain:  &serviceDomain,
+			Id:      nil,
+			Service: &serviceService,
+			Target:  target,
+			Type:    &serviceType,
+		},
+		ServiceData: schedulerRunActionParams,
 	}
 	return s
 }
 
 type SchedulerRunAction struct {
-	Id          *int     `json:"id"`
-	Type        *string  `json:"type"`
-	Domain      *string  `json:"domain"`
-	Service     *string  `json:"service"`
-	ServiceData struct{} `json:"service_data,omitempty"`
-	Target      struct {
-		EntityId []string `json:"entity_id,omitempty"`
-	} `json:"target,omitempty"`
+	ServiceBase
+	ServiceData SchedulerRunActionParams `json:"service_data,omitempty"`
 }
+type SchedulerRunActionParams struct{}
 
 func (s *SchedulerRunAction) JSON() string {
 	data, _ := json.Marshal(s)

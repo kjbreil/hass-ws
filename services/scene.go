@@ -8,36 +8,29 @@ import "encoding/json"
 
 // NewSceneApply creates the object that can be sent to Home Assistant for domain scene, service apply
 // "Activate a scene with configuration."
-func NewSceneApply(entities []string, transition *float64) *SceneApply {
+func NewSceneApply(target Target, sceneApplyParams SceneApplyParams) *SceneApply {
 	serviceDomain := "scene"
 	serviceType := "call_service"
 	serviceService := "apply"
 	s := &SceneApply{
-		Domain:  &serviceDomain,
-		Id:      nil,
-		Service: &serviceService,
-		ServiceData: struct {
-			Transition *float64 `json:"transition,omitempty"`
-		}{Transition: transition},
-		Target: struct {
-			EntityId []string `json:"entity_id,omitempty"`
-		}{EntityId: entities},
-		Type: &serviceType,
+		ServiceBase: ServiceBase{
+			Domain:  &serviceDomain,
+			Id:      nil,
+			Service: &serviceService,
+			Target:  target,
+			Type:    &serviceType,
+		},
+		ServiceData: sceneApplyParams,
 	}
 	return s
 }
 
 type SceneApply struct {
-	Id          *int    `json:"id"`
-	Type        *string `json:"type"`
-	Domain      *string `json:"domain"`
-	Service     *string `json:"service"`
-	ServiceData struct {
-		Transition *float64 `json:"transition,omitempty"`
-	} `json:"service_data,omitempty"`
-	Target struct {
-		EntityId []string `json:"entity_id,omitempty"`
-	} `json:"target,omitempty"`
+	ServiceBase
+	ServiceData SceneApplyParams `json:"service_data,omitempty"`
+}
+type SceneApplyParams struct {
+	Transition *float64 `json:"transition,omitempty"`
 }
 
 func (s *SceneApply) JSON() string {
@@ -50,36 +43,29 @@ func (s *SceneApply) SetID(id *int) {
 
 // NewSceneCreate creates the object that can be sent to Home Assistant for domain scene, service create
 // "Creates a new scene."
-func NewSceneCreate(entities []string, sceneId *string) *SceneCreate {
+func NewSceneCreate(target Target, sceneCreateParams SceneCreateParams) *SceneCreate {
 	serviceDomain := "scene"
 	serviceType := "call_service"
 	serviceService := "create"
 	s := &SceneCreate{
-		Domain:  &serviceDomain,
-		Id:      nil,
-		Service: &serviceService,
-		ServiceData: struct {
-			SceneId *string `json:"scene_id,omitempty"`
-		}{SceneId: sceneId},
-		Target: struct {
-			EntityId []string `json:"entity_id,omitempty"`
-		}{EntityId: entities},
-		Type: &serviceType,
+		ServiceBase: ServiceBase{
+			Domain:  &serviceDomain,
+			Id:      nil,
+			Service: &serviceService,
+			Target:  target,
+			Type:    &serviceType,
+		},
+		ServiceData: sceneCreateParams,
 	}
 	return s
 }
 
 type SceneCreate struct {
-	Id          *int    `json:"id"`
-	Type        *string `json:"type"`
-	Domain      *string `json:"domain"`
-	Service     *string `json:"service"`
-	ServiceData struct {
-		SceneId *string `json:"scene_id,omitempty"`
-	} `json:"service_data,omitempty"`
-	Target struct {
-		EntityId []string `json:"entity_id,omitempty"`
-	} `json:"target,omitempty"`
+	ServiceBase
+	ServiceData SceneCreateParams `json:"service_data,omitempty"`
+}
+type SceneCreateParams struct {
+	SceneId *string `json:"scene_id,omitempty"`
 }
 
 func (s *SceneCreate) JSON() string {
@@ -92,33 +78,28 @@ func (s *SceneCreate) SetID(id *int) {
 
 // NewSceneReload creates the object that can be sent to Home Assistant for domain scene, service reload
 // "Reload the scene configuration."
-func NewSceneReload(entities []string) *SceneReload {
+func NewSceneReload(target Target, sceneReloadParams SceneReloadParams) *SceneReload {
 	serviceDomain := "scene"
 	serviceType := "call_service"
 	serviceService := "reload"
 	s := &SceneReload{
-		Domain:      &serviceDomain,
-		Id:          nil,
-		Service:     &serviceService,
-		ServiceData: struct{}{},
-		Target: struct {
-			EntityId []string `json:"entity_id,omitempty"`
-		}{EntityId: entities},
-		Type: &serviceType,
+		ServiceBase: ServiceBase{
+			Domain:  &serviceDomain,
+			Id:      nil,
+			Service: &serviceService,
+			Target:  target,
+			Type:    &serviceType,
+		},
+		ServiceData: sceneReloadParams,
 	}
 	return s
 }
 
 type SceneReload struct {
-	Id          *int     `json:"id"`
-	Type        *string  `json:"type"`
-	Domain      *string  `json:"domain"`
-	Service     *string  `json:"service"`
-	ServiceData struct{} `json:"service_data,omitempty"`
-	Target      struct {
-		EntityId []string `json:"entity_id,omitempty"`
-	} `json:"target,omitempty"`
+	ServiceBase
+	ServiceData SceneReloadParams `json:"service_data,omitempty"`
 }
+type SceneReloadParams struct{}
 
 func (s *SceneReload) JSON() string {
 	data, _ := json.Marshal(s)
@@ -130,36 +111,29 @@ func (s *SceneReload) SetID(id *int) {
 
 // NewSceneTurnOn creates the object that can be sent to Home Assistant for domain scene, service turn_on
 // "Activate a scene."
-func NewSceneTurnOn(entities []string, transition *float64) *SceneTurnOn {
+func NewSceneTurnOn(target Target, sceneTurnOnParams SceneTurnOnParams) *SceneTurnOn {
 	serviceDomain := "scene"
 	serviceType := "call_service"
 	serviceService := "turn_on"
 	s := &SceneTurnOn{
-		Domain:  &serviceDomain,
-		Id:      nil,
-		Service: &serviceService,
-		ServiceData: struct {
-			Transition *float64 `json:"transition,omitempty"`
-		}{Transition: transition},
-		Target: struct {
-			EntityId []string `json:"entity_id,omitempty"`
-		}{EntityId: entities},
-		Type: &serviceType,
+		ServiceBase: ServiceBase{
+			Domain:  &serviceDomain,
+			Id:      nil,
+			Service: &serviceService,
+			Target:  target,
+			Type:    &serviceType,
+		},
+		ServiceData: sceneTurnOnParams,
 	}
 	return s
 }
 
 type SceneTurnOn struct {
-	Id          *int    `json:"id"`
-	Type        *string `json:"type"`
-	Domain      *string `json:"domain"`
-	Service     *string `json:"service"`
-	ServiceData struct {
-		Transition *float64 `json:"transition,omitempty"`
-	} `json:"service_data,omitempty"`
-	Target struct {
-		EntityId []string `json:"entity_id,omitempty"`
-	} `json:"target,omitempty"`
+	ServiceBase
+	ServiceData SceneTurnOnParams `json:"service_data,omitempty"`
+}
+type SceneTurnOnParams struct {
+	Transition *float64 `json:"transition,omitempty"`
 }
 
 func (s *SceneTurnOn) JSON() string {

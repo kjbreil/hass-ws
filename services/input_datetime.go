@@ -8,33 +8,28 @@ import "encoding/json"
 
 // NewInputDatetimeReload creates the object that can be sent to Home Assistant for domain input_datetime, service reload
 // "Reload the input_datetime configuration."
-func NewInputDatetimeReload(entities []string) *InputDatetimeReload {
+func NewInputDatetimeReload(target Target, inputDatetimeReloadParams InputDatetimeReloadParams) *InputDatetimeReload {
 	serviceDomain := "input_datetime"
 	serviceType := "call_service"
 	serviceService := "reload"
 	i := &InputDatetimeReload{
-		Domain:      &serviceDomain,
-		Id:          nil,
-		Service:     &serviceService,
-		ServiceData: struct{}{},
-		Target: struct {
-			EntityId []string `json:"entity_id,omitempty"`
-		}{EntityId: entities},
-		Type: &serviceType,
+		ServiceBase: ServiceBase{
+			Domain:  &serviceDomain,
+			Id:      nil,
+			Service: &serviceService,
+			Target:  target,
+			Type:    &serviceType,
+		},
+		ServiceData: inputDatetimeReloadParams,
 	}
 	return i
 }
 
 type InputDatetimeReload struct {
-	Id          *int     `json:"id"`
-	Type        *string  `json:"type"`
-	Domain      *string  `json:"domain"`
-	Service     *string  `json:"service"`
-	ServiceData struct{} `json:"service_data,omitempty"`
-	Target      struct {
-		EntityId []string `json:"entity_id,omitempty"`
-	} `json:"target,omitempty"`
+	ServiceBase
+	ServiceData InputDatetimeReloadParams `json:"service_data,omitempty"`
 }
+type InputDatetimeReloadParams struct{}
 
 func (i *InputDatetimeReload) JSON() string {
 	data, _ := json.Marshal(i)
@@ -46,44 +41,31 @@ func (i *InputDatetimeReload) SetID(id *int) {
 
 // NewInputDatetimeSetDatetime creates the object that can be sent to Home Assistant for domain input_datetime, service set_datetime
 // "This can be used to dynamically set the date and/or time."
-func NewInputDatetimeSetDatetime(entities []string, date *string, datetime *string, timestamp *float64) *InputDatetimeSetDatetime {
+func NewInputDatetimeSetDatetime(target Target, inputDatetimeSetDatetimeParams InputDatetimeSetDatetimeParams) *InputDatetimeSetDatetime {
 	serviceDomain := "input_datetime"
 	serviceType := "call_service"
 	serviceService := "set_datetime"
 	i := &InputDatetimeSetDatetime{
-		Domain:  &serviceDomain,
-		Id:      nil,
-		Service: &serviceService,
-		ServiceData: struct {
-			Date      *string  `json:"date,omitempty"`
-			Datetime  *string  `json:"datetime,omitempty"`
-			Timestamp *float64 `json:"timestamp,omitempty"`
-		}{
-			Date:      date,
-			Datetime:  datetime,
-			Timestamp: timestamp,
+		ServiceBase: ServiceBase{
+			Domain:  &serviceDomain,
+			Id:      nil,
+			Service: &serviceService,
+			Target:  target,
+			Type:    &serviceType,
 		},
-		Target: struct {
-			EntityId []string `json:"entity_id,omitempty"`
-		}{EntityId: entities},
-		Type: &serviceType,
+		ServiceData: inputDatetimeSetDatetimeParams,
 	}
 	return i
 }
 
 type InputDatetimeSetDatetime struct {
-	Id          *int    `json:"id"`
-	Type        *string `json:"type"`
-	Domain      *string `json:"domain"`
-	Service     *string `json:"service"`
-	ServiceData struct {
-		Date      *string  `json:"date,omitempty"`
-		Datetime  *string  `json:"datetime,omitempty"`
-		Timestamp *float64 `json:"timestamp,omitempty"`
-	} `json:"service_data,omitempty"`
-	Target struct {
-		EntityId []string `json:"entity_id,omitempty"`
-	} `json:"target,omitempty"`
+	ServiceBase
+	ServiceData InputDatetimeSetDatetimeParams `json:"service_data,omitempty"`
+}
+type InputDatetimeSetDatetimeParams struct {
+	Date      *string  `json:"date,omitempty"`
+	Datetime  *string  `json:"datetime,omitempty"`
+	Timestamp *float64 `json:"timestamp,omitempty"`
 }
 
 func (i *InputDatetimeSetDatetime) JSON() string {

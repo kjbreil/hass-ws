@@ -8,41 +8,30 @@ import "encoding/json"
 
 // NewMqttDump creates the object that can be sent to Home Assistant for domain mqtt, service dump
 // "Dump messages on a topic selector to the 'mqtt_dump.txt' file in your configuration folder."
-func NewMqttDump(entities []string, duration *float64, topic *string) *MqttDump {
+func NewMqttDump(target Target, mqttDumpParams MqttDumpParams) *MqttDump {
 	serviceDomain := "mqtt"
 	serviceType := "call_service"
 	serviceService := "dump"
 	m := &MqttDump{
-		Domain:  &serviceDomain,
-		Id:      nil,
-		Service: &serviceService,
-		ServiceData: struct {
-			Duration *float64 `json:"duration,omitempty"`
-			Topic    *string  `json:"topic,omitempty"`
-		}{
-			Duration: duration,
-			Topic:    topic,
+		ServiceBase: ServiceBase{
+			Domain:  &serviceDomain,
+			Id:      nil,
+			Service: &serviceService,
+			Target:  target,
+			Type:    &serviceType,
 		},
-		Target: struct {
-			EntityId []string `json:"entity_id,omitempty"`
-		}{EntityId: entities},
-		Type: &serviceType,
+		ServiceData: mqttDumpParams,
 	}
 	return m
 }
 
 type MqttDump struct {
-	Id          *int    `json:"id"`
-	Type        *string `json:"type"`
-	Domain      *string `json:"domain"`
-	Service     *string `json:"service"`
-	ServiceData struct {
-		Duration *float64 `json:"duration,omitempty"`
-		Topic    *string  `json:"topic,omitempty"`
-	} `json:"service_data,omitempty"`
-	Target struct {
-		EntityId []string `json:"entity_id,omitempty"`
-	} `json:"target,omitempty"`
+	ServiceBase
+	ServiceData MqttDumpParams `json:"service_data,omitempty"`
+}
+type MqttDumpParams struct {
+	Duration *float64 `json:"duration,omitempty"`
+	Topic    *string  `json:"topic,omitempty"`
 }
 
 func (m *MqttDump) JSON() string {
@@ -55,44 +44,31 @@ func (m *MqttDump) SetID(id *int) {
 
 // NewMqttPublish creates the object that can be sent to Home Assistant for domain mqtt, service publish
 // "Publish a message to an MQTT topic."
-func NewMqttPublish(entities []string, payload *string, qos *Qos, topic *string) *MqttPublish {
+func NewMqttPublish(target Target, mqttPublishParams MqttPublishParams) *MqttPublish {
 	serviceDomain := "mqtt"
 	serviceType := "call_service"
 	serviceService := "publish"
 	m := &MqttPublish{
-		Domain:  &serviceDomain,
-		Id:      nil,
-		Service: &serviceService,
-		ServiceData: struct {
-			Payload *string `json:"payload,omitempty"`
-			Qos     *Qos    `json:"qos,omitempty"`
-			Topic   *string `json:"topic,omitempty"`
-		}{
-			Payload: payload,
-			Qos:     qos,
-			Topic:   topic,
+		ServiceBase: ServiceBase{
+			Domain:  &serviceDomain,
+			Id:      nil,
+			Service: &serviceService,
+			Target:  target,
+			Type:    &serviceType,
 		},
-		Target: struct {
-			EntityId []string `json:"entity_id,omitempty"`
-		}{EntityId: entities},
-		Type: &serviceType,
+		ServiceData: mqttPublishParams,
 	}
 	return m
 }
 
 type MqttPublish struct {
-	Id          *int    `json:"id"`
-	Type        *string `json:"type"`
-	Domain      *string `json:"domain"`
-	Service     *string `json:"service"`
-	ServiceData struct {
-		Payload *string `json:"payload,omitempty"`
-		Qos     *Qos    `json:"qos,omitempty"`
-		Topic   *string `json:"topic,omitempty"`
-	} `json:"service_data,omitempty"`
-	Target struct {
-		EntityId []string `json:"entity_id,omitempty"`
-	} `json:"target,omitempty"`
+	ServiceBase
+	ServiceData MqttPublishParams `json:"service_data,omitempty"`
+}
+type MqttPublishParams struct {
+	Payload *string `json:"payload,omitempty"`
+	Qos     *Qos    `json:"qos,omitempty"`
+	Topic   *string `json:"topic,omitempty"`
 }
 
 func (m *MqttPublish) JSON() string {
@@ -105,33 +81,28 @@ func (m *MqttPublish) SetID(id *int) {
 
 // NewMqttReload creates the object that can be sent to Home Assistant for domain mqtt, service reload
 // "Reload all MQTT entities from YAML."
-func NewMqttReload(entities []string) *MqttReload {
+func NewMqttReload(target Target, mqttReloadParams MqttReloadParams) *MqttReload {
 	serviceDomain := "mqtt"
 	serviceType := "call_service"
 	serviceService := "reload"
 	m := &MqttReload{
-		Domain:      &serviceDomain,
-		Id:          nil,
-		Service:     &serviceService,
-		ServiceData: struct{}{},
-		Target: struct {
-			EntityId []string `json:"entity_id,omitempty"`
-		}{EntityId: entities},
-		Type: &serviceType,
+		ServiceBase: ServiceBase{
+			Domain:  &serviceDomain,
+			Id:      nil,
+			Service: &serviceService,
+			Target:  target,
+			Type:    &serviceType,
+		},
+		ServiceData: mqttReloadParams,
 	}
 	return m
 }
 
 type MqttReload struct {
-	Id          *int     `json:"id"`
-	Type        *string  `json:"type"`
-	Domain      *string  `json:"domain"`
-	Service     *string  `json:"service"`
-	ServiceData struct{} `json:"service_data,omitempty"`
-	Target      struct {
-		EntityId []string `json:"entity_id,omitempty"`
-	} `json:"target,omitempty"`
+	ServiceBase
+	ServiceData MqttReloadParams `json:"service_data,omitempty"`
 }
+type MqttReloadParams struct{}
 
 func (m *MqttReload) JSON() string {
 	data, _ := json.Marshal(m)

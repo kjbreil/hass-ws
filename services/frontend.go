@@ -8,33 +8,28 @@ import "encoding/json"
 
 // NewFrontendReloadThemes creates the object that can be sent to Home Assistant for domain frontend, service reload_themes
 // "Reload themes from YAML configuration."
-func NewFrontendReloadThemes(entities []string) *FrontendReloadThemes {
+func NewFrontendReloadThemes(target Target, frontendReloadThemesParams FrontendReloadThemesParams) *FrontendReloadThemes {
 	serviceDomain := "frontend"
 	serviceType := "call_service"
 	serviceService := "reload_themes"
 	f := &FrontendReloadThemes{
-		Domain:      &serviceDomain,
-		Id:          nil,
-		Service:     &serviceService,
-		ServiceData: struct{}{},
-		Target: struct {
-			EntityId []string `json:"entity_id,omitempty"`
-		}{EntityId: entities},
-		Type: &serviceType,
+		ServiceBase: ServiceBase{
+			Domain:  &serviceDomain,
+			Id:      nil,
+			Service: &serviceService,
+			Target:  target,
+			Type:    &serviceType,
+		},
+		ServiceData: frontendReloadThemesParams,
 	}
 	return f
 }
 
 type FrontendReloadThemes struct {
-	Id          *int     `json:"id"`
-	Type        *string  `json:"type"`
-	Domain      *string  `json:"domain"`
-	Service     *string  `json:"service"`
-	ServiceData struct{} `json:"service_data,omitempty"`
-	Target      struct {
-		EntityId []string `json:"entity_id,omitempty"`
-	} `json:"target,omitempty"`
+	ServiceBase
+	ServiceData FrontendReloadThemesParams `json:"service_data,omitempty"`
 }
+type FrontendReloadThemesParams struct{}
 
 func (f *FrontendReloadThemes) JSON() string {
 	data, _ := json.Marshal(f)
@@ -46,36 +41,29 @@ func (f *FrontendReloadThemes) SetID(id *int) {
 
 // NewFrontendSetTheme creates the object that can be sent to Home Assistant for domain frontend, service set_theme
 // "Set a theme unless the client selected per-device theme."
-func NewFrontendSetTheme(entities []string, mode *Mode) *FrontendSetTheme {
+func NewFrontendSetTheme(target Target, frontendSetThemeParams FrontendSetThemeParams) *FrontendSetTheme {
 	serviceDomain := "frontend"
 	serviceType := "call_service"
 	serviceService := "set_theme"
 	f := &FrontendSetTheme{
-		Domain:  &serviceDomain,
-		Id:      nil,
-		Service: &serviceService,
-		ServiceData: struct {
-			Mode *Mode `json:"mode,omitempty"`
-		}{Mode: mode},
-		Target: struct {
-			EntityId []string `json:"entity_id,omitempty"`
-		}{EntityId: entities},
-		Type: &serviceType,
+		ServiceBase: ServiceBase{
+			Domain:  &serviceDomain,
+			Id:      nil,
+			Service: &serviceService,
+			Target:  target,
+			Type:    &serviceType,
+		},
+		ServiceData: frontendSetThemeParams,
 	}
 	return f
 }
 
 type FrontendSetTheme struct {
-	Id          *int    `json:"id"`
-	Type        *string `json:"type"`
-	Domain      *string `json:"domain"`
-	Service     *string `json:"service"`
-	ServiceData struct {
-		Mode *Mode `json:"mode,omitempty"`
-	} `json:"service_data,omitempty"`
-	Target struct {
-		EntityId []string `json:"entity_id,omitempty"`
-	} `json:"target,omitempty"`
+	ServiceBase
+	ServiceData FrontendSetThemeParams `json:"service_data,omitempty"`
+}
+type FrontendSetThemeParams struct {
+	Mode *Mode `json:"mode,omitempty"`
 }
 
 func (f *FrontendSetTheme) JSON() string {

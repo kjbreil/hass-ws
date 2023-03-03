@@ -8,33 +8,28 @@ import "encoding/json"
 
 // NewAutomationReload creates the object that can be sent to Home Assistant for domain automation, service reload
 // "Reload the automation configuration."
-func NewAutomationReload(entities []string) *AutomationReload {
+func NewAutomationReload(target Target, automationReloadParams AutomationReloadParams) *AutomationReload {
 	serviceDomain := "automation"
 	serviceType := "call_service"
 	serviceService := "reload"
 	a := &AutomationReload{
-		Domain:      &serviceDomain,
-		Id:          nil,
-		Service:     &serviceService,
-		ServiceData: struct{}{},
-		Target: struct {
-			EntityId []string `json:"entity_id,omitempty"`
-		}{EntityId: entities},
-		Type: &serviceType,
+		ServiceBase: ServiceBase{
+			Domain:  &serviceDomain,
+			Id:      nil,
+			Service: &serviceService,
+			Target:  target,
+			Type:    &serviceType,
+		},
+		ServiceData: automationReloadParams,
 	}
 	return a
 }
 
 type AutomationReload struct {
-	Id          *int     `json:"id"`
-	Type        *string  `json:"type"`
-	Domain      *string  `json:"domain"`
-	Service     *string  `json:"service"`
-	ServiceData struct{} `json:"service_data,omitempty"`
-	Target      struct {
-		EntityId []string `json:"entity_id,omitempty"`
-	} `json:"target,omitempty"`
+	ServiceBase
+	ServiceData AutomationReloadParams `json:"service_data,omitempty"`
 }
+type AutomationReloadParams struct{}
 
 func (a *AutomationReload) JSON() string {
 	data, _ := json.Marshal(a)
@@ -46,33 +41,28 @@ func (a *AutomationReload) SetID(id *int) {
 
 // NewAutomationToggle creates the object that can be sent to Home Assistant for domain automation, service toggle
 // "Toggle (enable / disable) an automation."
-func NewAutomationToggle(entities []string) *AutomationToggle {
+func NewAutomationToggle(target Target, automationToggleParams AutomationToggleParams) *AutomationToggle {
 	serviceDomain := "automation"
 	serviceType := "call_service"
 	serviceService := "toggle"
 	a := &AutomationToggle{
-		Domain:      &serviceDomain,
-		Id:          nil,
-		Service:     &serviceService,
-		ServiceData: struct{}{},
-		Target: struct {
-			EntityId []string `json:"entity_id,omitempty"`
-		}{EntityId: entities},
-		Type: &serviceType,
+		ServiceBase: ServiceBase{
+			Domain:  &serviceDomain,
+			Id:      nil,
+			Service: &serviceService,
+			Target:  target,
+			Type:    &serviceType,
+		},
+		ServiceData: automationToggleParams,
 	}
 	return a
 }
 
 type AutomationToggle struct {
-	Id          *int     `json:"id"`
-	Type        *string  `json:"type"`
-	Domain      *string  `json:"domain"`
-	Service     *string  `json:"service"`
-	ServiceData struct{} `json:"service_data,omitempty"`
-	Target      struct {
-		EntityId []string `json:"entity_id,omitempty"`
-	} `json:"target,omitempty"`
+	ServiceBase
+	ServiceData AutomationToggleParams `json:"service_data,omitempty"`
 }
+type AutomationToggleParams struct{}
 
 func (a *AutomationToggle) JSON() string {
 	data, _ := json.Marshal(a)
@@ -84,33 +74,28 @@ func (a *AutomationToggle) SetID(id *int) {
 
 // NewAutomationTrigger creates the object that can be sent to Home Assistant for domain automation, service trigger
 // "Trigger the actions of an automation."
-func NewAutomationTrigger(entities []string) *AutomationTrigger {
+func NewAutomationTrigger(target Target, automationTriggerParams AutomationTriggerParams) *AutomationTrigger {
 	serviceDomain := "automation"
 	serviceType := "call_service"
 	serviceService := "trigger"
 	a := &AutomationTrigger{
-		Domain:      &serviceDomain,
-		Id:          nil,
-		Service:     &serviceService,
-		ServiceData: struct{}{},
-		Target: struct {
-			EntityId []string `json:"entity_id,omitempty"`
-		}{EntityId: entities},
-		Type: &serviceType,
+		ServiceBase: ServiceBase{
+			Domain:  &serviceDomain,
+			Id:      nil,
+			Service: &serviceService,
+			Target:  target,
+			Type:    &serviceType,
+		},
+		ServiceData: automationTriggerParams,
 	}
 	return a
 }
 
 type AutomationTrigger struct {
-	Id          *int     `json:"id"`
-	Type        *string  `json:"type"`
-	Domain      *string  `json:"domain"`
-	Service     *string  `json:"service"`
-	ServiceData struct{} `json:"service_data,omitempty"`
-	Target      struct {
-		EntityId []string `json:"entity_id,omitempty"`
-	} `json:"target,omitempty"`
+	ServiceBase
+	ServiceData AutomationTriggerParams `json:"service_data,omitempty"`
 }
+type AutomationTriggerParams struct{}
 
 func (a *AutomationTrigger) JSON() string {
 	data, _ := json.Marshal(a)
@@ -122,33 +107,28 @@ func (a *AutomationTrigger) SetID(id *int) {
 
 // NewAutomationTurnOff creates the object that can be sent to Home Assistant for domain automation, service turn_off
 // "Disable an automation."
-func NewAutomationTurnOff(entities []string) *AutomationTurnOff {
+func NewAutomationTurnOff(target Target, automationTurnOffParams AutomationTurnOffParams) *AutomationTurnOff {
 	serviceDomain := "automation"
 	serviceType := "call_service"
 	serviceService := "turn_off"
 	a := &AutomationTurnOff{
-		Domain:      &serviceDomain,
-		Id:          nil,
-		Service:     &serviceService,
-		ServiceData: struct{}{},
-		Target: struct {
-			EntityId []string `json:"entity_id,omitempty"`
-		}{EntityId: entities},
-		Type: &serviceType,
+		ServiceBase: ServiceBase{
+			Domain:  &serviceDomain,
+			Id:      nil,
+			Service: &serviceService,
+			Target:  target,
+			Type:    &serviceType,
+		},
+		ServiceData: automationTurnOffParams,
 	}
 	return a
 }
 
 type AutomationTurnOff struct {
-	Id          *int     `json:"id"`
-	Type        *string  `json:"type"`
-	Domain      *string  `json:"domain"`
-	Service     *string  `json:"service"`
-	ServiceData struct{} `json:"service_data,omitempty"`
-	Target      struct {
-		EntityId []string `json:"entity_id,omitempty"`
-	} `json:"target,omitempty"`
+	ServiceBase
+	ServiceData AutomationTurnOffParams `json:"service_data,omitempty"`
 }
+type AutomationTurnOffParams struct{}
 
 func (a *AutomationTurnOff) JSON() string {
 	data, _ := json.Marshal(a)
@@ -160,33 +140,28 @@ func (a *AutomationTurnOff) SetID(id *int) {
 
 // NewAutomationTurnOn creates the object that can be sent to Home Assistant for domain automation, service turn_on
 // "Enable an automation."
-func NewAutomationTurnOn(entities []string) *AutomationTurnOn {
+func NewAutomationTurnOn(target Target, automationTurnOnParams AutomationTurnOnParams) *AutomationTurnOn {
 	serviceDomain := "automation"
 	serviceType := "call_service"
 	serviceService := "turn_on"
 	a := &AutomationTurnOn{
-		Domain:      &serviceDomain,
-		Id:          nil,
-		Service:     &serviceService,
-		ServiceData: struct{}{},
-		Target: struct {
-			EntityId []string `json:"entity_id,omitempty"`
-		}{EntityId: entities},
-		Type: &serviceType,
+		ServiceBase: ServiceBase{
+			Domain:  &serviceDomain,
+			Id:      nil,
+			Service: &serviceService,
+			Target:  target,
+			Type:    &serviceType,
+		},
+		ServiceData: automationTurnOnParams,
 	}
 	return a
 }
 
 type AutomationTurnOn struct {
-	Id          *int     `json:"id"`
-	Type        *string  `json:"type"`
-	Domain      *string  `json:"domain"`
-	Service     *string  `json:"service"`
-	ServiceData struct{} `json:"service_data,omitempty"`
-	Target      struct {
-		EntityId []string `json:"entity_id,omitempty"`
-	} `json:"target,omitempty"`
+	ServiceBase
+	ServiceData AutomationTurnOnParams `json:"service_data,omitempty"`
 }
+type AutomationTurnOnParams struct{}
 
 func (a *AutomationTurnOn) JSON() string {
 	data, _ := json.Marshal(a)

@@ -8,36 +8,29 @@ import "encoding/json"
 
 // NewNumberSetValue creates the object that can be sent to Home Assistant for domain number, service set_value
 // "Set the value of a Number entity."
-func NewNumberSetValue(entities []string, value *string) *NumberSetValue {
+func NewNumberSetValue(target Target, numberSetValueParams NumberSetValueParams) *NumberSetValue {
 	serviceDomain := "number"
 	serviceType := "call_service"
 	serviceService := "set_value"
 	n := &NumberSetValue{
-		Domain:  &serviceDomain,
-		Id:      nil,
-		Service: &serviceService,
-		ServiceData: struct {
-			Value *string `json:"value,omitempty"`
-		}{Value: value},
-		Target: struct {
-			EntityId []string `json:"entity_id,omitempty"`
-		}{EntityId: entities},
-		Type: &serviceType,
+		ServiceBase: ServiceBase{
+			Domain:  &serviceDomain,
+			Id:      nil,
+			Service: &serviceService,
+			Target:  target,
+			Type:    &serviceType,
+		},
+		ServiceData: numberSetValueParams,
 	}
 	return n
 }
 
 type NumberSetValue struct {
-	Id          *int    `json:"id"`
-	Type        *string `json:"type"`
-	Domain      *string `json:"domain"`
-	Service     *string `json:"service"`
-	ServiceData struct {
-		Value *string `json:"value,omitempty"`
-	} `json:"service_data,omitempty"`
-	Target struct {
-		EntityId []string `json:"entity_id,omitempty"`
-	} `json:"target,omitempty"`
+	ServiceBase
+	ServiceData NumberSetValueParams `json:"service_data,omitempty"`
+}
+type NumberSetValueParams struct {
+	Value *string `json:"value,omitempty"`
 }
 
 func (n *NumberSetValue) JSON() string {

@@ -8,33 +8,28 @@ import "encoding/json"
 
 // NewInputNumberDecrement creates the object that can be sent to Home Assistant for domain input_number, service decrement
 // "Decrement the value of an input number entity by its stepping."
-func NewInputNumberDecrement(entities []string) *InputNumberDecrement {
+func NewInputNumberDecrement(target Target, inputNumberDecrementParams InputNumberDecrementParams) *InputNumberDecrement {
 	serviceDomain := "input_number"
 	serviceType := "call_service"
 	serviceService := "decrement"
 	i := &InputNumberDecrement{
-		Domain:      &serviceDomain,
-		Id:          nil,
-		Service:     &serviceService,
-		ServiceData: struct{}{},
-		Target: struct {
-			EntityId []string `json:"entity_id,omitempty"`
-		}{EntityId: entities},
-		Type: &serviceType,
+		ServiceBase: ServiceBase{
+			Domain:  &serviceDomain,
+			Id:      nil,
+			Service: &serviceService,
+			Target:  target,
+			Type:    &serviceType,
+		},
+		ServiceData: inputNumberDecrementParams,
 	}
 	return i
 }
 
 type InputNumberDecrement struct {
-	Id          *int     `json:"id"`
-	Type        *string  `json:"type"`
-	Domain      *string  `json:"domain"`
-	Service     *string  `json:"service"`
-	ServiceData struct{} `json:"service_data,omitempty"`
-	Target      struct {
-		EntityId []string `json:"entity_id,omitempty"`
-	} `json:"target,omitempty"`
+	ServiceBase
+	ServiceData InputNumberDecrementParams `json:"service_data,omitempty"`
 }
+type InputNumberDecrementParams struct{}
 
 func (i *InputNumberDecrement) JSON() string {
 	data, _ := json.Marshal(i)
@@ -46,33 +41,28 @@ func (i *InputNumberDecrement) SetID(id *int) {
 
 // NewInputNumberIncrement creates the object that can be sent to Home Assistant for domain input_number, service increment
 // "Increment the value of an input number entity by its stepping."
-func NewInputNumberIncrement(entities []string) *InputNumberIncrement {
+func NewInputNumberIncrement(target Target, inputNumberIncrementParams InputNumberIncrementParams) *InputNumberIncrement {
 	serviceDomain := "input_number"
 	serviceType := "call_service"
 	serviceService := "increment"
 	i := &InputNumberIncrement{
-		Domain:      &serviceDomain,
-		Id:          nil,
-		Service:     &serviceService,
-		ServiceData: struct{}{},
-		Target: struct {
-			EntityId []string `json:"entity_id,omitempty"`
-		}{EntityId: entities},
-		Type: &serviceType,
+		ServiceBase: ServiceBase{
+			Domain:  &serviceDomain,
+			Id:      nil,
+			Service: &serviceService,
+			Target:  target,
+			Type:    &serviceType,
+		},
+		ServiceData: inputNumberIncrementParams,
 	}
 	return i
 }
 
 type InputNumberIncrement struct {
-	Id          *int     `json:"id"`
-	Type        *string  `json:"type"`
-	Domain      *string  `json:"domain"`
-	Service     *string  `json:"service"`
-	ServiceData struct{} `json:"service_data,omitempty"`
-	Target      struct {
-		EntityId []string `json:"entity_id,omitempty"`
-	} `json:"target,omitempty"`
+	ServiceBase
+	ServiceData InputNumberIncrementParams `json:"service_data,omitempty"`
 }
+type InputNumberIncrementParams struct{}
 
 func (i *InputNumberIncrement) JSON() string {
 	data, _ := json.Marshal(i)
@@ -84,33 +74,28 @@ func (i *InputNumberIncrement) SetID(id *int) {
 
 // NewInputNumberReload creates the object that can be sent to Home Assistant for domain input_number, service reload
 // "Reload the input_number configuration."
-func NewInputNumberReload(entities []string) *InputNumberReload {
+func NewInputNumberReload(target Target, inputNumberReloadParams InputNumberReloadParams) *InputNumberReload {
 	serviceDomain := "input_number"
 	serviceType := "call_service"
 	serviceService := "reload"
 	i := &InputNumberReload{
-		Domain:      &serviceDomain,
-		Id:          nil,
-		Service:     &serviceService,
-		ServiceData: struct{}{},
-		Target: struct {
-			EntityId []string `json:"entity_id,omitempty"`
-		}{EntityId: entities},
-		Type: &serviceType,
+		ServiceBase: ServiceBase{
+			Domain:  &serviceDomain,
+			Id:      nil,
+			Service: &serviceService,
+			Target:  target,
+			Type:    &serviceType,
+		},
+		ServiceData: inputNumberReloadParams,
 	}
 	return i
 }
 
 type InputNumberReload struct {
-	Id          *int     `json:"id"`
-	Type        *string  `json:"type"`
-	Domain      *string  `json:"domain"`
-	Service     *string  `json:"service"`
-	ServiceData struct{} `json:"service_data,omitempty"`
-	Target      struct {
-		EntityId []string `json:"entity_id,omitempty"`
-	} `json:"target,omitempty"`
+	ServiceBase
+	ServiceData InputNumberReloadParams `json:"service_data,omitempty"`
 }
+type InputNumberReloadParams struct{}
 
 func (i *InputNumberReload) JSON() string {
 	data, _ := json.Marshal(i)
@@ -122,36 +107,29 @@ func (i *InputNumberReload) SetID(id *int) {
 
 // NewInputNumberSetValue creates the object that can be sent to Home Assistant for domain input_number, service set_value
 // "Set the value of an input number entity."
-func NewInputNumberSetValue(entities []string, value *float64) *InputNumberSetValue {
+func NewInputNumberSetValue(target Target, inputNumberSetValueParams InputNumberSetValueParams) *InputNumberSetValue {
 	serviceDomain := "input_number"
 	serviceType := "call_service"
 	serviceService := "set_value"
 	i := &InputNumberSetValue{
-		Domain:  &serviceDomain,
-		Id:      nil,
-		Service: &serviceService,
-		ServiceData: struct {
-			Value *float64 `json:"value,omitempty"`
-		}{Value: value},
-		Target: struct {
-			EntityId []string `json:"entity_id,omitempty"`
-		}{EntityId: entities},
-		Type: &serviceType,
+		ServiceBase: ServiceBase{
+			Domain:  &serviceDomain,
+			Id:      nil,
+			Service: &serviceService,
+			Target:  target,
+			Type:    &serviceType,
+		},
+		ServiceData: inputNumberSetValueParams,
 	}
 	return i
 }
 
 type InputNumberSetValue struct {
-	Id          *int    `json:"id"`
-	Type        *string `json:"type"`
-	Domain      *string `json:"domain"`
-	Service     *string `json:"service"`
-	ServiceData struct {
-		Value *float64 `json:"value,omitempty"`
-	} `json:"service_data,omitempty"`
-	Target struct {
-		EntityId []string `json:"entity_id,omitempty"`
-	} `json:"target,omitempty"`
+	ServiceBase
+	ServiceData InputNumberSetValueParams `json:"service_data,omitempty"`
+}
+type InputNumberSetValueParams struct {
+	Value *float64 `json:"value,omitempty"`
 }
 
 func (i *InputNumberSetValue) JSON() string {

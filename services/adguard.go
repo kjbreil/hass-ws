@@ -8,41 +8,30 @@ import "encoding/json"
 
 // NewAdguardAddUrl creates the object that can be sent to Home Assistant for domain adguard, service add_url
 // "Add a new filter subscription to AdGuard Home."
-func NewAdguardAddUrl(entities []string, name *string, url *string) *AdguardAddUrl {
+func NewAdguardAddUrl(target Target, adguardAddUrlParams AdguardAddUrlParams) *AdguardAddUrl {
 	serviceDomain := "adguard"
 	serviceType := "call_service"
 	serviceService := "add_url"
 	a := &AdguardAddUrl{
-		Domain:  &serviceDomain,
-		Id:      nil,
-		Service: &serviceService,
-		ServiceData: struct {
-			Name *string `json:"name,omitempty"`
-			Url  *string `json:"url,omitempty"`
-		}{
-			Name: name,
-			Url:  url,
+		ServiceBase: ServiceBase{
+			Domain:  &serviceDomain,
+			Id:      nil,
+			Service: &serviceService,
+			Target:  target,
+			Type:    &serviceType,
 		},
-		Target: struct {
-			EntityId []string `json:"entity_id,omitempty"`
-		}{EntityId: entities},
-		Type: &serviceType,
+		ServiceData: adguardAddUrlParams,
 	}
 	return a
 }
 
 type AdguardAddUrl struct {
-	Id          *int    `json:"id"`
-	Type        *string `json:"type"`
-	Domain      *string `json:"domain"`
-	Service     *string `json:"service"`
-	ServiceData struct {
-		Name *string `json:"name,omitempty"`
-		Url  *string `json:"url,omitempty"`
-	} `json:"service_data,omitempty"`
-	Target struct {
-		EntityId []string `json:"entity_id,omitempty"`
-	} `json:"target,omitempty"`
+	ServiceBase
+	ServiceData AdguardAddUrlParams `json:"service_data,omitempty"`
+}
+type AdguardAddUrlParams struct {
+	Name *string `json:"name,omitempty"`
+	Url  *string `json:"url,omitempty"`
 }
 
 func (a *AdguardAddUrl) JSON() string {
@@ -55,36 +44,29 @@ func (a *AdguardAddUrl) SetID(id *int) {
 
 // NewAdguardDisableUrl creates the object that can be sent to Home Assistant for domain adguard, service disable_url
 // "Disables a filter subscription in AdGuard Home."
-func NewAdguardDisableUrl(entities []string, url *string) *AdguardDisableUrl {
+func NewAdguardDisableUrl(target Target, adguardDisableUrlParams AdguardDisableUrlParams) *AdguardDisableUrl {
 	serviceDomain := "adguard"
 	serviceType := "call_service"
 	serviceService := "disable_url"
 	a := &AdguardDisableUrl{
-		Domain:  &serviceDomain,
-		Id:      nil,
-		Service: &serviceService,
-		ServiceData: struct {
-			Url *string `json:"url,omitempty"`
-		}{Url: url},
-		Target: struct {
-			EntityId []string `json:"entity_id,omitempty"`
-		}{EntityId: entities},
-		Type: &serviceType,
+		ServiceBase: ServiceBase{
+			Domain:  &serviceDomain,
+			Id:      nil,
+			Service: &serviceService,
+			Target:  target,
+			Type:    &serviceType,
+		},
+		ServiceData: adguardDisableUrlParams,
 	}
 	return a
 }
 
 type AdguardDisableUrl struct {
-	Id          *int    `json:"id"`
-	Type        *string `json:"type"`
-	Domain      *string `json:"domain"`
-	Service     *string `json:"service"`
-	ServiceData struct {
-		Url *string `json:"url,omitempty"`
-	} `json:"service_data,omitempty"`
-	Target struct {
-		EntityId []string `json:"entity_id,omitempty"`
-	} `json:"target,omitempty"`
+	ServiceBase
+	ServiceData AdguardDisableUrlParams `json:"service_data,omitempty"`
+}
+type AdguardDisableUrlParams struct {
+	Url *string `json:"url,omitempty"`
 }
 
 func (a *AdguardDisableUrl) JSON() string {
@@ -97,36 +79,29 @@ func (a *AdguardDisableUrl) SetID(id *int) {
 
 // NewAdguardEnableUrl creates the object that can be sent to Home Assistant for domain adguard, service enable_url
 // "Enables a filter subscription in AdGuard Home."
-func NewAdguardEnableUrl(entities []string, url *string) *AdguardEnableUrl {
+func NewAdguardEnableUrl(target Target, adguardEnableUrlParams AdguardEnableUrlParams) *AdguardEnableUrl {
 	serviceDomain := "adguard"
 	serviceType := "call_service"
 	serviceService := "enable_url"
 	a := &AdguardEnableUrl{
-		Domain:  &serviceDomain,
-		Id:      nil,
-		Service: &serviceService,
-		ServiceData: struct {
-			Url *string `json:"url,omitempty"`
-		}{Url: url},
-		Target: struct {
-			EntityId []string `json:"entity_id,omitempty"`
-		}{EntityId: entities},
-		Type: &serviceType,
+		ServiceBase: ServiceBase{
+			Domain:  &serviceDomain,
+			Id:      nil,
+			Service: &serviceService,
+			Target:  target,
+			Type:    &serviceType,
+		},
+		ServiceData: adguardEnableUrlParams,
 	}
 	return a
 }
 
 type AdguardEnableUrl struct {
-	Id          *int    `json:"id"`
-	Type        *string `json:"type"`
-	Domain      *string `json:"domain"`
-	Service     *string `json:"service"`
-	ServiceData struct {
-		Url *string `json:"url,omitempty"`
-	} `json:"service_data,omitempty"`
-	Target struct {
-		EntityId []string `json:"entity_id,omitempty"`
-	} `json:"target,omitempty"`
+	ServiceBase
+	ServiceData AdguardEnableUrlParams `json:"service_data,omitempty"`
+}
+type AdguardEnableUrlParams struct {
+	Url *string `json:"url,omitempty"`
 }
 
 func (a *AdguardEnableUrl) JSON() string {
@@ -139,33 +114,28 @@ func (a *AdguardEnableUrl) SetID(id *int) {
 
 // NewAdguardRefresh creates the object that can be sent to Home Assistant for domain adguard, service refresh
 // "Refresh all filter subscriptions in AdGuard Home."
-func NewAdguardRefresh(entities []string) *AdguardRefresh {
+func NewAdguardRefresh(target Target, adguardRefreshParams AdguardRefreshParams) *AdguardRefresh {
 	serviceDomain := "adguard"
 	serviceType := "call_service"
 	serviceService := "refresh"
 	a := &AdguardRefresh{
-		Domain:      &serviceDomain,
-		Id:          nil,
-		Service:     &serviceService,
-		ServiceData: struct{}{},
-		Target: struct {
-			EntityId []string `json:"entity_id,omitempty"`
-		}{EntityId: entities},
-		Type: &serviceType,
+		ServiceBase: ServiceBase{
+			Domain:  &serviceDomain,
+			Id:      nil,
+			Service: &serviceService,
+			Target:  target,
+			Type:    &serviceType,
+		},
+		ServiceData: adguardRefreshParams,
 	}
 	return a
 }
 
 type AdguardRefresh struct {
-	Id          *int     `json:"id"`
-	Type        *string  `json:"type"`
-	Domain      *string  `json:"domain"`
-	Service     *string  `json:"service"`
-	ServiceData struct{} `json:"service_data,omitempty"`
-	Target      struct {
-		EntityId []string `json:"entity_id,omitempty"`
-	} `json:"target,omitempty"`
+	ServiceBase
+	ServiceData AdguardRefreshParams `json:"service_data,omitempty"`
 }
+type AdguardRefreshParams struct{}
 
 func (a *AdguardRefresh) JSON() string {
 	data, _ := json.Marshal(a)
@@ -177,36 +147,29 @@ func (a *AdguardRefresh) SetID(id *int) {
 
 // NewAdguardRemoveUrl creates the object that can be sent to Home Assistant for domain adguard, service remove_url
 // "Removes a filter subscription from AdGuard Home."
-func NewAdguardRemoveUrl(entities []string, url *string) *AdguardRemoveUrl {
+func NewAdguardRemoveUrl(target Target, adguardRemoveUrlParams AdguardRemoveUrlParams) *AdguardRemoveUrl {
 	serviceDomain := "adguard"
 	serviceType := "call_service"
 	serviceService := "remove_url"
 	a := &AdguardRemoveUrl{
-		Domain:  &serviceDomain,
-		Id:      nil,
-		Service: &serviceService,
-		ServiceData: struct {
-			Url *string `json:"url,omitempty"`
-		}{Url: url},
-		Target: struct {
-			EntityId []string `json:"entity_id,omitempty"`
-		}{EntityId: entities},
-		Type: &serviceType,
+		ServiceBase: ServiceBase{
+			Domain:  &serviceDomain,
+			Id:      nil,
+			Service: &serviceService,
+			Target:  target,
+			Type:    &serviceType,
+		},
+		ServiceData: adguardRemoveUrlParams,
 	}
 	return a
 }
 
 type AdguardRemoveUrl struct {
-	Id          *int    `json:"id"`
-	Type        *string `json:"type"`
-	Domain      *string `json:"domain"`
-	Service     *string `json:"service"`
-	ServiceData struct {
-		Url *string `json:"url,omitempty"`
-	} `json:"service_data,omitempty"`
-	Target struct {
-		EntityId []string `json:"entity_id,omitempty"`
-	} `json:"target,omitempty"`
+	ServiceBase
+	ServiceData AdguardRemoveUrlParams `json:"service_data,omitempty"`
+}
+type AdguardRemoveUrlParams struct {
+	Url *string `json:"url,omitempty"`
 }
 
 func (a *AdguardRemoveUrl) JSON() string {

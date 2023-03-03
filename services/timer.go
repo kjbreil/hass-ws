@@ -8,33 +8,28 @@ import "encoding/json"
 
 // NewTimerCancel creates the object that can be sent to Home Assistant for domain timer, service cancel
 // "Cancel a timer."
-func NewTimerCancel(entities []string) *TimerCancel {
+func NewTimerCancel(target Target, timerCancelParams TimerCancelParams) *TimerCancel {
 	serviceDomain := "timer"
 	serviceType := "call_service"
 	serviceService := "cancel"
 	t := &TimerCancel{
-		Domain:      &serviceDomain,
-		Id:          nil,
-		Service:     &serviceService,
-		ServiceData: struct{}{},
-		Target: struct {
-			EntityId []string `json:"entity_id,omitempty"`
-		}{EntityId: entities},
-		Type: &serviceType,
+		ServiceBase: ServiceBase{
+			Domain:  &serviceDomain,
+			Id:      nil,
+			Service: &serviceService,
+			Target:  target,
+			Type:    &serviceType,
+		},
+		ServiceData: timerCancelParams,
 	}
 	return t
 }
 
 type TimerCancel struct {
-	Id          *int     `json:"id"`
-	Type        *string  `json:"type"`
-	Domain      *string  `json:"domain"`
-	Service     *string  `json:"service"`
-	ServiceData struct{} `json:"service_data,omitempty"`
-	Target      struct {
-		EntityId []string `json:"entity_id,omitempty"`
-	} `json:"target,omitempty"`
+	ServiceBase
+	ServiceData TimerCancelParams `json:"service_data,omitempty"`
 }
+type TimerCancelParams struct{}
 
 func (t *TimerCancel) JSON() string {
 	data, _ := json.Marshal(t)
@@ -46,33 +41,28 @@ func (t *TimerCancel) SetID(id *int) {
 
 // NewTimerFinish creates the object that can be sent to Home Assistant for domain timer, service finish
 // "Finish a timer."
-func NewTimerFinish(entities []string) *TimerFinish {
+func NewTimerFinish(target Target, timerFinishParams TimerFinishParams) *TimerFinish {
 	serviceDomain := "timer"
 	serviceType := "call_service"
 	serviceService := "finish"
 	t := &TimerFinish{
-		Domain:      &serviceDomain,
-		Id:          nil,
-		Service:     &serviceService,
-		ServiceData: struct{}{},
-		Target: struct {
-			EntityId []string `json:"entity_id,omitempty"`
-		}{EntityId: entities},
-		Type: &serviceType,
+		ServiceBase: ServiceBase{
+			Domain:  &serviceDomain,
+			Id:      nil,
+			Service: &serviceService,
+			Target:  target,
+			Type:    &serviceType,
+		},
+		ServiceData: timerFinishParams,
 	}
 	return t
 }
 
 type TimerFinish struct {
-	Id          *int     `json:"id"`
-	Type        *string  `json:"type"`
-	Domain      *string  `json:"domain"`
-	Service     *string  `json:"service"`
-	ServiceData struct{} `json:"service_data,omitempty"`
-	Target      struct {
-		EntityId []string `json:"entity_id,omitempty"`
-	} `json:"target,omitempty"`
+	ServiceBase
+	ServiceData TimerFinishParams `json:"service_data,omitempty"`
 }
+type TimerFinishParams struct{}
 
 func (t *TimerFinish) JSON() string {
 	data, _ := json.Marshal(t)
@@ -84,33 +74,28 @@ func (t *TimerFinish) SetID(id *int) {
 
 // NewTimerPause creates the object that can be sent to Home Assistant for domain timer, service pause
 // "Pause a timer."
-func NewTimerPause(entities []string) *TimerPause {
+func NewTimerPause(target Target, timerPauseParams TimerPauseParams) *TimerPause {
 	serviceDomain := "timer"
 	serviceType := "call_service"
 	serviceService := "pause"
 	t := &TimerPause{
-		Domain:      &serviceDomain,
-		Id:          nil,
-		Service:     &serviceService,
-		ServiceData: struct{}{},
-		Target: struct {
-			EntityId []string `json:"entity_id,omitempty"`
-		}{EntityId: entities},
-		Type: &serviceType,
+		ServiceBase: ServiceBase{
+			Domain:  &serviceDomain,
+			Id:      nil,
+			Service: &serviceService,
+			Target:  target,
+			Type:    &serviceType,
+		},
+		ServiceData: timerPauseParams,
 	}
 	return t
 }
 
 type TimerPause struct {
-	Id          *int     `json:"id"`
-	Type        *string  `json:"type"`
-	Domain      *string  `json:"domain"`
-	Service     *string  `json:"service"`
-	ServiceData struct{} `json:"service_data,omitempty"`
-	Target      struct {
-		EntityId []string `json:"entity_id,omitempty"`
-	} `json:"target,omitempty"`
+	ServiceBase
+	ServiceData TimerPauseParams `json:"service_data,omitempty"`
 }
+type TimerPauseParams struct{}
 
 func (t *TimerPause) JSON() string {
 	data, _ := json.Marshal(t)
@@ -122,33 +107,28 @@ func (t *TimerPause) SetID(id *int) {
 
 // NewTimerReload creates the object that can be sent to Home Assistant for domain timer, service reload
 // ""
-func NewTimerReload(entities []string) *TimerReload {
+func NewTimerReload(target Target, timerReloadParams TimerReloadParams) *TimerReload {
 	serviceDomain := "timer"
 	serviceType := "call_service"
 	serviceService := "reload"
 	t := &TimerReload{
-		Domain:      &serviceDomain,
-		Id:          nil,
-		Service:     &serviceService,
-		ServiceData: struct{}{},
-		Target: struct {
-			EntityId []string `json:"entity_id,omitempty"`
-		}{EntityId: entities},
-		Type: &serviceType,
+		ServiceBase: ServiceBase{
+			Domain:  &serviceDomain,
+			Id:      nil,
+			Service: &serviceService,
+			Target:  target,
+			Type:    &serviceType,
+		},
+		ServiceData: timerReloadParams,
 	}
 	return t
 }
 
 type TimerReload struct {
-	Id          *int     `json:"id"`
-	Type        *string  `json:"type"`
-	Domain      *string  `json:"domain"`
-	Service     *string  `json:"service"`
-	ServiceData struct{} `json:"service_data,omitempty"`
-	Target      struct {
-		EntityId []string `json:"entity_id,omitempty"`
-	} `json:"target,omitempty"`
+	ServiceBase
+	ServiceData TimerReloadParams `json:"service_data,omitempty"`
 }
+type TimerReloadParams struct{}
 
 func (t *TimerReload) JSON() string {
 	data, _ := json.Marshal(t)
@@ -160,36 +140,29 @@ func (t *TimerReload) SetID(id *int) {
 
 // NewTimerStart creates the object that can be sent to Home Assistant for domain timer, service start
 // "Start a timer"
-func NewTimerStart(entities []string, duration *string) *TimerStart {
+func NewTimerStart(target Target, timerStartParams TimerStartParams) *TimerStart {
 	serviceDomain := "timer"
 	serviceType := "call_service"
 	serviceService := "start"
 	t := &TimerStart{
-		Domain:  &serviceDomain,
-		Id:      nil,
-		Service: &serviceService,
-		ServiceData: struct {
-			Duration *string `json:"duration,omitempty"`
-		}{Duration: duration},
-		Target: struct {
-			EntityId []string `json:"entity_id,omitempty"`
-		}{EntityId: entities},
-		Type: &serviceType,
+		ServiceBase: ServiceBase{
+			Domain:  &serviceDomain,
+			Id:      nil,
+			Service: &serviceService,
+			Target:  target,
+			Type:    &serviceType,
+		},
+		ServiceData: timerStartParams,
 	}
 	return t
 }
 
 type TimerStart struct {
-	Id          *int    `json:"id"`
-	Type        *string `json:"type"`
-	Domain      *string `json:"domain"`
-	Service     *string `json:"service"`
-	ServiceData struct {
-		Duration *string `json:"duration,omitempty"`
-	} `json:"service_data,omitempty"`
-	Target struct {
-		EntityId []string `json:"entity_id,omitempty"`
-	} `json:"target,omitempty"`
+	ServiceBase
+	ServiceData TimerStartParams `json:"service_data,omitempty"`
+}
+type TimerStartParams struct {
+	Duration *string `json:"duration,omitempty"`
 }
 
 func (t *TimerStart) JSON() string {

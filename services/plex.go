@@ -8,41 +8,30 @@ import "encoding/json"
 
 // NewPlexRefreshLibrary creates the object that can be sent to Home Assistant for domain plex, service refresh_library
 // "Refresh a Plex library to scan for new and updated media."
-func NewPlexRefreshLibrary(entities []string, libraryName *string, serverName *string) *PlexRefreshLibrary {
+func NewPlexRefreshLibrary(target Target, plexRefreshLibraryParams PlexRefreshLibraryParams) *PlexRefreshLibrary {
 	serviceDomain := "plex"
 	serviceType := "call_service"
 	serviceService := "refresh_library"
 	p := &PlexRefreshLibrary{
-		Domain:  &serviceDomain,
-		Id:      nil,
-		Service: &serviceService,
-		ServiceData: struct {
-			LibraryName *string `json:"library_name,omitempty"`
-			ServerName  *string `json:"server_name,omitempty"`
-		}{
-			LibraryName: libraryName,
-			ServerName:  serverName,
+		ServiceBase: ServiceBase{
+			Domain:  &serviceDomain,
+			Id:      nil,
+			Service: &serviceService,
+			Target:  target,
+			Type:    &serviceType,
 		},
-		Target: struct {
-			EntityId []string `json:"entity_id,omitempty"`
-		}{EntityId: entities},
-		Type: &serviceType,
+		ServiceData: plexRefreshLibraryParams,
 	}
 	return p
 }
 
 type PlexRefreshLibrary struct {
-	Id          *int    `json:"id"`
-	Type        *string `json:"type"`
-	Domain      *string `json:"domain"`
-	Service     *string `json:"service"`
-	ServiceData struct {
-		LibraryName *string `json:"library_name,omitempty"`
-		ServerName  *string `json:"server_name,omitempty"`
-	} `json:"service_data,omitempty"`
-	Target struct {
-		EntityId []string `json:"entity_id,omitempty"`
-	} `json:"target,omitempty"`
+	ServiceBase
+	ServiceData PlexRefreshLibraryParams `json:"service_data,omitempty"`
+}
+type PlexRefreshLibraryParams struct {
+	LibraryName *string `json:"library_name,omitempty"`
+	ServerName  *string `json:"server_name,omitempty"`
 }
 
 func (p *PlexRefreshLibrary) JSON() string {
@@ -55,33 +44,28 @@ func (p *PlexRefreshLibrary) SetID(id *int) {
 
 // NewPlexScanForClients creates the object that can be sent to Home Assistant for domain plex, service scan_for_clients
 // "Scan for available clients from the Plex server(s), local network, and plex.tv."
-func NewPlexScanForClients(entities []string) *PlexScanForClients {
+func NewPlexScanForClients(target Target, plexScanForClientsParams PlexScanForClientsParams) *PlexScanForClients {
 	serviceDomain := "plex"
 	serviceType := "call_service"
 	serviceService := "scan_for_clients"
 	p := &PlexScanForClients{
-		Domain:      &serviceDomain,
-		Id:          nil,
-		Service:     &serviceService,
-		ServiceData: struct{}{},
-		Target: struct {
-			EntityId []string `json:"entity_id,omitempty"`
-		}{EntityId: entities},
-		Type: &serviceType,
+		ServiceBase: ServiceBase{
+			Domain:  &serviceDomain,
+			Id:      nil,
+			Service: &serviceService,
+			Target:  target,
+			Type:    &serviceType,
+		},
+		ServiceData: plexScanForClientsParams,
 	}
 	return p
 }
 
 type PlexScanForClients struct {
-	Id          *int     `json:"id"`
-	Type        *string  `json:"type"`
-	Domain      *string  `json:"domain"`
-	Service     *string  `json:"service"`
-	ServiceData struct{} `json:"service_data,omitempty"`
-	Target      struct {
-		EntityId []string `json:"entity_id,omitempty"`
-	} `json:"target,omitempty"`
+	ServiceBase
+	ServiceData PlexScanForClientsParams `json:"service_data,omitempty"`
 }
+type PlexScanForClientsParams struct{}
 
 func (p *PlexScanForClients) JSON() string {
 	data, _ := json.Marshal(p)

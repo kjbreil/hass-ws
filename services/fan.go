@@ -8,36 +8,29 @@ import "encoding/json"
 
 // NewFanDecreaseSpeed creates the object that can be sent to Home Assistant for domain fan, service decrease_speed
 // "Decrease the speed of the fan by one speed or a percentage_step."
-func NewFanDecreaseSpeed(entities []string, percentageStep *float64) *FanDecreaseSpeed {
+func NewFanDecreaseSpeed(target Target, fanDecreaseSpeedParams FanDecreaseSpeedParams) *FanDecreaseSpeed {
 	serviceDomain := "fan"
 	serviceType := "call_service"
 	serviceService := "decrease_speed"
 	f := &FanDecreaseSpeed{
-		Domain:  &serviceDomain,
-		Id:      nil,
-		Service: &serviceService,
-		ServiceData: struct {
-			PercentageStep *float64 `json:"percentage_step,omitempty"`
-		}{PercentageStep: percentageStep},
-		Target: struct {
-			EntityId []string `json:"entity_id,omitempty"`
-		}{EntityId: entities},
-		Type: &serviceType,
+		ServiceBase: ServiceBase{
+			Domain:  &serviceDomain,
+			Id:      nil,
+			Service: &serviceService,
+			Target:  target,
+			Type:    &serviceType,
+		},
+		ServiceData: fanDecreaseSpeedParams,
 	}
 	return f
 }
 
 type FanDecreaseSpeed struct {
-	Id          *int    `json:"id"`
-	Type        *string `json:"type"`
-	Domain      *string `json:"domain"`
-	Service     *string `json:"service"`
-	ServiceData struct {
-		PercentageStep *float64 `json:"percentage_step,omitempty"`
-	} `json:"service_data,omitempty"`
-	Target struct {
-		EntityId []string `json:"entity_id,omitempty"`
-	} `json:"target,omitempty"`
+	ServiceBase
+	ServiceData FanDecreaseSpeedParams `json:"service_data,omitempty"`
+}
+type FanDecreaseSpeedParams struct {
+	PercentageStep *float64 `json:"percentage_step,omitempty"`
 }
 
 func (f *FanDecreaseSpeed) JSON() string {
@@ -50,36 +43,29 @@ func (f *FanDecreaseSpeed) SetID(id *int) {
 
 // NewFanIncreaseSpeed creates the object that can be sent to Home Assistant for domain fan, service increase_speed
 // "Increase the speed of the fan by one speed or a percentage_step."
-func NewFanIncreaseSpeed(entities []string, percentageStep *float64) *FanIncreaseSpeed {
+func NewFanIncreaseSpeed(target Target, fanIncreaseSpeedParams FanIncreaseSpeedParams) *FanIncreaseSpeed {
 	serviceDomain := "fan"
 	serviceType := "call_service"
 	serviceService := "increase_speed"
 	f := &FanIncreaseSpeed{
-		Domain:  &serviceDomain,
-		Id:      nil,
-		Service: &serviceService,
-		ServiceData: struct {
-			PercentageStep *float64 `json:"percentage_step,omitempty"`
-		}{PercentageStep: percentageStep},
-		Target: struct {
-			EntityId []string `json:"entity_id,omitempty"`
-		}{EntityId: entities},
-		Type: &serviceType,
+		ServiceBase: ServiceBase{
+			Domain:  &serviceDomain,
+			Id:      nil,
+			Service: &serviceService,
+			Target:  target,
+			Type:    &serviceType,
+		},
+		ServiceData: fanIncreaseSpeedParams,
 	}
 	return f
 }
 
 type FanIncreaseSpeed struct {
-	Id          *int    `json:"id"`
-	Type        *string `json:"type"`
-	Domain      *string `json:"domain"`
-	Service     *string `json:"service"`
-	ServiceData struct {
-		PercentageStep *float64 `json:"percentage_step,omitempty"`
-	} `json:"service_data,omitempty"`
-	Target struct {
-		EntityId []string `json:"entity_id,omitempty"`
-	} `json:"target,omitempty"`
+	ServiceBase
+	ServiceData FanIncreaseSpeedParams `json:"service_data,omitempty"`
+}
+type FanIncreaseSpeedParams struct {
+	PercentageStep *float64 `json:"percentage_step,omitempty"`
 }
 
 func (f *FanIncreaseSpeed) JSON() string {
@@ -92,33 +78,28 @@ func (f *FanIncreaseSpeed) SetID(id *int) {
 
 // NewFanOscillate creates the object that can be sent to Home Assistant for domain fan, service oscillate
 // "Oscillate the fan."
-func NewFanOscillate(entities []string) *FanOscillate {
+func NewFanOscillate(target Target, fanOscillateParams FanOscillateParams) *FanOscillate {
 	serviceDomain := "fan"
 	serviceType := "call_service"
 	serviceService := "oscillate"
 	f := &FanOscillate{
-		Domain:      &serviceDomain,
-		Id:          nil,
-		Service:     &serviceService,
-		ServiceData: struct{}{},
-		Target: struct {
-			EntityId []string `json:"entity_id,omitempty"`
-		}{EntityId: entities},
-		Type: &serviceType,
+		ServiceBase: ServiceBase{
+			Domain:  &serviceDomain,
+			Id:      nil,
+			Service: &serviceService,
+			Target:  target,
+			Type:    &serviceType,
+		},
+		ServiceData: fanOscillateParams,
 	}
 	return f
 }
 
 type FanOscillate struct {
-	Id          *int     `json:"id"`
-	Type        *string  `json:"type"`
-	Domain      *string  `json:"domain"`
-	Service     *string  `json:"service"`
-	ServiceData struct{} `json:"service_data,omitempty"`
-	Target      struct {
-		EntityId []string `json:"entity_id,omitempty"`
-	} `json:"target,omitempty"`
+	ServiceBase
+	ServiceData FanOscillateParams `json:"service_data,omitempty"`
 }
+type FanOscillateParams struct{}
 
 func (f *FanOscillate) JSON() string {
 	data, _ := json.Marshal(f)
@@ -130,36 +111,29 @@ func (f *FanOscillate) SetID(id *int) {
 
 // NewFanSetDirection creates the object that can be sent to Home Assistant for domain fan, service set_direction
 // "Set the fan rotation."
-func NewFanSetDirection(entities []string, direction *Direction) *FanSetDirection {
+func NewFanSetDirection(target Target, fanSetDirectionParams FanSetDirectionParams) *FanSetDirection {
 	serviceDomain := "fan"
 	serviceType := "call_service"
 	serviceService := "set_direction"
 	f := &FanSetDirection{
-		Domain:  &serviceDomain,
-		Id:      nil,
-		Service: &serviceService,
-		ServiceData: struct {
-			Direction *Direction `json:"direction,omitempty"`
-		}{Direction: direction},
-		Target: struct {
-			EntityId []string `json:"entity_id,omitempty"`
-		}{EntityId: entities},
-		Type: &serviceType,
+		ServiceBase: ServiceBase{
+			Domain:  &serviceDomain,
+			Id:      nil,
+			Service: &serviceService,
+			Target:  target,
+			Type:    &serviceType,
+		},
+		ServiceData: fanSetDirectionParams,
 	}
 	return f
 }
 
 type FanSetDirection struct {
-	Id          *int    `json:"id"`
-	Type        *string `json:"type"`
-	Domain      *string `json:"domain"`
-	Service     *string `json:"service"`
-	ServiceData struct {
-		Direction *Direction `json:"direction,omitempty"`
-	} `json:"service_data,omitempty"`
-	Target struct {
-		EntityId []string `json:"entity_id,omitempty"`
-	} `json:"target,omitempty"`
+	ServiceBase
+	ServiceData FanSetDirectionParams `json:"service_data,omitempty"`
+}
+type FanSetDirectionParams struct {
+	Direction *Direction `json:"direction,omitempty"`
 }
 
 func (f *FanSetDirection) JSON() string {
@@ -172,36 +146,29 @@ func (f *FanSetDirection) SetID(id *int) {
 
 // NewFanSetPercentage creates the object that can be sent to Home Assistant for domain fan, service set_percentage
 // "Set fan speed percentage."
-func NewFanSetPercentage(entities []string, percentage *float64) *FanSetPercentage {
+func NewFanSetPercentage(target Target, fanSetPercentageParams FanSetPercentageParams) *FanSetPercentage {
 	serviceDomain := "fan"
 	serviceType := "call_service"
 	serviceService := "set_percentage"
 	f := &FanSetPercentage{
-		Domain:  &serviceDomain,
-		Id:      nil,
-		Service: &serviceService,
-		ServiceData: struct {
-			Percentage *float64 `json:"percentage,omitempty"`
-		}{Percentage: percentage},
-		Target: struct {
-			EntityId []string `json:"entity_id,omitempty"`
-		}{EntityId: entities},
-		Type: &serviceType,
+		ServiceBase: ServiceBase{
+			Domain:  &serviceDomain,
+			Id:      nil,
+			Service: &serviceService,
+			Target:  target,
+			Type:    &serviceType,
+		},
+		ServiceData: fanSetPercentageParams,
 	}
 	return f
 }
 
 type FanSetPercentage struct {
-	Id          *int    `json:"id"`
-	Type        *string `json:"type"`
-	Domain      *string `json:"domain"`
-	Service     *string `json:"service"`
-	ServiceData struct {
-		Percentage *float64 `json:"percentage,omitempty"`
-	} `json:"service_data,omitempty"`
-	Target struct {
-		EntityId []string `json:"entity_id,omitempty"`
-	} `json:"target,omitempty"`
+	ServiceBase
+	ServiceData FanSetPercentageParams `json:"service_data,omitempty"`
+}
+type FanSetPercentageParams struct {
+	Percentage *float64 `json:"percentage,omitempty"`
 }
 
 func (f *FanSetPercentage) JSON() string {
@@ -214,36 +181,29 @@ func (f *FanSetPercentage) SetID(id *int) {
 
 // NewFanSetPresetMode creates the object that can be sent to Home Assistant for domain fan, service set_preset_mode
 // "Set preset mode for a fan device."
-func NewFanSetPresetMode(entities []string, presetMode *string) *FanSetPresetMode {
+func NewFanSetPresetMode(target Target, fanSetPresetModeParams FanSetPresetModeParams) *FanSetPresetMode {
 	serviceDomain := "fan"
 	serviceType := "call_service"
 	serviceService := "set_preset_mode"
 	f := &FanSetPresetMode{
-		Domain:  &serviceDomain,
-		Id:      nil,
-		Service: &serviceService,
-		ServiceData: struct {
-			PresetMode *string `json:"preset_mode,omitempty"`
-		}{PresetMode: presetMode},
-		Target: struct {
-			EntityId []string `json:"entity_id,omitempty"`
-		}{EntityId: entities},
-		Type: &serviceType,
+		ServiceBase: ServiceBase{
+			Domain:  &serviceDomain,
+			Id:      nil,
+			Service: &serviceService,
+			Target:  target,
+			Type:    &serviceType,
+		},
+		ServiceData: fanSetPresetModeParams,
 	}
 	return f
 }
 
 type FanSetPresetMode struct {
-	Id          *int    `json:"id"`
-	Type        *string `json:"type"`
-	Domain      *string `json:"domain"`
-	Service     *string `json:"service"`
-	ServiceData struct {
-		PresetMode *string `json:"preset_mode,omitempty"`
-	} `json:"service_data,omitempty"`
-	Target struct {
-		EntityId []string `json:"entity_id,omitempty"`
-	} `json:"target,omitempty"`
+	ServiceBase
+	ServiceData FanSetPresetModeParams `json:"service_data,omitempty"`
+}
+type FanSetPresetModeParams struct {
+	PresetMode *string `json:"preset_mode,omitempty"`
 }
 
 func (f *FanSetPresetMode) JSON() string {
@@ -256,33 +216,28 @@ func (f *FanSetPresetMode) SetID(id *int) {
 
 // NewFanToggle creates the object that can be sent to Home Assistant for domain fan, service toggle
 // "Toggle the fan on/off."
-func NewFanToggle(entities []string) *FanToggle {
+func NewFanToggle(target Target, fanToggleParams FanToggleParams) *FanToggle {
 	serviceDomain := "fan"
 	serviceType := "call_service"
 	serviceService := "toggle"
 	f := &FanToggle{
-		Domain:      &serviceDomain,
-		Id:          nil,
-		Service:     &serviceService,
-		ServiceData: struct{}{},
-		Target: struct {
-			EntityId []string `json:"entity_id,omitempty"`
-		}{EntityId: entities},
-		Type: &serviceType,
+		ServiceBase: ServiceBase{
+			Domain:  &serviceDomain,
+			Id:      nil,
+			Service: &serviceService,
+			Target:  target,
+			Type:    &serviceType,
+		},
+		ServiceData: fanToggleParams,
 	}
 	return f
 }
 
 type FanToggle struct {
-	Id          *int     `json:"id"`
-	Type        *string  `json:"type"`
-	Domain      *string  `json:"domain"`
-	Service     *string  `json:"service"`
-	ServiceData struct{} `json:"service_data,omitempty"`
-	Target      struct {
-		EntityId []string `json:"entity_id,omitempty"`
-	} `json:"target,omitempty"`
+	ServiceBase
+	ServiceData FanToggleParams `json:"service_data,omitempty"`
 }
+type FanToggleParams struct{}
 
 func (f *FanToggle) JSON() string {
 	data, _ := json.Marshal(f)
@@ -294,33 +249,28 @@ func (f *FanToggle) SetID(id *int) {
 
 // NewFanTurnOff creates the object that can be sent to Home Assistant for domain fan, service turn_off
 // "Turn fan off."
-func NewFanTurnOff(entities []string) *FanTurnOff {
+func NewFanTurnOff(target Target, fanTurnOffParams FanTurnOffParams) *FanTurnOff {
 	serviceDomain := "fan"
 	serviceType := "call_service"
 	serviceService := "turn_off"
 	f := &FanTurnOff{
-		Domain:      &serviceDomain,
-		Id:          nil,
-		Service:     &serviceService,
-		ServiceData: struct{}{},
-		Target: struct {
-			EntityId []string `json:"entity_id,omitempty"`
-		}{EntityId: entities},
-		Type: &serviceType,
+		ServiceBase: ServiceBase{
+			Domain:  &serviceDomain,
+			Id:      nil,
+			Service: &serviceService,
+			Target:  target,
+			Type:    &serviceType,
+		},
+		ServiceData: fanTurnOffParams,
 	}
 	return f
 }
 
 type FanTurnOff struct {
-	Id          *int     `json:"id"`
-	Type        *string  `json:"type"`
-	Domain      *string  `json:"domain"`
-	Service     *string  `json:"service"`
-	ServiceData struct{} `json:"service_data,omitempty"`
-	Target      struct {
-		EntityId []string `json:"entity_id,omitempty"`
-	} `json:"target,omitempty"`
+	ServiceBase
+	ServiceData FanTurnOffParams `json:"service_data,omitempty"`
 }
+type FanTurnOffParams struct{}
 
 func (f *FanTurnOff) JSON() string {
 	data, _ := json.Marshal(f)
@@ -332,44 +282,31 @@ func (f *FanTurnOff) SetID(id *int) {
 
 // NewFanTurnOn creates the object that can be sent to Home Assistant for domain fan, service turn_on
 // "Turn fan on."
-func NewFanTurnOn(entities []string, percentage *float64, presetMode *string, speed *string) *FanTurnOn {
+func NewFanTurnOn(target Target, fanTurnOnParams FanTurnOnParams) *FanTurnOn {
 	serviceDomain := "fan"
 	serviceType := "call_service"
 	serviceService := "turn_on"
 	f := &FanTurnOn{
-		Domain:  &serviceDomain,
-		Id:      nil,
-		Service: &serviceService,
-		ServiceData: struct {
-			Percentage *float64 `json:"percentage,omitempty"`
-			PresetMode *string  `json:"preset_mode,omitempty"`
-			Speed      *string  `json:"speed,omitempty"`
-		}{
-			Percentage: percentage,
-			PresetMode: presetMode,
-			Speed:      speed,
+		ServiceBase: ServiceBase{
+			Domain:  &serviceDomain,
+			Id:      nil,
+			Service: &serviceService,
+			Target:  target,
+			Type:    &serviceType,
 		},
-		Target: struct {
-			EntityId []string `json:"entity_id,omitempty"`
-		}{EntityId: entities},
-		Type: &serviceType,
+		ServiceData: fanTurnOnParams,
 	}
 	return f
 }
 
 type FanTurnOn struct {
-	Id          *int    `json:"id"`
-	Type        *string `json:"type"`
-	Domain      *string `json:"domain"`
-	Service     *string `json:"service"`
-	ServiceData struct {
-		Percentage *float64 `json:"percentage,omitempty"`
-		PresetMode *string  `json:"preset_mode,omitempty"`
-		Speed      *string  `json:"speed,omitempty"`
-	} `json:"service_data,omitempty"`
-	Target struct {
-		EntityId []string `json:"entity_id,omitempty"`
-	} `json:"target,omitempty"`
+	ServiceBase
+	ServiceData FanTurnOnParams `json:"service_data,omitempty"`
+}
+type FanTurnOnParams struct {
+	Percentage *float64 `json:"percentage,omitempty"`
+	PresetMode *string  `json:"preset_mode,omitempty"`
+	Speed      *string  `json:"speed,omitempty"`
 }
 
 func (f *FanTurnOn) JSON() string {

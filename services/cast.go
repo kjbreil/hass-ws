@@ -8,41 +8,30 @@ import "encoding/json"
 
 // NewCastShowLovelaceView creates the object that can be sent to Home Assistant for domain cast, service show_lovelace_view
 // "Show a Lovelace view on a Chromecast."
-func NewCastShowLovelaceView(entities []string, dashboardPath *string, viewPath *string) *CastShowLovelaceView {
+func NewCastShowLovelaceView(target Target, castShowLovelaceViewParams CastShowLovelaceViewParams) *CastShowLovelaceView {
 	serviceDomain := "cast"
 	serviceType := "call_service"
 	serviceService := "show_lovelace_view"
 	c := &CastShowLovelaceView{
-		Domain:  &serviceDomain,
-		Id:      nil,
-		Service: &serviceService,
-		ServiceData: struct {
-			DashboardPath *string `json:"dashboard_path,omitempty"`
-			ViewPath      *string `json:"view_path,omitempty"`
-		}{
-			DashboardPath: dashboardPath,
-			ViewPath:      viewPath,
+		ServiceBase: ServiceBase{
+			Domain:  &serviceDomain,
+			Id:      nil,
+			Service: &serviceService,
+			Target:  target,
+			Type:    &serviceType,
 		},
-		Target: struct {
-			EntityId []string `json:"entity_id,omitempty"`
-		}{EntityId: entities},
-		Type: &serviceType,
+		ServiceData: castShowLovelaceViewParams,
 	}
 	return c
 }
 
 type CastShowLovelaceView struct {
-	Id          *int    `json:"id"`
-	Type        *string `json:"type"`
-	Domain      *string `json:"domain"`
-	Service     *string `json:"service"`
-	ServiceData struct {
-		DashboardPath *string `json:"dashboard_path,omitempty"`
-		ViewPath      *string `json:"view_path,omitempty"`
-	} `json:"service_data,omitempty"`
-	Target struct {
-		EntityId []string `json:"entity_id,omitempty"`
-	} `json:"target,omitempty"`
+	ServiceBase
+	ServiceData CastShowLovelaceViewParams `json:"service_data,omitempty"`
+}
+type CastShowLovelaceViewParams struct {
+	DashboardPath *string `json:"dashboard_path,omitempty"`
+	ViewPath      *string `json:"view_path,omitempty"`
 }
 
 func (c *CastShowLovelaceView) JSON() string {

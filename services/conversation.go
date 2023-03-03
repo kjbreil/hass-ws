@@ -8,36 +8,29 @@ import "encoding/json"
 
 // NewConversationProcess creates the object that can be sent to Home Assistant for domain conversation, service process
 // "Launch a conversation from a transcribed text."
-func NewConversationProcess(entities []string, text *string) *ConversationProcess {
+func NewConversationProcess(target Target, conversationProcessParams ConversationProcessParams) *ConversationProcess {
 	serviceDomain := "conversation"
 	serviceType := "call_service"
 	serviceService := "process"
 	c := &ConversationProcess{
-		Domain:  &serviceDomain,
-		Id:      nil,
-		Service: &serviceService,
-		ServiceData: struct {
-			Text *string `json:"text,omitempty"`
-		}{Text: text},
-		Target: struct {
-			EntityId []string `json:"entity_id,omitempty"`
-		}{EntityId: entities},
-		Type: &serviceType,
+		ServiceBase: ServiceBase{
+			Domain:  &serviceDomain,
+			Id:      nil,
+			Service: &serviceService,
+			Target:  target,
+			Type:    &serviceType,
+		},
+		ServiceData: conversationProcessParams,
 	}
 	return c
 }
 
 type ConversationProcess struct {
-	Id          *int    `json:"id"`
-	Type        *string `json:"type"`
-	Domain      *string `json:"domain"`
-	Service     *string `json:"service"`
-	ServiceData struct {
-		Text *string `json:"text,omitempty"`
-	} `json:"service_data,omitempty"`
-	Target struct {
-		EntityId []string `json:"entity_id,omitempty"`
-	} `json:"target,omitempty"`
+	ServiceBase
+	ServiceData ConversationProcessParams `json:"service_data,omitempty"`
+}
+type ConversationProcessParams struct {
+	Text *string `json:"text,omitempty"`
 }
 
 func (c *ConversationProcess) JSON() string {
@@ -50,33 +43,28 @@ func (c *ConversationProcess) SetID(id *int) {
 
 // NewConversationReload creates the object that can be sent to Home Assistant for domain conversation, service reload
 // ""
-func NewConversationReload(entities []string) *ConversationReload {
+func NewConversationReload(target Target, conversationReloadParams ConversationReloadParams) *ConversationReload {
 	serviceDomain := "conversation"
 	serviceType := "call_service"
 	serviceService := "reload"
 	c := &ConversationReload{
-		Domain:      &serviceDomain,
-		Id:          nil,
-		Service:     &serviceService,
-		ServiceData: struct{}{},
-		Target: struct {
-			EntityId []string `json:"entity_id,omitempty"`
-		}{EntityId: entities},
-		Type: &serviceType,
+		ServiceBase: ServiceBase{
+			Domain:  &serviceDomain,
+			Id:      nil,
+			Service: &serviceService,
+			Target:  target,
+			Type:    &serviceType,
+		},
+		ServiceData: conversationReloadParams,
 	}
 	return c
 }
 
 type ConversationReload struct {
-	Id          *int     `json:"id"`
-	Type        *string  `json:"type"`
-	Domain      *string  `json:"domain"`
-	Service     *string  `json:"service"`
-	ServiceData struct{} `json:"service_data,omitempty"`
-	Target      struct {
-		EntityId []string `json:"entity_id,omitempty"`
-	} `json:"target,omitempty"`
+	ServiceBase
+	ServiceData ConversationReloadParams `json:"service_data,omitempty"`
 }
+type ConversationReloadParams struct{}
 
 func (c *ConversationReload) JSON() string {
 	data, _ := json.Marshal(c)

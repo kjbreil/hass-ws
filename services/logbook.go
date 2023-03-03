@@ -8,44 +8,31 @@ import "encoding/json"
 
 // NewLogbookLog creates the object that can be sent to Home Assistant for domain logbook, service log
 // "Create a custom entry in your logbook."
-func NewLogbookLog(entities []string, domain *string, message *string, name *string) *LogbookLog {
+func NewLogbookLog(target Target, logbookLogParams LogbookLogParams) *LogbookLog {
 	serviceDomain := "logbook"
 	serviceType := "call_service"
 	serviceService := "log"
 	l := &LogbookLog{
-		Domain:  &serviceDomain,
-		Id:      nil,
-		Service: &serviceService,
-		ServiceData: struct {
-			Domain  *string `json:"domain,omitempty"`
-			Message *string `json:"message,omitempty"`
-			Name    *string `json:"name,omitempty"`
-		}{
-			Domain:  domain,
-			Message: message,
-			Name:    name,
+		ServiceBase: ServiceBase{
+			Domain:  &serviceDomain,
+			Id:      nil,
+			Service: &serviceService,
+			Target:  target,
+			Type:    &serviceType,
 		},
-		Target: struct {
-			EntityId []string `json:"entity_id,omitempty"`
-		}{EntityId: entities},
-		Type: &serviceType,
+		ServiceData: logbookLogParams,
 	}
 	return l
 }
 
 type LogbookLog struct {
-	Id          *int    `json:"id"`
-	Type        *string `json:"type"`
-	Domain      *string `json:"domain"`
-	Service     *string `json:"service"`
-	ServiceData struct {
-		Domain  *string `json:"domain,omitempty"`
-		Message *string `json:"message,omitempty"`
-		Name    *string `json:"name,omitempty"`
-	} `json:"service_data,omitempty"`
-	Target struct {
-		EntityId []string `json:"entity_id,omitempty"`
-	} `json:"target,omitempty"`
+	ServiceBase
+	ServiceData LogbookLogParams `json:"service_data,omitempty"`
+}
+type LogbookLogParams struct {
+	Domain  *string `json:"domain,omitempty"`
+	Message *string `json:"message,omitempty"`
+	Name    *string `json:"name,omitempty"`
 }
 
 func (l *LogbookLog) JSON() string {

@@ -8,33 +8,28 @@ import "encoding/json"
 
 // NewSystemLogClear creates the object that can be sent to Home Assistant for domain system_log, service clear
 // "Clear all log entries."
-func NewSystemLogClear(entities []string) *SystemLogClear {
+func NewSystemLogClear(target Target, systemLogClearParams SystemLogClearParams) *SystemLogClear {
 	serviceDomain := "system_log"
 	serviceType := "call_service"
 	serviceService := "clear"
 	s := &SystemLogClear{
-		Domain:      &serviceDomain,
-		Id:          nil,
-		Service:     &serviceService,
-		ServiceData: struct{}{},
-		Target: struct {
-			EntityId []string `json:"entity_id,omitempty"`
-		}{EntityId: entities},
-		Type: &serviceType,
+		ServiceBase: ServiceBase{
+			Domain:  &serviceDomain,
+			Id:      nil,
+			Service: &serviceService,
+			Target:  target,
+			Type:    &serviceType,
+		},
+		ServiceData: systemLogClearParams,
 	}
 	return s
 }
 
 type SystemLogClear struct {
-	Id          *int     `json:"id"`
-	Type        *string  `json:"type"`
-	Domain      *string  `json:"domain"`
-	Service     *string  `json:"service"`
-	ServiceData struct{} `json:"service_data,omitempty"`
-	Target      struct {
-		EntityId []string `json:"entity_id,omitempty"`
-	} `json:"target,omitempty"`
+	ServiceBase
+	ServiceData SystemLogClearParams `json:"service_data,omitempty"`
 }
+type SystemLogClearParams struct{}
 
 func (s *SystemLogClear) JSON() string {
 	data, _ := json.Marshal(s)
@@ -46,44 +41,31 @@ func (s *SystemLogClear) SetID(id *int) {
 
 // NewSystemLogWrite creates the object that can be sent to Home Assistant for domain system_log, service write
 // "Write log entry."
-func NewSystemLogWrite(entities []string, level *Level, logger *string, message *string) *SystemLogWrite {
+func NewSystemLogWrite(target Target, systemLogWriteParams SystemLogWriteParams) *SystemLogWrite {
 	serviceDomain := "system_log"
 	serviceType := "call_service"
 	serviceService := "write"
 	s := &SystemLogWrite{
-		Domain:  &serviceDomain,
-		Id:      nil,
-		Service: &serviceService,
-		ServiceData: struct {
-			Level   *Level  `json:"level,omitempty"`
-			Logger  *string `json:"logger,omitempty"`
-			Message *string `json:"message,omitempty"`
-		}{
-			Level:   level,
-			Logger:  logger,
-			Message: message,
+		ServiceBase: ServiceBase{
+			Domain:  &serviceDomain,
+			Id:      nil,
+			Service: &serviceService,
+			Target:  target,
+			Type:    &serviceType,
 		},
-		Target: struct {
-			EntityId []string `json:"entity_id,omitempty"`
-		}{EntityId: entities},
-		Type: &serviceType,
+		ServiceData: systemLogWriteParams,
 	}
 	return s
 }
 
 type SystemLogWrite struct {
-	Id          *int    `json:"id"`
-	Type        *string `json:"type"`
-	Domain      *string `json:"domain"`
-	Service     *string `json:"service"`
-	ServiceData struct {
-		Level   *Level  `json:"level,omitempty"`
-		Logger  *string `json:"logger,omitempty"`
-		Message *string `json:"message,omitempty"`
-	} `json:"service_data,omitempty"`
-	Target struct {
-		EntityId []string `json:"entity_id,omitempty"`
-	} `json:"target,omitempty"`
+	ServiceBase
+	ServiceData SystemLogWriteParams `json:"service_data,omitempty"`
+}
+type SystemLogWriteParams struct {
+	Level   *Level  `json:"level,omitempty"`
+	Logger  *string `json:"logger,omitempty"`
+	Message *string `json:"message,omitempty"`
 }
 
 func (s *SystemLogWrite) JSON() string {

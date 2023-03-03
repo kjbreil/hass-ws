@@ -8,33 +8,28 @@ import "encoding/json"
 
 // NewTemplateReload creates the object that can be sent to Home Assistant for domain template, service reload
 // "Reload all template entities."
-func NewTemplateReload(entities []string) *TemplateReload {
+func NewTemplateReload(target Target, templateReloadParams TemplateReloadParams) *TemplateReload {
 	serviceDomain := "template"
 	serviceType := "call_service"
 	serviceService := "reload"
 	t := &TemplateReload{
-		Domain:      &serviceDomain,
-		Id:          nil,
-		Service:     &serviceService,
-		ServiceData: struct{}{},
-		Target: struct {
-			EntityId []string `json:"entity_id,omitempty"`
-		}{EntityId: entities},
-		Type: &serviceType,
+		ServiceBase: ServiceBase{
+			Domain:  &serviceDomain,
+			Id:      nil,
+			Service: &serviceService,
+			Target:  target,
+			Type:    &serviceType,
+		},
+		ServiceData: templateReloadParams,
 	}
 	return t
 }
 
 type TemplateReload struct {
-	Id          *int     `json:"id"`
-	Type        *string  `json:"type"`
-	Domain      *string  `json:"domain"`
-	Service     *string  `json:"service"`
-	ServiceData struct{} `json:"service_data,omitempty"`
-	Target      struct {
-		EntityId []string `json:"entity_id,omitempty"`
-	} `json:"target,omitempty"`
+	ServiceBase
+	ServiceData TemplateReloadParams `json:"service_data,omitempty"`
 }
+type TemplateReloadParams struct{}
 
 func (t *TemplateReload) JSON() string {
 	data, _ := json.Marshal(t)

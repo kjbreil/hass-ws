@@ -8,36 +8,29 @@ import "encoding/json"
 
 // NewLoggerSetDefaultLevel creates the object that can be sent to Home Assistant for domain logger, service set_default_level
 // "Set the default log level for integrations."
-func NewLoggerSetDefaultLevel(entities []string, level *Level) *LoggerSetDefaultLevel {
+func NewLoggerSetDefaultLevel(target Target, loggerSetDefaultLevelParams LoggerSetDefaultLevelParams) *LoggerSetDefaultLevel {
 	serviceDomain := "logger"
 	serviceType := "call_service"
 	serviceService := "set_default_level"
 	l := &LoggerSetDefaultLevel{
-		Domain:  &serviceDomain,
-		Id:      nil,
-		Service: &serviceService,
-		ServiceData: struct {
-			Level *Level `json:"level,omitempty"`
-		}{Level: level},
-		Target: struct {
-			EntityId []string `json:"entity_id,omitempty"`
-		}{EntityId: entities},
-		Type: &serviceType,
+		ServiceBase: ServiceBase{
+			Domain:  &serviceDomain,
+			Id:      nil,
+			Service: &serviceService,
+			Target:  target,
+			Type:    &serviceType,
+		},
+		ServiceData: loggerSetDefaultLevelParams,
 	}
 	return l
 }
 
 type LoggerSetDefaultLevel struct {
-	Id          *int    `json:"id"`
-	Type        *string `json:"type"`
-	Domain      *string `json:"domain"`
-	Service     *string `json:"service"`
-	ServiceData struct {
-		Level *Level `json:"level,omitempty"`
-	} `json:"service_data,omitempty"`
-	Target struct {
-		EntityId []string `json:"entity_id,omitempty"`
-	} `json:"target,omitempty"`
+	ServiceBase
+	ServiceData LoggerSetDefaultLevelParams `json:"service_data,omitempty"`
+}
+type LoggerSetDefaultLevelParams struct {
+	Level *Level `json:"level,omitempty"`
 }
 
 func (l *LoggerSetDefaultLevel) JSON() string {
@@ -50,33 +43,28 @@ func (l *LoggerSetDefaultLevel) SetID(id *int) {
 
 // NewLoggerSetLevel creates the object that can be sent to Home Assistant for domain logger, service set_level
 // "Set log level for integrations."
-func NewLoggerSetLevel(entities []string) *LoggerSetLevel {
+func NewLoggerSetLevel(target Target, loggerSetLevelParams LoggerSetLevelParams) *LoggerSetLevel {
 	serviceDomain := "logger"
 	serviceType := "call_service"
 	serviceService := "set_level"
 	l := &LoggerSetLevel{
-		Domain:      &serviceDomain,
-		Id:          nil,
-		Service:     &serviceService,
-		ServiceData: struct{}{},
-		Target: struct {
-			EntityId []string `json:"entity_id,omitempty"`
-		}{EntityId: entities},
-		Type: &serviceType,
+		ServiceBase: ServiceBase{
+			Domain:  &serviceDomain,
+			Id:      nil,
+			Service: &serviceService,
+			Target:  target,
+			Type:    &serviceType,
+		},
+		ServiceData: loggerSetLevelParams,
 	}
 	return l
 }
 
 type LoggerSetLevel struct {
-	Id          *int     `json:"id"`
-	Type        *string  `json:"type"`
-	Domain      *string  `json:"domain"`
-	Service     *string  `json:"service"`
-	ServiceData struct{} `json:"service_data,omitempty"`
-	Target      struct {
-		EntityId []string `json:"entity_id,omitempty"`
-	} `json:"target,omitempty"`
+	ServiceBase
+	ServiceData LoggerSetLevelParams `json:"service_data,omitempty"`
 }
+type LoggerSetLevelParams struct{}
 
 func (l *LoggerSetLevel) JSON() string {
 	data, _ := json.Marshal(l)

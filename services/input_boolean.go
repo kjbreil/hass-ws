@@ -8,33 +8,28 @@ import "encoding/json"
 
 // NewInputBooleanReload creates the object that can be sent to Home Assistant for domain input_boolean, service reload
 // "Reload the input_boolean configuration"
-func NewInputBooleanReload(entities []string) *InputBooleanReload {
+func NewInputBooleanReload(target Target, inputBooleanReloadParams InputBooleanReloadParams) *InputBooleanReload {
 	serviceDomain := "input_boolean"
 	serviceType := "call_service"
 	serviceService := "reload"
 	i := &InputBooleanReload{
-		Domain:      &serviceDomain,
-		Id:          nil,
-		Service:     &serviceService,
-		ServiceData: struct{}{},
-		Target: struct {
-			EntityId []string `json:"entity_id,omitempty"`
-		}{EntityId: entities},
-		Type: &serviceType,
+		ServiceBase: ServiceBase{
+			Domain:  &serviceDomain,
+			Id:      nil,
+			Service: &serviceService,
+			Target:  target,
+			Type:    &serviceType,
+		},
+		ServiceData: inputBooleanReloadParams,
 	}
 	return i
 }
 
 type InputBooleanReload struct {
-	Id          *int     `json:"id"`
-	Type        *string  `json:"type"`
-	Domain      *string  `json:"domain"`
-	Service     *string  `json:"service"`
-	ServiceData struct{} `json:"service_data,omitempty"`
-	Target      struct {
-		EntityId []string `json:"entity_id,omitempty"`
-	} `json:"target,omitempty"`
+	ServiceBase
+	ServiceData InputBooleanReloadParams `json:"service_data,omitempty"`
 }
+type InputBooleanReloadParams struct{}
 
 func (i *InputBooleanReload) JSON() string {
 	data, _ := json.Marshal(i)
@@ -46,33 +41,28 @@ func (i *InputBooleanReload) SetID(id *int) {
 
 // NewInputBooleanToggle creates the object that can be sent to Home Assistant for domain input_boolean, service toggle
 // "Toggle an input boolean"
-func NewInputBooleanToggle(entities []string) *InputBooleanToggle {
+func NewInputBooleanToggle(target Target, inputBooleanToggleParams InputBooleanToggleParams) *InputBooleanToggle {
 	serviceDomain := "input_boolean"
 	serviceType := "call_service"
 	serviceService := "toggle"
 	i := &InputBooleanToggle{
-		Domain:      &serviceDomain,
-		Id:          nil,
-		Service:     &serviceService,
-		ServiceData: struct{}{},
-		Target: struct {
-			EntityId []string `json:"entity_id,omitempty"`
-		}{EntityId: entities},
-		Type: &serviceType,
+		ServiceBase: ServiceBase{
+			Domain:  &serviceDomain,
+			Id:      nil,
+			Service: &serviceService,
+			Target:  target,
+			Type:    &serviceType,
+		},
+		ServiceData: inputBooleanToggleParams,
 	}
 	return i
 }
 
 type InputBooleanToggle struct {
-	Id          *int     `json:"id"`
-	Type        *string  `json:"type"`
-	Domain      *string  `json:"domain"`
-	Service     *string  `json:"service"`
-	ServiceData struct{} `json:"service_data,omitempty"`
-	Target      struct {
-		EntityId []string `json:"entity_id,omitempty"`
-	} `json:"target,omitempty"`
+	ServiceBase
+	ServiceData InputBooleanToggleParams `json:"service_data,omitempty"`
 }
+type InputBooleanToggleParams struct{}
 
 func (i *InputBooleanToggle) JSON() string {
 	data, _ := json.Marshal(i)
@@ -84,33 +74,28 @@ func (i *InputBooleanToggle) SetID(id *int) {
 
 // NewInputBooleanTurnOff creates the object that can be sent to Home Assistant for domain input_boolean, service turn_off
 // "Turn off an input boolean"
-func NewInputBooleanTurnOff(entities []string) *InputBooleanTurnOff {
+func NewInputBooleanTurnOff(target Target, inputBooleanTurnOffParams InputBooleanTurnOffParams) *InputBooleanTurnOff {
 	serviceDomain := "input_boolean"
 	serviceType := "call_service"
 	serviceService := "turn_off"
 	i := &InputBooleanTurnOff{
-		Domain:      &serviceDomain,
-		Id:          nil,
-		Service:     &serviceService,
-		ServiceData: struct{}{},
-		Target: struct {
-			EntityId []string `json:"entity_id,omitempty"`
-		}{EntityId: entities},
-		Type: &serviceType,
+		ServiceBase: ServiceBase{
+			Domain:  &serviceDomain,
+			Id:      nil,
+			Service: &serviceService,
+			Target:  target,
+			Type:    &serviceType,
+		},
+		ServiceData: inputBooleanTurnOffParams,
 	}
 	return i
 }
 
 type InputBooleanTurnOff struct {
-	Id          *int     `json:"id"`
-	Type        *string  `json:"type"`
-	Domain      *string  `json:"domain"`
-	Service     *string  `json:"service"`
-	ServiceData struct{} `json:"service_data,omitempty"`
-	Target      struct {
-		EntityId []string `json:"entity_id,omitempty"`
-	} `json:"target,omitempty"`
+	ServiceBase
+	ServiceData InputBooleanTurnOffParams `json:"service_data,omitempty"`
 }
+type InputBooleanTurnOffParams struct{}
 
 func (i *InputBooleanTurnOff) JSON() string {
 	data, _ := json.Marshal(i)
@@ -122,33 +107,28 @@ func (i *InputBooleanTurnOff) SetID(id *int) {
 
 // NewInputBooleanTurnOn creates the object that can be sent to Home Assistant for domain input_boolean, service turn_on
 // "Turn on an input boolean"
-func NewInputBooleanTurnOn(entities []string) *InputBooleanTurnOn {
+func NewInputBooleanTurnOn(target Target, inputBooleanTurnOnParams InputBooleanTurnOnParams) *InputBooleanTurnOn {
 	serviceDomain := "input_boolean"
 	serviceType := "call_service"
 	serviceService := "turn_on"
 	i := &InputBooleanTurnOn{
-		Domain:      &serviceDomain,
-		Id:          nil,
-		Service:     &serviceService,
-		ServiceData: struct{}{},
-		Target: struct {
-			EntityId []string `json:"entity_id,omitempty"`
-		}{EntityId: entities},
-		Type: &serviceType,
+		ServiceBase: ServiceBase{
+			Domain:  &serviceDomain,
+			Id:      nil,
+			Service: &serviceService,
+			Target:  target,
+			Type:    &serviceType,
+		},
+		ServiceData: inputBooleanTurnOnParams,
 	}
 	return i
 }
 
 type InputBooleanTurnOn struct {
-	Id          *int     `json:"id"`
-	Type        *string  `json:"type"`
-	Domain      *string  `json:"domain"`
-	Service     *string  `json:"service"`
-	ServiceData struct{} `json:"service_data,omitempty"`
-	Target      struct {
-		EntityId []string `json:"entity_id,omitempty"`
-	} `json:"target,omitempty"`
+	ServiceBase
+	ServiceData InputBooleanTurnOnParams `json:"service_data,omitempty"`
 }
+type InputBooleanTurnOnParams struct{}
 
 func (i *InputBooleanTurnOn) JSON() string {
 	data, _ := json.Marshal(i)

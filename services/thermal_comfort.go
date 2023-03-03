@@ -8,33 +8,28 @@ import "encoding/json"
 
 // NewThermalComfortReload creates the object that can be sent to Home Assistant for domain thermal_comfort, service reload
 // "Reload all Thermal Comfort entities."
-func NewThermalComfortReload(entities []string) *ThermalComfortReload {
+func NewThermalComfortReload(target Target, thermalComfortReloadParams ThermalComfortReloadParams) *ThermalComfortReload {
 	serviceDomain := "thermal_comfort"
 	serviceType := "call_service"
 	serviceService := "reload"
 	t := &ThermalComfortReload{
-		Domain:      &serviceDomain,
-		Id:          nil,
-		Service:     &serviceService,
-		ServiceData: struct{}{},
-		Target: struct {
-			EntityId []string `json:"entity_id,omitempty"`
-		}{EntityId: entities},
-		Type: &serviceType,
+		ServiceBase: ServiceBase{
+			Domain:  &serviceDomain,
+			Id:      nil,
+			Service: &serviceService,
+			Target:  target,
+			Type:    &serviceType,
+		},
+		ServiceData: thermalComfortReloadParams,
 	}
 	return t
 }
 
 type ThermalComfortReload struct {
-	Id          *int     `json:"id"`
-	Type        *string  `json:"type"`
-	Domain      *string  `json:"domain"`
-	Service     *string  `json:"service"`
-	ServiceData struct{} `json:"service_data,omitempty"`
-	Target      struct {
-		EntityId []string `json:"entity_id,omitempty"`
-	} `json:"target,omitempty"`
+	ServiceBase
+	ServiceData ThermalComfortReloadParams `json:"service_data,omitempty"`
 }
+type ThermalComfortReloadParams struct{}
 
 func (t *ThermalComfortReload) JSON() string {
 	data, _ := json.Marshal(t)

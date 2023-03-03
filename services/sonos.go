@@ -8,33 +8,28 @@ import "encoding/json"
 
 // NewSonosClearSleepTimer creates the object that can be sent to Home Assistant for domain sonos, service clear_sleep_timer
 // "Clear a Sonos timer."
-func NewSonosClearSleepTimer(entities []string) *SonosClearSleepTimer {
+func NewSonosClearSleepTimer(target Target, sonosClearSleepTimerParams SonosClearSleepTimerParams) *SonosClearSleepTimer {
 	serviceDomain := "sonos"
 	serviceType := "call_service"
 	serviceService := "clear_sleep_timer"
 	s := &SonosClearSleepTimer{
-		Domain:      &serviceDomain,
-		Id:          nil,
-		Service:     &serviceService,
-		ServiceData: struct{}{},
-		Target: struct {
-			EntityId []string `json:"entity_id,omitempty"`
-		}{EntityId: entities},
-		Type: &serviceType,
+		ServiceBase: ServiceBase{
+			Domain:  &serviceDomain,
+			Id:      nil,
+			Service: &serviceService,
+			Target:  target,
+			Type:    &serviceType,
+		},
+		ServiceData: sonosClearSleepTimerParams,
 	}
 	return s
 }
 
 type SonosClearSleepTimer struct {
-	Id          *int     `json:"id"`
-	Type        *string  `json:"type"`
-	Domain      *string  `json:"domain"`
-	Service     *string  `json:"service"`
-	ServiceData struct{} `json:"service_data,omitempty"`
-	Target      struct {
-		EntityId []string `json:"entity_id,omitempty"`
-	} `json:"target,omitempty"`
+	ServiceBase
+	ServiceData SonosClearSleepTimerParams `json:"service_data,omitempty"`
 }
+type SonosClearSleepTimerParams struct{}
 
 func (s *SonosClearSleepTimer) JSON() string {
 	data, _ := json.Marshal(s)
@@ -46,36 +41,29 @@ func (s *SonosClearSleepTimer) SetID(id *int) {
 
 // NewSonosPlayQueue creates the object that can be sent to Home Assistant for domain sonos, service play_queue
 // "Start playing the queue from the first item."
-func NewSonosPlayQueue(entities []string, queuePosition *float64) *SonosPlayQueue {
+func NewSonosPlayQueue(target Target, sonosPlayQueueParams SonosPlayQueueParams) *SonosPlayQueue {
 	serviceDomain := "sonos"
 	serviceType := "call_service"
 	serviceService := "play_queue"
 	s := &SonosPlayQueue{
-		Domain:  &serviceDomain,
-		Id:      nil,
-		Service: &serviceService,
-		ServiceData: struct {
-			QueuePosition *float64 `json:"queue_position,omitempty"`
-		}{QueuePosition: queuePosition},
-		Target: struct {
-			EntityId []string `json:"entity_id,omitempty"`
-		}{EntityId: entities},
-		Type: &serviceType,
+		ServiceBase: ServiceBase{
+			Domain:  &serviceDomain,
+			Id:      nil,
+			Service: &serviceService,
+			Target:  target,
+			Type:    &serviceType,
+		},
+		ServiceData: sonosPlayQueueParams,
 	}
 	return s
 }
 
 type SonosPlayQueue struct {
-	Id          *int    `json:"id"`
-	Type        *string `json:"type"`
-	Domain      *string `json:"domain"`
-	Service     *string `json:"service"`
-	ServiceData struct {
-		QueuePosition *float64 `json:"queue_position,omitempty"`
-	} `json:"service_data,omitempty"`
-	Target struct {
-		EntityId []string `json:"entity_id,omitempty"`
-	} `json:"target,omitempty"`
+	ServiceBase
+	ServiceData SonosPlayQueueParams `json:"service_data,omitempty"`
+}
+type SonosPlayQueueParams struct {
+	QueuePosition *float64 `json:"queue_position,omitempty"`
 }
 
 func (s *SonosPlayQueue) JSON() string {
@@ -88,36 +76,29 @@ func (s *SonosPlayQueue) SetID(id *int) {
 
 // NewSonosRemoveFromQueue creates the object that can be sent to Home Assistant for domain sonos, service remove_from_queue
 // "Removes an item from the queue."
-func NewSonosRemoveFromQueue(entities []string, queuePosition *float64) *SonosRemoveFromQueue {
+func NewSonosRemoveFromQueue(target Target, sonosRemoveFromQueueParams SonosRemoveFromQueueParams) *SonosRemoveFromQueue {
 	serviceDomain := "sonos"
 	serviceType := "call_service"
 	serviceService := "remove_from_queue"
 	s := &SonosRemoveFromQueue{
-		Domain:  &serviceDomain,
-		Id:      nil,
-		Service: &serviceService,
-		ServiceData: struct {
-			QueuePosition *float64 `json:"queue_position,omitempty"`
-		}{QueuePosition: queuePosition},
-		Target: struct {
-			EntityId []string `json:"entity_id,omitempty"`
-		}{EntityId: entities},
-		Type: &serviceType,
+		ServiceBase: ServiceBase{
+			Domain:  &serviceDomain,
+			Id:      nil,
+			Service: &serviceService,
+			Target:  target,
+			Type:    &serviceType,
+		},
+		ServiceData: sonosRemoveFromQueueParams,
 	}
 	return s
 }
 
 type SonosRemoveFromQueue struct {
-	Id          *int    `json:"id"`
-	Type        *string `json:"type"`
-	Domain      *string `json:"domain"`
-	Service     *string `json:"service"`
-	ServiceData struct {
-		QueuePosition *float64 `json:"queue_position,omitempty"`
-	} `json:"service_data,omitempty"`
-	Target struct {
-		EntityId []string `json:"entity_id,omitempty"`
-	} `json:"target,omitempty"`
+	ServiceBase
+	ServiceData SonosRemoveFromQueueParams `json:"service_data,omitempty"`
+}
+type SonosRemoveFromQueueParams struct {
+	QueuePosition *float64 `json:"queue_position,omitempty"`
 }
 
 func (s *SonosRemoveFromQueue) JSON() string {
@@ -130,33 +111,28 @@ func (s *SonosRemoveFromQueue) SetID(id *int) {
 
 // NewSonosRestore creates the object that can be sent to Home Assistant for domain sonos, service restore
 // "Restore a snapshot of the media player."
-func NewSonosRestore(entities []string) *SonosRestore {
+func NewSonosRestore(target Target, sonosRestoreParams SonosRestoreParams) *SonosRestore {
 	serviceDomain := "sonos"
 	serviceType := "call_service"
 	serviceService := "restore"
 	s := &SonosRestore{
-		Domain:      &serviceDomain,
-		Id:          nil,
-		Service:     &serviceService,
-		ServiceData: struct{}{},
-		Target: struct {
-			EntityId []string `json:"entity_id,omitempty"`
-		}{EntityId: entities},
-		Type: &serviceType,
+		ServiceBase: ServiceBase{
+			Domain:  &serviceDomain,
+			Id:      nil,
+			Service: &serviceService,
+			Target:  target,
+			Type:    &serviceType,
+		},
+		ServiceData: sonosRestoreParams,
 	}
 	return s
 }
 
 type SonosRestore struct {
-	Id          *int     `json:"id"`
-	Type        *string  `json:"type"`
-	Domain      *string  `json:"domain"`
-	Service     *string  `json:"service"`
-	ServiceData struct{} `json:"service_data,omitempty"`
-	Target      struct {
-		EntityId []string `json:"entity_id,omitempty"`
-	} `json:"target,omitempty"`
+	ServiceBase
+	ServiceData SonosRestoreParams `json:"service_data,omitempty"`
 }
+type SonosRestoreParams struct{}
 
 func (s *SonosRestore) JSON() string {
 	data, _ := json.Marshal(s)
@@ -168,36 +144,29 @@ func (s *SonosRestore) SetID(id *int) {
 
 // NewSonosSetSleepTimer creates the object that can be sent to Home Assistant for domain sonos, service set_sleep_timer
 // "Set a Sonos timer."
-func NewSonosSetSleepTimer(entities []string, sleepTime *float64) *SonosSetSleepTimer {
+func NewSonosSetSleepTimer(target Target, sonosSetSleepTimerParams SonosSetSleepTimerParams) *SonosSetSleepTimer {
 	serviceDomain := "sonos"
 	serviceType := "call_service"
 	serviceService := "set_sleep_timer"
 	s := &SonosSetSleepTimer{
-		Domain:  &serviceDomain,
-		Id:      nil,
-		Service: &serviceService,
-		ServiceData: struct {
-			SleepTime *float64 `json:"sleep_time,omitempty"`
-		}{SleepTime: sleepTime},
-		Target: struct {
-			EntityId []string `json:"entity_id,omitempty"`
-		}{EntityId: entities},
-		Type: &serviceType,
+		ServiceBase: ServiceBase{
+			Domain:  &serviceDomain,
+			Id:      nil,
+			Service: &serviceService,
+			Target:  target,
+			Type:    &serviceType,
+		},
+		ServiceData: sonosSetSleepTimerParams,
 	}
 	return s
 }
 
 type SonosSetSleepTimer struct {
-	Id          *int    `json:"id"`
-	Type        *string `json:"type"`
-	Domain      *string `json:"domain"`
-	Service     *string `json:"service"`
-	ServiceData struct {
-		SleepTime *float64 `json:"sleep_time,omitempty"`
-	} `json:"service_data,omitempty"`
-	Target struct {
-		EntityId []string `json:"entity_id,omitempty"`
-	} `json:"target,omitempty"`
+	ServiceBase
+	ServiceData SonosSetSleepTimerParams `json:"service_data,omitempty"`
+}
+type SonosSetSleepTimerParams struct {
+	SleepTime *float64 `json:"sleep_time,omitempty"`
 }
 
 func (s *SonosSetSleepTimer) JSON() string {
@@ -210,33 +179,28 @@ func (s *SonosSetSleepTimer) SetID(id *int) {
 
 // NewSonosSnapshot creates the object that can be sent to Home Assistant for domain sonos, service snapshot
 // "Take a snapshot of the media player."
-func NewSonosSnapshot(entities []string) *SonosSnapshot {
+func NewSonosSnapshot(target Target, sonosSnapshotParams SonosSnapshotParams) *SonosSnapshot {
 	serviceDomain := "sonos"
 	serviceType := "call_service"
 	serviceService := "snapshot"
 	s := &SonosSnapshot{
-		Domain:      &serviceDomain,
-		Id:          nil,
-		Service:     &serviceService,
-		ServiceData: struct{}{},
-		Target: struct {
-			EntityId []string `json:"entity_id,omitempty"`
-		}{EntityId: entities},
-		Type: &serviceType,
+		ServiceBase: ServiceBase{
+			Domain:  &serviceDomain,
+			Id:      nil,
+			Service: &serviceService,
+			Target:  target,
+			Type:    &serviceType,
+		},
+		ServiceData: sonosSnapshotParams,
 	}
 	return s
 }
 
 type SonosSnapshot struct {
-	Id          *int     `json:"id"`
-	Type        *string  `json:"type"`
-	Domain      *string  `json:"domain"`
-	Service     *string  `json:"service"`
-	ServiceData struct{} `json:"service_data,omitempty"`
-	Target      struct {
-		EntityId []string `json:"entity_id,omitempty"`
-	} `json:"target,omitempty"`
+	ServiceBase
+	ServiceData SonosSnapshotParams `json:"service_data,omitempty"`
 }
+type SonosSnapshotParams struct{}
 
 func (s *SonosSnapshot) JSON() string {
 	data, _ := json.Marshal(s)
@@ -248,41 +212,30 @@ func (s *SonosSnapshot) SetID(id *int) {
 
 // NewSonosUpdateAlarm creates the object that can be sent to Home Assistant for domain sonos, service update_alarm
 // "Updates an alarm with new time and volume settings."
-func NewSonosUpdateAlarm(entities []string, alarmId *float64, volume *float64) *SonosUpdateAlarm {
+func NewSonosUpdateAlarm(target Target, sonosUpdateAlarmParams SonosUpdateAlarmParams) *SonosUpdateAlarm {
 	serviceDomain := "sonos"
 	serviceType := "call_service"
 	serviceService := "update_alarm"
 	s := &SonosUpdateAlarm{
-		Domain:  &serviceDomain,
-		Id:      nil,
-		Service: &serviceService,
-		ServiceData: struct {
-			AlarmId *float64 `json:"alarm_id,omitempty"`
-			Volume  *float64 `json:"volume,omitempty"`
-		}{
-			AlarmId: alarmId,
-			Volume:  volume,
+		ServiceBase: ServiceBase{
+			Domain:  &serviceDomain,
+			Id:      nil,
+			Service: &serviceService,
+			Target:  target,
+			Type:    &serviceType,
 		},
-		Target: struct {
-			EntityId []string `json:"entity_id,omitempty"`
-		}{EntityId: entities},
-		Type: &serviceType,
+		ServiceData: sonosUpdateAlarmParams,
 	}
 	return s
 }
 
 type SonosUpdateAlarm struct {
-	Id          *int    `json:"id"`
-	Type        *string `json:"type"`
-	Domain      *string `json:"domain"`
-	Service     *string `json:"service"`
-	ServiceData struct {
-		AlarmId *float64 `json:"alarm_id,omitempty"`
-		Volume  *float64 `json:"volume,omitempty"`
-	} `json:"service_data,omitempty"`
-	Target struct {
-		EntityId []string `json:"entity_id,omitempty"`
-	} `json:"target,omitempty"`
+	ServiceBase
+	ServiceData SonosUpdateAlarmParams `json:"service_data,omitempty"`
+}
+type SonosUpdateAlarmParams struct {
+	AlarmId *float64 `json:"alarm_id,omitempty"`
+	Volume  *float64 `json:"volume,omitempty"`
 }
 
 func (s *SonosUpdateAlarm) JSON() string {

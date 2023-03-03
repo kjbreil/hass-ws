@@ -8,36 +8,29 @@ import "encoding/json"
 
 // NewAlarmControlPanelAlarmArmAway creates the object that can be sent to Home Assistant for domain alarm_control_panel, service alarm_arm_away
 // "Send the alarm the command for arm away."
-func NewAlarmControlPanelAlarmArmAway(entities []string, code *string) *AlarmControlPanelAlarmArmAway {
+func NewAlarmControlPanelAlarmArmAway(target Target, alarmControlPanelAlarmArmAwayParams AlarmControlPanelAlarmArmAwayParams) *AlarmControlPanelAlarmArmAway {
 	serviceDomain := "alarm_control_panel"
 	serviceType := "call_service"
 	serviceService := "alarm_arm_away"
 	a := &AlarmControlPanelAlarmArmAway{
-		Domain:  &serviceDomain,
-		Id:      nil,
-		Service: &serviceService,
-		ServiceData: struct {
-			Code *string `json:"code,omitempty"`
-		}{Code: code},
-		Target: struct {
-			EntityId []string `json:"entity_id,omitempty"`
-		}{EntityId: entities},
-		Type: &serviceType,
+		ServiceBase: ServiceBase{
+			Domain:  &serviceDomain,
+			Id:      nil,
+			Service: &serviceService,
+			Target:  target,
+			Type:    &serviceType,
+		},
+		ServiceData: alarmControlPanelAlarmArmAwayParams,
 	}
 	return a
 }
 
 type AlarmControlPanelAlarmArmAway struct {
-	Id          *int    `json:"id"`
-	Type        *string `json:"type"`
-	Domain      *string `json:"domain"`
-	Service     *string `json:"service"`
-	ServiceData struct {
-		Code *string `json:"code,omitempty"`
-	} `json:"service_data,omitempty"`
-	Target struct {
-		EntityId []string `json:"entity_id,omitempty"`
-	} `json:"target,omitempty"`
+	ServiceBase
+	ServiceData AlarmControlPanelAlarmArmAwayParams `json:"service_data,omitempty"`
+}
+type AlarmControlPanelAlarmArmAwayParams struct {
+	Code *string `json:"code,omitempty"`
 }
 
 func (a *AlarmControlPanelAlarmArmAway) JSON() string {
@@ -50,36 +43,29 @@ func (a *AlarmControlPanelAlarmArmAway) SetID(id *int) {
 
 // NewAlarmControlPanelAlarmArmCustomBypass creates the object that can be sent to Home Assistant for domain alarm_control_panel, service alarm_arm_custom_bypass
 // "Send arm custom bypass command."
-func NewAlarmControlPanelAlarmArmCustomBypass(entities []string, code *string) *AlarmControlPanelAlarmArmCustomBypass {
+func NewAlarmControlPanelAlarmArmCustomBypass(target Target, alarmControlPanelAlarmArmCustomBypassParams AlarmControlPanelAlarmArmCustomBypassParams) *AlarmControlPanelAlarmArmCustomBypass {
 	serviceDomain := "alarm_control_panel"
 	serviceType := "call_service"
 	serviceService := "alarm_arm_custom_bypass"
 	a := &AlarmControlPanelAlarmArmCustomBypass{
-		Domain:  &serviceDomain,
-		Id:      nil,
-		Service: &serviceService,
-		ServiceData: struct {
-			Code *string `json:"code,omitempty"`
-		}{Code: code},
-		Target: struct {
-			EntityId []string `json:"entity_id,omitempty"`
-		}{EntityId: entities},
-		Type: &serviceType,
+		ServiceBase: ServiceBase{
+			Domain:  &serviceDomain,
+			Id:      nil,
+			Service: &serviceService,
+			Target:  target,
+			Type:    &serviceType,
+		},
+		ServiceData: alarmControlPanelAlarmArmCustomBypassParams,
 	}
 	return a
 }
 
 type AlarmControlPanelAlarmArmCustomBypass struct {
-	Id          *int    `json:"id"`
-	Type        *string `json:"type"`
-	Domain      *string `json:"domain"`
-	Service     *string `json:"service"`
-	ServiceData struct {
-		Code *string `json:"code,omitempty"`
-	} `json:"service_data,omitempty"`
-	Target struct {
-		EntityId []string `json:"entity_id,omitempty"`
-	} `json:"target,omitempty"`
+	ServiceBase
+	ServiceData AlarmControlPanelAlarmArmCustomBypassParams `json:"service_data,omitempty"`
+}
+type AlarmControlPanelAlarmArmCustomBypassParams struct {
+	Code *string `json:"code,omitempty"`
 }
 
 func (a *AlarmControlPanelAlarmArmCustomBypass) JSON() string {
@@ -92,36 +78,29 @@ func (a *AlarmControlPanelAlarmArmCustomBypass) SetID(id *int) {
 
 // NewAlarmControlPanelAlarmArmHome creates the object that can be sent to Home Assistant for domain alarm_control_panel, service alarm_arm_home
 // "Send the alarm the command for arm home."
-func NewAlarmControlPanelAlarmArmHome(entities []string, code *string) *AlarmControlPanelAlarmArmHome {
+func NewAlarmControlPanelAlarmArmHome(target Target, alarmControlPanelAlarmArmHomeParams AlarmControlPanelAlarmArmHomeParams) *AlarmControlPanelAlarmArmHome {
 	serviceDomain := "alarm_control_panel"
 	serviceType := "call_service"
 	serviceService := "alarm_arm_home"
 	a := &AlarmControlPanelAlarmArmHome{
-		Domain:  &serviceDomain,
-		Id:      nil,
-		Service: &serviceService,
-		ServiceData: struct {
-			Code *string `json:"code,omitempty"`
-		}{Code: code},
-		Target: struct {
-			EntityId []string `json:"entity_id,omitempty"`
-		}{EntityId: entities},
-		Type: &serviceType,
+		ServiceBase: ServiceBase{
+			Domain:  &serviceDomain,
+			Id:      nil,
+			Service: &serviceService,
+			Target:  target,
+			Type:    &serviceType,
+		},
+		ServiceData: alarmControlPanelAlarmArmHomeParams,
 	}
 	return a
 }
 
 type AlarmControlPanelAlarmArmHome struct {
-	Id          *int    `json:"id"`
-	Type        *string `json:"type"`
-	Domain      *string `json:"domain"`
-	Service     *string `json:"service"`
-	ServiceData struct {
-		Code *string `json:"code,omitempty"`
-	} `json:"service_data,omitempty"`
-	Target struct {
-		EntityId []string `json:"entity_id,omitempty"`
-	} `json:"target,omitempty"`
+	ServiceBase
+	ServiceData AlarmControlPanelAlarmArmHomeParams `json:"service_data,omitempty"`
+}
+type AlarmControlPanelAlarmArmHomeParams struct {
+	Code *string `json:"code,omitempty"`
 }
 
 func (a *AlarmControlPanelAlarmArmHome) JSON() string {
@@ -134,36 +113,29 @@ func (a *AlarmControlPanelAlarmArmHome) SetID(id *int) {
 
 // NewAlarmControlPanelAlarmArmNight creates the object that can be sent to Home Assistant for domain alarm_control_panel, service alarm_arm_night
 // "Send the alarm the command for arm night."
-func NewAlarmControlPanelAlarmArmNight(entities []string, code *string) *AlarmControlPanelAlarmArmNight {
+func NewAlarmControlPanelAlarmArmNight(target Target, alarmControlPanelAlarmArmNightParams AlarmControlPanelAlarmArmNightParams) *AlarmControlPanelAlarmArmNight {
 	serviceDomain := "alarm_control_panel"
 	serviceType := "call_service"
 	serviceService := "alarm_arm_night"
 	a := &AlarmControlPanelAlarmArmNight{
-		Domain:  &serviceDomain,
-		Id:      nil,
-		Service: &serviceService,
-		ServiceData: struct {
-			Code *string `json:"code,omitempty"`
-		}{Code: code},
-		Target: struct {
-			EntityId []string `json:"entity_id,omitempty"`
-		}{EntityId: entities},
-		Type: &serviceType,
+		ServiceBase: ServiceBase{
+			Domain:  &serviceDomain,
+			Id:      nil,
+			Service: &serviceService,
+			Target:  target,
+			Type:    &serviceType,
+		},
+		ServiceData: alarmControlPanelAlarmArmNightParams,
 	}
 	return a
 }
 
 type AlarmControlPanelAlarmArmNight struct {
-	Id          *int    `json:"id"`
-	Type        *string `json:"type"`
-	Domain      *string `json:"domain"`
-	Service     *string `json:"service"`
-	ServiceData struct {
-		Code *string `json:"code,omitempty"`
-	} `json:"service_data,omitempty"`
-	Target struct {
-		EntityId []string `json:"entity_id,omitempty"`
-	} `json:"target,omitempty"`
+	ServiceBase
+	ServiceData AlarmControlPanelAlarmArmNightParams `json:"service_data,omitempty"`
+}
+type AlarmControlPanelAlarmArmNightParams struct {
+	Code *string `json:"code,omitempty"`
 }
 
 func (a *AlarmControlPanelAlarmArmNight) JSON() string {
@@ -176,36 +148,29 @@ func (a *AlarmControlPanelAlarmArmNight) SetID(id *int) {
 
 // NewAlarmControlPanelAlarmArmVacation creates the object that can be sent to Home Assistant for domain alarm_control_panel, service alarm_arm_vacation
 // "Send the alarm the command for arm vacation."
-func NewAlarmControlPanelAlarmArmVacation(entities []string, code *string) *AlarmControlPanelAlarmArmVacation {
+func NewAlarmControlPanelAlarmArmVacation(target Target, alarmControlPanelAlarmArmVacationParams AlarmControlPanelAlarmArmVacationParams) *AlarmControlPanelAlarmArmVacation {
 	serviceDomain := "alarm_control_panel"
 	serviceType := "call_service"
 	serviceService := "alarm_arm_vacation"
 	a := &AlarmControlPanelAlarmArmVacation{
-		Domain:  &serviceDomain,
-		Id:      nil,
-		Service: &serviceService,
-		ServiceData: struct {
-			Code *string `json:"code,omitempty"`
-		}{Code: code},
-		Target: struct {
-			EntityId []string `json:"entity_id,omitempty"`
-		}{EntityId: entities},
-		Type: &serviceType,
+		ServiceBase: ServiceBase{
+			Domain:  &serviceDomain,
+			Id:      nil,
+			Service: &serviceService,
+			Target:  target,
+			Type:    &serviceType,
+		},
+		ServiceData: alarmControlPanelAlarmArmVacationParams,
 	}
 	return a
 }
 
 type AlarmControlPanelAlarmArmVacation struct {
-	Id          *int    `json:"id"`
-	Type        *string `json:"type"`
-	Domain      *string `json:"domain"`
-	Service     *string `json:"service"`
-	ServiceData struct {
-		Code *string `json:"code,omitempty"`
-	} `json:"service_data,omitempty"`
-	Target struct {
-		EntityId []string `json:"entity_id,omitempty"`
-	} `json:"target,omitempty"`
+	ServiceBase
+	ServiceData AlarmControlPanelAlarmArmVacationParams `json:"service_data,omitempty"`
+}
+type AlarmControlPanelAlarmArmVacationParams struct {
+	Code *string `json:"code,omitempty"`
 }
 
 func (a *AlarmControlPanelAlarmArmVacation) JSON() string {
@@ -218,36 +183,29 @@ func (a *AlarmControlPanelAlarmArmVacation) SetID(id *int) {
 
 // NewAlarmControlPanelAlarmDisarm creates the object that can be sent to Home Assistant for domain alarm_control_panel, service alarm_disarm
 // "Send the alarm the command for disarm."
-func NewAlarmControlPanelAlarmDisarm(entities []string, code *string) *AlarmControlPanelAlarmDisarm {
+func NewAlarmControlPanelAlarmDisarm(target Target, alarmControlPanelAlarmDisarmParams AlarmControlPanelAlarmDisarmParams) *AlarmControlPanelAlarmDisarm {
 	serviceDomain := "alarm_control_panel"
 	serviceType := "call_service"
 	serviceService := "alarm_disarm"
 	a := &AlarmControlPanelAlarmDisarm{
-		Domain:  &serviceDomain,
-		Id:      nil,
-		Service: &serviceService,
-		ServiceData: struct {
-			Code *string `json:"code,omitempty"`
-		}{Code: code},
-		Target: struct {
-			EntityId []string `json:"entity_id,omitempty"`
-		}{EntityId: entities},
-		Type: &serviceType,
+		ServiceBase: ServiceBase{
+			Domain:  &serviceDomain,
+			Id:      nil,
+			Service: &serviceService,
+			Target:  target,
+			Type:    &serviceType,
+		},
+		ServiceData: alarmControlPanelAlarmDisarmParams,
 	}
 	return a
 }
 
 type AlarmControlPanelAlarmDisarm struct {
-	Id          *int    `json:"id"`
-	Type        *string `json:"type"`
-	Domain      *string `json:"domain"`
-	Service     *string `json:"service"`
-	ServiceData struct {
-		Code *string `json:"code,omitempty"`
-	} `json:"service_data,omitempty"`
-	Target struct {
-		EntityId []string `json:"entity_id,omitempty"`
-	} `json:"target,omitempty"`
+	ServiceBase
+	ServiceData AlarmControlPanelAlarmDisarmParams `json:"service_data,omitempty"`
+}
+type AlarmControlPanelAlarmDisarmParams struct {
+	Code *string `json:"code,omitempty"`
 }
 
 func (a *AlarmControlPanelAlarmDisarm) JSON() string {
@@ -260,36 +218,29 @@ func (a *AlarmControlPanelAlarmDisarm) SetID(id *int) {
 
 // NewAlarmControlPanelAlarmTrigger creates the object that can be sent to Home Assistant for domain alarm_control_panel, service alarm_trigger
 // "Send the alarm the command for trigger."
-func NewAlarmControlPanelAlarmTrigger(entities []string, code *string) *AlarmControlPanelAlarmTrigger {
+func NewAlarmControlPanelAlarmTrigger(target Target, alarmControlPanelAlarmTriggerParams AlarmControlPanelAlarmTriggerParams) *AlarmControlPanelAlarmTrigger {
 	serviceDomain := "alarm_control_panel"
 	serviceType := "call_service"
 	serviceService := "alarm_trigger"
 	a := &AlarmControlPanelAlarmTrigger{
-		Domain:  &serviceDomain,
-		Id:      nil,
-		Service: &serviceService,
-		ServiceData: struct {
-			Code *string `json:"code,omitempty"`
-		}{Code: code},
-		Target: struct {
-			EntityId []string `json:"entity_id,omitempty"`
-		}{EntityId: entities},
-		Type: &serviceType,
+		ServiceBase: ServiceBase{
+			Domain:  &serviceDomain,
+			Id:      nil,
+			Service: &serviceService,
+			Target:  target,
+			Type:    &serviceType,
+		},
+		ServiceData: alarmControlPanelAlarmTriggerParams,
 	}
 	return a
 }
 
 type AlarmControlPanelAlarmTrigger struct {
-	Id          *int    `json:"id"`
-	Type        *string `json:"type"`
-	Domain      *string `json:"domain"`
-	Service     *string `json:"service"`
-	ServiceData struct {
-		Code *string `json:"code,omitempty"`
-	} `json:"service_data,omitempty"`
-	Target struct {
-		EntityId []string `json:"entity_id,omitempty"`
-	} `json:"target,omitempty"`
+	ServiceBase
+	ServiceData AlarmControlPanelAlarmTriggerParams `json:"service_data,omitempty"`
+}
+type AlarmControlPanelAlarmTriggerParams struct {
+	Code *string `json:"code,omitempty"`
 }
 
 func (a *AlarmControlPanelAlarmTrigger) JSON() string {
