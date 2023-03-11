@@ -73,175 +73,250 @@ func (o *OnTypeHandlers) Run(message *Message) bool {
 			return true
 		}
 		newAttrs := entities.GetAirQuality(message.Event.Data.NewState.Attributes)
-		oldAttrs := entities.GetAirQuality(message.Event.Data.OldState.Attributes)
+		oldAttrs := &entities.AirQuality{}
+		if message.Event.Data.OldState != nil {
+			oldAttrs = entities.GetAirQuality(message.Event.Data.OldState.Attributes)
+		}
 		o.OnAirQuality(message, newAttrs, oldAttrs)
 	case "alarm_control_panel":
 		if o.OnAlarmControlPanel == nil {
 			return true
 		}
 		newAttrs := entities.GetAlarmControlPanel(message.Event.Data.NewState.Attributes)
-		oldAttrs := entities.GetAlarmControlPanel(message.Event.Data.OldState.Attributes)
+		oldAttrs := &entities.AlarmControlPanel{}
+		if message.Event.Data.OldState != nil {
+			oldAttrs = entities.GetAlarmControlPanel(message.Event.Data.OldState.Attributes)
+		}
 		o.OnAlarmControlPanel(message, newAttrs, oldAttrs)
 	case "binary_sensor":
 		if o.OnBinarySensor == nil {
 			return true
 		}
 		newAttrs := entities.GetBinarySensor(message.Event.Data.NewState.Attributes)
-		oldAttrs := entities.GetBinarySensor(message.Event.Data.OldState.Attributes)
+		oldAttrs := &entities.BinarySensor{}
+		if message.Event.Data.OldState != nil {
+			oldAttrs = entities.GetBinarySensor(message.Event.Data.OldState.Attributes)
+		}
 		o.OnBinarySensor(message, newAttrs, oldAttrs)
 	case "button":
 		if o.OnButton == nil {
 			return true
 		}
 		newAttrs := entities.GetButton(message.Event.Data.NewState.Attributes)
-		oldAttrs := entities.GetButton(message.Event.Data.OldState.Attributes)
+		oldAttrs := &entities.Button{}
+		if message.Event.Data.OldState != nil {
+			oldAttrs = entities.GetButton(message.Event.Data.OldState.Attributes)
+		}
 		o.OnButton(message, newAttrs, oldAttrs)
 	case "camera":
 		if o.OnCamera == nil {
 			return true
 		}
 		newAttrs := entities.GetCamera(message.Event.Data.NewState.Attributes)
-		oldAttrs := entities.GetCamera(message.Event.Data.OldState.Attributes)
+		oldAttrs := &entities.Camera{}
+		if message.Event.Data.OldState != nil {
+			oldAttrs = entities.GetCamera(message.Event.Data.OldState.Attributes)
+		}
 		o.OnCamera(message, newAttrs, oldAttrs)
 	case "climate":
 		if o.OnClimate == nil {
 			return true
 		}
 		newAttrs := entities.GetClimate(message.Event.Data.NewState.Attributes)
-		oldAttrs := entities.GetClimate(message.Event.Data.OldState.Attributes)
+		oldAttrs := &entities.Climate{}
+		if message.Event.Data.OldState != nil {
+			oldAttrs = entities.GetClimate(message.Event.Data.OldState.Attributes)
+		}
 		o.OnClimate(message, newAttrs, oldAttrs)
 	case "cover":
 		if o.OnCover == nil {
 			return true
 		}
 		newAttrs := entities.GetCover(message.Event.Data.NewState.Attributes)
-		oldAttrs := entities.GetCover(message.Event.Data.OldState.Attributes)
+		oldAttrs := &entities.Cover{}
+		if message.Event.Data.OldState != nil {
+			oldAttrs = entities.GetCover(message.Event.Data.OldState.Attributes)
+		}
 		o.OnCover(message, newAttrs, oldAttrs)
 	case "device_tracker":
 		if o.OnDeviceTracker == nil {
 			return true
 		}
 		newAttrs := entities.GetDeviceTracker(message.Event.Data.NewState.Attributes)
-		oldAttrs := entities.GetDeviceTracker(message.Event.Data.OldState.Attributes)
+		oldAttrs := &entities.DeviceTracker{}
+		if message.Event.Data.OldState != nil {
+			oldAttrs = entities.GetDeviceTracker(message.Event.Data.OldState.Attributes)
+		}
 		o.OnDeviceTracker(message, newAttrs, oldAttrs)
 	case "fan":
 		if o.OnFan == nil {
 			return true
 		}
 		newAttrs := entities.GetFan(message.Event.Data.NewState.Attributes)
-		oldAttrs := entities.GetFan(message.Event.Data.OldState.Attributes)
+		oldAttrs := &entities.Fan{}
+		if message.Event.Data.OldState != nil {
+			oldAttrs = entities.GetFan(message.Event.Data.OldState.Attributes)
+		}
 		o.OnFan(message, newAttrs, oldAttrs)
 	case "humidifier":
 		if o.OnHumidifier == nil {
 			return true
 		}
 		newAttrs := entities.GetHumidifier(message.Event.Data.NewState.Attributes)
-		oldAttrs := entities.GetHumidifier(message.Event.Data.OldState.Attributes)
+		oldAttrs := &entities.Humidifier{}
+		if message.Event.Data.OldState != nil {
+			oldAttrs = entities.GetHumidifier(message.Event.Data.OldState.Attributes)
+		}
 		o.OnHumidifier(message, newAttrs, oldAttrs)
 	case "introduction":
 		if o.OnIntroduction == nil {
 			return true
 		}
 		newAttrs := entities.GetIntroduction(message.Event.Data.NewState.Attributes)
-		oldAttrs := entities.GetIntroduction(message.Event.Data.OldState.Attributes)
+		oldAttrs := &entities.Introduction{}
+		if message.Event.Data.OldState != nil {
+			oldAttrs = entities.GetIntroduction(message.Event.Data.OldState.Attributes)
+		}
 		o.OnIntroduction(message, newAttrs, oldAttrs)
 	case "light":
 		if o.OnLight == nil {
 			return true
 		}
 		newAttrs := entities.GetLight(message.Event.Data.NewState.Attributes)
-		oldAttrs := entities.GetLight(message.Event.Data.OldState.Attributes)
+		oldAttrs := &entities.Light{}
+		if message.Event.Data.OldState != nil {
+			oldAttrs = entities.GetLight(message.Event.Data.OldState.Attributes)
+		}
 		o.OnLight(message, newAttrs, oldAttrs)
 	case "lock":
 		if o.OnLock == nil {
 			return true
 		}
 		newAttrs := entities.GetLock(message.Event.Data.NewState.Attributes)
-		oldAttrs := entities.GetLock(message.Event.Data.OldState.Attributes)
+		oldAttrs := &entities.Lock{}
+		if message.Event.Data.OldState != nil {
+			oldAttrs = entities.GetLock(message.Event.Data.OldState.Attributes)
+		}
 		o.OnLock(message, newAttrs, oldAttrs)
 	case "media_player":
 		if o.OnMediaPlayer == nil {
 			return true
 		}
 		newAttrs := entities.GetMediaPlayer(message.Event.Data.NewState.Attributes)
-		oldAttrs := entities.GetMediaPlayer(message.Event.Data.OldState.Attributes)
+		oldAttrs := &entities.MediaPlayer{}
+		if message.Event.Data.OldState != nil {
+			oldAttrs = entities.GetMediaPlayer(message.Event.Data.OldState.Attributes)
+		}
 		o.OnMediaPlayer(message, newAttrs, oldAttrs)
 	case "number":
 		if o.OnNumber == nil {
 			return true
 		}
 		newAttrs := entities.GetNumber(message.Event.Data.NewState.Attributes)
-		oldAttrs := entities.GetNumber(message.Event.Data.OldState.Attributes)
+		oldAttrs := &entities.Number{}
+		if message.Event.Data.OldState != nil {
+			oldAttrs = entities.GetNumber(message.Event.Data.OldState.Attributes)
+		}
 		o.OnNumber(message, newAttrs, oldAttrs)
 	case "remote":
 		if o.OnRemote == nil {
 			return true
 		}
 		newAttrs := entities.GetRemote(message.Event.Data.NewState.Attributes)
-		oldAttrs := entities.GetRemote(message.Event.Data.OldState.Attributes)
+		oldAttrs := &entities.Remote{}
+		if message.Event.Data.OldState != nil {
+			oldAttrs = entities.GetRemote(message.Event.Data.OldState.Attributes)
+		}
 		o.OnRemote(message, newAttrs, oldAttrs)
 	case "select":
 		if o.OnSelect == nil {
 			return true
 		}
 		newAttrs := entities.GetSelect(message.Event.Data.NewState.Attributes)
-		oldAttrs := entities.GetSelect(message.Event.Data.OldState.Attributes)
+		oldAttrs := &entities.Select{}
+		if message.Event.Data.OldState != nil {
+			oldAttrs = entities.GetSelect(message.Event.Data.OldState.Attributes)
+		}
 		o.OnSelect(message, newAttrs, oldAttrs)
 	case "sensor":
 		if o.OnSensor == nil {
 			return true
 		}
 		newAttrs := entities.GetSensor(message.Event.Data.NewState.Attributes)
-		oldAttrs := entities.GetSensor(message.Event.Data.OldState.Attributes)
+		oldAttrs := &entities.Sensor{}
+		if message.Event.Data.OldState != nil {
+			oldAttrs = entities.GetSensor(message.Event.Data.OldState.Attributes)
+		}
 		o.OnSensor(message, newAttrs, oldAttrs)
 	case "siren":
 		if o.OnSiren == nil {
 			return true
 		}
 		newAttrs := entities.GetSiren(message.Event.Data.NewState.Attributes)
-		oldAttrs := entities.GetSiren(message.Event.Data.OldState.Attributes)
+		oldAttrs := &entities.Siren{}
+		if message.Event.Data.OldState != nil {
+			oldAttrs = entities.GetSiren(message.Event.Data.OldState.Attributes)
+		}
 		o.OnSiren(message, newAttrs, oldAttrs)
 	case "switch":
 		if o.OnSwitch == nil {
 			return true
 		}
 		newAttrs := entities.GetSwitch(message.Event.Data.NewState.Attributes)
-		oldAttrs := entities.GetSwitch(message.Event.Data.OldState.Attributes)
+		oldAttrs := &entities.Switch{}
+		if message.Event.Data.OldState != nil {
+			oldAttrs = entities.GetSwitch(message.Event.Data.OldState.Attributes)
+		}
 		o.OnSwitch(message, newAttrs, oldAttrs)
 	case "text":
 		if o.OnText == nil {
 			return true
 		}
 		newAttrs := entities.GetText(message.Event.Data.NewState.Attributes)
-		oldAttrs := entities.GetText(message.Event.Data.OldState.Attributes)
+		oldAttrs := &entities.Text{}
+		if message.Event.Data.OldState != nil {
+			oldAttrs = entities.GetText(message.Event.Data.OldState.Attributes)
+		}
 		o.OnText(message, newAttrs, oldAttrs)
 	case "update":
 		if o.OnUpdate == nil {
 			return true
 		}
 		newAttrs := entities.GetUpdate(message.Event.Data.NewState.Attributes)
-		oldAttrs := entities.GetUpdate(message.Event.Data.OldState.Attributes)
+		oldAttrs := &entities.Update{}
+		if message.Event.Data.OldState != nil {
+			oldAttrs = entities.GetUpdate(message.Event.Data.OldState.Attributes)
+		}
 		o.OnUpdate(message, newAttrs, oldAttrs)
 	case "vacuum":
 		if o.OnVacuum == nil {
 			return true
 		}
 		newAttrs := entities.GetVacuum(message.Event.Data.NewState.Attributes)
-		oldAttrs := entities.GetVacuum(message.Event.Data.OldState.Attributes)
+		oldAttrs := &entities.Vacuum{}
+		if message.Event.Data.OldState != nil {
+			oldAttrs = entities.GetVacuum(message.Event.Data.OldState.Attributes)
+		}
 		o.OnVacuum(message, newAttrs, oldAttrs)
 	case "water_heater":
 		if o.OnWaterHeater == nil {
 			return true
 		}
 		newAttrs := entities.GetWaterHeater(message.Event.Data.NewState.Attributes)
-		oldAttrs := entities.GetWaterHeater(message.Event.Data.OldState.Attributes)
+		oldAttrs := &entities.WaterHeater{}
+		if message.Event.Data.OldState != nil {
+			oldAttrs = entities.GetWaterHeater(message.Event.Data.OldState.Attributes)
+		}
 		o.OnWaterHeater(message, newAttrs, oldAttrs)
 	case "weather":
 		if o.OnWeather == nil {
 			return true
 		}
 		newAttrs := entities.GetWeather(message.Event.Data.NewState.Attributes)
-		oldAttrs := entities.GetWeather(message.Event.Data.OldState.Attributes)
+		oldAttrs := &entities.Weather{}
+		if message.Event.Data.OldState != nil {
+			oldAttrs = entities.GetWeather(message.Event.Data.OldState.Attributes)
+		}
 		o.OnWeather(message, newAttrs, oldAttrs)
 	}
 	return false
