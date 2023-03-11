@@ -1,8 +1,10 @@
 package hass_ws
 
 import (
+	"context"
+	"errors"
 	"github.com/kjbreil/hass-ws/model"
-	"log"
+	"nhooyr.io/websocket"
 	"time"
 )
 
@@ -10,10 +12,19 @@ func (c *Client) run() {
 	go func() {
 	mainLoop:
 		for {
+			if c.ctx.Err() != nil {
+				return
+			}
 			message, err := c.read()
 			if err != nil {
-				// TODO: Handle Auth Error properly
-				log.Println(err)
+				ERROR.Printf("read error: %v", err)
+				if errors.Is(err, context.Canceled) {
+					return
+				}
+
+				if status := websocket.CloseStatus(err); status != -1 {
+					return
+				}
 				continue
 			}
 			if c.OnMessage != nil {
@@ -21,9 +32,9 @@ func (c *Client) run() {
 			}
 
 			if message.ID != nil {
-				for i, callback := range c.callbacks {
+				for i, callback := range c.callbacks.GetMap() {
 					if i == *message.ID {
-						delete(c.callbacks, i)
+						c.callbacks.Delete(i)
 						callback <- message
 						continue mainLoop
 					}
@@ -44,6 +55,8 @@ func (c *Client) run() {
 
 		for {
 			select {
+			case <-c.ctx.Done():
+				return
 			case <-ticker.C:
 
 				callback := make(chan *model.Message)
@@ -51,10 +64,36 @@ func (c *Client) run() {
 					Type: model.MessageTypePing,
 				}, callback)
 				if err != nil {
-					log.Panicln(err)
+					ERROR.Printf("ping send error: %v", err)
+					err = c.reconnect()
+					if err != nil {
+						ERROR.Printf("reconnect failed: %v", err)
+						err = c.Close()
+						if err != nil {
+							ERROR.Printf("close error: %v", err)
+						}
+						panic(errors.New("connection lost and cannot be reconnected"))
+					}
+					return
 				}
 				go func() {
-					<-callback
+					// ping needs to come back within a second or connection needs restarting
+					restartTicker := time.NewTicker(time.Second)
+					select {
+					case <-callback:
+					case <-restartTicker.C:
+						ERROR.Println("pong not received attempting reconnect")
+
+						err := c.reconnect()
+						if err != nil {
+							ERROR.Printf("reconnect failed: %v", err)
+							err = c.Close()
+							if err != nil {
+								ERROR.Printf("close error: %v", err)
+							}
+							panic(errors.New("connection lost and cannot be reconnected"))
+						}
+					}
 				}()
 			}
 		}

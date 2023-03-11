@@ -1,6 +1,8 @@
 package hass_ws
 
 import (
+	"context"
+	"errors"
 	"fmt"
 	"github.com/kjbreil/hass-ws/model"
 	"net/url"
@@ -15,14 +17,30 @@ type Config struct {
 }
 
 func (c *Client) Connect() error {
+
+	if c.cancel != nil {
+		c.cancel()
+	}
+
+	c.ctx, c.cancel = context.WithCancel(context.Background())
+	c.callbacks = newCallbacks()
+	c.id = 0
+
 	var err error
 	u := url.URL{Scheme: "ws", Host: fmt.Sprintf("%s:%d", c.config.Host, c.config.Port), Path: "/api/websocket"}
 
 	c.client, _, err = websocket.Dial(c.ctx, u.String(), nil)
-	c.client.SetReadLimit(32768 * 100)
+
 	if err != nil {
+		c.cancel()
 		return fmt.Errorf("dial: %w", err)
 	}
+
+	c.client.SetReadLimit(32768 * 100)
+
+	// Mark as running
+	c.running = true
+
 	msg := &model.Message{}
 	msg, err = c.read()
 	if msg.Type != model.MessageTypeAuthRequired {
@@ -58,5 +76,35 @@ func (c *Client) Connect() error {
 	// this is needed because Home Assistant might not respond with authorization fast enough
 	// TODO: make authorization into a callback
 	time.Sleep(400 * time.Millisecond)
+
+	if c.InitStates {
+		c.GetStates()
+	}
+
+	return nil
+}
+
+func (c *Client) reconnect() error {
+	if c.cancel != nil {
+		c.cancel()
+	}
+	if !c.running {
+		return errors.New("cannot reconnect, client is not running")
+	}
+
+	var err error
+	retries := 120
+	for i := 0; i < retries; i++ {
+		ERROR.Printf("attempting to reconnect: %d", i)
+		err = c.Connect()
+		if err == nil {
+			return nil
+		}
+		ERROR.Printf("reconnect failed: %v", err)
+		time.Sleep(1 * time.Second)
+	}
+	if err != nil {
+		return fmt.Errorf("websocket reconnect failed: %w", err)
+	}
 	return nil
 }
