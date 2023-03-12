@@ -1,6 +1,9 @@
 package services
 
-import "encoding/json"
+import (
+	"encoding/json"
+	"fmt"
+)
 
 ////////////////////////////////////////////////////////////////////////////////
 // Do not modify this file, it is automatically generated
@@ -34,6 +37,9 @@ func (a *AutomationReload) JSON() string {
 	data, _ := json.Marshal(a)
 	return string(data)
 }
+func (a *AutomationReload) Name() string {
+	return fmt.Sprintf("%s.%s", *a.Domain, *a.Service)
+}
 func (a *AutomationReload) SetID(id *int) {
 	a.Id = id
 }
@@ -65,6 +71,9 @@ type AutomationToggle struct {
 func (a *AutomationToggle) JSON() string {
 	data, _ := json.Marshal(a)
 	return string(data)
+}
+func (a *AutomationToggle) Name() string {
+	return fmt.Sprintf("%s.%s", *a.Domain, *a.Service)
 }
 func (a *AutomationToggle) SetID(id *int) {
 	a.Id = id
@@ -98,6 +107,9 @@ func (a *AutomationTrigger) JSON() string {
 	data, _ := json.Marshal(a)
 	return string(data)
 }
+func (a *AutomationTrigger) Name() string {
+	return fmt.Sprintf("%s.%s", *a.Domain, *a.Service)
+}
 func (a *AutomationTrigger) SetID(id *int) {
 	a.Id = id
 }
@@ -130,6 +142,9 @@ func (a *AutomationTurnOff) JSON() string {
 	data, _ := json.Marshal(a)
 	return string(data)
 }
+func (a *AutomationTurnOff) Name() string {
+	return fmt.Sprintf("%s.%s", *a.Domain, *a.Service)
+}
 func (a *AutomationTurnOff) SetID(id *int) {
 	a.Id = id
 }
@@ -161,6 +176,9 @@ type AutomationTurnOn struct {
 func (a *AutomationTurnOn) JSON() string {
 	data, _ := json.Marshal(a)
 	return string(data)
+}
+func (a *AutomationTurnOn) Name() string {
+	return fmt.Sprintf("%s.%s", *a.Domain, *a.Service)
 }
 func (a *AutomationTurnOn) SetID(id *int) {
 	a.Id = id

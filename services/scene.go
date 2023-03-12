@@ -1,6 +1,9 @@
 package services
 
-import "encoding/json"
+import (
+	"encoding/json"
+	"fmt"
+)
 
 ////////////////////////////////////////////////////////////////////////////////
 // Do not modify this file, it is automatically generated
@@ -37,6 +40,9 @@ func (s *SceneApply) JSON() string {
 	data, _ := json.Marshal(s)
 	return string(data)
 }
+func (s *SceneApply) Name() string {
+	return fmt.Sprintf("%s.%s", *s.Domain, *s.Service)
+}
 func (s *SceneApply) SetID(id *int) {
 	s.Id = id
 }
@@ -72,6 +78,9 @@ func (s *SceneCreate) JSON() string {
 	data, _ := json.Marshal(s)
 	return string(data)
 }
+func (s *SceneCreate) Name() string {
+	return fmt.Sprintf("%s.%s", *s.Domain, *s.Service)
+}
 func (s *SceneCreate) SetID(id *int) {
 	s.Id = id
 }
@@ -103,6 +112,9 @@ type SceneReload struct {
 func (s *SceneReload) JSON() string {
 	data, _ := json.Marshal(s)
 	return string(data)
+}
+func (s *SceneReload) Name() string {
+	return fmt.Sprintf("%s.%s", *s.Domain, *s.Service)
 }
 func (s *SceneReload) SetID(id *int) {
 	s.Id = id
@@ -138,6 +150,9 @@ type SceneTurnOnParams struct {
 func (s *SceneTurnOn) JSON() string {
 	data, _ := json.Marshal(s)
 	return string(data)
+}
+func (s *SceneTurnOn) Name() string {
+	return fmt.Sprintf("%s.%s", *s.Domain, *s.Service)
 }
 func (s *SceneTurnOn) SetID(id *int) {
 	s.Id = id

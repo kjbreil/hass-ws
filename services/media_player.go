@@ -1,6 +1,9 @@
 package services
 
-import "encoding/json"
+import (
+	"encoding/json"
+	"fmt"
+)
 
 ////////////////////////////////////////////////////////////////////////////////
 // Do not modify this file, it is automatically generated
@@ -34,6 +37,9 @@ func (m *MediaPlayerClearPlaylist) JSON() string {
 	data, _ := json.Marshal(m)
 	return string(data)
 }
+func (m *MediaPlayerClearPlaylist) Name() string {
+	return fmt.Sprintf("%s.%s", *m.Domain, *m.Service)
+}
 func (m *MediaPlayerClearPlaylist) SetID(id *int) {
 	m.Id = id
 }
@@ -65,6 +71,9 @@ type MediaPlayerJoin struct {
 func (m *MediaPlayerJoin) JSON() string {
 	data, _ := json.Marshal(m)
 	return string(data)
+}
+func (m *MediaPlayerJoin) Name() string {
+	return fmt.Sprintf("%s.%s", *m.Domain, *m.Service)
 }
 func (m *MediaPlayerJoin) SetID(id *int) {
 	m.Id = id
@@ -98,6 +107,9 @@ func (m *MediaPlayerMediaNextTrack) JSON() string {
 	data, _ := json.Marshal(m)
 	return string(data)
 }
+func (m *MediaPlayerMediaNextTrack) Name() string {
+	return fmt.Sprintf("%s.%s", *m.Domain, *m.Service)
+}
 func (m *MediaPlayerMediaNextTrack) SetID(id *int) {
 	m.Id = id
 }
@@ -129,6 +141,9 @@ type MediaPlayerMediaPause struct {
 func (m *MediaPlayerMediaPause) JSON() string {
 	data, _ := json.Marshal(m)
 	return string(data)
+}
+func (m *MediaPlayerMediaPause) Name() string {
+	return fmt.Sprintf("%s.%s", *m.Domain, *m.Service)
 }
 func (m *MediaPlayerMediaPause) SetID(id *int) {
 	m.Id = id
@@ -162,6 +177,9 @@ func (m *MediaPlayerMediaPlay) JSON() string {
 	data, _ := json.Marshal(m)
 	return string(data)
 }
+func (m *MediaPlayerMediaPlay) Name() string {
+	return fmt.Sprintf("%s.%s", *m.Domain, *m.Service)
+}
 func (m *MediaPlayerMediaPlay) SetID(id *int) {
 	m.Id = id
 }
@@ -194,6 +212,9 @@ func (m *MediaPlayerMediaPlayPause) JSON() string {
 	data, _ := json.Marshal(m)
 	return string(data)
 }
+func (m *MediaPlayerMediaPlayPause) Name() string {
+	return fmt.Sprintf("%s.%s", *m.Domain, *m.Service)
+}
 func (m *MediaPlayerMediaPlayPause) SetID(id *int) {
 	m.Id = id
 }
@@ -225,6 +246,9 @@ type MediaPlayerMediaPreviousTrack struct {
 func (m *MediaPlayerMediaPreviousTrack) JSON() string {
 	data, _ := json.Marshal(m)
 	return string(data)
+}
+func (m *MediaPlayerMediaPreviousTrack) Name() string {
+	return fmt.Sprintf("%s.%s", *m.Domain, *m.Service)
 }
 func (m *MediaPlayerMediaPreviousTrack) SetID(id *int) {
 	m.Id = id
@@ -261,6 +285,9 @@ func (m *MediaPlayerMediaSeek) JSON() string {
 	data, _ := json.Marshal(m)
 	return string(data)
 }
+func (m *MediaPlayerMediaSeek) Name() string {
+	return fmt.Sprintf("%s.%s", *m.Domain, *m.Service)
+}
 func (m *MediaPlayerMediaSeek) SetID(id *int) {
 	m.Id = id
 }
@@ -292,6 +319,9 @@ type MediaPlayerMediaStop struct {
 func (m *MediaPlayerMediaStop) JSON() string {
 	data, _ := json.Marshal(m)
 	return string(data)
+}
+func (m *MediaPlayerMediaStop) Name() string {
+	return fmt.Sprintf("%s.%s", *m.Domain, *m.Service)
 }
 func (m *MediaPlayerMediaStop) SetID(id *int) {
 	m.Id = id
@@ -330,6 +360,9 @@ func (m *MediaPlayerPlayMedia) JSON() string {
 	data, _ := json.Marshal(m)
 	return string(data)
 }
+func (m *MediaPlayerPlayMedia) Name() string {
+	return fmt.Sprintf("%s.%s", *m.Domain, *m.Service)
+}
 func (m *MediaPlayerPlayMedia) SetID(id *int) {
 	m.Id = id
 }
@@ -364,6 +397,9 @@ type MediaPlayerRepeatSetParams struct {
 func (m *MediaPlayerRepeatSet) JSON() string {
 	data, _ := json.Marshal(m)
 	return string(data)
+}
+func (m *MediaPlayerRepeatSet) Name() string {
+	return fmt.Sprintf("%s.%s", *m.Domain, *m.Service)
 }
 func (m *MediaPlayerRepeatSet) SetID(id *int) {
 	m.Id = id
@@ -400,6 +436,9 @@ func (m *MediaPlayerSelectSoundMode) JSON() string {
 	data, _ := json.Marshal(m)
 	return string(data)
 }
+func (m *MediaPlayerSelectSoundMode) Name() string {
+	return fmt.Sprintf("%s.%s", *m.Domain, *m.Service)
+}
 func (m *MediaPlayerSelectSoundMode) SetID(id *int) {
 	m.Id = id
 }
@@ -435,6 +474,9 @@ func (m *MediaPlayerSelectSource) JSON() string {
 	data, _ := json.Marshal(m)
 	return string(data)
 }
+func (m *MediaPlayerSelectSource) Name() string {
+	return fmt.Sprintf("%s.%s", *m.Domain, *m.Service)
+}
 func (m *MediaPlayerSelectSource) SetID(id *int) {
 	m.Id = id
 }
@@ -466,6 +508,9 @@ type MediaPlayerShuffleSet struct {
 func (m *MediaPlayerShuffleSet) JSON() string {
 	data, _ := json.Marshal(m)
 	return string(data)
+}
+func (m *MediaPlayerShuffleSet) Name() string {
+	return fmt.Sprintf("%s.%s", *m.Domain, *m.Service)
 }
 func (m *MediaPlayerShuffleSet) SetID(id *int) {
 	m.Id = id
@@ -499,6 +544,9 @@ func (m *MediaPlayerToggle) JSON() string {
 	data, _ := json.Marshal(m)
 	return string(data)
 }
+func (m *MediaPlayerToggle) Name() string {
+	return fmt.Sprintf("%s.%s", *m.Domain, *m.Service)
+}
 func (m *MediaPlayerToggle) SetID(id *int) {
 	m.Id = id
 }
@@ -530,6 +578,9 @@ type MediaPlayerTurnOff struct {
 func (m *MediaPlayerTurnOff) JSON() string {
 	data, _ := json.Marshal(m)
 	return string(data)
+}
+func (m *MediaPlayerTurnOff) Name() string {
+	return fmt.Sprintf("%s.%s", *m.Domain, *m.Service)
 }
 func (m *MediaPlayerTurnOff) SetID(id *int) {
 	m.Id = id
@@ -563,6 +614,9 @@ func (m *MediaPlayerTurnOn) JSON() string {
 	data, _ := json.Marshal(m)
 	return string(data)
 }
+func (m *MediaPlayerTurnOn) Name() string {
+	return fmt.Sprintf("%s.%s", *m.Domain, *m.Service)
+}
 func (m *MediaPlayerTurnOn) SetID(id *int) {
 	m.Id = id
 }
@@ -594,6 +648,9 @@ type MediaPlayerUnjoin struct {
 func (m *MediaPlayerUnjoin) JSON() string {
 	data, _ := json.Marshal(m)
 	return string(data)
+}
+func (m *MediaPlayerUnjoin) Name() string {
+	return fmt.Sprintf("%s.%s", *m.Domain, *m.Service)
 }
 func (m *MediaPlayerUnjoin) SetID(id *int) {
 	m.Id = id
@@ -627,6 +684,9 @@ func (m *MediaPlayerVolumeDown) JSON() string {
 	data, _ := json.Marshal(m)
 	return string(data)
 }
+func (m *MediaPlayerVolumeDown) Name() string {
+	return fmt.Sprintf("%s.%s", *m.Domain, *m.Service)
+}
 func (m *MediaPlayerVolumeDown) SetID(id *int) {
 	m.Id = id
 }
@@ -658,6 +718,9 @@ type MediaPlayerVolumeMute struct {
 func (m *MediaPlayerVolumeMute) JSON() string {
 	data, _ := json.Marshal(m)
 	return string(data)
+}
+func (m *MediaPlayerVolumeMute) Name() string {
+	return fmt.Sprintf("%s.%s", *m.Domain, *m.Service)
 }
 func (m *MediaPlayerVolumeMute) SetID(id *int) {
 	m.Id = id
@@ -694,6 +757,9 @@ func (m *MediaPlayerVolumeSet) JSON() string {
 	data, _ := json.Marshal(m)
 	return string(data)
 }
+func (m *MediaPlayerVolumeSet) Name() string {
+	return fmt.Sprintf("%s.%s", *m.Domain, *m.Service)
+}
 func (m *MediaPlayerVolumeSet) SetID(id *int) {
 	m.Id = id
 }
@@ -725,6 +791,9 @@ type MediaPlayerVolumeUp struct {
 func (m *MediaPlayerVolumeUp) JSON() string {
 	data, _ := json.Marshal(m)
 	return string(data)
+}
+func (m *MediaPlayerVolumeUp) Name() string {
+	return fmt.Sprintf("%s.%s", *m.Domain, *m.Service)
 }
 func (m *MediaPlayerVolumeUp) SetID(id *int) {
 	m.Id = id

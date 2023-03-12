@@ -1,6 +1,9 @@
 package services
 
-import "encoding/json"
+import (
+	"encoding/json"
+	"fmt"
+)
 
 ////////////////////////////////////////////////////////////////////////////////
 // Do not modify this file, it is automatically generated
@@ -33,6 +36,9 @@ type SonosClearSleepTimer struct {
 func (s *SonosClearSleepTimer) JSON() string {
 	data, _ := json.Marshal(s)
 	return string(data)
+}
+func (s *SonosClearSleepTimer) Name() string {
+	return fmt.Sprintf("%s.%s", *s.Domain, *s.Service)
 }
 func (s *SonosClearSleepTimer) SetID(id *int) {
 	s.Id = id
@@ -69,6 +75,9 @@ func (s *SonosPlayQueue) JSON() string {
 	data, _ := json.Marshal(s)
 	return string(data)
 }
+func (s *SonosPlayQueue) Name() string {
+	return fmt.Sprintf("%s.%s", *s.Domain, *s.Service)
+}
 func (s *SonosPlayQueue) SetID(id *int) {
 	s.Id = id
 }
@@ -104,6 +113,9 @@ func (s *SonosRemoveFromQueue) JSON() string {
 	data, _ := json.Marshal(s)
 	return string(data)
 }
+func (s *SonosRemoveFromQueue) Name() string {
+	return fmt.Sprintf("%s.%s", *s.Domain, *s.Service)
+}
 func (s *SonosRemoveFromQueue) SetID(id *int) {
 	s.Id = id
 }
@@ -135,6 +147,9 @@ type SonosRestore struct {
 func (s *SonosRestore) JSON() string {
 	data, _ := json.Marshal(s)
 	return string(data)
+}
+func (s *SonosRestore) Name() string {
+	return fmt.Sprintf("%s.%s", *s.Domain, *s.Service)
 }
 func (s *SonosRestore) SetID(id *int) {
 	s.Id = id
@@ -171,6 +186,9 @@ func (s *SonosSetSleepTimer) JSON() string {
 	data, _ := json.Marshal(s)
 	return string(data)
 }
+func (s *SonosSetSleepTimer) Name() string {
+	return fmt.Sprintf("%s.%s", *s.Domain, *s.Service)
+}
 func (s *SonosSetSleepTimer) SetID(id *int) {
 	s.Id = id
 }
@@ -202,6 +220,9 @@ type SonosSnapshot struct {
 func (s *SonosSnapshot) JSON() string {
 	data, _ := json.Marshal(s)
 	return string(data)
+}
+func (s *SonosSnapshot) Name() string {
+	return fmt.Sprintf("%s.%s", *s.Domain, *s.Service)
 }
 func (s *SonosSnapshot) SetID(id *int) {
 	s.Id = id
@@ -238,6 +259,9 @@ type SonosUpdateAlarmParams struct {
 func (s *SonosUpdateAlarm) JSON() string {
 	data, _ := json.Marshal(s)
 	return string(data)
+}
+func (s *SonosUpdateAlarm) Name() string {
+	return fmt.Sprintf("%s.%s", *s.Domain, *s.Service)
 }
 func (s *SonosUpdateAlarm) SetID(id *int) {
 	s.Id = id

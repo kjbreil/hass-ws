@@ -113,6 +113,10 @@ func GenServices() error {
 				jen.Return(jen.String().Params(jen.Id("data"))),
 			)
 
+			services[d.name].Func().Params(jen.Id(s.firstLetter).Op("*").Id(s.camelName)).Id("Name").Params().String().Block(
+				jen.Return(jen.Qual("fmt", "Sprintf").Params(jen.Lit("%s.%s").Op(",").Op("*").Id(s.firstLetter).Dot("Domain").Op(",").Op("*").Id(s.firstLetter).Dot("Service"))),
+			)
+
 			services[d.name].Func().Params(jen.Id(s.firstLetter).Op("*").Id(s.camelName)).Id("SetID").Params(jen.Id("id").Op("*").Int()).Block(
 				jen.Id(s.firstLetter).Dot("Id").Op("=").Id("id"),
 			)
@@ -254,6 +258,7 @@ func GenServices() error {
 	services["types"].Type().Id("Service").Interface(
 		jen.Id("SetID").Params(jen.Id("id").Op("*").Int()),
 		jen.Id("JSON").Params().String(),
+		jen.Id("Name").Params().String(),
 	)
 
 	// Generate the base type

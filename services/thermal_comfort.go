@@ -1,6 +1,9 @@
 package services
 
-import "encoding/json"
+import (
+	"encoding/json"
+	"fmt"
+)
 
 ////////////////////////////////////////////////////////////////////////////////
 // Do not modify this file, it is automatically generated
@@ -33,6 +36,9 @@ type ThermalComfortReload struct {
 func (t *ThermalComfortReload) JSON() string {
 	data, _ := json.Marshal(t)
 	return string(data)
+}
+func (t *ThermalComfortReload) Name() string {
+	return fmt.Sprintf("%s.%s", *t.Domain, *t.Service)
 }
 func (t *ThermalComfortReload) SetID(id *int) {
 	t.Id = id

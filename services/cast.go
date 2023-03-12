@@ -1,6 +1,9 @@
 package services
 
-import "encoding/json"
+import (
+	"encoding/json"
+	"fmt"
+)
 
 ////////////////////////////////////////////////////////////////////////////////
 // Do not modify this file, it is automatically generated
@@ -37,6 +40,9 @@ type CastShowLovelaceViewParams struct {
 func (c *CastShowLovelaceView) JSON() string {
 	data, _ := json.Marshal(c)
 	return string(data)
+}
+func (c *CastShowLovelaceView) Name() string {
+	return fmt.Sprintf("%s.%s", *c.Domain, *c.Service)
 }
 func (c *CastShowLovelaceView) SetID(id *int) {
 	c.Id = id

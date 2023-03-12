@@ -1,6 +1,9 @@
 package services
 
-import "encoding/json"
+import (
+	"encoding/json"
+	"fmt"
+)
 
 ////////////////////////////////////////////////////////////////////////////////
 // Do not modify this file, it is automatically generated
@@ -34,6 +37,9 @@ func (t *TimerCancel) JSON() string {
 	data, _ := json.Marshal(t)
 	return string(data)
 }
+func (t *TimerCancel) Name() string {
+	return fmt.Sprintf("%s.%s", *t.Domain, *t.Service)
+}
 func (t *TimerCancel) SetID(id *int) {
 	t.Id = id
 }
@@ -65,6 +71,9 @@ type TimerFinish struct {
 func (t *TimerFinish) JSON() string {
 	data, _ := json.Marshal(t)
 	return string(data)
+}
+func (t *TimerFinish) Name() string {
+	return fmt.Sprintf("%s.%s", *t.Domain, *t.Service)
 }
 func (t *TimerFinish) SetID(id *int) {
 	t.Id = id
@@ -98,6 +107,9 @@ func (t *TimerPause) JSON() string {
 	data, _ := json.Marshal(t)
 	return string(data)
 }
+func (t *TimerPause) Name() string {
+	return fmt.Sprintf("%s.%s", *t.Domain, *t.Service)
+}
 func (t *TimerPause) SetID(id *int) {
 	t.Id = id
 }
@@ -129,6 +141,9 @@ type TimerReload struct {
 func (t *TimerReload) JSON() string {
 	data, _ := json.Marshal(t)
 	return string(data)
+}
+func (t *TimerReload) Name() string {
+	return fmt.Sprintf("%s.%s", *t.Domain, *t.Service)
 }
 func (t *TimerReload) SetID(id *int) {
 	t.Id = id
@@ -164,6 +179,9 @@ type TimerStartParams struct {
 func (t *TimerStart) JSON() string {
 	data, _ := json.Marshal(t)
 	return string(data)
+}
+func (t *TimerStart) Name() string {
+	return fmt.Sprintf("%s.%s", *t.Domain, *t.Service)
 }
 func (t *TimerStart) SetID(id *int) {
 	t.Id = id

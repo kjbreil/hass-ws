@@ -1,6 +1,9 @@
 package services
 
-import "encoding/json"
+import (
+	"encoding/json"
+	"fmt"
+)
 
 ////////////////////////////////////////////////////////////////////////////////
 // Do not modify this file, it is automatically generated
@@ -34,6 +37,9 @@ func (c *CameraDisableMotionDetection) JSON() string {
 	data, _ := json.Marshal(c)
 	return string(data)
 }
+func (c *CameraDisableMotionDetection) Name() string {
+	return fmt.Sprintf("%s.%s", *c.Domain, *c.Service)
+}
 func (c *CameraDisableMotionDetection) SetID(id *int) {
 	c.Id = id
 }
@@ -65,6 +71,9 @@ type CameraEnableMotionDetection struct {
 func (c *CameraEnableMotionDetection) JSON() string {
 	data, _ := json.Marshal(c)
 	return string(data)
+}
+func (c *CameraEnableMotionDetection) Name() string {
+	return fmt.Sprintf("%s.%s", *c.Domain, *c.Service)
 }
 func (c *CameraEnableMotionDetection) SetID(id *int) {
 	c.Id = id
@@ -100,6 +109,9 @@ type CameraPlayStreamParams struct {
 func (c *CameraPlayStream) JSON() string {
 	data, _ := json.Marshal(c)
 	return string(data)
+}
+func (c *CameraPlayStream) Name() string {
+	return fmt.Sprintf("%s.%s", *c.Domain, *c.Service)
 }
 func (c *CameraPlayStream) SetID(id *int) {
 	c.Id = id
@@ -138,6 +150,9 @@ func (c *CameraRecord) JSON() string {
 	data, _ := json.Marshal(c)
 	return string(data)
 }
+func (c *CameraRecord) Name() string {
+	return fmt.Sprintf("%s.%s", *c.Domain, *c.Service)
+}
 func (c *CameraRecord) SetID(id *int) {
 	c.Id = id
 }
@@ -173,6 +188,9 @@ func (c *CameraSnapshot) JSON() string {
 	data, _ := json.Marshal(c)
 	return string(data)
 }
+func (c *CameraSnapshot) Name() string {
+	return fmt.Sprintf("%s.%s", *c.Domain, *c.Service)
+}
 func (c *CameraSnapshot) SetID(id *int) {
 	c.Id = id
 }
@@ -205,6 +223,9 @@ func (c *CameraTurnOff) JSON() string {
 	data, _ := json.Marshal(c)
 	return string(data)
 }
+func (c *CameraTurnOff) Name() string {
+	return fmt.Sprintf("%s.%s", *c.Domain, *c.Service)
+}
 func (c *CameraTurnOff) SetID(id *int) {
 	c.Id = id
 }
@@ -236,6 +257,9 @@ type CameraTurnOn struct {
 func (c *CameraTurnOn) JSON() string {
 	data, _ := json.Marshal(c)
 	return string(data)
+}
+func (c *CameraTurnOn) Name() string {
+	return fmt.Sprintf("%s.%s", *c.Domain, *c.Service)
 }
 func (c *CameraTurnOn) SetID(id *int) {
 	c.Id = id

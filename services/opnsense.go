@@ -1,6 +1,9 @@
 package services
 
-import "encoding/json"
+import (
+	"encoding/json"
+	"fmt"
+)
 
 ////////////////////////////////////////////////////////////////////////////////
 // Do not modify this file, it is automatically generated
@@ -34,6 +37,9 @@ func (o *OpnsenseCloseNotice) JSON() string {
 	data, _ := json.Marshal(o)
 	return string(data)
 }
+func (o *OpnsenseCloseNotice) Name() string {
+	return fmt.Sprintf("%s.%s", *o.Domain, *o.Service)
+}
 func (o *OpnsenseCloseNotice) SetID(id *int) {
 	o.Id = id
 }
@@ -65,6 +71,9 @@ type OpnsenseFileNotice struct {
 func (o *OpnsenseFileNotice) JSON() string {
 	data, _ := json.Marshal(o)
 	return string(data)
+}
+func (o *OpnsenseFileNotice) Name() string {
+	return fmt.Sprintf("%s.%s", *o.Domain, *o.Service)
 }
 func (o *OpnsenseFileNotice) SetID(id *int) {
 	o.Id = id
@@ -98,6 +107,9 @@ func (o *OpnsenseRestartService) JSON() string {
 	data, _ := json.Marshal(o)
 	return string(data)
 }
+func (o *OpnsenseRestartService) Name() string {
+	return fmt.Sprintf("%s.%s", *o.Domain, *o.Service)
+}
 func (o *OpnsenseRestartService) SetID(id *int) {
 	o.Id = id
 }
@@ -129,6 +141,9 @@ type OpnsenseSendWol struct {
 func (o *OpnsenseSendWol) JSON() string {
 	data, _ := json.Marshal(o)
 	return string(data)
+}
+func (o *OpnsenseSendWol) Name() string {
+	return fmt.Sprintf("%s.%s", *o.Domain, *o.Service)
 }
 func (o *OpnsenseSendWol) SetID(id *int) {
 	o.Id = id
@@ -162,6 +177,9 @@ func (o *OpnsenseStartService) JSON() string {
 	data, _ := json.Marshal(o)
 	return string(data)
 }
+func (o *OpnsenseStartService) Name() string {
+	return fmt.Sprintf("%s.%s", *o.Domain, *o.Service)
+}
 func (o *OpnsenseStartService) SetID(id *int) {
 	o.Id = id
 }
@@ -193,6 +211,9 @@ type OpnsenseStopService struct {
 func (o *OpnsenseStopService) JSON() string {
 	data, _ := json.Marshal(o)
 	return string(data)
+}
+func (o *OpnsenseStopService) Name() string {
+	return fmt.Sprintf("%s.%s", *o.Domain, *o.Service)
 }
 func (o *OpnsenseStopService) SetID(id *int) {
 	o.Id = id
@@ -226,6 +247,9 @@ func (o *OpnsenseSystemHalt) JSON() string {
 	data, _ := json.Marshal(o)
 	return string(data)
 }
+func (o *OpnsenseSystemHalt) Name() string {
+	return fmt.Sprintf("%s.%s", *o.Domain, *o.Service)
+}
 func (o *OpnsenseSystemHalt) SetID(id *int) {
 	o.Id = id
 }
@@ -257,6 +281,9 @@ type OpnsenseSystemReboot struct {
 func (o *OpnsenseSystemReboot) JSON() string {
 	data, _ := json.Marshal(o)
 	return string(data)
+}
+func (o *OpnsenseSystemReboot) Name() string {
+	return fmt.Sprintf("%s.%s", *o.Domain, *o.Service)
 }
 func (o *OpnsenseSystemReboot) SetID(id *int) {
 	o.Id = id

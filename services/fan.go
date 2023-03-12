@@ -1,6 +1,9 @@
 package services
 
-import "encoding/json"
+import (
+	"encoding/json"
+	"fmt"
+)
 
 ////////////////////////////////////////////////////////////////////////////////
 // Do not modify this file, it is automatically generated
@@ -37,6 +40,9 @@ func (f *FanDecreaseSpeed) JSON() string {
 	data, _ := json.Marshal(f)
 	return string(data)
 }
+func (f *FanDecreaseSpeed) Name() string {
+	return fmt.Sprintf("%s.%s", *f.Domain, *f.Service)
+}
 func (f *FanDecreaseSpeed) SetID(id *int) {
 	f.Id = id
 }
@@ -72,6 +78,9 @@ func (f *FanIncreaseSpeed) JSON() string {
 	data, _ := json.Marshal(f)
 	return string(data)
 }
+func (f *FanIncreaseSpeed) Name() string {
+	return fmt.Sprintf("%s.%s", *f.Domain, *f.Service)
+}
 func (f *FanIncreaseSpeed) SetID(id *int) {
 	f.Id = id
 }
@@ -103,6 +112,9 @@ type FanOscillate struct {
 func (f *FanOscillate) JSON() string {
 	data, _ := json.Marshal(f)
 	return string(data)
+}
+func (f *FanOscillate) Name() string {
+	return fmt.Sprintf("%s.%s", *f.Domain, *f.Service)
 }
 func (f *FanOscillate) SetID(id *int) {
 	f.Id = id
@@ -139,6 +151,9 @@ func (f *FanSetDirection) JSON() string {
 	data, _ := json.Marshal(f)
 	return string(data)
 }
+func (f *FanSetDirection) Name() string {
+	return fmt.Sprintf("%s.%s", *f.Domain, *f.Service)
+}
 func (f *FanSetDirection) SetID(id *int) {
 	f.Id = id
 }
@@ -173,6 +188,9 @@ type FanSetPercentageParams struct {
 func (f *FanSetPercentage) JSON() string {
 	data, _ := json.Marshal(f)
 	return string(data)
+}
+func (f *FanSetPercentage) Name() string {
+	return fmt.Sprintf("%s.%s", *f.Domain, *f.Service)
 }
 func (f *FanSetPercentage) SetID(id *int) {
 	f.Id = id
@@ -209,6 +227,9 @@ func (f *FanSetPresetMode) JSON() string {
 	data, _ := json.Marshal(f)
 	return string(data)
 }
+func (f *FanSetPresetMode) Name() string {
+	return fmt.Sprintf("%s.%s", *f.Domain, *f.Service)
+}
 func (f *FanSetPresetMode) SetID(id *int) {
 	f.Id = id
 }
@@ -241,6 +262,9 @@ func (f *FanToggle) JSON() string {
 	data, _ := json.Marshal(f)
 	return string(data)
 }
+func (f *FanToggle) Name() string {
+	return fmt.Sprintf("%s.%s", *f.Domain, *f.Service)
+}
 func (f *FanToggle) SetID(id *int) {
 	f.Id = id
 }
@@ -272,6 +296,9 @@ type FanTurnOff struct {
 func (f *FanTurnOff) JSON() string {
 	data, _ := json.Marshal(f)
 	return string(data)
+}
+func (f *FanTurnOff) Name() string {
+	return fmt.Sprintf("%s.%s", *f.Domain, *f.Service)
 }
 func (f *FanTurnOff) SetID(id *int) {
 	f.Id = id
@@ -309,6 +336,9 @@ type FanTurnOnParams struct {
 func (f *FanTurnOn) JSON() string {
 	data, _ := json.Marshal(f)
 	return string(data)
+}
+func (f *FanTurnOn) Name() string {
+	return fmt.Sprintf("%s.%s", *f.Domain, *f.Service)
 }
 func (f *FanTurnOn) SetID(id *int) {
 	f.Id = id

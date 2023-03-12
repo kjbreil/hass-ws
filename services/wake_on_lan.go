@@ -1,6 +1,9 @@
 package services
 
-import "encoding/json"
+import (
+	"encoding/json"
+	"fmt"
+)
 
 ////////////////////////////////////////////////////////////////////////////////
 // Do not modify this file, it is automatically generated
@@ -38,6 +41,9 @@ type WakeOnLanSendMagicPacketParams struct {
 func (w *WakeOnLanSendMagicPacket) JSON() string {
 	data, _ := json.Marshal(w)
 	return string(data)
+}
+func (w *WakeOnLanSendMagicPacket) Name() string {
+	return fmt.Sprintf("%s.%s", *w.Domain, *w.Service)
 }
 func (w *WakeOnLanSendMagicPacket) SetID(id *int) {
 	w.Id = id

@@ -1,6 +1,9 @@
 package services
 
-import "encoding/json"
+import (
+	"encoding/json"
+	"fmt"
+)
 
 ////////////////////////////////////////////////////////////////////////////////
 // Do not modify this file, it is automatically generated
@@ -41,6 +44,9 @@ func (c *CounterConfigure) JSON() string {
 	data, _ := json.Marshal(c)
 	return string(data)
 }
+func (c *CounterConfigure) Name() string {
+	return fmt.Sprintf("%s.%s", *c.Domain, *c.Service)
+}
 func (c *CounterConfigure) SetID(id *int) {
 	c.Id = id
 }
@@ -72,6 +78,9 @@ type CounterDecrement struct {
 func (c *CounterDecrement) JSON() string {
 	data, _ := json.Marshal(c)
 	return string(data)
+}
+func (c *CounterDecrement) Name() string {
+	return fmt.Sprintf("%s.%s", *c.Domain, *c.Service)
 }
 func (c *CounterDecrement) SetID(id *int) {
 	c.Id = id
@@ -105,6 +114,9 @@ func (c *CounterIncrement) JSON() string {
 	data, _ := json.Marshal(c)
 	return string(data)
 }
+func (c *CounterIncrement) Name() string {
+	return fmt.Sprintf("%s.%s", *c.Domain, *c.Service)
+}
 func (c *CounterIncrement) SetID(id *int) {
 	c.Id = id
 }
@@ -136,6 +148,9 @@ type CounterReset struct {
 func (c *CounterReset) JSON() string {
 	data, _ := json.Marshal(c)
 	return string(data)
+}
+func (c *CounterReset) Name() string {
+	return fmt.Sprintf("%s.%s", *c.Domain, *c.Service)
 }
 func (c *CounterReset) SetID(id *int) {
 	c.Id = id

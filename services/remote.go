@@ -1,6 +1,9 @@
 package services
 
-import "encoding/json"
+import (
+	"encoding/json"
+	"fmt"
+)
 
 ////////////////////////////////////////////////////////////////////////////////
 // Do not modify this file, it is automatically generated
@@ -36,6 +39,9 @@ type RemoteDeleteCommandParams struct {
 func (r *RemoteDeleteCommand) JSON() string {
 	data, _ := json.Marshal(r)
 	return string(data)
+}
+func (r *RemoteDeleteCommand) Name() string {
+	return fmt.Sprintf("%s.%s", *r.Domain, *r.Service)
 }
 func (r *RemoteDeleteCommand) SetID(id *int) {
 	r.Id = id
@@ -73,6 +79,9 @@ type RemoteLearnCommandParams struct {
 func (r *RemoteLearnCommand) JSON() string {
 	data, _ := json.Marshal(r)
 	return string(data)
+}
+func (r *RemoteLearnCommand) Name() string {
+	return fmt.Sprintf("%s.%s", *r.Domain, *r.Service)
 }
 func (r *RemoteLearnCommand) SetID(id *int) {
 	r.Id = id
@@ -112,6 +121,9 @@ func (r *RemoteSendCommand) JSON() string {
 	data, _ := json.Marshal(r)
 	return string(data)
 }
+func (r *RemoteSendCommand) Name() string {
+	return fmt.Sprintf("%s.%s", *r.Domain, *r.Service)
+}
 func (r *RemoteSendCommand) SetID(id *int) {
 	r.Id = id
 }
@@ -144,6 +156,9 @@ func (r *RemoteToggle) JSON() string {
 	data, _ := json.Marshal(r)
 	return string(data)
 }
+func (r *RemoteToggle) Name() string {
+	return fmt.Sprintf("%s.%s", *r.Domain, *r.Service)
+}
 func (r *RemoteToggle) SetID(id *int) {
 	r.Id = id
 }
@@ -175,6 +190,9 @@ type RemoteTurnOff struct {
 func (r *RemoteTurnOff) JSON() string {
 	data, _ := json.Marshal(r)
 	return string(data)
+}
+func (r *RemoteTurnOff) Name() string {
+	return fmt.Sprintf("%s.%s", *r.Domain, *r.Service)
 }
 func (r *RemoteTurnOff) SetID(id *int) {
 	r.Id = id
@@ -210,6 +228,9 @@ type RemoteTurnOnParams struct {
 func (r *RemoteTurnOn) JSON() string {
 	data, _ := json.Marshal(r)
 	return string(data)
+}
+func (r *RemoteTurnOn) Name() string {
+	return fmt.Sprintf("%s.%s", *r.Domain, *r.Service)
 }
 func (r *RemoteTurnOn) SetID(id *int) {
 	r.Id = id

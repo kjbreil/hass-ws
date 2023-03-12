@@ -1,6 +1,9 @@
 package services
 
-import "encoding/json"
+import (
+	"encoding/json"
+	"fmt"
+)
 
 ////////////////////////////////////////////////////////////////////////////////
 // Do not modify this file, it is automatically generated
@@ -38,6 +41,9 @@ func (n *NotifyMobileAppAsk) JSON() string {
 	data, _ := json.Marshal(n)
 	return string(data)
 }
+func (n *NotifyMobileAppAsk) Name() string {
+	return fmt.Sprintf("%s.%s", *n.Domain, *n.Service)
+}
 func (n *NotifyMobileAppAsk) SetID(id *int) {
 	n.Id = id
 }
@@ -73,6 +79,9 @@ type NotifyMobileAppFranphoneParams struct {
 func (n *NotifyMobileAppFranphone) JSON() string {
 	data, _ := json.Marshal(n)
 	return string(data)
+}
+func (n *NotifyMobileAppFranphone) Name() string {
+	return fmt.Sprintf("%s.%s", *n.Domain, *n.Service)
 }
 func (n *NotifyMobileAppFranphone) SetID(id *int) {
 	n.Id = id
@@ -110,6 +119,9 @@ func (n *NotifyMobileAppIpad) JSON() string {
 	data, _ := json.Marshal(n)
 	return string(data)
 }
+func (n *NotifyMobileAppIpad) Name() string {
+	return fmt.Sprintf("%s.%s", *n.Domain, *n.Service)
+}
 func (n *NotifyMobileAppIpad) SetID(id *int) {
 	n.Id = id
 }
@@ -145,6 +157,9 @@ type NotifyMobileAppKioskairParams struct {
 func (n *NotifyMobileAppKioskair) JSON() string {
 	data, _ := json.Marshal(n)
 	return string(data)
+}
+func (n *NotifyMobileAppKioskair) Name() string {
+	return fmt.Sprintf("%s.%s", *n.Domain, *n.Service)
 }
 func (n *NotifyMobileAppKioskair) SetID(id *int) {
 	n.Id = id
@@ -182,6 +197,9 @@ func (n *NotifyMobileAppLoki) JSON() string {
 	data, _ := json.Marshal(n)
 	return string(data)
 }
+func (n *NotifyMobileAppLoki) Name() string {
+	return fmt.Sprintf("%s.%s", *n.Domain, *n.Service)
+}
 func (n *NotifyMobileAppLoki) SetID(id *int) {
 	n.Id = id
 }
@@ -217,6 +235,9 @@ type NotifyMobileAppSkadiParams struct {
 func (n *NotifyMobileAppSkadi) JSON() string {
 	data, _ := json.Marshal(n)
 	return string(data)
+}
+func (n *NotifyMobileAppSkadi) Name() string {
+	return fmt.Sprintf("%s.%s", *n.Domain, *n.Service)
 }
 func (n *NotifyMobileAppSkadi) SetID(id *int) {
 	n.Id = id
@@ -254,6 +275,9 @@ func (n *NotifyNotify) JSON() string {
 	data, _ := json.Marshal(n)
 	return string(data)
 }
+func (n *NotifyNotify) Name() string {
+	return fmt.Sprintf("%s.%s", *n.Domain, *n.Service)
+}
 func (n *NotifyNotify) SetID(id *int) {
 	n.Id = id
 }
@@ -289,6 +313,9 @@ type NotifyPersistentNotificationParams struct {
 func (n *NotifyPersistentNotification) JSON() string {
 	data, _ := json.Marshal(n)
 	return string(data)
+}
+func (n *NotifyPersistentNotification) Name() string {
+	return fmt.Sprintf("%s.%s", *n.Domain, *n.Service)
 }
 func (n *NotifyPersistentNotification) SetID(id *int) {
 	n.Id = id

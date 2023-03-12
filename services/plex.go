@@ -1,6 +1,9 @@
 package services
 
-import "encoding/json"
+import (
+	"encoding/json"
+	"fmt"
+)
 
 ////////////////////////////////////////////////////////////////////////////////
 // Do not modify this file, it is automatically generated
@@ -38,6 +41,9 @@ func (p *PlexRefreshLibrary) JSON() string {
 	data, _ := json.Marshal(p)
 	return string(data)
 }
+func (p *PlexRefreshLibrary) Name() string {
+	return fmt.Sprintf("%s.%s", *p.Domain, *p.Service)
+}
 func (p *PlexRefreshLibrary) SetID(id *int) {
 	p.Id = id
 }
@@ -69,6 +75,9 @@ type PlexScanForClients struct {
 func (p *PlexScanForClients) JSON() string {
 	data, _ := json.Marshal(p)
 	return string(data)
+}
+func (p *PlexScanForClients) Name() string {
+	return fmt.Sprintf("%s.%s", *p.Domain, *p.Service)
 }
 func (p *PlexScanForClients) SetID(id *int) {
 	p.Id = id

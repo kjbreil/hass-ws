@@ -1,6 +1,9 @@
 package services
 
-import "encoding/json"
+import (
+	"encoding/json"
+	"fmt"
+)
 
 ////////////////////////////////////////////////////////////////////////////////
 // Do not modify this file, it is automatically generated
@@ -33,6 +36,9 @@ type ClimateSetAuxHeat struct {
 func (c *ClimateSetAuxHeat) JSON() string {
 	data, _ := json.Marshal(c)
 	return string(data)
+}
+func (c *ClimateSetAuxHeat) Name() string {
+	return fmt.Sprintf("%s.%s", *c.Domain, *c.Service)
 }
 func (c *ClimateSetAuxHeat) SetID(id *int) {
 	c.Id = id
@@ -69,6 +75,9 @@ func (c *ClimateSetFanMode) JSON() string {
 	data, _ := json.Marshal(c)
 	return string(data)
 }
+func (c *ClimateSetFanMode) Name() string {
+	return fmt.Sprintf("%s.%s", *c.Domain, *c.Service)
+}
 func (c *ClimateSetFanMode) SetID(id *int) {
 	c.Id = id
 }
@@ -103,6 +112,9 @@ type ClimateSetHumidityParams struct {
 func (c *ClimateSetHumidity) JSON() string {
 	data, _ := json.Marshal(c)
 	return string(data)
+}
+func (c *ClimateSetHumidity) Name() string {
+	return fmt.Sprintf("%s.%s", *c.Domain, *c.Service)
 }
 func (c *ClimateSetHumidity) SetID(id *int) {
 	c.Id = id
@@ -139,6 +151,9 @@ func (c *ClimateSetHvacMode) JSON() string {
 	data, _ := json.Marshal(c)
 	return string(data)
 }
+func (c *ClimateSetHvacMode) Name() string {
+	return fmt.Sprintf("%s.%s", *c.Domain, *c.Service)
+}
 func (c *ClimateSetHvacMode) SetID(id *int) {
 	c.Id = id
 }
@@ -174,6 +189,9 @@ func (c *ClimateSetPresetMode) JSON() string {
 	data, _ := json.Marshal(c)
 	return string(data)
 }
+func (c *ClimateSetPresetMode) Name() string {
+	return fmt.Sprintf("%s.%s", *c.Domain, *c.Service)
+}
 func (c *ClimateSetPresetMode) SetID(id *int) {
 	c.Id = id
 }
@@ -208,6 +226,9 @@ type ClimateSetSwingModeParams struct {
 func (c *ClimateSetSwingMode) JSON() string {
 	data, _ := json.Marshal(c)
 	return string(data)
+}
+func (c *ClimateSetSwingMode) Name() string {
+	return fmt.Sprintf("%s.%s", *c.Domain, *c.Service)
 }
 func (c *ClimateSetSwingMode) SetID(id *int) {
 	c.Id = id
@@ -247,6 +268,9 @@ func (c *ClimateSetTemperature) JSON() string {
 	data, _ := json.Marshal(c)
 	return string(data)
 }
+func (c *ClimateSetTemperature) Name() string {
+	return fmt.Sprintf("%s.%s", *c.Domain, *c.Service)
+}
 func (c *ClimateSetTemperature) SetID(id *int) {
 	c.Id = id
 }
@@ -279,6 +303,9 @@ func (c *ClimateTurnOff) JSON() string {
 	data, _ := json.Marshal(c)
 	return string(data)
 }
+func (c *ClimateTurnOff) Name() string {
+	return fmt.Sprintf("%s.%s", *c.Domain, *c.Service)
+}
 func (c *ClimateTurnOff) SetID(id *int) {
 	c.Id = id
 }
@@ -310,6 +337,9 @@ type ClimateTurnOn struct {
 func (c *ClimateTurnOn) JSON() string {
 	data, _ := json.Marshal(c)
 	return string(data)
+}
+func (c *ClimateTurnOn) Name() string {
+	return fmt.Sprintf("%s.%s", *c.Domain, *c.Service)
 }
 func (c *ClimateTurnOn) SetID(id *int) {
 	c.Id = id

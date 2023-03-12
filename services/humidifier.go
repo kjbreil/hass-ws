@@ -1,6 +1,9 @@
 package services
 
-import "encoding/json"
+import (
+	"encoding/json"
+	"fmt"
+)
 
 ////////////////////////////////////////////////////////////////////////////////
 // Do not modify this file, it is automatically generated
@@ -37,6 +40,9 @@ func (h *HumidifierSetHumidity) JSON() string {
 	data, _ := json.Marshal(h)
 	return string(data)
 }
+func (h *HumidifierSetHumidity) Name() string {
+	return fmt.Sprintf("%s.%s", *h.Domain, *h.Service)
+}
 func (h *HumidifierSetHumidity) SetID(id *int) {
 	h.Id = id
 }
@@ -72,6 +78,9 @@ func (h *HumidifierSetMode) JSON() string {
 	data, _ := json.Marshal(h)
 	return string(data)
 }
+func (h *HumidifierSetMode) Name() string {
+	return fmt.Sprintf("%s.%s", *h.Domain, *h.Service)
+}
 func (h *HumidifierSetMode) SetID(id *int) {
 	h.Id = id
 }
@@ -103,6 +112,9 @@ type HumidifierToggle struct {
 func (h *HumidifierToggle) JSON() string {
 	data, _ := json.Marshal(h)
 	return string(data)
+}
+func (h *HumidifierToggle) Name() string {
+	return fmt.Sprintf("%s.%s", *h.Domain, *h.Service)
 }
 func (h *HumidifierToggle) SetID(id *int) {
 	h.Id = id
@@ -136,6 +148,9 @@ func (h *HumidifierTurnOff) JSON() string {
 	data, _ := json.Marshal(h)
 	return string(data)
 }
+func (h *HumidifierTurnOff) Name() string {
+	return fmt.Sprintf("%s.%s", *h.Domain, *h.Service)
+}
 func (h *HumidifierTurnOff) SetID(id *int) {
 	h.Id = id
 }
@@ -167,6 +182,9 @@ type HumidifierTurnOn struct {
 func (h *HumidifierTurnOn) JSON() string {
 	data, _ := json.Marshal(h)
 	return string(data)
+}
+func (h *HumidifierTurnOn) Name() string {
+	return fmt.Sprintf("%s.%s", *h.Domain, *h.Service)
 }
 func (h *HumidifierTurnOn) SetID(id *int) {
 	h.Id = id

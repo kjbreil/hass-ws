@@ -1,6 +1,9 @@
 package services
 
-import "encoding/json"
+import (
+	"encoding/json"
+	"fmt"
+)
 
 ////////////////////////////////////////////////////////////////////////////////
 // Do not modify this file, it is automatically generated
@@ -37,6 +40,9 @@ func (a *AlarmControlPanelAlarmArmAway) JSON() string {
 	data, _ := json.Marshal(a)
 	return string(data)
 }
+func (a *AlarmControlPanelAlarmArmAway) Name() string {
+	return fmt.Sprintf("%s.%s", *a.Domain, *a.Service)
+}
 func (a *AlarmControlPanelAlarmArmAway) SetID(id *int) {
 	a.Id = id
 }
@@ -71,6 +77,9 @@ type AlarmControlPanelAlarmArmCustomBypassParams struct {
 func (a *AlarmControlPanelAlarmArmCustomBypass) JSON() string {
 	data, _ := json.Marshal(a)
 	return string(data)
+}
+func (a *AlarmControlPanelAlarmArmCustomBypass) Name() string {
+	return fmt.Sprintf("%s.%s", *a.Domain, *a.Service)
 }
 func (a *AlarmControlPanelAlarmArmCustomBypass) SetID(id *int) {
 	a.Id = id
@@ -107,6 +116,9 @@ func (a *AlarmControlPanelAlarmArmHome) JSON() string {
 	data, _ := json.Marshal(a)
 	return string(data)
 }
+func (a *AlarmControlPanelAlarmArmHome) Name() string {
+	return fmt.Sprintf("%s.%s", *a.Domain, *a.Service)
+}
 func (a *AlarmControlPanelAlarmArmHome) SetID(id *int) {
 	a.Id = id
 }
@@ -141,6 +153,9 @@ type AlarmControlPanelAlarmArmNightParams struct {
 func (a *AlarmControlPanelAlarmArmNight) JSON() string {
 	data, _ := json.Marshal(a)
 	return string(data)
+}
+func (a *AlarmControlPanelAlarmArmNight) Name() string {
+	return fmt.Sprintf("%s.%s", *a.Domain, *a.Service)
 }
 func (a *AlarmControlPanelAlarmArmNight) SetID(id *int) {
 	a.Id = id
@@ -177,6 +192,9 @@ func (a *AlarmControlPanelAlarmArmVacation) JSON() string {
 	data, _ := json.Marshal(a)
 	return string(data)
 }
+func (a *AlarmControlPanelAlarmArmVacation) Name() string {
+	return fmt.Sprintf("%s.%s", *a.Domain, *a.Service)
+}
 func (a *AlarmControlPanelAlarmArmVacation) SetID(id *int) {
 	a.Id = id
 }
@@ -212,6 +230,9 @@ func (a *AlarmControlPanelAlarmDisarm) JSON() string {
 	data, _ := json.Marshal(a)
 	return string(data)
 }
+func (a *AlarmControlPanelAlarmDisarm) Name() string {
+	return fmt.Sprintf("%s.%s", *a.Domain, *a.Service)
+}
 func (a *AlarmControlPanelAlarmDisarm) SetID(id *int) {
 	a.Id = id
 }
@@ -246,6 +267,9 @@ type AlarmControlPanelAlarmTriggerParams struct {
 func (a *AlarmControlPanelAlarmTrigger) JSON() string {
 	data, _ := json.Marshal(a)
 	return string(data)
+}
+func (a *AlarmControlPanelAlarmTrigger) Name() string {
+	return fmt.Sprintf("%s.%s", *a.Domain, *a.Service)
 }
 func (a *AlarmControlPanelAlarmTrigger) SetID(id *int) {
 	a.Id = id

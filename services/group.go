@@ -1,6 +1,9 @@
 package services
 
-import "encoding/json"
+import (
+	"encoding/json"
+	"fmt"
+)
 
 ////////////////////////////////////////////////////////////////////////////////
 // Do not modify this file, it is automatically generated
@@ -34,6 +37,9 @@ func (g *GroupReload) JSON() string {
 	data, _ := json.Marshal(g)
 	return string(data)
 }
+func (g *GroupReload) Name() string {
+	return fmt.Sprintf("%s.%s", *g.Domain, *g.Service)
+}
 func (g *GroupReload) SetID(id *int) {
 	g.Id = id
 }
@@ -65,6 +71,9 @@ type GroupRemove struct {
 func (g *GroupRemove) JSON() string {
 	data, _ := json.Marshal(g)
 	return string(data)
+}
+func (g *GroupRemove) Name() string {
+	return fmt.Sprintf("%s.%s", *g.Domain, *g.Service)
 }
 func (g *GroupRemove) SetID(id *int) {
 	g.Id = id
@@ -101,6 +110,9 @@ type GroupSetParams struct {
 func (g *GroupSet) JSON() string {
 	data, _ := json.Marshal(g)
 	return string(data)
+}
+func (g *GroupSet) Name() string {
+	return fmt.Sprintf("%s.%s", *g.Domain, *g.Service)
 }
 func (g *GroupSet) SetID(id *int) {
 	g.Id = id

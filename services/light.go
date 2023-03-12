@@ -1,6 +1,9 @@
 package services
 
-import "encoding/json"
+import (
+	"encoding/json"
+	"fmt"
+)
 
 ////////////////////////////////////////////////////////////////////////////////
 // Do not modify this file, it is automatically generated
@@ -45,6 +48,9 @@ func (l *LightToggle) JSON() string {
 	data, _ := json.Marshal(l)
 	return string(data)
 }
+func (l *LightToggle) Name() string {
+	return fmt.Sprintf("%s.%s", *l.Domain, *l.Service)
+}
 func (l *LightToggle) SetID(id *int) {
 	l.Id = id
 }
@@ -80,6 +86,9 @@ type LightTurnOffParams struct {
 func (l *LightTurnOff) JSON() string {
 	data, _ := json.Marshal(l)
 	return string(data)
+}
+func (l *LightTurnOff) Name() string {
+	return fmt.Sprintf("%s.%s", *l.Domain, *l.Service)
 }
 func (l *LightTurnOff) SetID(id *int) {
 	l.Id = id
@@ -126,6 +135,9 @@ type LightTurnOnParams struct {
 func (l *LightTurnOn) JSON() string {
 	data, _ := json.Marshal(l)
 	return string(data)
+}
+func (l *LightTurnOn) Name() string {
+	return fmt.Sprintf("%s.%s", *l.Domain, *l.Service)
 }
 func (l *LightTurnOn) SetID(id *int) {
 	l.Id = id

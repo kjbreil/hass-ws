@@ -1,6 +1,9 @@
 package services
 
-import "encoding/json"
+import (
+	"encoding/json"
+	"fmt"
+)
 
 ////////////////////////////////////////////////////////////////////////////////
 // Do not modify this file, it is automatically generated
@@ -41,6 +44,9 @@ type DeviceTrackerSeeParams struct {
 func (d *DeviceTrackerSee) JSON() string {
 	data, _ := json.Marshal(d)
 	return string(data)
+}
+func (d *DeviceTrackerSee) Name() string {
+	return fmt.Sprintf("%s.%s", *d.Domain, *d.Service)
 }
 func (d *DeviceTrackerSee) SetID(id *int) {
 	d.Id = id

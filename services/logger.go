@@ -1,6 +1,9 @@
 package services
 
-import "encoding/json"
+import (
+	"encoding/json"
+	"fmt"
+)
 
 ////////////////////////////////////////////////////////////////////////////////
 // Do not modify this file, it is automatically generated
@@ -37,6 +40,9 @@ func (l *LoggerSetDefaultLevel) JSON() string {
 	data, _ := json.Marshal(l)
 	return string(data)
 }
+func (l *LoggerSetDefaultLevel) Name() string {
+	return fmt.Sprintf("%s.%s", *l.Domain, *l.Service)
+}
 func (l *LoggerSetDefaultLevel) SetID(id *int) {
 	l.Id = id
 }
@@ -68,6 +74,9 @@ type LoggerSetLevel struct {
 func (l *LoggerSetLevel) JSON() string {
 	data, _ := json.Marshal(l)
 	return string(data)
+}
+func (l *LoggerSetLevel) Name() string {
+	return fmt.Sprintf("%s.%s", *l.Domain, *l.Service)
 }
 func (l *LoggerSetLevel) SetID(id *int) {
 	l.Id = id

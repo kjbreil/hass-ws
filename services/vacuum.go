@@ -1,6 +1,9 @@
 package services
 
-import "encoding/json"
+import (
+	"encoding/json"
+	"fmt"
+)
 
 ////////////////////////////////////////////////////////////////////////////////
 // Do not modify this file, it is automatically generated
@@ -34,6 +37,9 @@ func (v *VacuumCleanSpot) JSON() string {
 	data, _ := json.Marshal(v)
 	return string(data)
 }
+func (v *VacuumCleanSpot) Name() string {
+	return fmt.Sprintf("%s.%s", *v.Domain, *v.Service)
+}
 func (v *VacuumCleanSpot) SetID(id *int) {
 	v.Id = id
 }
@@ -65,6 +71,9 @@ type VacuumLocate struct {
 func (v *VacuumLocate) JSON() string {
 	data, _ := json.Marshal(v)
 	return string(data)
+}
+func (v *VacuumLocate) Name() string {
+	return fmt.Sprintf("%s.%s", *v.Domain, *v.Service)
 }
 func (v *VacuumLocate) SetID(id *int) {
 	v.Id = id
@@ -98,6 +107,9 @@ func (v *VacuumPause) JSON() string {
 	data, _ := json.Marshal(v)
 	return string(data)
 }
+func (v *VacuumPause) Name() string {
+	return fmt.Sprintf("%s.%s", *v.Domain, *v.Service)
+}
 func (v *VacuumPause) SetID(id *int) {
 	v.Id = id
 }
@@ -129,6 +141,9 @@ type VacuumReturnToBase struct {
 func (v *VacuumReturnToBase) JSON() string {
 	data, _ := json.Marshal(v)
 	return string(data)
+}
+func (v *VacuumReturnToBase) Name() string {
+	return fmt.Sprintf("%s.%s", *v.Domain, *v.Service)
 }
 func (v *VacuumReturnToBase) SetID(id *int) {
 	v.Id = id
@@ -165,6 +180,9 @@ func (v *VacuumSendCommand) JSON() string {
 	data, _ := json.Marshal(v)
 	return string(data)
 }
+func (v *VacuumSendCommand) Name() string {
+	return fmt.Sprintf("%s.%s", *v.Domain, *v.Service)
+}
 func (v *VacuumSendCommand) SetID(id *int) {
 	v.Id = id
 }
@@ -200,6 +218,9 @@ func (v *VacuumSetFanSpeed) JSON() string {
 	data, _ := json.Marshal(v)
 	return string(data)
 }
+func (v *VacuumSetFanSpeed) Name() string {
+	return fmt.Sprintf("%s.%s", *v.Domain, *v.Service)
+}
 func (v *VacuumSetFanSpeed) SetID(id *int) {
 	v.Id = id
 }
@@ -231,6 +252,9 @@ type VacuumStart struct {
 func (v *VacuumStart) JSON() string {
 	data, _ := json.Marshal(v)
 	return string(data)
+}
+func (v *VacuumStart) Name() string {
+	return fmt.Sprintf("%s.%s", *v.Domain, *v.Service)
 }
 func (v *VacuumStart) SetID(id *int) {
 	v.Id = id
@@ -264,6 +288,9 @@ func (v *VacuumStartPause) JSON() string {
 	data, _ := json.Marshal(v)
 	return string(data)
 }
+func (v *VacuumStartPause) Name() string {
+	return fmt.Sprintf("%s.%s", *v.Domain, *v.Service)
+}
 func (v *VacuumStartPause) SetID(id *int) {
 	v.Id = id
 }
@@ -295,6 +322,9 @@ type VacuumStop struct {
 func (v *VacuumStop) JSON() string {
 	data, _ := json.Marshal(v)
 	return string(data)
+}
+func (v *VacuumStop) Name() string {
+	return fmt.Sprintf("%s.%s", *v.Domain, *v.Service)
 }
 func (v *VacuumStop) SetID(id *int) {
 	v.Id = id
@@ -328,6 +358,9 @@ func (v *VacuumToggle) JSON() string {
 	data, _ := json.Marshal(v)
 	return string(data)
 }
+func (v *VacuumToggle) Name() string {
+	return fmt.Sprintf("%s.%s", *v.Domain, *v.Service)
+}
 func (v *VacuumToggle) SetID(id *int) {
 	v.Id = id
 }
@@ -360,6 +393,9 @@ func (v *VacuumTurnOff) JSON() string {
 	data, _ := json.Marshal(v)
 	return string(data)
 }
+func (v *VacuumTurnOff) Name() string {
+	return fmt.Sprintf("%s.%s", *v.Domain, *v.Service)
+}
 func (v *VacuumTurnOff) SetID(id *int) {
 	v.Id = id
 }
@@ -391,6 +427,9 @@ type VacuumTurnOn struct {
 func (v *VacuumTurnOn) JSON() string {
 	data, _ := json.Marshal(v)
 	return string(data)
+}
+func (v *VacuumTurnOn) Name() string {
+	return fmt.Sprintf("%s.%s", *v.Domain, *v.Service)
 }
 func (v *VacuumTurnOn) SetID(id *int) {
 	v.Id = id

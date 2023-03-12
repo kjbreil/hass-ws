@@ -1,6 +1,9 @@
 package services
 
-import "encoding/json"
+import (
+	"encoding/json"
+	"fmt"
+)
 
 ////////////////////////////////////////////////////////////////////////////////
 // Do not modify this file, it is automatically generated
@@ -33,6 +36,9 @@ type PersonReload struct {
 func (p *PersonReload) JSON() string {
 	data, _ := json.Marshal(p)
 	return string(data)
+}
+func (p *PersonReload) Name() string {
+	return fmt.Sprintf("%s.%s", *p.Domain, *p.Service)
 }
 func (p *PersonReload) SetID(id *int) {
 	p.Id = id

@@ -1,6 +1,9 @@
 package services
 
-import "encoding/json"
+import (
+	"encoding/json"
+	"fmt"
+)
 
 ////////////////////////////////////////////////////////////////////////////////
 // Do not modify this file, it is automatically generated
@@ -36,6 +39,9 @@ type SelectSelectOptionParams struct {
 func (s *SelectSelectOption) JSON() string {
 	data, _ := json.Marshal(s)
 	return string(data)
+}
+func (s *SelectSelectOption) Name() string {
+	return fmt.Sprintf("%s.%s", *s.Domain, *s.Service)
 }
 func (s *SelectSelectOption) SetID(id *int) {
 	s.Id = id

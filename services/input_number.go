@@ -1,6 +1,9 @@
 package services
 
-import "encoding/json"
+import (
+	"encoding/json"
+	"fmt"
+)
 
 ////////////////////////////////////////////////////////////////////////////////
 // Do not modify this file, it is automatically generated
@@ -34,6 +37,9 @@ func (i *InputNumberDecrement) JSON() string {
 	data, _ := json.Marshal(i)
 	return string(data)
 }
+func (i *InputNumberDecrement) Name() string {
+	return fmt.Sprintf("%s.%s", *i.Domain, *i.Service)
+}
 func (i *InputNumberDecrement) SetID(id *int) {
 	i.Id = id
 }
@@ -66,6 +72,9 @@ func (i *InputNumberIncrement) JSON() string {
 	data, _ := json.Marshal(i)
 	return string(data)
 }
+func (i *InputNumberIncrement) Name() string {
+	return fmt.Sprintf("%s.%s", *i.Domain, *i.Service)
+}
 func (i *InputNumberIncrement) SetID(id *int) {
 	i.Id = id
 }
@@ -97,6 +106,9 @@ type InputNumberReload struct {
 func (i *InputNumberReload) JSON() string {
 	data, _ := json.Marshal(i)
 	return string(data)
+}
+func (i *InputNumberReload) Name() string {
+	return fmt.Sprintf("%s.%s", *i.Domain, *i.Service)
 }
 func (i *InputNumberReload) SetID(id *int) {
 	i.Id = id
@@ -132,6 +144,9 @@ type InputNumberSetValueParams struct {
 func (i *InputNumberSetValue) JSON() string {
 	data, _ := json.Marshal(i)
 	return string(data)
+}
+func (i *InputNumberSetValue) Name() string {
+	return fmt.Sprintf("%s.%s", *i.Domain, *i.Service)
 }
 func (i *InputNumberSetValue) SetID(id *int) {
 	i.Id = id

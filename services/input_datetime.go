@@ -1,6 +1,9 @@
 package services
 
-import "encoding/json"
+import (
+	"encoding/json"
+	"fmt"
+)
 
 ////////////////////////////////////////////////////////////////////////////////
 // Do not modify this file, it is automatically generated
@@ -33,6 +36,9 @@ type InputDatetimeReload struct {
 func (i *InputDatetimeReload) JSON() string {
 	data, _ := json.Marshal(i)
 	return string(data)
+}
+func (i *InputDatetimeReload) Name() string {
+	return fmt.Sprintf("%s.%s", *i.Domain, *i.Service)
 }
 func (i *InputDatetimeReload) SetID(id *int) {
 	i.Id = id
@@ -70,6 +76,9 @@ type InputDatetimeSetDatetimeParams struct {
 func (i *InputDatetimeSetDatetime) JSON() string {
 	data, _ := json.Marshal(i)
 	return string(data)
+}
+func (i *InputDatetimeSetDatetime) Name() string {
+	return fmt.Sprintf("%s.%s", *i.Domain, *i.Service)
 }
 func (i *InputDatetimeSetDatetime) SetID(id *int) {
 	i.Id = id

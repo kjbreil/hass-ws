@@ -1,6 +1,9 @@
 package services
 
-import "encoding/json"
+import (
+	"encoding/json"
+	"fmt"
+)
 
 ////////////////////////////////////////////////////////////////////////////////
 // Do not modify this file, it is automatically generated
@@ -34,6 +37,9 @@ func (s *ScriptReload) JSON() string {
 	data, _ := json.Marshal(s)
 	return string(data)
 }
+func (s *ScriptReload) Name() string {
+	return fmt.Sprintf("%s.%s", *s.Domain, *s.Service)
+}
 func (s *ScriptReload) SetID(id *int) {
 	s.Id = id
 }
@@ -65,6 +71,9 @@ type ScriptTestScript struct {
 func (s *ScriptTestScript) JSON() string {
 	data, _ := json.Marshal(s)
 	return string(data)
+}
+func (s *ScriptTestScript) Name() string {
+	return fmt.Sprintf("%s.%s", *s.Domain, *s.Service)
 }
 func (s *ScriptTestScript) SetID(id *int) {
 	s.Id = id
@@ -98,6 +107,9 @@ func (s *ScriptToggle) JSON() string {
 	data, _ := json.Marshal(s)
 	return string(data)
 }
+func (s *ScriptToggle) Name() string {
+	return fmt.Sprintf("%s.%s", *s.Domain, *s.Service)
+}
 func (s *ScriptToggle) SetID(id *int) {
 	s.Id = id
 }
@@ -130,6 +142,9 @@ func (s *ScriptTurnOff) JSON() string {
 	data, _ := json.Marshal(s)
 	return string(data)
 }
+func (s *ScriptTurnOff) Name() string {
+	return fmt.Sprintf("%s.%s", *s.Domain, *s.Service)
+}
 func (s *ScriptTurnOff) SetID(id *int) {
 	s.Id = id
 }
@@ -161,6 +176,9 @@ type ScriptTurnOn struct {
 func (s *ScriptTurnOn) JSON() string {
 	data, _ := json.Marshal(s)
 	return string(data)
+}
+func (s *ScriptTurnOn) Name() string {
+	return fmt.Sprintf("%s.%s", *s.Domain, *s.Service)
 }
 func (s *ScriptTurnOn) SetID(id *int) {
 	s.Id = id

@@ -1,6 +1,9 @@
 package services
 
-import "encoding/json"
+import (
+	"encoding/json"
+	"fmt"
+)
 
 ////////////////////////////////////////////////////////////////////////////////
 // Do not modify this file, it is automatically generated
@@ -33,6 +36,9 @@ type HomeassistantCheckConfig struct {
 func (h *HomeassistantCheckConfig) JSON() string {
 	data, _ := json.Marshal(h)
 	return string(data)
+}
+func (h *HomeassistantCheckConfig) Name() string {
+	return fmt.Sprintf("%s.%s", *h.Domain, *h.Service)
 }
 func (h *HomeassistantCheckConfig) SetID(id *int) {
 	h.Id = id
@@ -69,6 +75,9 @@ func (h *HomeassistantReloadConfigEntry) JSON() string {
 	data, _ := json.Marshal(h)
 	return string(data)
 }
+func (h *HomeassistantReloadConfigEntry) Name() string {
+	return fmt.Sprintf("%s.%s", *h.Domain, *h.Service)
+}
 func (h *HomeassistantReloadConfigEntry) SetID(id *int) {
 	h.Id = id
 }
@@ -100,6 +109,9 @@ type HomeassistantReloadCoreConfig struct {
 func (h *HomeassistantReloadCoreConfig) JSON() string {
 	data, _ := json.Marshal(h)
 	return string(data)
+}
+func (h *HomeassistantReloadCoreConfig) Name() string {
+	return fmt.Sprintf("%s.%s", *h.Domain, *h.Service)
 }
 func (h *HomeassistantReloadCoreConfig) SetID(id *int) {
 	h.Id = id
@@ -133,6 +145,9 @@ func (h *HomeassistantRestart) JSON() string {
 	data, _ := json.Marshal(h)
 	return string(data)
 }
+func (h *HomeassistantRestart) Name() string {
+	return fmt.Sprintf("%s.%s", *h.Domain, *h.Service)
+}
 func (h *HomeassistantRestart) SetID(id *int) {
 	h.Id = id
 }
@@ -164,6 +179,9 @@ type HomeassistantSavePersistentStates struct {
 func (h *HomeassistantSavePersistentStates) JSON() string {
 	data, _ := json.Marshal(h)
 	return string(data)
+}
+func (h *HomeassistantSavePersistentStates) Name() string {
+	return fmt.Sprintf("%s.%s", *h.Domain, *h.Service)
 }
 func (h *HomeassistantSavePersistentStates) SetID(id *int) {
 	h.Id = id
@@ -201,6 +219,9 @@ func (h *HomeassistantSetLocation) JSON() string {
 	data, _ := json.Marshal(h)
 	return string(data)
 }
+func (h *HomeassistantSetLocation) Name() string {
+	return fmt.Sprintf("%s.%s", *h.Domain, *h.Service)
+}
 func (h *HomeassistantSetLocation) SetID(id *int) {
 	h.Id = id
 }
@@ -232,6 +253,9 @@ type HomeassistantStop struct {
 func (h *HomeassistantStop) JSON() string {
 	data, _ := json.Marshal(h)
 	return string(data)
+}
+func (h *HomeassistantStop) Name() string {
+	return fmt.Sprintf("%s.%s", *h.Domain, *h.Service)
 }
 func (h *HomeassistantStop) SetID(id *int) {
 	h.Id = id
@@ -265,6 +289,9 @@ func (h *HomeassistantToggle) JSON() string {
 	data, _ := json.Marshal(h)
 	return string(data)
 }
+func (h *HomeassistantToggle) Name() string {
+	return fmt.Sprintf("%s.%s", *h.Domain, *h.Service)
+}
 func (h *HomeassistantToggle) SetID(id *int) {
 	h.Id = id
 }
@@ -296,6 +323,9 @@ type HomeassistantTurnOff struct {
 func (h *HomeassistantTurnOff) JSON() string {
 	data, _ := json.Marshal(h)
 	return string(data)
+}
+func (h *HomeassistantTurnOff) Name() string {
+	return fmt.Sprintf("%s.%s", *h.Domain, *h.Service)
 }
 func (h *HomeassistantTurnOff) SetID(id *int) {
 	h.Id = id
@@ -329,6 +359,9 @@ func (h *HomeassistantTurnOn) JSON() string {
 	data, _ := json.Marshal(h)
 	return string(data)
 }
+func (h *HomeassistantTurnOn) Name() string {
+	return fmt.Sprintf("%s.%s", *h.Domain, *h.Service)
+}
 func (h *HomeassistantTurnOn) SetID(id *int) {
 	h.Id = id
 }
@@ -360,6 +393,9 @@ type HomeassistantUpdateEntity struct {
 func (h *HomeassistantUpdateEntity) JSON() string {
 	data, _ := json.Marshal(h)
 	return string(data)
+}
+func (h *HomeassistantUpdateEntity) Name() string {
+	return fmt.Sprintf("%s.%s", *h.Domain, *h.Service)
 }
 func (h *HomeassistantUpdateEntity) SetID(id *int) {
 	h.Id = id

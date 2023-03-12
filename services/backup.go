@@ -1,6 +1,9 @@
 package services
 
-import "encoding/json"
+import (
+	"encoding/json"
+	"fmt"
+)
 
 ////////////////////////////////////////////////////////////////////////////////
 // Do not modify this file, it is automatically generated
@@ -33,6 +36,9 @@ type BackupCreate struct {
 func (b *BackupCreate) JSON() string {
 	data, _ := json.Marshal(b)
 	return string(data)
+}
+func (b *BackupCreate) Name() string {
+	return fmt.Sprintf("%s.%s", *b.Domain, *b.Service)
 }
 func (b *BackupCreate) SetID(id *int) {
 	b.Id = id

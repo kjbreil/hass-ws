@@ -1,6 +1,9 @@
 package services
 
-import "encoding/json"
+import (
+	"encoding/json"
+	"fmt"
+)
 
 ////////////////////////////////////////////////////////////////////////////////
 // Do not modify this file, it is automatically generated
@@ -33,6 +36,9 @@ type UpdateClearSkipped struct {
 func (u *UpdateClearSkipped) JSON() string {
 	data, _ := json.Marshal(u)
 	return string(data)
+}
+func (u *UpdateClearSkipped) Name() string {
+	return fmt.Sprintf("%s.%s", *u.Domain, *u.Service)
 }
 func (u *UpdateClearSkipped) SetID(id *int) {
 	u.Id = id
@@ -69,6 +75,9 @@ func (u *UpdateInstall) JSON() string {
 	data, _ := json.Marshal(u)
 	return string(data)
 }
+func (u *UpdateInstall) Name() string {
+	return fmt.Sprintf("%s.%s", *u.Domain, *u.Service)
+}
 func (u *UpdateInstall) SetID(id *int) {
 	u.Id = id
 }
@@ -100,6 +109,9 @@ type UpdateSkip struct {
 func (u *UpdateSkip) JSON() string {
 	data, _ := json.Marshal(u)
 	return string(data)
+}
+func (u *UpdateSkip) Name() string {
+	return fmt.Sprintf("%s.%s", *u.Domain, *u.Service)
 }
 func (u *UpdateSkip) SetID(id *int) {
 	u.Id = id

@@ -1,6 +1,9 @@
 package services
 
-import "encoding/json"
+import (
+	"encoding/json"
+	"fmt"
+)
 
 ////////////////////////////////////////////////////////////////////////////////
 // Do not modify this file, it is automatically generated
@@ -34,6 +37,9 @@ func (c *CoverCloseCover) JSON() string {
 	data, _ := json.Marshal(c)
 	return string(data)
 }
+func (c *CoverCloseCover) Name() string {
+	return fmt.Sprintf("%s.%s", *c.Domain, *c.Service)
+}
 func (c *CoverCloseCover) SetID(id *int) {
 	c.Id = id
 }
@@ -65,6 +71,9 @@ type CoverCloseCoverTilt struct {
 func (c *CoverCloseCoverTilt) JSON() string {
 	data, _ := json.Marshal(c)
 	return string(data)
+}
+func (c *CoverCloseCoverTilt) Name() string {
+	return fmt.Sprintf("%s.%s", *c.Domain, *c.Service)
 }
 func (c *CoverCloseCoverTilt) SetID(id *int) {
 	c.Id = id
@@ -98,6 +107,9 @@ func (c *CoverOpenCover) JSON() string {
 	data, _ := json.Marshal(c)
 	return string(data)
 }
+func (c *CoverOpenCover) Name() string {
+	return fmt.Sprintf("%s.%s", *c.Domain, *c.Service)
+}
 func (c *CoverOpenCover) SetID(id *int) {
 	c.Id = id
 }
@@ -129,6 +141,9 @@ type CoverOpenCoverTilt struct {
 func (c *CoverOpenCoverTilt) JSON() string {
 	data, _ := json.Marshal(c)
 	return string(data)
+}
+func (c *CoverOpenCoverTilt) Name() string {
+	return fmt.Sprintf("%s.%s", *c.Domain, *c.Service)
 }
 func (c *CoverOpenCoverTilt) SetID(id *int) {
 	c.Id = id
@@ -165,6 +180,9 @@ func (c *CoverSetCoverPosition) JSON() string {
 	data, _ := json.Marshal(c)
 	return string(data)
 }
+func (c *CoverSetCoverPosition) Name() string {
+	return fmt.Sprintf("%s.%s", *c.Domain, *c.Service)
+}
 func (c *CoverSetCoverPosition) SetID(id *int) {
 	c.Id = id
 }
@@ -200,6 +218,9 @@ func (c *CoverSetCoverTiltPosition) JSON() string {
 	data, _ := json.Marshal(c)
 	return string(data)
 }
+func (c *CoverSetCoverTiltPosition) Name() string {
+	return fmt.Sprintf("%s.%s", *c.Domain, *c.Service)
+}
 func (c *CoverSetCoverTiltPosition) SetID(id *int) {
 	c.Id = id
 }
@@ -231,6 +252,9 @@ type CoverStopCover struct {
 func (c *CoverStopCover) JSON() string {
 	data, _ := json.Marshal(c)
 	return string(data)
+}
+func (c *CoverStopCover) Name() string {
+	return fmt.Sprintf("%s.%s", *c.Domain, *c.Service)
 }
 func (c *CoverStopCover) SetID(id *int) {
 	c.Id = id
@@ -264,6 +288,9 @@ func (c *CoverStopCoverTilt) JSON() string {
 	data, _ := json.Marshal(c)
 	return string(data)
 }
+func (c *CoverStopCoverTilt) Name() string {
+	return fmt.Sprintf("%s.%s", *c.Domain, *c.Service)
+}
 func (c *CoverStopCoverTilt) SetID(id *int) {
 	c.Id = id
 }
@@ -296,6 +323,9 @@ func (c *CoverToggle) JSON() string {
 	data, _ := json.Marshal(c)
 	return string(data)
 }
+func (c *CoverToggle) Name() string {
+	return fmt.Sprintf("%s.%s", *c.Domain, *c.Service)
+}
 func (c *CoverToggle) SetID(id *int) {
 	c.Id = id
 }
@@ -327,6 +357,9 @@ type CoverToggleCoverTilt struct {
 func (c *CoverToggleCoverTilt) JSON() string {
 	data, _ := json.Marshal(c)
 	return string(data)
+}
+func (c *CoverToggleCoverTilt) Name() string {
+	return fmt.Sprintf("%s.%s", *c.Domain, *c.Service)
 }
 func (c *CoverToggleCoverTilt) SetID(id *int) {
 	c.Id = id

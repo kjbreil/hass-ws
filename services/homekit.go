@@ -1,6 +1,9 @@
 package services
 
-import "encoding/json"
+import (
+	"encoding/json"
+	"fmt"
+)
 
 ////////////////////////////////////////////////////////////////////////////////
 // Do not modify this file, it is automatically generated
@@ -34,6 +37,9 @@ func (h *HomekitReload) JSON() string {
 	data, _ := json.Marshal(h)
 	return string(data)
 }
+func (h *HomekitReload) Name() string {
+	return fmt.Sprintf("%s.%s", *h.Domain, *h.Service)
+}
 func (h *HomekitReload) SetID(id *int) {
 	h.Id = id
 }
@@ -66,6 +72,9 @@ func (h *HomekitResetAccessory) JSON() string {
 	data, _ := json.Marshal(h)
 	return string(data)
 }
+func (h *HomekitResetAccessory) Name() string {
+	return fmt.Sprintf("%s.%s", *h.Domain, *h.Service)
+}
 func (h *HomekitResetAccessory) SetID(id *int) {
 	h.Id = id
 }
@@ -97,6 +106,9 @@ type HomekitUnpair struct {
 func (h *HomekitUnpair) JSON() string {
 	data, _ := json.Marshal(h)
 	return string(data)
+}
+func (h *HomekitUnpair) Name() string {
+	return fmt.Sprintf("%s.%s", *h.Domain, *h.Service)
 }
 func (h *HomekitUnpair) SetID(id *int) {
 	h.Id = id

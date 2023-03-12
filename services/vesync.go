@@ -1,6 +1,9 @@
 package services
 
-import "encoding/json"
+import (
+	"encoding/json"
+	"fmt"
+)
 
 ////////////////////////////////////////////////////////////////////////////////
 // Do not modify this file, it is automatically generated
@@ -33,6 +36,9 @@ type VesyncUpdateDevices struct {
 func (v *VesyncUpdateDevices) JSON() string {
 	data, _ := json.Marshal(v)
 	return string(data)
+}
+func (v *VesyncUpdateDevices) Name() string {
+	return fmt.Sprintf("%s.%s", *v.Domain, *v.Service)
 }
 func (v *VesyncUpdateDevices) SetID(id *int) {
 	v.Id = id

@@ -1,6 +1,9 @@
 package services
 
-import "encoding/json"
+import (
+	"encoding/json"
+	"fmt"
+)
 
 ////////////////////////////////////////////////////////////////////////////////
 // Do not modify this file, it is automatically generated
@@ -37,6 +40,9 @@ func (c *ConversationProcess) JSON() string {
 	data, _ := json.Marshal(c)
 	return string(data)
 }
+func (c *ConversationProcess) Name() string {
+	return fmt.Sprintf("%s.%s", *c.Domain, *c.Service)
+}
 func (c *ConversationProcess) SetID(id *int) {
 	c.Id = id
 }
@@ -68,6 +74,9 @@ type ConversationReload struct {
 func (c *ConversationReload) JSON() string {
 	data, _ := json.Marshal(c)
 	return string(data)
+}
+func (c *ConversationReload) Name() string {
+	return fmt.Sprintf("%s.%s", *c.Domain, *c.Service)
 }
 func (c *ConversationReload) SetID(id *int) {
 	c.Id = id

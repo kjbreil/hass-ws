@@ -1,6 +1,9 @@
 package services
 
-import "encoding/json"
+import (
+	"encoding/json"
+	"fmt"
+)
 
 ////////////////////////////////////////////////////////////////////////////////
 // Do not modify this file, it is automatically generated
@@ -34,6 +37,9 @@ func (i *InputSelectReload) JSON() string {
 	data, _ := json.Marshal(i)
 	return string(data)
 }
+func (i *InputSelectReload) Name() string {
+	return fmt.Sprintf("%s.%s", *i.Domain, *i.Service)
+}
 func (i *InputSelectReload) SetID(id *int) {
 	i.Id = id
 }
@@ -65,6 +71,9 @@ type InputSelectSelectFirst struct {
 func (i *InputSelectSelectFirst) JSON() string {
 	data, _ := json.Marshal(i)
 	return string(data)
+}
+func (i *InputSelectSelectFirst) Name() string {
+	return fmt.Sprintf("%s.%s", *i.Domain, *i.Service)
 }
 func (i *InputSelectSelectFirst) SetID(id *int) {
 	i.Id = id
@@ -98,6 +107,9 @@ func (i *InputSelectSelectLast) JSON() string {
 	data, _ := json.Marshal(i)
 	return string(data)
 }
+func (i *InputSelectSelectLast) Name() string {
+	return fmt.Sprintf("%s.%s", *i.Domain, *i.Service)
+}
 func (i *InputSelectSelectLast) SetID(id *int) {
 	i.Id = id
 }
@@ -129,6 +141,9 @@ type InputSelectSelectNext struct {
 func (i *InputSelectSelectNext) JSON() string {
 	data, _ := json.Marshal(i)
 	return string(data)
+}
+func (i *InputSelectSelectNext) Name() string {
+	return fmt.Sprintf("%s.%s", *i.Domain, *i.Service)
 }
 func (i *InputSelectSelectNext) SetID(id *int) {
 	i.Id = id
@@ -165,6 +180,9 @@ func (i *InputSelectSelectOption) JSON() string {
 	data, _ := json.Marshal(i)
 	return string(data)
 }
+func (i *InputSelectSelectOption) Name() string {
+	return fmt.Sprintf("%s.%s", *i.Domain, *i.Service)
+}
 func (i *InputSelectSelectOption) SetID(id *int) {
 	i.Id = id
 }
@@ -197,6 +215,9 @@ func (i *InputSelectSelectPrevious) JSON() string {
 	data, _ := json.Marshal(i)
 	return string(data)
 }
+func (i *InputSelectSelectPrevious) Name() string {
+	return fmt.Sprintf("%s.%s", *i.Domain, *i.Service)
+}
 func (i *InputSelectSelectPrevious) SetID(id *int) {
 	i.Id = id
 }
@@ -228,6 +249,9 @@ type InputSelectSetOptions struct {
 func (i *InputSelectSetOptions) JSON() string {
 	data, _ := json.Marshal(i)
 	return string(data)
+}
+func (i *InputSelectSetOptions) Name() string {
+	return fmt.Sprintf("%s.%s", *i.Domain, *i.Service)
 }
 func (i *InputSelectSetOptions) SetID(id *int) {
 	i.Id = id

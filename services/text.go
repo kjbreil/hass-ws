@@ -1,6 +1,9 @@
 package services
 
-import "encoding/json"
+import (
+	"encoding/json"
+	"fmt"
+)
 
 ////////////////////////////////////////////////////////////////////////////////
 // Do not modify this file, it is automatically generated
@@ -36,6 +39,9 @@ type TextSetValueParams struct {
 func (t *TextSetValue) JSON() string {
 	data, _ := json.Marshal(t)
 	return string(data)
+}
+func (t *TextSetValue) Name() string {
+	return fmt.Sprintf("%s.%s", *t.Domain, *t.Service)
 }
 func (t *TextSetValue) SetID(id *int) {
 	t.Id = id

@@ -1,6 +1,9 @@
 package services
 
-import "encoding/json"
+import (
+	"encoding/json"
+	"fmt"
+)
 
 ////////////////////////////////////////////////////////////////////////////////
 // Do not modify this file, it is automatically generated
@@ -34,6 +37,9 @@ func (i *InputBooleanReload) JSON() string {
 	data, _ := json.Marshal(i)
 	return string(data)
 }
+func (i *InputBooleanReload) Name() string {
+	return fmt.Sprintf("%s.%s", *i.Domain, *i.Service)
+}
 func (i *InputBooleanReload) SetID(id *int) {
 	i.Id = id
 }
@@ -65,6 +71,9 @@ type InputBooleanToggle struct {
 func (i *InputBooleanToggle) JSON() string {
 	data, _ := json.Marshal(i)
 	return string(data)
+}
+func (i *InputBooleanToggle) Name() string {
+	return fmt.Sprintf("%s.%s", *i.Domain, *i.Service)
 }
 func (i *InputBooleanToggle) SetID(id *int) {
 	i.Id = id
@@ -98,6 +107,9 @@ func (i *InputBooleanTurnOff) JSON() string {
 	data, _ := json.Marshal(i)
 	return string(data)
 }
+func (i *InputBooleanTurnOff) Name() string {
+	return fmt.Sprintf("%s.%s", *i.Domain, *i.Service)
+}
 func (i *InputBooleanTurnOff) SetID(id *int) {
 	i.Id = id
 }
@@ -129,6 +141,9 @@ type InputBooleanTurnOn struct {
 func (i *InputBooleanTurnOn) JSON() string {
 	data, _ := json.Marshal(i)
 	return string(data)
+}
+func (i *InputBooleanTurnOn) Name() string {
+	return fmt.Sprintf("%s.%s", *i.Domain, *i.Service)
 }
 func (i *InputBooleanTurnOn) SetID(id *int) {
 	i.Id = id

@@ -1,6 +1,9 @@
 package services
 
-import "encoding/json"
+import (
+	"encoding/json"
+	"fmt"
+)
 
 ////////////////////////////////////////////////////////////////////////////////
 // Do not modify this file, it is automatically generated
@@ -34,6 +37,9 @@ func (c *CloudRemoteConnect) JSON() string {
 	data, _ := json.Marshal(c)
 	return string(data)
 }
+func (c *CloudRemoteConnect) Name() string {
+	return fmt.Sprintf("%s.%s", *c.Domain, *c.Service)
+}
 func (c *CloudRemoteConnect) SetID(id *int) {
 	c.Id = id
 }
@@ -65,6 +71,9 @@ type CloudRemoteDisconnect struct {
 func (c *CloudRemoteDisconnect) JSON() string {
 	data, _ := json.Marshal(c)
 	return string(data)
+}
+func (c *CloudRemoteDisconnect) Name() string {
+	return fmt.Sprintf("%s.%s", *c.Domain, *c.Service)
 }
 func (c *CloudRemoteDisconnect) SetID(id *int) {
 	c.Id = id

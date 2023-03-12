@@ -1,6 +1,9 @@
 package services
 
-import "encoding/json"
+import (
+	"encoding/json"
+	"fmt"
+)
 
 ////////////////////////////////////////////////////////////////////////////////
 // Do not modify this file, it is automatically generated
@@ -37,6 +40,9 @@ type MqttDumpParams struct {
 func (m *MqttDump) JSON() string {
 	data, _ := json.Marshal(m)
 	return string(data)
+}
+func (m *MqttDump) Name() string {
+	return fmt.Sprintf("%s.%s", *m.Domain, *m.Service)
 }
 func (m *MqttDump) SetID(id *int) {
 	m.Id = id
@@ -75,6 +81,9 @@ func (m *MqttPublish) JSON() string {
 	data, _ := json.Marshal(m)
 	return string(data)
 }
+func (m *MqttPublish) Name() string {
+	return fmt.Sprintf("%s.%s", *m.Domain, *m.Service)
+}
 func (m *MqttPublish) SetID(id *int) {
 	m.Id = id
 }
@@ -106,6 +115,9 @@ type MqttReload struct {
 func (m *MqttReload) JSON() string {
 	data, _ := json.Marshal(m)
 	return string(data)
+}
+func (m *MqttReload) Name() string {
+	return fmt.Sprintf("%s.%s", *m.Domain, *m.Service)
 }
 func (m *MqttReload) SetID(id *int) {
 	m.Id = id

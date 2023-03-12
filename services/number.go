@@ -1,6 +1,9 @@
 package services
 
-import "encoding/json"
+import (
+	"encoding/json"
+	"fmt"
+)
 
 ////////////////////////////////////////////////////////////////////////////////
 // Do not modify this file, it is automatically generated
@@ -36,6 +39,9 @@ type NumberSetValueParams struct {
 func (n *NumberSetValue) JSON() string {
 	data, _ := json.Marshal(n)
 	return string(data)
+}
+func (n *NumberSetValue) Name() string {
+	return fmt.Sprintf("%s.%s", *n.Domain, *n.Service)
 }
 func (n *NumberSetValue) SetID(id *int) {
 	n.Id = id

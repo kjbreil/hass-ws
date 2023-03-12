@@ -1,6 +1,9 @@
 package services
 
-import "encoding/json"
+import (
+	"encoding/json"
+	"fmt"
+)
 
 ////////////////////////////////////////////////////////////////////////////////
 // Do not modify this file, it is automatically generated
@@ -39,6 +42,9 @@ func (p *PersistentNotificationCreate) JSON() string {
 	data, _ := json.Marshal(p)
 	return string(data)
 }
+func (p *PersistentNotificationCreate) Name() string {
+	return fmt.Sprintf("%s.%s", *p.Domain, *p.Service)
+}
 func (p *PersistentNotificationCreate) SetID(id *int) {
 	p.Id = id
 }
@@ -74,6 +80,9 @@ func (p *PersistentNotificationDismiss) JSON() string {
 	data, _ := json.Marshal(p)
 	return string(data)
 }
+func (p *PersistentNotificationDismiss) Name() string {
+	return fmt.Sprintf("%s.%s", *p.Domain, *p.Service)
+}
 func (p *PersistentNotificationDismiss) SetID(id *int) {
 	p.Id = id
 }
@@ -108,6 +117,9 @@ type PersistentNotificationMarkReadParams struct {
 func (p *PersistentNotificationMarkRead) JSON() string {
 	data, _ := json.Marshal(p)
 	return string(data)
+}
+func (p *PersistentNotificationMarkRead) Name() string {
+	return fmt.Sprintf("%s.%s", *p.Domain, *p.Service)
 }
 func (p *PersistentNotificationMarkRead) SetID(id *int) {
 	p.Id = id

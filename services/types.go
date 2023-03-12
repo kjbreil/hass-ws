@@ -32,6 +32,7 @@ package services
 type Service interface {
 	SetID(id *int)
 	JSON() string
+	Name() string
 }
 type ServiceBase struct {
 	Id      *int    `json:"id"`

@@ -1,6 +1,9 @@
 package services
 
-import "encoding/json"
+import (
+	"encoding/json"
+	"fmt"
+)
 
 ////////////////////////////////////////////////////////////////////////////////
 // Do not modify this file, it is automatically generated
@@ -33,6 +36,9 @@ type SystemLogClear struct {
 func (s *SystemLogClear) JSON() string {
 	data, _ := json.Marshal(s)
 	return string(data)
+}
+func (s *SystemLogClear) Name() string {
+	return fmt.Sprintf("%s.%s", *s.Domain, *s.Service)
 }
 func (s *SystemLogClear) SetID(id *int) {
 	s.Id = id
@@ -70,6 +76,9 @@ type SystemLogWriteParams struct {
 func (s *SystemLogWrite) JSON() string {
 	data, _ := json.Marshal(s)
 	return string(data)
+}
+func (s *SystemLogWrite) Name() string {
+	return fmt.Sprintf("%s.%s", *s.Domain, *s.Service)
 }
 func (s *SystemLogWrite) SetID(id *int) {
 	s.Id = id

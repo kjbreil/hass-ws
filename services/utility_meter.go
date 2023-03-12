@@ -1,6 +1,9 @@
 package services
 
-import "encoding/json"
+import (
+	"encoding/json"
+	"fmt"
+)
 
 ////////////////////////////////////////////////////////////////////////////////
 // Do not modify this file, it is automatically generated
@@ -37,6 +40,9 @@ func (u *UtilityMeterCalibrate) JSON() string {
 	data, _ := json.Marshal(u)
 	return string(data)
 }
+func (u *UtilityMeterCalibrate) Name() string {
+	return fmt.Sprintf("%s.%s", *u.Domain, *u.Service)
+}
 func (u *UtilityMeterCalibrate) SetID(id *int) {
 	u.Id = id
 }
@@ -68,6 +74,9 @@ type UtilityMeterReset struct {
 func (u *UtilityMeterReset) JSON() string {
 	data, _ := json.Marshal(u)
 	return string(data)
+}
+func (u *UtilityMeterReset) Name() string {
+	return fmt.Sprintf("%s.%s", *u.Domain, *u.Service)
 }
 func (u *UtilityMeterReset) SetID(id *int) {
 	u.Id = id

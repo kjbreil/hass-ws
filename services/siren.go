@@ -1,6 +1,9 @@
 package services
 
-import "encoding/json"
+import (
+	"encoding/json"
+	"fmt"
+)
 
 ////////////////////////////////////////////////////////////////////////////////
 // Do not modify this file, it is automatically generated
@@ -34,6 +37,9 @@ func (s *SirenToggle) JSON() string {
 	data, _ := json.Marshal(s)
 	return string(data)
 }
+func (s *SirenToggle) Name() string {
+	return fmt.Sprintf("%s.%s", *s.Domain, *s.Service)
+}
 func (s *SirenToggle) SetID(id *int) {
 	s.Id = id
 }
@@ -65,6 +71,9 @@ type SirenTurnOff struct {
 func (s *SirenTurnOff) JSON() string {
 	data, _ := json.Marshal(s)
 	return string(data)
+}
+func (s *SirenTurnOff) Name() string {
+	return fmt.Sprintf("%s.%s", *s.Domain, *s.Service)
 }
 func (s *SirenTurnOff) SetID(id *int) {
 	s.Id = id
@@ -102,6 +111,9 @@ type SirenTurnOnParams struct {
 func (s *SirenTurnOn) JSON() string {
 	data, _ := json.Marshal(s)
 	return string(data)
+}
+func (s *SirenTurnOn) Name() string {
+	return fmt.Sprintf("%s.%s", *s.Domain, *s.Service)
 }
 func (s *SirenTurnOn) SetID(id *int) {
 	s.Id = id

@@ -1,6 +1,9 @@
 package services
 
-import "encoding/json"
+import (
+	"encoding/json"
+	"fmt"
+)
 
 ////////////////////////////////////////////////////////////////////////////////
 // Do not modify this file, it is automatically generated
@@ -38,6 +41,9 @@ func (s *SchedulerAdd) JSON() string {
 	data, _ := json.Marshal(s)
 	return string(data)
 }
+func (s *SchedulerAdd) Name() string {
+	return fmt.Sprintf("%s.%s", *s.Domain, *s.Service)
+}
 func (s *SchedulerAdd) SetID(id *int) {
 	s.Id = id
 }
@@ -72,6 +78,9 @@ type SchedulerCopyParams struct {
 func (s *SchedulerCopy) JSON() string {
 	data, _ := json.Marshal(s)
 	return string(data)
+}
+func (s *SchedulerCopy) Name() string {
+	return fmt.Sprintf("%s.%s", *s.Domain, *s.Service)
 }
 func (s *SchedulerCopy) SetID(id *int) {
 	s.Id = id
@@ -109,6 +118,9 @@ func (s *SchedulerEdit) JSON() string {
 	data, _ := json.Marshal(s)
 	return string(data)
 }
+func (s *SchedulerEdit) Name() string {
+	return fmt.Sprintf("%s.%s", *s.Domain, *s.Service)
+}
 func (s *SchedulerEdit) SetID(id *int) {
 	s.Id = id
 }
@@ -141,6 +153,9 @@ func (s *SchedulerRemove) JSON() string {
 	data, _ := json.Marshal(s)
 	return string(data)
 }
+func (s *SchedulerRemove) Name() string {
+	return fmt.Sprintf("%s.%s", *s.Domain, *s.Service)
+}
 func (s *SchedulerRemove) SetID(id *int) {
 	s.Id = id
 }
@@ -172,6 +187,9 @@ type SchedulerRunAction struct {
 func (s *SchedulerRunAction) JSON() string {
 	data, _ := json.Marshal(s)
 	return string(data)
+}
+func (s *SchedulerRunAction) Name() string {
+	return fmt.Sprintf("%s.%s", *s.Domain, *s.Service)
 }
 func (s *SchedulerRunAction) SetID(id *int) {
 	s.Id = id

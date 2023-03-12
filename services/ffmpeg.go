@@ -1,6 +1,9 @@
 package services
 
-import "encoding/json"
+import (
+	"encoding/json"
+	"fmt"
+)
 
 ////////////////////////////////////////////////////////////////////////////////
 // Do not modify this file, it is automatically generated
@@ -34,6 +37,9 @@ func (f *FfmpegRestart) JSON() string {
 	data, _ := json.Marshal(f)
 	return string(data)
 }
+func (f *FfmpegRestart) Name() string {
+	return fmt.Sprintf("%s.%s", *f.Domain, *f.Service)
+}
 func (f *FfmpegRestart) SetID(id *int) {
 	f.Id = id
 }
@@ -66,6 +72,9 @@ func (f *FfmpegStart) JSON() string {
 	data, _ := json.Marshal(f)
 	return string(data)
 }
+func (f *FfmpegStart) Name() string {
+	return fmt.Sprintf("%s.%s", *f.Domain, *f.Service)
+}
 func (f *FfmpegStart) SetID(id *int) {
 	f.Id = id
 }
@@ -97,6 +106,9 @@ type FfmpegStop struct {
 func (f *FfmpegStop) JSON() string {
 	data, _ := json.Marshal(f)
 	return string(data)
+}
+func (f *FfmpegStop) Name() string {
+	return fmt.Sprintf("%s.%s", *f.Domain, *f.Service)
 }
 func (f *FfmpegStop) SetID(id *int) {
 	f.Id = id

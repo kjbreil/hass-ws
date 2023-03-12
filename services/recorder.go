@@ -1,6 +1,9 @@
 package services
 
-import "encoding/json"
+import (
+	"encoding/json"
+	"fmt"
+)
 
 ////////////////////////////////////////////////////////////////////////////////
 // Do not modify this file, it is automatically generated
@@ -34,6 +37,9 @@ func (r *RecorderDisable) JSON() string {
 	data, _ := json.Marshal(r)
 	return string(data)
 }
+func (r *RecorderDisable) Name() string {
+	return fmt.Sprintf("%s.%s", *r.Domain, *r.Service)
+}
 func (r *RecorderDisable) SetID(id *int) {
 	r.Id = id
 }
@@ -65,6 +71,9 @@ type RecorderEnable struct {
 func (r *RecorderEnable) JSON() string {
 	data, _ := json.Marshal(r)
 	return string(data)
+}
+func (r *RecorderEnable) Name() string {
+	return fmt.Sprintf("%s.%s", *r.Domain, *r.Service)
 }
 func (r *RecorderEnable) SetID(id *int) {
 	r.Id = id
@@ -101,6 +110,9 @@ func (r *RecorderPurge) JSON() string {
 	data, _ := json.Marshal(r)
 	return string(data)
 }
+func (r *RecorderPurge) Name() string {
+	return fmt.Sprintf("%s.%s", *r.Domain, *r.Service)
+}
 func (r *RecorderPurge) SetID(id *int) {
 	r.Id = id
 }
@@ -132,6 +144,9 @@ type RecorderPurgeEntities struct {
 func (r *RecorderPurgeEntities) JSON() string {
 	data, _ := json.Marshal(r)
 	return string(data)
+}
+func (r *RecorderPurgeEntities) Name() string {
+	return fmt.Sprintf("%s.%s", *r.Domain, *r.Service)
 }
 func (r *RecorderPurgeEntities) SetID(id *int) {
 	r.Id = id

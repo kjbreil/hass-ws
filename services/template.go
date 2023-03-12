@@ -1,6 +1,9 @@
 package services
 
-import "encoding/json"
+import (
+	"encoding/json"
+	"fmt"
+)
 
 ////////////////////////////////////////////////////////////////////////////////
 // Do not modify this file, it is automatically generated
@@ -33,6 +36,9 @@ type TemplateReload struct {
 func (t *TemplateReload) JSON() string {
 	data, _ := json.Marshal(t)
 	return string(data)
+}
+func (t *TemplateReload) Name() string {
+	return fmt.Sprintf("%s.%s", *t.Domain, *t.Service)
 }
 func (t *TemplateReload) SetID(id *int) {
 	t.Id = id

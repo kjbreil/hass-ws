@@ -1,6 +1,9 @@
 package services
 
-import "encoding/json"
+import (
+	"encoding/json"
+	"fmt"
+)
 
 ////////////////////////////////////////////////////////////////////////////////
 // Do not modify this file, it is automatically generated
@@ -38,6 +41,9 @@ func (a *AdguardAddUrl) JSON() string {
 	data, _ := json.Marshal(a)
 	return string(data)
 }
+func (a *AdguardAddUrl) Name() string {
+	return fmt.Sprintf("%s.%s", *a.Domain, *a.Service)
+}
 func (a *AdguardAddUrl) SetID(id *int) {
 	a.Id = id
 }
@@ -72,6 +78,9 @@ type AdguardDisableUrlParams struct {
 func (a *AdguardDisableUrl) JSON() string {
 	data, _ := json.Marshal(a)
 	return string(data)
+}
+func (a *AdguardDisableUrl) Name() string {
+	return fmt.Sprintf("%s.%s", *a.Domain, *a.Service)
 }
 func (a *AdguardDisableUrl) SetID(id *int) {
 	a.Id = id
@@ -108,6 +117,9 @@ func (a *AdguardEnableUrl) JSON() string {
 	data, _ := json.Marshal(a)
 	return string(data)
 }
+func (a *AdguardEnableUrl) Name() string {
+	return fmt.Sprintf("%s.%s", *a.Domain, *a.Service)
+}
 func (a *AdguardEnableUrl) SetID(id *int) {
 	a.Id = id
 }
@@ -139,6 +151,9 @@ type AdguardRefresh struct {
 func (a *AdguardRefresh) JSON() string {
 	data, _ := json.Marshal(a)
 	return string(data)
+}
+func (a *AdguardRefresh) Name() string {
+	return fmt.Sprintf("%s.%s", *a.Domain, *a.Service)
 }
 func (a *AdguardRefresh) SetID(id *int) {
 	a.Id = id
@@ -174,6 +189,9 @@ type AdguardRemoveUrlParams struct {
 func (a *AdguardRemoveUrl) JSON() string {
 	data, _ := json.Marshal(a)
 	return string(data)
+}
+func (a *AdguardRemoveUrl) Name() string {
+	return fmt.Sprintf("%s.%s", *a.Domain, *a.Service)
 }
 func (a *AdguardRemoveUrl) SetID(id *int) {
 	a.Id = id

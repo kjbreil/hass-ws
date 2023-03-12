@@ -1,6 +1,9 @@
 package services
 
-import "encoding/json"
+import (
+	"encoding/json"
+	"fmt"
+)
 
 ////////////////////////////////////////////////////////////////////////////////
 // Do not modify this file, it is automatically generated
@@ -34,6 +37,9 @@ func (s *ShellCommandShutdownTyr) JSON() string {
 	data, _ := json.Marshal(s)
 	return string(data)
 }
+func (s *ShellCommandShutdownTyr) Name() string {
+	return fmt.Sprintf("%s.%s", *s.Domain, *s.Service)
+}
 func (s *ShellCommandShutdownTyr) SetID(id *int) {
 	s.Id = id
 }
@@ -66,6 +72,9 @@ func (s *ShellCommandStartNcbp) JSON() string {
 	data, _ := json.Marshal(s)
 	return string(data)
 }
+func (s *ShellCommandStartNcbp) Name() string {
+	return fmt.Sprintf("%s.%s", *s.Domain, *s.Service)
+}
 func (s *ShellCommandStartNcbp) SetID(id *int) {
 	s.Id = id
 }
@@ -97,6 +106,9 @@ type ShellCommandStopNcbp struct {
 func (s *ShellCommandStopNcbp) JSON() string {
 	data, _ := json.Marshal(s)
 	return string(data)
+}
+func (s *ShellCommandStopNcbp) Name() string {
+	return fmt.Sprintf("%s.%s", *s.Domain, *s.Service)
 }
 func (s *ShellCommandStopNcbp) SetID(id *int) {
 	s.Id = id

@@ -103,7 +103,11 @@ func (c *Client) CallService(service services.Service) {
 		return
 	}
 	go func() {
-		<-callback
+		message := <-callback
+		if message.Error != nil {
+			ERROR.Printf("service %s error code: %s message: %s", service.Name(), message.Error.Code, message.Error.Message)
+		}
+		//INFO.Printf("callback message received: %v", message)
 		close(callback)
 	}()
 	return

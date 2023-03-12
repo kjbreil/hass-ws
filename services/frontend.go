@@ -1,6 +1,9 @@
 package services
 
-import "encoding/json"
+import (
+	"encoding/json"
+	"fmt"
+)
 
 ////////////////////////////////////////////////////////////////////////////////
 // Do not modify this file, it is automatically generated
@@ -33,6 +36,9 @@ type FrontendReloadThemes struct {
 func (f *FrontendReloadThemes) JSON() string {
 	data, _ := json.Marshal(f)
 	return string(data)
+}
+func (f *FrontendReloadThemes) Name() string {
+	return fmt.Sprintf("%s.%s", *f.Domain, *f.Service)
 }
 func (f *FrontendReloadThemes) SetID(id *int) {
 	f.Id = id
@@ -68,6 +74,9 @@ type FrontendSetThemeParams struct {
 func (f *FrontendSetTheme) JSON() string {
 	data, _ := json.Marshal(f)
 	return string(data)
+}
+func (f *FrontendSetTheme) Name() string {
+	return fmt.Sprintf("%s.%s", *f.Domain, *f.Service)
 }
 func (f *FrontendSetTheme) SetID(id *int) {
 	f.Id = id

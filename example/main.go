@@ -22,7 +22,7 @@ func main() {
 	c, _ := hass_ws.NewClient(&hass_ws.Config{
 		Host:  "192.168.1.12",
 		Port:  8123,
-		Token: "",
+		Token: "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiIzODE5ZTQ4ZTE0NDE0ZTMwOGFiZWM1ZjFmOWYwMmJlYSIsImlhdCI6MTY3NzYyODA0OSwiZXhwIjoxOTkyOTg4MDQ5fQ.bdv3h4F_d0NeUH-nW6ajUeKSRUH5C_sePUbpfzP1NCE",
 	})
 
 	// Subscribe to all events
@@ -50,31 +50,34 @@ func main() {
 	c.OnUnhandled = func(message model.Message) {
 		// some processing code
 	}
+	c.InitStates = true
 
 	err := c.Connect()
 	if err != nil {
 		log.Panicln(err)
 	}
+	//
+	//// Call a service
+	//high := 78.0
+	//low := 60.0
+	//mode := services.HvacModeheat_cool
+	//c.CallService(services.NewClimateSetTemperature(services.Targets("climate.kitchen"), &services.ClimateSetTemperatureParams{
+	//	HvacMode:       &mode,
+	//	TargetTempHigh: &high,
+	//	TargetTempLow:  &low,
+	//	Temperature:    nil,
+	//}))
+	//
+	//// Get all states, they ar ether run through the OnType and OnEntity handlers but not OnMessage or OnUnhandled
+	//c.GetStates()
 
-	// Call a service
-	high := 78.0
-	low := 60.0
-	mode := services.HvacModeheat_cool
-	c.CallService(services.NewClimateSetTemperature(services.Targets("climate.kitchen"), &services.ClimateSetTemperatureParams{
-		HvacMode:       &mode,
-		TargetTempHigh: &high,
-		TargetTempLow:  &low,
-		Temperature:    nil,
-	}))
+	//// Get all the services, in ServiceResults its a map[string]interface{} and not easy to work with
+	//ss := c.GetServices()
+	//for sn := range ss.ServiceResult {
+	//	fmt.Printf("Service %s returned\n", sn)
+	//}
 
-	// Get all states, they ar ethen run through the OnType and OnEntity handlers but not OnMessage or OnUnhandled
-	c.GetStates()
-
-	// Get all the services, in ServiceResults its a map[string]interface{} and not easy to work with
-	ss := c.GetServices()
-	for sn := range ss.ServiceResult {
-		fmt.Printf("Service %s returned\n", sn)
-	}
+	hass_ws.ERROR = log.New(os.Stderr, "ERROR: ", 0)
 
 	for {
 		select {

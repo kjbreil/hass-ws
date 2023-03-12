@@ -1,6 +1,9 @@
 package services
 
-import "encoding/json"
+import (
+	"encoding/json"
+	"fmt"
+)
 
 ////////////////////////////////////////////////////////////////////////////////
 // Do not modify this file, it is automatically generated
@@ -33,6 +36,9 @@ type MinMaxReload struct {
 func (m *MinMaxReload) JSON() string {
 	data, _ := json.Marshal(m)
 	return string(data)
+}
+func (m *MinMaxReload) Name() string {
+	return fmt.Sprintf("%s.%s", *m.Domain, *m.Service)
 }
 func (m *MinMaxReload) SetID(id *int) {
 	m.Id = id

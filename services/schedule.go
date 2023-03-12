@@ -1,6 +1,9 @@
 package services
 
-import "encoding/json"
+import (
+	"encoding/json"
+	"fmt"
+)
 
 ////////////////////////////////////////////////////////////////////////////////
 // Do not modify this file, it is automatically generated
@@ -33,6 +36,9 @@ type ScheduleReload struct {
 func (s *ScheduleReload) JSON() string {
 	data, _ := json.Marshal(s)
 	return string(data)
+}
+func (s *ScheduleReload) Name() string {
+	return fmt.Sprintf("%s.%s", *s.Domain, *s.Service)
 }
 func (s *ScheduleReload) SetID(id *int) {
 	s.Id = id

@@ -1,6 +1,9 @@
 package services
 
-import "encoding/json"
+import (
+	"encoding/json"
+	"fmt"
+)
 
 ////////////////////////////////////////////////////////////////////////////////
 // Do not modify this file, it is automatically generated
@@ -33,6 +36,9 @@ type ZoneReload struct {
 func (z *ZoneReload) JSON() string {
 	data, _ := json.Marshal(z)
 	return string(data)
+}
+func (z *ZoneReload) Name() string {
+	return fmt.Sprintf("%s.%s", *z.Domain, *z.Service)
 }
 func (z *ZoneReload) SetID(id *int) {
 	z.Id = id

@@ -1,6 +1,9 @@
 package services
 
-import "encoding/json"
+import (
+	"encoding/json"
+	"fmt"
+)
 
 ////////////////////////////////////////////////////////////////////////////////
 // Do not modify this file, it is automatically generated
@@ -34,6 +37,9 @@ func (i *InputButtonPress) JSON() string {
 	data, _ := json.Marshal(i)
 	return string(data)
 }
+func (i *InputButtonPress) Name() string {
+	return fmt.Sprintf("%s.%s", *i.Domain, *i.Service)
+}
 func (i *InputButtonPress) SetID(id *int) {
 	i.Id = id
 }
@@ -65,6 +71,9 @@ type InputButtonReload struct {
 func (i *InputButtonReload) JSON() string {
 	data, _ := json.Marshal(i)
 	return string(data)
+}
+func (i *InputButtonReload) Name() string {
+	return fmt.Sprintf("%s.%s", *i.Domain, *i.Service)
 }
 func (i *InputButtonReload) SetID(id *int) {
 	i.Id = id

@@ -1,6 +1,9 @@
 package services
 
-import "encoding/json"
+import (
+	"encoding/json"
+	"fmt"
+)
 
 ////////////////////////////////////////////////////////////////////////////////
 // Do not modify this file, it is automatically generated
@@ -33,6 +36,9 @@ type TtsClearCache struct {
 func (t *TtsClearCache) JSON() string {
 	data, _ := json.Marshal(t)
 	return string(data)
+}
+func (t *TtsClearCache) Name() string {
+	return fmt.Sprintf("%s.%s", *t.Domain, *t.Service)
 }
 func (t *TtsClearCache) SetID(id *int) {
 	t.Id = id
@@ -70,6 +76,9 @@ func (t *TtsCloudSay) JSON() string {
 	data, _ := json.Marshal(t)
 	return string(data)
 }
+func (t *TtsCloudSay) Name() string {
+	return fmt.Sprintf("%s.%s", *t.Domain, *t.Service)
+}
 func (t *TtsCloudSay) SetID(id *int) {
 	t.Id = id
 }
@@ -105,6 +114,9 @@ type TtsGoogleTranslateSayParams struct {
 func (t *TtsGoogleTranslateSay) JSON() string {
 	data, _ := json.Marshal(t)
 	return string(data)
+}
+func (t *TtsGoogleTranslateSay) Name() string {
+	return fmt.Sprintf("%s.%s", *t.Domain, *t.Service)
 }
 func (t *TtsGoogleTranslateSay) SetID(id *int) {
 	t.Id = id

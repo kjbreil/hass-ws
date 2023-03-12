@@ -1,6 +1,9 @@
 package services
 
-import "encoding/json"
+import (
+	"encoding/json"
+	"fmt"
+)
 
 ////////////////////////////////////////////////////////////////////////////////
 // Do not modify this file, it is automatically generated
@@ -39,6 +42,9 @@ func (h *HueActivateScene) JSON() string {
 	data, _ := json.Marshal(h)
 	return string(data)
 }
+func (h *HueActivateScene) Name() string {
+	return fmt.Sprintf("%s.%s", *h.Domain, *h.Service)
+}
 func (h *HueActivateScene) SetID(id *int) {
 	h.Id = id
 }
@@ -74,6 +80,9 @@ type HueHueActivateSceneParams struct {
 func (h *HueHueActivateScene) JSON() string {
 	data, _ := json.Marshal(h)
 	return string(data)
+}
+func (h *HueHueActivateScene) Name() string {
+	return fmt.Sprintf("%s.%s", *h.Domain, *h.Service)
 }
 func (h *HueHueActivateScene) SetID(id *int) {
 	h.Id = id

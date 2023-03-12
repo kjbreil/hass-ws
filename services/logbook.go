@@ -1,6 +1,9 @@
 package services
 
-import "encoding/json"
+import (
+	"encoding/json"
+	"fmt"
+)
 
 ////////////////////////////////////////////////////////////////////////////////
 // Do not modify this file, it is automatically generated
@@ -38,6 +41,9 @@ type LogbookLogParams struct {
 func (l *LogbookLog) JSON() string {
 	data, _ := json.Marshal(l)
 	return string(data)
+}
+func (l *LogbookLog) Name() string {
+	return fmt.Sprintf("%s.%s", *l.Domain, *l.Service)
 }
 func (l *LogbookLog) SetID(id *int) {
 	l.Id = id

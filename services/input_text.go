@@ -1,6 +1,9 @@
 package services
 
-import "encoding/json"
+import (
+	"encoding/json"
+	"fmt"
+)
 
 ////////////////////////////////////////////////////////////////////////////////
 // Do not modify this file, it is automatically generated
@@ -33,6 +36,9 @@ type InputTextReload struct {
 func (i *InputTextReload) JSON() string {
 	data, _ := json.Marshal(i)
 	return string(data)
+}
+func (i *InputTextReload) Name() string {
+	return fmt.Sprintf("%s.%s", *i.Domain, *i.Service)
 }
 func (i *InputTextReload) SetID(id *int) {
 	i.Id = id
@@ -68,6 +74,9 @@ type InputTextSetValueParams struct {
 func (i *InputTextSetValue) JSON() string {
 	data, _ := json.Marshal(i)
 	return string(data)
+}
+func (i *InputTextSetValue) Name() string {
+	return fmt.Sprintf("%s.%s", *i.Domain, *i.Service)
 }
 func (i *InputTextSetValue) SetID(id *int) {
 	i.Id = id

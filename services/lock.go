@@ -1,6 +1,9 @@
 package services
 
-import "encoding/json"
+import (
+	"encoding/json"
+	"fmt"
+)
 
 ////////////////////////////////////////////////////////////////////////////////
 // Do not modify this file, it is automatically generated
@@ -37,6 +40,9 @@ func (l *LockLock) JSON() string {
 	data, _ := json.Marshal(l)
 	return string(data)
 }
+func (l *LockLock) Name() string {
+	return fmt.Sprintf("%s.%s", *l.Domain, *l.Service)
+}
 func (l *LockLock) SetID(id *int) {
 	l.Id = id
 }
@@ -72,6 +78,9 @@ func (l *LockOpen) JSON() string {
 	data, _ := json.Marshal(l)
 	return string(data)
 }
+func (l *LockOpen) Name() string {
+	return fmt.Sprintf("%s.%s", *l.Domain, *l.Service)
+}
 func (l *LockOpen) SetID(id *int) {
 	l.Id = id
 }
@@ -106,6 +115,9 @@ type LockUnlockParams struct {
 func (l *LockUnlock) JSON() string {
 	data, _ := json.Marshal(l)
 	return string(data)
+}
+func (l *LockUnlock) Name() string {
+	return fmt.Sprintf("%s.%s", *l.Domain, *l.Service)
 }
 func (l *LockUnlock) SetID(id *int) {
 	l.Id = id

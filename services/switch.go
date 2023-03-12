@@ -1,6 +1,9 @@
 package services
 
-import "encoding/json"
+import (
+	"encoding/json"
+	"fmt"
+)
 
 ////////////////////////////////////////////////////////////////////////////////
 // Do not modify this file, it is automatically generated
@@ -34,6 +37,9 @@ func (s *SwitchToggle) JSON() string {
 	data, _ := json.Marshal(s)
 	return string(data)
 }
+func (s *SwitchToggle) Name() string {
+	return fmt.Sprintf("%s.%s", *s.Domain, *s.Service)
+}
 func (s *SwitchToggle) SetID(id *int) {
 	s.Id = id
 }
@@ -66,6 +72,9 @@ func (s *SwitchTurnOff) JSON() string {
 	data, _ := json.Marshal(s)
 	return string(data)
 }
+func (s *SwitchTurnOff) Name() string {
+	return fmt.Sprintf("%s.%s", *s.Domain, *s.Service)
+}
 func (s *SwitchTurnOff) SetID(id *int) {
 	s.Id = id
 }
@@ -97,6 +106,9 @@ type SwitchTurnOn struct {
 func (s *SwitchTurnOn) JSON() string {
 	data, _ := json.Marshal(s)
 	return string(data)
+}
+func (s *SwitchTurnOn) Name() string {
+	return fmt.Sprintf("%s.%s", *s.Domain, *s.Service)
 }
 func (s *SwitchTurnOn) SetID(id *int) {
 	s.Id = id

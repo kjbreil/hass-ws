@@ -1,6 +1,9 @@
 package services
 
-import "encoding/json"
+import (
+	"encoding/json"
+	"fmt"
+)
 
 ////////////////////////////////////////////////////////////////////////////////
 // Do not modify this file, it is automatically generated
@@ -33,6 +36,9 @@ type ButtonPress struct {
 func (b *ButtonPress) JSON() string {
 	data, _ := json.Marshal(b)
 	return string(data)
+}
+func (b *ButtonPress) Name() string {
+	return fmt.Sprintf("%s.%s", *b.Domain, *b.Service)
 }
 func (b *ButtonPress) SetID(id *int) {
 	b.Id = id
