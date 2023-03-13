@@ -3,6 +3,7 @@ package hass_ws
 import (
 	"context"
 	"errors"
+	"fmt"
 	"github.com/kjbreil/hass-ws/model"
 	"nhooyr.io/websocket"
 	"time"
@@ -17,7 +18,7 @@ func (c *Client) run() {
 			}
 			message, err := c.read()
 			if err != nil {
-				ERROR.Printf("read error: %v", err)
+				c.logger.Error(fmt.Errorf("read error: %v", err), "message read error")
 				if errors.Is(err, context.Canceled) {
 					return
 				}
@@ -64,13 +65,13 @@ func (c *Client) run() {
 					Type: model.MessageTypePing,
 				}, callback)
 				if err != nil {
-					ERROR.Printf("ping send error: %v", err)
+					c.logger.Error(fmt.Errorf("ping send error: %v", err), "ping could not be sent")
 					err = c.reconnect()
 					if err != nil {
-						ERROR.Printf("reconnect failed: %v", err)
+						c.logger.Error(fmt.Errorf("reconnect failed: %v", err), "reconnect failed")
 						err = c.Close()
 						if err != nil {
-							ERROR.Printf("close error: %v", err)
+							c.logger.Error(fmt.Errorf("close error: %v", err), "context close error")
 						}
 						panic(errors.New("connection lost and cannot be reconnected"))
 					}
@@ -82,14 +83,15 @@ func (c *Client) run() {
 					select {
 					case <-callback:
 					case <-restartTicker.C:
-						ERROR.Println("pong not received attempting reconnect")
+						c.logger.Error(fmt.Errorf("read error: %v", err), "message read error")
+						c.logger.Error(fmt.Errorf("pong not received attempting reconnect"), "ping could not be sent")
 
 						err := c.reconnect()
 						if err != nil {
-							ERROR.Printf("reconnect failed: %v", err)
+							c.logger.Error(fmt.Errorf("reconnect failed: %v", err), "reconnect failed")
 							err = c.Close()
 							if err != nil {
-								ERROR.Printf("close error: %v", err)
+								c.logger.Error(fmt.Errorf("close error: %v", err), "context close error")
 							}
 							panic(errors.New("connection lost and cannot be reconnected"))
 						}

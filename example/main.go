@@ -77,8 +77,6 @@ func main() {
 	//	fmt.Printf("Service %s returned\n", sn)
 	//}
 
-	hass_ws.ERROR = log.New(os.Stderr, "ERROR: ", 0)
-
 	for {
 		select {
 		case <-interrupt:

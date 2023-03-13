@@ -7,6 +7,7 @@ import (
 	"encoding/json"
 	"errors"
 	"fmt"
+	"github.com/go-logr/logr"
 	"github.com/kjbreil/hass-ws/model"
 	"github.com/kjbreil/hass-ws/services"
 	"nhooyr.io/websocket"
@@ -28,6 +29,8 @@ type Client struct {
 
 	callbacks *callbacks
 
+	logger logr.Logger
+
 	ctx    context.Context
 	cancel context.CancelFunc
 
@@ -46,6 +49,10 @@ func NewClient(c *Config) (*Client, error) {
 		OnEntity:      make(model.OnEntityHandlers),
 	}
 	return client, nil
+}
+
+func (c *Client) Logger(logger logr.Logger) {
+	c.logger = logger
 }
 
 func (c *Client) AddSubscription(eventType model.EventType) {
@@ -99,13 +106,14 @@ func (c *Client) CallService(service services.Service) {
 	callback := make(chan *model.Message)
 	err := c.sendStringWithCallback(service.JSON(), callback)
 	if err != nil {
-		ERROR.Printf("Error sending: %v", err)
+		c.logger.Error(err, "Error sending")
 		return
 	}
 	go func() {
 		message := <-callback
 		if message.Error != nil {
-			ERROR.Printf("service %s error code: %s message: %s", service.Name(), message.Error.Code, message.Error.Message)
+			c.logger.Error(fmt.Errorf("service %s error code: %s message: %s", service.Name(), message.Error.Code, message.Error.Message), "Error sending")
+
 		}
 		//INFO.Printf("callback message received: %v", message)
 		close(callback)

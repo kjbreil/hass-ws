@@ -43,6 +43,10 @@ func (c *Client) Connect() error {
 
 	msg := &model.Message{}
 	msg, err = c.read()
+	if err != nil {
+		c.cancel()
+		return fmt.Errorf("read: %w", err)
+	}
 	if msg.Type != model.MessageTypeAuthRequired {
 		return fmt.Errorf("initial response not AuthRequired: %s", msg.Raw)
 	}
@@ -95,12 +99,12 @@ func (c *Client) reconnect() error {
 	var err error
 	retries := 120
 	for i := 0; i < retries; i++ {
-		ERROR.Printf("attempting to reconnect: %d", i)
+		c.logger.Error(fmt.Errorf("attempting to reconnect: %d", i), "context close error")
 		err = c.Connect()
 		if err == nil {
 			return nil
 		}
-		ERROR.Printf("reconnect failed: %v", err)
+		c.logger.Error(fmt.Errorf("reconnect failed: %v", err), "context close error")
 		time.Sleep(1 * time.Second)
 	}
 	if err != nil {
