@@ -115,7 +115,7 @@ func (c *Client) CallService(service services.Service) {
 			c.logger.Error(fmt.Errorf("service %s error code: %s message: %s", service.Name(), message.Error.Code, message.Error.Message), "Error sending")
 
 		}
-		//INFO.Printf("callback message received: %v", message)
+		//c.logger.Info(fmt.Sprintf("callback message received: %v", message))
 		close(callback)
 	}()
 	return

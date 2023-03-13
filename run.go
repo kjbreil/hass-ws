@@ -83,7 +83,6 @@ func (c *Client) run() {
 					select {
 					case <-callback:
 					case <-restartTicker.C:
-						c.logger.Error(fmt.Errorf("read error: %v", err), "message read error")
 						c.logger.Error(fmt.Errorf("pong not received attempting reconnect"), "ping could not be sent")
 
 						err := c.reconnect()

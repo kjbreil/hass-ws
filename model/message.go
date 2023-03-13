@@ -52,6 +52,16 @@ func (m *Message) State() string {
 	return ""
 }
 
+func (m *Message) OldState() *string {
+	if m.Event != nil &&
+		m.Event.Data != nil &&
+		m.Event.Data.OldState != nil &&
+		m.Event.Data.OldState.State != nil {
+		return m.Event.Data.OldState.State
+	}
+	return nil
+}
+
 func (m *Message) StateFloat() (float64, error) {
 	if m.Event != nil &&
 		m.Event.Data != nil &&
@@ -68,6 +78,15 @@ func (m *Message) Attributes() map[string]interface{} {
 		m.Event.Data.NewState != nil &&
 		m.Event.Data.NewState.Attributes != nil {
 		return m.Event.Data.NewState.Attributes
+	}
+	return nil
+}
+func (m *Message) OldAttributes() map[string]interface{} {
+	if m.Event != nil &&
+		m.Event.Data != nil &&
+		m.Event.Data.OldState != nil &&
+		m.Event.Data.OldState.Attributes != nil {
+		return m.Event.Data.OldState.Attributes
 	}
 	return nil
 }
