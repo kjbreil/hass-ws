@@ -60,7 +60,9 @@ func toInt(d interface{}) int {
 
 func toFloat(d interface{}) float64 {
 	switch d.(type) {
-	default:
+	case float64:
 		return d.(float64)
+	default:
+		return 0.0
 	}
 }
