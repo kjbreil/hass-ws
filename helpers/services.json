@@ -1,91 +1,6 @@
 {
   "id": 2,
   "service_result": {
-    "adguard": {
-      "add_url": {
-        "description": "Add a new filter subscription to AdGuard Home.",
-        "fields": {
-          "name": {
-            "description": "The name of the filter subscription.",
-            "example": "Example",
-            "name": "Name",
-            "required": true,
-            "selector": {
-              "text": null
-            }
-          },
-          "url": {
-            "description": "The filter URL to subscribe to, containing the filter rules.",
-            "example": "https://www.example.com/filter/1.txt",
-            "name": "Url",
-            "required": true,
-            "selector": {
-              "text": null
-            }
-          }
-        },
-        "name": "Add url"
-      },
-      "disable_url": {
-        "description": "Disables a filter subscription in AdGuard Home.",
-        "fields": {
-          "url": {
-            "description": "The filter subscription URL to disable.",
-            "example": "https://www.example.com/filter/1.txt",
-            "name": "Url",
-            "required": true,
-            "selector": {
-              "text": null
-            }
-          }
-        },
-        "name": "Disable url"
-      },
-      "enable_url": {
-        "description": "Enables a filter subscription in AdGuard Home.",
-        "fields": {
-          "url": {
-            "description": "The filter subscription URL to enable.",
-            "example": "https://www.example.com/filter/1.txt",
-            "name": "Url",
-            "required": true,
-            "selector": {
-              "text": null
-            }
-          }
-        },
-        "name": "Enable url"
-      },
-      "refresh": {
-        "description": "Refresh all filter subscriptions in AdGuard Home.",
-        "fields": {
-          "force": {
-            "default": false,
-            "description": "Force update (bypasses AdGuard Home throttling). \"true\" to force, or \"false\" to omit for a regular refresh.",
-            "name": "Force",
-            "selector": {
-              "boolean": null
-            }
-          }
-        },
-        "name": "Refresh"
-      },
-      "remove_url": {
-        "description": "Removes a filter subscription from AdGuard Home.",
-        "fields": {
-          "url": {
-            "description": "The filter subscription URL to remove.",
-            "example": "https://www.example.com/filter/1.txt",
-            "name": "Url",
-            "required": true,
-            "selector": {
-              "text": null
-            }
-          }
-        },
-        "name": "Remove url"
-      }
-    },
     "alarm_control_panel": {
       "alarm_arm_away": {
         "description": "Send the alarm the command for arm away.",
@@ -1267,56 +1182,6 @@
         }
       }
     },
-    "ffmpeg": {
-      "restart": {
-        "description": "Send a restart command to a ffmpeg based sensor.",
-        "fields": {
-          "entity_id": {
-            "description": "Name of entity that will restart. Platform dependent.",
-            "name": "Entity",
-            "selector": {
-              "entity": {
-                "domain": "binary_sensor",
-                "integration": "ffmpeg"
-              }
-            }
-          }
-        },
-        "name": "Restart"
-      },
-      "start": {
-        "description": "Send a start command to a ffmpeg based sensor.",
-        "fields": {
-          "entity_id": {
-            "description": "Name of entity that will start. Platform dependent.",
-            "name": "Entity",
-            "selector": {
-              "entity": {
-                "domain": "binary_sensor",
-                "integration": "ffmpeg"
-              }
-            }
-          }
-        },
-        "name": "Start"
-      },
-      "stop": {
-        "description": "Send a stop command to a ffmpeg based sensor.",
-        "fields": {
-          "entity_id": {
-            "description": "Name of entity that will stop. Platform dependent.",
-            "name": "Entity",
-            "selector": {
-              "entity": {
-                "domain": "binary_sensor",
-                "integration": "ffmpeg"
-              }
-            }
-          }
-        },
-        "name": "Stop"
-      }
-    },
     "frontend": {
       "reload_themes": {
         "description": "Reload themes from YAML configuration.",
@@ -1542,31 +1407,6 @@
         "name": "Update entity",
         "target": {
           "entity": {}
-        }
-      }
-    },
-    "homekit": {
-      "reload": {
-        "description": "Reload homekit and re-process YAML configuration",
-        "fields": {},
-        "name": "Reload"
-      },
-      "reset_accessory": {
-        "description": "Reset a HomeKit accessory",
-        "fields": {},
-        "name": "Reset accessory",
-        "target": {
-          "entity": {}
-        }
-      },
-      "unpair": {
-        "description": "Forcefully remove all pairings from an accessory to allow re-pairing. Use this service if the accessory is no longer responsive, and you want to avoid deleting and re-adding the entry. Room locations, and accessory preferences will be lost.",
-        "fields": {},
-        "name": "Unpair an accessory or bridge",
-        "target": {
-          "device": {
-            "integration": "homekit"
-          }
         }
       }
     },
@@ -3214,13 +3054,6 @@
         "name": "Reload"
       }
     },
-    "molekule": {
-      "update_devices": {
-        "description": "Add new Molekule devices to Home Assistant",
-        "fields": {},
-        "name": "Update devices"
-      }
-    },
     "mqtt": {
       "dump": {
         "description": "Dump messages on a topic selector to the 'mqtt_dump.txt' file in your configuration folder.",
@@ -3310,240 +3143,6 @@
       }
     },
     "notify": {
-      "mobile_app_ask": {
-        "description": "Sends a notification message using the mobile_app_ask integration.",
-        "fields": {
-          "data": {
-            "description": "Extended information for notification. Optional depending on the platform.",
-            "example": "platform specific",
-            "name": "Data",
-            "selector": {
-              "object": null
-            }
-          },
-          "message": {
-            "description": "Message body of the notification.",
-            "example": "The garage door has been open for 10 minutes.",
-            "name": "Message",
-            "required": true,
-            "selector": {
-              "text": null
-            }
-          },
-          "target": {
-            "description": "An array of targets to send the notification to. Optional depending on the platform.",
-            "example": "platform specific",
-            "name": "Target",
-            "selector": {
-              "object": null
-            }
-          },
-          "title": {
-            "description": "Title for your notification.",
-            "example": "Your Garage Door Friend",
-            "name": "Title",
-            "selector": {
-              "text": null
-            }
-          }
-        },
-        "name": "Send a notification via mobile_app_ask"
-      },
-      "mobile_app_franphone": {
-        "description": "Sends a notification message using the mobile_app_franphone integration.",
-        "fields": {
-          "data": {
-            "description": "Extended information for notification. Optional depending on the platform.",
-            "example": "platform specific",
-            "name": "Data",
-            "selector": {
-              "object": null
-            }
-          },
-          "message": {
-            "description": "Message body of the notification.",
-            "example": "The garage door has been open for 10 minutes.",
-            "name": "Message",
-            "required": true,
-            "selector": {
-              "text": null
-            }
-          },
-          "target": {
-            "description": "An array of targets to send the notification to. Optional depending on the platform.",
-            "example": "platform specific",
-            "name": "Target",
-            "selector": {
-              "object": null
-            }
-          },
-          "title": {
-            "description": "Title for your notification.",
-            "example": "Your Garage Door Friend",
-            "name": "Title",
-            "selector": {
-              "text": null
-            }
-          }
-        },
-        "name": "Send a notification via mobile_app_franphone"
-      },
-      "mobile_app_ipad": {
-        "description": "Sends a notification message using the mobile_app_ipad integration.",
-        "fields": {
-          "data": {
-            "description": "Extended information for notification. Optional depending on the platform.",
-            "example": "platform specific",
-            "name": "Data",
-            "selector": {
-              "object": null
-            }
-          },
-          "message": {
-            "description": "Message body of the notification.",
-            "example": "The garage door has been open for 10 minutes.",
-            "name": "Message",
-            "required": true,
-            "selector": {
-              "text": null
-            }
-          },
-          "target": {
-            "description": "An array of targets to send the notification to. Optional depending on the platform.",
-            "example": "platform specific",
-            "name": "Target",
-            "selector": {
-              "object": null
-            }
-          },
-          "title": {
-            "description": "Title for your notification.",
-            "example": "Your Garage Door Friend",
-            "name": "Title",
-            "selector": {
-              "text": null
-            }
-          }
-        },
-        "name": "Send a notification via mobile_app_ipad"
-      },
-      "mobile_app_kioskair": {
-        "description": "Sends a notification message using the mobile_app_kioskair integration.",
-        "fields": {
-          "data": {
-            "description": "Extended information for notification. Optional depending on the platform.",
-            "example": "platform specific",
-            "name": "Data",
-            "selector": {
-              "object": null
-            }
-          },
-          "message": {
-            "description": "Message body of the notification.",
-            "example": "The garage door has been open for 10 minutes.",
-            "name": "Message",
-            "required": true,
-            "selector": {
-              "text": null
-            }
-          },
-          "target": {
-            "description": "An array of targets to send the notification to. Optional depending on the platform.",
-            "example": "platform specific",
-            "name": "Target",
-            "selector": {
-              "object": null
-            }
-          },
-          "title": {
-            "description": "Title for your notification.",
-            "example": "Your Garage Door Friend",
-            "name": "Title",
-            "selector": {
-              "text": null
-            }
-          }
-        },
-        "name": "Send a notification via mobile_app_kioskair"
-      },
-      "mobile_app_loki": {
-        "description": "Sends a notification message using the mobile_app_loki integration.",
-        "fields": {
-          "data": {
-            "description": "Extended information for notification. Optional depending on the platform.",
-            "example": "platform specific",
-            "name": "Data",
-            "selector": {
-              "object": null
-            }
-          },
-          "message": {
-            "description": "Message body of the notification.",
-            "example": "The garage door has been open for 10 minutes.",
-            "name": "Message",
-            "required": true,
-            "selector": {
-              "text": null
-            }
-          },
-          "target": {
-            "description": "An array of targets to send the notification to. Optional depending on the platform.",
-            "example": "platform specific",
-            "name": "Target",
-            "selector": {
-              "object": null
-            }
-          },
-          "title": {
-            "description": "Title for your notification.",
-            "example": "Your Garage Door Friend",
-            "name": "Title",
-            "selector": {
-              "text": null
-            }
-          }
-        },
-        "name": "Send a notification via mobile_app_loki"
-      },
-      "mobile_app_skadi": {
-        "description": "Sends a notification message using the mobile_app_skadi integration.",
-        "fields": {
-          "data": {
-            "description": "Extended information for notification. Optional depending on the platform.",
-            "example": "platform specific",
-            "name": "Data",
-            "selector": {
-              "object": null
-            }
-          },
-          "message": {
-            "description": "Message body of the notification.",
-            "example": "The garage door has been open for 10 minutes.",
-            "name": "Message",
-            "required": true,
-            "selector": {
-              "text": null
-            }
-          },
-          "target": {
-            "description": "An array of targets to send the notification to. Optional depending on the platform.",
-            "example": "platform specific",
-            "name": "Target",
-            "selector": {
-              "object": null
-            }
-          },
-          "title": {
-            "description": "Title for your notification.",
-            "example": "Your Garage Door Friend",
-            "name": "Title",
-            "selector": {
-              "text": null
-            }
-          }
-        },
-        "name": "Send a notification via mobile_app_skadi"
-      },
       "notify": {
         "description": "Sends a notification message using the notify service.",
         "fields": {
@@ -3834,36 +3433,6 @@
         "description": "Reload the person configuration.",
         "fields": {},
         "name": "Reload"
-      }
-    },
-    "plex": {
-      "refresh_library": {
-        "description": "Refresh a Plex library to scan for new and updated media.",
-        "fields": {
-          "library_name": {
-            "description": "Name of the Plex library to refresh.",
-            "example": "TV Shows",
-            "name": "Library name",
-            "required": true,
-            "selector": {
-              "text": null
-            }
-          },
-          "server_name": {
-            "description": "Name of a Plex server if multiple Plex servers configured.",
-            "example": "My Plex Server",
-            "name": "Server name",
-            "selector": {
-              "text": null
-            }
-          }
-        },
-        "name": "Refresh library"
-      },
-      "scan_for_clients": {
-        "description": "Scan for available clients from the Plex server(s), local network, and plex.tv.",
-        "fields": {},
-        "name": "Scan for clients"
       }
     },
     "recorder": {
@@ -5301,13 +4870,6 @@
             "domain": "vacuum"
           }
         }
-      }
-    },
-    "vesync": {
-      "update_devices": {
-        "description": "Add new VeSync devices to Home Assistant",
-        "fields": {},
-        "name": "Update devices"
       }
     },
     "wake_on_lan": {

@@ -4,9 +4,11 @@ import (
 	"context"
 	"errors"
 	"fmt"
+	"github.com/goccy/go-yaml"
 	"github.com/kjbreil/hass-ws/model"
 	"net/url"
 	"nhooyr.io/websocket"
+	"os"
 	"time"
 )
 
@@ -14,6 +16,22 @@ type Config struct {
 	Host  string `json:"host"`
 	Port  int    `json:"port"`
 	Token string `json:"token"`
+}
+
+func ParseConfig(filename string) (*Config, error) {
+	data, err := os.ReadFile(filename)
+	if err != nil {
+		return nil, err
+	}
+	var c struct {
+		Websocket Config
+	}
+	err = yaml.Unmarshal(data, &c)
+	if err != nil {
+		return nil, err
+	}
+
+	return &c.Websocket, nil
 }
 
 func (c *Client) Connect() error {

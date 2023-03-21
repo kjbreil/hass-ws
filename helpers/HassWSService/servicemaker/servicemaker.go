@@ -1,9 +1,10 @@
-package main
+package servicemaker
 
 import (
 	"fmt"
 	"github.com/dave/jennifer/jen"
 	"github.com/iancoleman/strcase"
+	"os"
 	"sort"
 	"strings"
 )
@@ -11,7 +12,16 @@ import (
 func GenServices() error {
 	servicesFolder := "services"
 
-	servicesList := ServicesInit()
+	servicesList := ServicesInit("./helpers/services.json")
+	err := Gen(servicesFolder, servicesList)
+	return err
+}
+
+func Gen(servicesFolder string, servicesList ServiceList) error {
+	err := os.MkdirAll(servicesFolder, os.ModePerm)
+	if err != nil {
+		return err
+	}
 
 	services := make(map[string]*jen.File)
 	fileList := []string{

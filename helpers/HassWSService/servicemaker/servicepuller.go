@@ -1,4 +1,4 @@
-package main
+package servicemaker
 
 import (
 	"fmt"
@@ -32,10 +32,30 @@ type Service struct {
 	description    string
 }
 
-func ServicesInit() ServiceList {
+func ServicesInit(servicesJSON string) ServiceList {
 	var serviceList ServiceList
 
-	serviceList.json, _ = gabs.ParseJSONFile("./helpers/services.json")
+	serviceList.json, _ = gabs.ParseJSONFile(servicesJSON)
+	serviceList.enums = make(map[string]map[string][]string)
+
+	serviceList.setServiceNames()
+
+	for _, name := range serviceList.serviceNames {
+		d := Domain{
+			name:      name,
+			camelName: strcase.ToCamel(name),
+			services:  make(map[string]*Service),
+		}
+		serviceList.setParameters(&d)
+		serviceList.services = append(serviceList.services, d)
+	}
+	return serviceList
+}
+
+func ServicesInitJson(data []byte) ServiceList {
+	var serviceList ServiceList
+
+	serviceList.json, _ = gabs.ParseJSON(data)
 	serviceList.enums = make(map[string]map[string][]string)
 
 	serviceList.setServiceNames()

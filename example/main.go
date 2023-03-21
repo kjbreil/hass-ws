@@ -20,9 +20,9 @@ func main() {
 	interrupt := make(chan os.Signal, 1)
 	signal.Notify(interrupt, os.Interrupt)
 	c, _ := hass_ws.NewClient(&hass_ws.Config{
-		Host:  "192.168.1.2",
+		Host:  "192.168.1.12",
 		Port:  8123,
-		Token: "",
+		Token: "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiIzODE5ZTQ4ZTE0NDE0ZTMwOGFiZWM1ZjFmOWYwMmJlYSIsImlhdCI6MTY3NzYyODA0OSwiZXhwIjoxOTkyOTg4MDQ5fQ.bdv3h4F_d0NeUH-nW6ajUeKSRUH5C_sePUbpfzP1NCE",
 	})
 
 	// Subscribe to all events
@@ -30,9 +30,12 @@ func main() {
 
 	// Setup a handler for sensor updates
 	// use message.FriendlyName() rather than newAttr.FriendlyName and need to check for nil
-	c.OnType.OnSensor = func(message *model.Message, newAttrs, oldAttrs *entities.Sensor) {
+	//c.OnType.OnSensor = func(message *model.Message, newAttrs, oldAttrs *entities.Sensor) {
+	//	fmt.Printf("Sensor: %s - %s - %s\n", message.EntityID(), message.FriendlyName(), message.State())
+	//}
+
+	c.OnType.OnClimate = func(message *model.Message, newAttrs, oldAttrs *entities.Climate) {
 		fmt.Printf("Sensor: %s - %s - %s\n", message.EntityID(), message.FriendlyName(), message.State())
-		c.CallService(services.NewInputBooleanToggle(services.Targets("input_boolean.test_toggle")))
 	}
 
 	// setup handler for single entity updates
