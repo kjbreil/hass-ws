@@ -30,8 +30,8 @@ func fillFields(object interface{}, attributes map[string]interface{}) {
 				st := d.(string)
 				v.Field(i).Set(reflect.ValueOf(&st))
 			case reflect.Slice:
-				ss := toStringSlice(d)
-				v.Field(i).Set(reflect.ValueOf(&ss))
+				//ss := toStringSlice(d)
+				//v.Field(i).Set(reflect.ValueOf(&ss))
 			default:
 				panic(fmt.Errorf("not setup to handle %s in fillFields", ty))
 			}
@@ -44,7 +44,11 @@ func toStringSlice(d interface{}) []string {
 	ds := d.([]interface{})
 	rtn := make([]string, len(ds))
 	for i := range ds {
-		rtn[i] = ds[i].(string)
+		switch ds[i].(type) {
+		case string:
+			rtn[i] = ds[i].(string)
+
+		}
 	}
 	return rtn
 }

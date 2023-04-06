@@ -66,6 +66,7 @@ func (c *Client) run() {
 				}, callback)
 				if err != nil {
 					c.logger.Error(fmt.Errorf("ping send error: %v", err), "ping could not be sent")
+					panic(err)
 					err = c.reconnect()
 					if err != nil {
 						c.logger.Error(fmt.Errorf("reconnect failed: %v", err), "reconnect failed")

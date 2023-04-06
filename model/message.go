@@ -106,15 +106,17 @@ func (m *Message) FriendlyName() string {
 type MessageType string
 
 const (
-	MessageTypeAuthRequired     MessageType = "auth_required"
-	MessageTypeAuth                         = "auth"
-	MessageTypeAuthOK                       = "auth_ok"
-	MessageTypeSubscribeEvents              = "subscribe_events"
-	MessageTypeSubscribeTrigger             = "subscribe_trigger"
-	MessageTypeEvent                        = "event"
-	MessageTypePing                         = "ping"
-	MessageTypeGetStates                    = "get_states"
-	MessageTypeGetServices                  = "get_services"
+	MessageTypeAuthRequired      MessageType = "auth_required"
+	MessageTypeAuth                          = "auth"
+	MessageTypeAuthOK                        = "auth_ok"
+	MessageTypeSubscribeEvents               = "subscribe_events"
+	MessageTypeSubscribeTrigger              = "subscribe_trigger"
+	MessageTypeEvent                         = "event"
+	MessageTypePing                          = "ping"
+	MessageTypeGetStates                     = "get_states"
+	MessageTypeGetServices                   = "get_services"
+	MessageTypeGetEntityRegistry             = "config/entity_registry/list"
+	MessageTypeGetDeviceRegistry             = "config/device_registry/list"
 )
 
 func (mt MessageType) Valid() bool {
@@ -127,7 +129,9 @@ func (mt MessageType) Valid() bool {
 		MessageTypeEvent,
 		MessageTypePing,
 		MessageTypeGetStates,
-		MessageTypeGetServices:
+		MessageTypeGetServices,
+		MessageTypeGetEntityRegistry,
+		MessageTypeGetDeviceRegistry:
 		return true
 	}
 

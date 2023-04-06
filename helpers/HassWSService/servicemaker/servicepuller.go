@@ -85,6 +85,9 @@ func (sl *ServiceList) setParameters(d *Domain) {
 	deviceServices := sl.json.Search("service_result", d.name)
 	// this will range over each service in the json
 	for k, v := range deviceServices.ChildrenMap() {
+		if strings.Contains(k, "-") {
+			continue
+		}
 		s := &Service{
 			name:           k,
 			camelName:      fmt.Sprintf("%s%s", d.camelName, strcase.ToCamel(k)),
@@ -119,6 +122,8 @@ func (sl *ServiceList) setParameters(d *Domain) {
 							enumName := strings.Trim(o.Path("value").String(), "\"")
 							if enumName == "null" {
 								enumName = strings.Trim(o.String(), "\"")
+								enumName = strings.ReplaceAll(enumName, "-", "")
+
 							}
 							sl.enums[strcase.ToCamel(fn)][enumName] = append(sl.enums[strcase.ToCamel(fn)][enumName], fmt.Sprintf("%s: %s", d.name, s.name))
 

@@ -19,8 +19,12 @@ func main() {
 	ss := c.GetServices()
 
 	data, _ := json.Marshal(ss)
+
 	servicesList := servicemaker.ServicesInitJson(data)
 	servicesFolder := "services"
 
-	_ = servicemaker.Gen(servicesFolder, servicesList)
+	err = servicemaker.Gen(servicesFolder, servicesList)
+	if err != nil {
+		panic(err)
+	}
 }

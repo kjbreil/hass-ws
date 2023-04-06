@@ -82,6 +82,41 @@ func (c *Client) GetStates() {
 	return
 }
 
+func (c *Client) GetEntityRegistry() *model.Message {
+	callback := make(chan *model.Message)
+	id, _ := c.sendWithCallback(&model.Message{
+		Type: model.MessageTypeGetEntityRegistry,
+	}, callback)
+	ticker := time.NewTicker(time.Second * 10)
+	select {
+	case <-ticker.C:
+		c.callbacks.Delete(id)
+		close(callback)
+
+		return nil
+	case message := <-callback:
+		close(callback)
+		return message
+	}
+}
+func (c *Client) GetDeviceRegistry() *model.Message {
+	callback := make(chan *model.Message)
+	id, _ := c.sendWithCallback(&model.Message{
+		Type: model.MessageTypeGetDeviceRegistry,
+	}, callback)
+	ticker := time.NewTicker(time.Second * 10)
+	select {
+	case <-ticker.C:
+		c.callbacks.Delete(id)
+		close(callback)
+
+		return nil
+	case message := <-callback:
+		close(callback)
+		return message
+	}
+}
+
 func (c *Client) GetServices() *model.Message {
 	callback := make(chan *model.Message)
 	id, _ := c.sendWithCallback(&model.Message{

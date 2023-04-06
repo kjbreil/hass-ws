@@ -9,7 +9,6 @@ import (
 	hass_ws "github.com/kjbreil/hass-ws"
 	"github.com/kjbreil/hass-ws/entities"
 	"github.com/kjbreil/hass-ws/model"
-	"github.com/kjbreil/hass-ws/services"
 	"log"
 	"os"
 	"os/signal"
@@ -59,26 +58,33 @@ func main() {
 	if err != nil {
 		log.Panicln(err)
 	}
+	//
+	//// Call a service
+	//high := 78.0
+	//low := 60.0
+	//mode := services.HvacModeheat_cool
+	//c.CallService(services.NewClimateSetTemperature(services.Targets("climate.kitchen"), &services.ClimateSetTemperatureParams{
+	//	HvacMode:       &mode,
+	//	TargetTempHigh: &high,
+	//	TargetTempLow:  &low,
+	//	Temperature:    nil,
+	//}))
+	//
+	//// Get all states, they ar ether run through the OnType and OnEntity handlers but not OnMessage or OnUnhandled
+	//c.GetStates()
+	//
+	//// Get all the services, in ServiceResults its a map[string]interface{} and not easy to work with
+	//ss := c.GetServices()
+	//for sn := range ss.ServiceResult {
+	//	fmt.Printf("Service %s returned\n", sn)
+	//}
 
-	// Call a service
-	high := 78.0
-	low := 60.0
-	mode := services.HvacModeheat_cool
-	c.CallService(services.NewClimateSetTemperature(services.Targets("climate.kitchen"), &services.ClimateSetTemperatureParams{
-		HvacMode:       &mode,
-		TargetTempHigh: &high,
-		TargetTempLow:  &low,
-		Temperature:    nil,
-	}))
+	areas := c.GetDeviceRegistry()
 
-	// Get all states, they ar ether run through the OnType and OnEntity handlers but not OnMessage or OnUnhandled
-	c.GetStates()
-
-	// Get all the services, in ServiceResults its a map[string]interface{} and not easy to work with
-	ss := c.GetServices()
-	for sn := range ss.ServiceResult {
-		fmt.Printf("Service %s returned\n", sn)
-	}
+	fmt.Println(areas)
+	//for sn := range areas.ServiceResult {
+	//	fmt.Printf("Service %s returned\n", sn)
+	//}
 
 	for {
 		select {
