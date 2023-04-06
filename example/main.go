@@ -18,11 +18,12 @@ func main() {
 
 	interrupt := make(chan os.Signal, 1)
 	signal.Notify(interrupt, os.Interrupt)
-	c, _ := hass_ws.NewClient(&hass_ws.Config{
-		Host:  "192.168.1.12",
-		Port:  8123,
-		Token: "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiIzODE5ZTQ4ZTE0NDE0ZTMwOGFiZWM1ZjFmOWYwMmJlYSIsImlhdCI6MTY3NzYyODA0OSwiZXhwIjoxOTkyOTg4MDQ5fQ.bdv3h4F_d0NeUH-nW6ajUeKSRUH5C_sePUbpfzP1NCE",
-	})
+
+	cfg, _ := hass_ws.ParseConfig("config.yml")
+
+	c, _ := hass_ws.NewClient(cfg)
+
+	//c.Logger(setupLogging())
 
 	// Subscribe to all events
 	c.AddSubscription(model.EventTypeAll)
@@ -33,13 +34,13 @@ func main() {
 	//	fmt.Printf("Sensor: %s - %s - %s\n", message.EntityID(), message.FriendlyName(), message.State())
 	//}
 
-	c.OnType.OnClimate = func(message *model.Message, newAttrs, oldAttrs *entities.Climate) {
-		fmt.Printf("Sensor: %s - %s - %s\n", message.EntityID(), message.FriendlyName(), message.State())
+	c.OnType.OnLight = func(message *model.Message, newAttrs, oldAttrs *entities.Light) {
+		c.Logger().Info(fmt.Sprintf("Sensor: %s - %s - %s", message.EntityID(), message.FriendlyName(), message.State()))
 	}
 
 	// setup handler for single entity updates
 	c.OnEntity["climate.kitchen"] = func(message *model.Message) {
-		fmt.Printf("Sensor: %s - %s\n", message.FriendlyName(), message.State())
+		c.Logger().Info(fmt.Sprintf("Sensor: %s - %s", message.FriendlyName(), message.State()))
 
 	}
 
@@ -79,9 +80,9 @@ func main() {
 	//	fmt.Printf("Service %s returned\n", sn)
 	//}
 
-	areas := c.GetDeviceRegistry()
+	//areas := c.GetDeviceRegistry()
 
-	fmt.Println(areas)
+	//fmt.Println(areas)
 	//for sn := range areas.ServiceResult {
 	//	fmt.Printf("Service %s returned\n", sn)
 	//}

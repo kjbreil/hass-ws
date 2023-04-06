@@ -8,6 +8,7 @@ import (
 	"errors"
 	"fmt"
 	"github.com/go-logr/logr"
+	"github.com/go-logr/logr/funcr"
 	"github.com/kjbreil/hass-ws/model"
 	"github.com/kjbreil/hass-ws/services"
 	"nhooyr.io/websocket"
@@ -40,19 +41,38 @@ type Client struct {
 }
 
 func NewClient(c *Config) (*Client, error) {
-	client := &Client{
-		config:      *c,
-		OnMessage:   nil,
-		OnUnhandled: nil,
+	return NewClientWithLogger(c, defaultLogger())
+}
 
+func NewClientWithLogger(c *Config, logger logr.Logger) (*Client, error) {
+	// TODO: Validate Config
+	client := &Client{
+		config:        *c,
+		OnMessage:     nil,
+		OnUnhandled:   nil,
+		logger:        logger,
 		subscriptions: make(map[model.EventType]int),
 		OnEntity:      make(model.OnEntityHandlers),
 	}
 	return client, nil
 }
 
-func (c *Client) Logger(logger logr.Logger) {
+func defaultLogger() logr.Logger {
+	log := funcr.New(
+		func(pfx, args string) { fmt.Println(pfx, args) },
+		funcr.Options{
+			LogCaller:    funcr.All,
+			LogTimestamp: true,
+			Verbosity:    1,
+		})
+	return log.WithName("hass-ws")
+}
+
+func (c *Client) SetLogger(logger logr.Logger) {
 	c.logger = logger
+}
+func (c *Client) Logger() *logr.Logger {
+	return &c.logger
 }
 
 func (c *Client) AddSubscription(eventType model.EventType) {
@@ -182,7 +202,7 @@ func (c *Client) read() (*model.Message, error) {
 
 	var msg model.Message
 
-	messageString := string(message)
+	//messageString := string(message)
 
 	err = json.Unmarshal(message, &msg)
 	if err != nil {
@@ -200,14 +220,14 @@ func (c *Client) read() (*model.Message, error) {
 
 			err = json.Unmarshal(message, &msg)
 			if err != nil {
-				fmt.Println(messageString)
+				//fmt.Println(messageString)
 				return nil, err
 			}
 
 			return &msg, nil
 		}
 
-		fmt.Println(messageString)
+		//fmt.Println(messageString)
 		return nil, err
 	}
 	msg.Raw = message
@@ -216,11 +236,11 @@ func (c *Client) read() (*model.Message, error) {
 
 func (c *Client) Close() error {
 	c.running = false
-	// close the context
-	c.cancel()
 	// TODO: Chain errors
 	var err error
 	err = c.client.Close(websocket.StatusNormalClosure, "")
+	// close the context
+	c.cancel()
 	if err != nil {
 		return err
 	}

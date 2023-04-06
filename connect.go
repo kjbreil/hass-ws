@@ -117,13 +117,13 @@ func (c *Client) reconnect() error {
 	var err error
 	retries := 120
 	for i := 0; i < retries; i++ {
-		c.logger.Error(fmt.Errorf("attempting to reconnect: %d", i), "context close error")
+		c.logger.Info(fmt.Sprintf("attempting to reconnect: %d", i))
 		err = c.Connect()
 		if err == nil {
 			return nil
 		}
-		c.logger.Error(fmt.Errorf("reconnect failed: %v", err), "context close error")
-		time.Sleep(1 * time.Second)
+		c.logger.Error(fmt.Errorf("reconnect failed: %v", err), "reconnect failed")
+		time.Sleep(2 * time.Second)
 	}
 	if err != nil {
 		return fmt.Errorf("websocket reconnect failed: %w", err)

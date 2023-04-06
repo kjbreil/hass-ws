@@ -2,8 +2,8 @@ package hass_ws
 
 import (
 	"encoding/json"
+	"fmt"
 	"github.com/kjbreil/hass-ws/model"
-	"log"
 	"nhooyr.io/websocket"
 )
 
@@ -25,7 +25,7 @@ func (c *Client) sendWithCallback(msg *model.Message, callback chan *model.Messa
 		return *msg.ID, err
 	}
 	if !msg.Type.Valid() {
-		log.Panicf("unknown message type: %s\n", msg.Type)
+		c.logger.Error(fmt.Errorf("unknown message type: %s\n", msg.Type), "unknown message")
 	}
 	return *msg.ID, nil
 }
@@ -41,7 +41,7 @@ func (c *Client) send(msg *model.Message) error {
 		return err
 	}
 	if !msg.Type.Valid() {
-		log.Panicf("unknown message type: %s\n", msg.Type)
+		c.logger.Error(fmt.Errorf("unknown message type: %s\n", msg.Type), "unknown message")
 	}
 	return nil
 }

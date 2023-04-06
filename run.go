@@ -5,6 +5,7 @@ import (
 	"errors"
 	"fmt"
 	"github.com/kjbreil/hass-ws/model"
+	"io"
 	"nhooyr.io/websocket"
 	"time"
 )
@@ -19,14 +20,15 @@ func (c *Client) run() {
 			message, err := c.read()
 			if err != nil {
 				c.logger.Error(fmt.Errorf("read error: %v", err), "message read error")
-				if errors.Is(err, context.Canceled) {
+				switch {
+				case errors.Is(err, context.Canceled),
+					websocket.CloseStatus(err) != -1,
+					errors.Is(err, io.EOF),
+					errors.Is(err, io.ErrUnexpectedEOF):
 					return
+				default:
+					continue
 				}
-
-				if status := websocket.CloseStatus(err); status != -1 {
-					return
-				}
-				continue
 			}
 			if c.OnMessage != nil {
 				c.OnMessage(*message)
@@ -66,7 +68,6 @@ func (c *Client) run() {
 				}, callback)
 				if err != nil {
 					c.logger.Error(fmt.Errorf("ping send error: %v", err), "ping could not be sent")
-					panic(err)
 					err = c.reconnect()
 					if err != nil {
 						c.logger.Error(fmt.Errorf("reconnect failed: %v", err), "reconnect failed")
@@ -76,6 +77,7 @@ func (c *Client) run() {
 						}
 						panic(errors.New("connection lost and cannot be reconnected"))
 					}
+					c.logger.Info("reconnect succeeded")
 					return
 				}
 				go func() {
@@ -95,6 +97,8 @@ func (c *Client) run() {
 							}
 							panic(errors.New("connection lost and cannot be reconnected"))
 						}
+						c.logger.Info("reconnect succeeded")
+
 					}
 				}()
 			}
