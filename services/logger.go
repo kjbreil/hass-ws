@@ -11,7 +11,7 @@ import (
 
 // NewLoggerSetDefaultLevel creates the object that can be sent to Home Assistant for domain logger, service set_default_level
 // "Set the default log level for integrations."
-func NewLoggerSetDefaultLevel(target Target, loggerSetDefaultLevelParams *LoggerSetDefaultLevelParams) *LoggerSetDefaultLevel {
+func NewLoggerSetDefaultLevel(target Target) *LoggerSetDefaultLevel {
 	serviceDomain := "logger"
 	serviceType := "call_service"
 	serviceService := "set_default_level"
@@ -23,7 +23,7 @@ func NewLoggerSetDefaultLevel(target Target, loggerSetDefaultLevelParams *Logger
 			Target:  target,
 			Type:    &serviceType,
 		},
-		ServiceData: *loggerSetDefaultLevelParams,
+		ServiceData: LoggerSetDefaultLevelParams{},
 	}
 	return l
 }
@@ -36,6 +36,10 @@ type LoggerSetDefaultLevelParams struct {
 	Level *Level `json:"level,omitempty"`
 }
 
+func (l *LoggerSetDefaultLevel) Level(level Level) *LoggerSetDefaultLevel {
+	l.ServiceData.Level = &level
+	return l
+}
 func (l *LoggerSetDefaultLevel) JSON() string {
 	data, _ := json.Marshal(l)
 	return string(data)

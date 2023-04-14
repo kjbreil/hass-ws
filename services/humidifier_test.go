@@ -14,7 +14,7 @@ func TestHumidifierSetHumidity_JSON(t *testing.T) {
 		fields *HumidifierSetHumidity
 		want   string
 	}{{
-		fields: NewHumidifierSetHumidity(Targets("climate.kitchen"), &HumidifierSetHumidityParams{Humidity: &humidity}),
+		fields: NewHumidifierSetHumidity(Targets("climate.kitchen")).Humidity(humidity),
 		name:   "base",
 		want:   "{\"id\":null,\"type\":\"call_service\",\"domain\":\"humidifier\",\"service\":\"set_humidity\",\"target\":{\"entity_id\":[\"climate.kitchen\"]},\"service_data\":{\"humidity\":1.2}}",
 	}}
@@ -35,7 +35,7 @@ func TestHumidifierSetMode_JSON(t *testing.T) {
 		fields *HumidifierSetMode
 		want   string
 	}{{
-		fields: NewHumidifierSetMode(Targets("climate.kitchen"), &HumidifierSetModeParams{Mode: &mode}),
+		fields: NewHumidifierSetMode(Targets("climate.kitchen")).Mode(mode),
 		name:   "base",
 		want:   "{\"id\":null,\"type\":\"call_service\",\"domain\":\"humidifier\",\"service\":\"set_mode\",\"target\":{\"entity_id\":[\"climate.kitchen\"]},\"service_data\":{\"mode\":\"data\"}}",
 	}}

@@ -11,7 +11,7 @@ import (
 
 // NewUtilityMeterCalibrate creates the object that can be sent to Home Assistant for domain utility_meter, service calibrate
 // "Calibrates a utility meter sensor."
-func NewUtilityMeterCalibrate(target Target, utilityMeterCalibrateParams *UtilityMeterCalibrateParams) *UtilityMeterCalibrate {
+func NewUtilityMeterCalibrate(target Target) *UtilityMeterCalibrate {
 	serviceDomain := "utility_meter"
 	serviceType := "call_service"
 	serviceService := "calibrate"
@@ -23,7 +23,7 @@ func NewUtilityMeterCalibrate(target Target, utilityMeterCalibrateParams *Utilit
 			Target:  target,
 			Type:    &serviceType,
 		},
-		ServiceData: *utilityMeterCalibrateParams,
+		ServiceData: UtilityMeterCalibrateParams{},
 	}
 	return u
 }
@@ -36,6 +36,10 @@ type UtilityMeterCalibrateParams struct {
 	Value *string `json:"value,omitempty"`
 }
 
+func (u *UtilityMeterCalibrate) Value(value string) *UtilityMeterCalibrate {
+	u.ServiceData.Value = &value
+	return u
+}
 func (u *UtilityMeterCalibrate) JSON() string {
 	data, _ := json.Marshal(u)
 	return string(data)

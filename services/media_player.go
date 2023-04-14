@@ -256,7 +256,7 @@ func (m *MediaPlayerMediaPreviousTrack) SetID(id *int) {
 
 // NewMediaPlayerMediaSeek creates the object that can be sent to Home Assistant for domain media_player, service media_seek
 // "Send the media player the command to seek in current playing media."
-func NewMediaPlayerMediaSeek(target Target, mediaPlayerMediaSeekParams *MediaPlayerMediaSeekParams) *MediaPlayerMediaSeek {
+func NewMediaPlayerMediaSeek(target Target) *MediaPlayerMediaSeek {
 	serviceDomain := "media_player"
 	serviceType := "call_service"
 	serviceService := "media_seek"
@@ -268,7 +268,7 @@ func NewMediaPlayerMediaSeek(target Target, mediaPlayerMediaSeekParams *MediaPla
 			Target:  target,
 			Type:    &serviceType,
 		},
-		ServiceData: *mediaPlayerMediaSeekParams,
+		ServiceData: MediaPlayerMediaSeekParams{},
 	}
 	return m
 }
@@ -281,6 +281,10 @@ type MediaPlayerMediaSeekParams struct {
 	SeekPosition *float64 `json:"seek_position,omitempty"`
 }
 
+func (m *MediaPlayerMediaSeek) SeekPosition(seekPosition float64) *MediaPlayerMediaSeek {
+	m.ServiceData.SeekPosition = &seekPosition
+	return m
+}
 func (m *MediaPlayerMediaSeek) JSON() string {
 	data, _ := json.Marshal(m)
 	return string(data)
@@ -329,7 +333,7 @@ func (m *MediaPlayerMediaStop) SetID(id *int) {
 
 // NewMediaPlayerPlayMedia creates the object that can be sent to Home Assistant for domain media_player, service play_media
 // "Send the media player the command for playing media."
-func NewMediaPlayerPlayMedia(target Target, mediaPlayerPlayMediaParams *MediaPlayerPlayMediaParams) *MediaPlayerPlayMedia {
+func NewMediaPlayerPlayMedia(target Target) *MediaPlayerPlayMedia {
 	serviceDomain := "media_player"
 	serviceType := "call_service"
 	serviceService := "play_media"
@@ -341,7 +345,7 @@ func NewMediaPlayerPlayMedia(target Target, mediaPlayerPlayMediaParams *MediaPla
 			Target:  target,
 			Type:    &serviceType,
 		},
-		ServiceData: *mediaPlayerPlayMediaParams,
+		ServiceData: MediaPlayerPlayMediaParams{},
 	}
 	return m
 }
@@ -356,6 +360,18 @@ type MediaPlayerPlayMediaParams struct {
 	MediaContentType *string  `json:"media_content_type,omitempty"`
 }
 
+func (m *MediaPlayerPlayMedia) Enqueue(enqueue Enqueue) *MediaPlayerPlayMedia {
+	m.ServiceData.Enqueue = &enqueue
+	return m
+}
+func (m *MediaPlayerPlayMedia) MediaContentId(mediaContentId string) *MediaPlayerPlayMedia {
+	m.ServiceData.MediaContentId = &mediaContentId
+	return m
+}
+func (m *MediaPlayerPlayMedia) MediaContentType(mediaContentType string) *MediaPlayerPlayMedia {
+	m.ServiceData.MediaContentType = &mediaContentType
+	return m
+}
 func (m *MediaPlayerPlayMedia) JSON() string {
 	data, _ := json.Marshal(m)
 	return string(data)
@@ -369,7 +385,7 @@ func (m *MediaPlayerPlayMedia) SetID(id *int) {
 
 // NewMediaPlayerRepeatSet creates the object that can be sent to Home Assistant for domain media_player, service repeat_set
 // "Set repeat mode"
-func NewMediaPlayerRepeatSet(target Target, mediaPlayerRepeatSetParams *MediaPlayerRepeatSetParams) *MediaPlayerRepeatSet {
+func NewMediaPlayerRepeatSet(target Target) *MediaPlayerRepeatSet {
 	serviceDomain := "media_player"
 	serviceType := "call_service"
 	serviceService := "repeat_set"
@@ -381,7 +397,7 @@ func NewMediaPlayerRepeatSet(target Target, mediaPlayerRepeatSetParams *MediaPla
 			Target:  target,
 			Type:    &serviceType,
 		},
-		ServiceData: *mediaPlayerRepeatSetParams,
+		ServiceData: MediaPlayerRepeatSetParams{},
 	}
 	return m
 }
@@ -394,6 +410,10 @@ type MediaPlayerRepeatSetParams struct {
 	Repeat *Repeat `json:"repeat,omitempty"`
 }
 
+func (m *MediaPlayerRepeatSet) Repeat(repeat Repeat) *MediaPlayerRepeatSet {
+	m.ServiceData.Repeat = &repeat
+	return m
+}
 func (m *MediaPlayerRepeatSet) JSON() string {
 	data, _ := json.Marshal(m)
 	return string(data)
@@ -407,7 +427,7 @@ func (m *MediaPlayerRepeatSet) SetID(id *int) {
 
 // NewMediaPlayerSelectSoundMode creates the object that can be sent to Home Assistant for domain media_player, service select_sound_mode
 // "Send the media player the command to change sound mode."
-func NewMediaPlayerSelectSoundMode(target Target, mediaPlayerSelectSoundModeParams *MediaPlayerSelectSoundModeParams) *MediaPlayerSelectSoundMode {
+func NewMediaPlayerSelectSoundMode(target Target) *MediaPlayerSelectSoundMode {
 	serviceDomain := "media_player"
 	serviceType := "call_service"
 	serviceService := "select_sound_mode"
@@ -419,7 +439,7 @@ func NewMediaPlayerSelectSoundMode(target Target, mediaPlayerSelectSoundModePara
 			Target:  target,
 			Type:    &serviceType,
 		},
-		ServiceData: *mediaPlayerSelectSoundModeParams,
+		ServiceData: MediaPlayerSelectSoundModeParams{},
 	}
 	return m
 }
@@ -432,6 +452,10 @@ type MediaPlayerSelectSoundModeParams struct {
 	SoundMode *string `json:"sound_mode,omitempty"`
 }
 
+func (m *MediaPlayerSelectSoundMode) SoundMode(soundMode string) *MediaPlayerSelectSoundMode {
+	m.ServiceData.SoundMode = &soundMode
+	return m
+}
 func (m *MediaPlayerSelectSoundMode) JSON() string {
 	data, _ := json.Marshal(m)
 	return string(data)
@@ -445,7 +469,7 @@ func (m *MediaPlayerSelectSoundMode) SetID(id *int) {
 
 // NewMediaPlayerSelectSource creates the object that can be sent to Home Assistant for domain media_player, service select_source
 // "Send the media player the command to change input source."
-func NewMediaPlayerSelectSource(target Target, mediaPlayerSelectSourceParams *MediaPlayerSelectSourceParams) *MediaPlayerSelectSource {
+func NewMediaPlayerSelectSource(target Target) *MediaPlayerSelectSource {
 	serviceDomain := "media_player"
 	serviceType := "call_service"
 	serviceService := "select_source"
@@ -457,7 +481,7 @@ func NewMediaPlayerSelectSource(target Target, mediaPlayerSelectSourceParams *Me
 			Target:  target,
 			Type:    &serviceType,
 		},
-		ServiceData: *mediaPlayerSelectSourceParams,
+		ServiceData: MediaPlayerSelectSourceParams{},
 	}
 	return m
 }
@@ -470,6 +494,10 @@ type MediaPlayerSelectSourceParams struct {
 	Source *string `json:"source,omitempty"`
 }
 
+func (m *MediaPlayerSelectSource) Source(source string) *MediaPlayerSelectSource {
+	m.ServiceData.Source = &source
+	return m
+}
 func (m *MediaPlayerSelectSource) JSON() string {
 	data, _ := json.Marshal(m)
 	return string(data)
@@ -728,7 +756,7 @@ func (m *MediaPlayerVolumeMute) SetID(id *int) {
 
 // NewMediaPlayerVolumeSet creates the object that can be sent to Home Assistant for domain media_player, service volume_set
 // "Set a media player's volume level."
-func NewMediaPlayerVolumeSet(target Target, mediaPlayerVolumeSetParams *MediaPlayerVolumeSetParams) *MediaPlayerVolumeSet {
+func NewMediaPlayerVolumeSet(target Target) *MediaPlayerVolumeSet {
 	serviceDomain := "media_player"
 	serviceType := "call_service"
 	serviceService := "volume_set"
@@ -740,7 +768,7 @@ func NewMediaPlayerVolumeSet(target Target, mediaPlayerVolumeSetParams *MediaPla
 			Target:  target,
 			Type:    &serviceType,
 		},
-		ServiceData: *mediaPlayerVolumeSetParams,
+		ServiceData: MediaPlayerVolumeSetParams{},
 	}
 	return m
 }
@@ -753,6 +781,10 @@ type MediaPlayerVolumeSetParams struct {
 	VolumeLevel *float64 `json:"volume_level,omitempty"`
 }
 
+func (m *MediaPlayerVolumeSet) VolumeLevel(volumeLevel float64) *MediaPlayerVolumeSet {
+	m.ServiceData.VolumeLevel = &volumeLevel
+	return m
+}
 func (m *MediaPlayerVolumeSet) JSON() string {
 	data, _ := json.Marshal(m)
 	return string(data)

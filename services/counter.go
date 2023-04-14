@@ -11,7 +11,7 @@ import (
 
 // NewCounterConfigure creates the object that can be sent to Home Assistant for domain counter, service configure
 // "Change counter parameters."
-func NewCounterConfigure(target Target, counterConfigureParams *CounterConfigureParams) *CounterConfigure {
+func NewCounterConfigure(target Target) *CounterConfigure {
 	serviceDomain := "counter"
 	serviceType := "call_service"
 	serviceService := "configure"
@@ -23,7 +23,7 @@ func NewCounterConfigure(target Target, counterConfigureParams *CounterConfigure
 			Target:  target,
 			Type:    &serviceType,
 		},
-		ServiceData: *counterConfigureParams,
+		ServiceData: CounterConfigureParams{},
 	}
 	return c
 }
@@ -40,6 +40,26 @@ type CounterConfigureParams struct {
 	Value   *float64 `json:"value,omitempty"`
 }
 
+func (c *CounterConfigure) Initial(initial float64) *CounterConfigure {
+	c.ServiceData.Initial = &initial
+	return c
+}
+func (c *CounterConfigure) Maximum(maximum float64) *CounterConfigure {
+	c.ServiceData.Maximum = &maximum
+	return c
+}
+func (c *CounterConfigure) Minimum(minimum float64) *CounterConfigure {
+	c.ServiceData.Minimum = &minimum
+	return c
+}
+func (c *CounterConfigure) Step(step float64) *CounterConfigure {
+	c.ServiceData.Step = &step
+	return c
+}
+func (c *CounterConfigure) Value(value float64) *CounterConfigure {
+	c.ServiceData.Value = &value
+	return c
+}
 func (c *CounterConfigure) JSON() string {
 	data, _ := json.Marshal(c)
 	return string(data)

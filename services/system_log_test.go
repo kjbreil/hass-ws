@@ -36,13 +36,9 @@ func TestSystemLogWrite_JSON(t *testing.T) {
 		fields *SystemLogWrite
 		want   string
 	}{{
-		fields: NewSystemLogWrite(Targets("climate.kitchen"), &SystemLogWriteParams{
-			Level:   &level,
-			Logger:  &logger,
-			Message: &message,
-		}),
-		name: "base",
-		want: "{\"id\":null,\"type\":\"call_service\",\"domain\":\"system_log\",\"service\":\"write\",\"target\":{\"entity_id\":[\"climate.kitchen\"]},\"service_data\":{\"level\":\"critical\",\"logger\":\"data\",\"message\":\"data\"}}",
+		fields: NewSystemLogWrite(Targets("climate.kitchen")).Level(level).Logger(logger).Message(message),
+		name:   "base",
+		want:   "{\"id\":null,\"type\":\"call_service\",\"domain\":\"system_log\",\"service\":\"write\",\"target\":{\"entity_id\":[\"climate.kitchen\"]},\"service_data\":{\"level\":\"critical\",\"logger\":\"data\",\"message\":\"data\"}}",
 	}}
 	for _, tt := range tests {
 		t.Run(tt.name, func(t *testing.T) {

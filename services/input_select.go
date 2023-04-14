@@ -151,7 +151,7 @@ func (i *InputSelectSelectNext) SetID(id *int) {
 
 // NewInputSelectSelectOption creates the object that can be sent to Home Assistant for domain input_select, service select_option
 // "Select an option of an input select entity."
-func NewInputSelectSelectOption(target Target, inputSelectSelectOptionParams *InputSelectSelectOptionParams) *InputSelectSelectOption {
+func NewInputSelectSelectOption(target Target) *InputSelectSelectOption {
 	serviceDomain := "input_select"
 	serviceType := "call_service"
 	serviceService := "select_option"
@@ -163,7 +163,7 @@ func NewInputSelectSelectOption(target Target, inputSelectSelectOptionParams *In
 			Target:  target,
 			Type:    &serviceType,
 		},
-		ServiceData: *inputSelectSelectOptionParams,
+		ServiceData: InputSelectSelectOptionParams{},
 	}
 	return i
 }
@@ -176,6 +176,10 @@ type InputSelectSelectOptionParams struct {
 	Option *string `json:"option,omitempty"`
 }
 
+func (i *InputSelectSelectOption) Option(option string) *InputSelectSelectOption {
+	i.ServiceData.Option = &option
+	return i
+}
 func (i *InputSelectSelectOption) JSON() string {
 	data, _ := json.Marshal(i)
 	return string(data)

@@ -7,22 +7,18 @@ import "testing"
 ////////////////////////////////////////////////////////////////////////////////
 
 func TestLogbookLog_JSON(t *testing.T) {
-	domain := "data"
+	logbookLogDomain := "data"
 	message := "data"
-	name := "data"
+	logbookLogName := "data"
 
 	tests := []struct {
 		name   string
 		fields *LogbookLog
 		want   string
 	}{{
-		fields: NewLogbookLog(Targets("climate.kitchen"), &LogbookLogParams{
-			Domain:  &domain,
-			Message: &message,
-			Name:    &name,
-		}),
-		name: "base",
-		want: "{\"id\":null,\"type\":\"call_service\",\"domain\":\"logbook\",\"service\":\"log\",\"target\":{\"entity_id\":[\"climate.kitchen\"]},\"service_data\":{\"domain\":\"data\",\"message\":\"data\",\"name\":\"data\"}}",
+		fields: NewLogbookLog(Targets("climate.kitchen")).LogbookLogDomain(logbookLogDomain).Message(message).LogbookLogName(logbookLogName),
+		name:   "base",
+		want:   "{\"id\":null,\"type\":\"call_service\",\"domain\":\"logbook\",\"service\":\"log\",\"target\":{\"entity_id\":[\"climate.kitchen\"]},\"service_data\":{\"domain\":\"data\",\"message\":\"data\",\"name\":\"data\"}}",
 	}}
 	for _, tt := range tests {
 		t.Run(tt.name, func(t *testing.T) {

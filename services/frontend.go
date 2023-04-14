@@ -46,7 +46,7 @@ func (f *FrontendReloadThemes) SetID(id *int) {
 
 // NewFrontendSetTheme creates the object that can be sent to Home Assistant for domain frontend, service set_theme
 // "Set a theme unless the client selected per-device theme."
-func NewFrontendSetTheme(target Target, frontendSetThemeParams *FrontendSetThemeParams) *FrontendSetTheme {
+func NewFrontendSetTheme(target Target) *FrontendSetTheme {
 	serviceDomain := "frontend"
 	serviceType := "call_service"
 	serviceService := "set_theme"
@@ -58,7 +58,7 @@ func NewFrontendSetTheme(target Target, frontendSetThemeParams *FrontendSetTheme
 			Target:  target,
 			Type:    &serviceType,
 		},
-		ServiceData: *frontendSetThemeParams,
+		ServiceData: FrontendSetThemeParams{},
 	}
 	return f
 }
@@ -71,6 +71,10 @@ type FrontendSetThemeParams struct {
 	Mode *Mode `json:"mode,omitempty"`
 }
 
+func (f *FrontendSetTheme) Mode(mode Mode) *FrontendSetTheme {
+	f.ServiceData.Mode = &mode
+	return f
+}
 func (f *FrontendSetTheme) JSON() string {
 	data, _ := json.Marshal(f)
 	return string(data)

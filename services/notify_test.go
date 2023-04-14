@@ -15,12 +15,9 @@ func TestNotifyNotify_JSON(t *testing.T) {
 		fields *NotifyNotify
 		want   string
 	}{{
-		fields: NewNotifyNotify(Targets("climate.kitchen"), &NotifyNotifyParams{
-			Message: &message,
-			Title:   &title,
-		}),
-		name: "base",
-		want: "{\"id\":null,\"type\":\"call_service\",\"domain\":\"notify\",\"service\":\"notify\",\"target\":{\"entity_id\":[\"climate.kitchen\"]},\"service_data\":{\"message\":\"data\",\"title\":\"data\"}}",
+		fields: NewNotifyNotify(Targets("climate.kitchen")).Message(message).Title(title),
+		name:   "base",
+		want:   "{\"id\":null,\"type\":\"call_service\",\"domain\":\"notify\",\"service\":\"notify\",\"target\":{\"entity_id\":[\"climate.kitchen\"]},\"service_data\":{\"message\":\"data\",\"title\":\"data\"}}",
 	}}
 	for _, tt := range tests {
 		t.Run(tt.name, func(t *testing.T) {
@@ -40,12 +37,9 @@ func TestNotifyPersistentNotification_JSON(t *testing.T) {
 		fields *NotifyPersistentNotification
 		want   string
 	}{{
-		fields: NewNotifyPersistentNotification(Targets("climate.kitchen"), &NotifyPersistentNotificationParams{
-			Message: &message,
-			Title:   &title,
-		}),
-		name: "base",
-		want: "{\"id\":null,\"type\":\"call_service\",\"domain\":\"notify\",\"service\":\"persistent_notification\",\"target\":{\"entity_id\":[\"climate.kitchen\"]},\"service_data\":{\"message\":\"data\",\"title\":\"data\"}}",
+		fields: NewNotifyPersistentNotification(Targets("climate.kitchen")).Message(message).Title(title),
+		name:   "base",
+		want:   "{\"id\":null,\"type\":\"call_service\",\"domain\":\"notify\",\"service\":\"persistent_notification\",\"target\":{\"entity_id\":[\"climate.kitchen\"]},\"service_data\":{\"message\":\"data\",\"title\":\"data\"}}",
 	}}
 	for _, tt := range tests {
 		t.Run(tt.name, func(t *testing.T) {

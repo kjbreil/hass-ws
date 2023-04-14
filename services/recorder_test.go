@@ -54,7 +54,7 @@ func TestRecorderPurge_JSON(t *testing.T) {
 		fields *RecorderPurge
 		want   string
 	}{{
-		fields: NewRecorderPurge(Targets("climate.kitchen"), &RecorderPurgeParams{KeepDays: &keepDays}),
+		fields: NewRecorderPurge(Targets("climate.kitchen")).KeepDays(keepDays),
 		name:   "base",
 		want:   "{\"id\":null,\"type\":\"call_service\",\"domain\":\"recorder\",\"service\":\"purge\",\"target\":{\"entity_id\":[\"climate.kitchen\"]},\"service_data\":{\"keep_days\":1.2}}",
 	}}

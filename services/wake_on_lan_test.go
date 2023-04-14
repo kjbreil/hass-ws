@@ -16,13 +16,9 @@ func TestWakeOnLanSendMagicPacket_JSON(t *testing.T) {
 		fields *WakeOnLanSendMagicPacket
 		want   string
 	}{{
-		fields: NewWakeOnLanSendMagicPacket(Targets("climate.kitchen"), &WakeOnLanSendMagicPacketParams{
-			BroadcastAddress: &broadcastAddress,
-			BroadcastPort:    &broadcastPort,
-			Mac:              &mac,
-		}),
-		name: "base",
-		want: "{\"id\":null,\"type\":\"call_service\",\"domain\":\"wake_on_lan\",\"service\":\"send_magic_packet\",\"target\":{\"entity_id\":[\"climate.kitchen\"]},\"service_data\":{\"broadcast_address\":\"data\",\"broadcast_port\":1.2,\"mac\":\"data\"}}",
+		fields: NewWakeOnLanSendMagicPacket(Targets("climate.kitchen")).BroadcastAddress(broadcastAddress).BroadcastPort(broadcastPort).Mac(mac),
+		name:   "base",
+		want:   "{\"id\":null,\"type\":\"call_service\",\"domain\":\"wake_on_lan\",\"service\":\"send_magic_packet\",\"target\":{\"entity_id\":[\"climate.kitchen\"]},\"service_data\":{\"broadcast_address\":\"data\",\"broadcast_port\":1.2,\"mac\":\"data\"}}",
 	}}
 	for _, tt := range tests {
 		t.Run(tt.name, func(t *testing.T) {

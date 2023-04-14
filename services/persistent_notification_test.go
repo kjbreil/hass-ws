@@ -16,13 +16,9 @@ func TestPersistentNotificationCreate_JSON(t *testing.T) {
 		fields *PersistentNotificationCreate
 		want   string
 	}{{
-		fields: NewPersistentNotificationCreate(Targets("climate.kitchen"), &PersistentNotificationCreateParams{
-			Message:        &message,
-			NotificationId: &notificationId,
-			Title:          &title,
-		}),
-		name: "base",
-		want: "{\"id\":null,\"type\":\"call_service\",\"domain\":\"persistent_notification\",\"service\":\"create\",\"target\":{\"entity_id\":[\"climate.kitchen\"]},\"service_data\":{\"message\":\"data\",\"notification_id\":\"data\",\"title\":\"data\"}}",
+		fields: NewPersistentNotificationCreate(Targets("climate.kitchen")).Message(message).NotificationId(notificationId).Title(title),
+		name:   "base",
+		want:   "{\"id\":null,\"type\":\"call_service\",\"domain\":\"persistent_notification\",\"service\":\"create\",\"target\":{\"entity_id\":[\"climate.kitchen\"]},\"service_data\":{\"message\":\"data\",\"notification_id\":\"data\",\"title\":\"data\"}}",
 	}}
 	for _, tt := range tests {
 		t.Run(tt.name, func(t *testing.T) {
@@ -41,7 +37,7 @@ func TestPersistentNotificationDismiss_JSON(t *testing.T) {
 		fields *PersistentNotificationDismiss
 		want   string
 	}{{
-		fields: NewPersistentNotificationDismiss(Targets("climate.kitchen"), &PersistentNotificationDismissParams{NotificationId: &notificationId}),
+		fields: NewPersistentNotificationDismiss(Targets("climate.kitchen")).NotificationId(notificationId),
 		name:   "base",
 		want:   "{\"id\":null,\"type\":\"call_service\",\"domain\":\"persistent_notification\",\"service\":\"dismiss\",\"target\":{\"entity_id\":[\"climate.kitchen\"]},\"service_data\":{\"notification_id\":\"data\"}}",
 	}}
@@ -62,7 +58,7 @@ func TestPersistentNotificationMarkRead_JSON(t *testing.T) {
 		fields *PersistentNotificationMarkRead
 		want   string
 	}{{
-		fields: NewPersistentNotificationMarkRead(Targets("climate.kitchen"), &PersistentNotificationMarkReadParams{NotificationId: &notificationId}),
+		fields: NewPersistentNotificationMarkRead(Targets("climate.kitchen")).NotificationId(notificationId),
 		name:   "base",
 		want:   "{\"id\":null,\"type\":\"call_service\",\"domain\":\"persistent_notification\",\"service\":\"mark_read\",\"target\":{\"entity_id\":[\"climate.kitchen\"]},\"service_data\":{\"notification_id\":\"data\"}}",
 	}}

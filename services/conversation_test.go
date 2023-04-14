@@ -14,7 +14,7 @@ func TestConversationProcess_JSON(t *testing.T) {
 		fields *ConversationProcess
 		want   string
 	}{{
-		fields: NewConversationProcess(Targets("climate.kitchen"), &ConversationProcessParams{Text: &text}),
+		fields: NewConversationProcess(Targets("climate.kitchen")).Text(text),
 		name:   "base",
 		want:   "{\"id\":null,\"type\":\"call_service\",\"domain\":\"conversation\",\"service\":\"process\",\"target\":{\"entity_id\":[\"climate.kitchen\"]},\"service_data\":{\"text\":\"data\"}}",
 	}}

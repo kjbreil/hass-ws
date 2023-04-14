@@ -151,7 +151,7 @@ func (v *VacuumReturnToBase) SetID(id *int) {
 
 // NewVacuumSendCommand creates the object that can be sent to Home Assistant for domain vacuum, service send_command
 // "Send a raw command to the vacuum cleaner."
-func NewVacuumSendCommand(target Target, vacuumSendCommandParams *VacuumSendCommandParams) *VacuumSendCommand {
+func NewVacuumSendCommand(target Target) *VacuumSendCommand {
 	serviceDomain := "vacuum"
 	serviceType := "call_service"
 	serviceService := "send_command"
@@ -163,7 +163,7 @@ func NewVacuumSendCommand(target Target, vacuumSendCommandParams *VacuumSendComm
 			Target:  target,
 			Type:    &serviceType,
 		},
-		ServiceData: *vacuumSendCommandParams,
+		ServiceData: VacuumSendCommandParams{},
 	}
 	return v
 }
@@ -176,6 +176,10 @@ type VacuumSendCommandParams struct {
 	Command *string `json:"command,omitempty"`
 }
 
+func (v *VacuumSendCommand) Command(command string) *VacuumSendCommand {
+	v.ServiceData.Command = &command
+	return v
+}
 func (v *VacuumSendCommand) JSON() string {
 	data, _ := json.Marshal(v)
 	return string(data)
@@ -189,7 +193,7 @@ func (v *VacuumSendCommand) SetID(id *int) {
 
 // NewVacuumSetFanSpeed creates the object that can be sent to Home Assistant for domain vacuum, service set_fan_speed
 // "Set the fan speed of the vacuum cleaner."
-func NewVacuumSetFanSpeed(target Target, vacuumSetFanSpeedParams *VacuumSetFanSpeedParams) *VacuumSetFanSpeed {
+func NewVacuumSetFanSpeed(target Target) *VacuumSetFanSpeed {
 	serviceDomain := "vacuum"
 	serviceType := "call_service"
 	serviceService := "set_fan_speed"
@@ -201,7 +205,7 @@ func NewVacuumSetFanSpeed(target Target, vacuumSetFanSpeedParams *VacuumSetFanSp
 			Target:  target,
 			Type:    &serviceType,
 		},
-		ServiceData: *vacuumSetFanSpeedParams,
+		ServiceData: VacuumSetFanSpeedParams{},
 	}
 	return v
 }
@@ -214,6 +218,10 @@ type VacuumSetFanSpeedParams struct {
 	FanSpeed *string `json:"fan_speed,omitempty"`
 }
 
+func (v *VacuumSetFanSpeed) FanSpeed(fanSpeed string) *VacuumSetFanSpeed {
+	v.ServiceData.FanSpeed = &fanSpeed
+	return v
+}
 func (v *VacuumSetFanSpeed) JSON() string {
 	data, _ := json.Marshal(v)
 	return string(data)

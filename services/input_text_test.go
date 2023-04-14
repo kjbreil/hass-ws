@@ -34,7 +34,7 @@ func TestInputTextSetValue_JSON(t *testing.T) {
 		fields *InputTextSetValue
 		want   string
 	}{{
-		fields: NewInputTextSetValue(Targets("climate.kitchen"), &InputTextSetValueParams{Value: &value}),
+		fields: NewInputTextSetValue(Targets("climate.kitchen")).Value(value),
 		name:   "base",
 		want:   "{\"id\":null,\"type\":\"call_service\",\"domain\":\"input_text\",\"service\":\"set_value\",\"target\":{\"entity_id\":[\"climate.kitchen\"]},\"service_data\":{\"value\":\"data\"}}",
 	}}

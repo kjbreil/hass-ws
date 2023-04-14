@@ -11,7 +11,7 @@ import (
 
 // NewMqttDump creates the object that can be sent to Home Assistant for domain mqtt, service dump
 // "Dump messages on a topic selector to the 'mqtt_dump.txt' file in your configuration folder."
-func NewMqttDump(target Target, mqttDumpParams *MqttDumpParams) *MqttDump {
+func NewMqttDump(target Target) *MqttDump {
 	serviceDomain := "mqtt"
 	serviceType := "call_service"
 	serviceService := "dump"
@@ -23,7 +23,7 @@ func NewMqttDump(target Target, mqttDumpParams *MqttDumpParams) *MqttDump {
 			Target:  target,
 			Type:    &serviceType,
 		},
-		ServiceData: *mqttDumpParams,
+		ServiceData: MqttDumpParams{},
 	}
 	return m
 }
@@ -37,6 +37,14 @@ type MqttDumpParams struct {
 	Topic    *string  `json:"topic,omitempty"`
 }
 
+func (m *MqttDump) Duration(duration float64) *MqttDump {
+	m.ServiceData.Duration = &duration
+	return m
+}
+func (m *MqttDump) Topic(topic string) *MqttDump {
+	m.ServiceData.Topic = &topic
+	return m
+}
 func (m *MqttDump) JSON() string {
 	data, _ := json.Marshal(m)
 	return string(data)
@@ -50,7 +58,7 @@ func (m *MqttDump) SetID(id *int) {
 
 // NewMqttPublish creates the object that can be sent to Home Assistant for domain mqtt, service publish
 // "Publish a message to an MQTT topic."
-func NewMqttPublish(target Target, mqttPublishParams *MqttPublishParams) *MqttPublish {
+func NewMqttPublish(target Target) *MqttPublish {
 	serviceDomain := "mqtt"
 	serviceType := "call_service"
 	serviceService := "publish"
@@ -62,7 +70,7 @@ func NewMqttPublish(target Target, mqttPublishParams *MqttPublishParams) *MqttPu
 			Target:  target,
 			Type:    &serviceType,
 		},
-		ServiceData: *mqttPublishParams,
+		ServiceData: MqttPublishParams{},
 	}
 	return m
 }
@@ -77,6 +85,18 @@ type MqttPublishParams struct {
 	Topic   *string `json:"topic,omitempty"`
 }
 
+func (m *MqttPublish) Payload(payload string) *MqttPublish {
+	m.ServiceData.Payload = &payload
+	return m
+}
+func (m *MqttPublish) Qos(qos Qos) *MqttPublish {
+	m.ServiceData.Qos = &qos
+	return m
+}
+func (m *MqttPublish) Topic(topic string) *MqttPublish {
+	m.ServiceData.Topic = &topic
+	return m
+}
 func (m *MqttPublish) JSON() string {
 	data, _ := json.Marshal(m)
 	return string(data)

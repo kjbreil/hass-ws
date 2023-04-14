@@ -46,7 +46,7 @@ func (h *HomeassistantCheckConfig) SetID(id *int) {
 
 // NewHomeassistantReloadConfigEntry creates the object that can be sent to Home Assistant for domain homeassistant, service reload_config_entry
 // "Reload a config entry that matches a target."
-func NewHomeassistantReloadConfigEntry(target Target, homeassistantReloadConfigEntryParams *HomeassistantReloadConfigEntryParams) *HomeassistantReloadConfigEntry {
+func NewHomeassistantReloadConfigEntry(target Target) *HomeassistantReloadConfigEntry {
 	serviceDomain := "homeassistant"
 	serviceType := "call_service"
 	serviceService := "reload_config_entry"
@@ -58,7 +58,7 @@ func NewHomeassistantReloadConfigEntry(target Target, homeassistantReloadConfigE
 			Target:  target,
 			Type:    &serviceType,
 		},
-		ServiceData: *homeassistantReloadConfigEntryParams,
+		ServiceData: HomeassistantReloadConfigEntryParams{},
 	}
 	return h
 }
@@ -71,6 +71,10 @@ type HomeassistantReloadConfigEntryParams struct {
 	EntryId *string `json:"entry_id,omitempty"`
 }
 
+func (h *HomeassistantReloadConfigEntry) EntryId(entryId string) *HomeassistantReloadConfigEntry {
+	h.ServiceData.EntryId = &entryId
+	return h
+}
 func (h *HomeassistantReloadConfigEntry) JSON() string {
 	data, _ := json.Marshal(h)
 	return string(data)
@@ -189,7 +193,7 @@ func (h *HomeassistantSavePersistentStates) SetID(id *int) {
 
 // NewHomeassistantSetLocation creates the object that can be sent to Home Assistant for domain homeassistant, service set_location
 // "Update the Home Assistant location."
-func NewHomeassistantSetLocation(target Target, homeassistantSetLocationParams *HomeassistantSetLocationParams) *HomeassistantSetLocation {
+func NewHomeassistantSetLocation(target Target) *HomeassistantSetLocation {
 	serviceDomain := "homeassistant"
 	serviceType := "call_service"
 	serviceService := "set_location"
@@ -201,7 +205,7 @@ func NewHomeassistantSetLocation(target Target, homeassistantSetLocationParams *
 			Target:  target,
 			Type:    &serviceType,
 		},
-		ServiceData: *homeassistantSetLocationParams,
+		ServiceData: HomeassistantSetLocationParams{},
 	}
 	return h
 }
@@ -215,6 +219,14 @@ type HomeassistantSetLocationParams struct {
 	Longitude *string `json:"longitude,omitempty"`
 }
 
+func (h *HomeassistantSetLocation) Latitude(latitude string) *HomeassistantSetLocation {
+	h.ServiceData.Latitude = &latitude
+	return h
+}
+func (h *HomeassistantSetLocation) Longitude(longitude string) *HomeassistantSetLocation {
+	h.ServiceData.Longitude = &longitude
+	return h
+}
 func (h *HomeassistantSetLocation) JSON() string {
 	data, _ := json.Marshal(h)
 	return string(data)

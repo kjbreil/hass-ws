@@ -94,7 +94,7 @@ func TestVacuumSendCommand_JSON(t *testing.T) {
 		fields *VacuumSendCommand
 		want   string
 	}{{
-		fields: NewVacuumSendCommand(Targets("climate.kitchen"), &VacuumSendCommandParams{Command: &command}),
+		fields: NewVacuumSendCommand(Targets("climate.kitchen")).Command(command),
 		name:   "base",
 		want:   "{\"id\":null,\"type\":\"call_service\",\"domain\":\"vacuum\",\"service\":\"send_command\",\"target\":{\"entity_id\":[\"climate.kitchen\"]},\"service_data\":{\"command\":\"data\"}}",
 	}}
@@ -115,7 +115,7 @@ func TestVacuumSetFanSpeed_JSON(t *testing.T) {
 		fields *VacuumSetFanSpeed
 		want   string
 	}{{
-		fields: NewVacuumSetFanSpeed(Targets("climate.kitchen"), &VacuumSetFanSpeedParams{FanSpeed: &fanSpeed}),
+		fields: NewVacuumSetFanSpeed(Targets("climate.kitchen")).FanSpeed(fanSpeed),
 		name:   "base",
 		want:   "{\"id\":null,\"type\":\"call_service\",\"domain\":\"vacuum\",\"service\":\"set_fan_speed\",\"target\":{\"entity_id\":[\"climate.kitchen\"]},\"service_data\":{\"fan_speed\":\"data\"}}",
 	}}

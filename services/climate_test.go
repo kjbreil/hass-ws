@@ -34,7 +34,7 @@ func TestClimateSetFanMode_JSON(t *testing.T) {
 		fields *ClimateSetFanMode
 		want   string
 	}{{
-		fields: NewClimateSetFanMode(Targets("climate.kitchen"), &ClimateSetFanModeParams{FanMode: &fanMode}),
+		fields: NewClimateSetFanMode(Targets("climate.kitchen")).FanMode(fanMode),
 		name:   "base",
 		want:   "{\"id\":null,\"type\":\"call_service\",\"domain\":\"climate\",\"service\":\"set_fan_mode\",\"target\":{\"entity_id\":[\"climate.kitchen\"]},\"service_data\":{\"fan_mode\":\"data\"}}",
 	}}
@@ -55,7 +55,7 @@ func TestClimateSetHumidity_JSON(t *testing.T) {
 		fields *ClimateSetHumidity
 		want   string
 	}{{
-		fields: NewClimateSetHumidity(Targets("climate.kitchen"), &ClimateSetHumidityParams{Humidity: &humidity}),
+		fields: NewClimateSetHumidity(Targets("climate.kitchen")).Humidity(humidity),
 		name:   "base",
 		want:   "{\"id\":null,\"type\":\"call_service\",\"domain\":\"climate\",\"service\":\"set_humidity\",\"target\":{\"entity_id\":[\"climate.kitchen\"]},\"service_data\":{\"humidity\":1.2}}",
 	}}
@@ -76,7 +76,7 @@ func TestClimateSetHvacMode_JSON(t *testing.T) {
 		fields *ClimateSetHvacMode
 		want   string
 	}{{
-		fields: NewClimateSetHvacMode(Targets("climate.kitchen"), &ClimateSetHvacModeParams{HvacMode: &hvacMode}),
+		fields: NewClimateSetHvacMode(Targets("climate.kitchen")).HvacMode(hvacMode),
 		name:   "base",
 		want:   "{\"id\":null,\"type\":\"call_service\",\"domain\":\"climate\",\"service\":\"set_hvac_mode\",\"target\":{\"entity_id\":[\"climate.kitchen\"]},\"service_data\":{\"hvac_mode\":\"auto\"}}",
 	}}
@@ -97,7 +97,7 @@ func TestClimateSetPresetMode_JSON(t *testing.T) {
 		fields *ClimateSetPresetMode
 		want   string
 	}{{
-		fields: NewClimateSetPresetMode(Targets("climate.kitchen"), &ClimateSetPresetModeParams{PresetMode: &presetMode}),
+		fields: NewClimateSetPresetMode(Targets("climate.kitchen")).PresetMode(presetMode),
 		name:   "base",
 		want:   "{\"id\":null,\"type\":\"call_service\",\"domain\":\"climate\",\"service\":\"set_preset_mode\",\"target\":{\"entity_id\":[\"climate.kitchen\"]},\"service_data\":{\"preset_mode\":\"data\"}}",
 	}}
@@ -118,7 +118,7 @@ func TestClimateSetSwingMode_JSON(t *testing.T) {
 		fields *ClimateSetSwingMode
 		want   string
 	}{{
-		fields: NewClimateSetSwingMode(Targets("climate.kitchen"), &ClimateSetSwingModeParams{SwingMode: &swingMode}),
+		fields: NewClimateSetSwingMode(Targets("climate.kitchen")).SwingMode(swingMode),
 		name:   "base",
 		want:   "{\"id\":null,\"type\":\"call_service\",\"domain\":\"climate\",\"service\":\"set_swing_mode\",\"target\":{\"entity_id\":[\"climate.kitchen\"]},\"service_data\":{\"swing_mode\":\"data\"}}",
 	}}
@@ -142,14 +142,9 @@ func TestClimateSetTemperature_JSON(t *testing.T) {
 		fields *ClimateSetTemperature
 		want   string
 	}{{
-		fields: NewClimateSetTemperature(Targets("climate.kitchen"), &ClimateSetTemperatureParams{
-			HvacMode:       &hvacMode,
-			TargetTempHigh: &targetTempHigh,
-			TargetTempLow:  &targetTempLow,
-			Temperature:    &temperature,
-		}),
-		name: "base",
-		want: "{\"id\":null,\"type\":\"call_service\",\"domain\":\"climate\",\"service\":\"set_temperature\",\"target\":{\"entity_id\":[\"climate.kitchen\"]},\"service_data\":{\"hvac_mode\":\"auto\",\"target_temp_high\":1.2,\"target_temp_low\":1.2,\"temperature\":1.2}}",
+		fields: NewClimateSetTemperature(Targets("climate.kitchen")).HvacMode(hvacMode).TargetTempHigh(targetTempHigh).TargetTempLow(targetTempLow).Temperature(temperature),
+		name:   "base",
+		want:   "{\"id\":null,\"type\":\"call_service\",\"domain\":\"climate\",\"service\":\"set_temperature\",\"target\":{\"entity_id\":[\"climate.kitchen\"]},\"service_data\":{\"hvac_mode\":\"auto\",\"target_temp_high\":1.2,\"target_temp_low\":1.2,\"temperature\":1.2}}",
 	}}
 	for _, tt := range tests {
 		t.Run(tt.name, func(t *testing.T) {

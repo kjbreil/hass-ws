@@ -56,13 +56,9 @@ func TestSirenTurnOn_JSON(t *testing.T) {
 		fields *SirenTurnOn
 		want   string
 	}{{
-		fields: NewSirenTurnOn(Targets("climate.kitchen"), &SirenTurnOnParams{
-			Duration:    &duration,
-			Tone:        &tone,
-			VolumeLevel: &volumeLevel,
-		}),
-		name: "base",
-		want: "{\"id\":null,\"type\":\"call_service\",\"domain\":\"siren\",\"service\":\"turn_on\",\"target\":{\"entity_id\":[\"climate.kitchen\"]},\"service_data\":{\"duration\":\"data\",\"tone\":\"data\",\"volume_level\":1.2}}",
+		fields: NewSirenTurnOn(Targets("climate.kitchen")).Duration(duration).Tone(tone).VolumeLevel(volumeLevel),
+		name:   "base",
+		want:   "{\"id\":null,\"type\":\"call_service\",\"domain\":\"siren\",\"service\":\"turn_on\",\"target\":{\"entity_id\":[\"climate.kitchen\"]},\"service_data\":{\"duration\":\"data\",\"tone\":\"data\",\"volume_level\":1.2}}",
 	}}
 	for _, tt := range tests {
 		t.Run(tt.name, func(t *testing.T) {

@@ -154,7 +154,7 @@ func TestMediaPlayerMediaSeek_JSON(t *testing.T) {
 		fields *MediaPlayerMediaSeek
 		want   string
 	}{{
-		fields: NewMediaPlayerMediaSeek(Targets("climate.kitchen"), &MediaPlayerMediaSeekParams{SeekPosition: &seekPosition}),
+		fields: NewMediaPlayerMediaSeek(Targets("climate.kitchen")).SeekPosition(seekPosition),
 		name:   "base",
 		want:   "{\"id\":null,\"type\":\"call_service\",\"domain\":\"media_player\",\"service\":\"media_seek\",\"target\":{\"entity_id\":[\"climate.kitchen\"]},\"service_data\":{\"seek_position\":1.2}}",
 	}}
@@ -197,13 +197,9 @@ func TestMediaPlayerPlayMedia_JSON(t *testing.T) {
 		fields *MediaPlayerPlayMedia
 		want   string
 	}{{
-		fields: NewMediaPlayerPlayMedia(Targets("climate.kitchen"), &MediaPlayerPlayMediaParams{
-			Enqueue:          &enqueue,
-			MediaContentId:   &mediaContentId,
-			MediaContentType: &mediaContentType,
-		}),
-		name: "base",
-		want: "{\"id\":null,\"type\":\"call_service\",\"domain\":\"media_player\",\"service\":\"play_media\",\"target\":{\"entity_id\":[\"climate.kitchen\"]},\"service_data\":{\"enqueue\":\"add\",\"media_content_id\":\"data\",\"media_content_type\":\"data\"}}",
+		fields: NewMediaPlayerPlayMedia(Targets("climate.kitchen")).Enqueue(enqueue).MediaContentId(mediaContentId).MediaContentType(mediaContentType),
+		name:   "base",
+		want:   "{\"id\":null,\"type\":\"call_service\",\"domain\":\"media_player\",\"service\":\"play_media\",\"target\":{\"entity_id\":[\"climate.kitchen\"]},\"service_data\":{\"enqueue\":\"add\",\"media_content_id\":\"data\",\"media_content_type\":\"data\"}}",
 	}}
 	for _, tt := range tests {
 		t.Run(tt.name, func(t *testing.T) {
@@ -222,7 +218,7 @@ func TestMediaPlayerRepeatSet_JSON(t *testing.T) {
 		fields *MediaPlayerRepeatSet
 		want   string
 	}{{
-		fields: NewMediaPlayerRepeatSet(Targets("climate.kitchen"), &MediaPlayerRepeatSetParams{Repeat: &repeat}),
+		fields: NewMediaPlayerRepeatSet(Targets("climate.kitchen")).Repeat(repeat),
 		name:   "base",
 		want:   "{\"id\":null,\"type\":\"call_service\",\"domain\":\"media_player\",\"service\":\"repeat_set\",\"target\":{\"entity_id\":[\"climate.kitchen\"]},\"service_data\":{\"repeat\":\"all\"}}",
 	}}
@@ -243,7 +239,7 @@ func TestMediaPlayerSelectSoundMode_JSON(t *testing.T) {
 		fields *MediaPlayerSelectSoundMode
 		want   string
 	}{{
-		fields: NewMediaPlayerSelectSoundMode(Targets("climate.kitchen"), &MediaPlayerSelectSoundModeParams{SoundMode: &soundMode}),
+		fields: NewMediaPlayerSelectSoundMode(Targets("climate.kitchen")).SoundMode(soundMode),
 		name:   "base",
 		want:   "{\"id\":null,\"type\":\"call_service\",\"domain\":\"media_player\",\"service\":\"select_sound_mode\",\"target\":{\"entity_id\":[\"climate.kitchen\"]},\"service_data\":{\"sound_mode\":\"data\"}}",
 	}}
@@ -264,7 +260,7 @@ func TestMediaPlayerSelectSource_JSON(t *testing.T) {
 		fields *MediaPlayerSelectSource
 		want   string
 	}{{
-		fields: NewMediaPlayerSelectSource(Targets("climate.kitchen"), &MediaPlayerSelectSourceParams{Source: &source}),
+		fields: NewMediaPlayerSelectSource(Targets("climate.kitchen")).Source(source),
 		name:   "base",
 		want:   "{\"id\":null,\"type\":\"call_service\",\"domain\":\"media_player\",\"service\":\"select_source\",\"target\":{\"entity_id\":[\"climate.kitchen\"]},\"service_data\":{\"source\":\"data\"}}",
 	}}
@@ -425,7 +421,7 @@ func TestMediaPlayerVolumeSet_JSON(t *testing.T) {
 		fields *MediaPlayerVolumeSet
 		want   string
 	}{{
-		fields: NewMediaPlayerVolumeSet(Targets("climate.kitchen"), &MediaPlayerVolumeSetParams{VolumeLevel: &volumeLevel}),
+		fields: NewMediaPlayerVolumeSet(Targets("climate.kitchen")).VolumeLevel(volumeLevel),
 		name:   "base",
 		want:   "{\"id\":null,\"type\":\"call_service\",\"domain\":\"media_player\",\"service\":\"volume_set\",\"target\":{\"entity_id\":[\"climate.kitchen\"]},\"service_data\":{\"volume_level\":1.2}}",
 	}}

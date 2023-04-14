@@ -34,7 +34,7 @@ func TestSonosPlayQueue_JSON(t *testing.T) {
 		fields *SonosPlayQueue
 		want   string
 	}{{
-		fields: NewSonosPlayQueue(Targets("climate.kitchen"), &SonosPlayQueueParams{QueuePosition: &queuePosition}),
+		fields: NewSonosPlayQueue(Targets("climate.kitchen")).QueuePosition(queuePosition),
 		name:   "base",
 		want:   "{\"id\":null,\"type\":\"call_service\",\"domain\":\"sonos\",\"service\":\"play_queue\",\"target\":{\"entity_id\":[\"climate.kitchen\"]},\"service_data\":{\"queue_position\":1.2}}",
 	}}
@@ -55,7 +55,7 @@ func TestSonosRemoveFromQueue_JSON(t *testing.T) {
 		fields *SonosRemoveFromQueue
 		want   string
 	}{{
-		fields: NewSonosRemoveFromQueue(Targets("climate.kitchen"), &SonosRemoveFromQueueParams{QueuePosition: &queuePosition}),
+		fields: NewSonosRemoveFromQueue(Targets("climate.kitchen")).QueuePosition(queuePosition),
 		name:   "base",
 		want:   "{\"id\":null,\"type\":\"call_service\",\"domain\":\"sonos\",\"service\":\"remove_from_queue\",\"target\":{\"entity_id\":[\"climate.kitchen\"]},\"service_data\":{\"queue_position\":1.2}}",
 	}}
@@ -96,7 +96,7 @@ func TestSonosSetSleepTimer_JSON(t *testing.T) {
 		fields *SonosSetSleepTimer
 		want   string
 	}{{
-		fields: NewSonosSetSleepTimer(Targets("climate.kitchen"), &SonosSetSleepTimerParams{SleepTime: &sleepTime}),
+		fields: NewSonosSetSleepTimer(Targets("climate.kitchen")).SleepTime(sleepTime),
 		name:   "base",
 		want:   "{\"id\":null,\"type\":\"call_service\",\"domain\":\"sonos\",\"service\":\"set_sleep_timer\",\"target\":{\"entity_id\":[\"climate.kitchen\"]},\"service_data\":{\"sleep_time\":1.2}}",
 	}}
@@ -138,12 +138,9 @@ func TestSonosUpdateAlarm_JSON(t *testing.T) {
 		fields *SonosUpdateAlarm
 		want   string
 	}{{
-		fields: NewSonosUpdateAlarm(Targets("climate.kitchen"), &SonosUpdateAlarmParams{
-			AlarmId: &alarmId,
-			Volume:  &volume,
-		}),
-		name: "base",
-		want: "{\"id\":null,\"type\":\"call_service\",\"domain\":\"sonos\",\"service\":\"update_alarm\",\"target\":{\"entity_id\":[\"climate.kitchen\"]},\"service_data\":{\"alarm_id\":1.2,\"volume\":1.2}}",
+		fields: NewSonosUpdateAlarm(Targets("climate.kitchen")).AlarmId(alarmId).Volume(volume),
+		name:   "base",
+		want:   "{\"id\":null,\"type\":\"call_service\",\"domain\":\"sonos\",\"service\":\"update_alarm\",\"target\":{\"entity_id\":[\"climate.kitchen\"]},\"service_data\":{\"alarm_id\":1.2,\"volume\":1.2}}",
 	}}
 	for _, tt := range tests {
 		t.Run(tt.name, func(t *testing.T) {

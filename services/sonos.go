@@ -46,7 +46,7 @@ func (s *SonosClearSleepTimer) SetID(id *int) {
 
 // NewSonosPlayQueue creates the object that can be sent to Home Assistant for domain sonos, service play_queue
 // "Start playing the queue from the first item."
-func NewSonosPlayQueue(target Target, sonosPlayQueueParams *SonosPlayQueueParams) *SonosPlayQueue {
+func NewSonosPlayQueue(target Target) *SonosPlayQueue {
 	serviceDomain := "sonos"
 	serviceType := "call_service"
 	serviceService := "play_queue"
@@ -58,7 +58,7 @@ func NewSonosPlayQueue(target Target, sonosPlayQueueParams *SonosPlayQueueParams
 			Target:  target,
 			Type:    &serviceType,
 		},
-		ServiceData: *sonosPlayQueueParams,
+		ServiceData: SonosPlayQueueParams{},
 	}
 	return s
 }
@@ -71,6 +71,10 @@ type SonosPlayQueueParams struct {
 	QueuePosition *float64 `json:"queue_position,omitempty"`
 }
 
+func (s *SonosPlayQueue) QueuePosition(queuePosition float64) *SonosPlayQueue {
+	s.ServiceData.QueuePosition = &queuePosition
+	return s
+}
 func (s *SonosPlayQueue) JSON() string {
 	data, _ := json.Marshal(s)
 	return string(data)
@@ -84,7 +88,7 @@ func (s *SonosPlayQueue) SetID(id *int) {
 
 // NewSonosRemoveFromQueue creates the object that can be sent to Home Assistant for domain sonos, service remove_from_queue
 // "Removes an item from the queue."
-func NewSonosRemoveFromQueue(target Target, sonosRemoveFromQueueParams *SonosRemoveFromQueueParams) *SonosRemoveFromQueue {
+func NewSonosRemoveFromQueue(target Target) *SonosRemoveFromQueue {
 	serviceDomain := "sonos"
 	serviceType := "call_service"
 	serviceService := "remove_from_queue"
@@ -96,7 +100,7 @@ func NewSonosRemoveFromQueue(target Target, sonosRemoveFromQueueParams *SonosRem
 			Target:  target,
 			Type:    &serviceType,
 		},
-		ServiceData: *sonosRemoveFromQueueParams,
+		ServiceData: SonosRemoveFromQueueParams{},
 	}
 	return s
 }
@@ -109,6 +113,10 @@ type SonosRemoveFromQueueParams struct {
 	QueuePosition *float64 `json:"queue_position,omitempty"`
 }
 
+func (s *SonosRemoveFromQueue) QueuePosition(queuePosition float64) *SonosRemoveFromQueue {
+	s.ServiceData.QueuePosition = &queuePosition
+	return s
+}
 func (s *SonosRemoveFromQueue) JSON() string {
 	data, _ := json.Marshal(s)
 	return string(data)
@@ -157,7 +165,7 @@ func (s *SonosRestore) SetID(id *int) {
 
 // NewSonosSetSleepTimer creates the object that can be sent to Home Assistant for domain sonos, service set_sleep_timer
 // "Set a Sonos timer."
-func NewSonosSetSleepTimer(target Target, sonosSetSleepTimerParams *SonosSetSleepTimerParams) *SonosSetSleepTimer {
+func NewSonosSetSleepTimer(target Target) *SonosSetSleepTimer {
 	serviceDomain := "sonos"
 	serviceType := "call_service"
 	serviceService := "set_sleep_timer"
@@ -169,7 +177,7 @@ func NewSonosSetSleepTimer(target Target, sonosSetSleepTimerParams *SonosSetSlee
 			Target:  target,
 			Type:    &serviceType,
 		},
-		ServiceData: *sonosSetSleepTimerParams,
+		ServiceData: SonosSetSleepTimerParams{},
 	}
 	return s
 }
@@ -182,6 +190,10 @@ type SonosSetSleepTimerParams struct {
 	SleepTime *float64 `json:"sleep_time,omitempty"`
 }
 
+func (s *SonosSetSleepTimer) SleepTime(sleepTime float64) *SonosSetSleepTimer {
+	s.ServiceData.SleepTime = &sleepTime
+	return s
+}
 func (s *SonosSetSleepTimer) JSON() string {
 	data, _ := json.Marshal(s)
 	return string(data)
@@ -230,7 +242,7 @@ func (s *SonosSnapshot) SetID(id *int) {
 
 // NewSonosUpdateAlarm creates the object that can be sent to Home Assistant for domain sonos, service update_alarm
 // "Updates an alarm with new time and volume settings."
-func NewSonosUpdateAlarm(target Target, sonosUpdateAlarmParams *SonosUpdateAlarmParams) *SonosUpdateAlarm {
+func NewSonosUpdateAlarm(target Target) *SonosUpdateAlarm {
 	serviceDomain := "sonos"
 	serviceType := "call_service"
 	serviceService := "update_alarm"
@@ -242,7 +254,7 @@ func NewSonosUpdateAlarm(target Target, sonosUpdateAlarmParams *SonosUpdateAlarm
 			Target:  target,
 			Type:    &serviceType,
 		},
-		ServiceData: *sonosUpdateAlarmParams,
+		ServiceData: SonosUpdateAlarmParams{},
 	}
 	return s
 }
@@ -256,6 +268,14 @@ type SonosUpdateAlarmParams struct {
 	Volume  *float64 `json:"volume,omitempty"`
 }
 
+func (s *SonosUpdateAlarm) AlarmId(alarmId float64) *SonosUpdateAlarm {
+	s.ServiceData.AlarmId = &alarmId
+	return s
+}
+func (s *SonosUpdateAlarm) Volume(volume float64) *SonosUpdateAlarm {
+	s.ServiceData.Volume = &volume
+	return s
+}
 func (s *SonosUpdateAlarm) JSON() string {
 	data, _ := json.Marshal(s)
 	return string(data)

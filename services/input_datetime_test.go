@@ -36,13 +36,9 @@ func TestInputDatetimeSetDatetime_JSON(t *testing.T) {
 		fields *InputDatetimeSetDatetime
 		want   string
 	}{{
-		fields: NewInputDatetimeSetDatetime(Targets("climate.kitchen"), &InputDatetimeSetDatetimeParams{
-			Date:      &date,
-			Datetime:  &datetime,
-			Timestamp: &timestamp,
-		}),
-		name: "base",
-		want: "{\"id\":null,\"type\":\"call_service\",\"domain\":\"input_datetime\",\"service\":\"set_datetime\",\"target\":{\"entity_id\":[\"climate.kitchen\"]},\"service_data\":{\"date\":\"data\",\"datetime\":\"data\",\"timestamp\":1.2}}",
+		fields: NewInputDatetimeSetDatetime(Targets("climate.kitchen")).Date(date).Datetime(datetime).Timestamp(timestamp),
+		name:   "base",
+		want:   "{\"id\":null,\"type\":\"call_service\",\"domain\":\"input_datetime\",\"service\":\"set_datetime\",\"target\":{\"entity_id\":[\"climate.kitchen\"]},\"service_data\":{\"date\":\"data\",\"datetime\":\"data\",\"timestamp\":1.2}}",
 	}}
 	for _, tt := range tests {
 		t.Run(tt.name, func(t *testing.T) {

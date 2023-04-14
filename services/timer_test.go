@@ -94,7 +94,7 @@ func TestTimerStart_JSON(t *testing.T) {
 		fields *TimerStart
 		want   string
 	}{{
-		fields: NewTimerStart(Targets("climate.kitchen"), &TimerStartParams{Duration: &duration}),
+		fields: NewTimerStart(Targets("climate.kitchen")).Duration(duration),
 		name:   "base",
 		want:   "{\"id\":null,\"type\":\"call_service\",\"domain\":\"timer\",\"service\":\"start\",\"target\":{\"entity_id\":[\"climate.kitchen\"]},\"service_data\":{\"duration\":\"data\"}}",
 	}}

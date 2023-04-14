@@ -151,7 +151,7 @@ func (t *TimerReload) SetID(id *int) {
 
 // NewTimerStart creates the object that can be sent to Home Assistant for domain timer, service start
 // "Start a timer"
-func NewTimerStart(target Target, timerStartParams *TimerStartParams) *TimerStart {
+func NewTimerStart(target Target) *TimerStart {
 	serviceDomain := "timer"
 	serviceType := "call_service"
 	serviceService := "start"
@@ -163,7 +163,7 @@ func NewTimerStart(target Target, timerStartParams *TimerStartParams) *TimerStar
 			Target:  target,
 			Type:    &serviceType,
 		},
-		ServiceData: *timerStartParams,
+		ServiceData: TimerStartParams{},
 	}
 	return t
 }
@@ -176,6 +176,10 @@ type TimerStartParams struct {
 	Duration *string `json:"duration,omitempty"`
 }
 
+func (t *TimerStart) Duration(duration string) *TimerStart {
+	t.ServiceData.Duration = &duration
+	return t
+}
 func (t *TimerStart) JSON() string {
 	data, _ := json.Marshal(t)
 	return string(data)

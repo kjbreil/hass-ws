@@ -46,7 +46,7 @@ func (c *ClimateSetAuxHeat) SetID(id *int) {
 
 // NewClimateSetFanMode creates the object that can be sent to Home Assistant for domain climate, service set_fan_mode
 // "Set fan operation for climate device."
-func NewClimateSetFanMode(target Target, climateSetFanModeParams *ClimateSetFanModeParams) *ClimateSetFanMode {
+func NewClimateSetFanMode(target Target) *ClimateSetFanMode {
 	serviceDomain := "climate"
 	serviceType := "call_service"
 	serviceService := "set_fan_mode"
@@ -58,7 +58,7 @@ func NewClimateSetFanMode(target Target, climateSetFanModeParams *ClimateSetFanM
 			Target:  target,
 			Type:    &serviceType,
 		},
-		ServiceData: *climateSetFanModeParams,
+		ServiceData: ClimateSetFanModeParams{},
 	}
 	return c
 }
@@ -71,6 +71,10 @@ type ClimateSetFanModeParams struct {
 	FanMode *string `json:"fan_mode,omitempty"`
 }
 
+func (c *ClimateSetFanMode) FanMode(fanMode string) *ClimateSetFanMode {
+	c.ServiceData.FanMode = &fanMode
+	return c
+}
 func (c *ClimateSetFanMode) JSON() string {
 	data, _ := json.Marshal(c)
 	return string(data)
@@ -84,7 +88,7 @@ func (c *ClimateSetFanMode) SetID(id *int) {
 
 // NewClimateSetHumidity creates the object that can be sent to Home Assistant for domain climate, service set_humidity
 // "Set target humidity of climate device."
-func NewClimateSetHumidity(target Target, climateSetHumidityParams *ClimateSetHumidityParams) *ClimateSetHumidity {
+func NewClimateSetHumidity(target Target) *ClimateSetHumidity {
 	serviceDomain := "climate"
 	serviceType := "call_service"
 	serviceService := "set_humidity"
@@ -96,7 +100,7 @@ func NewClimateSetHumidity(target Target, climateSetHumidityParams *ClimateSetHu
 			Target:  target,
 			Type:    &serviceType,
 		},
-		ServiceData: *climateSetHumidityParams,
+		ServiceData: ClimateSetHumidityParams{},
 	}
 	return c
 }
@@ -109,6 +113,10 @@ type ClimateSetHumidityParams struct {
 	Humidity *float64 `json:"humidity,omitempty"`
 }
 
+func (c *ClimateSetHumidity) Humidity(humidity float64) *ClimateSetHumidity {
+	c.ServiceData.Humidity = &humidity
+	return c
+}
 func (c *ClimateSetHumidity) JSON() string {
 	data, _ := json.Marshal(c)
 	return string(data)
@@ -122,7 +130,7 @@ func (c *ClimateSetHumidity) SetID(id *int) {
 
 // NewClimateSetHvacMode creates the object that can be sent to Home Assistant for domain climate, service set_hvac_mode
 // "Set HVAC operation mode for climate device."
-func NewClimateSetHvacMode(target Target, climateSetHvacModeParams *ClimateSetHvacModeParams) *ClimateSetHvacMode {
+func NewClimateSetHvacMode(target Target) *ClimateSetHvacMode {
 	serviceDomain := "climate"
 	serviceType := "call_service"
 	serviceService := "set_hvac_mode"
@@ -134,7 +142,7 @@ func NewClimateSetHvacMode(target Target, climateSetHvacModeParams *ClimateSetHv
 			Target:  target,
 			Type:    &serviceType,
 		},
-		ServiceData: *climateSetHvacModeParams,
+		ServiceData: ClimateSetHvacModeParams{},
 	}
 	return c
 }
@@ -147,6 +155,10 @@ type ClimateSetHvacModeParams struct {
 	HvacMode *HvacMode `json:"hvac_mode,omitempty"`
 }
 
+func (c *ClimateSetHvacMode) HvacMode(hvacMode HvacMode) *ClimateSetHvacMode {
+	c.ServiceData.HvacMode = &hvacMode
+	return c
+}
 func (c *ClimateSetHvacMode) JSON() string {
 	data, _ := json.Marshal(c)
 	return string(data)
@@ -160,7 +172,7 @@ func (c *ClimateSetHvacMode) SetID(id *int) {
 
 // NewClimateSetPresetMode creates the object that can be sent to Home Assistant for domain climate, service set_preset_mode
 // "Set preset mode for climate device."
-func NewClimateSetPresetMode(target Target, climateSetPresetModeParams *ClimateSetPresetModeParams) *ClimateSetPresetMode {
+func NewClimateSetPresetMode(target Target) *ClimateSetPresetMode {
 	serviceDomain := "climate"
 	serviceType := "call_service"
 	serviceService := "set_preset_mode"
@@ -172,7 +184,7 @@ func NewClimateSetPresetMode(target Target, climateSetPresetModeParams *ClimateS
 			Target:  target,
 			Type:    &serviceType,
 		},
-		ServiceData: *climateSetPresetModeParams,
+		ServiceData: ClimateSetPresetModeParams{},
 	}
 	return c
 }
@@ -185,6 +197,10 @@ type ClimateSetPresetModeParams struct {
 	PresetMode *string `json:"preset_mode,omitempty"`
 }
 
+func (c *ClimateSetPresetMode) PresetMode(presetMode string) *ClimateSetPresetMode {
+	c.ServiceData.PresetMode = &presetMode
+	return c
+}
 func (c *ClimateSetPresetMode) JSON() string {
 	data, _ := json.Marshal(c)
 	return string(data)
@@ -198,7 +214,7 @@ func (c *ClimateSetPresetMode) SetID(id *int) {
 
 // NewClimateSetSwingMode creates the object that can be sent to Home Assistant for domain climate, service set_swing_mode
 // "Set swing operation for climate device."
-func NewClimateSetSwingMode(target Target, climateSetSwingModeParams *ClimateSetSwingModeParams) *ClimateSetSwingMode {
+func NewClimateSetSwingMode(target Target) *ClimateSetSwingMode {
 	serviceDomain := "climate"
 	serviceType := "call_service"
 	serviceService := "set_swing_mode"
@@ -210,7 +226,7 @@ func NewClimateSetSwingMode(target Target, climateSetSwingModeParams *ClimateSet
 			Target:  target,
 			Type:    &serviceType,
 		},
-		ServiceData: *climateSetSwingModeParams,
+		ServiceData: ClimateSetSwingModeParams{},
 	}
 	return c
 }
@@ -223,6 +239,10 @@ type ClimateSetSwingModeParams struct {
 	SwingMode *string `json:"swing_mode,omitempty"`
 }
 
+func (c *ClimateSetSwingMode) SwingMode(swingMode string) *ClimateSetSwingMode {
+	c.ServiceData.SwingMode = &swingMode
+	return c
+}
 func (c *ClimateSetSwingMode) JSON() string {
 	data, _ := json.Marshal(c)
 	return string(data)
@@ -236,7 +256,7 @@ func (c *ClimateSetSwingMode) SetID(id *int) {
 
 // NewClimateSetTemperature creates the object that can be sent to Home Assistant for domain climate, service set_temperature
 // "Set target temperature of climate device."
-func NewClimateSetTemperature(target Target, climateSetTemperatureParams *ClimateSetTemperatureParams) *ClimateSetTemperature {
+func NewClimateSetTemperature(target Target) *ClimateSetTemperature {
 	serviceDomain := "climate"
 	serviceType := "call_service"
 	serviceService := "set_temperature"
@@ -248,7 +268,7 @@ func NewClimateSetTemperature(target Target, climateSetTemperatureParams *Climat
 			Target:  target,
 			Type:    &serviceType,
 		},
-		ServiceData: *climateSetTemperatureParams,
+		ServiceData: ClimateSetTemperatureParams{},
 	}
 	return c
 }
@@ -264,6 +284,22 @@ type ClimateSetTemperatureParams struct {
 	Temperature    *float64  `json:"temperature,omitempty"`
 }
 
+func (c *ClimateSetTemperature) HvacMode(hvacMode HvacMode) *ClimateSetTemperature {
+	c.ServiceData.HvacMode = &hvacMode
+	return c
+}
+func (c *ClimateSetTemperature) TargetTempHigh(targetTempHigh float64) *ClimateSetTemperature {
+	c.ServiceData.TargetTempHigh = &targetTempHigh
+	return c
+}
+func (c *ClimateSetTemperature) TargetTempLow(targetTempLow float64) *ClimateSetTemperature {
+	c.ServiceData.TargetTempLow = &targetTempLow
+	return c
+}
+func (c *ClimateSetTemperature) Temperature(temperature float64) *ClimateSetTemperature {
+	c.ServiceData.Temperature = &temperature
+	return c
+}
 func (c *ClimateSetTemperature) JSON() string {
 	data, _ := json.Marshal(c)
 	return string(data)

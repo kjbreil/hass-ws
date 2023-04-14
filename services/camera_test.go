@@ -54,7 +54,7 @@ func TestCameraPlayStream_JSON(t *testing.T) {
 		fields *CameraPlayStream
 		want   string
 	}{{
-		fields: NewCameraPlayStream(Targets("climate.kitchen"), &CameraPlayStreamParams{Format: &format}),
+		fields: NewCameraPlayStream(Targets("climate.kitchen")).Format(format),
 		name:   "base",
 		want:   "{\"id\":null,\"type\":\"call_service\",\"domain\":\"camera\",\"service\":\"play_stream\",\"target\":{\"entity_id\":[\"climate.kitchen\"]},\"service_data\":{\"format\":\"hls\"}}",
 	}}
@@ -77,13 +77,9 @@ func TestCameraRecord_JSON(t *testing.T) {
 		fields *CameraRecord
 		want   string
 	}{{
-		fields: NewCameraRecord(Targets("climate.kitchen"), &CameraRecordParams{
-			Duration: &duration,
-			Filename: &filename,
-			Lookback: &lookback,
-		}),
-		name: "base",
-		want: "{\"id\":null,\"type\":\"call_service\",\"domain\":\"camera\",\"service\":\"record\",\"target\":{\"entity_id\":[\"climate.kitchen\"]},\"service_data\":{\"duration\":1.2,\"filename\":\"data\",\"lookback\":1.2}}",
+		fields: NewCameraRecord(Targets("climate.kitchen")).Duration(duration).Filename(filename).Lookback(lookback),
+		name:   "base",
+		want:   "{\"id\":null,\"type\":\"call_service\",\"domain\":\"camera\",\"service\":\"record\",\"target\":{\"entity_id\":[\"climate.kitchen\"]},\"service_data\":{\"duration\":1.2,\"filename\":\"data\",\"lookback\":1.2}}",
 	}}
 	for _, tt := range tests {
 		t.Run(tt.name, func(t *testing.T) {
@@ -102,7 +98,7 @@ func TestCameraSnapshot_JSON(t *testing.T) {
 		fields *CameraSnapshot
 		want   string
 	}{{
-		fields: NewCameraSnapshot(Targets("climate.kitchen"), &CameraSnapshotParams{Filename: &filename}),
+		fields: NewCameraSnapshot(Targets("climate.kitchen")).Filename(filename),
 		name:   "base",
 		want:   "{\"id\":null,\"type\":\"call_service\",\"domain\":\"camera\",\"service\":\"snapshot\",\"target\":{\"entity_id\":[\"climate.kitchen\"]},\"service_data\":{\"filename\":\"data\"}}",
 	}}

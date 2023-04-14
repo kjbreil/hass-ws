@@ -11,7 +11,7 @@ import (
 
 // NewHumidifierSetHumidity creates the object that can be sent to Home Assistant for domain humidifier, service set_humidity
 // "Set target humidity of humidifier device."
-func NewHumidifierSetHumidity(target Target, humidifierSetHumidityParams *HumidifierSetHumidityParams) *HumidifierSetHumidity {
+func NewHumidifierSetHumidity(target Target) *HumidifierSetHumidity {
 	serviceDomain := "humidifier"
 	serviceType := "call_service"
 	serviceService := "set_humidity"
@@ -23,7 +23,7 @@ func NewHumidifierSetHumidity(target Target, humidifierSetHumidityParams *Humidi
 			Target:  target,
 			Type:    &serviceType,
 		},
-		ServiceData: *humidifierSetHumidityParams,
+		ServiceData: HumidifierSetHumidityParams{},
 	}
 	return h
 }
@@ -36,6 +36,10 @@ type HumidifierSetHumidityParams struct {
 	Humidity *float64 `json:"humidity,omitempty"`
 }
 
+func (h *HumidifierSetHumidity) Humidity(humidity float64) *HumidifierSetHumidity {
+	h.ServiceData.Humidity = &humidity
+	return h
+}
 func (h *HumidifierSetHumidity) JSON() string {
 	data, _ := json.Marshal(h)
 	return string(data)
@@ -49,7 +53,7 @@ func (h *HumidifierSetHumidity) SetID(id *int) {
 
 // NewHumidifierSetMode creates the object that can be sent to Home Assistant for domain humidifier, service set_mode
 // "Set mode for humidifier device."
-func NewHumidifierSetMode(target Target, humidifierSetModeParams *HumidifierSetModeParams) *HumidifierSetMode {
+func NewHumidifierSetMode(target Target) *HumidifierSetMode {
 	serviceDomain := "humidifier"
 	serviceType := "call_service"
 	serviceService := "set_mode"
@@ -61,7 +65,7 @@ func NewHumidifierSetMode(target Target, humidifierSetModeParams *HumidifierSetM
 			Target:  target,
 			Type:    &serviceType,
 		},
-		ServiceData: *humidifierSetModeParams,
+		ServiceData: HumidifierSetModeParams{},
 	}
 	return h
 }
@@ -74,6 +78,10 @@ type HumidifierSetModeParams struct {
 	Mode *string `json:"mode,omitempty"`
 }
 
+func (h *HumidifierSetMode) Mode(mode string) *HumidifierSetMode {
+	h.ServiceData.Mode = &mode
+	return h
+}
 func (h *HumidifierSetMode) JSON() string {
 	data, _ := json.Marshal(h)
 	return string(data)

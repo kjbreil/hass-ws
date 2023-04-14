@@ -11,7 +11,7 @@ import (
 
 // NewSchedulerAdd creates the object that can be sent to Home Assistant for domain scheduler, service add
 // "Create a new schedule entity"
-func NewSchedulerAdd(target Target, schedulerAddParams *SchedulerAddParams) *SchedulerAdd {
+func NewSchedulerAdd(target Target) *SchedulerAdd {
 	serviceDomain := "scheduler"
 	serviceType := "call_service"
 	serviceService := "add"
@@ -23,7 +23,7 @@ func NewSchedulerAdd(target Target, schedulerAddParams *SchedulerAddParams) *Sch
 			Target:  target,
 			Type:    &serviceType,
 		},
-		ServiceData: *schedulerAddParams,
+		ServiceData: SchedulerAddParams{},
 	}
 	return s
 }
@@ -37,6 +37,14 @@ type SchedulerAddParams struct {
 	RepeatType *RepeatType `json:"repeat_type,omitempty"`
 }
 
+func (s *SchedulerAdd) SchedulerAddName(schedulerAddName string) *SchedulerAdd {
+	s.ServiceData.Name = &schedulerAddName
+	return s
+}
+func (s *SchedulerAdd) RepeatType(repeatType RepeatType) *SchedulerAdd {
+	s.ServiceData.RepeatType = &repeatType
+	return s
+}
 func (s *SchedulerAdd) JSON() string {
 	data, _ := json.Marshal(s)
 	return string(data)
@@ -50,7 +58,7 @@ func (s *SchedulerAdd) SetID(id *int) {
 
 // NewSchedulerCopy creates the object that can be sent to Home Assistant for domain scheduler, service copy
 // "Duplicate a schedule entity"
-func NewSchedulerCopy(target Target, schedulerCopyParams *SchedulerCopyParams) *SchedulerCopy {
+func NewSchedulerCopy(target Target) *SchedulerCopy {
 	serviceDomain := "scheduler"
 	serviceType := "call_service"
 	serviceService := "copy"
@@ -62,7 +70,7 @@ func NewSchedulerCopy(target Target, schedulerCopyParams *SchedulerCopyParams) *
 			Target:  target,
 			Type:    &serviceType,
 		},
-		ServiceData: *schedulerCopyParams,
+		ServiceData: SchedulerCopyParams{},
 	}
 	return s
 }
@@ -75,6 +83,10 @@ type SchedulerCopyParams struct {
 	Name *string `json:"name,omitempty"`
 }
 
+func (s *SchedulerCopy) SchedulerCopyName(schedulerCopyName string) *SchedulerCopy {
+	s.ServiceData.Name = &schedulerCopyName
+	return s
+}
 func (s *SchedulerCopy) JSON() string {
 	data, _ := json.Marshal(s)
 	return string(data)
@@ -88,7 +100,7 @@ func (s *SchedulerCopy) SetID(id *int) {
 
 // NewSchedulerEdit creates the object that can be sent to Home Assistant for domain scheduler, service edit
 // "Edit a schedule entity"
-func NewSchedulerEdit(target Target, schedulerEditParams *SchedulerEditParams) *SchedulerEdit {
+func NewSchedulerEdit(target Target) *SchedulerEdit {
 	serviceDomain := "scheduler"
 	serviceType := "call_service"
 	serviceService := "edit"
@@ -100,7 +112,7 @@ func NewSchedulerEdit(target Target, schedulerEditParams *SchedulerEditParams) *
 			Target:  target,
 			Type:    &serviceType,
 		},
-		ServiceData: *schedulerEditParams,
+		ServiceData: SchedulerEditParams{},
 	}
 	return s
 }
@@ -114,6 +126,14 @@ type SchedulerEditParams struct {
 	RepeatType *RepeatType `json:"repeat_type,omitempty"`
 }
 
+func (s *SchedulerEdit) SchedulerEditName(schedulerEditName string) *SchedulerEdit {
+	s.ServiceData.Name = &schedulerEditName
+	return s
+}
+func (s *SchedulerEdit) RepeatType(repeatType RepeatType) *SchedulerEdit {
+	s.ServiceData.RepeatType = &repeatType
+	return s
+}
 func (s *SchedulerEdit) JSON() string {
 	data, _ := json.Marshal(s)
 	return string(data)

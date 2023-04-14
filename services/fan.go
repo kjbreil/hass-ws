@@ -11,7 +11,7 @@ import (
 
 // NewFanDecreaseSpeed creates the object that can be sent to Home Assistant for domain fan, service decrease_speed
 // "Decrease the speed of the fan by one speed or a percentage_step."
-func NewFanDecreaseSpeed(target Target, fanDecreaseSpeedParams *FanDecreaseSpeedParams) *FanDecreaseSpeed {
+func NewFanDecreaseSpeed(target Target) *FanDecreaseSpeed {
 	serviceDomain := "fan"
 	serviceType := "call_service"
 	serviceService := "decrease_speed"
@@ -23,7 +23,7 @@ func NewFanDecreaseSpeed(target Target, fanDecreaseSpeedParams *FanDecreaseSpeed
 			Target:  target,
 			Type:    &serviceType,
 		},
-		ServiceData: *fanDecreaseSpeedParams,
+		ServiceData: FanDecreaseSpeedParams{},
 	}
 	return f
 }
@@ -36,6 +36,10 @@ type FanDecreaseSpeedParams struct {
 	PercentageStep *float64 `json:"percentage_step,omitempty"`
 }
 
+func (f *FanDecreaseSpeed) PercentageStep(percentageStep float64) *FanDecreaseSpeed {
+	f.ServiceData.PercentageStep = &percentageStep
+	return f
+}
 func (f *FanDecreaseSpeed) JSON() string {
 	data, _ := json.Marshal(f)
 	return string(data)
@@ -49,7 +53,7 @@ func (f *FanDecreaseSpeed) SetID(id *int) {
 
 // NewFanIncreaseSpeed creates the object that can be sent to Home Assistant for domain fan, service increase_speed
 // "Increase the speed of the fan by one speed or a percentage_step."
-func NewFanIncreaseSpeed(target Target, fanIncreaseSpeedParams *FanIncreaseSpeedParams) *FanIncreaseSpeed {
+func NewFanIncreaseSpeed(target Target) *FanIncreaseSpeed {
 	serviceDomain := "fan"
 	serviceType := "call_service"
 	serviceService := "increase_speed"
@@ -61,7 +65,7 @@ func NewFanIncreaseSpeed(target Target, fanIncreaseSpeedParams *FanIncreaseSpeed
 			Target:  target,
 			Type:    &serviceType,
 		},
-		ServiceData: *fanIncreaseSpeedParams,
+		ServiceData: FanIncreaseSpeedParams{},
 	}
 	return f
 }
@@ -74,6 +78,10 @@ type FanIncreaseSpeedParams struct {
 	PercentageStep *float64 `json:"percentage_step,omitempty"`
 }
 
+func (f *FanIncreaseSpeed) PercentageStep(percentageStep float64) *FanIncreaseSpeed {
+	f.ServiceData.PercentageStep = &percentageStep
+	return f
+}
 func (f *FanIncreaseSpeed) JSON() string {
 	data, _ := json.Marshal(f)
 	return string(data)
@@ -122,7 +130,7 @@ func (f *FanOscillate) SetID(id *int) {
 
 // NewFanSetDirection creates the object that can be sent to Home Assistant for domain fan, service set_direction
 // "Set the fan rotation."
-func NewFanSetDirection(target Target, fanSetDirectionParams *FanSetDirectionParams) *FanSetDirection {
+func NewFanSetDirection(target Target) *FanSetDirection {
 	serviceDomain := "fan"
 	serviceType := "call_service"
 	serviceService := "set_direction"
@@ -134,7 +142,7 @@ func NewFanSetDirection(target Target, fanSetDirectionParams *FanSetDirectionPar
 			Target:  target,
 			Type:    &serviceType,
 		},
-		ServiceData: *fanSetDirectionParams,
+		ServiceData: FanSetDirectionParams{},
 	}
 	return f
 }
@@ -147,6 +155,10 @@ type FanSetDirectionParams struct {
 	Direction *Direction `json:"direction,omitempty"`
 }
 
+func (f *FanSetDirection) Direction(direction Direction) *FanSetDirection {
+	f.ServiceData.Direction = &direction
+	return f
+}
 func (f *FanSetDirection) JSON() string {
 	data, _ := json.Marshal(f)
 	return string(data)
@@ -160,7 +172,7 @@ func (f *FanSetDirection) SetID(id *int) {
 
 // NewFanSetPercentage creates the object that can be sent to Home Assistant for domain fan, service set_percentage
 // "Set fan speed percentage."
-func NewFanSetPercentage(target Target, fanSetPercentageParams *FanSetPercentageParams) *FanSetPercentage {
+func NewFanSetPercentage(target Target) *FanSetPercentage {
 	serviceDomain := "fan"
 	serviceType := "call_service"
 	serviceService := "set_percentage"
@@ -172,7 +184,7 @@ func NewFanSetPercentage(target Target, fanSetPercentageParams *FanSetPercentage
 			Target:  target,
 			Type:    &serviceType,
 		},
-		ServiceData: *fanSetPercentageParams,
+		ServiceData: FanSetPercentageParams{},
 	}
 	return f
 }
@@ -185,6 +197,10 @@ type FanSetPercentageParams struct {
 	Percentage *float64 `json:"percentage,omitempty"`
 }
 
+func (f *FanSetPercentage) Percentage(percentage float64) *FanSetPercentage {
+	f.ServiceData.Percentage = &percentage
+	return f
+}
 func (f *FanSetPercentage) JSON() string {
 	data, _ := json.Marshal(f)
 	return string(data)
@@ -198,7 +214,7 @@ func (f *FanSetPercentage) SetID(id *int) {
 
 // NewFanSetPresetMode creates the object that can be sent to Home Assistant for domain fan, service set_preset_mode
 // "Set preset mode for a fan device."
-func NewFanSetPresetMode(target Target, fanSetPresetModeParams *FanSetPresetModeParams) *FanSetPresetMode {
+func NewFanSetPresetMode(target Target) *FanSetPresetMode {
 	serviceDomain := "fan"
 	serviceType := "call_service"
 	serviceService := "set_preset_mode"
@@ -210,7 +226,7 @@ func NewFanSetPresetMode(target Target, fanSetPresetModeParams *FanSetPresetMode
 			Target:  target,
 			Type:    &serviceType,
 		},
-		ServiceData: *fanSetPresetModeParams,
+		ServiceData: FanSetPresetModeParams{},
 	}
 	return f
 }
@@ -223,6 +239,10 @@ type FanSetPresetModeParams struct {
 	PresetMode *string `json:"preset_mode,omitempty"`
 }
 
+func (f *FanSetPresetMode) PresetMode(presetMode string) *FanSetPresetMode {
+	f.ServiceData.PresetMode = &presetMode
+	return f
+}
 func (f *FanSetPresetMode) JSON() string {
 	data, _ := json.Marshal(f)
 	return string(data)
@@ -306,7 +326,7 @@ func (f *FanTurnOff) SetID(id *int) {
 
 // NewFanTurnOn creates the object that can be sent to Home Assistant for domain fan, service turn_on
 // "Turn fan on."
-func NewFanTurnOn(target Target, fanTurnOnParams *FanTurnOnParams) *FanTurnOn {
+func NewFanTurnOn(target Target) *FanTurnOn {
 	serviceDomain := "fan"
 	serviceType := "call_service"
 	serviceService := "turn_on"
@@ -318,7 +338,7 @@ func NewFanTurnOn(target Target, fanTurnOnParams *FanTurnOnParams) *FanTurnOn {
 			Target:  target,
 			Type:    &serviceType,
 		},
-		ServiceData: *fanTurnOnParams,
+		ServiceData: FanTurnOnParams{},
 	}
 	return f
 }
@@ -333,6 +353,18 @@ type FanTurnOnParams struct {
 	Speed      *string  `json:"speed,omitempty"`
 }
 
+func (f *FanTurnOn) Percentage(percentage float64) *FanTurnOn {
+	f.ServiceData.Percentage = &percentage
+	return f
+}
+func (f *FanTurnOn) PresetMode(presetMode string) *FanTurnOn {
+	f.ServiceData.PresetMode = &presetMode
+	return f
+}
+func (f *FanTurnOn) Speed(speed string) *FanTurnOn {
+	f.ServiceData.Speed = &speed
+	return f
+}
 func (f *FanTurnOn) JSON() string {
 	data, _ := json.Marshal(f)
 	return string(data)

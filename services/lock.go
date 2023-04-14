@@ -11,7 +11,7 @@ import (
 
 // NewLockLock creates the object that can be sent to Home Assistant for domain lock, service lock
 // "Lock all or specified locks."
-func NewLockLock(target Target, lockLockParams *LockLockParams) *LockLock {
+func NewLockLock(target Target) *LockLock {
 	serviceDomain := "lock"
 	serviceType := "call_service"
 	serviceService := "lock"
@@ -23,7 +23,7 @@ func NewLockLock(target Target, lockLockParams *LockLockParams) *LockLock {
 			Target:  target,
 			Type:    &serviceType,
 		},
-		ServiceData: *lockLockParams,
+		ServiceData: LockLockParams{},
 	}
 	return l
 }
@@ -36,6 +36,10 @@ type LockLockParams struct {
 	Code *string `json:"code,omitempty"`
 }
 
+func (l *LockLock) Code(code string) *LockLock {
+	l.ServiceData.Code = &code
+	return l
+}
 func (l *LockLock) JSON() string {
 	data, _ := json.Marshal(l)
 	return string(data)
@@ -49,7 +53,7 @@ func (l *LockLock) SetID(id *int) {
 
 // NewLockOpen creates the object that can be sent to Home Assistant for domain lock, service open
 // "Open all or specified locks."
-func NewLockOpen(target Target, lockOpenParams *LockOpenParams) *LockOpen {
+func NewLockOpen(target Target) *LockOpen {
 	serviceDomain := "lock"
 	serviceType := "call_service"
 	serviceService := "open"
@@ -61,7 +65,7 @@ func NewLockOpen(target Target, lockOpenParams *LockOpenParams) *LockOpen {
 			Target:  target,
 			Type:    &serviceType,
 		},
-		ServiceData: *lockOpenParams,
+		ServiceData: LockOpenParams{},
 	}
 	return l
 }
@@ -74,6 +78,10 @@ type LockOpenParams struct {
 	Code *string `json:"code,omitempty"`
 }
 
+func (l *LockOpen) Code(code string) *LockOpen {
+	l.ServiceData.Code = &code
+	return l
+}
 func (l *LockOpen) JSON() string {
 	data, _ := json.Marshal(l)
 	return string(data)
@@ -87,7 +95,7 @@ func (l *LockOpen) SetID(id *int) {
 
 // NewLockUnlock creates the object that can be sent to Home Assistant for domain lock, service unlock
 // "Unlock all or specified locks."
-func NewLockUnlock(target Target, lockUnlockParams *LockUnlockParams) *LockUnlock {
+func NewLockUnlock(target Target) *LockUnlock {
 	serviceDomain := "lock"
 	serviceType := "call_service"
 	serviceService := "unlock"
@@ -99,7 +107,7 @@ func NewLockUnlock(target Target, lockUnlockParams *LockUnlockParams) *LockUnloc
 			Target:  target,
 			Type:    &serviceType,
 		},
-		ServiceData: *lockUnlockParams,
+		ServiceData: LockUnlockParams{},
 	}
 	return l
 }
@@ -112,6 +120,10 @@ type LockUnlockParams struct {
 	Code *string `json:"code,omitempty"`
 }
 
+func (l *LockUnlock) Code(code string) *LockUnlock {
+	l.ServiceData.Code = &code
+	return l
+}
 func (l *LockUnlock) JSON() string {
 	data, _ := json.Marshal(l)
 	return string(data)

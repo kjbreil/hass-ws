@@ -11,7 +11,7 @@ import (
 
 // NewConversationProcess creates the object that can be sent to Home Assistant for domain conversation, service process
 // "Launch a conversation from a transcribed text."
-func NewConversationProcess(target Target, conversationProcessParams *ConversationProcessParams) *ConversationProcess {
+func NewConversationProcess(target Target) *ConversationProcess {
 	serviceDomain := "conversation"
 	serviceType := "call_service"
 	serviceService := "process"
@@ -23,7 +23,7 @@ func NewConversationProcess(target Target, conversationProcessParams *Conversati
 			Target:  target,
 			Type:    &serviceType,
 		},
-		ServiceData: *conversationProcessParams,
+		ServiceData: ConversationProcessParams{},
 	}
 	return c
 }
@@ -36,6 +36,10 @@ type ConversationProcessParams struct {
 	Text *string `json:"text,omitempty"`
 }
 
+func (c *ConversationProcess) Text(text string) *ConversationProcess {
+	c.ServiceData.Text = &text
+	return c
+}
 func (c *ConversationProcess) JSON() string {
 	data, _ := json.Marshal(c)
 	return string(data)

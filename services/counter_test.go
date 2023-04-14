@@ -18,15 +18,9 @@ func TestCounterConfigure_JSON(t *testing.T) {
 		fields *CounterConfigure
 		want   string
 	}{{
-		fields: NewCounterConfigure(Targets("climate.kitchen"), &CounterConfigureParams{
-			Initial: &initial,
-			Maximum: &maximum,
-			Minimum: &minimum,
-			Step:    &step,
-			Value:   &value,
-		}),
-		name: "base",
-		want: "{\"id\":null,\"type\":\"call_service\",\"domain\":\"counter\",\"service\":\"configure\",\"target\":{\"entity_id\":[\"climate.kitchen\"]},\"service_data\":{\"initial\":1.2,\"maximum\":1.2,\"minimum\":1.2,\"step\":1.2,\"value\":1.2}}",
+		fields: NewCounterConfigure(Targets("climate.kitchen")).Initial(initial).Maximum(maximum).Minimum(minimum).Step(step).Value(value),
+		name:   "base",
+		want:   "{\"id\":null,\"type\":\"call_service\",\"domain\":\"counter\",\"service\":\"configure\",\"target\":{\"entity_id\":[\"climate.kitchen\"]},\"service_data\":{\"initial\":1.2,\"maximum\":1.2,\"minimum\":1.2,\"step\":1.2,\"value\":1.2}}",
 	}}
 	for _, tt := range tests {
 		t.Run(tt.name, func(t *testing.T) {

@@ -81,7 +81,7 @@ func (s *SirenTurnOff) SetID(id *int) {
 
 // NewSirenTurnOn creates the object that can be sent to Home Assistant for domain siren, service turn_on
 // "Turn siren on."
-func NewSirenTurnOn(target Target, sirenTurnOnParams *SirenTurnOnParams) *SirenTurnOn {
+func NewSirenTurnOn(target Target) *SirenTurnOn {
 	serviceDomain := "siren"
 	serviceType := "call_service"
 	serviceService := "turn_on"
@@ -93,7 +93,7 @@ func NewSirenTurnOn(target Target, sirenTurnOnParams *SirenTurnOnParams) *SirenT
 			Target:  target,
 			Type:    &serviceType,
 		},
-		ServiceData: *sirenTurnOnParams,
+		ServiceData: SirenTurnOnParams{},
 	}
 	return s
 }
@@ -108,6 +108,18 @@ type SirenTurnOnParams struct {
 	VolumeLevel *float64 `json:"volume_level,omitempty"`
 }
 
+func (s *SirenTurnOn) Duration(duration string) *SirenTurnOn {
+	s.ServiceData.Duration = &duration
+	return s
+}
+func (s *SirenTurnOn) Tone(tone string) *SirenTurnOn {
+	s.ServiceData.Tone = &tone
+	return s
+}
+func (s *SirenTurnOn) VolumeLevel(volumeLevel float64) *SirenTurnOn {
+	s.ServiceData.VolumeLevel = &volumeLevel
+	return s
+}
 func (s *SirenTurnOn) JSON() string {
 	data, _ := json.Marshal(s)
 	return string(data)

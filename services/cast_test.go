@@ -15,12 +15,9 @@ func TestCastShowLovelaceView_JSON(t *testing.T) {
 		fields *CastShowLovelaceView
 		want   string
 	}{{
-		fields: NewCastShowLovelaceView(Targets("climate.kitchen"), &CastShowLovelaceViewParams{
-			DashboardPath: &dashboardPath,
-			ViewPath:      &viewPath,
-		}),
-		name: "base",
-		want: "{\"id\":null,\"type\":\"call_service\",\"domain\":\"cast\",\"service\":\"show_lovelace_view\",\"target\":{\"entity_id\":[\"climate.kitchen\"]},\"service_data\":{\"dashboard_path\":\"data\",\"view_path\":\"data\"}}",
+		fields: NewCastShowLovelaceView(Targets("climate.kitchen")).DashboardPath(dashboardPath).ViewPath(viewPath),
+		name:   "base",
+		want:   "{\"id\":null,\"type\":\"call_service\",\"domain\":\"cast\",\"service\":\"show_lovelace_view\",\"target\":{\"entity_id\":[\"climate.kitchen\"]},\"service_data\":{\"dashboard_path\":\"data\",\"view_path\":\"data\"}}",
 	}}
 	for _, tt := range tests {
 		t.Run(tt.name, func(t *testing.T) {

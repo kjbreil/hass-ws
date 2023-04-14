@@ -11,7 +11,7 @@ import (
 
 // NewRemoteDeleteCommand creates the object that can be sent to Home Assistant for domain remote, service delete_command
 // "Deletes a command or a list of commands from the database."
-func NewRemoteDeleteCommand(target Target, remoteDeleteCommandParams *RemoteDeleteCommandParams) *RemoteDeleteCommand {
+func NewRemoteDeleteCommand(target Target) *RemoteDeleteCommand {
 	serviceDomain := "remote"
 	serviceType := "call_service"
 	serviceService := "delete_command"
@@ -23,7 +23,7 @@ func NewRemoteDeleteCommand(target Target, remoteDeleteCommandParams *RemoteDele
 			Target:  target,
 			Type:    &serviceType,
 		},
-		ServiceData: *remoteDeleteCommandParams,
+		ServiceData: RemoteDeleteCommandParams{},
 	}
 	return r
 }
@@ -36,6 +36,10 @@ type RemoteDeleteCommandParams struct {
 	Device *string `json:"device,omitempty"`
 }
 
+func (r *RemoteDeleteCommand) Device(device string) *RemoteDeleteCommand {
+	r.ServiceData.Device = &device
+	return r
+}
 func (r *RemoteDeleteCommand) JSON() string {
 	data, _ := json.Marshal(r)
 	return string(data)
@@ -49,7 +53,7 @@ func (r *RemoteDeleteCommand) SetID(id *int) {
 
 // NewRemoteLearnCommand creates the object that can be sent to Home Assistant for domain remote, service learn_command
 // "Learns a command or a list of commands from a device."
-func NewRemoteLearnCommand(target Target, remoteLearnCommandParams *RemoteLearnCommandParams) *RemoteLearnCommand {
+func NewRemoteLearnCommand(target Target) *RemoteLearnCommand {
 	serviceDomain := "remote"
 	serviceType := "call_service"
 	serviceService := "learn_command"
@@ -61,7 +65,7 @@ func NewRemoteLearnCommand(target Target, remoteLearnCommandParams *RemoteLearnC
 			Target:  target,
 			Type:    &serviceType,
 		},
-		ServiceData: *remoteLearnCommandParams,
+		ServiceData: RemoteLearnCommandParams{},
 	}
 	return r
 }
@@ -76,6 +80,18 @@ type RemoteLearnCommandParams struct {
 	Timeout     *float64     `json:"timeout,omitempty"`
 }
 
+func (r *RemoteLearnCommand) CommandType(commandType CommandType) *RemoteLearnCommand {
+	r.ServiceData.CommandType = &commandType
+	return r
+}
+func (r *RemoteLearnCommand) Device(device string) *RemoteLearnCommand {
+	r.ServiceData.Device = &device
+	return r
+}
+func (r *RemoteLearnCommand) Timeout(timeout float64) *RemoteLearnCommand {
+	r.ServiceData.Timeout = &timeout
+	return r
+}
 func (r *RemoteLearnCommand) JSON() string {
 	data, _ := json.Marshal(r)
 	return string(data)
@@ -89,7 +105,7 @@ func (r *RemoteLearnCommand) SetID(id *int) {
 
 // NewRemoteSendCommand creates the object that can be sent to Home Assistant for domain remote, service send_command
 // "Sends a command or a list of commands to a device."
-func NewRemoteSendCommand(target Target, remoteSendCommandParams *RemoteSendCommandParams) *RemoteSendCommand {
+func NewRemoteSendCommand(target Target) *RemoteSendCommand {
 	serviceDomain := "remote"
 	serviceType := "call_service"
 	serviceService := "send_command"
@@ -101,7 +117,7 @@ func NewRemoteSendCommand(target Target, remoteSendCommandParams *RemoteSendComm
 			Target:  target,
 			Type:    &serviceType,
 		},
-		ServiceData: *remoteSendCommandParams,
+		ServiceData: RemoteSendCommandParams{},
 	}
 	return r
 }
@@ -117,6 +133,22 @@ type RemoteSendCommandParams struct {
 	NumRepeats *float64 `json:"num_repeats,omitempty"`
 }
 
+func (r *RemoteSendCommand) DelaySecs(delaySecs float64) *RemoteSendCommand {
+	r.ServiceData.DelaySecs = &delaySecs
+	return r
+}
+func (r *RemoteSendCommand) Device(device string) *RemoteSendCommand {
+	r.ServiceData.Device = &device
+	return r
+}
+func (r *RemoteSendCommand) HoldSecs(holdSecs float64) *RemoteSendCommand {
+	r.ServiceData.HoldSecs = &holdSecs
+	return r
+}
+func (r *RemoteSendCommand) NumRepeats(numRepeats float64) *RemoteSendCommand {
+	r.ServiceData.NumRepeats = &numRepeats
+	return r
+}
 func (r *RemoteSendCommand) JSON() string {
 	data, _ := json.Marshal(r)
 	return string(data)
@@ -200,7 +232,7 @@ func (r *RemoteTurnOff) SetID(id *int) {
 
 // NewRemoteTurnOn creates the object that can be sent to Home Assistant for domain remote, service turn_on
 // "Sends the Power On Command."
-func NewRemoteTurnOn(target Target, remoteTurnOnParams *RemoteTurnOnParams) *RemoteTurnOn {
+func NewRemoteTurnOn(target Target) *RemoteTurnOn {
 	serviceDomain := "remote"
 	serviceType := "call_service"
 	serviceService := "turn_on"
@@ -212,7 +244,7 @@ func NewRemoteTurnOn(target Target, remoteTurnOnParams *RemoteTurnOnParams) *Rem
 			Target:  target,
 			Type:    &serviceType,
 		},
-		ServiceData: *remoteTurnOnParams,
+		ServiceData: RemoteTurnOnParams{},
 	}
 	return r
 }
@@ -225,6 +257,10 @@ type RemoteTurnOnParams struct {
 	Activity *string `json:"activity,omitempty"`
 }
 
+func (r *RemoteTurnOn) Activity(activity string) *RemoteTurnOn {
+	r.ServiceData.Activity = &activity
+	return r
+}
 func (r *RemoteTurnOn) JSON() string {
 	data, _ := json.Marshal(r)
 	return string(data)

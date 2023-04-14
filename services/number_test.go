@@ -14,7 +14,7 @@ func TestNumberSetValue_JSON(t *testing.T) {
 		fields *NumberSetValue
 		want   string
 	}{{
-		fields: NewNumberSetValue(Targets("climate.kitchen"), &NumberSetValueParams{Value: &value}),
+		fields: NewNumberSetValue(Targets("climate.kitchen")).Value(value),
 		name:   "base",
 		want:   "{\"id\":null,\"type\":\"call_service\",\"domain\":\"number\",\"service\":\"set_value\",\"target\":{\"entity_id\":[\"climate.kitchen\"]},\"service_data\":{\"value\":\"data\"}}",
 	}}

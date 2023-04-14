@@ -46,7 +46,7 @@ func (u *UpdateClearSkipped) SetID(id *int) {
 
 // NewUpdateInstall creates the object that can be sent to Home Assistant for domain update, service install
 // "Install an update for this device or service"
-func NewUpdateInstall(target Target, updateInstallParams *UpdateInstallParams) *UpdateInstall {
+func NewUpdateInstall(target Target) *UpdateInstall {
 	serviceDomain := "update"
 	serviceType := "call_service"
 	serviceService := "install"
@@ -58,7 +58,7 @@ func NewUpdateInstall(target Target, updateInstallParams *UpdateInstallParams) *
 			Target:  target,
 			Type:    &serviceType,
 		},
-		ServiceData: *updateInstallParams,
+		ServiceData: UpdateInstallParams{},
 	}
 	return u
 }
@@ -71,6 +71,10 @@ type UpdateInstallParams struct {
 	Version *string `json:"version,omitempty"`
 }
 
+func (u *UpdateInstall) Version(version string) *UpdateInstall {
+	u.ServiceData.Version = &version
+	return u
+}
 func (u *UpdateInstall) JSON() string {
 	data, _ := json.Marshal(u)
 	return string(data)

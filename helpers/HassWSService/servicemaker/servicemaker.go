@@ -63,9 +63,9 @@ func Gen(servicesFolder string, servicesList ServiceList) error {
 				Id(fmt.Sprintf("New%s", s.camelName)).
 				ParamsFunc(func(g *jen.Group) {
 					g.Add(jen.Id("target").Id("Target"))
-					if len(s.parameterKeys) > 0 {
-						g.Add(jen.Id(fmt.Sprintf("%sParams", s.lowerCamelName)).Op("*").Id(fmt.Sprintf("%sParams", s.camelName)))
-					}
+					//if len(s.parameterKeys) > 0 {
+					//	g.Add(jen.Id(fmt.Sprintf("%sParams", s.lowerCamelName)).Op("*").Id(fmt.Sprintf("%sParams", s.camelName)))
+					//}
 				}).
 				Op("*").Id(s.camelName).
 				Block(
@@ -82,7 +82,8 @@ func Gen(servicesFolder string, servicesList ServiceList) error {
 								jen.Id("Target"):  jen.Id("target"),
 							})
 							if len(s.parameters) > 0 {
-								d[jen.Id("ServiceData")] = jen.Op("*").Id(fmt.Sprintf("%sParams", s.lowerCamelName))
+								//d[jen.Id("ServiceData")] = jen.Op("*").Id(fmt.Sprintf("%sParams", s.lowerCamelName))
+								d[jen.Id("ServiceData")] = jen.Id(fmt.Sprintf("%sParams", s.camelName)).Values()
 							} else {
 								d[jen.Id("ServiceData")] = jen.Id("nil")
 
@@ -118,6 +119,31 @@ func Gen(servicesFolder string, servicesList ServiceList) error {
 					})
 			}
 
+			if len(s.parameterKeys) > 0 {
+				for _, fn := range s.parameterKeys {
+
+					//firstLetter := string(fn[0])
+					code := s.parameters[fn]
+
+					finalCamelName := strcase.ToCamel(fn)
+					switch fn {
+					case "name", "domain":
+						fn = s.camelName + strcase.ToCamel(fn)
+					}
+					camelName := strcase.ToCamel(fn)
+					lowerCamelName := strcase.ToLowerCamel(fn)
+					services[d.name].Func().
+						Params(jen.Id(s.firstLetter).Op("*").Id(s.camelName)).
+						Id(fmt.Sprintf("%s", camelName)).
+						Params(jen.Id(lowerCamelName).Add(codeGetter(code))).
+						Op("*").Id(s.camelName).
+						Block(
+							jen.Id(s.firstLetter).Dot("ServiceData").Dot(finalCamelName).Op("=").Op("&").Id(lowerCamelName),
+							jen.Return(jen.Id(s.firstLetter)),
+						)
+				}
+			}
+
 			services[d.name].Func().Params(jen.Id(s.firstLetter).Op("*").Id(s.camelName)).Id("JSON").Params().String().Block(
 				jen.List(jen.Id("data"), jen.Id("_")).Op(":=").Qual("encoding/json", "Marshal").Params(jen.Id(s.firstLetter)),
 				jen.Return(jen.String().Params(jen.Id("data"))),
@@ -134,7 +160,12 @@ func Gen(servicesFolder string, servicesList ServiceList) error {
 			// Tests
 			services[testFileName].Func().Id(fmt.Sprintf("Test%s_JSON", s.camelName)).Params(jen.Id("t").Op("*").Qual("testing", "T")).BlockFunc(func(g *jen.Group) {
 				for _, fn := range s.parameterKeys {
+
 					code := s.parameters[fn]
+					switch fn {
+					case "name", "domain":
+						fn = s.camelName + strcase.ToCamel(fn)
+					}
 					fn = strcase.ToLowerCamel(fn)
 					g.Add(servicesList.codeAssigner(fn, code))
 
@@ -147,21 +178,35 @@ func Gen(servicesFolder string, servicesList ServiceList) error {
 						jen.Id("fields").Op("*").Id(s.camelName),
 						jen.Id("want").String(),
 					).ValuesFunc(func(g *jen.Group) {
+						add := jen.Add()
+						if len(s.parameters) > 0 {
+							for _, fn := range s.parameterKeys {
+
+								switch fn {
+								case "name", "domain":
+									fn = s.camelName + strcase.ToCamel(fn)
+								}
+								camelName := strcase.ToCamel(fn)
+								fn = strcase.ToLowerCamel(fn)
+								add.Add(jen.Dot(camelName).Params(jen.Id(fn)))
+							}
+						}
+
 						g.Add(jen.Values(jen.Dict{
 							jen.Id("name"): jen.Lit("base"),
 							jen.Id("fields"): jen.Id(fmt.Sprintf("New%s", s.camelName)).
 								CallFunc(func(g *jen.Group) {
 									g.Add(jen.Id("Targets").Call(jen.Lit("climate.kitchen")))
-									if len(s.parameters) > 0 {
-										g.Add(jen.Op("&").Id(fmt.Sprintf("%sParams", s.camelName)).Values(jen.DictFunc(func(d jen.Dict) {
-											for _, fn := range s.parameterKeys {
-												d[jen.Id(strcase.ToCamel(fn))] = jen.Op("&").Id(strcase.ToLowerCamel(fn))
-
-											}
-
-										})))
-									}
-								}),
+									//if len(s.parameters) > 0 {
+									//	g.Add(jen.Op("&").Id(fmt.Sprintf("%sParams", s.camelName)).Values(jen.DictFunc(func(d jen.Dict) {
+									//		for _, fn := range s.parameterKeys {
+									//			d[jen.Id(strcase.ToCamel(fn))] = jen.Op("&").Id(strcase.ToLowerCamel(fn))
+									//
+									//		}
+									//
+									//	})))
+									//}
+								}).Add(add),
 
 							jen.Id("want"): jen.LitFunc(func() interface{} {
 
@@ -285,14 +330,6 @@ func Gen(servicesFolder string, servicesList ServiceList) error {
 	services["types"].Type().Id("Target").Struct(
 		jen.Id("EntityId").Index().String().Tag(map[string]string{"json": "entity_id" + ",omitempty"}),
 	)
-
-	//func EntitiesTarget(entities ...string) Target {
-	//	var t Target
-	//	for _, e := range entities {
-	//	t.EntityId = append(t.EntityId, e)
-	//}
-	//	return t
-	//}
 
 	services["types"].Func().Id("Targets").Params(jen.Id("entities").Op("...").String()).Id("Target").Block(
 		jen.Var().Id("t").Id("Target"),

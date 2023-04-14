@@ -11,7 +11,7 @@ import (
 
 // NewNotifyNotify creates the object that can be sent to Home Assistant for domain notify, service notify
 // "Sends a notification message using the notify service."
-func NewNotifyNotify(target Target, notifyNotifyParams *NotifyNotifyParams) *NotifyNotify {
+func NewNotifyNotify(target Target) *NotifyNotify {
 	serviceDomain := "notify"
 	serviceType := "call_service"
 	serviceService := "notify"
@@ -23,7 +23,7 @@ func NewNotifyNotify(target Target, notifyNotifyParams *NotifyNotifyParams) *Not
 			Target:  target,
 			Type:    &serviceType,
 		},
-		ServiceData: *notifyNotifyParams,
+		ServiceData: NotifyNotifyParams{},
 	}
 	return n
 }
@@ -37,6 +37,14 @@ type NotifyNotifyParams struct {
 	Title   *string `json:"title,omitempty"`
 }
 
+func (n *NotifyNotify) Message(message string) *NotifyNotify {
+	n.ServiceData.Message = &message
+	return n
+}
+func (n *NotifyNotify) Title(title string) *NotifyNotify {
+	n.ServiceData.Title = &title
+	return n
+}
 func (n *NotifyNotify) JSON() string {
 	data, _ := json.Marshal(n)
 	return string(data)
@@ -50,7 +58,7 @@ func (n *NotifyNotify) SetID(id *int) {
 
 // NewNotifyPersistentNotification creates the object that can be sent to Home Assistant for domain notify, service persistent_notification
 // "Sends a notification that is visible in the front-end."
-func NewNotifyPersistentNotification(target Target, notifyPersistentNotificationParams *NotifyPersistentNotificationParams) *NotifyPersistentNotification {
+func NewNotifyPersistentNotification(target Target) *NotifyPersistentNotification {
 	serviceDomain := "notify"
 	serviceType := "call_service"
 	serviceService := "persistent_notification"
@@ -62,7 +70,7 @@ func NewNotifyPersistentNotification(target Target, notifyPersistentNotification
 			Target:  target,
 			Type:    &serviceType,
 		},
-		ServiceData: *notifyPersistentNotificationParams,
+		ServiceData: NotifyPersistentNotificationParams{},
 	}
 	return n
 }
@@ -76,6 +84,14 @@ type NotifyPersistentNotificationParams struct {
 	Title   *string `json:"title,omitempty"`
 }
 
+func (n *NotifyPersistentNotification) Message(message string) *NotifyPersistentNotification {
+	n.ServiceData.Message = &message
+	return n
+}
+func (n *NotifyPersistentNotification) Title(title string) *NotifyPersistentNotification {
+	n.ServiceData.Title = &title
+	return n
+}
 func (n *NotifyPersistentNotification) JSON() string {
 	data, _ := json.Marshal(n)
 	return string(data)

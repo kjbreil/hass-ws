@@ -94,7 +94,7 @@ func TestInputSelectSelectOption_JSON(t *testing.T) {
 		fields *InputSelectSelectOption
 		want   string
 	}{{
-		fields: NewInputSelectSelectOption(Targets("climate.kitchen"), &InputSelectSelectOptionParams{Option: &option}),
+		fields: NewInputSelectSelectOption(Targets("climate.kitchen")).Option(option),
 		name:   "base",
 		want:   "{\"id\":null,\"type\":\"call_service\",\"domain\":\"input_select\",\"service\":\"select_option\",\"target\":{\"entity_id\":[\"climate.kitchen\"]},\"service_data\":{\"option\":\"data\"}}",
 	}}

@@ -46,7 +46,7 @@ func (t *TtsClearCache) SetID(id *int) {
 
 // NewTtsCloudSay creates the object that can be sent to Home Assistant for domain tts, service cloud_say
 // "Say something using text-to-speech on a media player with cloud."
-func NewTtsCloudSay(target Target, ttsCloudSayParams *TtsCloudSayParams) *TtsCloudSay {
+func NewTtsCloudSay(target Target) *TtsCloudSay {
 	serviceDomain := "tts"
 	serviceType := "call_service"
 	serviceService := "cloud_say"
@@ -58,7 +58,7 @@ func NewTtsCloudSay(target Target, ttsCloudSayParams *TtsCloudSayParams) *TtsClo
 			Target:  target,
 			Type:    &serviceType,
 		},
-		ServiceData: *ttsCloudSayParams,
+		ServiceData: TtsCloudSayParams{},
 	}
 	return t
 }
@@ -72,6 +72,14 @@ type TtsCloudSayParams struct {
 	Message  *string `json:"message,omitempty"`
 }
 
+func (t *TtsCloudSay) Language(language string) *TtsCloudSay {
+	t.ServiceData.Language = &language
+	return t
+}
+func (t *TtsCloudSay) Message(message string) *TtsCloudSay {
+	t.ServiceData.Message = &message
+	return t
+}
 func (t *TtsCloudSay) JSON() string {
 	data, _ := json.Marshal(t)
 	return string(data)
@@ -85,7 +93,7 @@ func (t *TtsCloudSay) SetID(id *int) {
 
 // NewTtsGoogleTranslateSay creates the object that can be sent to Home Assistant for domain tts, service google_translate_say
 // "Say something using text-to-speech on a media player with google_translate."
-func NewTtsGoogleTranslateSay(target Target, ttsGoogleTranslateSayParams *TtsGoogleTranslateSayParams) *TtsGoogleTranslateSay {
+func NewTtsGoogleTranslateSay(target Target) *TtsGoogleTranslateSay {
 	serviceDomain := "tts"
 	serviceType := "call_service"
 	serviceService := "google_translate_say"
@@ -97,7 +105,7 @@ func NewTtsGoogleTranslateSay(target Target, ttsGoogleTranslateSayParams *TtsGoo
 			Target:  target,
 			Type:    &serviceType,
 		},
-		ServiceData: *ttsGoogleTranslateSayParams,
+		ServiceData: TtsGoogleTranslateSayParams{},
 	}
 	return t
 }
@@ -111,6 +119,14 @@ type TtsGoogleTranslateSayParams struct {
 	Message  *string `json:"message,omitempty"`
 }
 
+func (t *TtsGoogleTranslateSay) Language(language string) *TtsGoogleTranslateSay {
+	t.ServiceData.Language = &language
+	return t
+}
+func (t *TtsGoogleTranslateSay) Message(message string) *TtsGoogleTranslateSay {
+	t.ServiceData.Message = &message
+	return t
+}
 func (t *TtsGoogleTranslateSay) JSON() string {
 	data, _ := json.Marshal(t)
 	return string(data)

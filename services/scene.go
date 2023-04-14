@@ -11,7 +11,7 @@ import (
 
 // NewSceneApply creates the object that can be sent to Home Assistant for domain scene, service apply
 // "Activate a scene with configuration."
-func NewSceneApply(target Target, sceneApplyParams *SceneApplyParams) *SceneApply {
+func NewSceneApply(target Target) *SceneApply {
 	serviceDomain := "scene"
 	serviceType := "call_service"
 	serviceService := "apply"
@@ -23,7 +23,7 @@ func NewSceneApply(target Target, sceneApplyParams *SceneApplyParams) *SceneAppl
 			Target:  target,
 			Type:    &serviceType,
 		},
-		ServiceData: *sceneApplyParams,
+		ServiceData: SceneApplyParams{},
 	}
 	return s
 }
@@ -36,6 +36,10 @@ type SceneApplyParams struct {
 	Transition *float64 `json:"transition,omitempty"`
 }
 
+func (s *SceneApply) Transition(transition float64) *SceneApply {
+	s.ServiceData.Transition = &transition
+	return s
+}
 func (s *SceneApply) JSON() string {
 	data, _ := json.Marshal(s)
 	return string(data)
@@ -49,7 +53,7 @@ func (s *SceneApply) SetID(id *int) {
 
 // NewSceneCreate creates the object that can be sent to Home Assistant for domain scene, service create
 // "Creates a new scene."
-func NewSceneCreate(target Target, sceneCreateParams *SceneCreateParams) *SceneCreate {
+func NewSceneCreate(target Target) *SceneCreate {
 	serviceDomain := "scene"
 	serviceType := "call_service"
 	serviceService := "create"
@@ -61,7 +65,7 @@ func NewSceneCreate(target Target, sceneCreateParams *SceneCreateParams) *SceneC
 			Target:  target,
 			Type:    &serviceType,
 		},
-		ServiceData: *sceneCreateParams,
+		ServiceData: SceneCreateParams{},
 	}
 	return s
 }
@@ -74,6 +78,10 @@ type SceneCreateParams struct {
 	SceneId *string `json:"scene_id,omitempty"`
 }
 
+func (s *SceneCreate) SceneId(sceneId string) *SceneCreate {
+	s.ServiceData.SceneId = &sceneId
+	return s
+}
 func (s *SceneCreate) JSON() string {
 	data, _ := json.Marshal(s)
 	return string(data)
@@ -122,7 +130,7 @@ func (s *SceneReload) SetID(id *int) {
 
 // NewSceneTurnOn creates the object that can be sent to Home Assistant for domain scene, service turn_on
 // "Activate a scene."
-func NewSceneTurnOn(target Target, sceneTurnOnParams *SceneTurnOnParams) *SceneTurnOn {
+func NewSceneTurnOn(target Target) *SceneTurnOn {
 	serviceDomain := "scene"
 	serviceType := "call_service"
 	serviceService := "turn_on"
@@ -134,7 +142,7 @@ func NewSceneTurnOn(target Target, sceneTurnOnParams *SceneTurnOnParams) *SceneT
 			Target:  target,
 			Type:    &serviceType,
 		},
-		ServiceData: *sceneTurnOnParams,
+		ServiceData: SceneTurnOnParams{},
 	}
 	return s
 }
@@ -147,6 +155,10 @@ type SceneTurnOnParams struct {
 	Transition *float64 `json:"transition,omitempty"`
 }
 
+func (s *SceneTurnOn) Transition(transition float64) *SceneTurnOn {
+	s.ServiceData.Transition = &transition
+	return s
+}
 func (s *SceneTurnOn) JSON() string {
 	data, _ := json.Marshal(s)
 	return string(data)

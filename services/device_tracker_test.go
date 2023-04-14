@@ -19,16 +19,9 @@ func TestDeviceTrackerSee_JSON(t *testing.T) {
 		fields *DeviceTrackerSee
 		want   string
 	}{{
-		fields: NewDeviceTrackerSee(Targets("climate.kitchen"), &DeviceTrackerSeeParams{
-			Battery:      &battery,
-			DevId:        &devId,
-			GpsAccuracy:  &gpsAccuracy,
-			HostName:     &hostName,
-			LocationName: &locationName,
-			Mac:          &mac,
-		}),
-		name: "base",
-		want: "{\"id\":null,\"type\":\"call_service\",\"domain\":\"device_tracker\",\"service\":\"see\",\"target\":{\"entity_id\":[\"climate.kitchen\"]},\"service_data\":{\"battery\":1.2,\"dev_id\":\"data\",\"gps_accuracy\":1.2,\"host_name\":\"data\",\"location_name\":\"data\",\"mac\":\"data\"}}",
+		fields: NewDeviceTrackerSee(Targets("climate.kitchen")).Battery(battery).DevId(devId).GpsAccuracy(gpsAccuracy).HostName(hostName).LocationName(locationName).Mac(mac),
+		name:   "base",
+		want:   "{\"id\":null,\"type\":\"call_service\",\"domain\":\"device_tracker\",\"service\":\"see\",\"target\":{\"entity_id\":[\"climate.kitchen\"]},\"service_data\":{\"battery\":1.2,\"dev_id\":\"data\",\"gps_accuracy\":1.2,\"host_name\":\"data\",\"location_name\":\"data\",\"mac\":\"data\"}}",
 	}}
 	for _, tt := range tests {
 		t.Run(tt.name, func(t *testing.T) {

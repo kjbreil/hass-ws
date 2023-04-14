@@ -11,7 +11,7 @@ import (
 
 // NewSelectSelectOption creates the object that can be sent to Home Assistant for domain select, service select_option
 // "Select an option of an select entity."
-func NewSelectSelectOption(target Target, selectSelectOptionParams *SelectSelectOptionParams) *SelectSelectOption {
+func NewSelectSelectOption(target Target) *SelectSelectOption {
 	serviceDomain := "select"
 	serviceType := "call_service"
 	serviceService := "select_option"
@@ -23,7 +23,7 @@ func NewSelectSelectOption(target Target, selectSelectOptionParams *SelectSelect
 			Target:  target,
 			Type:    &serviceType,
 		},
-		ServiceData: *selectSelectOptionParams,
+		ServiceData: SelectSelectOptionParams{},
 	}
 	return s
 }
@@ -36,6 +36,10 @@ type SelectSelectOptionParams struct {
 	Option *string `json:"option,omitempty"`
 }
 
+func (s *SelectSelectOption) Option(option string) *SelectSelectOption {
+	s.ServiceData.Option = &option
+	return s
+}
 func (s *SelectSelectOption) JSON() string {
 	data, _ := json.Marshal(s)
 	return string(data)

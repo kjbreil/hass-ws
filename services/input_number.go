@@ -116,7 +116,7 @@ func (i *InputNumberReload) SetID(id *int) {
 
 // NewInputNumberSetValue creates the object that can be sent to Home Assistant for domain input_number, service set_value
 // "Set the value of an input number entity."
-func NewInputNumberSetValue(target Target, inputNumberSetValueParams *InputNumberSetValueParams) *InputNumberSetValue {
+func NewInputNumberSetValue(target Target) *InputNumberSetValue {
 	serviceDomain := "input_number"
 	serviceType := "call_service"
 	serviceService := "set_value"
@@ -128,7 +128,7 @@ func NewInputNumberSetValue(target Target, inputNumberSetValueParams *InputNumbe
 			Target:  target,
 			Type:    &serviceType,
 		},
-		ServiceData: *inputNumberSetValueParams,
+		ServiceData: InputNumberSetValueParams{},
 	}
 	return i
 }
@@ -141,6 +141,10 @@ type InputNumberSetValueParams struct {
 	Value *float64 `json:"value,omitempty"`
 }
 
+func (i *InputNumberSetValue) Value(value float64) *InputNumberSetValue {
+	i.ServiceData.Value = &value
+	return i
+}
 func (i *InputNumberSetValue) JSON() string {
 	data, _ := json.Marshal(i)
 	return string(data)

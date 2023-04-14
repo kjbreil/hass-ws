@@ -34,7 +34,7 @@ func TestHomeassistantReloadConfigEntry_JSON(t *testing.T) {
 		fields *HomeassistantReloadConfigEntry
 		want   string
 	}{{
-		fields: NewHomeassistantReloadConfigEntry(Targets("climate.kitchen"), &HomeassistantReloadConfigEntryParams{EntryId: &entryId}),
+		fields: NewHomeassistantReloadConfigEntry(Targets("climate.kitchen")).EntryId(entryId),
 		name:   "base",
 		want:   "{\"id\":null,\"type\":\"call_service\",\"domain\":\"homeassistant\",\"service\":\"reload_config_entry\",\"target\":{\"entity_id\":[\"climate.kitchen\"]},\"service_data\":{\"entry_id\":\"data\"}}",
 	}}
@@ -116,12 +116,9 @@ func TestHomeassistantSetLocation_JSON(t *testing.T) {
 		fields *HomeassistantSetLocation
 		want   string
 	}{{
-		fields: NewHomeassistantSetLocation(Targets("climate.kitchen"), &HomeassistantSetLocationParams{
-			Latitude:  &latitude,
-			Longitude: &longitude,
-		}),
-		name: "base",
-		want: "{\"id\":null,\"type\":\"call_service\",\"domain\":\"homeassistant\",\"service\":\"set_location\",\"target\":{\"entity_id\":[\"climate.kitchen\"]},\"service_data\":{\"latitude\":\"data\",\"longitude\":\"data\"}}",
+		fields: NewHomeassistantSetLocation(Targets("climate.kitchen")).Latitude(latitude).Longitude(longitude),
+		name:   "base",
+		want:   "{\"id\":null,\"type\":\"call_service\",\"domain\":\"homeassistant\",\"service\":\"set_location\",\"target\":{\"entity_id\":[\"climate.kitchen\"]},\"service_data\":{\"latitude\":\"data\",\"longitude\":\"data\"}}",
 	}}
 	for _, tt := range tests {
 		t.Run(tt.name, func(t *testing.T) {

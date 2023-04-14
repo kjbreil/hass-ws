@@ -11,7 +11,7 @@ import (
 
 // NewLogbookLog creates the object that can be sent to Home Assistant for domain logbook, service log
 // "Create a custom entry in your logbook."
-func NewLogbookLog(target Target, logbookLogParams *LogbookLogParams) *LogbookLog {
+func NewLogbookLog(target Target) *LogbookLog {
 	serviceDomain := "logbook"
 	serviceType := "call_service"
 	serviceService := "log"
@@ -23,7 +23,7 @@ func NewLogbookLog(target Target, logbookLogParams *LogbookLogParams) *LogbookLo
 			Target:  target,
 			Type:    &serviceType,
 		},
-		ServiceData: *logbookLogParams,
+		ServiceData: LogbookLogParams{},
 	}
 	return l
 }
@@ -38,6 +38,18 @@ type LogbookLogParams struct {
 	Name    *string `json:"name,omitempty"`
 }
 
+func (l *LogbookLog) LogbookLogDomain(logbookLogDomain string) *LogbookLog {
+	l.ServiceData.Domain = &logbookLogDomain
+	return l
+}
+func (l *LogbookLog) Message(message string) *LogbookLog {
+	l.ServiceData.Message = &message
+	return l
+}
+func (l *LogbookLog) LogbookLogName(logbookLogName string) *LogbookLog {
+	l.ServiceData.Name = &logbookLogName
+	return l
+}
 func (l *LogbookLog) JSON() string {
 	data, _ := json.Marshal(l)
 	return string(data)

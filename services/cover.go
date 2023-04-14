@@ -151,7 +151,7 @@ func (c *CoverOpenCoverTilt) SetID(id *int) {
 
 // NewCoverSetCoverPosition creates the object that can be sent to Home Assistant for domain cover, service set_cover_position
 // "Move to specific position all or specified cover."
-func NewCoverSetCoverPosition(target Target, coverSetCoverPositionParams *CoverSetCoverPositionParams) *CoverSetCoverPosition {
+func NewCoverSetCoverPosition(target Target) *CoverSetCoverPosition {
 	serviceDomain := "cover"
 	serviceType := "call_service"
 	serviceService := "set_cover_position"
@@ -163,7 +163,7 @@ func NewCoverSetCoverPosition(target Target, coverSetCoverPositionParams *CoverS
 			Target:  target,
 			Type:    &serviceType,
 		},
-		ServiceData: *coverSetCoverPositionParams,
+		ServiceData: CoverSetCoverPositionParams{},
 	}
 	return c
 }
@@ -176,6 +176,10 @@ type CoverSetCoverPositionParams struct {
 	Position *float64 `json:"position,omitempty"`
 }
 
+func (c *CoverSetCoverPosition) Position(position float64) *CoverSetCoverPosition {
+	c.ServiceData.Position = &position
+	return c
+}
 func (c *CoverSetCoverPosition) JSON() string {
 	data, _ := json.Marshal(c)
 	return string(data)
@@ -189,7 +193,7 @@ func (c *CoverSetCoverPosition) SetID(id *int) {
 
 // NewCoverSetCoverTiltPosition creates the object that can be sent to Home Assistant for domain cover, service set_cover_tilt_position
 // "Move to specific position all or specified cover tilt."
-func NewCoverSetCoverTiltPosition(target Target, coverSetCoverTiltPositionParams *CoverSetCoverTiltPositionParams) *CoverSetCoverTiltPosition {
+func NewCoverSetCoverTiltPosition(target Target) *CoverSetCoverTiltPosition {
 	serviceDomain := "cover"
 	serviceType := "call_service"
 	serviceService := "set_cover_tilt_position"
@@ -201,7 +205,7 @@ func NewCoverSetCoverTiltPosition(target Target, coverSetCoverTiltPositionParams
 			Target:  target,
 			Type:    &serviceType,
 		},
-		ServiceData: *coverSetCoverTiltPositionParams,
+		ServiceData: CoverSetCoverTiltPositionParams{},
 	}
 	return c
 }
@@ -214,6 +218,10 @@ type CoverSetCoverTiltPositionParams struct {
 	TiltPosition *float64 `json:"tilt_position,omitempty"`
 }
 
+func (c *CoverSetCoverTiltPosition) TiltPosition(tiltPosition float64) *CoverSetCoverTiltPosition {
+	c.ServiceData.TiltPosition = &tiltPosition
+	return c
+}
 func (c *CoverSetCoverTiltPosition) JSON() string {
 	data, _ := json.Marshal(c)
 	return string(data)

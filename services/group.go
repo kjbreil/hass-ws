@@ -81,7 +81,7 @@ func (g *GroupRemove) SetID(id *int) {
 
 // NewGroupSet creates the object that can be sent to Home Assistant for domain group, service set
 // "Create/Update a user group."
-func NewGroupSet(target Target, groupSetParams *GroupSetParams) *GroupSet {
+func NewGroupSet(target Target) *GroupSet {
 	serviceDomain := "group"
 	serviceType := "call_service"
 	serviceService := "set"
@@ -93,7 +93,7 @@ func NewGroupSet(target Target, groupSetParams *GroupSetParams) *GroupSet {
 			Target:  target,
 			Type:    &serviceType,
 		},
-		ServiceData: *groupSetParams,
+		ServiceData: GroupSetParams{},
 	}
 	return g
 }
@@ -107,6 +107,14 @@ type GroupSetParams struct {
 	ObjectId *string `json:"object_id,omitempty"`
 }
 
+func (g *GroupSet) GroupSetName(groupSetName string) *GroupSet {
+	g.ServiceData.Name = &groupSetName
+	return g
+}
+func (g *GroupSet) ObjectId(objectId string) *GroupSet {
+	g.ServiceData.ObjectId = &objectId
+	return g
+}
 func (g *GroupSet) JSON() string {
 	data, _ := json.Marshal(g)
 	return string(data)

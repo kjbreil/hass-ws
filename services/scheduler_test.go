@@ -7,7 +7,7 @@ import "testing"
 ////////////////////////////////////////////////////////////////////////////////
 
 func TestSchedulerAdd_JSON(t *testing.T) {
-	name := "data"
+	schedulerAddName := "data"
 	repeatType := RepeatTypepause
 
 	tests := []struct {
@@ -15,12 +15,9 @@ func TestSchedulerAdd_JSON(t *testing.T) {
 		fields *SchedulerAdd
 		want   string
 	}{{
-		fields: NewSchedulerAdd(Targets("climate.kitchen"), &SchedulerAddParams{
-			Name:       &name,
-			RepeatType: &repeatType,
-		}),
-		name: "base",
-		want: "{\"id\":null,\"type\":\"call_service\",\"domain\":\"scheduler\",\"service\":\"add\",\"target\":{\"entity_id\":[\"climate.kitchen\"]},\"service_data\":{\"name\":\"data\",\"repeat_type\":\"pause\"}}",
+		fields: NewSchedulerAdd(Targets("climate.kitchen")).SchedulerAddName(schedulerAddName).RepeatType(repeatType),
+		name:   "base",
+		want:   "{\"id\":null,\"type\":\"call_service\",\"domain\":\"scheduler\",\"service\":\"add\",\"target\":{\"entity_id\":[\"climate.kitchen\"]},\"service_data\":{\"name\":\"data\",\"repeat_type\":\"pause\"}}",
 	}}
 	for _, tt := range tests {
 		t.Run(tt.name, func(t *testing.T) {
@@ -32,14 +29,14 @@ func TestSchedulerAdd_JSON(t *testing.T) {
 	}
 }
 func TestSchedulerCopy_JSON(t *testing.T) {
-	name := "data"
+	schedulerCopyName := "data"
 
 	tests := []struct {
 		name   string
 		fields *SchedulerCopy
 		want   string
 	}{{
-		fields: NewSchedulerCopy(Targets("climate.kitchen"), &SchedulerCopyParams{Name: &name}),
+		fields: NewSchedulerCopy(Targets("climate.kitchen")).SchedulerCopyName(schedulerCopyName),
 		name:   "base",
 		want:   "{\"id\":null,\"type\":\"call_service\",\"domain\":\"scheduler\",\"service\":\"copy\",\"target\":{\"entity_id\":[\"climate.kitchen\"]},\"service_data\":{\"name\":\"data\"}}",
 	}}
@@ -53,7 +50,7 @@ func TestSchedulerCopy_JSON(t *testing.T) {
 	}
 }
 func TestSchedulerEdit_JSON(t *testing.T) {
-	name := "data"
+	schedulerEditName := "data"
 	repeatType := RepeatTypepause
 
 	tests := []struct {
@@ -61,12 +58,9 @@ func TestSchedulerEdit_JSON(t *testing.T) {
 		fields *SchedulerEdit
 		want   string
 	}{{
-		fields: NewSchedulerEdit(Targets("climate.kitchen"), &SchedulerEditParams{
-			Name:       &name,
-			RepeatType: &repeatType,
-		}),
-		name: "base",
-		want: "{\"id\":null,\"type\":\"call_service\",\"domain\":\"scheduler\",\"service\":\"edit\",\"target\":{\"entity_id\":[\"climate.kitchen\"]},\"service_data\":{\"name\":\"data\",\"repeat_type\":\"pause\"}}",
+		fields: NewSchedulerEdit(Targets("climate.kitchen")).SchedulerEditName(schedulerEditName).RepeatType(repeatType),
+		name:   "base",
+		want:   "{\"id\":null,\"type\":\"call_service\",\"domain\":\"scheduler\",\"service\":\"edit\",\"target\":{\"entity_id\":[\"climate.kitchen\"]},\"service_data\":{\"name\":\"data\",\"repeat_type\":\"pause\"}}",
 	}}
 	for _, tt := range tests {
 		t.Run(tt.name, func(t *testing.T) {

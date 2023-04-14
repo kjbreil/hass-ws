@@ -94,7 +94,7 @@ func TestCoverSetCoverPosition_JSON(t *testing.T) {
 		fields *CoverSetCoverPosition
 		want   string
 	}{{
-		fields: NewCoverSetCoverPosition(Targets("climate.kitchen"), &CoverSetCoverPositionParams{Position: &position}),
+		fields: NewCoverSetCoverPosition(Targets("climate.kitchen")).Position(position),
 		name:   "base",
 		want:   "{\"id\":null,\"type\":\"call_service\",\"domain\":\"cover\",\"service\":\"set_cover_position\",\"target\":{\"entity_id\":[\"climate.kitchen\"]},\"service_data\":{\"position\":1.2}}",
 	}}
@@ -115,7 +115,7 @@ func TestCoverSetCoverTiltPosition_JSON(t *testing.T) {
 		fields *CoverSetCoverTiltPosition
 		want   string
 	}{{
-		fields: NewCoverSetCoverTiltPosition(Targets("climate.kitchen"), &CoverSetCoverTiltPositionParams{TiltPosition: &tiltPosition}),
+		fields: NewCoverSetCoverTiltPosition(Targets("climate.kitchen")).TiltPosition(tiltPosition),
 		name:   "base",
 		want:   "{\"id\":null,\"type\":\"call_service\",\"domain\":\"cover\",\"service\":\"set_cover_tilt_position\",\"target\":{\"entity_id\":[\"climate.kitchen\"]},\"service_data\":{\"tilt_position\":1.2}}",
 	}}

@@ -14,7 +14,7 @@ func TestSceneApply_JSON(t *testing.T) {
 		fields *SceneApply
 		want   string
 	}{{
-		fields: NewSceneApply(Targets("climate.kitchen"), &SceneApplyParams{Transition: &transition}),
+		fields: NewSceneApply(Targets("climate.kitchen")).Transition(transition),
 		name:   "base",
 		want:   "{\"id\":null,\"type\":\"call_service\",\"domain\":\"scene\",\"service\":\"apply\",\"target\":{\"entity_id\":[\"climate.kitchen\"]},\"service_data\":{\"transition\":1.2}}",
 	}}
@@ -35,7 +35,7 @@ func TestSceneCreate_JSON(t *testing.T) {
 		fields *SceneCreate
 		want   string
 	}{{
-		fields: NewSceneCreate(Targets("climate.kitchen"), &SceneCreateParams{SceneId: &sceneId}),
+		fields: NewSceneCreate(Targets("climate.kitchen")).SceneId(sceneId),
 		name:   "base",
 		want:   "{\"id\":null,\"type\":\"call_service\",\"domain\":\"scene\",\"service\":\"create\",\"target\":{\"entity_id\":[\"climate.kitchen\"]},\"service_data\":{\"scene_id\":\"data\"}}",
 	}}
@@ -76,7 +76,7 @@ func TestSceneTurnOn_JSON(t *testing.T) {
 		fields *SceneTurnOn
 		want   string
 	}{{
-		fields: NewSceneTurnOn(Targets("climate.kitchen"), &SceneTurnOnParams{Transition: &transition}),
+		fields: NewSceneTurnOn(Targets("climate.kitchen")).Transition(transition),
 		name:   "base",
 		want:   "{\"id\":null,\"type\":\"call_service\",\"domain\":\"scene\",\"service\":\"turn_on\",\"target\":{\"entity_id\":[\"climate.kitchen\"]},\"service_data\":{\"transition\":1.2}}",
 	}}

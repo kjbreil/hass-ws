@@ -34,7 +34,7 @@ func TestFrontendSetTheme_JSON(t *testing.T) {
 		fields *FrontendSetTheme
 		want   string
 	}{{
-		fields: NewFrontendSetTheme(Targets("climate.kitchen"), &FrontendSetThemeParams{Mode: &mode}),
+		fields: NewFrontendSetTheme(Targets("climate.kitchen")).Mode(mode),
 		name:   "base",
 		want:   "{\"id\":null,\"type\":\"call_service\",\"domain\":\"frontend\",\"service\":\"set_theme\",\"target\":{\"entity_id\":[\"climate.kitchen\"]},\"service_data\":{\"mode\":\"dark\"}}",
 	}}

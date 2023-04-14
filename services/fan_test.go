@@ -14,7 +14,7 @@ func TestFanDecreaseSpeed_JSON(t *testing.T) {
 		fields *FanDecreaseSpeed
 		want   string
 	}{{
-		fields: NewFanDecreaseSpeed(Targets("climate.kitchen"), &FanDecreaseSpeedParams{PercentageStep: &percentageStep}),
+		fields: NewFanDecreaseSpeed(Targets("climate.kitchen")).PercentageStep(percentageStep),
 		name:   "base",
 		want:   "{\"id\":null,\"type\":\"call_service\",\"domain\":\"fan\",\"service\":\"decrease_speed\",\"target\":{\"entity_id\":[\"climate.kitchen\"]},\"service_data\":{\"percentage_step\":1.2}}",
 	}}
@@ -35,7 +35,7 @@ func TestFanIncreaseSpeed_JSON(t *testing.T) {
 		fields *FanIncreaseSpeed
 		want   string
 	}{{
-		fields: NewFanIncreaseSpeed(Targets("climate.kitchen"), &FanIncreaseSpeedParams{PercentageStep: &percentageStep}),
+		fields: NewFanIncreaseSpeed(Targets("climate.kitchen")).PercentageStep(percentageStep),
 		name:   "base",
 		want:   "{\"id\":null,\"type\":\"call_service\",\"domain\":\"fan\",\"service\":\"increase_speed\",\"target\":{\"entity_id\":[\"climate.kitchen\"]},\"service_data\":{\"percentage_step\":1.2}}",
 	}}
@@ -76,7 +76,7 @@ func TestFanSetDirection_JSON(t *testing.T) {
 		fields *FanSetDirection
 		want   string
 	}{{
-		fields: NewFanSetDirection(Targets("climate.kitchen"), &FanSetDirectionParams{Direction: &direction}),
+		fields: NewFanSetDirection(Targets("climate.kitchen")).Direction(direction),
 		name:   "base",
 		want:   "{\"id\":null,\"type\":\"call_service\",\"domain\":\"fan\",\"service\":\"set_direction\",\"target\":{\"entity_id\":[\"climate.kitchen\"]},\"service_data\":{\"direction\":\"forward\"}}",
 	}}
@@ -97,7 +97,7 @@ func TestFanSetPercentage_JSON(t *testing.T) {
 		fields *FanSetPercentage
 		want   string
 	}{{
-		fields: NewFanSetPercentage(Targets("climate.kitchen"), &FanSetPercentageParams{Percentage: &percentage}),
+		fields: NewFanSetPercentage(Targets("climate.kitchen")).Percentage(percentage),
 		name:   "base",
 		want:   "{\"id\":null,\"type\":\"call_service\",\"domain\":\"fan\",\"service\":\"set_percentage\",\"target\":{\"entity_id\":[\"climate.kitchen\"]},\"service_data\":{\"percentage\":1.2}}",
 	}}
@@ -118,7 +118,7 @@ func TestFanSetPresetMode_JSON(t *testing.T) {
 		fields *FanSetPresetMode
 		want   string
 	}{{
-		fields: NewFanSetPresetMode(Targets("climate.kitchen"), &FanSetPresetModeParams{PresetMode: &presetMode}),
+		fields: NewFanSetPresetMode(Targets("climate.kitchen")).PresetMode(presetMode),
 		name:   "base",
 		want:   "{\"id\":null,\"type\":\"call_service\",\"domain\":\"fan\",\"service\":\"set_preset_mode\",\"target\":{\"entity_id\":[\"climate.kitchen\"]},\"service_data\":{\"preset_mode\":\"data\"}}",
 	}}
@@ -181,13 +181,9 @@ func TestFanTurnOn_JSON(t *testing.T) {
 		fields *FanTurnOn
 		want   string
 	}{{
-		fields: NewFanTurnOn(Targets("climate.kitchen"), &FanTurnOnParams{
-			Percentage: &percentage,
-			PresetMode: &presetMode,
-			Speed:      &speed,
-		}),
-		name: "base",
-		want: "{\"id\":null,\"type\":\"call_service\",\"domain\":\"fan\",\"service\":\"turn_on\",\"target\":{\"entity_id\":[\"climate.kitchen\"]},\"service_data\":{\"percentage\":1.2,\"preset_mode\":\"data\",\"speed\":\"data\"}}",
+		fields: NewFanTurnOn(Targets("climate.kitchen")).Percentage(percentage).PresetMode(presetMode).Speed(speed),
+		name:   "base",
+		want:   "{\"id\":null,\"type\":\"call_service\",\"domain\":\"fan\",\"service\":\"turn_on\",\"target\":{\"entity_id\":[\"climate.kitchen\"]},\"service_data\":{\"percentage\":1.2,\"preset_mode\":\"data\",\"speed\":\"data\"}}",
 	}}
 	for _, tt := range tests {
 		t.Run(tt.name, func(t *testing.T) {

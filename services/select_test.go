@@ -14,7 +14,7 @@ func TestSelectSelectOption_JSON(t *testing.T) {
 		fields *SelectSelectOption
 		want   string
 	}{{
-		fields: NewSelectSelectOption(Targets("climate.kitchen"), &SelectSelectOptionParams{Option: &option}),
+		fields: NewSelectSelectOption(Targets("climate.kitchen")).Option(option),
 		name:   "base",
 		want:   "{\"id\":null,\"type\":\"call_service\",\"domain\":\"select\",\"service\":\"select_option\",\"target\":{\"entity_id\":[\"climate.kitchen\"]},\"service_data\":{\"option\":\"data\"}}",
 	}}

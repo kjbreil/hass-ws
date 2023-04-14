@@ -81,7 +81,7 @@ func (r *RecorderEnable) SetID(id *int) {
 
 // NewRecorderPurge creates the object that can be sent to Home Assistant for domain recorder, service purge
 // "Start purge task - to clean up old data from your database."
-func NewRecorderPurge(target Target, recorderPurgeParams *RecorderPurgeParams) *RecorderPurge {
+func NewRecorderPurge(target Target) *RecorderPurge {
 	serviceDomain := "recorder"
 	serviceType := "call_service"
 	serviceService := "purge"
@@ -93,7 +93,7 @@ func NewRecorderPurge(target Target, recorderPurgeParams *RecorderPurgeParams) *
 			Target:  target,
 			Type:    &serviceType,
 		},
-		ServiceData: *recorderPurgeParams,
+		ServiceData: RecorderPurgeParams{},
 	}
 	return r
 }
@@ -106,6 +106,10 @@ type RecorderPurgeParams struct {
 	KeepDays *float64 `json:"keep_days,omitempty"`
 }
 
+func (r *RecorderPurge) KeepDays(keepDays float64) *RecorderPurge {
+	r.ServiceData.KeepDays = &keepDays
+	return r
+}
 func (r *RecorderPurge) JSON() string {
 	data, _ := json.Marshal(r)
 	return string(data)

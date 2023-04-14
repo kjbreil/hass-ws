@@ -47,7 +47,7 @@ func TestGroupRemove_JSON(t *testing.T) {
 	}
 }
 func TestGroupSet_JSON(t *testing.T) {
-	name := "data"
+	groupSetName := "data"
 	objectId := "data"
 
 	tests := []struct {
@@ -55,12 +55,9 @@ func TestGroupSet_JSON(t *testing.T) {
 		fields *GroupSet
 		want   string
 	}{{
-		fields: NewGroupSet(Targets("climate.kitchen"), &GroupSetParams{
-			Name:     &name,
-			ObjectId: &objectId,
-		}),
-		name: "base",
-		want: "{\"id\":null,\"type\":\"call_service\",\"domain\":\"group\",\"service\":\"set\",\"target\":{\"entity_id\":[\"climate.kitchen\"]},\"service_data\":{\"name\":\"data\",\"object_id\":\"data\"}}",
+		fields: NewGroupSet(Targets("climate.kitchen")).GroupSetName(groupSetName).ObjectId(objectId),
+		name:   "base",
+		want:   "{\"id\":null,\"type\":\"call_service\",\"domain\":\"group\",\"service\":\"set\",\"target\":{\"entity_id\":[\"climate.kitchen\"]},\"service_data\":{\"name\":\"data\",\"object_id\":\"data\"}}",
 	}}
 	for _, tt := range tests {
 		t.Run(tt.name, func(t *testing.T) {

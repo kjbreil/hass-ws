@@ -81,7 +81,7 @@ func (c *CameraEnableMotionDetection) SetID(id *int) {
 
 // NewCameraPlayStream creates the object that can be sent to Home Assistant for domain camera, service play_stream
 // "Play camera stream on supported media player."
-func NewCameraPlayStream(target Target, cameraPlayStreamParams *CameraPlayStreamParams) *CameraPlayStream {
+func NewCameraPlayStream(target Target) *CameraPlayStream {
 	serviceDomain := "camera"
 	serviceType := "call_service"
 	serviceService := "play_stream"
@@ -93,7 +93,7 @@ func NewCameraPlayStream(target Target, cameraPlayStreamParams *CameraPlayStream
 			Target:  target,
 			Type:    &serviceType,
 		},
-		ServiceData: *cameraPlayStreamParams,
+		ServiceData: CameraPlayStreamParams{},
 	}
 	return c
 }
@@ -106,6 +106,10 @@ type CameraPlayStreamParams struct {
 	Format *Format `json:"format,omitempty"`
 }
 
+func (c *CameraPlayStream) Format(format Format) *CameraPlayStream {
+	c.ServiceData.Format = &format
+	return c
+}
 func (c *CameraPlayStream) JSON() string {
 	data, _ := json.Marshal(c)
 	return string(data)
@@ -119,7 +123,7 @@ func (c *CameraPlayStream) SetID(id *int) {
 
 // NewCameraRecord creates the object that can be sent to Home Assistant for domain camera, service record
 // "Record live camera feed."
-func NewCameraRecord(target Target, cameraRecordParams *CameraRecordParams) *CameraRecord {
+func NewCameraRecord(target Target) *CameraRecord {
 	serviceDomain := "camera"
 	serviceType := "call_service"
 	serviceService := "record"
@@ -131,7 +135,7 @@ func NewCameraRecord(target Target, cameraRecordParams *CameraRecordParams) *Cam
 			Target:  target,
 			Type:    &serviceType,
 		},
-		ServiceData: *cameraRecordParams,
+		ServiceData: CameraRecordParams{},
 	}
 	return c
 }
@@ -146,6 +150,18 @@ type CameraRecordParams struct {
 	Lookback *float64 `json:"lookback,omitempty"`
 }
 
+func (c *CameraRecord) Duration(duration float64) *CameraRecord {
+	c.ServiceData.Duration = &duration
+	return c
+}
+func (c *CameraRecord) Filename(filename string) *CameraRecord {
+	c.ServiceData.Filename = &filename
+	return c
+}
+func (c *CameraRecord) Lookback(lookback float64) *CameraRecord {
+	c.ServiceData.Lookback = &lookback
+	return c
+}
 func (c *CameraRecord) JSON() string {
 	data, _ := json.Marshal(c)
 	return string(data)
@@ -159,7 +175,7 @@ func (c *CameraRecord) SetID(id *int) {
 
 // NewCameraSnapshot creates the object that can be sent to Home Assistant for domain camera, service snapshot
 // "Take a snapshot from a camera."
-func NewCameraSnapshot(target Target, cameraSnapshotParams *CameraSnapshotParams) *CameraSnapshot {
+func NewCameraSnapshot(target Target) *CameraSnapshot {
 	serviceDomain := "camera"
 	serviceType := "call_service"
 	serviceService := "snapshot"
@@ -171,7 +187,7 @@ func NewCameraSnapshot(target Target, cameraSnapshotParams *CameraSnapshotParams
 			Target:  target,
 			Type:    &serviceType,
 		},
-		ServiceData: *cameraSnapshotParams,
+		ServiceData: CameraSnapshotParams{},
 	}
 	return c
 }
@@ -184,6 +200,10 @@ type CameraSnapshotParams struct {
 	Filename *string `json:"filename,omitempty"`
 }
 
+func (c *CameraSnapshot) Filename(filename string) *CameraSnapshot {
+	c.ServiceData.Filename = &filename
+	return c
+}
 func (c *CameraSnapshot) JSON() string {
 	data, _ := json.Marshal(c)
 	return string(data)

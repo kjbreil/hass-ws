@@ -11,7 +11,7 @@ import (
 
 // NewHueActivateScene creates the object that can be sent to Home Assistant for domain hue, service activate_scene
 // "Activate a Hue scene with more control over the options."
-func NewHueActivateScene(target Target, hueActivateSceneParams *HueActivateSceneParams) *HueActivateScene {
+func NewHueActivateScene(target Target) *HueActivateScene {
 	serviceDomain := "hue"
 	serviceType := "call_service"
 	serviceService := "activate_scene"
@@ -23,7 +23,7 @@ func NewHueActivateScene(target Target, hueActivateSceneParams *HueActivateScene
 			Target:  target,
 			Type:    &serviceType,
 		},
-		ServiceData: *hueActivateSceneParams,
+		ServiceData: HueActivateSceneParams{},
 	}
 	return h
 }
@@ -38,6 +38,18 @@ type HueActivateSceneParams struct {
 	Transition *float64 `json:"transition,omitempty"`
 }
 
+func (h *HueActivateScene) Brightness(brightness float64) *HueActivateScene {
+	h.ServiceData.Brightness = &brightness
+	return h
+}
+func (h *HueActivateScene) Speed(speed float64) *HueActivateScene {
+	h.ServiceData.Speed = &speed
+	return h
+}
+func (h *HueActivateScene) Transition(transition float64) *HueActivateScene {
+	h.ServiceData.Transition = &transition
+	return h
+}
 func (h *HueActivateScene) JSON() string {
 	data, _ := json.Marshal(h)
 	return string(data)
@@ -51,7 +63,7 @@ func (h *HueActivateScene) SetID(id *int) {
 
 // NewHueHueActivateScene creates the object that can be sent to Home Assistant for domain hue, service hue_activate_scene
 // "Activate a hue scene stored in the hue hub."
-func NewHueHueActivateScene(target Target, hueHueActivateSceneParams *HueHueActivateSceneParams) *HueHueActivateScene {
+func NewHueHueActivateScene(target Target) *HueHueActivateScene {
 	serviceDomain := "hue"
 	serviceType := "call_service"
 	serviceService := "hue_activate_scene"
@@ -63,7 +75,7 @@ func NewHueHueActivateScene(target Target, hueHueActivateSceneParams *HueHueActi
 			Target:  target,
 			Type:    &serviceType,
 		},
-		ServiceData: *hueHueActivateSceneParams,
+		ServiceData: HueHueActivateSceneParams{},
 	}
 	return h
 }
@@ -77,6 +89,14 @@ type HueHueActivateSceneParams struct {
 	SceneName *string `json:"scene_name,omitempty"`
 }
 
+func (h *HueHueActivateScene) GroupName(groupName string) *HueHueActivateScene {
+	h.ServiceData.GroupName = &groupName
+	return h
+}
+func (h *HueHueActivateScene) SceneName(sceneName string) *HueHueActivateScene {
+	h.ServiceData.SceneName = &sceneName
+	return h
+}
 func (h *HueHueActivateScene) JSON() string {
 	data, _ := json.Marshal(h)
 	return string(data)

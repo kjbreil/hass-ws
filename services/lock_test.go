@@ -14,7 +14,7 @@ func TestLockLock_JSON(t *testing.T) {
 		fields *LockLock
 		want   string
 	}{{
-		fields: NewLockLock(Targets("climate.kitchen"), &LockLockParams{Code: &code}),
+		fields: NewLockLock(Targets("climate.kitchen")).Code(code),
 		name:   "base",
 		want:   "{\"id\":null,\"type\":\"call_service\",\"domain\":\"lock\",\"service\":\"lock\",\"target\":{\"entity_id\":[\"climate.kitchen\"]},\"service_data\":{\"code\":\"data\"}}",
 	}}
@@ -35,7 +35,7 @@ func TestLockOpen_JSON(t *testing.T) {
 		fields *LockOpen
 		want   string
 	}{{
-		fields: NewLockOpen(Targets("climate.kitchen"), &LockOpenParams{Code: &code}),
+		fields: NewLockOpen(Targets("climate.kitchen")).Code(code),
 		name:   "base",
 		want:   "{\"id\":null,\"type\":\"call_service\",\"domain\":\"lock\",\"service\":\"open\",\"target\":{\"entity_id\":[\"climate.kitchen\"]},\"service_data\":{\"code\":\"data\"}}",
 	}}
@@ -56,7 +56,7 @@ func TestLockUnlock_JSON(t *testing.T) {
 		fields *LockUnlock
 		want   string
 	}{{
-		fields: NewLockUnlock(Targets("climate.kitchen"), &LockUnlockParams{Code: &code}),
+		fields: NewLockUnlock(Targets("climate.kitchen")).Code(code),
 		name:   "base",
 		want:   "{\"id\":null,\"type\":\"call_service\",\"domain\":\"lock\",\"service\":\"unlock\",\"target\":{\"entity_id\":[\"climate.kitchen\"]},\"service_data\":{\"code\":\"data\"}}",
 	}}
