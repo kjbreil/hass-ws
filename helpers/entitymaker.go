@@ -114,128 +114,91 @@ func GenEntities() error {
 			}
 		})
 
-		models[v].Func().Params(
-			jen.Id("o").Op("*").Id("OnTypeHandlers"),
-		).Id("Run").Params(
-			jen.Id("message").Op("*").Id("Message"),
-		).Bool().Block(
-			jen.If(jen.Id("message").Dot("Event").Op("==").Id("nil").Op("||").
-				Id("message").Dot("Event").Dot("Data").Op("==").Id("nil").Op("||").
-				Id("message").Dot("Event").Dot("Data").Dot("EntityId").Op("==").Id("nil")).
-				Block(jen.Return().False()),
+		makeRunOnTypeHandlers(models, v, sortedKeys)
+
+		makeRunStatesOnTypeHandlers(models, v, sortedKeys)
+
+		models[v].Type().Id("OnEntityHandlers").Map(jen.String()).Func().Params(jen.Id("message").Op("*").Id("Message"))
+
+		makeRunOnEntityHandlers(models, v)
+
+		makeRunStatesOnEntityHandlers(models, v)
+	}
+
+	for k, v := range entities {
+		err := v.Save(fmt.Sprintf("./%s/%s.go", entitiesFolder, k))
+		if err != nil {
+			return err
+		}
+	}
+
+	for k, v := range models {
+		err := v.Save(fmt.Sprintf("./%s/%s.go", modelFolder, k))
+		if err != nil {
+			return err
+		}
+	}
+	return nil
+}
+
+func makeRunOnTypeHandlers(models map[string]*jen.File, v string, sortedKeys []string) {
+	models[v].Func().Params(
+		jen.Id("o").Op("*").Id("OnTypeHandlers"),
+	).Id("Run").Params(
+		jen.Id("message").Op("*").Id("Message"),
+	).Bool().Block(
+		jen.If(jen.Id("message").Dot("Event").Op("==").Id("nil").Op("||").
+			Id("message").Dot("Event").Dot("Data").Op("==").Id("nil").Op("||").
+			Id("message").Dot("Event").Dot("Data").Dot("EntityId").Op("==").Id("nil")).
+			Block(jen.Return().False()),
+		jen.Id("entityType").Op(":=").Qual("strings", "Split").Params(
+			jen.Op("*").Id("message").Dot("Event").Dot("Data").Dot("EntityId"),
+			jen.Lit("."),
+		).Id("[0]"),
+
+		jen.Switch(jen.Id("entityType")).BlockFunc(func(g *jen.Group) {
+			for i := 0; i < len(sortedKeys); i++ {
+				camelName := strcase.ToCamel(sortedKeys[i])
+				underName := strcase.ToSnake(sortedKeys[i])
+				g.Add(jen.Case(jen.Lit(underName)).Block(
+					jen.If(jen.Id("o").Dot(fmt.Sprintf("On%s", camelName)).Op("==").Id("nil")).Block(jen.Return().True()),
+					jen.Id("newAttrs").Op(":=").Qual("github.com/kjbreil/hass-ws/entities", fmt.Sprintf("Get%s", camelName)).Params(jen.Id("message").Dot("Event").Dot("Data").Dot("NewState").Dot("Attributes")),
+
+					jen.Id("oldAttrs").Op(":=").Op("&").Qual("github.com/kjbreil/hass-ws/entities", fmt.Sprintf("%s", camelName)).Block(),
+					jen.If(jen.Id("message").Dot("Event").Dot("Data").Dot("OldState").Op("!=").Id("nil")).Block(
+						jen.Id("oldAttrs").Op("=").Qual("github.com/kjbreil/hass-ws/entities", fmt.Sprintf("Get%s", camelName)).Params(jen.Id("message").Dot("Event").Dot("Data").Dot("OldState").Dot("Attributes")),
+					),
+
+					jen.Id("o").Dot(fmt.Sprintf("On%s", camelName)).Params(jen.Id("message"), jen.Id("newAttrs"), jen.Id("oldAttrs")),
+				))
+
+			}
+		}),
+		jen.Return().False(),
+	)
+}
+
+func makeRunStatesOnTypeHandlers(models map[string]*jen.File, v string, sortedKeys []string) {
+	models[v].Func().Params(
+		jen.Id("o").Op("*").Id("OnTypeHandlers"),
+	).Id("RunStates").Params(
+		jen.Id("message").Op("*").Id("Message"),
+	).Block(
+		jen.If(jen.Id("message").Dot("Result").Op("==").Id("nil")).
+			Block(jen.Return()),
+		jen.For(jen.Id("_").Op(",").Id("r").Op(":=").Range().Id("message").Dot("Result")).Block(
+
 			jen.Id("entityType").Op(":=").Qual("strings", "Split").Params(
-				jen.Op("*").Id("message").Dot("Event").Dot("Data").Dot("EntityId"),
+				jen.Op("*").Id("r").Dot("EntityId"),
 				jen.Lit("."),
 			).Id("[0]"),
-
 			jen.Switch(jen.Id("entityType")).BlockFunc(func(g *jen.Group) {
 				for i := 0; i < len(sortedKeys); i++ {
 					camelName := strcase.ToCamel(sortedKeys[i])
 					underName := strcase.ToSnake(sortedKeys[i])
 					g.Add(jen.Case(jen.Lit(underName)).Block(
-						jen.If(jen.Id("o").Dot(fmt.Sprintf("On%s", camelName)).Op("==").Id("nil")).Block(jen.Return().True()),
-						jen.Id("newAttrs").Op(":=").Qual("github.com/kjbreil/hass-ws/entities", fmt.Sprintf("Get%s", camelName)).Params(jen.Id("message").Dot("Event").Dot("Data").Dot("NewState").Dot("Attributes")),
-
-						jen.Id("oldAttrs").Op(":=").Op("&").Qual("github.com/kjbreil/hass-ws/entities", fmt.Sprintf("%s", camelName)).Block(),
-						jen.If(jen.Id("message").Dot("Event").Dot("Data").Dot("OldState").Op("!=").Id("nil")).Block(
-							jen.Id("oldAttrs").Op("=").Qual("github.com/kjbreil/hass-ws/entities", fmt.Sprintf("Get%s", camelName)).Params(jen.Id("message").Dot("Event").Dot("Data").Dot("OldState").Dot("Attributes")),
-						),
-
-						jen.Id("o").Dot(fmt.Sprintf("On%s", camelName)).Params(jen.Id("message"), jen.Id("newAttrs"), jen.Id("oldAttrs")),
-					))
-
-				}
-			}),
-			jen.Return().False(),
-		)
-
-		models[v].Func().Params(
-			jen.Id("o").Op("*").Id("OnTypeHandlers"),
-		).Id("RunStates").Params(
-			jen.Id("message").Op("*").Id("Message"),
-		).Block(
-			jen.If(jen.Id("message").Dot("Result").Op("==").Id("nil")).
-				Block(jen.Return()),
-			jen.For(jen.Id("_").Op(",").Id("r").Op(":=").Range().Id("message").Dot("Result")).Block(
-
-				jen.Id("entityType").Op(":=").Qual("strings", "Split").Params(
-					jen.Op("*").Id("r").Dot("EntityId"),
-					jen.Lit("."),
-				).Id("[0]"),
-				jen.Switch(jen.Id("entityType")).BlockFunc(func(g *jen.Group) {
-					for i := 0; i < len(sortedKeys); i++ {
-						camelName := strcase.ToCamel(sortedKeys[i])
-						underName := strcase.ToSnake(sortedKeys[i])
-						g.Add(jen.Case(jen.Lit(underName)).Block(
-							jen.If(jen.Id("o").Dot(fmt.Sprintf("On%s", camelName)).Op("==").Id("nil")).Block(jen.Continue()),
-							jen.Id("newAttrs").Op(":=").Qual("github.com/kjbreil/hass-ws/entities", fmt.Sprintf("Get%s", camelName)).Params(jen.Id("r").Dot("Attributes")),
-							jen.Id("newMsg").Op(":=").Op("&").Id("Message").Values(jen.Dict{
-
-								jen.Id("ID"):   jen.Id("message").Dot("ID"),
-								jen.Id("Type"): jen.Id("MessageTypeEvent"),
-								jen.Id("Event"): jen.Op("&").Id("Event").Values(
-									jen.Dict{
-										jen.Id("Data"): jen.Op("&").Id("Data").Values(jen.Dict{
-											jen.Id("EntityId"): jen.Id("r").Dot("EntityId"),
-											jen.Id("NewState"): jen.Op("&").Id("State").Values(
-												jen.Dict{
-													jen.Id("EntityId"):    jen.Id("r").Dot("EntityId"),
-													jen.Id("LastChanged"): jen.Id("r").Dot("LastChanged"),
-													jen.Id("State"):       jen.Id("r").Dot("EntityState"),
-													jen.Id("Attributes"):  jen.Id("r").Dot("Attributes"),
-													jen.Id("LastUpdated"): jen.Id("r").Dot("LastUpdated"),
-													jen.Id("Context"):     jen.Id("r").Dot("Context"),
-												},
-											),
-											jen.Id("OldState"): jen.Id("nil"),
-										}),
-										jen.Id("Context"):   jen.Id("r").Dot("Context"),
-										jen.Id("EventType"): jen.Id("EventTypeState"),
-									},
-								),
-							},
-							),
-
-							jen.Id("o").Dot(fmt.Sprintf("On%s", camelName)).Params(jen.Id("newMsg"), jen.Id("newAttrs"), jen.Id("nil")),
-						))
-						// .Params(jen.Id("message").Id("newAttrs").Id("oldAttrs"))
-					}
-				}),
-			),
-		)
-
-		models[v].Type().Id("OnEntityHandlers").Map(jen.String()).Func().Params(jen.Id("message").Op("*").Id("Message"))
-
-		models[v].Func().Params(
-			jen.Id("o").Id("OnEntityHandlers"),
-		).Id("Run").Params(
-			jen.Id("message").Op("*").Id("Message"),
-		).Bool().Block(
-			jen.If(jen.Id("message").Dot("Event").Op("==").Id("nil").Op("||").
-				Id("message").Dot("Event").Dot("Data").Op("==").Id("nil").Op("||").
-				Id("message").Dot("Event").Dot("Data").Dot("EntityId").Op("==").Id("nil")).
-				Block(jen.Return().False()),
-			jen.For(jen.Id("k").Op(",").Id("v").Op(":=").Range().Id("o")).Block(
-				jen.If(jen.Id("k").Op("==").Op("*").Id("message").Dot("Event").Dot("Data").Dot("EntityId").Block(
-					jen.Id("v").Call(jen.Id("message")),
-					jen.Return().True(),
-				)),
-			),
-			jen.Return().False(),
-		)
-
-		models[v].Func().Params(
-			jen.Id("o").Id("OnEntityHandlers"),
-		).Id("RunStates").Params(
-			jen.Id("message").Op("*").Id("Message"),
-		).Block(
-			jen.If(jen.Id("message").Dot("Result").Op("==").Id("nil")).
-				Block(jen.Return()),
-			jen.For(jen.Id("_").Op(",").Id("r").Op(":=").Range().Id("message").Dot("Result")).Block(
-				jen.For(jen.Id("k").Op(",").Id("v").Op(":=").Range().Id("o")).Block(
-
-					jen.If(jen.Id("k").Op("==").Op("*").Id("r").Dot("EntityId").Block(
-
+						jen.If(jen.Id("o").Dot(fmt.Sprintf("On%s", camelName)).Op("==").Id("nil")).Block(jen.Continue()),
+						jen.Id("newAttrs").Op(":=").Qual("github.com/kjbreil/hass-ws/entities", fmt.Sprintf("Get%s", camelName)).Params(jen.Id("r").Dot("Attributes")),
 						jen.Id("newMsg").Op(":=").Op("&").Id("Message").Values(jen.Dict{
 
 							jen.Id("ID"):   jen.Id("message").Dot("ID"),
@@ -263,25 +226,78 @@ func GenEntities() error {
 						},
 						),
 
-						jen.Id("v").Call(jen.Id("newMsg")),
-					)),
-				),
+						jen.Id("o").Dot(fmt.Sprintf("On%s", camelName)).Params(jen.Id("newMsg"), jen.Id("newAttrs"), jen.Id("nil")),
+					))
+					// .Params(jen.Id("message").Id("newAttrs").Id("oldAttrs"))
+				}
+			}),
+		),
+	)
+}
+
+func makeRunOnEntityHandlers(models map[string]*jen.File, v string) {
+	models[v].Func().Params(
+		jen.Id("o").Id("OnEntityHandlers"),
+	).Id("Run").Params(
+		jen.Id("message").Op("*").Id("Message"),
+	).Bool().Block(
+		jen.If(jen.Id("message").Dot("Event").Op("==").Id("nil").Op("||").
+			Id("message").Dot("Event").Dot("Data").Op("==").Id("nil").Op("||").
+			Id("message").Dot("Event").Dot("Data").Dot("EntityId").Op("==").Id("nil")).
+			Block(jen.Return().False()),
+		jen.For(jen.Id("k").Op(",").Id("v").Op(":=").Range().Id("o")).Block(
+			jen.If(jen.Id("k").Op("==").Op("*").Id("message").Dot("Event").Dot("Data").Dot("EntityId").Block(
+				jen.Id("v").Call(jen.Id("message")),
+				jen.Return().True(),
+			)),
+		),
+		jen.Return().False(),
+	)
+}
+
+func makeRunStatesOnEntityHandlers(models map[string]*jen.File, v string) {
+	models[v].Func().Params(
+		jen.Id("o").Id("OnEntityHandlers"),
+	).Id("RunStates").Params(
+		jen.Id("message").Op("*").Id("Message"),
+	).Block(
+		jen.If(jen.Id("message").Dot("Result").Op("==").Id("nil")).
+			Block(jen.Return()),
+		jen.For(jen.Id("_").Op(",").Id("r").Op(":=").Range().Id("message").Dot("Result")).Block(
+			jen.For(jen.Id("k").Op(",").Id("v").Op(":=").Range().Id("o")).Block(
+
+				jen.If(jen.Id("k").Op("==").Op("*").Id("r").Dot("EntityId").Block(
+
+					jen.Id("newMsg").Op(":=").Op("&").Id("Message").Values(jen.Dict{
+
+						jen.Id("ID"):   jen.Id("message").Dot("ID"),
+						jen.Id("Type"): jen.Id("MessageTypeEvent"),
+						jen.Id("Event"): jen.Op("&").Id("Event").Values(
+							jen.Dict{
+								jen.Id("Data"): jen.Op("&").Id("Data").Values(jen.Dict{
+									jen.Id("EntityId"): jen.Id("r").Dot("EntityId"),
+									jen.Id("NewState"): jen.Op("&").Id("State").Values(
+										jen.Dict{
+											jen.Id("EntityId"):    jen.Id("r").Dot("EntityId"),
+											jen.Id("LastChanged"): jen.Id("r").Dot("LastChanged"),
+											jen.Id("State"):       jen.Id("r").Dot("EntityState"),
+											jen.Id("Attributes"):  jen.Id("r").Dot("Attributes"),
+											jen.Id("LastUpdated"): jen.Id("r").Dot("LastUpdated"),
+											jen.Id("Context"):     jen.Id("r").Dot("Context"),
+										},
+									),
+									jen.Id("OldState"): jen.Id("nil"),
+								}),
+								jen.Id("Context"):   jen.Id("r").Dot("Context"),
+								jen.Id("EventType"): jen.Id("EventTypeState"),
+							},
+						),
+					},
+					),
+
+					jen.Id("v").Call(jen.Id("newMsg")),
+				)),
 			),
-		)
-	}
-
-	for k, v := range entities {
-		err := v.Save(fmt.Sprintf("./%s/%s.go", entitiesFolder, k))
-		if err != nil {
-			return err
-		}
-	}
-
-	for k, v := range models {
-		err := v.Save(fmt.Sprintf("./%s/%s.go", modelFolder, k))
-		if err != nil {
-			return err
-		}
-	}
-	return nil
+		),
+	)
 }
