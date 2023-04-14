@@ -107,6 +107,10 @@ func (c *Client) GetEntityRegistry() *model.Message {
 	id, _ := c.sendWithCallback(&model.Message{
 		Type: model.MessageTypeGetEntityRegistry,
 	}, callback)
+	return c.handleCallback(id, callback)
+}
+
+func (c *Client) handleCallback(id int, callback chan *model.Message) *model.Message {
 	ticker := time.NewTicker(time.Second * 10)
 	select {
 	case <-ticker.C:
@@ -124,17 +128,7 @@ func (c *Client) GetDeviceRegistry() *model.Message {
 	id, _ := c.sendWithCallback(&model.Message{
 		Type: model.MessageTypeGetDeviceRegistry,
 	}, callback)
-	ticker := time.NewTicker(time.Second * 10)
-	select {
-	case <-ticker.C:
-		c.callbacks.Delete(id)
-		close(callback)
-
-		return nil
-	case message := <-callback:
-		close(callback)
-		return message
-	}
+	return c.handleCallback(id, callback)
 }
 
 func (c *Client) GetServices() *model.Message {
@@ -142,18 +136,7 @@ func (c *Client) GetServices() *model.Message {
 	id, _ := c.sendWithCallback(&model.Message{
 		Type: model.MessageTypeGetServices,
 	}, callback)
-	ticker := time.NewTicker(time.Second * 10)
-	select {
-	case <-ticker.C:
-		c.callbacks.Delete(id)
-		close(callback)
-
-		return nil
-	case message := <-callback:
-		close(callback)
-		return message
-	}
-
+	return c.handleCallback(id, callback)
 }
 
 func (c *Client) CallService(service services.Service) {
@@ -170,7 +153,6 @@ func (c *Client) CallService(service services.Service) {
 			c.logger.Error(fmt.Errorf("service %s error code: %s message: %s", service.Name(), message.Error.Code, message.Error.Message), "Error sending")
 
 		}
-		//c.logger.Info(fmt.Sprintf("callback message received: %v", message))
 		close(callback)
 	}()
 	return

@@ -59,23 +59,29 @@ func (c *Client) Connect() error {
 	// Mark as running
 	c.running = true
 
-	msg := &model.Message{}
-	msg, err = c.read()
-	if err != nil {
-		c.cancel()
-		return fmt.Errorf("read: %w", err)
-	}
-	if msg.Type != model.MessageTypeAuthRequired {
-		return fmt.Errorf("initial response not AuthRequired: %s", msg.Raw)
-	}
-	err = c.send(&model.Message{
-		Type:        model.MessageTypeAuth,
-		AccessToken: &c.config.Token,
-	})
+	// Authorize the websocket connection
+	err = authorize(err, c)
 	if err != nil {
 		return err
 	}
 
+	// Subscribe to the event types
+	err = c.subscribe(err)
+	if err != nil {
+		return err
+	}
+
+	// Run the message receiver
+	c.run()
+
+	if c.InitStates {
+		c.GetStates()
+	}
+
+	return nil
+}
+
+func (c *Client) subscribe(err error) error {
 	for eventType := range c.subscriptions {
 		if eventType == model.EventTypeAll {
 			err = c.send(&model.Message{
@@ -92,15 +98,32 @@ func (c *Client) Connect() error {
 			return err
 		}
 	}
+	return nil
+}
 
-	c.run()
+func authorize(err error, c *Client) error {
+	msg := &model.Message{}
+	msg, err = c.read()
+	if err != nil {
+		c.cancel()
+		return fmt.Errorf("read: %w", err)
+	}
+	if msg.Type != model.MessageTypeAuthRequired {
+		return fmt.Errorf("initial response not AuthRequired: %s", msg.Raw)
+	}
+	callback := make(chan *model.Message)
 
-	// this is needed because Home Assistant might not respond with authorization fast enough
-	// TODO: make authorization into a callback
-	time.Sleep(400 * time.Millisecond)
-
-	if c.InitStates {
-		c.GetStates()
+	var id int
+	id, err = c.sendWithCallback(&model.Message{
+		Type:        model.MessageTypeAuth,
+		AccessToken: &c.config.Token,
+	}, callback)
+	if err != nil {
+		return err
+	}
+	authMsg := c.handleCallback(id, callback)
+	if authMsg == nil {
+		return fmt.Errorf("authorization callback never received")
 	}
 
 	return nil

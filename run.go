@@ -45,6 +45,7 @@ func (c *Client) run() {
 			}
 
 			onTypeRan := c.OnType.Run(message)
+
 			onEntityRan := c.OnEntity.Run(message)
 
 			if !onTypeRan && !onEntityRan && c.OnUnhandled != nil {
