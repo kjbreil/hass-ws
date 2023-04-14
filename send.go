@@ -8,11 +8,8 @@ import (
 )
 
 func (c *Client) sendWithCallback(msg *model.Message, callback chan *model.Message) (int, error) {
-	if msg.Type != model.MessageTypeAuth {
-		msg.ID = c.NextID()
-		c.callbacks.Set(c.id, callback)
-
-	}
+	msg.ID = c.NextID()
+	c.callbacks.Set(c.id, callback)
 
 	d, _ := json.Marshal(msg)
 	err := c.client.Write(c.ctx, websocket.MessageText, d)

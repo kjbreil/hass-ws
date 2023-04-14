@@ -111,19 +111,13 @@ func authorize(err error, c *Client) error {
 	if msg.Type != model.MessageTypeAuthRequired {
 		return fmt.Errorf("initial response not AuthRequired: %s", msg.Raw)
 	}
-	callback := make(chan *model.Message)
 
-	var id int
-	id, err = c.sendWithCallback(&model.Message{
+	err = c.send(&model.Message{
 		Type:        model.MessageTypeAuth,
 		AccessToken: &c.config.Token,
-	}, callback)
+	})
 	if err != nil {
 		return err
-	}
-	authMsg := c.handleCallback(id, callback)
-	if authMsg == nil {
-		return fmt.Errorf("authorization callback never received")
 	}
 
 	return nil
