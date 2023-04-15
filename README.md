@@ -28,9 +28,17 @@ go generate ./...
 ### Calling a Service
 To call a service you create a service and then add options to the service. I recommend using Home Assistant Developer Tools -> Services page to get a better understanding of what is needed for each call each service. There is no reporting of requirements in the service definitions so be warned, some parameters are required and others are not, it is also conditional at times. For example `ClimateSetTemperature{}` needs `TargetTempHigh(float64)` and `TargetTempLow(float64)` when the mode is Heat/Cool however if the mode is Heat or the mode is Cool then `Temperature(float64)` is needed and both `TargetTempHigh(float64)` and `TargetTempLow(float64)` are ignored.
 ```go
+cfg, _ := hass_ws.ParseConfig("config.yml")
+c, _ := hass_ws.NewClient(cfg)
+err := c.Connect()
+if err != nil {
+    panic(err)
+}
+
 service := services.NewClimateSetTemperature(services.Targets("climate.kitchen")).
 		HvacMode(services.HvacModeheat_cool).
 		TargetTempHigh(75).
 		TargetTempLow(65)
-gs.ServiceChan <- service
+
+c.CallService(service)
 ```
