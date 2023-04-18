@@ -1,8 +1,8 @@
 package services
 
 import (
-	"encoding/json"
 	"fmt"
+	gojson "github.com/goccy/go-json"
 )
 
 ////////////////////////////////////////////////////////////////////////////////
@@ -34,7 +34,7 @@ type RecorderDisable struct {
 }
 
 func (r *RecorderDisable) JSON() string {
-	data, _ := json.Marshal(r)
+	data, _ := gojson.Marshal(r)
 	return string(data)
 }
 func (r *RecorderDisable) Name() string {
@@ -69,7 +69,7 @@ type RecorderEnable struct {
 }
 
 func (r *RecorderEnable) JSON() string {
-	data, _ := json.Marshal(r)
+	data, _ := gojson.Marshal(r)
 	return string(data)
 }
 func (r *RecorderEnable) Name() string {
@@ -111,7 +111,7 @@ func (r *RecorderPurge) KeepDays(keepDays float64) *RecorderPurge {
 	return r
 }
 func (r *RecorderPurge) JSON() string {
-	data, _ := json.Marshal(r)
+	data, _ := gojson.Marshal(r)
 	return string(data)
 }
 func (r *RecorderPurge) Name() string {
@@ -146,7 +146,7 @@ type RecorderPurgeEntities struct {
 }
 
 func (r *RecorderPurgeEntities) JSON() string {
-	data, _ := json.Marshal(r)
+	data, _ := gojson.Marshal(r)
 	return string(data)
 }
 func (r *RecorderPurgeEntities) Name() string {

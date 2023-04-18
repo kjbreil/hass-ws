@@ -1,8 +1,8 @@
 package services
 
 import (
-	"encoding/json"
 	"fmt"
+	gojson "github.com/goccy/go-json"
 )
 
 ////////////////////////////////////////////////////////////////////////////////
@@ -46,7 +46,7 @@ func (c *CastShowLovelaceView) ViewPath(viewPath string) *CastShowLovelaceView {
 	return c
 }
 func (c *CastShowLovelaceView) JSON() string {
-	data, _ := json.Marshal(c)
+	data, _ := gojson.Marshal(c)
 	return string(data)
 }
 func (c *CastShowLovelaceView) Name() string {

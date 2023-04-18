@@ -1,8 +1,8 @@
 package services
 
 import (
-	"encoding/json"
 	"fmt"
+	gojson "github.com/goccy/go-json"
 )
 
 ////////////////////////////////////////////////////////////////////////////////
@@ -34,7 +34,7 @@ type PersonReload struct {
 }
 
 func (p *PersonReload) JSON() string {
-	data, _ := json.Marshal(p)
+	data, _ := gojson.Marshal(p)
 	return string(data)
 }
 func (p *PersonReload) Name() string {

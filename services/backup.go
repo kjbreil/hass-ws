@@ -1,8 +1,8 @@
 package services
 
 import (
-	"encoding/json"
 	"fmt"
+	gojson "github.com/goccy/go-json"
 )
 
 ////////////////////////////////////////////////////////////////////////////////
@@ -34,7 +34,7 @@ type BackupCreate struct {
 }
 
 func (b *BackupCreate) JSON() string {
-	data, _ := json.Marshal(b)
+	data, _ := gojson.Marshal(b)
 	return string(data)
 }
 func (b *BackupCreate) Name() string {

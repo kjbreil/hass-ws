@@ -1,8 +1,8 @@
 package services
 
 import (
-	"encoding/json"
 	"fmt"
+	gojson "github.com/goccy/go-json"
 )
 
 ////////////////////////////////////////////////////////////////////////////////
@@ -51,7 +51,7 @@ func (l *LogbookLog) LogbookLogName(logbookLogName string) *LogbookLog {
 	return l
 }
 func (l *LogbookLog) JSON() string {
-	data, _ := json.Marshal(l)
+	data, _ := gojson.Marshal(l)
 	return string(data)
 }
 func (l *LogbookLog) Name() string {

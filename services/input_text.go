@@ -1,8 +1,8 @@
 package services
 
 import (
-	"encoding/json"
 	"fmt"
+	gojson "github.com/goccy/go-json"
 )
 
 ////////////////////////////////////////////////////////////////////////////////
@@ -34,7 +34,7 @@ type InputTextReload struct {
 }
 
 func (i *InputTextReload) JSON() string {
-	data, _ := json.Marshal(i)
+	data, _ := gojson.Marshal(i)
 	return string(data)
 }
 func (i *InputTextReload) Name() string {
@@ -76,7 +76,7 @@ func (i *InputTextSetValue) Value(value string) *InputTextSetValue {
 	return i
 }
 func (i *InputTextSetValue) JSON() string {
-	data, _ := json.Marshal(i)
+	data, _ := gojson.Marshal(i)
 	return string(data)
 }
 func (i *InputTextSetValue) Name() string {

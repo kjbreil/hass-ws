@@ -1,8 +1,8 @@
 package services
 
 import (
-	"encoding/json"
 	"fmt"
+	gojson "github.com/goccy/go-json"
 )
 
 ////////////////////////////////////////////////////////////////////////////////
@@ -34,7 +34,7 @@ type InputBooleanReload struct {
 }
 
 func (i *InputBooleanReload) JSON() string {
-	data, _ := json.Marshal(i)
+	data, _ := gojson.Marshal(i)
 	return string(data)
 }
 func (i *InputBooleanReload) Name() string {
@@ -69,7 +69,7 @@ type InputBooleanToggle struct {
 }
 
 func (i *InputBooleanToggle) JSON() string {
-	data, _ := json.Marshal(i)
+	data, _ := gojson.Marshal(i)
 	return string(data)
 }
 func (i *InputBooleanToggle) Name() string {
@@ -104,7 +104,7 @@ type InputBooleanTurnOff struct {
 }
 
 func (i *InputBooleanTurnOff) JSON() string {
-	data, _ := json.Marshal(i)
+	data, _ := gojson.Marshal(i)
 	return string(data)
 }
 func (i *InputBooleanTurnOff) Name() string {
@@ -139,7 +139,7 @@ type InputBooleanTurnOn struct {
 }
 
 func (i *InputBooleanTurnOn) JSON() string {
-	data, _ := json.Marshal(i)
+	data, _ := gojson.Marshal(i)
 	return string(data)
 }
 func (i *InputBooleanTurnOn) Name() string {

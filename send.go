@@ -1,8 +1,8 @@
 package hass_ws
 
 import (
-	"encoding/json"
 	"fmt"
+	"github.com/goccy/go-json"
 	"github.com/kjbreil/hass-ws/model"
 	"nhooyr.io/websocket"
 )

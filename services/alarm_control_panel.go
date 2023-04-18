@@ -1,8 +1,8 @@
 package services
 
 import (
-	"encoding/json"
 	"fmt"
+	gojson "github.com/goccy/go-json"
 )
 
 ////////////////////////////////////////////////////////////////////////////////
@@ -41,7 +41,7 @@ func (a *AlarmControlPanelAlarmArmAway) Code(code string) *AlarmControlPanelAlar
 	return a
 }
 func (a *AlarmControlPanelAlarmArmAway) JSON() string {
-	data, _ := json.Marshal(a)
+	data, _ := gojson.Marshal(a)
 	return string(data)
 }
 func (a *AlarmControlPanelAlarmArmAway) Name() string {
@@ -83,7 +83,7 @@ func (a *AlarmControlPanelAlarmArmCustomBypass) Code(code string) *AlarmControlP
 	return a
 }
 func (a *AlarmControlPanelAlarmArmCustomBypass) JSON() string {
-	data, _ := json.Marshal(a)
+	data, _ := gojson.Marshal(a)
 	return string(data)
 }
 func (a *AlarmControlPanelAlarmArmCustomBypass) Name() string {
@@ -125,7 +125,7 @@ func (a *AlarmControlPanelAlarmArmHome) Code(code string) *AlarmControlPanelAlar
 	return a
 }
 func (a *AlarmControlPanelAlarmArmHome) JSON() string {
-	data, _ := json.Marshal(a)
+	data, _ := gojson.Marshal(a)
 	return string(data)
 }
 func (a *AlarmControlPanelAlarmArmHome) Name() string {
@@ -167,7 +167,7 @@ func (a *AlarmControlPanelAlarmArmNight) Code(code string) *AlarmControlPanelAla
 	return a
 }
 func (a *AlarmControlPanelAlarmArmNight) JSON() string {
-	data, _ := json.Marshal(a)
+	data, _ := gojson.Marshal(a)
 	return string(data)
 }
 func (a *AlarmControlPanelAlarmArmNight) Name() string {
@@ -209,7 +209,7 @@ func (a *AlarmControlPanelAlarmArmVacation) Code(code string) *AlarmControlPanel
 	return a
 }
 func (a *AlarmControlPanelAlarmArmVacation) JSON() string {
-	data, _ := json.Marshal(a)
+	data, _ := gojson.Marshal(a)
 	return string(data)
 }
 func (a *AlarmControlPanelAlarmArmVacation) Name() string {
@@ -251,7 +251,7 @@ func (a *AlarmControlPanelAlarmDisarm) Code(code string) *AlarmControlPanelAlarm
 	return a
 }
 func (a *AlarmControlPanelAlarmDisarm) JSON() string {
-	data, _ := json.Marshal(a)
+	data, _ := gojson.Marshal(a)
 	return string(data)
 }
 func (a *AlarmControlPanelAlarmDisarm) Name() string {
@@ -293,7 +293,7 @@ func (a *AlarmControlPanelAlarmTrigger) Code(code string) *AlarmControlPanelAlar
 	return a
 }
 func (a *AlarmControlPanelAlarmTrigger) JSON() string {
-	data, _ := json.Marshal(a)
+	data, _ := gojson.Marshal(a)
 	return string(data)
 }
 func (a *AlarmControlPanelAlarmTrigger) Name() string {

@@ -1,8 +1,8 @@
 package services
 
 import (
-	"encoding/json"
 	"fmt"
+	gojson "github.com/goccy/go-json"
 )
 
 ////////////////////////////////////////////////////////////////////////////////
@@ -34,7 +34,7 @@ type MediaPlayerClearPlaylist struct {
 }
 
 func (m *MediaPlayerClearPlaylist) JSON() string {
-	data, _ := json.Marshal(m)
+	data, _ := gojson.Marshal(m)
 	return string(data)
 }
 func (m *MediaPlayerClearPlaylist) Name() string {
@@ -69,7 +69,7 @@ type MediaPlayerJoin struct {
 }
 
 func (m *MediaPlayerJoin) JSON() string {
-	data, _ := json.Marshal(m)
+	data, _ := gojson.Marshal(m)
 	return string(data)
 }
 func (m *MediaPlayerJoin) Name() string {
@@ -104,7 +104,7 @@ type MediaPlayerMediaNextTrack struct {
 }
 
 func (m *MediaPlayerMediaNextTrack) JSON() string {
-	data, _ := json.Marshal(m)
+	data, _ := gojson.Marshal(m)
 	return string(data)
 }
 func (m *MediaPlayerMediaNextTrack) Name() string {
@@ -139,7 +139,7 @@ type MediaPlayerMediaPause struct {
 }
 
 func (m *MediaPlayerMediaPause) JSON() string {
-	data, _ := json.Marshal(m)
+	data, _ := gojson.Marshal(m)
 	return string(data)
 }
 func (m *MediaPlayerMediaPause) Name() string {
@@ -174,7 +174,7 @@ type MediaPlayerMediaPlay struct {
 }
 
 func (m *MediaPlayerMediaPlay) JSON() string {
-	data, _ := json.Marshal(m)
+	data, _ := gojson.Marshal(m)
 	return string(data)
 }
 func (m *MediaPlayerMediaPlay) Name() string {
@@ -209,7 +209,7 @@ type MediaPlayerMediaPlayPause struct {
 }
 
 func (m *MediaPlayerMediaPlayPause) JSON() string {
-	data, _ := json.Marshal(m)
+	data, _ := gojson.Marshal(m)
 	return string(data)
 }
 func (m *MediaPlayerMediaPlayPause) Name() string {
@@ -244,7 +244,7 @@ type MediaPlayerMediaPreviousTrack struct {
 }
 
 func (m *MediaPlayerMediaPreviousTrack) JSON() string {
-	data, _ := json.Marshal(m)
+	data, _ := gojson.Marshal(m)
 	return string(data)
 }
 func (m *MediaPlayerMediaPreviousTrack) Name() string {
@@ -286,7 +286,7 @@ func (m *MediaPlayerMediaSeek) SeekPosition(seekPosition float64) *MediaPlayerMe
 	return m
 }
 func (m *MediaPlayerMediaSeek) JSON() string {
-	data, _ := json.Marshal(m)
+	data, _ := gojson.Marshal(m)
 	return string(data)
 }
 func (m *MediaPlayerMediaSeek) Name() string {
@@ -321,7 +321,7 @@ type MediaPlayerMediaStop struct {
 }
 
 func (m *MediaPlayerMediaStop) JSON() string {
-	data, _ := json.Marshal(m)
+	data, _ := gojson.Marshal(m)
 	return string(data)
 }
 func (m *MediaPlayerMediaStop) Name() string {
@@ -373,7 +373,7 @@ func (m *MediaPlayerPlayMedia) MediaContentType(mediaContentType string) *MediaP
 	return m
 }
 func (m *MediaPlayerPlayMedia) JSON() string {
-	data, _ := json.Marshal(m)
+	data, _ := gojson.Marshal(m)
 	return string(data)
 }
 func (m *MediaPlayerPlayMedia) Name() string {
@@ -415,7 +415,7 @@ func (m *MediaPlayerRepeatSet) Repeat(repeat Repeat) *MediaPlayerRepeatSet {
 	return m
 }
 func (m *MediaPlayerRepeatSet) JSON() string {
-	data, _ := json.Marshal(m)
+	data, _ := gojson.Marshal(m)
 	return string(data)
 }
 func (m *MediaPlayerRepeatSet) Name() string {
@@ -457,7 +457,7 @@ func (m *MediaPlayerSelectSoundMode) SoundMode(soundMode string) *MediaPlayerSel
 	return m
 }
 func (m *MediaPlayerSelectSoundMode) JSON() string {
-	data, _ := json.Marshal(m)
+	data, _ := gojson.Marshal(m)
 	return string(data)
 }
 func (m *MediaPlayerSelectSoundMode) Name() string {
@@ -499,7 +499,7 @@ func (m *MediaPlayerSelectSource) Source(source string) *MediaPlayerSelectSource
 	return m
 }
 func (m *MediaPlayerSelectSource) JSON() string {
-	data, _ := json.Marshal(m)
+	data, _ := gojson.Marshal(m)
 	return string(data)
 }
 func (m *MediaPlayerSelectSource) Name() string {
@@ -534,7 +534,7 @@ type MediaPlayerShuffleSet struct {
 }
 
 func (m *MediaPlayerShuffleSet) JSON() string {
-	data, _ := json.Marshal(m)
+	data, _ := gojson.Marshal(m)
 	return string(data)
 }
 func (m *MediaPlayerShuffleSet) Name() string {
@@ -569,7 +569,7 @@ type MediaPlayerToggle struct {
 }
 
 func (m *MediaPlayerToggle) JSON() string {
-	data, _ := json.Marshal(m)
+	data, _ := gojson.Marshal(m)
 	return string(data)
 }
 func (m *MediaPlayerToggle) Name() string {
@@ -604,7 +604,7 @@ type MediaPlayerTurnOff struct {
 }
 
 func (m *MediaPlayerTurnOff) JSON() string {
-	data, _ := json.Marshal(m)
+	data, _ := gojson.Marshal(m)
 	return string(data)
 }
 func (m *MediaPlayerTurnOff) Name() string {
@@ -639,7 +639,7 @@ type MediaPlayerTurnOn struct {
 }
 
 func (m *MediaPlayerTurnOn) JSON() string {
-	data, _ := json.Marshal(m)
+	data, _ := gojson.Marshal(m)
 	return string(data)
 }
 func (m *MediaPlayerTurnOn) Name() string {
@@ -674,7 +674,7 @@ type MediaPlayerUnjoin struct {
 }
 
 func (m *MediaPlayerUnjoin) JSON() string {
-	data, _ := json.Marshal(m)
+	data, _ := gojson.Marshal(m)
 	return string(data)
 }
 func (m *MediaPlayerUnjoin) Name() string {
@@ -709,7 +709,7 @@ type MediaPlayerVolumeDown struct {
 }
 
 func (m *MediaPlayerVolumeDown) JSON() string {
-	data, _ := json.Marshal(m)
+	data, _ := gojson.Marshal(m)
 	return string(data)
 }
 func (m *MediaPlayerVolumeDown) Name() string {
@@ -744,7 +744,7 @@ type MediaPlayerVolumeMute struct {
 }
 
 func (m *MediaPlayerVolumeMute) JSON() string {
-	data, _ := json.Marshal(m)
+	data, _ := gojson.Marshal(m)
 	return string(data)
 }
 func (m *MediaPlayerVolumeMute) Name() string {
@@ -786,7 +786,7 @@ func (m *MediaPlayerVolumeSet) VolumeLevel(volumeLevel float64) *MediaPlayerVolu
 	return m
 }
 func (m *MediaPlayerVolumeSet) JSON() string {
-	data, _ := json.Marshal(m)
+	data, _ := gojson.Marshal(m)
 	return string(data)
 }
 func (m *MediaPlayerVolumeSet) Name() string {
@@ -821,7 +821,7 @@ type MediaPlayerVolumeUp struct {
 }
 
 func (m *MediaPlayerVolumeUp) JSON() string {
-	data, _ := json.Marshal(m)
+	data, _ := gojson.Marshal(m)
 	return string(data)
 }
 func (m *MediaPlayerVolumeUp) Name() string {

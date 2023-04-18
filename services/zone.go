@@ -1,8 +1,8 @@
 package services
 
 import (
-	"encoding/json"
 	"fmt"
+	gojson "github.com/goccy/go-json"
 )
 
 ////////////////////////////////////////////////////////////////////////////////
@@ -34,7 +34,7 @@ type ZoneReload struct {
 }
 
 func (z *ZoneReload) JSON() string {
-	data, _ := json.Marshal(z)
+	data, _ := gojson.Marshal(z)
 	return string(data)
 }
 func (z *ZoneReload) Name() string {

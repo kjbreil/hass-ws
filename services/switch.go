@@ -1,8 +1,8 @@
 package services
 
 import (
-	"encoding/json"
 	"fmt"
+	gojson "github.com/goccy/go-json"
 )
 
 ////////////////////////////////////////////////////////////////////////////////
@@ -34,7 +34,7 @@ type SwitchToggle struct {
 }
 
 func (s *SwitchToggle) JSON() string {
-	data, _ := json.Marshal(s)
+	data, _ := gojson.Marshal(s)
 	return string(data)
 }
 func (s *SwitchToggle) Name() string {
@@ -69,7 +69,7 @@ type SwitchTurnOff struct {
 }
 
 func (s *SwitchTurnOff) JSON() string {
-	data, _ := json.Marshal(s)
+	data, _ := gojson.Marshal(s)
 	return string(data)
 }
 func (s *SwitchTurnOff) Name() string {
@@ -104,7 +104,7 @@ type SwitchTurnOn struct {
 }
 
 func (s *SwitchTurnOn) JSON() string {
-	data, _ := json.Marshal(s)
+	data, _ := gojson.Marshal(s)
 	return string(data)
 }
 func (s *SwitchTurnOn) Name() string {

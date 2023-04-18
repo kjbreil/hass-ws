@@ -1,8 +1,8 @@
 package model
 
 import (
-	"encoding/json"
 	"fmt"
+	"github.com/goccy/go-json"
 	"strconv"
 	"strings"
 )

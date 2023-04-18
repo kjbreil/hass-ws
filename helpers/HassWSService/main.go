@@ -1,8 +1,8 @@
 package main
 
 import (
-	"encoding/json"
 	"flag"
+	"github.com/goccy/go-json"
 	hass_ws "github.com/kjbreil/hass-ws"
 	"github.com/kjbreil/hass-ws/helpers/HassWSService/servicemaker"
 )

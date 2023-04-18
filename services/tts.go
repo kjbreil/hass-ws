@@ -1,8 +1,8 @@
 package services
 
 import (
-	"encoding/json"
 	"fmt"
+	gojson "github.com/goccy/go-json"
 )
 
 ////////////////////////////////////////////////////////////////////////////////
@@ -34,7 +34,7 @@ type TtsClearCache struct {
 }
 
 func (t *TtsClearCache) JSON() string {
-	data, _ := json.Marshal(t)
+	data, _ := gojson.Marshal(t)
 	return string(data)
 }
 func (t *TtsClearCache) Name() string {
@@ -81,7 +81,7 @@ func (t *TtsCloudSay) Message(message string) *TtsCloudSay {
 	return t
 }
 func (t *TtsCloudSay) JSON() string {
-	data, _ := json.Marshal(t)
+	data, _ := gojson.Marshal(t)
 	return string(data)
 }
 func (t *TtsCloudSay) Name() string {
@@ -128,7 +128,7 @@ func (t *TtsGoogleTranslateSay) Message(message string) *TtsGoogleTranslateSay {
 	return t
 }
 func (t *TtsGoogleTranslateSay) JSON() string {
-	data, _ := json.Marshal(t)
+	data, _ := gojson.Marshal(t)
 	return string(data)
 }
 func (t *TtsGoogleTranslateSay) Name() string {

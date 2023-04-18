@@ -1,8 +1,8 @@
 package services
 
 import (
-	"encoding/json"
 	"fmt"
+	gojson "github.com/goccy/go-json"
 )
 
 ////////////////////////////////////////////////////////////////////////////////
@@ -34,7 +34,7 @@ type CloudRemoteConnect struct {
 }
 
 func (c *CloudRemoteConnect) JSON() string {
-	data, _ := json.Marshal(c)
+	data, _ := gojson.Marshal(c)
 	return string(data)
 }
 func (c *CloudRemoteConnect) Name() string {
@@ -69,7 +69,7 @@ type CloudRemoteDisconnect struct {
 }
 
 func (c *CloudRemoteDisconnect) JSON() string {
-	data, _ := json.Marshal(c)
+	data, _ := gojson.Marshal(c)
 	return string(data)
 }
 func (c *CloudRemoteDisconnect) Name() string {

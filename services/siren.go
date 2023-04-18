@@ -1,8 +1,8 @@
 package services
 
 import (
-	"encoding/json"
 	"fmt"
+	gojson "github.com/goccy/go-json"
 )
 
 ////////////////////////////////////////////////////////////////////////////////
@@ -34,7 +34,7 @@ type SirenToggle struct {
 }
 
 func (s *SirenToggle) JSON() string {
-	data, _ := json.Marshal(s)
+	data, _ := gojson.Marshal(s)
 	return string(data)
 }
 func (s *SirenToggle) Name() string {
@@ -69,7 +69,7 @@ type SirenTurnOff struct {
 }
 
 func (s *SirenTurnOff) JSON() string {
-	data, _ := json.Marshal(s)
+	data, _ := gojson.Marshal(s)
 	return string(data)
 }
 func (s *SirenTurnOff) Name() string {
@@ -121,7 +121,7 @@ func (s *SirenTurnOn) VolumeLevel(volumeLevel float64) *SirenTurnOn {
 	return s
 }
 func (s *SirenTurnOn) JSON() string {
-	data, _ := json.Marshal(s)
+	data, _ := gojson.Marshal(s)
 	return string(data)
 }
 func (s *SirenTurnOn) Name() string {

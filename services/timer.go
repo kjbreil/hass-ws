@@ -1,8 +1,8 @@
 package services
 
 import (
-	"encoding/json"
 	"fmt"
+	gojson "github.com/goccy/go-json"
 )
 
 ////////////////////////////////////////////////////////////////////////////////
@@ -34,7 +34,7 @@ type TimerCancel struct {
 }
 
 func (t *TimerCancel) JSON() string {
-	data, _ := json.Marshal(t)
+	data, _ := gojson.Marshal(t)
 	return string(data)
 }
 func (t *TimerCancel) Name() string {
@@ -69,7 +69,7 @@ type TimerFinish struct {
 }
 
 func (t *TimerFinish) JSON() string {
-	data, _ := json.Marshal(t)
+	data, _ := gojson.Marshal(t)
 	return string(data)
 }
 func (t *TimerFinish) Name() string {
@@ -104,7 +104,7 @@ type TimerPause struct {
 }
 
 func (t *TimerPause) JSON() string {
-	data, _ := json.Marshal(t)
+	data, _ := gojson.Marshal(t)
 	return string(data)
 }
 func (t *TimerPause) Name() string {
@@ -139,7 +139,7 @@ type TimerReload struct {
 }
 
 func (t *TimerReload) JSON() string {
-	data, _ := json.Marshal(t)
+	data, _ := gojson.Marshal(t)
 	return string(data)
 }
 func (t *TimerReload) Name() string {
@@ -181,7 +181,7 @@ func (t *TimerStart) Duration(duration string) *TimerStart {
 	return t
 }
 func (t *TimerStart) JSON() string {
-	data, _ := json.Marshal(t)
+	data, _ := gojson.Marshal(t)
 	return string(data)
 }
 func (t *TimerStart) Name() string {

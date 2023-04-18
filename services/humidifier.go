@@ -1,8 +1,8 @@
 package services
 
 import (
-	"encoding/json"
 	"fmt"
+	gojson "github.com/goccy/go-json"
 )
 
 ////////////////////////////////////////////////////////////////////////////////
@@ -41,7 +41,7 @@ func (h *HumidifierSetHumidity) Humidity(humidity float64) *HumidifierSetHumidit
 	return h
 }
 func (h *HumidifierSetHumidity) JSON() string {
-	data, _ := json.Marshal(h)
+	data, _ := gojson.Marshal(h)
 	return string(data)
 }
 func (h *HumidifierSetHumidity) Name() string {
@@ -83,7 +83,7 @@ func (h *HumidifierSetMode) Mode(mode string) *HumidifierSetMode {
 	return h
 }
 func (h *HumidifierSetMode) JSON() string {
-	data, _ := json.Marshal(h)
+	data, _ := gojson.Marshal(h)
 	return string(data)
 }
 func (h *HumidifierSetMode) Name() string {
@@ -118,7 +118,7 @@ type HumidifierToggle struct {
 }
 
 func (h *HumidifierToggle) JSON() string {
-	data, _ := json.Marshal(h)
+	data, _ := gojson.Marshal(h)
 	return string(data)
 }
 func (h *HumidifierToggle) Name() string {
@@ -153,7 +153,7 @@ type HumidifierTurnOff struct {
 }
 
 func (h *HumidifierTurnOff) JSON() string {
-	data, _ := json.Marshal(h)
+	data, _ := gojson.Marshal(h)
 	return string(data)
 }
 func (h *HumidifierTurnOff) Name() string {
@@ -188,7 +188,7 @@ type HumidifierTurnOn struct {
 }
 
 func (h *HumidifierTurnOn) JSON() string {
-	data, _ := json.Marshal(h)
+	data, _ := gojson.Marshal(h)
 	return string(data)
 }
 func (h *HumidifierTurnOn) Name() string {

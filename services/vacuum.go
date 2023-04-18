@@ -1,8 +1,8 @@
 package services
 
 import (
-	"encoding/json"
 	"fmt"
+	gojson "github.com/goccy/go-json"
 )
 
 ////////////////////////////////////////////////////////////////////////////////
@@ -34,7 +34,7 @@ type VacuumCleanSpot struct {
 }
 
 func (v *VacuumCleanSpot) JSON() string {
-	data, _ := json.Marshal(v)
+	data, _ := gojson.Marshal(v)
 	return string(data)
 }
 func (v *VacuumCleanSpot) Name() string {
@@ -69,7 +69,7 @@ type VacuumLocate struct {
 }
 
 func (v *VacuumLocate) JSON() string {
-	data, _ := json.Marshal(v)
+	data, _ := gojson.Marshal(v)
 	return string(data)
 }
 func (v *VacuumLocate) Name() string {
@@ -104,7 +104,7 @@ type VacuumPause struct {
 }
 
 func (v *VacuumPause) JSON() string {
-	data, _ := json.Marshal(v)
+	data, _ := gojson.Marshal(v)
 	return string(data)
 }
 func (v *VacuumPause) Name() string {
@@ -139,7 +139,7 @@ type VacuumReturnToBase struct {
 }
 
 func (v *VacuumReturnToBase) JSON() string {
-	data, _ := json.Marshal(v)
+	data, _ := gojson.Marshal(v)
 	return string(data)
 }
 func (v *VacuumReturnToBase) Name() string {
@@ -181,7 +181,7 @@ func (v *VacuumSendCommand) Command(command string) *VacuumSendCommand {
 	return v
 }
 func (v *VacuumSendCommand) JSON() string {
-	data, _ := json.Marshal(v)
+	data, _ := gojson.Marshal(v)
 	return string(data)
 }
 func (v *VacuumSendCommand) Name() string {
@@ -223,7 +223,7 @@ func (v *VacuumSetFanSpeed) FanSpeed(fanSpeed string) *VacuumSetFanSpeed {
 	return v
 }
 func (v *VacuumSetFanSpeed) JSON() string {
-	data, _ := json.Marshal(v)
+	data, _ := gojson.Marshal(v)
 	return string(data)
 }
 func (v *VacuumSetFanSpeed) Name() string {
@@ -258,7 +258,7 @@ type VacuumStart struct {
 }
 
 func (v *VacuumStart) JSON() string {
-	data, _ := json.Marshal(v)
+	data, _ := gojson.Marshal(v)
 	return string(data)
 }
 func (v *VacuumStart) Name() string {
@@ -293,7 +293,7 @@ type VacuumStartPause struct {
 }
 
 func (v *VacuumStartPause) JSON() string {
-	data, _ := json.Marshal(v)
+	data, _ := gojson.Marshal(v)
 	return string(data)
 }
 func (v *VacuumStartPause) Name() string {
@@ -328,7 +328,7 @@ type VacuumStop struct {
 }
 
 func (v *VacuumStop) JSON() string {
-	data, _ := json.Marshal(v)
+	data, _ := gojson.Marshal(v)
 	return string(data)
 }
 func (v *VacuumStop) Name() string {
@@ -363,7 +363,7 @@ type VacuumToggle struct {
 }
 
 func (v *VacuumToggle) JSON() string {
-	data, _ := json.Marshal(v)
+	data, _ := gojson.Marshal(v)
 	return string(data)
 }
 func (v *VacuumToggle) Name() string {
@@ -398,7 +398,7 @@ type VacuumTurnOff struct {
 }
 
 func (v *VacuumTurnOff) JSON() string {
-	data, _ := json.Marshal(v)
+	data, _ := gojson.Marshal(v)
 	return string(data)
 }
 func (v *VacuumTurnOff) Name() string {
@@ -433,7 +433,7 @@ type VacuumTurnOn struct {
 }
 
 func (v *VacuumTurnOn) JSON() string {
-	data, _ := json.Marshal(v)
+	data, _ := gojson.Marshal(v)
 	return string(data)
 }
 func (v *VacuumTurnOn) Name() string {

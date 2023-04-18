@@ -1,8 +1,8 @@
 package services
 
 import (
-	"encoding/json"
 	"fmt"
+	gojson "github.com/goccy/go-json"
 )
 
 ////////////////////////////////////////////////////////////////////////////////
@@ -41,7 +41,7 @@ func (l *LockLock) Code(code string) *LockLock {
 	return l
 }
 func (l *LockLock) JSON() string {
-	data, _ := json.Marshal(l)
+	data, _ := gojson.Marshal(l)
 	return string(data)
 }
 func (l *LockLock) Name() string {
@@ -83,7 +83,7 @@ func (l *LockOpen) Code(code string) *LockOpen {
 	return l
 }
 func (l *LockOpen) JSON() string {
-	data, _ := json.Marshal(l)
+	data, _ := gojson.Marshal(l)
 	return string(data)
 }
 func (l *LockOpen) Name() string {
@@ -125,7 +125,7 @@ func (l *LockUnlock) Code(code string) *LockUnlock {
 	return l
 }
 func (l *LockUnlock) JSON() string {
-	data, _ := json.Marshal(l)
+	data, _ := gojson.Marshal(l)
 	return string(data)
 }
 func (l *LockUnlock) Name() string {

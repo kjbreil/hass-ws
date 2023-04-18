@@ -1,8 +1,8 @@
 package services
 
 import (
-	"encoding/json"
 	"fmt"
+	gojson "github.com/goccy/go-json"
 )
 
 ////////////////////////////////////////////////////////////////////////////////
@@ -61,7 +61,7 @@ func (c *CounterConfigure) Value(value float64) *CounterConfigure {
 	return c
 }
 func (c *CounterConfigure) JSON() string {
-	data, _ := json.Marshal(c)
+	data, _ := gojson.Marshal(c)
 	return string(data)
 }
 func (c *CounterConfigure) Name() string {
@@ -96,7 +96,7 @@ type CounterDecrement struct {
 }
 
 func (c *CounterDecrement) JSON() string {
-	data, _ := json.Marshal(c)
+	data, _ := gojson.Marshal(c)
 	return string(data)
 }
 func (c *CounterDecrement) Name() string {
@@ -131,7 +131,7 @@ type CounterIncrement struct {
 }
 
 func (c *CounterIncrement) JSON() string {
-	data, _ := json.Marshal(c)
+	data, _ := gojson.Marshal(c)
 	return string(data)
 }
 func (c *CounterIncrement) Name() string {
@@ -166,7 +166,7 @@ type CounterReset struct {
 }
 
 func (c *CounterReset) JSON() string {
-	data, _ := json.Marshal(c)
+	data, _ := gojson.Marshal(c)
 	return string(data)
 }
 func (c *CounterReset) Name() string {

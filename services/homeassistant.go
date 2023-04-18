@@ -1,8 +1,8 @@
 package services
 
 import (
-	"encoding/json"
 	"fmt"
+	gojson "github.com/goccy/go-json"
 )
 
 ////////////////////////////////////////////////////////////////////////////////
@@ -34,7 +34,7 @@ type HomeassistantCheckConfig struct {
 }
 
 func (h *HomeassistantCheckConfig) JSON() string {
-	data, _ := json.Marshal(h)
+	data, _ := gojson.Marshal(h)
 	return string(data)
 }
 func (h *HomeassistantCheckConfig) Name() string {
@@ -76,7 +76,7 @@ func (h *HomeassistantReloadConfigEntry) EntryId(entryId string) *HomeassistantR
 	return h
 }
 func (h *HomeassistantReloadConfigEntry) JSON() string {
-	data, _ := json.Marshal(h)
+	data, _ := gojson.Marshal(h)
 	return string(data)
 }
 func (h *HomeassistantReloadConfigEntry) Name() string {
@@ -111,7 +111,7 @@ type HomeassistantReloadCoreConfig struct {
 }
 
 func (h *HomeassistantReloadCoreConfig) JSON() string {
-	data, _ := json.Marshal(h)
+	data, _ := gojson.Marshal(h)
 	return string(data)
 }
 func (h *HomeassistantReloadCoreConfig) Name() string {
@@ -146,7 +146,7 @@ type HomeassistantRestart struct {
 }
 
 func (h *HomeassistantRestart) JSON() string {
-	data, _ := json.Marshal(h)
+	data, _ := gojson.Marshal(h)
 	return string(data)
 }
 func (h *HomeassistantRestart) Name() string {
@@ -181,7 +181,7 @@ type HomeassistantSavePersistentStates struct {
 }
 
 func (h *HomeassistantSavePersistentStates) JSON() string {
-	data, _ := json.Marshal(h)
+	data, _ := gojson.Marshal(h)
 	return string(data)
 }
 func (h *HomeassistantSavePersistentStates) Name() string {
@@ -228,7 +228,7 @@ func (h *HomeassistantSetLocation) Longitude(longitude string) *HomeassistantSet
 	return h
 }
 func (h *HomeassistantSetLocation) JSON() string {
-	data, _ := json.Marshal(h)
+	data, _ := gojson.Marshal(h)
 	return string(data)
 }
 func (h *HomeassistantSetLocation) Name() string {
@@ -263,7 +263,7 @@ type HomeassistantStop struct {
 }
 
 func (h *HomeassistantStop) JSON() string {
-	data, _ := json.Marshal(h)
+	data, _ := gojson.Marshal(h)
 	return string(data)
 }
 func (h *HomeassistantStop) Name() string {
@@ -298,7 +298,7 @@ type HomeassistantToggle struct {
 }
 
 func (h *HomeassistantToggle) JSON() string {
-	data, _ := json.Marshal(h)
+	data, _ := gojson.Marshal(h)
 	return string(data)
 }
 func (h *HomeassistantToggle) Name() string {
@@ -333,7 +333,7 @@ type HomeassistantTurnOff struct {
 }
 
 func (h *HomeassistantTurnOff) JSON() string {
-	data, _ := json.Marshal(h)
+	data, _ := gojson.Marshal(h)
 	return string(data)
 }
 func (h *HomeassistantTurnOff) Name() string {
@@ -368,7 +368,7 @@ type HomeassistantTurnOn struct {
 }
 
 func (h *HomeassistantTurnOn) JSON() string {
-	data, _ := json.Marshal(h)
+	data, _ := gojson.Marshal(h)
 	return string(data)
 }
 func (h *HomeassistantTurnOn) Name() string {
@@ -403,7 +403,7 @@ type HomeassistantUpdateEntity struct {
 }
 
 func (h *HomeassistantUpdateEntity) JSON() string {
-	data, _ := json.Marshal(h)
+	data, _ := gojson.Marshal(h)
 	return string(data)
 }
 func (h *HomeassistantUpdateEntity) Name() string {

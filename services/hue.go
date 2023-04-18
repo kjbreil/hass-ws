@@ -1,8 +1,8 @@
 package services
 
 import (
-	"encoding/json"
 	"fmt"
+	gojson "github.com/goccy/go-json"
 )
 
 ////////////////////////////////////////////////////////////////////////////////
@@ -51,7 +51,7 @@ func (h *HueActivateScene) Transition(transition float64) *HueActivateScene {
 	return h
 }
 func (h *HueActivateScene) JSON() string {
-	data, _ := json.Marshal(h)
+	data, _ := gojson.Marshal(h)
 	return string(data)
 }
 func (h *HueActivateScene) Name() string {
@@ -98,7 +98,7 @@ func (h *HueHueActivateScene) SceneName(sceneName string) *HueHueActivateScene {
 	return h
 }
 func (h *HueHueActivateScene) JSON() string {
-	data, _ := json.Marshal(h)
+	data, _ := gojson.Marshal(h)
 	return string(data)
 }
 func (h *HueHueActivateScene) Name() string {

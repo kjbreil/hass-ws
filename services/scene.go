@@ -1,8 +1,8 @@
 package services
 
 import (
-	"encoding/json"
 	"fmt"
+	gojson "github.com/goccy/go-json"
 )
 
 ////////////////////////////////////////////////////////////////////////////////
@@ -41,7 +41,7 @@ func (s *SceneApply) Transition(transition float64) *SceneApply {
 	return s
 }
 func (s *SceneApply) JSON() string {
-	data, _ := json.Marshal(s)
+	data, _ := gojson.Marshal(s)
 	return string(data)
 }
 func (s *SceneApply) Name() string {
@@ -83,7 +83,7 @@ func (s *SceneCreate) SceneId(sceneId string) *SceneCreate {
 	return s
 }
 func (s *SceneCreate) JSON() string {
-	data, _ := json.Marshal(s)
+	data, _ := gojson.Marshal(s)
 	return string(data)
 }
 func (s *SceneCreate) Name() string {
@@ -118,7 +118,7 @@ type SceneReload struct {
 }
 
 func (s *SceneReload) JSON() string {
-	data, _ := json.Marshal(s)
+	data, _ := gojson.Marshal(s)
 	return string(data)
 }
 func (s *SceneReload) Name() string {
@@ -160,7 +160,7 @@ func (s *SceneTurnOn) Transition(transition float64) *SceneTurnOn {
 	return s
 }
 func (s *SceneTurnOn) JSON() string {
-	data, _ := json.Marshal(s)
+	data, _ := gojson.Marshal(s)
 	return string(data)
 }
 func (s *SceneTurnOn) Name() string {

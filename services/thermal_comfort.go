@@ -1,8 +1,8 @@
 package services
 
 import (
-	"encoding/json"
 	"fmt"
+	gojson "github.com/goccy/go-json"
 )
 
 ////////////////////////////////////////////////////////////////////////////////
@@ -34,7 +34,7 @@ type ThermalComfortReload struct {
 }
 
 func (t *ThermalComfortReload) JSON() string {
-	data, _ := json.Marshal(t)
+	data, _ := gojson.Marshal(t)
 	return string(data)
 }
 func (t *ThermalComfortReload) Name() string {

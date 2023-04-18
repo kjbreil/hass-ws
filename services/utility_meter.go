@@ -1,8 +1,8 @@
 package services
 
 import (
-	"encoding/json"
 	"fmt"
+	gojson "github.com/goccy/go-json"
 )
 
 ////////////////////////////////////////////////////////////////////////////////
@@ -41,7 +41,7 @@ func (u *UtilityMeterCalibrate) Value(value string) *UtilityMeterCalibrate {
 	return u
 }
 func (u *UtilityMeterCalibrate) JSON() string {
-	data, _ := json.Marshal(u)
+	data, _ := gojson.Marshal(u)
 	return string(data)
 }
 func (u *UtilityMeterCalibrate) Name() string {
@@ -76,7 +76,7 @@ type UtilityMeterReset struct {
 }
 
 func (u *UtilityMeterReset) JSON() string {
-	data, _ := json.Marshal(u)
+	data, _ := gojson.Marshal(u)
 	return string(data)
 }
 func (u *UtilityMeterReset) Name() string {

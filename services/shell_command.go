@@ -1,8 +1,8 @@
 package services
 
 import (
-	"encoding/json"
 	"fmt"
+	gojson "github.com/goccy/go-json"
 )
 
 ////////////////////////////////////////////////////////////////////////////////
@@ -34,7 +34,7 @@ type ShellCommandShutdownTyr struct {
 }
 
 func (s *ShellCommandShutdownTyr) JSON() string {
-	data, _ := json.Marshal(s)
+	data, _ := gojson.Marshal(s)
 	return string(data)
 }
 func (s *ShellCommandShutdownTyr) Name() string {
@@ -69,7 +69,7 @@ type ShellCommandStartNcbp struct {
 }
 
 func (s *ShellCommandStartNcbp) JSON() string {
-	data, _ := json.Marshal(s)
+	data, _ := gojson.Marshal(s)
 	return string(data)
 }
 func (s *ShellCommandStartNcbp) Name() string {
@@ -104,7 +104,7 @@ type ShellCommandStopNcbp struct {
 }
 
 func (s *ShellCommandStopNcbp) JSON() string {
-	data, _ := json.Marshal(s)
+	data, _ := gojson.Marshal(s)
 	return string(data)
 }
 func (s *ShellCommandStopNcbp) Name() string {

@@ -1,8 +1,8 @@
 package services
 
 import (
-	"encoding/json"
 	"fmt"
+	gojson "github.com/goccy/go-json"
 )
 
 ////////////////////////////////////////////////////////////////////////////////
@@ -34,7 +34,7 @@ type InputNumberDecrement struct {
 }
 
 func (i *InputNumberDecrement) JSON() string {
-	data, _ := json.Marshal(i)
+	data, _ := gojson.Marshal(i)
 	return string(data)
 }
 func (i *InputNumberDecrement) Name() string {
@@ -69,7 +69,7 @@ type InputNumberIncrement struct {
 }
 
 func (i *InputNumberIncrement) JSON() string {
-	data, _ := json.Marshal(i)
+	data, _ := gojson.Marshal(i)
 	return string(data)
 }
 func (i *InputNumberIncrement) Name() string {
@@ -104,7 +104,7 @@ type InputNumberReload struct {
 }
 
 func (i *InputNumberReload) JSON() string {
-	data, _ := json.Marshal(i)
+	data, _ := gojson.Marshal(i)
 	return string(data)
 }
 func (i *InputNumberReload) Name() string {
@@ -146,7 +146,7 @@ func (i *InputNumberSetValue) Value(value float64) *InputNumberSetValue {
 	return i
 }
 func (i *InputNumberSetValue) JSON() string {
-	data, _ := json.Marshal(i)
+	data, _ := gojson.Marshal(i)
 	return string(data)
 }
 func (i *InputNumberSetValue) Name() string {

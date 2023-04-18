@@ -1,8 +1,8 @@
 package services
 
 import (
-	"encoding/json"
 	"fmt"
+	gojson "github.com/goccy/go-json"
 )
 
 ////////////////////////////////////////////////////////////////////////////////
@@ -34,7 +34,7 @@ type CameraDisableMotionDetection struct {
 }
 
 func (c *CameraDisableMotionDetection) JSON() string {
-	data, _ := json.Marshal(c)
+	data, _ := gojson.Marshal(c)
 	return string(data)
 }
 func (c *CameraDisableMotionDetection) Name() string {
@@ -69,7 +69,7 @@ type CameraEnableMotionDetection struct {
 }
 
 func (c *CameraEnableMotionDetection) JSON() string {
-	data, _ := json.Marshal(c)
+	data, _ := gojson.Marshal(c)
 	return string(data)
 }
 func (c *CameraEnableMotionDetection) Name() string {
@@ -111,7 +111,7 @@ func (c *CameraPlayStream) Format(format Format) *CameraPlayStream {
 	return c
 }
 func (c *CameraPlayStream) JSON() string {
-	data, _ := json.Marshal(c)
+	data, _ := gojson.Marshal(c)
 	return string(data)
 }
 func (c *CameraPlayStream) Name() string {
@@ -163,7 +163,7 @@ func (c *CameraRecord) Lookback(lookback float64) *CameraRecord {
 	return c
 }
 func (c *CameraRecord) JSON() string {
-	data, _ := json.Marshal(c)
+	data, _ := gojson.Marshal(c)
 	return string(data)
 }
 func (c *CameraRecord) Name() string {
@@ -205,7 +205,7 @@ func (c *CameraSnapshot) Filename(filename string) *CameraSnapshot {
 	return c
 }
 func (c *CameraSnapshot) JSON() string {
-	data, _ := json.Marshal(c)
+	data, _ := gojson.Marshal(c)
 	return string(data)
 }
 func (c *CameraSnapshot) Name() string {
@@ -240,7 +240,7 @@ type CameraTurnOff struct {
 }
 
 func (c *CameraTurnOff) JSON() string {
-	data, _ := json.Marshal(c)
+	data, _ := gojson.Marshal(c)
 	return string(data)
 }
 func (c *CameraTurnOff) Name() string {
@@ -275,7 +275,7 @@ type CameraTurnOn struct {
 }
 
 func (c *CameraTurnOn) JSON() string {
-	data, _ := json.Marshal(c)
+	data, _ := gojson.Marshal(c)
 	return string(data)
 }
 func (c *CameraTurnOn) Name() string {

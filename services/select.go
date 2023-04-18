@@ -1,8 +1,8 @@
 package services
 
 import (
-	"encoding/json"
 	"fmt"
+	gojson "github.com/goccy/go-json"
 )
 
 ////////////////////////////////////////////////////////////////////////////////
@@ -41,7 +41,7 @@ func (s *SelectSelectOption) Option(option string) *SelectSelectOption {
 	return s
 }
 func (s *SelectSelectOption) JSON() string {
-	data, _ := json.Marshal(s)
+	data, _ := gojson.Marshal(s)
 	return string(data)
 }
 func (s *SelectSelectOption) Name() string {

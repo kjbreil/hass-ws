@@ -1,8 +1,8 @@
 package services
 
 import (
-	"encoding/json"
 	"fmt"
+	gojson "github.com/goccy/go-json"
 )
 
 ////////////////////////////////////////////////////////////////////////////////
@@ -34,7 +34,7 @@ type ClimateSetAuxHeat struct {
 }
 
 func (c *ClimateSetAuxHeat) JSON() string {
-	data, _ := json.Marshal(c)
+	data, _ := gojson.Marshal(c)
 	return string(data)
 }
 func (c *ClimateSetAuxHeat) Name() string {
@@ -76,7 +76,7 @@ func (c *ClimateSetFanMode) FanMode(fanMode string) *ClimateSetFanMode {
 	return c
 }
 func (c *ClimateSetFanMode) JSON() string {
-	data, _ := json.Marshal(c)
+	data, _ := gojson.Marshal(c)
 	return string(data)
 }
 func (c *ClimateSetFanMode) Name() string {
@@ -118,7 +118,7 @@ func (c *ClimateSetHumidity) Humidity(humidity float64) *ClimateSetHumidity {
 	return c
 }
 func (c *ClimateSetHumidity) JSON() string {
-	data, _ := json.Marshal(c)
+	data, _ := gojson.Marshal(c)
 	return string(data)
 }
 func (c *ClimateSetHumidity) Name() string {
@@ -160,7 +160,7 @@ func (c *ClimateSetHvacMode) HvacMode(hvacMode HvacMode) *ClimateSetHvacMode {
 	return c
 }
 func (c *ClimateSetHvacMode) JSON() string {
-	data, _ := json.Marshal(c)
+	data, _ := gojson.Marshal(c)
 	return string(data)
 }
 func (c *ClimateSetHvacMode) Name() string {
@@ -202,7 +202,7 @@ func (c *ClimateSetPresetMode) PresetMode(presetMode string) *ClimateSetPresetMo
 	return c
 }
 func (c *ClimateSetPresetMode) JSON() string {
-	data, _ := json.Marshal(c)
+	data, _ := gojson.Marshal(c)
 	return string(data)
 }
 func (c *ClimateSetPresetMode) Name() string {
@@ -244,7 +244,7 @@ func (c *ClimateSetSwingMode) SwingMode(swingMode string) *ClimateSetSwingMode {
 	return c
 }
 func (c *ClimateSetSwingMode) JSON() string {
-	data, _ := json.Marshal(c)
+	data, _ := gojson.Marshal(c)
 	return string(data)
 }
 func (c *ClimateSetSwingMode) Name() string {
@@ -301,7 +301,7 @@ func (c *ClimateSetTemperature) Temperature(temperature float64) *ClimateSetTemp
 	return c
 }
 func (c *ClimateSetTemperature) JSON() string {
-	data, _ := json.Marshal(c)
+	data, _ := gojson.Marshal(c)
 	return string(data)
 }
 func (c *ClimateSetTemperature) Name() string {
@@ -336,7 +336,7 @@ type ClimateTurnOff struct {
 }
 
 func (c *ClimateTurnOff) JSON() string {
-	data, _ := json.Marshal(c)
+	data, _ := gojson.Marshal(c)
 	return string(data)
 }
 func (c *ClimateTurnOff) Name() string {
@@ -371,7 +371,7 @@ type ClimateTurnOn struct {
 }
 
 func (c *ClimateTurnOn) JSON() string {
-	data, _ := json.Marshal(c)
+	data, _ := gojson.Marshal(c)
 	return string(data)
 }
 func (c *ClimateTurnOn) Name() string {

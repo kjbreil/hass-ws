@@ -1,8 +1,8 @@
 package services
 
 import (
-	"encoding/json"
 	"fmt"
+	gojson "github.com/goccy/go-json"
 )
 
 ////////////////////////////////////////////////////////////////////////////////
@@ -34,7 +34,7 @@ type InputSelectReload struct {
 }
 
 func (i *InputSelectReload) JSON() string {
-	data, _ := json.Marshal(i)
+	data, _ := gojson.Marshal(i)
 	return string(data)
 }
 func (i *InputSelectReload) Name() string {
@@ -69,7 +69,7 @@ type InputSelectSelectFirst struct {
 }
 
 func (i *InputSelectSelectFirst) JSON() string {
-	data, _ := json.Marshal(i)
+	data, _ := gojson.Marshal(i)
 	return string(data)
 }
 func (i *InputSelectSelectFirst) Name() string {
@@ -104,7 +104,7 @@ type InputSelectSelectLast struct {
 }
 
 func (i *InputSelectSelectLast) JSON() string {
-	data, _ := json.Marshal(i)
+	data, _ := gojson.Marshal(i)
 	return string(data)
 }
 func (i *InputSelectSelectLast) Name() string {
@@ -139,7 +139,7 @@ type InputSelectSelectNext struct {
 }
 
 func (i *InputSelectSelectNext) JSON() string {
-	data, _ := json.Marshal(i)
+	data, _ := gojson.Marshal(i)
 	return string(data)
 }
 func (i *InputSelectSelectNext) Name() string {
@@ -181,7 +181,7 @@ func (i *InputSelectSelectOption) Option(option string) *InputSelectSelectOption
 	return i
 }
 func (i *InputSelectSelectOption) JSON() string {
-	data, _ := json.Marshal(i)
+	data, _ := gojson.Marshal(i)
 	return string(data)
 }
 func (i *InputSelectSelectOption) Name() string {
@@ -216,7 +216,7 @@ type InputSelectSelectPrevious struct {
 }
 
 func (i *InputSelectSelectPrevious) JSON() string {
-	data, _ := json.Marshal(i)
+	data, _ := gojson.Marshal(i)
 	return string(data)
 }
 func (i *InputSelectSelectPrevious) Name() string {
@@ -251,7 +251,7 @@ type InputSelectSetOptions struct {
 }
 
 func (i *InputSelectSetOptions) JSON() string {
-	data, _ := json.Marshal(i)
+	data, _ := gojson.Marshal(i)
 	return string(data)
 }
 func (i *InputSelectSetOptions) Name() string {

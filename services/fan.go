@@ -1,8 +1,8 @@
 package services
 
 import (
-	"encoding/json"
 	"fmt"
+	gojson "github.com/goccy/go-json"
 )
 
 ////////////////////////////////////////////////////////////////////////////////
@@ -41,7 +41,7 @@ func (f *FanDecreaseSpeed) PercentageStep(percentageStep float64) *FanDecreaseSp
 	return f
 }
 func (f *FanDecreaseSpeed) JSON() string {
-	data, _ := json.Marshal(f)
+	data, _ := gojson.Marshal(f)
 	return string(data)
 }
 func (f *FanDecreaseSpeed) Name() string {
@@ -83,7 +83,7 @@ func (f *FanIncreaseSpeed) PercentageStep(percentageStep float64) *FanIncreaseSp
 	return f
 }
 func (f *FanIncreaseSpeed) JSON() string {
-	data, _ := json.Marshal(f)
+	data, _ := gojson.Marshal(f)
 	return string(data)
 }
 func (f *FanIncreaseSpeed) Name() string {
@@ -118,7 +118,7 @@ type FanOscillate struct {
 }
 
 func (f *FanOscillate) JSON() string {
-	data, _ := json.Marshal(f)
+	data, _ := gojson.Marshal(f)
 	return string(data)
 }
 func (f *FanOscillate) Name() string {
@@ -160,7 +160,7 @@ func (f *FanSetDirection) Direction(direction Direction) *FanSetDirection {
 	return f
 }
 func (f *FanSetDirection) JSON() string {
-	data, _ := json.Marshal(f)
+	data, _ := gojson.Marshal(f)
 	return string(data)
 }
 func (f *FanSetDirection) Name() string {
@@ -202,7 +202,7 @@ func (f *FanSetPercentage) Percentage(percentage float64) *FanSetPercentage {
 	return f
 }
 func (f *FanSetPercentage) JSON() string {
-	data, _ := json.Marshal(f)
+	data, _ := gojson.Marshal(f)
 	return string(data)
 }
 func (f *FanSetPercentage) Name() string {
@@ -244,7 +244,7 @@ func (f *FanSetPresetMode) PresetMode(presetMode string) *FanSetPresetMode {
 	return f
 }
 func (f *FanSetPresetMode) JSON() string {
-	data, _ := json.Marshal(f)
+	data, _ := gojson.Marshal(f)
 	return string(data)
 }
 func (f *FanSetPresetMode) Name() string {
@@ -279,7 +279,7 @@ type FanToggle struct {
 }
 
 func (f *FanToggle) JSON() string {
-	data, _ := json.Marshal(f)
+	data, _ := gojson.Marshal(f)
 	return string(data)
 }
 func (f *FanToggle) Name() string {
@@ -314,7 +314,7 @@ type FanTurnOff struct {
 }
 
 func (f *FanTurnOff) JSON() string {
-	data, _ := json.Marshal(f)
+	data, _ := gojson.Marshal(f)
 	return string(data)
 }
 func (f *FanTurnOff) Name() string {
@@ -366,7 +366,7 @@ func (f *FanTurnOn) Speed(speed string) *FanTurnOn {
 	return f
 }
 func (f *FanTurnOn) JSON() string {
-	data, _ := json.Marshal(f)
+	data, _ := gojson.Marshal(f)
 	return string(data)
 }
 func (f *FanTurnOn) Name() string {

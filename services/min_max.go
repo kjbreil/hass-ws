@@ -1,8 +1,8 @@
 package services
 
 import (
-	"encoding/json"
 	"fmt"
+	gojson "github.com/goccy/go-json"
 )
 
 ////////////////////////////////////////////////////////////////////////////////
@@ -34,7 +34,7 @@ type MinMaxReload struct {
 }
 
 func (m *MinMaxReload) JSON() string {
-	data, _ := json.Marshal(m)
+	data, _ := gojson.Marshal(m)
 	return string(data)
 }
 func (m *MinMaxReload) Name() string {

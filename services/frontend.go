@@ -1,8 +1,8 @@
 package services
 
 import (
-	"encoding/json"
 	"fmt"
+	gojson "github.com/goccy/go-json"
 )
 
 ////////////////////////////////////////////////////////////////////////////////
@@ -34,7 +34,7 @@ type FrontendReloadThemes struct {
 }
 
 func (f *FrontendReloadThemes) JSON() string {
-	data, _ := json.Marshal(f)
+	data, _ := gojson.Marshal(f)
 	return string(data)
 }
 func (f *FrontendReloadThemes) Name() string {
@@ -76,7 +76,7 @@ func (f *FrontendSetTheme) Mode(mode Mode) *FrontendSetTheme {
 	return f
 }
 func (f *FrontendSetTheme) JSON() string {
-	data, _ := json.Marshal(f)
+	data, _ := gojson.Marshal(f)
 	return string(data)
 }
 func (f *FrontendSetTheme) Name() string {

@@ -1,8 +1,8 @@
 package services
 
 import (
-	"encoding/json"
 	"fmt"
+	gojson "github.com/goccy/go-json"
 )
 
 ////////////////////////////////////////////////////////////////////////////////
@@ -34,7 +34,7 @@ type UpdateClearSkipped struct {
 }
 
 func (u *UpdateClearSkipped) JSON() string {
-	data, _ := json.Marshal(u)
+	data, _ := gojson.Marshal(u)
 	return string(data)
 }
 func (u *UpdateClearSkipped) Name() string {
@@ -76,7 +76,7 @@ func (u *UpdateInstall) Version(version string) *UpdateInstall {
 	return u
 }
 func (u *UpdateInstall) JSON() string {
-	data, _ := json.Marshal(u)
+	data, _ := gojson.Marshal(u)
 	return string(data)
 }
 func (u *UpdateInstall) Name() string {
@@ -111,7 +111,7 @@ type UpdateSkip struct {
 }
 
 func (u *UpdateSkip) JSON() string {
-	data, _ := json.Marshal(u)
+	data, _ := gojson.Marshal(u)
 	return string(data)
 }
 func (u *UpdateSkip) Name() string {

@@ -1,8 +1,8 @@
 package services
 
 import (
-	"encoding/json"
 	"fmt"
+	gojson "github.com/goccy/go-json"
 )
 
 ////////////////////////////////////////////////////////////////////////////////
@@ -51,7 +51,7 @@ func (w *WakeOnLanSendMagicPacket) Mac(mac string) *WakeOnLanSendMagicPacket {
 	return w
 }
 func (w *WakeOnLanSendMagicPacket) JSON() string {
-	data, _ := json.Marshal(w)
+	data, _ := gojson.Marshal(w)
 	return string(data)
 }
 func (w *WakeOnLanSendMagicPacket) Name() string {

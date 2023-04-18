@@ -6,6 +6,7 @@ require (
 	github.com/Jeffail/gabs/v2 v2.7.0
 	github.com/dave/jennifer v1.6.0
 	github.com/go-logr/logr v1.2.4
+	github.com/goccy/go-json v0.10.2
 	github.com/goccy/go-yaml v1.11.0
 	github.com/gomarkdown/markdown v0.0.0-20230322041520-c84983bdbf2a
 	github.com/iancoleman/strcase v0.2.0

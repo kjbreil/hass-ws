@@ -1,8 +1,8 @@
 package services
 
 import (
-	"encoding/json"
 	"fmt"
+	gojson "github.com/goccy/go-json"
 )
 
 ////////////////////////////////////////////////////////////////////////////////
@@ -46,7 +46,7 @@ func (s *SchedulerAdd) RepeatType(repeatType RepeatType) *SchedulerAdd {
 	return s
 }
 func (s *SchedulerAdd) JSON() string {
-	data, _ := json.Marshal(s)
+	data, _ := gojson.Marshal(s)
 	return string(data)
 }
 func (s *SchedulerAdd) Name() string {
@@ -88,7 +88,7 @@ func (s *SchedulerCopy) SchedulerCopyName(schedulerCopyName string) *SchedulerCo
 	return s
 }
 func (s *SchedulerCopy) JSON() string {
-	data, _ := json.Marshal(s)
+	data, _ := gojson.Marshal(s)
 	return string(data)
 }
 func (s *SchedulerCopy) Name() string {
@@ -135,7 +135,7 @@ func (s *SchedulerEdit) RepeatType(repeatType RepeatType) *SchedulerEdit {
 	return s
 }
 func (s *SchedulerEdit) JSON() string {
-	data, _ := json.Marshal(s)
+	data, _ := gojson.Marshal(s)
 	return string(data)
 }
 func (s *SchedulerEdit) Name() string {
@@ -170,7 +170,7 @@ type SchedulerRemove struct {
 }
 
 func (s *SchedulerRemove) JSON() string {
-	data, _ := json.Marshal(s)
+	data, _ := gojson.Marshal(s)
 	return string(data)
 }
 func (s *SchedulerRemove) Name() string {
@@ -205,7 +205,7 @@ type SchedulerRunAction struct {
 }
 
 func (s *SchedulerRunAction) JSON() string {
-	data, _ := json.Marshal(s)
+	data, _ := gojson.Marshal(s)
 	return string(data)
 }
 func (s *SchedulerRunAction) Name() string {

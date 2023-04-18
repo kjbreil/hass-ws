@@ -1,8 +1,8 @@
 package services
 
 import (
-	"encoding/json"
 	"fmt"
+	gojson "github.com/goccy/go-json"
 )
 
 ////////////////////////////////////////////////////////////////////////////////
@@ -34,7 +34,7 @@ type GroupReload struct {
 }
 
 func (g *GroupReload) JSON() string {
-	data, _ := json.Marshal(g)
+	data, _ := gojson.Marshal(g)
 	return string(data)
 }
 func (g *GroupReload) Name() string {
@@ -69,7 +69,7 @@ type GroupRemove struct {
 }
 
 func (g *GroupRemove) JSON() string {
-	data, _ := json.Marshal(g)
+	data, _ := gojson.Marshal(g)
 	return string(data)
 }
 func (g *GroupRemove) Name() string {
@@ -116,7 +116,7 @@ func (g *GroupSet) ObjectId(objectId string) *GroupSet {
 	return g
 }
 func (g *GroupSet) JSON() string {
-	data, _ := json.Marshal(g)
+	data, _ := gojson.Marshal(g)
 	return string(data)
 }
 func (g *GroupSet) Name() string {

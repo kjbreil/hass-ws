@@ -145,7 +145,7 @@ func Gen(servicesFolder string, servicesList ServiceList) error {
 			}
 
 			services[d.name].Func().Params(jen.Id(s.firstLetter).Op("*").Id(s.camelName)).Id("JSON").Params().String().Block(
-				jen.List(jen.Id("data"), jen.Id("_")).Op(":=").Qual("encoding/json", "Marshal").Params(jen.Id(s.firstLetter)),
+				jen.List(jen.Id("data"), jen.Id("_")).Op(":=").Qual("github.com/goccy/go-json", "Marshal").Params(jen.Id(s.firstLetter)),
 				jen.Return(jen.String().Params(jen.Id("data"))),
 			)
 

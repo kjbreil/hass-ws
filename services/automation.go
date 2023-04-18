@@ -1,8 +1,8 @@
 package services
 
 import (
-	"encoding/json"
 	"fmt"
+	gojson "github.com/goccy/go-json"
 )
 
 ////////////////////////////////////////////////////////////////////////////////
@@ -34,7 +34,7 @@ type AutomationReload struct {
 }
 
 func (a *AutomationReload) JSON() string {
-	data, _ := json.Marshal(a)
+	data, _ := gojson.Marshal(a)
 	return string(data)
 }
 func (a *AutomationReload) Name() string {
@@ -69,7 +69,7 @@ type AutomationToggle struct {
 }
 
 func (a *AutomationToggle) JSON() string {
-	data, _ := json.Marshal(a)
+	data, _ := gojson.Marshal(a)
 	return string(data)
 }
 func (a *AutomationToggle) Name() string {
@@ -104,7 +104,7 @@ type AutomationTrigger struct {
 }
 
 func (a *AutomationTrigger) JSON() string {
-	data, _ := json.Marshal(a)
+	data, _ := gojson.Marshal(a)
 	return string(data)
 }
 func (a *AutomationTrigger) Name() string {
@@ -139,7 +139,7 @@ type AutomationTurnOff struct {
 }
 
 func (a *AutomationTurnOff) JSON() string {
-	data, _ := json.Marshal(a)
+	data, _ := gojson.Marshal(a)
 	return string(data)
 }
 func (a *AutomationTurnOff) Name() string {
@@ -174,7 +174,7 @@ type AutomationTurnOn struct {
 }
 
 func (a *AutomationTurnOn) JSON() string {
-	data, _ := json.Marshal(a)
+	data, _ := gojson.Marshal(a)
 	return string(data)
 }
 func (a *AutomationTurnOn) Name() string {

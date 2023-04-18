@@ -1,8 +1,8 @@
 package services
 
 import (
-	"encoding/json"
 	"fmt"
+	gojson "github.com/goccy/go-json"
 )
 
 ////////////////////////////////////////////////////////////////////////////////
@@ -41,7 +41,7 @@ func (r *RemoteDeleteCommand) Device(device string) *RemoteDeleteCommand {
 	return r
 }
 func (r *RemoteDeleteCommand) JSON() string {
-	data, _ := json.Marshal(r)
+	data, _ := gojson.Marshal(r)
 	return string(data)
 }
 func (r *RemoteDeleteCommand) Name() string {
@@ -93,7 +93,7 @@ func (r *RemoteLearnCommand) Timeout(timeout float64) *RemoteLearnCommand {
 	return r
 }
 func (r *RemoteLearnCommand) JSON() string {
-	data, _ := json.Marshal(r)
+	data, _ := gojson.Marshal(r)
 	return string(data)
 }
 func (r *RemoteLearnCommand) Name() string {
@@ -150,7 +150,7 @@ func (r *RemoteSendCommand) NumRepeats(numRepeats float64) *RemoteSendCommand {
 	return r
 }
 func (r *RemoteSendCommand) JSON() string {
-	data, _ := json.Marshal(r)
+	data, _ := gojson.Marshal(r)
 	return string(data)
 }
 func (r *RemoteSendCommand) Name() string {
@@ -185,7 +185,7 @@ type RemoteToggle struct {
 }
 
 func (r *RemoteToggle) JSON() string {
-	data, _ := json.Marshal(r)
+	data, _ := gojson.Marshal(r)
 	return string(data)
 }
 func (r *RemoteToggle) Name() string {
@@ -220,7 +220,7 @@ type RemoteTurnOff struct {
 }
 
 func (r *RemoteTurnOff) JSON() string {
-	data, _ := json.Marshal(r)
+	data, _ := gojson.Marshal(r)
 	return string(data)
 }
 func (r *RemoteTurnOff) Name() string {
@@ -262,7 +262,7 @@ func (r *RemoteTurnOn) Activity(activity string) *RemoteTurnOn {
 	return r
 }
 func (r *RemoteTurnOn) JSON() string {
-	data, _ := json.Marshal(r)
+	data, _ := gojson.Marshal(r)
 	return string(data)
 }
 func (r *RemoteTurnOn) Name() string {

@@ -1,8 +1,8 @@
 package services
 
 import (
-	"encoding/json"
 	"fmt"
+	gojson "github.com/goccy/go-json"
 )
 
 ////////////////////////////////////////////////////////////////////////////////
@@ -41,7 +41,7 @@ func (l *LoggerSetDefaultLevel) Level(level Level) *LoggerSetDefaultLevel {
 	return l
 }
 func (l *LoggerSetDefaultLevel) JSON() string {
-	data, _ := json.Marshal(l)
+	data, _ := gojson.Marshal(l)
 	return string(data)
 }
 func (l *LoggerSetDefaultLevel) Name() string {
@@ -76,7 +76,7 @@ type LoggerSetLevel struct {
 }
 
 func (l *LoggerSetLevel) JSON() string {
-	data, _ := json.Marshal(l)
+	data, _ := gojson.Marshal(l)
 	return string(data)
 }
 func (l *LoggerSetLevel) Name() string {

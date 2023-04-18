@@ -1,8 +1,8 @@
 package services
 
 import (
-	"encoding/json"
 	"fmt"
+	gojson "github.com/goccy/go-json"
 )
 
 ////////////////////////////////////////////////////////////////////////////////
@@ -41,7 +41,7 @@ func (n *NumberSetValue) Value(value string) *NumberSetValue {
 	return n
 }
 func (n *NumberSetValue) JSON() string {
-	data, _ := json.Marshal(n)
+	data, _ := gojson.Marshal(n)
 	return string(data)
 }
 func (n *NumberSetValue) Name() string {

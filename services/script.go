@@ -1,8 +1,8 @@
 package services
 
 import (
-	"encoding/json"
 	"fmt"
+	gojson "github.com/goccy/go-json"
 )
 
 ////////////////////////////////////////////////////////////////////////////////
@@ -34,7 +34,7 @@ type ScriptReload struct {
 }
 
 func (s *ScriptReload) JSON() string {
-	data, _ := json.Marshal(s)
+	data, _ := gojson.Marshal(s)
 	return string(data)
 }
 func (s *ScriptReload) Name() string {
@@ -69,7 +69,7 @@ type ScriptTestScript struct {
 }
 
 func (s *ScriptTestScript) JSON() string {
-	data, _ := json.Marshal(s)
+	data, _ := gojson.Marshal(s)
 	return string(data)
 }
 func (s *ScriptTestScript) Name() string {
@@ -104,7 +104,7 @@ type ScriptToggle struct {
 }
 
 func (s *ScriptToggle) JSON() string {
-	data, _ := json.Marshal(s)
+	data, _ := gojson.Marshal(s)
 	return string(data)
 }
 func (s *ScriptToggle) Name() string {
@@ -139,7 +139,7 @@ type ScriptTurnOff struct {
 }
 
 func (s *ScriptTurnOff) JSON() string {
-	data, _ := json.Marshal(s)
+	data, _ := gojson.Marshal(s)
 	return string(data)
 }
 func (s *ScriptTurnOff) Name() string {
@@ -174,7 +174,7 @@ type ScriptTurnOn struct {
 }
 
 func (s *ScriptTurnOn) JSON() string {
-	data, _ := json.Marshal(s)
+	data, _ := gojson.Marshal(s)
 	return string(data)
 }
 func (s *ScriptTurnOn) Name() string {

@@ -1,8 +1,8 @@
 package services
 
 import (
-	"encoding/json"
 	"fmt"
+	gojson "github.com/goccy/go-json"
 )
 
 ////////////////////////////////////////////////////////////////////////////////
@@ -34,7 +34,7 @@ type InputButtonPress struct {
 }
 
 func (i *InputButtonPress) JSON() string {
-	data, _ := json.Marshal(i)
+	data, _ := gojson.Marshal(i)
 	return string(data)
 }
 func (i *InputButtonPress) Name() string {
@@ -69,7 +69,7 @@ type InputButtonReload struct {
 }
 
 func (i *InputButtonReload) JSON() string {
-	data, _ := json.Marshal(i)
+	data, _ := gojson.Marshal(i)
 	return string(data)
 }
 func (i *InputButtonReload) Name() string {

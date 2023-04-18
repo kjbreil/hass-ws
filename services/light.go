@@ -1,8 +1,8 @@
 package services
 
 import (
-	"encoding/json"
 	"fmt"
+	gojson "github.com/goccy/go-json"
 )
 
 ////////////////////////////////////////////////////////////////////////////////
@@ -81,7 +81,7 @@ func (l *LightToggle) Transition(transition float64) *LightToggle {
 	return l
 }
 func (l *LightToggle) JSON() string {
-	data, _ := json.Marshal(l)
+	data, _ := gojson.Marshal(l)
 	return string(data)
 }
 func (l *LightToggle) Name() string {
@@ -128,7 +128,7 @@ func (l *LightTurnOff) Transition(transition float64) *LightTurnOff {
 	return l
 }
 func (l *LightTurnOff) JSON() string {
-	data, _ := json.Marshal(l)
+	data, _ := gojson.Marshal(l)
 	return string(data)
 }
 func (l *LightTurnOff) Name() string {
@@ -225,7 +225,7 @@ func (l *LightTurnOn) White(white float64) *LightTurnOn {
 	return l
 }
 func (l *LightTurnOn) JSON() string {
-	data, _ := json.Marshal(l)
+	data, _ := gojson.Marshal(l)
 	return string(data)
 }
 func (l *LightTurnOn) Name() string {

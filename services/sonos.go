@@ -1,8 +1,8 @@
 package services
 
 import (
-	"encoding/json"
 	"fmt"
+	gojson "github.com/goccy/go-json"
 )
 
 ////////////////////////////////////////////////////////////////////////////////
@@ -34,7 +34,7 @@ type SonosClearSleepTimer struct {
 }
 
 func (s *SonosClearSleepTimer) JSON() string {
-	data, _ := json.Marshal(s)
+	data, _ := gojson.Marshal(s)
 	return string(data)
 }
 func (s *SonosClearSleepTimer) Name() string {
@@ -76,7 +76,7 @@ func (s *SonosPlayQueue) QueuePosition(queuePosition float64) *SonosPlayQueue {
 	return s
 }
 func (s *SonosPlayQueue) JSON() string {
-	data, _ := json.Marshal(s)
+	data, _ := gojson.Marshal(s)
 	return string(data)
 }
 func (s *SonosPlayQueue) Name() string {
@@ -118,7 +118,7 @@ func (s *SonosRemoveFromQueue) QueuePosition(queuePosition float64) *SonosRemove
 	return s
 }
 func (s *SonosRemoveFromQueue) JSON() string {
-	data, _ := json.Marshal(s)
+	data, _ := gojson.Marshal(s)
 	return string(data)
 }
 func (s *SonosRemoveFromQueue) Name() string {
@@ -153,7 +153,7 @@ type SonosRestore struct {
 }
 
 func (s *SonosRestore) JSON() string {
-	data, _ := json.Marshal(s)
+	data, _ := gojson.Marshal(s)
 	return string(data)
 }
 func (s *SonosRestore) Name() string {
@@ -195,7 +195,7 @@ func (s *SonosSetSleepTimer) SleepTime(sleepTime float64) *SonosSetSleepTimer {
 	return s
 }
 func (s *SonosSetSleepTimer) JSON() string {
-	data, _ := json.Marshal(s)
+	data, _ := gojson.Marshal(s)
 	return string(data)
 }
 func (s *SonosSetSleepTimer) Name() string {
@@ -230,7 +230,7 @@ type SonosSnapshot struct {
 }
 
 func (s *SonosSnapshot) JSON() string {
-	data, _ := json.Marshal(s)
+	data, _ := gojson.Marshal(s)
 	return string(data)
 }
 func (s *SonosSnapshot) Name() string {
@@ -277,7 +277,7 @@ func (s *SonosUpdateAlarm) Volume(volume float64) *SonosUpdateAlarm {
 	return s
 }
 func (s *SonosUpdateAlarm) JSON() string {
-	data, _ := json.Marshal(s)
+	data, _ := gojson.Marshal(s)
 	return string(data)
 }
 func (s *SonosUpdateAlarm) Name() string {

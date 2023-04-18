@@ -1,8 +1,8 @@
 package services
 
 import (
-	"encoding/json"
 	"fmt"
+	gojson "github.com/goccy/go-json"
 )
 
 ////////////////////////////////////////////////////////////////////////////////
@@ -34,7 +34,7 @@ type InputDatetimeReload struct {
 }
 
 func (i *InputDatetimeReload) JSON() string {
-	data, _ := json.Marshal(i)
+	data, _ := gojson.Marshal(i)
 	return string(data)
 }
 func (i *InputDatetimeReload) Name() string {
@@ -86,7 +86,7 @@ func (i *InputDatetimeSetDatetime) Timestamp(timestamp float64) *InputDatetimeSe
 	return i
 }
 func (i *InputDatetimeSetDatetime) JSON() string {
-	data, _ := json.Marshal(i)
+	data, _ := gojson.Marshal(i)
 	return string(data)
 }
 func (i *InputDatetimeSetDatetime) Name() string {

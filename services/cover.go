@@ -1,8 +1,8 @@
 package services
 
 import (
-	"encoding/json"
 	"fmt"
+	gojson "github.com/goccy/go-json"
 )
 
 ////////////////////////////////////////////////////////////////////////////////
@@ -34,7 +34,7 @@ type CoverCloseCover struct {
 }
 
 func (c *CoverCloseCover) JSON() string {
-	data, _ := json.Marshal(c)
+	data, _ := gojson.Marshal(c)
 	return string(data)
 }
 func (c *CoverCloseCover) Name() string {
@@ -69,7 +69,7 @@ type CoverCloseCoverTilt struct {
 }
 
 func (c *CoverCloseCoverTilt) JSON() string {
-	data, _ := json.Marshal(c)
+	data, _ := gojson.Marshal(c)
 	return string(data)
 }
 func (c *CoverCloseCoverTilt) Name() string {
@@ -104,7 +104,7 @@ type CoverOpenCover struct {
 }
 
 func (c *CoverOpenCover) JSON() string {
-	data, _ := json.Marshal(c)
+	data, _ := gojson.Marshal(c)
 	return string(data)
 }
 func (c *CoverOpenCover) Name() string {
@@ -139,7 +139,7 @@ type CoverOpenCoverTilt struct {
 }
 
 func (c *CoverOpenCoverTilt) JSON() string {
-	data, _ := json.Marshal(c)
+	data, _ := gojson.Marshal(c)
 	return string(data)
 }
 func (c *CoverOpenCoverTilt) Name() string {
@@ -181,7 +181,7 @@ func (c *CoverSetCoverPosition) Position(position float64) *CoverSetCoverPositio
 	return c
 }
 func (c *CoverSetCoverPosition) JSON() string {
-	data, _ := json.Marshal(c)
+	data, _ := gojson.Marshal(c)
 	return string(data)
 }
 func (c *CoverSetCoverPosition) Name() string {
@@ -223,7 +223,7 @@ func (c *CoverSetCoverTiltPosition) TiltPosition(tiltPosition float64) *CoverSet
 	return c
 }
 func (c *CoverSetCoverTiltPosition) JSON() string {
-	data, _ := json.Marshal(c)
+	data, _ := gojson.Marshal(c)
 	return string(data)
 }
 func (c *CoverSetCoverTiltPosition) Name() string {
@@ -258,7 +258,7 @@ type CoverStopCover struct {
 }
 
 func (c *CoverStopCover) JSON() string {
-	data, _ := json.Marshal(c)
+	data, _ := gojson.Marshal(c)
 	return string(data)
 }
 func (c *CoverStopCover) Name() string {
@@ -293,7 +293,7 @@ type CoverStopCoverTilt struct {
 }
 
 func (c *CoverStopCoverTilt) JSON() string {
-	data, _ := json.Marshal(c)
+	data, _ := gojson.Marshal(c)
 	return string(data)
 }
 func (c *CoverStopCoverTilt) Name() string {
@@ -328,7 +328,7 @@ type CoverToggle struct {
 }
 
 func (c *CoverToggle) JSON() string {
-	data, _ := json.Marshal(c)
+	data, _ := gojson.Marshal(c)
 	return string(data)
 }
 func (c *CoverToggle) Name() string {
@@ -363,7 +363,7 @@ type CoverToggleCoverTilt struct {
 }
 
 func (c *CoverToggleCoverTilt) JSON() string {
-	data, _ := json.Marshal(c)
+	data, _ := gojson.Marshal(c)
 	return string(data)
 }
 func (c *CoverToggleCoverTilt) Name() string {

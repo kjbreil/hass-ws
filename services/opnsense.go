@@ -1,8 +1,8 @@
 package services
 
 import (
-	"encoding/json"
 	"fmt"
+	gojson "github.com/goccy/go-json"
 )
 
 ////////////////////////////////////////////////////////////////////////////////
@@ -34,7 +34,7 @@ type OpnsenseCloseNotice struct {
 }
 
 func (o *OpnsenseCloseNotice) JSON() string {
-	data, _ := json.Marshal(o)
+	data, _ := gojson.Marshal(o)
 	return string(data)
 }
 func (o *OpnsenseCloseNotice) Name() string {
@@ -69,7 +69,7 @@ type OpnsenseFileNotice struct {
 }
 
 func (o *OpnsenseFileNotice) JSON() string {
-	data, _ := json.Marshal(o)
+	data, _ := gojson.Marshal(o)
 	return string(data)
 }
 func (o *OpnsenseFileNotice) Name() string {
@@ -104,7 +104,7 @@ type OpnsenseRestartService struct {
 }
 
 func (o *OpnsenseRestartService) JSON() string {
-	data, _ := json.Marshal(o)
+	data, _ := gojson.Marshal(o)
 	return string(data)
 }
 func (o *OpnsenseRestartService) Name() string {
@@ -139,7 +139,7 @@ type OpnsenseSendWol struct {
 }
 
 func (o *OpnsenseSendWol) JSON() string {
-	data, _ := json.Marshal(o)
+	data, _ := gojson.Marshal(o)
 	return string(data)
 }
 func (o *OpnsenseSendWol) Name() string {
@@ -174,7 +174,7 @@ type OpnsenseStartService struct {
 }
 
 func (o *OpnsenseStartService) JSON() string {
-	data, _ := json.Marshal(o)
+	data, _ := gojson.Marshal(o)
 	return string(data)
 }
 func (o *OpnsenseStartService) Name() string {
@@ -209,7 +209,7 @@ type OpnsenseStopService struct {
 }
 
 func (o *OpnsenseStopService) JSON() string {
-	data, _ := json.Marshal(o)
+	data, _ := gojson.Marshal(o)
 	return string(data)
 }
 func (o *OpnsenseStopService) Name() string {
@@ -244,7 +244,7 @@ type OpnsenseSystemHalt struct {
 }
 
 func (o *OpnsenseSystemHalt) JSON() string {
-	data, _ := json.Marshal(o)
+	data, _ := gojson.Marshal(o)
 	return string(data)
 }
 func (o *OpnsenseSystemHalt) Name() string {
@@ -279,7 +279,7 @@ type OpnsenseSystemReboot struct {
 }
 
 func (o *OpnsenseSystemReboot) JSON() string {
-	data, _ := json.Marshal(o)
+	data, _ := gojson.Marshal(o)
 	return string(data)
 }
 func (o *OpnsenseSystemReboot) Name() string {

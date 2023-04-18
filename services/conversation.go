@@ -1,8 +1,8 @@
 package services
 
 import (
-	"encoding/json"
 	"fmt"
+	gojson "github.com/goccy/go-json"
 )
 
 ////////////////////////////////////////////////////////////////////////////////
@@ -41,7 +41,7 @@ func (c *ConversationProcess) Text(text string) *ConversationProcess {
 	return c
 }
 func (c *ConversationProcess) JSON() string {
-	data, _ := json.Marshal(c)
+	data, _ := gojson.Marshal(c)
 	return string(data)
 }
 func (c *ConversationProcess) Name() string {
@@ -76,7 +76,7 @@ type ConversationReload struct {
 }
 
 func (c *ConversationReload) JSON() string {
-	data, _ := json.Marshal(c)
+	data, _ := gojson.Marshal(c)
 	return string(data)
 }
 func (c *ConversationReload) Name() string {

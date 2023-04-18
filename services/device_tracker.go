@@ -1,8 +1,8 @@
 package services
 
 import (
-	"encoding/json"
 	"fmt"
+	gojson "github.com/goccy/go-json"
 )
 
 ////////////////////////////////////////////////////////////////////////////////
@@ -66,7 +66,7 @@ func (d *DeviceTrackerSee) Mac(mac string) *DeviceTrackerSee {
 	return d
 }
 func (d *DeviceTrackerSee) JSON() string {
-	data, _ := json.Marshal(d)
+	data, _ := gojson.Marshal(d)
 	return string(data)
 }
 func (d *DeviceTrackerSee) Name() string {

@@ -1,8 +1,8 @@
 package services
 
 import (
-	"encoding/json"
 	"fmt"
+	gojson "github.com/goccy/go-json"
 )
 
 ////////////////////////////////////////////////////////////////////////////////
@@ -46,7 +46,7 @@ func (m *MqttDump) Topic(topic string) *MqttDump {
 	return m
 }
 func (m *MqttDump) JSON() string {
-	data, _ := json.Marshal(m)
+	data, _ := gojson.Marshal(m)
 	return string(data)
 }
 func (m *MqttDump) Name() string {
@@ -98,7 +98,7 @@ func (m *MqttPublish) Topic(topic string) *MqttPublish {
 	return m
 }
 func (m *MqttPublish) JSON() string {
-	data, _ := json.Marshal(m)
+	data, _ := gojson.Marshal(m)
 	return string(data)
 }
 func (m *MqttPublish) Name() string {
@@ -133,7 +133,7 @@ type MqttReload struct {
 }
 
 func (m *MqttReload) JSON() string {
-	data, _ := json.Marshal(m)
+	data, _ := gojson.Marshal(m)
 	return string(data)
 }
 func (m *MqttReload) Name() string {

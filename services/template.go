@@ -1,8 +1,8 @@
 package services
 
 import (
-	"encoding/json"
 	"fmt"
+	gojson "github.com/goccy/go-json"
 )
 
 ////////////////////////////////////////////////////////////////////////////////
@@ -34,7 +34,7 @@ type TemplateReload struct {
 }
 
 func (t *TemplateReload) JSON() string {
-	data, _ := json.Marshal(t)
+	data, _ := gojson.Marshal(t)
 	return string(data)
 }
 func (t *TemplateReload) Name() string {

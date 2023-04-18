@@ -1,8 +1,8 @@
 package services
 
 import (
-	"encoding/json"
 	"fmt"
+	gojson "github.com/goccy/go-json"
 )
 
 ////////////////////////////////////////////////////////////////////////////////
@@ -34,7 +34,7 @@ type SystemLogClear struct {
 }
 
 func (s *SystemLogClear) JSON() string {
-	data, _ := json.Marshal(s)
+	data, _ := gojson.Marshal(s)
 	return string(data)
 }
 func (s *SystemLogClear) Name() string {
@@ -86,7 +86,7 @@ func (s *SystemLogWrite) Message(message string) *SystemLogWrite {
 	return s
 }
 func (s *SystemLogWrite) JSON() string {
-	data, _ := json.Marshal(s)
+	data, _ := gojson.Marshal(s)
 	return string(data)
 }
 func (s *SystemLogWrite) Name() string {

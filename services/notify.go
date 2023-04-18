@@ -1,8 +1,8 @@
 package services
 
 import (
-	"encoding/json"
 	"fmt"
+	gojson "github.com/goccy/go-json"
 )
 
 ////////////////////////////////////////////////////////////////////////////////
@@ -46,7 +46,7 @@ func (n *NotifyNotify) Title(title string) *NotifyNotify {
 	return n
 }
 func (n *NotifyNotify) JSON() string {
-	data, _ := json.Marshal(n)
+	data, _ := gojson.Marshal(n)
 	return string(data)
 }
 func (n *NotifyNotify) Name() string {
@@ -93,7 +93,7 @@ func (n *NotifyPersistentNotification) Title(title string) *NotifyPersistentNoti
 	return n
 }
 func (n *NotifyPersistentNotification) JSON() string {
-	data, _ := json.Marshal(n)
+	data, _ := gojson.Marshal(n)
 	return string(data)
 }
 func (n *NotifyPersistentNotification) Name() string {
