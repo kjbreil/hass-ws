@@ -209,8 +209,7 @@ func (c *Client) read() (*model.Message, error) {
 			return &msg, nil
 		}
 
-		//fmt.Println(messageString)
-		return nil, err
+		return nil, fmt.Errorf("%s gave error: %w", string(message), err)
 	}
 	msg.Raw = message
 	return &msg, nil
