@@ -49,6 +49,9 @@ func (n *NotifyNotify) JSON() string {
 	data, _ := gojson.Marshal(n)
 	return string(data)
 }
+func (n *NotifyNotify) Targets() []string {
+	return n.Target.EntityId
+}
 func (n *NotifyNotify) Name() string {
 	return fmt.Sprintf("%s.%s", *n.Domain, *n.Service)
 }
@@ -95,6 +98,9 @@ func (n *NotifyPersistentNotification) Title(title string) *NotifyPersistentNoti
 func (n *NotifyPersistentNotification) JSON() string {
 	data, _ := gojson.Marshal(n)
 	return string(data)
+}
+func (n *NotifyPersistentNotification) Targets() []string {
+	return n.Target.EntityId
 }
 func (n *NotifyPersistentNotification) Name() string {
 	return fmt.Sprintf("%s.%s", *n.Domain, *n.Service)

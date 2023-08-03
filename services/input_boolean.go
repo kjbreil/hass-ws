@@ -37,6 +37,9 @@ func (i *InputBooleanReload) JSON() string {
 	data, _ := gojson.Marshal(i)
 	return string(data)
 }
+func (i *InputBooleanReload) Targets() []string {
+	return i.Target.EntityId
+}
 func (i *InputBooleanReload) Name() string {
 	return fmt.Sprintf("%s.%s", *i.Domain, *i.Service)
 }
@@ -71,6 +74,9 @@ type InputBooleanToggle struct {
 func (i *InputBooleanToggle) JSON() string {
 	data, _ := gojson.Marshal(i)
 	return string(data)
+}
+func (i *InputBooleanToggle) Targets() []string {
+	return i.Target.EntityId
 }
 func (i *InputBooleanToggle) Name() string {
 	return fmt.Sprintf("%s.%s", *i.Domain, *i.Service)
@@ -107,6 +113,9 @@ func (i *InputBooleanTurnOff) JSON() string {
 	data, _ := gojson.Marshal(i)
 	return string(data)
 }
+func (i *InputBooleanTurnOff) Targets() []string {
+	return i.Target.EntityId
+}
 func (i *InputBooleanTurnOff) Name() string {
 	return fmt.Sprintf("%s.%s", *i.Domain, *i.Service)
 }
@@ -141,6 +150,9 @@ type InputBooleanTurnOn struct {
 func (i *InputBooleanTurnOn) JSON() string {
 	data, _ := gojson.Marshal(i)
 	return string(data)
+}
+func (i *InputBooleanTurnOn) Targets() []string {
+	return i.Target.EntityId
 }
 func (i *InputBooleanTurnOn) Name() string {
 	return fmt.Sprintf("%s.%s", *i.Domain, *i.Service)

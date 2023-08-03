@@ -37,6 +37,9 @@ func (s *SirenToggle) JSON() string {
 	data, _ := gojson.Marshal(s)
 	return string(data)
 }
+func (s *SirenToggle) Targets() []string {
+	return s.Target.EntityId
+}
 func (s *SirenToggle) Name() string {
 	return fmt.Sprintf("%s.%s", *s.Domain, *s.Service)
 }
@@ -71,6 +74,9 @@ type SirenTurnOff struct {
 func (s *SirenTurnOff) JSON() string {
 	data, _ := gojson.Marshal(s)
 	return string(data)
+}
+func (s *SirenTurnOff) Targets() []string {
+	return s.Target.EntityId
 }
 func (s *SirenTurnOff) Name() string {
 	return fmt.Sprintf("%s.%s", *s.Domain, *s.Service)
@@ -123,6 +129,9 @@ func (s *SirenTurnOn) VolumeLevel(volumeLevel float64) *SirenTurnOn {
 func (s *SirenTurnOn) JSON() string {
 	data, _ := gojson.Marshal(s)
 	return string(data)
+}
+func (s *SirenTurnOn) Targets() []string {
+	return s.Target.EntityId
 }
 func (s *SirenTurnOn) Name() string {
 	return fmt.Sprintf("%s.%s", *s.Domain, *s.Service)

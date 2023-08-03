@@ -37,6 +37,9 @@ func (b *ButtonPress) JSON() string {
 	data, _ := gojson.Marshal(b)
 	return string(data)
 }
+func (b *ButtonPress) Targets() []string {
+	return b.Target.EntityId
+}
 func (b *ButtonPress) Name() string {
 	return fmt.Sprintf("%s.%s", *b.Domain, *b.Service)
 }

@@ -37,6 +37,9 @@ func (o *OpnsenseCloseNotice) JSON() string {
 	data, _ := gojson.Marshal(o)
 	return string(data)
 }
+func (o *OpnsenseCloseNotice) Targets() []string {
+	return o.Target.EntityId
+}
 func (o *OpnsenseCloseNotice) Name() string {
 	return fmt.Sprintf("%s.%s", *o.Domain, *o.Service)
 }
@@ -71,6 +74,9 @@ type OpnsenseFileNotice struct {
 func (o *OpnsenseFileNotice) JSON() string {
 	data, _ := gojson.Marshal(o)
 	return string(data)
+}
+func (o *OpnsenseFileNotice) Targets() []string {
+	return o.Target.EntityId
 }
 func (o *OpnsenseFileNotice) Name() string {
 	return fmt.Sprintf("%s.%s", *o.Domain, *o.Service)
@@ -107,6 +113,9 @@ func (o *OpnsenseRestartService) JSON() string {
 	data, _ := gojson.Marshal(o)
 	return string(data)
 }
+func (o *OpnsenseRestartService) Targets() []string {
+	return o.Target.EntityId
+}
 func (o *OpnsenseRestartService) Name() string {
 	return fmt.Sprintf("%s.%s", *o.Domain, *o.Service)
 }
@@ -141,6 +150,9 @@ type OpnsenseSendWol struct {
 func (o *OpnsenseSendWol) JSON() string {
 	data, _ := gojson.Marshal(o)
 	return string(data)
+}
+func (o *OpnsenseSendWol) Targets() []string {
+	return o.Target.EntityId
 }
 func (o *OpnsenseSendWol) Name() string {
 	return fmt.Sprintf("%s.%s", *o.Domain, *o.Service)
@@ -177,6 +189,9 @@ func (o *OpnsenseStartService) JSON() string {
 	data, _ := gojson.Marshal(o)
 	return string(data)
 }
+func (o *OpnsenseStartService) Targets() []string {
+	return o.Target.EntityId
+}
 func (o *OpnsenseStartService) Name() string {
 	return fmt.Sprintf("%s.%s", *o.Domain, *o.Service)
 }
@@ -211,6 +226,9 @@ type OpnsenseStopService struct {
 func (o *OpnsenseStopService) JSON() string {
 	data, _ := gojson.Marshal(o)
 	return string(data)
+}
+func (o *OpnsenseStopService) Targets() []string {
+	return o.Target.EntityId
 }
 func (o *OpnsenseStopService) Name() string {
 	return fmt.Sprintf("%s.%s", *o.Domain, *o.Service)
@@ -247,6 +265,9 @@ func (o *OpnsenseSystemHalt) JSON() string {
 	data, _ := gojson.Marshal(o)
 	return string(data)
 }
+func (o *OpnsenseSystemHalt) Targets() []string {
+	return o.Target.EntityId
+}
 func (o *OpnsenseSystemHalt) Name() string {
 	return fmt.Sprintf("%s.%s", *o.Domain, *o.Service)
 }
@@ -281,6 +302,9 @@ type OpnsenseSystemReboot struct {
 func (o *OpnsenseSystemReboot) JSON() string {
 	data, _ := gojson.Marshal(o)
 	return string(data)
+}
+func (o *OpnsenseSystemReboot) Targets() []string {
+	return o.Target.EntityId
 }
 func (o *OpnsenseSystemReboot) Name() string {
 	return fmt.Sprintf("%s.%s", *o.Domain, *o.Service)

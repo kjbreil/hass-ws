@@ -111,6 +111,12 @@ func (sl *ServiceList) setParameters(d *Domain) {
 				if _, ok := sm["color_temp"]; ok {
 					s.parameters[fn] = "float64"
 				}
+				if _, ok := sm["object"]; ok {
+					if fn == "data" {
+
+						s.parameters[fn] = "[]byte"
+					}
+				}
 				if se, ok := sm["select"]; ok {
 					options := se.ChildrenMap()["options"].Children()
 					if options != nil {

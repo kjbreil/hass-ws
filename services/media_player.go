@@ -37,6 +37,9 @@ func (m *MediaPlayerClearPlaylist) JSON() string {
 	data, _ := gojson.Marshal(m)
 	return string(data)
 }
+func (m *MediaPlayerClearPlaylist) Targets() []string {
+	return m.Target.EntityId
+}
 func (m *MediaPlayerClearPlaylist) Name() string {
 	return fmt.Sprintf("%s.%s", *m.Domain, *m.Service)
 }
@@ -71,6 +74,9 @@ type MediaPlayerJoin struct {
 func (m *MediaPlayerJoin) JSON() string {
 	data, _ := gojson.Marshal(m)
 	return string(data)
+}
+func (m *MediaPlayerJoin) Targets() []string {
+	return m.Target.EntityId
 }
 func (m *MediaPlayerJoin) Name() string {
 	return fmt.Sprintf("%s.%s", *m.Domain, *m.Service)
@@ -107,6 +113,9 @@ func (m *MediaPlayerMediaNextTrack) JSON() string {
 	data, _ := gojson.Marshal(m)
 	return string(data)
 }
+func (m *MediaPlayerMediaNextTrack) Targets() []string {
+	return m.Target.EntityId
+}
 func (m *MediaPlayerMediaNextTrack) Name() string {
 	return fmt.Sprintf("%s.%s", *m.Domain, *m.Service)
 }
@@ -141,6 +150,9 @@ type MediaPlayerMediaPause struct {
 func (m *MediaPlayerMediaPause) JSON() string {
 	data, _ := gojson.Marshal(m)
 	return string(data)
+}
+func (m *MediaPlayerMediaPause) Targets() []string {
+	return m.Target.EntityId
 }
 func (m *MediaPlayerMediaPause) Name() string {
 	return fmt.Sprintf("%s.%s", *m.Domain, *m.Service)
@@ -177,6 +189,9 @@ func (m *MediaPlayerMediaPlay) JSON() string {
 	data, _ := gojson.Marshal(m)
 	return string(data)
 }
+func (m *MediaPlayerMediaPlay) Targets() []string {
+	return m.Target.EntityId
+}
 func (m *MediaPlayerMediaPlay) Name() string {
 	return fmt.Sprintf("%s.%s", *m.Domain, *m.Service)
 }
@@ -212,6 +227,9 @@ func (m *MediaPlayerMediaPlayPause) JSON() string {
 	data, _ := gojson.Marshal(m)
 	return string(data)
 }
+func (m *MediaPlayerMediaPlayPause) Targets() []string {
+	return m.Target.EntityId
+}
 func (m *MediaPlayerMediaPlayPause) Name() string {
 	return fmt.Sprintf("%s.%s", *m.Domain, *m.Service)
 }
@@ -246,6 +264,9 @@ type MediaPlayerMediaPreviousTrack struct {
 func (m *MediaPlayerMediaPreviousTrack) JSON() string {
 	data, _ := gojson.Marshal(m)
 	return string(data)
+}
+func (m *MediaPlayerMediaPreviousTrack) Targets() []string {
+	return m.Target.EntityId
 }
 func (m *MediaPlayerMediaPreviousTrack) Name() string {
 	return fmt.Sprintf("%s.%s", *m.Domain, *m.Service)
@@ -289,6 +310,9 @@ func (m *MediaPlayerMediaSeek) JSON() string {
 	data, _ := gojson.Marshal(m)
 	return string(data)
 }
+func (m *MediaPlayerMediaSeek) Targets() []string {
+	return m.Target.EntityId
+}
 func (m *MediaPlayerMediaSeek) Name() string {
 	return fmt.Sprintf("%s.%s", *m.Domain, *m.Service)
 }
@@ -323,6 +347,9 @@ type MediaPlayerMediaStop struct {
 func (m *MediaPlayerMediaStop) JSON() string {
 	data, _ := gojson.Marshal(m)
 	return string(data)
+}
+func (m *MediaPlayerMediaStop) Targets() []string {
+	return m.Target.EntityId
 }
 func (m *MediaPlayerMediaStop) Name() string {
 	return fmt.Sprintf("%s.%s", *m.Domain, *m.Service)
@@ -376,6 +403,9 @@ func (m *MediaPlayerPlayMedia) JSON() string {
 	data, _ := gojson.Marshal(m)
 	return string(data)
 }
+func (m *MediaPlayerPlayMedia) Targets() []string {
+	return m.Target.EntityId
+}
 func (m *MediaPlayerPlayMedia) Name() string {
 	return fmt.Sprintf("%s.%s", *m.Domain, *m.Service)
 }
@@ -417,6 +447,9 @@ func (m *MediaPlayerRepeatSet) Repeat(repeat Repeat) *MediaPlayerRepeatSet {
 func (m *MediaPlayerRepeatSet) JSON() string {
 	data, _ := gojson.Marshal(m)
 	return string(data)
+}
+func (m *MediaPlayerRepeatSet) Targets() []string {
+	return m.Target.EntityId
 }
 func (m *MediaPlayerRepeatSet) Name() string {
 	return fmt.Sprintf("%s.%s", *m.Domain, *m.Service)
@@ -460,6 +493,9 @@ func (m *MediaPlayerSelectSoundMode) JSON() string {
 	data, _ := gojson.Marshal(m)
 	return string(data)
 }
+func (m *MediaPlayerSelectSoundMode) Targets() []string {
+	return m.Target.EntityId
+}
 func (m *MediaPlayerSelectSoundMode) Name() string {
 	return fmt.Sprintf("%s.%s", *m.Domain, *m.Service)
 }
@@ -502,6 +538,9 @@ func (m *MediaPlayerSelectSource) JSON() string {
 	data, _ := gojson.Marshal(m)
 	return string(data)
 }
+func (m *MediaPlayerSelectSource) Targets() []string {
+	return m.Target.EntityId
+}
 func (m *MediaPlayerSelectSource) Name() string {
 	return fmt.Sprintf("%s.%s", *m.Domain, *m.Service)
 }
@@ -536,6 +575,9 @@ type MediaPlayerShuffleSet struct {
 func (m *MediaPlayerShuffleSet) JSON() string {
 	data, _ := gojson.Marshal(m)
 	return string(data)
+}
+func (m *MediaPlayerShuffleSet) Targets() []string {
+	return m.Target.EntityId
 }
 func (m *MediaPlayerShuffleSet) Name() string {
 	return fmt.Sprintf("%s.%s", *m.Domain, *m.Service)
@@ -572,6 +614,9 @@ func (m *MediaPlayerToggle) JSON() string {
 	data, _ := gojson.Marshal(m)
 	return string(data)
 }
+func (m *MediaPlayerToggle) Targets() []string {
+	return m.Target.EntityId
+}
 func (m *MediaPlayerToggle) Name() string {
 	return fmt.Sprintf("%s.%s", *m.Domain, *m.Service)
 }
@@ -606,6 +651,9 @@ type MediaPlayerTurnOff struct {
 func (m *MediaPlayerTurnOff) JSON() string {
 	data, _ := gojson.Marshal(m)
 	return string(data)
+}
+func (m *MediaPlayerTurnOff) Targets() []string {
+	return m.Target.EntityId
 }
 func (m *MediaPlayerTurnOff) Name() string {
 	return fmt.Sprintf("%s.%s", *m.Domain, *m.Service)
@@ -642,6 +690,9 @@ func (m *MediaPlayerTurnOn) JSON() string {
 	data, _ := gojson.Marshal(m)
 	return string(data)
 }
+func (m *MediaPlayerTurnOn) Targets() []string {
+	return m.Target.EntityId
+}
 func (m *MediaPlayerTurnOn) Name() string {
 	return fmt.Sprintf("%s.%s", *m.Domain, *m.Service)
 }
@@ -676,6 +727,9 @@ type MediaPlayerUnjoin struct {
 func (m *MediaPlayerUnjoin) JSON() string {
 	data, _ := gojson.Marshal(m)
 	return string(data)
+}
+func (m *MediaPlayerUnjoin) Targets() []string {
+	return m.Target.EntityId
 }
 func (m *MediaPlayerUnjoin) Name() string {
 	return fmt.Sprintf("%s.%s", *m.Domain, *m.Service)
@@ -712,6 +766,9 @@ func (m *MediaPlayerVolumeDown) JSON() string {
 	data, _ := gojson.Marshal(m)
 	return string(data)
 }
+func (m *MediaPlayerVolumeDown) Targets() []string {
+	return m.Target.EntityId
+}
 func (m *MediaPlayerVolumeDown) Name() string {
 	return fmt.Sprintf("%s.%s", *m.Domain, *m.Service)
 }
@@ -746,6 +803,9 @@ type MediaPlayerVolumeMute struct {
 func (m *MediaPlayerVolumeMute) JSON() string {
 	data, _ := gojson.Marshal(m)
 	return string(data)
+}
+func (m *MediaPlayerVolumeMute) Targets() []string {
+	return m.Target.EntityId
 }
 func (m *MediaPlayerVolumeMute) Name() string {
 	return fmt.Sprintf("%s.%s", *m.Domain, *m.Service)
@@ -789,6 +849,9 @@ func (m *MediaPlayerVolumeSet) JSON() string {
 	data, _ := gojson.Marshal(m)
 	return string(data)
 }
+func (m *MediaPlayerVolumeSet) Targets() []string {
+	return m.Target.EntityId
+}
 func (m *MediaPlayerVolumeSet) Name() string {
 	return fmt.Sprintf("%s.%s", *m.Domain, *m.Service)
 }
@@ -823,6 +886,9 @@ type MediaPlayerVolumeUp struct {
 func (m *MediaPlayerVolumeUp) JSON() string {
 	data, _ := gojson.Marshal(m)
 	return string(data)
+}
+func (m *MediaPlayerVolumeUp) Targets() []string {
+	return m.Target.EntityId
 }
 func (m *MediaPlayerVolumeUp) Name() string {
 	return fmt.Sprintf("%s.%s", *m.Domain, *m.Service)

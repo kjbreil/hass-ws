@@ -44,6 +44,9 @@ func (s *SceneApply) JSON() string {
 	data, _ := gojson.Marshal(s)
 	return string(data)
 }
+func (s *SceneApply) Targets() []string {
+	return s.Target.EntityId
+}
 func (s *SceneApply) Name() string {
 	return fmt.Sprintf("%s.%s", *s.Domain, *s.Service)
 }
@@ -86,6 +89,9 @@ func (s *SceneCreate) JSON() string {
 	data, _ := gojson.Marshal(s)
 	return string(data)
 }
+func (s *SceneCreate) Targets() []string {
+	return s.Target.EntityId
+}
 func (s *SceneCreate) Name() string {
 	return fmt.Sprintf("%s.%s", *s.Domain, *s.Service)
 }
@@ -120,6 +126,9 @@ type SceneReload struct {
 func (s *SceneReload) JSON() string {
 	data, _ := gojson.Marshal(s)
 	return string(data)
+}
+func (s *SceneReload) Targets() []string {
+	return s.Target.EntityId
 }
 func (s *SceneReload) Name() string {
 	return fmt.Sprintf("%s.%s", *s.Domain, *s.Service)
@@ -162,6 +171,9 @@ func (s *SceneTurnOn) Transition(transition float64) *SceneTurnOn {
 func (s *SceneTurnOn) JSON() string {
 	data, _ := gojson.Marshal(s)
 	return string(data)
+}
+func (s *SceneTurnOn) Targets() []string {
+	return s.Target.EntityId
 }
 func (s *SceneTurnOn) Name() string {
 	return fmt.Sprintf("%s.%s", *s.Domain, *s.Service)

@@ -37,6 +37,9 @@ func (r *RecorderDisable) JSON() string {
 	data, _ := gojson.Marshal(r)
 	return string(data)
 }
+func (r *RecorderDisable) Targets() []string {
+	return r.Target.EntityId
+}
 func (r *RecorderDisable) Name() string {
 	return fmt.Sprintf("%s.%s", *r.Domain, *r.Service)
 }
@@ -71,6 +74,9 @@ type RecorderEnable struct {
 func (r *RecorderEnable) JSON() string {
 	data, _ := gojson.Marshal(r)
 	return string(data)
+}
+func (r *RecorderEnable) Targets() []string {
+	return r.Target.EntityId
 }
 func (r *RecorderEnable) Name() string {
 	return fmt.Sprintf("%s.%s", *r.Domain, *r.Service)
@@ -114,6 +120,9 @@ func (r *RecorderPurge) JSON() string {
 	data, _ := gojson.Marshal(r)
 	return string(data)
 }
+func (r *RecorderPurge) Targets() []string {
+	return r.Target.EntityId
+}
 func (r *RecorderPurge) Name() string {
 	return fmt.Sprintf("%s.%s", *r.Domain, *r.Service)
 }
@@ -148,6 +157,9 @@ type RecorderPurgeEntities struct {
 func (r *RecorderPurgeEntities) JSON() string {
 	data, _ := gojson.Marshal(r)
 	return string(data)
+}
+func (r *RecorderPurgeEntities) Targets() []string {
+	return r.Target.EntityId
 }
 func (r *RecorderPurgeEntities) Name() string {
 	return fmt.Sprintf("%s.%s", *r.Domain, *r.Service)

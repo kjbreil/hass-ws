@@ -37,6 +37,9 @@ func (t *TimerCancel) JSON() string {
 	data, _ := gojson.Marshal(t)
 	return string(data)
 }
+func (t *TimerCancel) Targets() []string {
+	return t.Target.EntityId
+}
 func (t *TimerCancel) Name() string {
 	return fmt.Sprintf("%s.%s", *t.Domain, *t.Service)
 }
@@ -71,6 +74,9 @@ type TimerFinish struct {
 func (t *TimerFinish) JSON() string {
 	data, _ := gojson.Marshal(t)
 	return string(data)
+}
+func (t *TimerFinish) Targets() []string {
+	return t.Target.EntityId
 }
 func (t *TimerFinish) Name() string {
 	return fmt.Sprintf("%s.%s", *t.Domain, *t.Service)
@@ -107,6 +113,9 @@ func (t *TimerPause) JSON() string {
 	data, _ := gojson.Marshal(t)
 	return string(data)
 }
+func (t *TimerPause) Targets() []string {
+	return t.Target.EntityId
+}
 func (t *TimerPause) Name() string {
 	return fmt.Sprintf("%s.%s", *t.Domain, *t.Service)
 }
@@ -141,6 +150,9 @@ type TimerReload struct {
 func (t *TimerReload) JSON() string {
 	data, _ := gojson.Marshal(t)
 	return string(data)
+}
+func (t *TimerReload) Targets() []string {
+	return t.Target.EntityId
 }
 func (t *TimerReload) Name() string {
 	return fmt.Sprintf("%s.%s", *t.Domain, *t.Service)
@@ -183,6 +195,9 @@ func (t *TimerStart) Duration(duration string) *TimerStart {
 func (t *TimerStart) JSON() string {
 	data, _ := gojson.Marshal(t)
 	return string(data)
+}
+func (t *TimerStart) Targets() []string {
+	return t.Target.EntityId
 }
 func (t *TimerStart) Name() string {
 	return fmt.Sprintf("%s.%s", *t.Domain, *t.Service)

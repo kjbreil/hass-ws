@@ -37,6 +37,9 @@ func (i *InputSelectReload) JSON() string {
 	data, _ := gojson.Marshal(i)
 	return string(data)
 }
+func (i *InputSelectReload) Targets() []string {
+	return i.Target.EntityId
+}
 func (i *InputSelectReload) Name() string {
 	return fmt.Sprintf("%s.%s", *i.Domain, *i.Service)
 }
@@ -71,6 +74,9 @@ type InputSelectSelectFirst struct {
 func (i *InputSelectSelectFirst) JSON() string {
 	data, _ := gojson.Marshal(i)
 	return string(data)
+}
+func (i *InputSelectSelectFirst) Targets() []string {
+	return i.Target.EntityId
 }
 func (i *InputSelectSelectFirst) Name() string {
 	return fmt.Sprintf("%s.%s", *i.Domain, *i.Service)
@@ -107,6 +113,9 @@ func (i *InputSelectSelectLast) JSON() string {
 	data, _ := gojson.Marshal(i)
 	return string(data)
 }
+func (i *InputSelectSelectLast) Targets() []string {
+	return i.Target.EntityId
+}
 func (i *InputSelectSelectLast) Name() string {
 	return fmt.Sprintf("%s.%s", *i.Domain, *i.Service)
 }
@@ -141,6 +150,9 @@ type InputSelectSelectNext struct {
 func (i *InputSelectSelectNext) JSON() string {
 	data, _ := gojson.Marshal(i)
 	return string(data)
+}
+func (i *InputSelectSelectNext) Targets() []string {
+	return i.Target.EntityId
 }
 func (i *InputSelectSelectNext) Name() string {
 	return fmt.Sprintf("%s.%s", *i.Domain, *i.Service)
@@ -184,6 +196,9 @@ func (i *InputSelectSelectOption) JSON() string {
 	data, _ := gojson.Marshal(i)
 	return string(data)
 }
+func (i *InputSelectSelectOption) Targets() []string {
+	return i.Target.EntityId
+}
 func (i *InputSelectSelectOption) Name() string {
 	return fmt.Sprintf("%s.%s", *i.Domain, *i.Service)
 }
@@ -219,6 +234,9 @@ func (i *InputSelectSelectPrevious) JSON() string {
 	data, _ := gojson.Marshal(i)
 	return string(data)
 }
+func (i *InputSelectSelectPrevious) Targets() []string {
+	return i.Target.EntityId
+}
 func (i *InputSelectSelectPrevious) Name() string {
 	return fmt.Sprintf("%s.%s", *i.Domain, *i.Service)
 }
@@ -253,6 +271,9 @@ type InputSelectSetOptions struct {
 func (i *InputSelectSetOptions) JSON() string {
 	data, _ := gojson.Marshal(i)
 	return string(data)
+}
+func (i *InputSelectSetOptions) Targets() []string {
+	return i.Target.EntityId
 }
 func (i *InputSelectSetOptions) Name() string {
 	return fmt.Sprintf("%s.%s", *i.Domain, *i.Service)

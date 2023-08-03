@@ -37,6 +37,9 @@ func (i *InputNumberDecrement) JSON() string {
 	data, _ := gojson.Marshal(i)
 	return string(data)
 }
+func (i *InputNumberDecrement) Targets() []string {
+	return i.Target.EntityId
+}
 func (i *InputNumberDecrement) Name() string {
 	return fmt.Sprintf("%s.%s", *i.Domain, *i.Service)
 }
@@ -72,6 +75,9 @@ func (i *InputNumberIncrement) JSON() string {
 	data, _ := gojson.Marshal(i)
 	return string(data)
 }
+func (i *InputNumberIncrement) Targets() []string {
+	return i.Target.EntityId
+}
 func (i *InputNumberIncrement) Name() string {
 	return fmt.Sprintf("%s.%s", *i.Domain, *i.Service)
 }
@@ -106,6 +112,9 @@ type InputNumberReload struct {
 func (i *InputNumberReload) JSON() string {
 	data, _ := gojson.Marshal(i)
 	return string(data)
+}
+func (i *InputNumberReload) Targets() []string {
+	return i.Target.EntityId
 }
 func (i *InputNumberReload) Name() string {
 	return fmt.Sprintf("%s.%s", *i.Domain, *i.Service)
@@ -148,6 +157,9 @@ func (i *InputNumberSetValue) Value(value float64) *InputNumberSetValue {
 func (i *InputNumberSetValue) JSON() string {
 	data, _ := gojson.Marshal(i)
 	return string(data)
+}
+func (i *InputNumberSetValue) Targets() []string {
+	return i.Target.EntityId
 }
 func (i *InputNumberSetValue) Name() string {
 	return fmt.Sprintf("%s.%s", *i.Domain, *i.Service)

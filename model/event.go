@@ -40,15 +40,6 @@ type Data struct {
 	OldState *State  `json:"old_state,omitempty"`
 }
 
-type State struct {
-	EntityId    *string                `json:"entity_id,omitempty"`
-	LastChanged *time.Time             `json:"last_changed,omitempty"`
-	State       *string                `json:"state,omitempty"`
-	Attributes  map[string]interface{} `json:"attributes,omitempty"`
-	LastUpdated *time.Time             `json:"last_updated,omitempty"`
-	Context     *Context               `json:"context,omitempty"`
-}
-
 type Context struct {
 	Id       *string `json:"id"`
 	ParentId *string `json:"parent_id"`

@@ -84,6 +84,9 @@ func (l *LightToggle) JSON() string {
 	data, _ := gojson.Marshal(l)
 	return string(data)
 }
+func (l *LightToggle) Targets() []string {
+	return l.Target.EntityId
+}
 func (l *LightToggle) Name() string {
 	return fmt.Sprintf("%s.%s", *l.Domain, *l.Service)
 }
@@ -130,6 +133,9 @@ func (l *LightTurnOff) Transition(transition float64) *LightTurnOff {
 func (l *LightTurnOff) JSON() string {
 	data, _ := gojson.Marshal(l)
 	return string(data)
+}
+func (l *LightTurnOff) Targets() []string {
+	return l.Target.EntityId
 }
 func (l *LightTurnOff) Name() string {
 	return fmt.Sprintf("%s.%s", *l.Domain, *l.Service)
@@ -227,6 +233,9 @@ func (l *LightTurnOn) White(white float64) *LightTurnOn {
 func (l *LightTurnOn) JSON() string {
 	data, _ := gojson.Marshal(l)
 	return string(data)
+}
+func (l *LightTurnOn) Targets() []string {
+	return l.Target.EntityId
 }
 func (l *LightTurnOn) Name() string {
 	return fmt.Sprintf("%s.%s", *l.Domain, *l.Service)

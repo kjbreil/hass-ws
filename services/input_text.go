@@ -37,6 +37,9 @@ func (i *InputTextReload) JSON() string {
 	data, _ := gojson.Marshal(i)
 	return string(data)
 }
+func (i *InputTextReload) Targets() []string {
+	return i.Target.EntityId
+}
 func (i *InputTextReload) Name() string {
 	return fmt.Sprintf("%s.%s", *i.Domain, *i.Service)
 }
@@ -78,6 +81,9 @@ func (i *InputTextSetValue) Value(value string) *InputTextSetValue {
 func (i *InputTextSetValue) JSON() string {
 	data, _ := gojson.Marshal(i)
 	return string(data)
+}
+func (i *InputTextSetValue) Targets() []string {
+	return i.Target.EntityId
 }
 func (i *InputTextSetValue) Name() string {
 	return fmt.Sprintf("%s.%s", *i.Domain, *i.Service)

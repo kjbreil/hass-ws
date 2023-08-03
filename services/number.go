@@ -44,6 +44,9 @@ func (n *NumberSetValue) JSON() string {
 	data, _ := gojson.Marshal(n)
 	return string(data)
 }
+func (n *NumberSetValue) Targets() []string {
+	return n.Target.EntityId
+}
 func (n *NumberSetValue) Name() string {
 	return fmt.Sprintf("%s.%s", *n.Domain, *n.Service)
 }

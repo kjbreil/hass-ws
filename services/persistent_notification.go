@@ -54,6 +54,9 @@ func (p *PersistentNotificationCreate) JSON() string {
 	data, _ := gojson.Marshal(p)
 	return string(data)
 }
+func (p *PersistentNotificationCreate) Targets() []string {
+	return p.Target.EntityId
+}
 func (p *PersistentNotificationCreate) Name() string {
 	return fmt.Sprintf("%s.%s", *p.Domain, *p.Service)
 }
@@ -96,6 +99,9 @@ func (p *PersistentNotificationDismiss) JSON() string {
 	data, _ := gojson.Marshal(p)
 	return string(data)
 }
+func (p *PersistentNotificationDismiss) Targets() []string {
+	return p.Target.EntityId
+}
 func (p *PersistentNotificationDismiss) Name() string {
 	return fmt.Sprintf("%s.%s", *p.Domain, *p.Service)
 }
@@ -137,6 +143,9 @@ func (p *PersistentNotificationMarkRead) NotificationId(notificationId string) *
 func (p *PersistentNotificationMarkRead) JSON() string {
 	data, _ := gojson.Marshal(p)
 	return string(data)
+}
+func (p *PersistentNotificationMarkRead) Targets() []string {
+	return p.Target.EntityId
 }
 func (p *PersistentNotificationMarkRead) Name() string {
 	return fmt.Sprintf("%s.%s", *p.Domain, *p.Service)

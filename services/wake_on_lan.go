@@ -54,6 +54,9 @@ func (w *WakeOnLanSendMagicPacket) JSON() string {
 	data, _ := gojson.Marshal(w)
 	return string(data)
 }
+func (w *WakeOnLanSendMagicPacket) Targets() []string {
+	return w.Target.EntityId
+}
 func (w *WakeOnLanSendMagicPacket) Name() string {
 	return fmt.Sprintf("%s.%s", *w.Domain, *w.Service)
 }

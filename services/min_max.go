@@ -37,6 +37,9 @@ func (m *MinMaxReload) JSON() string {
 	data, _ := gojson.Marshal(m)
 	return string(data)
 }
+func (m *MinMaxReload) Targets() []string {
+	return m.Target.EntityId
+}
 func (m *MinMaxReload) Name() string {
 	return fmt.Sprintf("%s.%s", *m.Domain, *m.Service)
 }

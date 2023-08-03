@@ -37,6 +37,9 @@ func (z *ZoneReload) JSON() string {
 	data, _ := gojson.Marshal(z)
 	return string(data)
 }
+func (z *ZoneReload) Targets() []string {
+	return z.Target.EntityId
+}
 func (z *ZoneReload) Name() string {
 	return fmt.Sprintf("%s.%s", *z.Domain, *z.Service)
 }

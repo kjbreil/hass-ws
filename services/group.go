@@ -37,6 +37,9 @@ func (g *GroupReload) JSON() string {
 	data, _ := gojson.Marshal(g)
 	return string(data)
 }
+func (g *GroupReload) Targets() []string {
+	return g.Target.EntityId
+}
 func (g *GroupReload) Name() string {
 	return fmt.Sprintf("%s.%s", *g.Domain, *g.Service)
 }
@@ -71,6 +74,9 @@ type GroupRemove struct {
 func (g *GroupRemove) JSON() string {
 	data, _ := gojson.Marshal(g)
 	return string(data)
+}
+func (g *GroupRemove) Targets() []string {
+	return g.Target.EntityId
 }
 func (g *GroupRemove) Name() string {
 	return fmt.Sprintf("%s.%s", *g.Domain, *g.Service)
@@ -118,6 +124,9 @@ func (g *GroupSet) ObjectId(objectId string) *GroupSet {
 func (g *GroupSet) JSON() string {
 	data, _ := gojson.Marshal(g)
 	return string(data)
+}
+func (g *GroupSet) Targets() []string {
+	return g.Target.EntityId
 }
 func (g *GroupSet) Name() string {
 	return fmt.Sprintf("%s.%s", *g.Domain, *g.Service)

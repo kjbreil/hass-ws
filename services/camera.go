@@ -37,6 +37,9 @@ func (c *CameraDisableMotionDetection) JSON() string {
 	data, _ := gojson.Marshal(c)
 	return string(data)
 }
+func (c *CameraDisableMotionDetection) Targets() []string {
+	return c.Target.EntityId
+}
 func (c *CameraDisableMotionDetection) Name() string {
 	return fmt.Sprintf("%s.%s", *c.Domain, *c.Service)
 }
@@ -71,6 +74,9 @@ type CameraEnableMotionDetection struct {
 func (c *CameraEnableMotionDetection) JSON() string {
 	data, _ := gojson.Marshal(c)
 	return string(data)
+}
+func (c *CameraEnableMotionDetection) Targets() []string {
+	return c.Target.EntityId
 }
 func (c *CameraEnableMotionDetection) Name() string {
 	return fmt.Sprintf("%s.%s", *c.Domain, *c.Service)
@@ -113,6 +119,9 @@ func (c *CameraPlayStream) Format(format Format) *CameraPlayStream {
 func (c *CameraPlayStream) JSON() string {
 	data, _ := gojson.Marshal(c)
 	return string(data)
+}
+func (c *CameraPlayStream) Targets() []string {
+	return c.Target.EntityId
 }
 func (c *CameraPlayStream) Name() string {
 	return fmt.Sprintf("%s.%s", *c.Domain, *c.Service)
@@ -166,6 +175,9 @@ func (c *CameraRecord) JSON() string {
 	data, _ := gojson.Marshal(c)
 	return string(data)
 }
+func (c *CameraRecord) Targets() []string {
+	return c.Target.EntityId
+}
 func (c *CameraRecord) Name() string {
 	return fmt.Sprintf("%s.%s", *c.Domain, *c.Service)
 }
@@ -208,6 +220,9 @@ func (c *CameraSnapshot) JSON() string {
 	data, _ := gojson.Marshal(c)
 	return string(data)
 }
+func (c *CameraSnapshot) Targets() []string {
+	return c.Target.EntityId
+}
 func (c *CameraSnapshot) Name() string {
 	return fmt.Sprintf("%s.%s", *c.Domain, *c.Service)
 }
@@ -243,6 +258,9 @@ func (c *CameraTurnOff) JSON() string {
 	data, _ := gojson.Marshal(c)
 	return string(data)
 }
+func (c *CameraTurnOff) Targets() []string {
+	return c.Target.EntityId
+}
 func (c *CameraTurnOff) Name() string {
 	return fmt.Sprintf("%s.%s", *c.Domain, *c.Service)
 }
@@ -277,6 +295,9 @@ type CameraTurnOn struct {
 func (c *CameraTurnOn) JSON() string {
 	data, _ := gojson.Marshal(c)
 	return string(data)
+}
+func (c *CameraTurnOn) Targets() []string {
+	return c.Target.EntityId
 }
 func (c *CameraTurnOn) Name() string {
 	return fmt.Sprintf("%s.%s", *c.Domain, *c.Service)

@@ -44,6 +44,9 @@ func (l *LockLock) JSON() string {
 	data, _ := gojson.Marshal(l)
 	return string(data)
 }
+func (l *LockLock) Targets() []string {
+	return l.Target.EntityId
+}
 func (l *LockLock) Name() string {
 	return fmt.Sprintf("%s.%s", *l.Domain, *l.Service)
 }
@@ -86,6 +89,9 @@ func (l *LockOpen) JSON() string {
 	data, _ := gojson.Marshal(l)
 	return string(data)
 }
+func (l *LockOpen) Targets() []string {
+	return l.Target.EntityId
+}
 func (l *LockOpen) Name() string {
 	return fmt.Sprintf("%s.%s", *l.Domain, *l.Service)
 }
@@ -127,6 +133,9 @@ func (l *LockUnlock) Code(code string) *LockUnlock {
 func (l *LockUnlock) JSON() string {
 	data, _ := gojson.Marshal(l)
 	return string(data)
+}
+func (l *LockUnlock) Targets() []string {
+	return l.Target.EntityId
 }
 func (l *LockUnlock) Name() string {
 	return fmt.Sprintf("%s.%s", *l.Domain, *l.Service)

@@ -69,6 +69,9 @@ func (d *DeviceTrackerSee) JSON() string {
 	data, _ := gojson.Marshal(d)
 	return string(data)
 }
+func (d *DeviceTrackerSee) Targets() []string {
+	return d.Target.EntityId
+}
 func (d *DeviceTrackerSee) Name() string {
 	return fmt.Sprintf("%s.%s", *d.Domain, *d.Service)
 }

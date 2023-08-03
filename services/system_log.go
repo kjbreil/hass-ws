@@ -37,6 +37,9 @@ func (s *SystemLogClear) JSON() string {
 	data, _ := gojson.Marshal(s)
 	return string(data)
 }
+func (s *SystemLogClear) Targets() []string {
+	return s.Target.EntityId
+}
 func (s *SystemLogClear) Name() string {
 	return fmt.Sprintf("%s.%s", *s.Domain, *s.Service)
 }
@@ -88,6 +91,9 @@ func (s *SystemLogWrite) Message(message string) *SystemLogWrite {
 func (s *SystemLogWrite) JSON() string {
 	data, _ := gojson.Marshal(s)
 	return string(data)
+}
+func (s *SystemLogWrite) Targets() []string {
+	return s.Target.EntityId
 }
 func (s *SystemLogWrite) Name() string {
 	return fmt.Sprintf("%s.%s", *s.Domain, *s.Service)

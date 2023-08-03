@@ -37,6 +37,9 @@ func (t *ThermalComfortReload) JSON() string {
 	data, _ := gojson.Marshal(t)
 	return string(data)
 }
+func (t *ThermalComfortReload) Targets() []string {
+	return t.Target.EntityId
+}
 func (t *ThermalComfortReload) Name() string {
 	return fmt.Sprintf("%s.%s", *t.Domain, *t.Service)
 }

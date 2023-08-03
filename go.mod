@@ -4,7 +4,7 @@ go 1.19
 
 require (
 	github.com/Jeffail/gabs/v2 v2.7.0
-	github.com/dave/jennifer v1.6.0
+	github.com/dave/jennifer v1.6.1
 	github.com/go-logr/logr v1.2.4
 	github.com/goccy/go-json v0.10.2
 	github.com/goccy/go-yaml v1.11.0
@@ -15,7 +15,7 @@ require (
 
 require (
 	github.com/fatih/color v1.15.0 // indirect
-	github.com/klauspost/compress v1.16.4 // indirect
+	github.com/klauspost/compress v1.16.5 // indirect
 	github.com/mattn/go-colorable v0.1.13 // indirect
 	github.com/mattn/go-isatty v0.0.18 // indirect
 	golang.org/x/sys v0.7.0 // indirect

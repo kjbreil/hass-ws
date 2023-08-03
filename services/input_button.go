@@ -37,6 +37,9 @@ func (i *InputButtonPress) JSON() string {
 	data, _ := gojson.Marshal(i)
 	return string(data)
 }
+func (i *InputButtonPress) Targets() []string {
+	return i.Target.EntityId
+}
 func (i *InputButtonPress) Name() string {
 	return fmt.Sprintf("%s.%s", *i.Domain, *i.Service)
 }
@@ -71,6 +74,9 @@ type InputButtonReload struct {
 func (i *InputButtonReload) JSON() string {
 	data, _ := gojson.Marshal(i)
 	return string(data)
+}
+func (i *InputButtonReload) Targets() []string {
+	return i.Target.EntityId
 }
 func (i *InputButtonReload) Name() string {
 	return fmt.Sprintf("%s.%s", *i.Domain, *i.Service)

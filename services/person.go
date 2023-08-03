@@ -37,6 +37,9 @@ func (p *PersonReload) JSON() string {
 	data, _ := gojson.Marshal(p)
 	return string(data)
 }
+func (p *PersonReload) Targets() []string {
+	return p.Target.EntityId
+}
 func (p *PersonReload) Name() string {
 	return fmt.Sprintf("%s.%s", *p.Domain, *p.Service)
 }

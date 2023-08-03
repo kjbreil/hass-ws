@@ -37,6 +37,9 @@ func (h *HomeassistantCheckConfig) JSON() string {
 	data, _ := gojson.Marshal(h)
 	return string(data)
 }
+func (h *HomeassistantCheckConfig) Targets() []string {
+	return h.Target.EntityId
+}
 func (h *HomeassistantCheckConfig) Name() string {
 	return fmt.Sprintf("%s.%s", *h.Domain, *h.Service)
 }
@@ -79,6 +82,9 @@ func (h *HomeassistantReloadConfigEntry) JSON() string {
 	data, _ := gojson.Marshal(h)
 	return string(data)
 }
+func (h *HomeassistantReloadConfigEntry) Targets() []string {
+	return h.Target.EntityId
+}
 func (h *HomeassistantReloadConfigEntry) Name() string {
 	return fmt.Sprintf("%s.%s", *h.Domain, *h.Service)
 }
@@ -113,6 +119,9 @@ type HomeassistantReloadCoreConfig struct {
 func (h *HomeassistantReloadCoreConfig) JSON() string {
 	data, _ := gojson.Marshal(h)
 	return string(data)
+}
+func (h *HomeassistantReloadCoreConfig) Targets() []string {
+	return h.Target.EntityId
 }
 func (h *HomeassistantReloadCoreConfig) Name() string {
 	return fmt.Sprintf("%s.%s", *h.Domain, *h.Service)
@@ -149,6 +158,9 @@ func (h *HomeassistantRestart) JSON() string {
 	data, _ := gojson.Marshal(h)
 	return string(data)
 }
+func (h *HomeassistantRestart) Targets() []string {
+	return h.Target.EntityId
+}
 func (h *HomeassistantRestart) Name() string {
 	return fmt.Sprintf("%s.%s", *h.Domain, *h.Service)
 }
@@ -183,6 +195,9 @@ type HomeassistantSavePersistentStates struct {
 func (h *HomeassistantSavePersistentStates) JSON() string {
 	data, _ := gojson.Marshal(h)
 	return string(data)
+}
+func (h *HomeassistantSavePersistentStates) Targets() []string {
+	return h.Target.EntityId
 }
 func (h *HomeassistantSavePersistentStates) Name() string {
 	return fmt.Sprintf("%s.%s", *h.Domain, *h.Service)
@@ -231,6 +246,9 @@ func (h *HomeassistantSetLocation) JSON() string {
 	data, _ := gojson.Marshal(h)
 	return string(data)
 }
+func (h *HomeassistantSetLocation) Targets() []string {
+	return h.Target.EntityId
+}
 func (h *HomeassistantSetLocation) Name() string {
 	return fmt.Sprintf("%s.%s", *h.Domain, *h.Service)
 }
@@ -265,6 +283,9 @@ type HomeassistantStop struct {
 func (h *HomeassistantStop) JSON() string {
 	data, _ := gojson.Marshal(h)
 	return string(data)
+}
+func (h *HomeassistantStop) Targets() []string {
+	return h.Target.EntityId
 }
 func (h *HomeassistantStop) Name() string {
 	return fmt.Sprintf("%s.%s", *h.Domain, *h.Service)
@@ -301,6 +322,9 @@ func (h *HomeassistantToggle) JSON() string {
 	data, _ := gojson.Marshal(h)
 	return string(data)
 }
+func (h *HomeassistantToggle) Targets() []string {
+	return h.Target.EntityId
+}
 func (h *HomeassistantToggle) Name() string {
 	return fmt.Sprintf("%s.%s", *h.Domain, *h.Service)
 }
@@ -335,6 +359,9 @@ type HomeassistantTurnOff struct {
 func (h *HomeassistantTurnOff) JSON() string {
 	data, _ := gojson.Marshal(h)
 	return string(data)
+}
+func (h *HomeassistantTurnOff) Targets() []string {
+	return h.Target.EntityId
 }
 func (h *HomeassistantTurnOff) Name() string {
 	return fmt.Sprintf("%s.%s", *h.Domain, *h.Service)
@@ -371,6 +398,9 @@ func (h *HomeassistantTurnOn) JSON() string {
 	data, _ := gojson.Marshal(h)
 	return string(data)
 }
+func (h *HomeassistantTurnOn) Targets() []string {
+	return h.Target.EntityId
+}
 func (h *HomeassistantTurnOn) Name() string {
 	return fmt.Sprintf("%s.%s", *h.Domain, *h.Service)
 }
@@ -405,6 +435,9 @@ type HomeassistantUpdateEntity struct {
 func (h *HomeassistantUpdateEntity) JSON() string {
 	data, _ := gojson.Marshal(h)
 	return string(data)
+}
+func (h *HomeassistantUpdateEntity) Targets() []string {
+	return h.Target.EntityId
 }
 func (h *HomeassistantUpdateEntity) Name() string {
 	return fmt.Sprintf("%s.%s", *h.Domain, *h.Service)

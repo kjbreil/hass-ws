@@ -49,6 +49,9 @@ func (c *CastShowLovelaceView) JSON() string {
 	data, _ := gojson.Marshal(c)
 	return string(data)
 }
+func (c *CastShowLovelaceView) Targets() []string {
+	return c.Target.EntityId
+}
 func (c *CastShowLovelaceView) Name() string {
 	return fmt.Sprintf("%s.%s", *c.Domain, *c.Service)
 }

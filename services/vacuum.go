@@ -37,6 +37,9 @@ func (v *VacuumCleanSpot) JSON() string {
 	data, _ := gojson.Marshal(v)
 	return string(data)
 }
+func (v *VacuumCleanSpot) Targets() []string {
+	return v.Target.EntityId
+}
 func (v *VacuumCleanSpot) Name() string {
 	return fmt.Sprintf("%s.%s", *v.Domain, *v.Service)
 }
@@ -71,6 +74,9 @@ type VacuumLocate struct {
 func (v *VacuumLocate) JSON() string {
 	data, _ := gojson.Marshal(v)
 	return string(data)
+}
+func (v *VacuumLocate) Targets() []string {
+	return v.Target.EntityId
 }
 func (v *VacuumLocate) Name() string {
 	return fmt.Sprintf("%s.%s", *v.Domain, *v.Service)
@@ -107,6 +113,9 @@ func (v *VacuumPause) JSON() string {
 	data, _ := gojson.Marshal(v)
 	return string(data)
 }
+func (v *VacuumPause) Targets() []string {
+	return v.Target.EntityId
+}
 func (v *VacuumPause) Name() string {
 	return fmt.Sprintf("%s.%s", *v.Domain, *v.Service)
 }
@@ -141,6 +150,9 @@ type VacuumReturnToBase struct {
 func (v *VacuumReturnToBase) JSON() string {
 	data, _ := gojson.Marshal(v)
 	return string(data)
+}
+func (v *VacuumReturnToBase) Targets() []string {
+	return v.Target.EntityId
 }
 func (v *VacuumReturnToBase) Name() string {
 	return fmt.Sprintf("%s.%s", *v.Domain, *v.Service)
@@ -184,6 +196,9 @@ func (v *VacuumSendCommand) JSON() string {
 	data, _ := gojson.Marshal(v)
 	return string(data)
 }
+func (v *VacuumSendCommand) Targets() []string {
+	return v.Target.EntityId
+}
 func (v *VacuumSendCommand) Name() string {
 	return fmt.Sprintf("%s.%s", *v.Domain, *v.Service)
 }
@@ -226,6 +241,9 @@ func (v *VacuumSetFanSpeed) JSON() string {
 	data, _ := gojson.Marshal(v)
 	return string(data)
 }
+func (v *VacuumSetFanSpeed) Targets() []string {
+	return v.Target.EntityId
+}
 func (v *VacuumSetFanSpeed) Name() string {
 	return fmt.Sprintf("%s.%s", *v.Domain, *v.Service)
 }
@@ -260,6 +278,9 @@ type VacuumStart struct {
 func (v *VacuumStart) JSON() string {
 	data, _ := gojson.Marshal(v)
 	return string(data)
+}
+func (v *VacuumStart) Targets() []string {
+	return v.Target.EntityId
 }
 func (v *VacuumStart) Name() string {
 	return fmt.Sprintf("%s.%s", *v.Domain, *v.Service)
@@ -296,6 +317,9 @@ func (v *VacuumStartPause) JSON() string {
 	data, _ := gojson.Marshal(v)
 	return string(data)
 }
+func (v *VacuumStartPause) Targets() []string {
+	return v.Target.EntityId
+}
 func (v *VacuumStartPause) Name() string {
 	return fmt.Sprintf("%s.%s", *v.Domain, *v.Service)
 }
@@ -330,6 +354,9 @@ type VacuumStop struct {
 func (v *VacuumStop) JSON() string {
 	data, _ := gojson.Marshal(v)
 	return string(data)
+}
+func (v *VacuumStop) Targets() []string {
+	return v.Target.EntityId
 }
 func (v *VacuumStop) Name() string {
 	return fmt.Sprintf("%s.%s", *v.Domain, *v.Service)
@@ -366,6 +393,9 @@ func (v *VacuumToggle) JSON() string {
 	data, _ := gojson.Marshal(v)
 	return string(data)
 }
+func (v *VacuumToggle) Targets() []string {
+	return v.Target.EntityId
+}
 func (v *VacuumToggle) Name() string {
 	return fmt.Sprintf("%s.%s", *v.Domain, *v.Service)
 }
@@ -401,6 +431,9 @@ func (v *VacuumTurnOff) JSON() string {
 	data, _ := gojson.Marshal(v)
 	return string(data)
 }
+func (v *VacuumTurnOff) Targets() []string {
+	return v.Target.EntityId
+}
 func (v *VacuumTurnOff) Name() string {
 	return fmt.Sprintf("%s.%s", *v.Domain, *v.Service)
 }
@@ -435,6 +468,9 @@ type VacuumTurnOn struct {
 func (v *VacuumTurnOn) JSON() string {
 	data, _ := gojson.Marshal(v)
 	return string(data)
+}
+func (v *VacuumTurnOn) Targets() []string {
+	return v.Target.EntityId
 }
 func (v *VacuumTurnOn) Name() string {
 	return fmt.Sprintf("%s.%s", *v.Domain, *v.Service)

@@ -37,6 +37,9 @@ func (b *BackupCreate) JSON() string {
 	data, _ := gojson.Marshal(b)
 	return string(data)
 }
+func (b *BackupCreate) Targets() []string {
+	return b.Target.EntityId
+}
 func (b *BackupCreate) Name() string {
 	return fmt.Sprintf("%s.%s", *b.Domain, *b.Service)
 }

@@ -37,6 +37,9 @@ func (s *SonosClearSleepTimer) JSON() string {
 	data, _ := gojson.Marshal(s)
 	return string(data)
 }
+func (s *SonosClearSleepTimer) Targets() []string {
+	return s.Target.EntityId
+}
 func (s *SonosClearSleepTimer) Name() string {
 	return fmt.Sprintf("%s.%s", *s.Domain, *s.Service)
 }
@@ -78,6 +81,9 @@ func (s *SonosPlayQueue) QueuePosition(queuePosition float64) *SonosPlayQueue {
 func (s *SonosPlayQueue) JSON() string {
 	data, _ := gojson.Marshal(s)
 	return string(data)
+}
+func (s *SonosPlayQueue) Targets() []string {
+	return s.Target.EntityId
 }
 func (s *SonosPlayQueue) Name() string {
 	return fmt.Sprintf("%s.%s", *s.Domain, *s.Service)
@@ -121,6 +127,9 @@ func (s *SonosRemoveFromQueue) JSON() string {
 	data, _ := gojson.Marshal(s)
 	return string(data)
 }
+func (s *SonosRemoveFromQueue) Targets() []string {
+	return s.Target.EntityId
+}
 func (s *SonosRemoveFromQueue) Name() string {
 	return fmt.Sprintf("%s.%s", *s.Domain, *s.Service)
 }
@@ -155,6 +164,9 @@ type SonosRestore struct {
 func (s *SonosRestore) JSON() string {
 	data, _ := gojson.Marshal(s)
 	return string(data)
+}
+func (s *SonosRestore) Targets() []string {
+	return s.Target.EntityId
 }
 func (s *SonosRestore) Name() string {
 	return fmt.Sprintf("%s.%s", *s.Domain, *s.Service)
@@ -198,6 +210,9 @@ func (s *SonosSetSleepTimer) JSON() string {
 	data, _ := gojson.Marshal(s)
 	return string(data)
 }
+func (s *SonosSetSleepTimer) Targets() []string {
+	return s.Target.EntityId
+}
 func (s *SonosSetSleepTimer) Name() string {
 	return fmt.Sprintf("%s.%s", *s.Domain, *s.Service)
 }
@@ -232,6 +247,9 @@ type SonosSnapshot struct {
 func (s *SonosSnapshot) JSON() string {
 	data, _ := gojson.Marshal(s)
 	return string(data)
+}
+func (s *SonosSnapshot) Targets() []string {
+	return s.Target.EntityId
 }
 func (s *SonosSnapshot) Name() string {
 	return fmt.Sprintf("%s.%s", *s.Domain, *s.Service)
@@ -279,6 +297,9 @@ func (s *SonosUpdateAlarm) Volume(volume float64) *SonosUpdateAlarm {
 func (s *SonosUpdateAlarm) JSON() string {
 	data, _ := gojson.Marshal(s)
 	return string(data)
+}
+func (s *SonosUpdateAlarm) Targets() []string {
+	return s.Target.EntityId
 }
 func (s *SonosUpdateAlarm) Name() string {
 	return fmt.Sprintf("%s.%s", *s.Domain, *s.Service)

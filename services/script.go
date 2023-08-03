@@ -37,6 +37,9 @@ func (s *ScriptReload) JSON() string {
 	data, _ := gojson.Marshal(s)
 	return string(data)
 }
+func (s *ScriptReload) Targets() []string {
+	return s.Target.EntityId
+}
 func (s *ScriptReload) Name() string {
 	return fmt.Sprintf("%s.%s", *s.Domain, *s.Service)
 }
@@ -71,6 +74,9 @@ type ScriptTestScript struct {
 func (s *ScriptTestScript) JSON() string {
 	data, _ := gojson.Marshal(s)
 	return string(data)
+}
+func (s *ScriptTestScript) Targets() []string {
+	return s.Target.EntityId
 }
 func (s *ScriptTestScript) Name() string {
 	return fmt.Sprintf("%s.%s", *s.Domain, *s.Service)
@@ -107,6 +113,9 @@ func (s *ScriptToggle) JSON() string {
 	data, _ := gojson.Marshal(s)
 	return string(data)
 }
+func (s *ScriptToggle) Targets() []string {
+	return s.Target.EntityId
+}
 func (s *ScriptToggle) Name() string {
 	return fmt.Sprintf("%s.%s", *s.Domain, *s.Service)
 }
@@ -142,6 +151,9 @@ func (s *ScriptTurnOff) JSON() string {
 	data, _ := gojson.Marshal(s)
 	return string(data)
 }
+func (s *ScriptTurnOff) Targets() []string {
+	return s.Target.EntityId
+}
 func (s *ScriptTurnOff) Name() string {
 	return fmt.Sprintf("%s.%s", *s.Domain, *s.Service)
 }
@@ -176,6 +188,9 @@ type ScriptTurnOn struct {
 func (s *ScriptTurnOn) JSON() string {
 	data, _ := gojson.Marshal(s)
 	return string(data)
+}
+func (s *ScriptTurnOn) Targets() []string {
+	return s.Target.EntityId
 }
 func (s *ScriptTurnOn) Name() string {
 	return fmt.Sprintf("%s.%s", *s.Domain, *s.Service)

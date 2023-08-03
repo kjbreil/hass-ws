@@ -44,6 +44,9 @@ func (h *HumidifierSetHumidity) JSON() string {
 	data, _ := gojson.Marshal(h)
 	return string(data)
 }
+func (h *HumidifierSetHumidity) Targets() []string {
+	return h.Target.EntityId
+}
 func (h *HumidifierSetHumidity) Name() string {
 	return fmt.Sprintf("%s.%s", *h.Domain, *h.Service)
 }
@@ -86,6 +89,9 @@ func (h *HumidifierSetMode) JSON() string {
 	data, _ := gojson.Marshal(h)
 	return string(data)
 }
+func (h *HumidifierSetMode) Targets() []string {
+	return h.Target.EntityId
+}
 func (h *HumidifierSetMode) Name() string {
 	return fmt.Sprintf("%s.%s", *h.Domain, *h.Service)
 }
@@ -120,6 +126,9 @@ type HumidifierToggle struct {
 func (h *HumidifierToggle) JSON() string {
 	data, _ := gojson.Marshal(h)
 	return string(data)
+}
+func (h *HumidifierToggle) Targets() []string {
+	return h.Target.EntityId
 }
 func (h *HumidifierToggle) Name() string {
 	return fmt.Sprintf("%s.%s", *h.Domain, *h.Service)
@@ -156,6 +165,9 @@ func (h *HumidifierTurnOff) JSON() string {
 	data, _ := gojson.Marshal(h)
 	return string(data)
 }
+func (h *HumidifierTurnOff) Targets() []string {
+	return h.Target.EntityId
+}
 func (h *HumidifierTurnOff) Name() string {
 	return fmt.Sprintf("%s.%s", *h.Domain, *h.Service)
 }
@@ -190,6 +202,9 @@ type HumidifierTurnOn struct {
 func (h *HumidifierTurnOn) JSON() string {
 	data, _ := gojson.Marshal(h)
 	return string(data)
+}
+func (h *HumidifierTurnOn) Targets() []string {
+	return h.Target.EntityId
 }
 func (h *HumidifierTurnOn) Name() string {
 	return fmt.Sprintf("%s.%s", *h.Domain, *h.Service)

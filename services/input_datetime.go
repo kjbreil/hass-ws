@@ -37,6 +37,9 @@ func (i *InputDatetimeReload) JSON() string {
 	data, _ := gojson.Marshal(i)
 	return string(data)
 }
+func (i *InputDatetimeReload) Targets() []string {
+	return i.Target.EntityId
+}
 func (i *InputDatetimeReload) Name() string {
 	return fmt.Sprintf("%s.%s", *i.Domain, *i.Service)
 }
@@ -88,6 +91,9 @@ func (i *InputDatetimeSetDatetime) Timestamp(timestamp float64) *InputDatetimeSe
 func (i *InputDatetimeSetDatetime) JSON() string {
 	data, _ := gojson.Marshal(i)
 	return string(data)
+}
+func (i *InputDatetimeSetDatetime) Targets() []string {
+	return i.Target.EntityId
 }
 func (i *InputDatetimeSetDatetime) Name() string {
 	return fmt.Sprintf("%s.%s", *i.Domain, *i.Service)

@@ -37,6 +37,9 @@ func (s *ShellCommandShutdownTyr) JSON() string {
 	data, _ := gojson.Marshal(s)
 	return string(data)
 }
+func (s *ShellCommandShutdownTyr) Targets() []string {
+	return s.Target.EntityId
+}
 func (s *ShellCommandShutdownTyr) Name() string {
 	return fmt.Sprintf("%s.%s", *s.Domain, *s.Service)
 }
@@ -72,6 +75,9 @@ func (s *ShellCommandStartNcbp) JSON() string {
 	data, _ := gojson.Marshal(s)
 	return string(data)
 }
+func (s *ShellCommandStartNcbp) Targets() []string {
+	return s.Target.EntityId
+}
 func (s *ShellCommandStartNcbp) Name() string {
 	return fmt.Sprintf("%s.%s", *s.Domain, *s.Service)
 }
@@ -106,6 +112,9 @@ type ShellCommandStopNcbp struct {
 func (s *ShellCommandStopNcbp) JSON() string {
 	data, _ := gojson.Marshal(s)
 	return string(data)
+}
+func (s *ShellCommandStopNcbp) Targets() []string {
+	return s.Target.EntityId
 }
 func (s *ShellCommandStopNcbp) Name() string {
 	return fmt.Sprintf("%s.%s", *s.Domain, *s.Service)

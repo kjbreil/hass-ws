@@ -64,6 +64,9 @@ func (c *CounterConfigure) JSON() string {
 	data, _ := gojson.Marshal(c)
 	return string(data)
 }
+func (c *CounterConfigure) Targets() []string {
+	return c.Target.EntityId
+}
 func (c *CounterConfigure) Name() string {
 	return fmt.Sprintf("%s.%s", *c.Domain, *c.Service)
 }
@@ -98,6 +101,9 @@ type CounterDecrement struct {
 func (c *CounterDecrement) JSON() string {
 	data, _ := gojson.Marshal(c)
 	return string(data)
+}
+func (c *CounterDecrement) Targets() []string {
+	return c.Target.EntityId
 }
 func (c *CounterDecrement) Name() string {
 	return fmt.Sprintf("%s.%s", *c.Domain, *c.Service)
@@ -134,6 +140,9 @@ func (c *CounterIncrement) JSON() string {
 	data, _ := gojson.Marshal(c)
 	return string(data)
 }
+func (c *CounterIncrement) Targets() []string {
+	return c.Target.EntityId
+}
 func (c *CounterIncrement) Name() string {
 	return fmt.Sprintf("%s.%s", *c.Domain, *c.Service)
 }
@@ -168,6 +177,9 @@ type CounterReset struct {
 func (c *CounterReset) JSON() string {
 	data, _ := gojson.Marshal(c)
 	return string(data)
+}
+func (c *CounterReset) Targets() []string {
+	return c.Target.EntityId
 }
 func (c *CounterReset) Name() string {
 	return fmt.Sprintf("%s.%s", *c.Domain, *c.Service)

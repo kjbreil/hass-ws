@@ -54,6 +54,9 @@ func (h *HueActivateScene) JSON() string {
 	data, _ := gojson.Marshal(h)
 	return string(data)
 }
+func (h *HueActivateScene) Targets() []string {
+	return h.Target.EntityId
+}
 func (h *HueActivateScene) Name() string {
 	return fmt.Sprintf("%s.%s", *h.Domain, *h.Service)
 }
@@ -100,6 +103,9 @@ func (h *HueHueActivateScene) SceneName(sceneName string) *HueHueActivateScene {
 func (h *HueHueActivateScene) JSON() string {
 	data, _ := gojson.Marshal(h)
 	return string(data)
+}
+func (h *HueHueActivateScene) Targets() []string {
+	return h.Target.EntityId
 }
 func (h *HueHueActivateScene) Name() string {
 	return fmt.Sprintf("%s.%s", *h.Domain, *h.Service)

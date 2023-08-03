@@ -37,6 +37,9 @@ func (s *ScheduleReload) JSON() string {
 	data, _ := gojson.Marshal(s)
 	return string(data)
 }
+func (s *ScheduleReload) Targets() []string {
+	return s.Target.EntityId
+}
 func (s *ScheduleReload) Name() string {
 	return fmt.Sprintf("%s.%s", *s.Domain, *s.Service)
 }

@@ -44,6 +44,9 @@ func (u *UtilityMeterCalibrate) JSON() string {
 	data, _ := gojson.Marshal(u)
 	return string(data)
 }
+func (u *UtilityMeterCalibrate) Targets() []string {
+	return u.Target.EntityId
+}
 func (u *UtilityMeterCalibrate) Name() string {
 	return fmt.Sprintf("%s.%s", *u.Domain, *u.Service)
 }
@@ -78,6 +81,9 @@ type UtilityMeterReset struct {
 func (u *UtilityMeterReset) JSON() string {
 	data, _ := gojson.Marshal(u)
 	return string(data)
+}
+func (u *UtilityMeterReset) Targets() []string {
+	return u.Target.EntityId
 }
 func (u *UtilityMeterReset) Name() string {
 	return fmt.Sprintf("%s.%s", *u.Domain, *u.Service)

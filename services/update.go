@@ -37,6 +37,9 @@ func (u *UpdateClearSkipped) JSON() string {
 	data, _ := gojson.Marshal(u)
 	return string(data)
 }
+func (u *UpdateClearSkipped) Targets() []string {
+	return u.Target.EntityId
+}
 func (u *UpdateClearSkipped) Name() string {
 	return fmt.Sprintf("%s.%s", *u.Domain, *u.Service)
 }
@@ -79,6 +82,9 @@ func (u *UpdateInstall) JSON() string {
 	data, _ := gojson.Marshal(u)
 	return string(data)
 }
+func (u *UpdateInstall) Targets() []string {
+	return u.Target.EntityId
+}
 func (u *UpdateInstall) Name() string {
 	return fmt.Sprintf("%s.%s", *u.Domain, *u.Service)
 }
@@ -113,6 +119,9 @@ type UpdateSkip struct {
 func (u *UpdateSkip) JSON() string {
 	data, _ := gojson.Marshal(u)
 	return string(data)
+}
+func (u *UpdateSkip) Targets() []string {
+	return u.Target.EntityId
 }
 func (u *UpdateSkip) Name() string {
 	return fmt.Sprintf("%s.%s", *u.Domain, *u.Service)

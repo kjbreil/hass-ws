@@ -44,6 +44,9 @@ func (r *RemoteDeleteCommand) JSON() string {
 	data, _ := gojson.Marshal(r)
 	return string(data)
 }
+func (r *RemoteDeleteCommand) Targets() []string {
+	return r.Target.EntityId
+}
 func (r *RemoteDeleteCommand) Name() string {
 	return fmt.Sprintf("%s.%s", *r.Domain, *r.Service)
 }
@@ -95,6 +98,9 @@ func (r *RemoteLearnCommand) Timeout(timeout float64) *RemoteLearnCommand {
 func (r *RemoteLearnCommand) JSON() string {
 	data, _ := gojson.Marshal(r)
 	return string(data)
+}
+func (r *RemoteLearnCommand) Targets() []string {
+	return r.Target.EntityId
 }
 func (r *RemoteLearnCommand) Name() string {
 	return fmt.Sprintf("%s.%s", *r.Domain, *r.Service)
@@ -153,6 +159,9 @@ func (r *RemoteSendCommand) JSON() string {
 	data, _ := gojson.Marshal(r)
 	return string(data)
 }
+func (r *RemoteSendCommand) Targets() []string {
+	return r.Target.EntityId
+}
 func (r *RemoteSendCommand) Name() string {
 	return fmt.Sprintf("%s.%s", *r.Domain, *r.Service)
 }
@@ -188,6 +197,9 @@ func (r *RemoteToggle) JSON() string {
 	data, _ := gojson.Marshal(r)
 	return string(data)
 }
+func (r *RemoteToggle) Targets() []string {
+	return r.Target.EntityId
+}
 func (r *RemoteToggle) Name() string {
 	return fmt.Sprintf("%s.%s", *r.Domain, *r.Service)
 }
@@ -222,6 +234,9 @@ type RemoteTurnOff struct {
 func (r *RemoteTurnOff) JSON() string {
 	data, _ := gojson.Marshal(r)
 	return string(data)
+}
+func (r *RemoteTurnOff) Targets() []string {
+	return r.Target.EntityId
 }
 func (r *RemoteTurnOff) Name() string {
 	return fmt.Sprintf("%s.%s", *r.Domain, *r.Service)
@@ -264,6 +279,9 @@ func (r *RemoteTurnOn) Activity(activity string) *RemoteTurnOn {
 func (r *RemoteTurnOn) JSON() string {
 	data, _ := gojson.Marshal(r)
 	return string(data)
+}
+func (r *RemoteTurnOn) Targets() []string {
+	return r.Target.EntityId
 }
 func (r *RemoteTurnOn) Name() string {
 	return fmt.Sprintf("%s.%s", *r.Domain, *r.Service)

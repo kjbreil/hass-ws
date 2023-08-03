@@ -37,6 +37,9 @@ func (f *FrontendReloadThemes) JSON() string {
 	data, _ := gojson.Marshal(f)
 	return string(data)
 }
+func (f *FrontendReloadThemes) Targets() []string {
+	return f.Target.EntityId
+}
 func (f *FrontendReloadThemes) Name() string {
 	return fmt.Sprintf("%s.%s", *f.Domain, *f.Service)
 }
@@ -78,6 +81,9 @@ func (f *FrontendSetTheme) Mode(mode Mode) *FrontendSetTheme {
 func (f *FrontendSetTheme) JSON() string {
 	data, _ := gojson.Marshal(f)
 	return string(data)
+}
+func (f *FrontendSetTheme) Targets() []string {
+	return f.Target.EntityId
 }
 func (f *FrontendSetTheme) Name() string {
 	return fmt.Sprintf("%s.%s", *f.Domain, *f.Service)

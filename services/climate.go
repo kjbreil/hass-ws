@@ -37,6 +37,9 @@ func (c *ClimateSetAuxHeat) JSON() string {
 	data, _ := gojson.Marshal(c)
 	return string(data)
 }
+func (c *ClimateSetAuxHeat) Targets() []string {
+	return c.Target.EntityId
+}
 func (c *ClimateSetAuxHeat) Name() string {
 	return fmt.Sprintf("%s.%s", *c.Domain, *c.Service)
 }
@@ -78,6 +81,9 @@ func (c *ClimateSetFanMode) FanMode(fanMode string) *ClimateSetFanMode {
 func (c *ClimateSetFanMode) JSON() string {
 	data, _ := gojson.Marshal(c)
 	return string(data)
+}
+func (c *ClimateSetFanMode) Targets() []string {
+	return c.Target.EntityId
 }
 func (c *ClimateSetFanMode) Name() string {
 	return fmt.Sprintf("%s.%s", *c.Domain, *c.Service)
@@ -121,6 +127,9 @@ func (c *ClimateSetHumidity) JSON() string {
 	data, _ := gojson.Marshal(c)
 	return string(data)
 }
+func (c *ClimateSetHumidity) Targets() []string {
+	return c.Target.EntityId
+}
 func (c *ClimateSetHumidity) Name() string {
 	return fmt.Sprintf("%s.%s", *c.Domain, *c.Service)
 }
@@ -162,6 +171,9 @@ func (c *ClimateSetHvacMode) HvacMode(hvacMode HvacMode) *ClimateSetHvacMode {
 func (c *ClimateSetHvacMode) JSON() string {
 	data, _ := gojson.Marshal(c)
 	return string(data)
+}
+func (c *ClimateSetHvacMode) Targets() []string {
+	return c.Target.EntityId
 }
 func (c *ClimateSetHvacMode) Name() string {
 	return fmt.Sprintf("%s.%s", *c.Domain, *c.Service)
@@ -205,6 +217,9 @@ func (c *ClimateSetPresetMode) JSON() string {
 	data, _ := gojson.Marshal(c)
 	return string(data)
 }
+func (c *ClimateSetPresetMode) Targets() []string {
+	return c.Target.EntityId
+}
 func (c *ClimateSetPresetMode) Name() string {
 	return fmt.Sprintf("%s.%s", *c.Domain, *c.Service)
 }
@@ -246,6 +261,9 @@ func (c *ClimateSetSwingMode) SwingMode(swingMode string) *ClimateSetSwingMode {
 func (c *ClimateSetSwingMode) JSON() string {
 	data, _ := gojson.Marshal(c)
 	return string(data)
+}
+func (c *ClimateSetSwingMode) Targets() []string {
+	return c.Target.EntityId
 }
 func (c *ClimateSetSwingMode) Name() string {
 	return fmt.Sprintf("%s.%s", *c.Domain, *c.Service)
@@ -304,6 +322,9 @@ func (c *ClimateSetTemperature) JSON() string {
 	data, _ := gojson.Marshal(c)
 	return string(data)
 }
+func (c *ClimateSetTemperature) Targets() []string {
+	return c.Target.EntityId
+}
 func (c *ClimateSetTemperature) Name() string {
 	return fmt.Sprintf("%s.%s", *c.Domain, *c.Service)
 }
@@ -339,6 +360,9 @@ func (c *ClimateTurnOff) JSON() string {
 	data, _ := gojson.Marshal(c)
 	return string(data)
 }
+func (c *ClimateTurnOff) Targets() []string {
+	return c.Target.EntityId
+}
 func (c *ClimateTurnOff) Name() string {
 	return fmt.Sprintf("%s.%s", *c.Domain, *c.Service)
 }
@@ -373,6 +397,9 @@ type ClimateTurnOn struct {
 func (c *ClimateTurnOn) JSON() string {
 	data, _ := gojson.Marshal(c)
 	return string(data)
+}
+func (c *ClimateTurnOn) Targets() []string {
+	return c.Target.EntityId
 }
 func (c *ClimateTurnOn) Name() string {
 	return fmt.Sprintf("%s.%s", *c.Domain, *c.Service)

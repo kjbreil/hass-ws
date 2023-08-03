@@ -33,6 +33,7 @@ type Service interface {
 	SetID(id *int)
 	JSON() string
 	Name() string
+	Targets() []string
 }
 type ServiceBase struct {
 	Id      *int    `json:"id"`

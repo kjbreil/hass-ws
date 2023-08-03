@@ -44,6 +44,9 @@ func (l *LoggerSetDefaultLevel) JSON() string {
 	data, _ := gojson.Marshal(l)
 	return string(data)
 }
+func (l *LoggerSetDefaultLevel) Targets() []string {
+	return l.Target.EntityId
+}
 func (l *LoggerSetDefaultLevel) Name() string {
 	return fmt.Sprintf("%s.%s", *l.Domain, *l.Service)
 }
@@ -78,6 +81,9 @@ type LoggerSetLevel struct {
 func (l *LoggerSetLevel) JSON() string {
 	data, _ := gojson.Marshal(l)
 	return string(data)
+}
+func (l *LoggerSetLevel) Targets() []string {
+	return l.Target.EntityId
 }
 func (l *LoggerSetLevel) Name() string {
 	return fmt.Sprintf("%s.%s", *l.Domain, *l.Service)

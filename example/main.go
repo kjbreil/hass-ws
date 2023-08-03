@@ -5,14 +5,12 @@
 package main
 
 import (
-	"fmt"
 	hass_ws "github.com/kjbreil/hass-ws"
-	"github.com/kjbreil/hass-ws/entities"
 	"github.com/kjbreil/hass-ws/model"
-	"github.com/kjbreil/hass-ws/services"
 	"log"
 	"os"
 	"os/signal"
+	"time"
 )
 
 func main() {
@@ -35,15 +33,15 @@ func main() {
 	//	fmt.Printf("Sensor: %s - %s - %s\n", message.EntityID(), message.FriendlyName(), message.State())
 	//}
 
-	c.OnType.OnLight = func(message *model.Message, newAttrs, oldAttrs *entities.Light) {
-		c.Logger().Info(fmt.Sprintf("Sensor: %s - %s - %s", message.EntityID(), message.FriendlyName(), message.State()))
-	}
+	//c.OnType.OnLight = func(message *model.Message, newAttrs, oldAttrs *entities.Light) {
+	//	c.Logger().Info(fmt.Sprintf("Sensor: %s - %s - %s", message.EntityID(), message.FriendlyName(), message.State()))
+	//}
 
-	// setup handler for single entity updates
-	c.OnEntity["climate.kitchen"] = func(message *model.Message) {
-		c.Logger().Info(fmt.Sprintf("Sensor: %s - %s", message.FriendlyName(), message.State()))
-
-	}
+	//// setup handler for single entity updates
+	//c.OnEntity["climate.kitchen"] = func(message *model.Message) {
+	//	c.Logger().Info(fmt.Sprintf("Sensor: %s - %s", message.FriendlyName(), message.State()))
+	//
+	//}
 
 	// Set a message handler to run on every message even if hit by other message handlers
 	c.OnMessage = func(message model.Message) {
@@ -61,20 +59,20 @@ func main() {
 		log.Panicln(err)
 	}
 
-	service := services.NewClimateSetTemperature(services.Targets("climate.kitchen")).
-		HvacMode(services.HvacModeheat_cool).
-		TargetTempLow(60).
-		TargetTempHigh(78)
-	c.CallService(service)
+	//service := services.NewClimateSetTemperature(services.Targets("climate.kitchen")).
+	//	HvacMode(services.HvacModeheat_cool).
+	//	TargetTempLow(60).
+	//	TargetTempHigh(78)
+	//c.CallService(service)
 
 	// Get all states, they ar ether run through the OnType and OnEntity handlers but not OnMessage or OnUnhandled
-	c.GetStates()
+	//c.GetStates()
 
 	// Get all the services, in ServiceResults its a map[string]interface{} and not easy to work with
-	ss := c.GetServices()
-	for sn := range ss.ServiceResult {
-		fmt.Printf("Service %s returned\n", sn)
-	}
+	//ss := c.GetServices()
+	//for sn := range ss.ServiceResult {
+	//	fmt.Printf("Service %s returned\n", sn)
+	//}
 
 	//areas := c.GetDeviceRegistry()
 
@@ -83,6 +81,11 @@ func main() {
 	//	fmt.Printf("Service %s returned\n", sn)
 	//}
 
+	_, err = c.GetHistory(time.Now().Add(-24*time.Hour), time.Now(), "climate.kids_room")
+
+	if err != nil {
+		log.Panicln(err)
+	}
 	for {
 		select {
 		case <-interrupt:

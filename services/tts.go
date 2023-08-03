@@ -37,6 +37,9 @@ func (t *TtsClearCache) JSON() string {
 	data, _ := gojson.Marshal(t)
 	return string(data)
 }
+func (t *TtsClearCache) Targets() []string {
+	return t.Target.EntityId
+}
 func (t *TtsClearCache) Name() string {
 	return fmt.Sprintf("%s.%s", *t.Domain, *t.Service)
 }
@@ -84,6 +87,9 @@ func (t *TtsCloudSay) JSON() string {
 	data, _ := gojson.Marshal(t)
 	return string(data)
 }
+func (t *TtsCloudSay) Targets() []string {
+	return t.Target.EntityId
+}
 func (t *TtsCloudSay) Name() string {
 	return fmt.Sprintf("%s.%s", *t.Domain, *t.Service)
 }
@@ -130,6 +136,9 @@ func (t *TtsGoogleTranslateSay) Message(message string) *TtsGoogleTranslateSay {
 func (t *TtsGoogleTranslateSay) JSON() string {
 	data, _ := gojson.Marshal(t)
 	return string(data)
+}
+func (t *TtsGoogleTranslateSay) Targets() []string {
+	return t.Target.EntityId
 }
 func (t *TtsGoogleTranslateSay) Name() string {
 	return fmt.Sprintf("%s.%s", *t.Domain, *t.Service)

@@ -37,6 +37,9 @@ func (c *CloudRemoteConnect) JSON() string {
 	data, _ := gojson.Marshal(c)
 	return string(data)
 }
+func (c *CloudRemoteConnect) Targets() []string {
+	return c.Target.EntityId
+}
 func (c *CloudRemoteConnect) Name() string {
 	return fmt.Sprintf("%s.%s", *c.Domain, *c.Service)
 }
@@ -71,6 +74,9 @@ type CloudRemoteDisconnect struct {
 func (c *CloudRemoteDisconnect) JSON() string {
 	data, _ := gojson.Marshal(c)
 	return string(data)
+}
+func (c *CloudRemoteDisconnect) Targets() []string {
+	return c.Target.EntityId
 }
 func (c *CloudRemoteDisconnect) Name() string {
 	return fmt.Sprintf("%s.%s", *c.Domain, *c.Service)

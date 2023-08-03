@@ -44,6 +44,9 @@ func (c *ConversationProcess) JSON() string {
 	data, _ := gojson.Marshal(c)
 	return string(data)
 }
+func (c *ConversationProcess) Targets() []string {
+	return c.Target.EntityId
+}
 func (c *ConversationProcess) Name() string {
 	return fmt.Sprintf("%s.%s", *c.Domain, *c.Service)
 }
@@ -78,6 +81,9 @@ type ConversationReload struct {
 func (c *ConversationReload) JSON() string {
 	data, _ := gojson.Marshal(c)
 	return string(data)
+}
+func (c *ConversationReload) Targets() []string {
+	return c.Target.EntityId
 }
 func (c *ConversationReload) Name() string {
 	return fmt.Sprintf("%s.%s", *c.Domain, *c.Service)

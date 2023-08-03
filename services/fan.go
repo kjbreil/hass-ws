@@ -44,6 +44,9 @@ func (f *FanDecreaseSpeed) JSON() string {
 	data, _ := gojson.Marshal(f)
 	return string(data)
 }
+func (f *FanDecreaseSpeed) Targets() []string {
+	return f.Target.EntityId
+}
 func (f *FanDecreaseSpeed) Name() string {
 	return fmt.Sprintf("%s.%s", *f.Domain, *f.Service)
 }
@@ -86,6 +89,9 @@ func (f *FanIncreaseSpeed) JSON() string {
 	data, _ := gojson.Marshal(f)
 	return string(data)
 }
+func (f *FanIncreaseSpeed) Targets() []string {
+	return f.Target.EntityId
+}
 func (f *FanIncreaseSpeed) Name() string {
 	return fmt.Sprintf("%s.%s", *f.Domain, *f.Service)
 }
@@ -120,6 +126,9 @@ type FanOscillate struct {
 func (f *FanOscillate) JSON() string {
 	data, _ := gojson.Marshal(f)
 	return string(data)
+}
+func (f *FanOscillate) Targets() []string {
+	return f.Target.EntityId
 }
 func (f *FanOscillate) Name() string {
 	return fmt.Sprintf("%s.%s", *f.Domain, *f.Service)
@@ -163,6 +172,9 @@ func (f *FanSetDirection) JSON() string {
 	data, _ := gojson.Marshal(f)
 	return string(data)
 }
+func (f *FanSetDirection) Targets() []string {
+	return f.Target.EntityId
+}
 func (f *FanSetDirection) Name() string {
 	return fmt.Sprintf("%s.%s", *f.Domain, *f.Service)
 }
@@ -204,6 +216,9 @@ func (f *FanSetPercentage) Percentage(percentage float64) *FanSetPercentage {
 func (f *FanSetPercentage) JSON() string {
 	data, _ := gojson.Marshal(f)
 	return string(data)
+}
+func (f *FanSetPercentage) Targets() []string {
+	return f.Target.EntityId
 }
 func (f *FanSetPercentage) Name() string {
 	return fmt.Sprintf("%s.%s", *f.Domain, *f.Service)
@@ -247,6 +262,9 @@ func (f *FanSetPresetMode) JSON() string {
 	data, _ := gojson.Marshal(f)
 	return string(data)
 }
+func (f *FanSetPresetMode) Targets() []string {
+	return f.Target.EntityId
+}
 func (f *FanSetPresetMode) Name() string {
 	return fmt.Sprintf("%s.%s", *f.Domain, *f.Service)
 }
@@ -282,6 +300,9 @@ func (f *FanToggle) JSON() string {
 	data, _ := gojson.Marshal(f)
 	return string(data)
 }
+func (f *FanToggle) Targets() []string {
+	return f.Target.EntityId
+}
 func (f *FanToggle) Name() string {
 	return fmt.Sprintf("%s.%s", *f.Domain, *f.Service)
 }
@@ -316,6 +337,9 @@ type FanTurnOff struct {
 func (f *FanTurnOff) JSON() string {
 	data, _ := gojson.Marshal(f)
 	return string(data)
+}
+func (f *FanTurnOff) Targets() []string {
+	return f.Target.EntityId
 }
 func (f *FanTurnOff) Name() string {
 	return fmt.Sprintf("%s.%s", *f.Domain, *f.Service)
@@ -368,6 +392,9 @@ func (f *FanTurnOn) Speed(speed string) *FanTurnOn {
 func (f *FanTurnOn) JSON() string {
 	data, _ := gojson.Marshal(f)
 	return string(data)
+}
+func (f *FanTurnOn) Targets() []string {
+	return f.Target.EntityId
 }
 func (f *FanTurnOn) Name() string {
 	return fmt.Sprintf("%s.%s", *f.Domain, *f.Service)

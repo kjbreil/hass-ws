@@ -44,6 +44,9 @@ func (s *SelectSelectOption) JSON() string {
 	data, _ := gojson.Marshal(s)
 	return string(data)
 }
+func (s *SelectSelectOption) Targets() []string {
+	return s.Target.EntityId
+}
 func (s *SelectSelectOption) Name() string {
 	return fmt.Sprintf("%s.%s", *s.Domain, *s.Service)
 }

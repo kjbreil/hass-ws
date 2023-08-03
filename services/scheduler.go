@@ -49,6 +49,9 @@ func (s *SchedulerAdd) JSON() string {
 	data, _ := gojson.Marshal(s)
 	return string(data)
 }
+func (s *SchedulerAdd) Targets() []string {
+	return s.Target.EntityId
+}
 func (s *SchedulerAdd) Name() string {
 	return fmt.Sprintf("%s.%s", *s.Domain, *s.Service)
 }
@@ -90,6 +93,9 @@ func (s *SchedulerCopy) SchedulerCopyName(schedulerCopyName string) *SchedulerCo
 func (s *SchedulerCopy) JSON() string {
 	data, _ := gojson.Marshal(s)
 	return string(data)
+}
+func (s *SchedulerCopy) Targets() []string {
+	return s.Target.EntityId
 }
 func (s *SchedulerCopy) Name() string {
 	return fmt.Sprintf("%s.%s", *s.Domain, *s.Service)
@@ -138,6 +144,9 @@ func (s *SchedulerEdit) JSON() string {
 	data, _ := gojson.Marshal(s)
 	return string(data)
 }
+func (s *SchedulerEdit) Targets() []string {
+	return s.Target.EntityId
+}
 func (s *SchedulerEdit) Name() string {
 	return fmt.Sprintf("%s.%s", *s.Domain, *s.Service)
 }
@@ -173,6 +182,9 @@ func (s *SchedulerRemove) JSON() string {
 	data, _ := gojson.Marshal(s)
 	return string(data)
 }
+func (s *SchedulerRemove) Targets() []string {
+	return s.Target.EntityId
+}
 func (s *SchedulerRemove) Name() string {
 	return fmt.Sprintf("%s.%s", *s.Domain, *s.Service)
 }
@@ -207,6 +219,9 @@ type SchedulerRunAction struct {
 func (s *SchedulerRunAction) JSON() string {
 	data, _ := gojson.Marshal(s)
 	return string(data)
+}
+func (s *SchedulerRunAction) Targets() []string {
+	return s.Target.EntityId
 }
 func (s *SchedulerRunAction) Name() string {
 	return fmt.Sprintf("%s.%s", *s.Domain, *s.Service)

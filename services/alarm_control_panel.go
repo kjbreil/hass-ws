@@ -44,6 +44,9 @@ func (a *AlarmControlPanelAlarmArmAway) JSON() string {
 	data, _ := gojson.Marshal(a)
 	return string(data)
 }
+func (a *AlarmControlPanelAlarmArmAway) Targets() []string {
+	return a.Target.EntityId
+}
 func (a *AlarmControlPanelAlarmArmAway) Name() string {
 	return fmt.Sprintf("%s.%s", *a.Domain, *a.Service)
 }
@@ -85,6 +88,9 @@ func (a *AlarmControlPanelAlarmArmCustomBypass) Code(code string) *AlarmControlP
 func (a *AlarmControlPanelAlarmArmCustomBypass) JSON() string {
 	data, _ := gojson.Marshal(a)
 	return string(data)
+}
+func (a *AlarmControlPanelAlarmArmCustomBypass) Targets() []string {
+	return a.Target.EntityId
 }
 func (a *AlarmControlPanelAlarmArmCustomBypass) Name() string {
 	return fmt.Sprintf("%s.%s", *a.Domain, *a.Service)
@@ -128,6 +134,9 @@ func (a *AlarmControlPanelAlarmArmHome) JSON() string {
 	data, _ := gojson.Marshal(a)
 	return string(data)
 }
+func (a *AlarmControlPanelAlarmArmHome) Targets() []string {
+	return a.Target.EntityId
+}
 func (a *AlarmControlPanelAlarmArmHome) Name() string {
 	return fmt.Sprintf("%s.%s", *a.Domain, *a.Service)
 }
@@ -169,6 +178,9 @@ func (a *AlarmControlPanelAlarmArmNight) Code(code string) *AlarmControlPanelAla
 func (a *AlarmControlPanelAlarmArmNight) JSON() string {
 	data, _ := gojson.Marshal(a)
 	return string(data)
+}
+func (a *AlarmControlPanelAlarmArmNight) Targets() []string {
+	return a.Target.EntityId
 }
 func (a *AlarmControlPanelAlarmArmNight) Name() string {
 	return fmt.Sprintf("%s.%s", *a.Domain, *a.Service)
@@ -212,6 +224,9 @@ func (a *AlarmControlPanelAlarmArmVacation) JSON() string {
 	data, _ := gojson.Marshal(a)
 	return string(data)
 }
+func (a *AlarmControlPanelAlarmArmVacation) Targets() []string {
+	return a.Target.EntityId
+}
 func (a *AlarmControlPanelAlarmArmVacation) Name() string {
 	return fmt.Sprintf("%s.%s", *a.Domain, *a.Service)
 }
@@ -254,6 +269,9 @@ func (a *AlarmControlPanelAlarmDisarm) JSON() string {
 	data, _ := gojson.Marshal(a)
 	return string(data)
 }
+func (a *AlarmControlPanelAlarmDisarm) Targets() []string {
+	return a.Target.EntityId
+}
 func (a *AlarmControlPanelAlarmDisarm) Name() string {
 	return fmt.Sprintf("%s.%s", *a.Domain, *a.Service)
 }
@@ -295,6 +313,9 @@ func (a *AlarmControlPanelAlarmTrigger) Code(code string) *AlarmControlPanelAlar
 func (a *AlarmControlPanelAlarmTrigger) JSON() string {
 	data, _ := gojson.Marshal(a)
 	return string(data)
+}
+func (a *AlarmControlPanelAlarmTrigger) Targets() []string {
+	return a.Target.EntityId
 }
 func (a *AlarmControlPanelAlarmTrigger) Name() string {
 	return fmt.Sprintf("%s.%s", *a.Domain, *a.Service)

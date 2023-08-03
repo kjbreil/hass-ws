@@ -49,6 +49,9 @@ func (m *MqttDump) JSON() string {
 	data, _ := gojson.Marshal(m)
 	return string(data)
 }
+func (m *MqttDump) Targets() []string {
+	return m.Target.EntityId
+}
 func (m *MqttDump) Name() string {
 	return fmt.Sprintf("%s.%s", *m.Domain, *m.Service)
 }
@@ -101,6 +104,9 @@ func (m *MqttPublish) JSON() string {
 	data, _ := gojson.Marshal(m)
 	return string(data)
 }
+func (m *MqttPublish) Targets() []string {
+	return m.Target.EntityId
+}
 func (m *MqttPublish) Name() string {
 	return fmt.Sprintf("%s.%s", *m.Domain, *m.Service)
 }
@@ -135,6 +141,9 @@ type MqttReload struct {
 func (m *MqttReload) JSON() string {
 	data, _ := gojson.Marshal(m)
 	return string(data)
+}
+func (m *MqttReload) Targets() []string {
+	return m.Target.EntityId
 }
 func (m *MqttReload) Name() string {
 	return fmt.Sprintf("%s.%s", *m.Domain, *m.Service)

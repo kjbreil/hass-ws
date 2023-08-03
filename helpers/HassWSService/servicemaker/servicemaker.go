@@ -149,6 +149,10 @@ func Gen(servicesFolder string, servicesList ServiceList) error {
 				jen.Return(jen.String().Params(jen.Id("data"))),
 			)
 
+			services[d.name].Func().Params(jen.Id(s.firstLetter).Op("*").Id(s.camelName)).Id("Targets").Params().Index().String().Block(
+				jen.Return(jen.Id(s.firstLetter).Dot("Target").Dot("EntityId")),
+			)
+
 			services[d.name].Func().Params(jen.Id(s.firstLetter).Op("*").Id(s.camelName)).Id("Name").Params().String().Block(
 				jen.Return(jen.Qual("fmt", "Sprintf").Params(jen.Lit("%s.%s").Op(",").Op("*").Id(s.firstLetter).Dot("Domain").Op(",").Op("*").Id(s.firstLetter).Dot("Service"))),
 			)
@@ -219,6 +223,8 @@ func Gen(servicesFolder string, servicesList ServiceList) error {
 
 									switch code {
 									case "string":
+										serviceData = append(serviceData, fmt.Sprintf(`"%s":"%s"`, fn, "data"))
+									case "[]byte":
 										serviceData = append(serviceData, fmt.Sprintf(`"%s":"%s"`, fn, "data"))
 									case "float64":
 										serviceData = append(serviceData, fmt.Sprintf(`"%s":%.1f`, fn, 1.2))
@@ -314,6 +320,7 @@ func Gen(servicesFolder string, servicesList ServiceList) error {
 		jen.Id("SetID").Params(jen.Id("id").Op("*").Int()),
 		jen.Id("JSON").Params().String(),
 		jen.Id("Name").Params().String(),
+		jen.Id("Targets").Params().Index().String(),
 	)
 
 	// Generate the base type
@@ -392,6 +399,8 @@ func (sl *ServiceList) codeAssigner(fn string, code string) jen.Code {
 		return jen.Id(fn).Op(":=").Lit("data")
 	case "float64":
 		return jen.Id(fn).Op(":=").Lit(1.2)
+	case "[]byte":
+		return jen.Id(fn).Op(":=").Lit("data")
 	default:
 
 		v := sl.enums[code]

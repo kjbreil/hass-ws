@@ -37,6 +37,9 @@ func (c *CoverCloseCover) JSON() string {
 	data, _ := gojson.Marshal(c)
 	return string(data)
 }
+func (c *CoverCloseCover) Targets() []string {
+	return c.Target.EntityId
+}
 func (c *CoverCloseCover) Name() string {
 	return fmt.Sprintf("%s.%s", *c.Domain, *c.Service)
 }
@@ -71,6 +74,9 @@ type CoverCloseCoverTilt struct {
 func (c *CoverCloseCoverTilt) JSON() string {
 	data, _ := gojson.Marshal(c)
 	return string(data)
+}
+func (c *CoverCloseCoverTilt) Targets() []string {
+	return c.Target.EntityId
 }
 func (c *CoverCloseCoverTilt) Name() string {
 	return fmt.Sprintf("%s.%s", *c.Domain, *c.Service)
@@ -107,6 +113,9 @@ func (c *CoverOpenCover) JSON() string {
 	data, _ := gojson.Marshal(c)
 	return string(data)
 }
+func (c *CoverOpenCover) Targets() []string {
+	return c.Target.EntityId
+}
 func (c *CoverOpenCover) Name() string {
 	return fmt.Sprintf("%s.%s", *c.Domain, *c.Service)
 }
@@ -141,6 +150,9 @@ type CoverOpenCoverTilt struct {
 func (c *CoverOpenCoverTilt) JSON() string {
 	data, _ := gojson.Marshal(c)
 	return string(data)
+}
+func (c *CoverOpenCoverTilt) Targets() []string {
+	return c.Target.EntityId
 }
 func (c *CoverOpenCoverTilt) Name() string {
 	return fmt.Sprintf("%s.%s", *c.Domain, *c.Service)
@@ -184,6 +196,9 @@ func (c *CoverSetCoverPosition) JSON() string {
 	data, _ := gojson.Marshal(c)
 	return string(data)
 }
+func (c *CoverSetCoverPosition) Targets() []string {
+	return c.Target.EntityId
+}
 func (c *CoverSetCoverPosition) Name() string {
 	return fmt.Sprintf("%s.%s", *c.Domain, *c.Service)
 }
@@ -226,6 +241,9 @@ func (c *CoverSetCoverTiltPosition) JSON() string {
 	data, _ := gojson.Marshal(c)
 	return string(data)
 }
+func (c *CoverSetCoverTiltPosition) Targets() []string {
+	return c.Target.EntityId
+}
 func (c *CoverSetCoverTiltPosition) Name() string {
 	return fmt.Sprintf("%s.%s", *c.Domain, *c.Service)
 }
@@ -260,6 +278,9 @@ type CoverStopCover struct {
 func (c *CoverStopCover) JSON() string {
 	data, _ := gojson.Marshal(c)
 	return string(data)
+}
+func (c *CoverStopCover) Targets() []string {
+	return c.Target.EntityId
 }
 func (c *CoverStopCover) Name() string {
 	return fmt.Sprintf("%s.%s", *c.Domain, *c.Service)
@@ -296,6 +317,9 @@ func (c *CoverStopCoverTilt) JSON() string {
 	data, _ := gojson.Marshal(c)
 	return string(data)
 }
+func (c *CoverStopCoverTilt) Targets() []string {
+	return c.Target.EntityId
+}
 func (c *CoverStopCoverTilt) Name() string {
 	return fmt.Sprintf("%s.%s", *c.Domain, *c.Service)
 }
@@ -331,6 +355,9 @@ func (c *CoverToggle) JSON() string {
 	data, _ := gojson.Marshal(c)
 	return string(data)
 }
+func (c *CoverToggle) Targets() []string {
+	return c.Target.EntityId
+}
 func (c *CoverToggle) Name() string {
 	return fmt.Sprintf("%s.%s", *c.Domain, *c.Service)
 }
@@ -365,6 +392,9 @@ type CoverToggleCoverTilt struct {
 func (c *CoverToggleCoverTilt) JSON() string {
 	data, _ := gojson.Marshal(c)
 	return string(data)
+}
+func (c *CoverToggleCoverTilt) Targets() []string {
+	return c.Target.EntityId
 }
 func (c *CoverToggleCoverTilt) Name() string {
 	return fmt.Sprintf("%s.%s", *c.Domain, *c.Service)

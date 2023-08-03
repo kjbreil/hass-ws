@@ -37,6 +37,9 @@ func (a *AutomationReload) JSON() string {
 	data, _ := gojson.Marshal(a)
 	return string(data)
 }
+func (a *AutomationReload) Targets() []string {
+	return a.Target.EntityId
+}
 func (a *AutomationReload) Name() string {
 	return fmt.Sprintf("%s.%s", *a.Domain, *a.Service)
 }
@@ -71,6 +74,9 @@ type AutomationToggle struct {
 func (a *AutomationToggle) JSON() string {
 	data, _ := gojson.Marshal(a)
 	return string(data)
+}
+func (a *AutomationToggle) Targets() []string {
+	return a.Target.EntityId
 }
 func (a *AutomationToggle) Name() string {
 	return fmt.Sprintf("%s.%s", *a.Domain, *a.Service)
@@ -107,6 +113,9 @@ func (a *AutomationTrigger) JSON() string {
 	data, _ := gojson.Marshal(a)
 	return string(data)
 }
+func (a *AutomationTrigger) Targets() []string {
+	return a.Target.EntityId
+}
 func (a *AutomationTrigger) Name() string {
 	return fmt.Sprintf("%s.%s", *a.Domain, *a.Service)
 }
@@ -142,6 +151,9 @@ func (a *AutomationTurnOff) JSON() string {
 	data, _ := gojson.Marshal(a)
 	return string(data)
 }
+func (a *AutomationTurnOff) Targets() []string {
+	return a.Target.EntityId
+}
 func (a *AutomationTurnOff) Name() string {
 	return fmt.Sprintf("%s.%s", *a.Domain, *a.Service)
 }
@@ -176,6 +188,9 @@ type AutomationTurnOn struct {
 func (a *AutomationTurnOn) JSON() string {
 	data, _ := gojson.Marshal(a)
 	return string(data)
+}
+func (a *AutomationTurnOn) Targets() []string {
+	return a.Target.EntityId
 }
 func (a *AutomationTurnOn) Name() string {
 	return fmt.Sprintf("%s.%s", *a.Domain, *a.Service)

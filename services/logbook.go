@@ -54,6 +54,9 @@ func (l *LogbookLog) JSON() string {
 	data, _ := gojson.Marshal(l)
 	return string(data)
 }
+func (l *LogbookLog) Targets() []string {
+	return l.Target.EntityId
+}
 func (l *LogbookLog) Name() string {
 	return fmt.Sprintf("%s.%s", *l.Domain, *l.Service)
 }
