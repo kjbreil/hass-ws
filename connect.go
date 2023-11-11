@@ -45,7 +45,7 @@ func (c *Client) Connect() error {
 	c.id = 0
 
 	var err error
-	u := url.URL{Scheme: "ws", Host: fmt.Sprintf("%s:%d", c.config.Host, c.config.Port), Path: "/api/websocket"}
+	u := url.URL{Scheme: "wss", Host: fmt.Sprintf("%s:%d", c.config.Host, c.config.Port), Path: "/api/websocket"}
 
 	c.client, _, err = websocket.Dial(c.ctx, u.String(), nil)
 
