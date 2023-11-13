@@ -14,7 +14,17 @@ import (
 
 func (c *Client) GetHistory(start, end time.Time, entities ...string) (*model.Histories, error) {
 
-	u := url.URL{Scheme: "http", Host: fmt.Sprintf("%s:%d", c.config.Host, c.config.Port), Path: fmt.Sprintf("/api/history/period/%s", start.Local().Format(time.RFC3339))}
+	scheme := "http"
+	if c.config.SSL {
+		scheme = "https"
+	}
+
+	u := url.URL{
+		Scheme: scheme,
+		Host:   fmt.Sprintf("%s:%d", c.config.Host, c.config.Port),
+		Path: fmt.Sprintf("/api/history/period/%s",
+			start.Local().Format(time.RFC3339)),
+	}
 
 	values := u.Query()
 	values.Set("end_time", end.Local().Format(time.RFC3339))
@@ -43,7 +53,7 @@ func (c *Client) GetHistory(start, end time.Time, entities ...string) (*model.Hi
 		}
 	}(resp.Body)
 
-	fmt.Println(u.String())
+	// fmt.Println(u.String())
 
 	body, err := io.ReadAll(resp.Body)
 	if err != nil {
