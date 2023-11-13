@@ -14,6 +14,7 @@ import (
 
 type Config struct {
 	Host  string `json:"host"`
+	SSL   bool   `json:"ssl"`
 	Port  int    `json:"port"`
 	Token string `json:"token"`
 }
@@ -45,7 +46,12 @@ func (c *Client) Connect() error {
 	c.id = 0
 
 	var err error
-	u := url.URL{Scheme: "ws", Host: fmt.Sprintf("%s:%d", c.config.Host, c.config.Port), Path: "/api/websocket"}
+	scheme := "ws"
+	if c.config.SSL {
+		scheme = "wss"
+	}
+
+	u := url.URL{Scheme: scheme, Host: fmt.Sprintf("%s:%d", c.config.Host, c.config.Port), Path: "/api/websocket"}
 
 	c.client, _, err = websocket.Dial(c.ctx, u.String(), nil)
 
