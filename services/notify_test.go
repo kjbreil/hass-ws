@@ -7,6 +7,7 @@ import "testing"
 ////////////////////////////////////////////////////////////////////////////////
 
 func TestNotifyNotify_JSON(t *testing.T) {
+	data := "data"
 	message := "data"
 	title := "data"
 
@@ -15,9 +16,9 @@ func TestNotifyNotify_JSON(t *testing.T) {
 		fields *NotifyNotify
 		want   string
 	}{{
-		fields: NewNotifyNotify(Targets("climate.kitchen")).Message(message).Title(title),
+		fields: NewNotifyNotify(Targets("climate.kitchen")).Data(data).Message(message).Title(title),
 		name:   "base",
-		want:   "{\"id\":null,\"type\":\"call_service\",\"domain\":\"notify\",\"service\":\"notify\",\"target\":{\"entity_id\":[\"climate.kitchen\"]},\"service_data\":{\"message\":\"data\",\"title\":\"data\"}}",
+		want:   "{\"id\":null,\"type\":\"call_service\",\"domain\":\"notify\",\"service\":\"notify\",\"target\":{\"entity_id\":[\"climate.kitchen\"]},\"service_data\":{\"data\":\"data\",\"message\":\"data\",\"title\":\"data\"}}",
 	}}
 	for _, tt := range tests {
 		t.Run(tt.name, func(t *testing.T) {

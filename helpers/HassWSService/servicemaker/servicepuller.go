@@ -61,6 +61,9 @@ func ServicesInitJson(data []byte) ServiceList {
 	serviceList.setServiceNames()
 
 	for _, name := range serviceList.serviceNames {
+		//if name != "babybuddy" {
+		//	continue
+		//}
 		d := Domain{
 			name:      name,
 			camelName: strcase.ToCamel(name),
@@ -101,6 +104,9 @@ func (sl *ServiceList) setParameters(d *Domain) {
 
 			if selector != nil {
 				sm := selector.ChildrenMap()
+				if strings.EqualFold(fn, "type") {
+					fn = fmt.Sprintf("%s_%s", k, fn)
+				}
 
 				if _, ok := sm["text"]; ok {
 					s.parameters[fn] = "string"
@@ -113,8 +119,7 @@ func (sl *ServiceList) setParameters(d *Domain) {
 				}
 				if _, ok := sm["object"]; ok {
 					if fn == "data" {
-
-						s.parameters[fn] = "[]byte"
+						s.parameters[fn] = "interface{}"
 					}
 				}
 				if se, ok := sm["select"]; ok {
@@ -129,8 +134,10 @@ func (sl *ServiceList) setParameters(d *Domain) {
 							if enumName == "null" {
 								enumName = strings.Trim(o.String(), "\"")
 								enumName = strings.ReplaceAll(enumName, "-", "")
+								enumName = strings.ReplaceAll(enumName, " ", "")
 
 							}
+							//enumName = strcase.ToCamel(enumName)
 							sl.enums[strcase.ToCamel(fn)][enumName] = append(sl.enums[strcase.ToCamel(fn)][enumName], fmt.Sprintf("%s: %s", d.name, s.name))
 
 						}

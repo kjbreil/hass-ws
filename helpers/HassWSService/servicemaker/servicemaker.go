@@ -114,7 +114,11 @@ func Gen(servicesFolder string, servicesList ServiceList) error {
 					StructFunc(func(g *jen.Group) {
 						for _, fn := range s.parameterKeys {
 							code := s.parameters[fn]
-							g.Add(jen.Id(strcase.ToCamel(fn)).Op("*").Add(codeGetter(code)).Tag(map[string]string{"json": fn + ",omitempty"}))
+							if code == "interface{}" {
+								g.Add(jen.Id(strcase.ToCamel(fn)).Add(codeGetter(code)).Tag(map[string]string{"json": fn + ",omitempty"}))
+							} else {
+								g.Add(jen.Id(strcase.ToCamel(fn)).Op("*").Add(codeGetter(code)).Tag(map[string]string{"json": fn + ",omitempty"}))
+							}
 						}
 					})
 			}
@@ -225,6 +229,8 @@ func Gen(servicesFolder string, servicesList ServiceList) error {
 									case "string":
 										serviceData = append(serviceData, fmt.Sprintf(`"%s":"%s"`, fn, "data"))
 									case "[]byte":
+										serviceData = append(serviceData, fmt.Sprintf(`"%s":"%s"`, fn, "data"))
+									case "interface{}":
 										serviceData = append(serviceData, fmt.Sprintf(`"%s":"%s"`, fn, "data"))
 									case "float64":
 										serviceData = append(serviceData, fmt.Sprintf(`"%s":%.1f`, fn, 1.2))
@@ -400,6 +406,8 @@ func (sl *ServiceList) codeAssigner(fn string, code string) jen.Code {
 	case "float64":
 		return jen.Id(fn).Op(":=").Lit(1.2)
 	case "[]byte":
+		return jen.Id(fn).Op(":=").Lit("data")
+	case "interface{}":
 		return jen.Id(fn).Op(":=").Lit("data")
 	default:
 

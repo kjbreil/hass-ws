@@ -33,10 +33,15 @@ type NotifyNotify struct {
 	ServiceData NotifyNotifyParams `json:"service_data,omitempty"`
 }
 type NotifyNotifyParams struct {
-	Message *string `json:"message,omitempty"`
-	Title   *string `json:"title,omitempty"`
+	Data    *interface{} `json:"data,omitempty"`
+	Message *string      `json:"message,omitempty"`
+	Title   *string      `json:"title,omitempty"`
 }
 
+func (n *NotifyNotify) Data(data interface{}) *NotifyNotify {
+	n.ServiceData.Data = &data
+	return n
+}
 func (n *NotifyNotify) Message(message string) *NotifyNotify {
 	n.ServiceData.Message = &message
 	return n
