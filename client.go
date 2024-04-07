@@ -6,12 +6,13 @@ import (
 	"context"
 	"errors"
 	"fmt"
-	"github.com/go-logr/logr"
-	"github.com/go-logr/logr/funcr"
 	"github.com/goccy/go-json"
+	"github.com/kjbreil/hass-ws/logger"
 	"github.com/kjbreil/hass-ws/model"
 	"github.com/kjbreil/hass-ws/services"
+	"log/slog"
 	"nhooyr.io/websocket"
+	"os"
 	"time"
 )
 
@@ -30,7 +31,7 @@ type Client struct {
 
 	callbacks *callbacks
 
-	logger logr.Logger
+	logger *slog.Logger
 
 	ctx    context.Context
 	cancel context.CancelFunc
@@ -44,35 +45,28 @@ func NewClient(c *Config) (*Client, error) {
 	return NewClientWithLogger(c, defaultLogger())
 }
 
-func NewClientWithLogger(c *Config, logger logr.Logger) (*Client, error) {
+func NewClientWithLogger(c *Config, lgr *slog.Logger) (*Client, error) {
 	// TODO: Validate Config
 	client := &Client{
 		config:        *c,
 		OnMessage:     nil,
 		OnUnhandled:   nil,
-		logger:        logger,
+		logger:        slog.New(logger.NewWrapHandler(lgr.Handler())),
 		subscriptions: make(map[model.EventType]int),
 		OnEntity:      make(model.OnEntityHandlers),
 	}
 	return client, nil
 }
 
-func defaultLogger() logr.Logger {
-	log := funcr.New(
-		func(pfx, args string) { fmt.Println(pfx, args) },
-		funcr.Options{
-			LogCaller:    funcr.All,
-			LogTimestamp: true,
-			Verbosity:    1,
-		})
-	return log.WithName("hass-ws")
+func defaultLogger() *slog.Logger {
+	return slog.New(slog.NewJSONHandler(os.Stdout, nil))
 }
 
-func (c *Client) SetLogger(logger logr.Logger) {
+func (c *Client) SetLogger(logger *slog.Logger) {
 	c.logger = logger
 }
-func (c *Client) Logger() *logr.Logger {
-	return &c.logger
+func (c *Client) Logger() *slog.Logger {
+	return c.logger
 }
 
 func (c *Client) AddSubscription(eventType model.EventType) {
@@ -144,13 +138,13 @@ func (c *Client) CallService(service services.Service) {
 	callback := make(chan *model.Message)
 	err := c.sendStringWithCallback(service.JSON(), callback)
 	if err != nil {
-		c.logger.Error(err, "Error sending")
+		c.logger.Error(err.Error())
 		return
 	}
 	go func() {
 		message := <-callback
 		if message.Error != nil {
-			c.logger.Error(fmt.Errorf("service %s error code: %s message: %s", service.Name(), message.Error.Code, message.Error.Message), "Error sending")
+			c.logger.Error(fmt.Sprintf("service %s error code: %s message: %s", service.Name(), message.Error.Code, message.Error.Message), "Error sending")
 
 		}
 		close(callback)
@@ -184,7 +178,7 @@ func (c *Client) read() (*model.Message, error) {
 
 	var msg model.Message
 
-	//messageString := string(message)
+	// messageString := string(message)
 
 	err = json.Unmarshal(message, &msg)
 	if err != nil {
@@ -202,7 +196,7 @@ func (c *Client) read() (*model.Message, error) {
 
 			err = json.Unmarshal(message, &msg)
 			if err != nil {
-				//fmt.Println(messageString)
+				// fmt.Println(messageString)
 				return nil, err
 			}
 

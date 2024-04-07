@@ -145,7 +145,7 @@ func (c *Client) reconnect() error {
 		if err == nil {
 			return nil
 		}
-		c.logger.Error(fmt.Errorf("reconnect failed: %v", err), "reconnect failed")
+		c.logger.Error(fmt.Sprintf("reconnect failed: %v", err), "reconnect failed")
 		time.Sleep(2 * time.Second)
 	}
 	if err != nil {

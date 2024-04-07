@@ -19,7 +19,7 @@ func (c *Client) run() {
 			}
 			message, err := c.read()
 			if err != nil {
-				c.logger.Error(fmt.Errorf("read error: %v", err), "message read error")
+				c.logger.Error(fmt.Sprintf("read error: %v", err), "message read error")
 				switch {
 				case errors.Is(err, context.Canceled),
 					websocket.CloseStatus(err) != -1,
@@ -68,13 +68,13 @@ func (c *Client) run() {
 					Type: model.MessageTypePing,
 				}, callback)
 				if err != nil {
-					c.logger.Error(fmt.Errorf("ping send error: %v", err), "ping could not be sent")
+					c.logger.Error(fmt.Sprintf("ping send error: %v", err), "ping could not be sent")
 					err = c.reconnect()
 					if err != nil {
-						c.logger.Error(fmt.Errorf("reconnect failed: %v", err), "reconnect failed")
+						c.logger.Error(fmt.Sprintf("reconnect failed: %v", err), "reconnect failed")
 						err = c.Close()
 						if err != nil {
-							c.logger.Error(fmt.Errorf("close error: %v", err), "context close error")
+							c.logger.Error(fmt.Sprintf("close error: %v", err), "context close error")
 						}
 						panic(errors.New("connection lost and cannot be reconnected"))
 					}
@@ -87,14 +87,14 @@ func (c *Client) run() {
 					select {
 					case <-callback:
 					case <-restartTicker.C:
-						c.logger.Error(fmt.Errorf("pong not received attempting reconnect"), "ping could not be sent")
+						c.logger.Error(fmt.Sprintf("pong not received attempting reconnect"))
 
 						err := c.reconnect()
 						if err != nil {
-							c.logger.Error(fmt.Errorf("reconnect failed: %v", err), "reconnect failed")
+							c.logger.Error(fmt.Sprintf("reconnect failed: %v", err))
 							err = c.Close()
 							if err != nil {
-								c.logger.Error(fmt.Errorf("close error: %v", err), "context close error")
+								c.logger.Error(fmt.Sprintf("close error: %v", err))
 							}
 							panic(errors.New("connection lost and cannot be reconnected"))
 						}
