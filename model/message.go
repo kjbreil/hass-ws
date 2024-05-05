@@ -24,7 +24,7 @@ type Message struct {
 }
 
 func (m *Message) DomainEntity() string {
-	if m.Event != nil && m.Event.Data != nil && m.Event.Data.EntityId != nil {
+	if m != nil && m.Event != nil && m.Event.Data != nil && m.Event.Data.EntityId != nil {
 		return *m.Event.Data.EntityId
 	}
 	return ""
