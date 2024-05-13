@@ -17,11 +17,12 @@ func NewTemplateReload(target Target) *TemplateReload {
 	serviceService := "reload"
 	t := &TemplateReload{
 		ServiceBase: ServiceBase{
-			Domain:  &serviceDomain,
-			Id:      nil,
-			Service: &serviceService,
-			Target:  target,
-			Type:    &serviceType,
+			Domain:         &serviceDomain,
+			Id:             nil,
+			ReturnResponse: false,
+			Service:        &serviceService,
+			Target:         target,
+			Type:           &serviceType,
 		},
 		ServiceData: nil,
 	}
@@ -42,7 +43,4 @@ func (t *TemplateReload) Targets() []string {
 }
 func (t *TemplateReload) Name() string {
 	return fmt.Sprintf("%s.%s", *t.Domain, *t.Service)
-}
-func (t *TemplateReload) SetID(id *int) {
-	t.Id = id
 }

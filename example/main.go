@@ -7,11 +7,12 @@ package main
 import (
 	"fmt"
 	hass_ws "github.com/kjbreil/hass-ws"
+	"github.com/kjbreil/hass-ws/helpers/HassWSService/services"
 	"github.com/kjbreil/hass-ws/model"
-	"github.com/kjbreil/hass-ws/services"
 	"log"
 	"os"
 	"os/signal"
+	"time"
 )
 
 func main() {
@@ -66,13 +67,21 @@ func main() {
 	}
 
 	// service := services.NewClimateSetTemperature(services.Targets("climate.kitchen")).
-	//	HvacMode(services.HvacModeheat_cool).
-	//	TargetTempLow(60).
-	//	TargetTempHigh(78)
+	// 	HvacMode(services.HvacModeheat_cool).
+	// 	TargetTempLow(60).
+	// 	TargetTempHigh(78)
 	// c.CallService(service)
 
-	service := services.NewCalendarListEvents(services.Targets("calendar.rainier"))
-	c.CallService(service)
+	service := services.NewWeatherGetForecast(services.Targets("weather.forecast_merritt_ave_se"))
+	service.GetForecastType(services.GetForecastTypehourly)
+
+	rsp := c.CallService(service)
+
+	msg := rsp.Timeout(time.Second)
+	fmt.Println(msg)
+
+	// service := services.NewCalendarListEvents(services.Targets("calendar.rainier"))
+	// c.CallService(service)
 
 	// Get all states, they ar ether run through the OnType and OnEntity handlers but not OnMessage or OnUnhandled
 	// c.GetStates()

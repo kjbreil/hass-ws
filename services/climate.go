@@ -17,11 +17,12 @@ func NewClimateSetAuxHeat(target Target) *ClimateSetAuxHeat {
 	serviceService := "set_aux_heat"
 	c := &ClimateSetAuxHeat{
 		ServiceBase: ServiceBase{
-			Domain:  &serviceDomain,
-			Id:      nil,
-			Service: &serviceService,
-			Target:  target,
-			Type:    &serviceType,
+			Domain:         &serviceDomain,
+			Id:             nil,
+			ReturnResponse: false,
+			Service:        &serviceService,
+			Target:         target,
+			Type:           &serviceType,
 		},
 		ServiceData: nil,
 	}
@@ -43,9 +44,6 @@ func (c *ClimateSetAuxHeat) Targets() []string {
 func (c *ClimateSetAuxHeat) Name() string {
 	return fmt.Sprintf("%s.%s", *c.Domain, *c.Service)
 }
-func (c *ClimateSetAuxHeat) SetID(id *int) {
-	c.Id = id
-}
 
 // NewClimateSetFanMode creates the object that can be sent to Home Assistant for domain climate, service set_fan_mode
 // "Set fan operation for climate device."
@@ -55,11 +53,12 @@ func NewClimateSetFanMode(target Target) *ClimateSetFanMode {
 	serviceService := "set_fan_mode"
 	c := &ClimateSetFanMode{
 		ServiceBase: ServiceBase{
-			Domain:  &serviceDomain,
-			Id:      nil,
-			Service: &serviceService,
-			Target:  target,
-			Type:    &serviceType,
+			Domain:         &serviceDomain,
+			Id:             nil,
+			ReturnResponse: false,
+			Service:        &serviceService,
+			Target:         target,
+			Type:           &serviceType,
 		},
 		ServiceData: ClimateSetFanModeParams{},
 	}
@@ -88,9 +87,6 @@ func (c *ClimateSetFanMode) Targets() []string {
 func (c *ClimateSetFanMode) Name() string {
 	return fmt.Sprintf("%s.%s", *c.Domain, *c.Service)
 }
-func (c *ClimateSetFanMode) SetID(id *int) {
-	c.Id = id
-}
 
 // NewClimateSetHumidity creates the object that can be sent to Home Assistant for domain climate, service set_humidity
 // "Set target humidity of climate device."
@@ -100,11 +96,12 @@ func NewClimateSetHumidity(target Target) *ClimateSetHumidity {
 	serviceService := "set_humidity"
 	c := &ClimateSetHumidity{
 		ServiceBase: ServiceBase{
-			Domain:  &serviceDomain,
-			Id:      nil,
-			Service: &serviceService,
-			Target:  target,
-			Type:    &serviceType,
+			Domain:         &serviceDomain,
+			Id:             nil,
+			ReturnResponse: false,
+			Service:        &serviceService,
+			Target:         target,
+			Type:           &serviceType,
 		},
 		ServiceData: ClimateSetHumidityParams{},
 	}
@@ -133,9 +130,6 @@ func (c *ClimateSetHumidity) Targets() []string {
 func (c *ClimateSetHumidity) Name() string {
 	return fmt.Sprintf("%s.%s", *c.Domain, *c.Service)
 }
-func (c *ClimateSetHumidity) SetID(id *int) {
-	c.Id = id
-}
 
 // NewClimateSetHvacMode creates the object that can be sent to Home Assistant for domain climate, service set_hvac_mode
 // "Set HVAC operation mode for climate device."
@@ -145,11 +139,12 @@ func NewClimateSetHvacMode(target Target) *ClimateSetHvacMode {
 	serviceService := "set_hvac_mode"
 	c := &ClimateSetHvacMode{
 		ServiceBase: ServiceBase{
-			Domain:  &serviceDomain,
-			Id:      nil,
-			Service: &serviceService,
-			Target:  target,
-			Type:    &serviceType,
+			Domain:         &serviceDomain,
+			Id:             nil,
+			ReturnResponse: false,
+			Service:        &serviceService,
+			Target:         target,
+			Type:           &serviceType,
 		},
 		ServiceData: ClimateSetHvacModeParams{},
 	}
@@ -178,9 +173,6 @@ func (c *ClimateSetHvacMode) Targets() []string {
 func (c *ClimateSetHvacMode) Name() string {
 	return fmt.Sprintf("%s.%s", *c.Domain, *c.Service)
 }
-func (c *ClimateSetHvacMode) SetID(id *int) {
-	c.Id = id
-}
 
 // NewClimateSetPresetMode creates the object that can be sent to Home Assistant for domain climate, service set_preset_mode
 // "Set preset mode for climate device."
@@ -190,11 +182,12 @@ func NewClimateSetPresetMode(target Target) *ClimateSetPresetMode {
 	serviceService := "set_preset_mode"
 	c := &ClimateSetPresetMode{
 		ServiceBase: ServiceBase{
-			Domain:  &serviceDomain,
-			Id:      nil,
-			Service: &serviceService,
-			Target:  target,
-			Type:    &serviceType,
+			Domain:         &serviceDomain,
+			Id:             nil,
+			ReturnResponse: false,
+			Service:        &serviceService,
+			Target:         target,
+			Type:           &serviceType,
 		},
 		ServiceData: ClimateSetPresetModeParams{},
 	}
@@ -223,9 +216,6 @@ func (c *ClimateSetPresetMode) Targets() []string {
 func (c *ClimateSetPresetMode) Name() string {
 	return fmt.Sprintf("%s.%s", *c.Domain, *c.Service)
 }
-func (c *ClimateSetPresetMode) SetID(id *int) {
-	c.Id = id
-}
 
 // NewClimateSetSwingMode creates the object that can be sent to Home Assistant for domain climate, service set_swing_mode
 // "Set swing operation for climate device."
@@ -235,11 +225,12 @@ func NewClimateSetSwingMode(target Target) *ClimateSetSwingMode {
 	serviceService := "set_swing_mode"
 	c := &ClimateSetSwingMode{
 		ServiceBase: ServiceBase{
-			Domain:  &serviceDomain,
-			Id:      nil,
-			Service: &serviceService,
-			Target:  target,
-			Type:    &serviceType,
+			Domain:         &serviceDomain,
+			Id:             nil,
+			ReturnResponse: false,
+			Service:        &serviceService,
+			Target:         target,
+			Type:           &serviceType,
 		},
 		ServiceData: ClimateSetSwingModeParams{},
 	}
@@ -268,9 +259,6 @@ func (c *ClimateSetSwingMode) Targets() []string {
 func (c *ClimateSetSwingMode) Name() string {
 	return fmt.Sprintf("%s.%s", *c.Domain, *c.Service)
 }
-func (c *ClimateSetSwingMode) SetID(id *int) {
-	c.Id = id
-}
 
 // NewClimateSetTemperature creates the object that can be sent to Home Assistant for domain climate, service set_temperature
 // "Set target temperature of climate device."
@@ -280,11 +268,12 @@ func NewClimateSetTemperature(target Target) *ClimateSetTemperature {
 	serviceService := "set_temperature"
 	c := &ClimateSetTemperature{
 		ServiceBase: ServiceBase{
-			Domain:  &serviceDomain,
-			Id:      nil,
-			Service: &serviceService,
-			Target:  target,
-			Type:    &serviceType,
+			Domain:         &serviceDomain,
+			Id:             nil,
+			ReturnResponse: false,
+			Service:        &serviceService,
+			Target:         target,
+			Type:           &serviceType,
 		},
 		ServiceData: ClimateSetTemperatureParams{},
 	}
@@ -328,9 +317,6 @@ func (c *ClimateSetTemperature) Targets() []string {
 func (c *ClimateSetTemperature) Name() string {
 	return fmt.Sprintf("%s.%s", *c.Domain, *c.Service)
 }
-func (c *ClimateSetTemperature) SetID(id *int) {
-	c.Id = id
-}
 
 // NewClimateTurnOff creates the object that can be sent to Home Assistant for domain climate, service turn_off
 // "Turn climate device off."
@@ -340,11 +326,12 @@ func NewClimateTurnOff(target Target) *ClimateTurnOff {
 	serviceService := "turn_off"
 	c := &ClimateTurnOff{
 		ServiceBase: ServiceBase{
-			Domain:  &serviceDomain,
-			Id:      nil,
-			Service: &serviceService,
-			Target:  target,
-			Type:    &serviceType,
+			Domain:         &serviceDomain,
+			Id:             nil,
+			ReturnResponse: false,
+			Service:        &serviceService,
+			Target:         target,
+			Type:           &serviceType,
 		},
 		ServiceData: nil,
 	}
@@ -366,9 +353,6 @@ func (c *ClimateTurnOff) Targets() []string {
 func (c *ClimateTurnOff) Name() string {
 	return fmt.Sprintf("%s.%s", *c.Domain, *c.Service)
 }
-func (c *ClimateTurnOff) SetID(id *int) {
-	c.Id = id
-}
 
 // NewClimateTurnOn creates the object that can be sent to Home Assistant for domain climate, service turn_on
 // "Turn climate device on."
@@ -378,11 +362,12 @@ func NewClimateTurnOn(target Target) *ClimateTurnOn {
 	serviceService := "turn_on"
 	c := &ClimateTurnOn{
 		ServiceBase: ServiceBase{
-			Domain:  &serviceDomain,
-			Id:      nil,
-			Service: &serviceService,
-			Target:  target,
-			Type:    &serviceType,
+			Domain:         &serviceDomain,
+			Id:             nil,
+			ReturnResponse: false,
+			Service:        &serviceService,
+			Target:         target,
+			Type:           &serviceType,
 		},
 		ServiceData: nil,
 	}
@@ -403,7 +388,4 @@ func (c *ClimateTurnOn) Targets() []string {
 }
 func (c *ClimateTurnOn) Name() string {
 	return fmt.Sprintf("%s.%s", *c.Domain, *c.Service)
-}
-func (c *ClimateTurnOn) SetID(id *int) {
-	c.Id = id
 }

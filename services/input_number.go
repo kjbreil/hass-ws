@@ -17,11 +17,12 @@ func NewInputNumberDecrement(target Target) *InputNumberDecrement {
 	serviceService := "decrement"
 	i := &InputNumberDecrement{
 		ServiceBase: ServiceBase{
-			Domain:  &serviceDomain,
-			Id:      nil,
-			Service: &serviceService,
-			Target:  target,
-			Type:    &serviceType,
+			Domain:         &serviceDomain,
+			Id:             nil,
+			ReturnResponse: false,
+			Service:        &serviceService,
+			Target:         target,
+			Type:           &serviceType,
 		},
 		ServiceData: nil,
 	}
@@ -43,9 +44,6 @@ func (i *InputNumberDecrement) Targets() []string {
 func (i *InputNumberDecrement) Name() string {
 	return fmt.Sprintf("%s.%s", *i.Domain, *i.Service)
 }
-func (i *InputNumberDecrement) SetID(id *int) {
-	i.Id = id
-}
 
 // NewInputNumberIncrement creates the object that can be sent to Home Assistant for domain input_number, service increment
 // "Increment the value of an input number entity by its stepping."
@@ -55,11 +53,12 @@ func NewInputNumberIncrement(target Target) *InputNumberIncrement {
 	serviceService := "increment"
 	i := &InputNumberIncrement{
 		ServiceBase: ServiceBase{
-			Domain:  &serviceDomain,
-			Id:      nil,
-			Service: &serviceService,
-			Target:  target,
-			Type:    &serviceType,
+			Domain:         &serviceDomain,
+			Id:             nil,
+			ReturnResponse: false,
+			Service:        &serviceService,
+			Target:         target,
+			Type:           &serviceType,
 		},
 		ServiceData: nil,
 	}
@@ -81,9 +80,6 @@ func (i *InputNumberIncrement) Targets() []string {
 func (i *InputNumberIncrement) Name() string {
 	return fmt.Sprintf("%s.%s", *i.Domain, *i.Service)
 }
-func (i *InputNumberIncrement) SetID(id *int) {
-	i.Id = id
-}
 
 // NewInputNumberReload creates the object that can be sent to Home Assistant for domain input_number, service reload
 // "Reload the input_number configuration."
@@ -93,11 +89,12 @@ func NewInputNumberReload(target Target) *InputNumberReload {
 	serviceService := "reload"
 	i := &InputNumberReload{
 		ServiceBase: ServiceBase{
-			Domain:  &serviceDomain,
-			Id:      nil,
-			Service: &serviceService,
-			Target:  target,
-			Type:    &serviceType,
+			Domain:         &serviceDomain,
+			Id:             nil,
+			ReturnResponse: false,
+			Service:        &serviceService,
+			Target:         target,
+			Type:           &serviceType,
 		},
 		ServiceData: nil,
 	}
@@ -119,9 +116,6 @@ func (i *InputNumberReload) Targets() []string {
 func (i *InputNumberReload) Name() string {
 	return fmt.Sprintf("%s.%s", *i.Domain, *i.Service)
 }
-func (i *InputNumberReload) SetID(id *int) {
-	i.Id = id
-}
 
 // NewInputNumberSetValue creates the object that can be sent to Home Assistant for domain input_number, service set_value
 // "Set the value of an input number entity."
@@ -131,11 +125,12 @@ func NewInputNumberSetValue(target Target) *InputNumberSetValue {
 	serviceService := "set_value"
 	i := &InputNumberSetValue{
 		ServiceBase: ServiceBase{
-			Domain:  &serviceDomain,
-			Id:      nil,
-			Service: &serviceService,
-			Target:  target,
-			Type:    &serviceType,
+			Domain:         &serviceDomain,
+			Id:             nil,
+			ReturnResponse: false,
+			Service:        &serviceService,
+			Target:         target,
+			Type:           &serviceType,
 		},
 		ServiceData: InputNumberSetValueParams{},
 	}
@@ -163,7 +158,4 @@ func (i *InputNumberSetValue) Targets() []string {
 }
 func (i *InputNumberSetValue) Name() string {
 	return fmt.Sprintf("%s.%s", *i.Domain, *i.Service)
-}
-func (i *InputNumberSetValue) SetID(id *int) {
-	i.Id = id
 }

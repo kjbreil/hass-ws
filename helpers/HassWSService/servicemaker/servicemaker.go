@@ -63,9 +63,9 @@ func Gen(servicesFolder string, servicesList ServiceList) error {
 				Id(fmt.Sprintf("New%s", s.camelName)).
 				ParamsFunc(func(g *jen.Group) {
 					g.Add(jen.Id("target").Id("Target"))
-					//if len(s.parameterKeys) > 0 {
+					// if len(s.parameterKeys) > 0 {
 					//	g.Add(jen.Id(fmt.Sprintf("%sParams", s.lowerCamelName)).Op("*").Id(fmt.Sprintf("%sParams", s.camelName)))
-					//}
+					// }
 				}).
 				Op("*").Id(s.camelName).
 				Block(
@@ -75,14 +75,15 @@ func Gen(servicesFolder string, servicesList ServiceList) error {
 					jen.Id(s.firstLetter).Op(":=").Op("&").Id(s.camelName).Values(
 						jen.DictFunc(func(d jen.Dict) {
 							d[jen.Id("ServiceBase")] = jen.Id("ServiceBase").Values(jen.Dict{
-								jen.Id("Id"):      jen.Id("nil"),
-								jen.Id("Type"):    jen.Op("&").Id("serviceType"),
-								jen.Id("Domain"):  jen.Op("&").Id("serviceDomain"),
-								jen.Id("Service"): jen.Op("&").Id("serviceService"),
-								jen.Id("Target"):  jen.Id("target"),
+								jen.Id("Id"):             jen.Id("nil"),
+								jen.Id("Type"):           jen.Op("&").Id("serviceType"),
+								jen.Id("Domain"):         jen.Op("&").Id("serviceDomain"),
+								jen.Id("Service"):        jen.Op("&").Id("serviceService"),
+								jen.Id("Target"):         jen.Id("target"),
+								jen.Id("ReturnResponse"): jen.Lit(s.responseRequired),
 							})
 							if len(s.parameters) > 0 {
-								//d[jen.Id("ServiceData")] = jen.Op("*").Id(fmt.Sprintf("%sParams", s.lowerCamelName))
+								// d[jen.Id("ServiceData")] = jen.Op("*").Id(fmt.Sprintf("%sParams", s.lowerCamelName))
 								d[jen.Id("ServiceData")] = jen.Id(fmt.Sprintf("%sParams", s.camelName)).Values()
 							} else {
 								d[jen.Id("ServiceData")] = jen.Id("nil")
@@ -114,10 +115,14 @@ func Gen(servicesFolder string, servicesList ServiceList) error {
 					StructFunc(func(g *jen.Group) {
 						for _, fn := range s.parameterKeys {
 							code := s.parameters[fn]
+							jsonTag := fn
+							if strings.HasPrefix(fn, s.name) {
+								jsonTag = strings.Replace(jsonTag, s.name+"_", "", 1)
+							}
 							if code == "interface{}" {
-								g.Add(jen.Id(strcase.ToCamel(fn)).Add(codeGetter(code)).Tag(map[string]string{"json": fn + ",omitempty"}))
+								g.Add(jen.Id(strcase.ToCamel(fn)).Add(codeGetter(code)).Tag(map[string]string{"json": jsonTag + ",omitempty"}))
 							} else {
-								g.Add(jen.Id(strcase.ToCamel(fn)).Op("*").Add(codeGetter(code)).Tag(map[string]string{"json": fn + ",omitempty"}))
+								g.Add(jen.Id(strcase.ToCamel(fn)).Op("*").Add(codeGetter(code)).Tag(map[string]string{"json": jsonTag + ",omitempty"}))
 							}
 						}
 					})
@@ -126,7 +131,7 @@ func Gen(servicesFolder string, servicesList ServiceList) error {
 			if len(s.parameterKeys) > 0 {
 				for _, fn := range s.parameterKeys {
 
-					//firstLetter := string(fn[0])
+					// firstLetter := string(fn[0])
 					code := s.parameters[fn]
 
 					finalCamelName := strcase.ToCamel(fn)
@@ -159,10 +164,6 @@ func Gen(servicesFolder string, servicesList ServiceList) error {
 
 			services[d.name].Func().Params(jen.Id(s.firstLetter).Op("*").Id(s.camelName)).Id("Name").Params().String().Block(
 				jen.Return(jen.Qual("fmt", "Sprintf").Params(jen.Lit("%s.%s").Op(",").Op("*").Id(s.firstLetter).Dot("Domain").Op(",").Op("*").Id(s.firstLetter).Dot("Service"))),
-			)
-
-			services[d.name].Func().Params(jen.Id(s.firstLetter).Op("*").Id(s.camelName)).Id("SetID").Params(jen.Id("id").Op("*").Int()).Block(
-				jen.Id(s.firstLetter).Dot("Id").Op("=").Id("id"),
 			)
 
 			// Tests
@@ -205,7 +206,7 @@ func Gen(servicesFolder string, servicesList ServiceList) error {
 							jen.Id("fields"): jen.Id(fmt.Sprintf("New%s", s.camelName)).
 								CallFunc(func(g *jen.Group) {
 									g.Add(jen.Id("Targets").Call(jen.Lit("climate.kitchen")))
-									//if len(s.parameters) > 0 {
+									// if len(s.parameters) > 0 {
 									//	g.Add(jen.Op("&").Id(fmt.Sprintf("%sParams", s.camelName)).Values(jen.DictFunc(func(d jen.Dict) {
 									//		for _, fn := range s.parameterKeys {
 									//			d[jen.Id(strcase.ToCamel(fn))] = jen.Op("&").Id(strcase.ToLowerCamel(fn))
@@ -213,7 +214,7 @@ func Gen(servicesFolder string, servicesList ServiceList) error {
 									//		}
 									//
 									//	})))
-									//}
+									// }
 								}).Add(add),
 
 							jen.Id("want"): jen.LitFunc(func() interface{} {
@@ -258,7 +259,7 @@ func Gen(servicesFolder string, servicesList ServiceList) error {
 								return fmt.Sprintf(`{"id":null,"type":"call_service","domain":"%s","service":"%s","target":{"entity_id":["climate.kitchen"]}%s}`, d.name, k, finalServiceData)
 
 							},
-							//fmt.Sprintf("{\"id\":null,\"type\":\"call_service\",\"domain\":\"%s\",\"service\":\"%s\",\"target\":{\"entity_id\":[\"climate.kitchen\"]},\"service_data\":{}}", d, k),
+							// fmt.Sprintf("{\"id\":null,\"type\":\"call_service\",\"domain\":\"%s\",\"service\":\"%s\",\"target\":{\"entity_id\":[\"climate.kitchen\"]},\"service_data\":{}}", d, k),
 							),
 						}))
 					}))
@@ -278,7 +279,7 @@ func Gen(servicesFolder string, servicesList ServiceList) error {
 
 		}
 		// Tests
-		//func TestDeviceTrackerSee_JSON(t *testing.T) {
+		// func TestDeviceTrackerSee_JSON(t *testing.T) {
 		//	tests := []struct {
 		//		name   string
 		//		fields *DeviceTrackerSee
@@ -308,49 +309,10 @@ func Gen(servicesFolder string, servicesList ServiceList) error {
 		//			}
 		//		})
 		//	}
-		//}
+		// }
 
 	}
-	//// Make the types.go file
-	// make the generate comment for stringer
-
-	for _, k := range enumKeys {
-		services["types"].HeaderComment(fmt.Sprintf("//go:generate stringer -type=%s -trimprefix=%s", k, k))
-	}
-	for _, k := range enumKeys {
-		services["types"].HeaderComment(fmt.Sprintf("//go:generate jsonenums -type=%s", k))
-	}
-
-	// Generate the interface
-	services["types"].Type().Id("Service").Interface(
-		jen.Id("SetID").Params(jen.Id("id").Op("*").Int()),
-		jen.Id("JSON").Params().String(),
-		jen.Id("Name").Params().String(),
-		jen.Id("Targets").Params().Index().String(),
-	)
-
-	// Generate the base type
-	services["types"].Type().
-		Id("ServiceBase").
-		StructFunc(func(g *jen.Group) {
-			g.Add(jen.Id("Id").Op("*").Int().Tag(map[string]string{"json": "id"}))
-			g.Add(jen.Id("Type").Op("*").String().Tag(map[string]string{"json": "type"}))
-			g.Add(jen.Id("Domain").Op("*").String().Tag(map[string]string{"json": "domain"}))
-			g.Add(jen.Id("Service").Op("*").String().Tag(map[string]string{"json": "service"}))
-			g.Add(jen.Id("Target").Id("Target").Tag(map[string]string{"json": "target" + ",omitempty"}))
-		})
-
-	services["types"].Type().Id("Target").Struct(
-		jen.Id("EntityId").Index().String().Tag(map[string]string{"json": "entity_id" + ",omitempty"}),
-	)
-
-	services["types"].Func().Id("Targets").Params(jen.Id("entities").Op("...").String()).Id("Target").Block(
-		jen.Var().Id("t").Id("Target"),
-		jen.For(jen.Id("_").Op(",").Id("e").Op(":=").Range().Id("entities")).Block(
-			jen.Id("t").Dot("EntityId").Op("=").Append(jen.Id("t").Dot("EntityId").Op(",").Id("e")),
-		),
-		jen.Return(jen.Id("t")),
-	)
+	makeTypesFile(enumKeys, services)
 
 	for _, k := range enumKeys {
 		v := servicesList.enums[k]
@@ -366,7 +328,7 @@ func Gen(servicesFolder string, servicesList ServiceList) error {
 
 			for i, o := range keysKey {
 
-				//varName := strcase.ToCamel(o)
+				// varName := strcase.ToCamel(o)
 
 				if i == 0 {
 					g.Add(jen.Id(fmt.Sprintf("%s%s", typeName, o)).Id(typeName).Op("=").Id("iota"))

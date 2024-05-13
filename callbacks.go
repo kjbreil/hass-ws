@@ -6,35 +6,42 @@ import (
 )
 
 type callbacks struct {
-	sync.Map
+	callbacks map[int]chan *model.Message
+	m         *sync.Mutex
 }
 
 func newCallbacks() *callbacks {
-	return &callbacks{}
+	return &callbacks{
+		callbacks: make(map[int]chan *model.Message),
+		m:         &sync.Mutex{},
+	}
 }
 
 func (c *callbacks) Get(key int) (chan *model.Message, bool) {
-	ch, ok := c.Load(key)
-	if ok {
-		return ch.(chan *model.Message), true
+	c.m.Lock()
+	defer c.m.Unlock()
+	if cb, ok := c.callbacks[key]; ok {
+		return cb, true
 	}
 	return nil, false
 }
 
 func (c *callbacks) Set(key int, value chan *model.Message) {
-	c.Store(key, value)
+	c.m.Lock()
+	defer c.m.Unlock()
+	c.callbacks[key] = value
 }
-
-func (c *callbacks) GetMap() map[int]chan *model.Message {
-	returnMap := make(map[int]chan *model.Message)
-
-	c.Range(func(key, value any) bool {
-		returnMap[key.(int)] = value.(chan *model.Message)
-		return true
-	})
-	return returnMap
+func (c *callbacks) Delete(key int) {
+	c.m.Lock()
+	defer c.m.Unlock()
+	if cb, ok := c.callbacks[key]; ok {
+		close(cb)
+		delete(c.callbacks, key)
+	}
 }
 
 func (c *callbacks) Len() int {
-	return len(c.GetMap())
+	c.m.Lock()
+	defer c.m.Unlock()
+	return len(c.callbacks)
 }

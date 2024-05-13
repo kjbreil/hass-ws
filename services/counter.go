@@ -17,11 +17,12 @@ func NewCounterConfigure(target Target) *CounterConfigure {
 	serviceService := "configure"
 	c := &CounterConfigure{
 		ServiceBase: ServiceBase{
-			Domain:  &serviceDomain,
-			Id:      nil,
-			Service: &serviceService,
-			Target:  target,
-			Type:    &serviceType,
+			Domain:         &serviceDomain,
+			Id:             nil,
+			ReturnResponse: false,
+			Service:        &serviceService,
+			Target:         target,
+			Type:           &serviceType,
 		},
 		ServiceData: CounterConfigureParams{},
 	}
@@ -70,9 +71,6 @@ func (c *CounterConfigure) Targets() []string {
 func (c *CounterConfigure) Name() string {
 	return fmt.Sprintf("%s.%s", *c.Domain, *c.Service)
 }
-func (c *CounterConfigure) SetID(id *int) {
-	c.Id = id
-}
 
 // NewCounterDecrement creates the object that can be sent to Home Assistant for domain counter, service decrement
 // "Decrement a counter."
@@ -82,11 +80,12 @@ func NewCounterDecrement(target Target) *CounterDecrement {
 	serviceService := "decrement"
 	c := &CounterDecrement{
 		ServiceBase: ServiceBase{
-			Domain:  &serviceDomain,
-			Id:      nil,
-			Service: &serviceService,
-			Target:  target,
-			Type:    &serviceType,
+			Domain:         &serviceDomain,
+			Id:             nil,
+			ReturnResponse: false,
+			Service:        &serviceService,
+			Target:         target,
+			Type:           &serviceType,
 		},
 		ServiceData: nil,
 	}
@@ -108,9 +107,6 @@ func (c *CounterDecrement) Targets() []string {
 func (c *CounterDecrement) Name() string {
 	return fmt.Sprintf("%s.%s", *c.Domain, *c.Service)
 }
-func (c *CounterDecrement) SetID(id *int) {
-	c.Id = id
-}
 
 // NewCounterIncrement creates the object that can be sent to Home Assistant for domain counter, service increment
 // "Increment a counter."
@@ -120,11 +116,12 @@ func NewCounterIncrement(target Target) *CounterIncrement {
 	serviceService := "increment"
 	c := &CounterIncrement{
 		ServiceBase: ServiceBase{
-			Domain:  &serviceDomain,
-			Id:      nil,
-			Service: &serviceService,
-			Target:  target,
-			Type:    &serviceType,
+			Domain:         &serviceDomain,
+			Id:             nil,
+			ReturnResponse: false,
+			Service:        &serviceService,
+			Target:         target,
+			Type:           &serviceType,
 		},
 		ServiceData: nil,
 	}
@@ -146,9 +143,6 @@ func (c *CounterIncrement) Targets() []string {
 func (c *CounterIncrement) Name() string {
 	return fmt.Sprintf("%s.%s", *c.Domain, *c.Service)
 }
-func (c *CounterIncrement) SetID(id *int) {
-	c.Id = id
-}
 
 // NewCounterReset creates the object that can be sent to Home Assistant for domain counter, service reset
 // "Reset a counter."
@@ -158,11 +152,12 @@ func NewCounterReset(target Target) *CounterReset {
 	serviceService := "reset"
 	c := &CounterReset{
 		ServiceBase: ServiceBase{
-			Domain:  &serviceDomain,
-			Id:      nil,
-			Service: &serviceService,
-			Target:  target,
-			Type:    &serviceType,
+			Domain:         &serviceDomain,
+			Id:             nil,
+			ReturnResponse: false,
+			Service:        &serviceService,
+			Target:         target,
+			Type:           &serviceType,
 		},
 		ServiceData: nil,
 	}
@@ -183,7 +178,4 @@ func (c *CounterReset) Targets() []string {
 }
 func (c *CounterReset) Name() string {
 	return fmt.Sprintf("%s.%s", *c.Domain, *c.Service)
-}
-func (c *CounterReset) SetID(id *int) {
-	c.Id = id
 }

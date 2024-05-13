@@ -17,11 +17,12 @@ func NewInputTextReload(target Target) *InputTextReload {
 	serviceService := "reload"
 	i := &InputTextReload{
 		ServiceBase: ServiceBase{
-			Domain:  &serviceDomain,
-			Id:      nil,
-			Service: &serviceService,
-			Target:  target,
-			Type:    &serviceType,
+			Domain:         &serviceDomain,
+			Id:             nil,
+			ReturnResponse: false,
+			Service:        &serviceService,
+			Target:         target,
+			Type:           &serviceType,
 		},
 		ServiceData: nil,
 	}
@@ -43,9 +44,6 @@ func (i *InputTextReload) Targets() []string {
 func (i *InputTextReload) Name() string {
 	return fmt.Sprintf("%s.%s", *i.Domain, *i.Service)
 }
-func (i *InputTextReload) SetID(id *int) {
-	i.Id = id
-}
 
 // NewInputTextSetValue creates the object that can be sent to Home Assistant for domain input_text, service set_value
 // "Set the value of an input text entity."
@@ -55,11 +53,12 @@ func NewInputTextSetValue(target Target) *InputTextSetValue {
 	serviceService := "set_value"
 	i := &InputTextSetValue{
 		ServiceBase: ServiceBase{
-			Domain:  &serviceDomain,
-			Id:      nil,
-			Service: &serviceService,
-			Target:  target,
-			Type:    &serviceType,
+			Domain:         &serviceDomain,
+			Id:             nil,
+			ReturnResponse: false,
+			Service:        &serviceService,
+			Target:         target,
+			Type:           &serviceType,
 		},
 		ServiceData: InputTextSetValueParams{},
 	}
@@ -87,7 +86,4 @@ func (i *InputTextSetValue) Targets() []string {
 }
 func (i *InputTextSetValue) Name() string {
 	return fmt.Sprintf("%s.%s", *i.Domain, *i.Service)
-}
-func (i *InputTextSetValue) SetID(id *int) {
-	i.Id = id
 }

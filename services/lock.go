@@ -17,11 +17,12 @@ func NewLockLock(target Target) *LockLock {
 	serviceService := "lock"
 	l := &LockLock{
 		ServiceBase: ServiceBase{
-			Domain:  &serviceDomain,
-			Id:      nil,
-			Service: &serviceService,
-			Target:  target,
-			Type:    &serviceType,
+			Domain:         &serviceDomain,
+			Id:             nil,
+			ReturnResponse: false,
+			Service:        &serviceService,
+			Target:         target,
+			Type:           &serviceType,
 		},
 		ServiceData: LockLockParams{},
 	}
@@ -50,9 +51,6 @@ func (l *LockLock) Targets() []string {
 func (l *LockLock) Name() string {
 	return fmt.Sprintf("%s.%s", *l.Domain, *l.Service)
 }
-func (l *LockLock) SetID(id *int) {
-	l.Id = id
-}
 
 // NewLockOpen creates the object that can be sent to Home Assistant for domain lock, service open
 // "Open all or specified locks."
@@ -62,11 +60,12 @@ func NewLockOpen(target Target) *LockOpen {
 	serviceService := "open"
 	l := &LockOpen{
 		ServiceBase: ServiceBase{
-			Domain:  &serviceDomain,
-			Id:      nil,
-			Service: &serviceService,
-			Target:  target,
-			Type:    &serviceType,
+			Domain:         &serviceDomain,
+			Id:             nil,
+			ReturnResponse: false,
+			Service:        &serviceService,
+			Target:         target,
+			Type:           &serviceType,
 		},
 		ServiceData: LockOpenParams{},
 	}
@@ -95,9 +94,6 @@ func (l *LockOpen) Targets() []string {
 func (l *LockOpen) Name() string {
 	return fmt.Sprintf("%s.%s", *l.Domain, *l.Service)
 }
-func (l *LockOpen) SetID(id *int) {
-	l.Id = id
-}
 
 // NewLockUnlock creates the object that can be sent to Home Assistant for domain lock, service unlock
 // "Unlock all or specified locks."
@@ -107,11 +103,12 @@ func NewLockUnlock(target Target) *LockUnlock {
 	serviceService := "unlock"
 	l := &LockUnlock{
 		ServiceBase: ServiceBase{
-			Domain:  &serviceDomain,
-			Id:      nil,
-			Service: &serviceService,
-			Target:  target,
-			Type:    &serviceType,
+			Domain:         &serviceDomain,
+			Id:             nil,
+			ReturnResponse: false,
+			Service:        &serviceService,
+			Target:         target,
+			Type:           &serviceType,
 		},
 		ServiceData: LockUnlockParams{},
 	}
@@ -139,7 +136,4 @@ func (l *LockUnlock) Targets() []string {
 }
 func (l *LockUnlock) Name() string {
 	return fmt.Sprintf("%s.%s", *l.Domain, *l.Service)
-}
-func (l *LockUnlock) SetID(id *int) {
-	l.Id = id
 }

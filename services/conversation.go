@@ -17,11 +17,12 @@ func NewConversationProcess(target Target) *ConversationProcess {
 	serviceService := "process"
 	c := &ConversationProcess{
 		ServiceBase: ServiceBase{
-			Domain:  &serviceDomain,
-			Id:      nil,
-			Service: &serviceService,
-			Target:  target,
-			Type:    &serviceType,
+			Domain:         &serviceDomain,
+			Id:             nil,
+			ReturnResponse: false,
+			Service:        &serviceService,
+			Target:         target,
+			Type:           &serviceType,
 		},
 		ServiceData: ConversationProcessParams{},
 	}
@@ -50,9 +51,6 @@ func (c *ConversationProcess) Targets() []string {
 func (c *ConversationProcess) Name() string {
 	return fmt.Sprintf("%s.%s", *c.Domain, *c.Service)
 }
-func (c *ConversationProcess) SetID(id *int) {
-	c.Id = id
-}
 
 // NewConversationReload creates the object that can be sent to Home Assistant for domain conversation, service reload
 // ""
@@ -62,11 +60,12 @@ func NewConversationReload(target Target) *ConversationReload {
 	serviceService := "reload"
 	c := &ConversationReload{
 		ServiceBase: ServiceBase{
-			Domain:  &serviceDomain,
-			Id:      nil,
-			Service: &serviceService,
-			Target:  target,
-			Type:    &serviceType,
+			Domain:         &serviceDomain,
+			Id:             nil,
+			ReturnResponse: false,
+			Service:        &serviceService,
+			Target:         target,
+			Type:           &serviceType,
 		},
 		ServiceData: nil,
 	}
@@ -87,7 +86,4 @@ func (c *ConversationReload) Targets() []string {
 }
 func (c *ConversationReload) Name() string {
 	return fmt.Sprintf("%s.%s", *c.Domain, *c.Service)
-}
-func (c *ConversationReload) SetID(id *int) {
-	c.Id = id
 }

@@ -17,11 +17,12 @@ func NewSelectSelectOption(target Target) *SelectSelectOption {
 	serviceService := "select_option"
 	s := &SelectSelectOption{
 		ServiceBase: ServiceBase{
-			Domain:  &serviceDomain,
-			Id:      nil,
-			Service: &serviceService,
-			Target:  target,
-			Type:    &serviceType,
+			Domain:         &serviceDomain,
+			Id:             nil,
+			ReturnResponse: false,
+			Service:        &serviceService,
+			Target:         target,
+			Type:           &serviceType,
 		},
 		ServiceData: SelectSelectOptionParams{},
 	}
@@ -49,7 +50,4 @@ func (s *SelectSelectOption) Targets() []string {
 }
 func (s *SelectSelectOption) Name() string {
 	return fmt.Sprintf("%s.%s", *s.Domain, *s.Service)
-}
-func (s *SelectSelectOption) SetID(id *int) {
-	s.Id = id
 }

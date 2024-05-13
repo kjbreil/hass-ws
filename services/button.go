@@ -17,11 +17,12 @@ func NewButtonPress(target Target) *ButtonPress {
 	serviceService := "press"
 	b := &ButtonPress{
 		ServiceBase: ServiceBase{
-			Domain:  &serviceDomain,
-			Id:      nil,
-			Service: &serviceService,
-			Target:  target,
-			Type:    &serviceType,
+			Domain:         &serviceDomain,
+			Id:             nil,
+			ReturnResponse: false,
+			Service:        &serviceService,
+			Target:         target,
+			Type:           &serviceType,
 		},
 		ServiceData: nil,
 	}
@@ -42,7 +43,4 @@ func (b *ButtonPress) Targets() []string {
 }
 func (b *ButtonPress) Name() string {
 	return fmt.Sprintf("%s.%s", *b.Domain, *b.Service)
-}
-func (b *ButtonPress) SetID(id *int) {
-	b.Id = id
 }

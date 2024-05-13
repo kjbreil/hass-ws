@@ -17,11 +17,12 @@ func NewWakeOnLanSendMagicPacket(target Target) *WakeOnLanSendMagicPacket {
 	serviceService := "send_magic_packet"
 	w := &WakeOnLanSendMagicPacket{
 		ServiceBase: ServiceBase{
-			Domain:  &serviceDomain,
-			Id:      nil,
-			Service: &serviceService,
-			Target:  target,
-			Type:    &serviceType,
+			Domain:         &serviceDomain,
+			Id:             nil,
+			ReturnResponse: false,
+			Service:        &serviceService,
+			Target:         target,
+			Type:           &serviceType,
 		},
 		ServiceData: WakeOnLanSendMagicPacketParams{},
 	}
@@ -59,7 +60,4 @@ func (w *WakeOnLanSendMagicPacket) Targets() []string {
 }
 func (w *WakeOnLanSendMagicPacket) Name() string {
 	return fmt.Sprintf("%s.%s", *w.Domain, *w.Service)
-}
-func (w *WakeOnLanSendMagicPacket) SetID(id *int) {
-	w.Id = id
 }

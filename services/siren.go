@@ -17,11 +17,12 @@ func NewSirenToggle(target Target) *SirenToggle {
 	serviceService := "toggle"
 	s := &SirenToggle{
 		ServiceBase: ServiceBase{
-			Domain:  &serviceDomain,
-			Id:      nil,
-			Service: &serviceService,
-			Target:  target,
-			Type:    &serviceType,
+			Domain:         &serviceDomain,
+			Id:             nil,
+			ReturnResponse: false,
+			Service:        &serviceService,
+			Target:         target,
+			Type:           &serviceType,
 		},
 		ServiceData: nil,
 	}
@@ -43,9 +44,6 @@ func (s *SirenToggle) Targets() []string {
 func (s *SirenToggle) Name() string {
 	return fmt.Sprintf("%s.%s", *s.Domain, *s.Service)
 }
-func (s *SirenToggle) SetID(id *int) {
-	s.Id = id
-}
 
 // NewSirenTurnOff creates the object that can be sent to Home Assistant for domain siren, service turn_off
 // "Turn siren off."
@@ -55,11 +53,12 @@ func NewSirenTurnOff(target Target) *SirenTurnOff {
 	serviceService := "turn_off"
 	s := &SirenTurnOff{
 		ServiceBase: ServiceBase{
-			Domain:  &serviceDomain,
-			Id:      nil,
-			Service: &serviceService,
-			Target:  target,
-			Type:    &serviceType,
+			Domain:         &serviceDomain,
+			Id:             nil,
+			ReturnResponse: false,
+			Service:        &serviceService,
+			Target:         target,
+			Type:           &serviceType,
 		},
 		ServiceData: nil,
 	}
@@ -81,9 +80,6 @@ func (s *SirenTurnOff) Targets() []string {
 func (s *SirenTurnOff) Name() string {
 	return fmt.Sprintf("%s.%s", *s.Domain, *s.Service)
 }
-func (s *SirenTurnOff) SetID(id *int) {
-	s.Id = id
-}
 
 // NewSirenTurnOn creates the object that can be sent to Home Assistant for domain siren, service turn_on
 // "Turn siren on."
@@ -93,11 +89,12 @@ func NewSirenTurnOn(target Target) *SirenTurnOn {
 	serviceService := "turn_on"
 	s := &SirenTurnOn{
 		ServiceBase: ServiceBase{
-			Domain:  &serviceDomain,
-			Id:      nil,
-			Service: &serviceService,
-			Target:  target,
-			Type:    &serviceType,
+			Domain:         &serviceDomain,
+			Id:             nil,
+			ReturnResponse: false,
+			Service:        &serviceService,
+			Target:         target,
+			Type:           &serviceType,
 		},
 		ServiceData: SirenTurnOnParams{},
 	}
@@ -135,7 +132,4 @@ func (s *SirenTurnOn) Targets() []string {
 }
 func (s *SirenTurnOn) Name() string {
 	return fmt.Sprintf("%s.%s", *s.Domain, *s.Service)
-}
-func (s *SirenTurnOn) SetID(id *int) {
-	s.Id = id
 }

@@ -17,11 +17,12 @@ func NewLightToggle(target Target) *LightToggle {
 	serviceService := "toggle"
 	l := &LightToggle{
 		ServiceBase: ServiceBase{
-			Domain:  &serviceDomain,
-			Id:      nil,
-			Service: &serviceService,
-			Target:  target,
-			Type:    &serviceType,
+			Domain:         &serviceDomain,
+			Id:             nil,
+			ReturnResponse: false,
+			Service:        &serviceService,
+			Target:         target,
+			Type:           &serviceType,
 		},
 		ServiceData: LightToggleParams{},
 	}
@@ -90,9 +91,6 @@ func (l *LightToggle) Targets() []string {
 func (l *LightToggle) Name() string {
 	return fmt.Sprintf("%s.%s", *l.Domain, *l.Service)
 }
-func (l *LightToggle) SetID(id *int) {
-	l.Id = id
-}
 
 // NewLightTurnOff creates the object that can be sent to Home Assistant for domain light, service turn_off
 // "Turns off one or more lights."
@@ -102,11 +100,12 @@ func NewLightTurnOff(target Target) *LightTurnOff {
 	serviceService := "turn_off"
 	l := &LightTurnOff{
 		ServiceBase: ServiceBase{
-			Domain:  &serviceDomain,
-			Id:      nil,
-			Service: &serviceService,
-			Target:  target,
-			Type:    &serviceType,
+			Domain:         &serviceDomain,
+			Id:             nil,
+			ReturnResponse: false,
+			Service:        &serviceService,
+			Target:         target,
+			Type:           &serviceType,
 		},
 		ServiceData: LightTurnOffParams{},
 	}
@@ -140,9 +139,6 @@ func (l *LightTurnOff) Targets() []string {
 func (l *LightTurnOff) Name() string {
 	return fmt.Sprintf("%s.%s", *l.Domain, *l.Service)
 }
-func (l *LightTurnOff) SetID(id *int) {
-	l.Id = id
-}
 
 // NewLightTurnOn creates the object that can be sent to Home Assistant for domain light, service turn_on
 // "Turn on one or more lights and adjust properties of the light, even when they are turned on already.\n"
@@ -152,11 +148,12 @@ func NewLightTurnOn(target Target) *LightTurnOn {
 	serviceService := "turn_on"
 	l := &LightTurnOn{
 		ServiceBase: ServiceBase{
-			Domain:  &serviceDomain,
-			Id:      nil,
-			Service: &serviceService,
-			Target:  target,
-			Type:    &serviceType,
+			Domain:         &serviceDomain,
+			Id:             nil,
+			ReturnResponse: false,
+			Service:        &serviceService,
+			Target:         target,
+			Type:           &serviceType,
 		},
 		ServiceData: LightTurnOnParams{},
 	}
@@ -239,7 +236,4 @@ func (l *LightTurnOn) Targets() []string {
 }
 func (l *LightTurnOn) Name() string {
 	return fmt.Sprintf("%s.%s", *l.Domain, *l.Service)
-}
-func (l *LightTurnOn) SetID(id *int) {
-	l.Id = id
 }

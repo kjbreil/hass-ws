@@ -23,13 +23,14 @@ type Domain struct {
 }
 
 type Service struct {
-	name           string
-	camelName      string
-	lowerCamelName string
-	firstLetter    string
-	parameters     map[string]string
-	parameterKeys  []string
-	description    string
+	name             string
+	camelName        string
+	lowerCamelName   string
+	firstLetter      string
+	parameters       map[string]string
+	parameterKeys    []string
+	description      string
+	responseRequired bool
 }
 
 func ServicesInit(servicesJSON string) ServiceList {
@@ -61,9 +62,9 @@ func ServicesInitJson(data []byte) ServiceList {
 	serviceList.setServiceNames()
 
 	for _, name := range serviceList.serviceNames {
-		//if name != "babybuddy" {
+		// if name != "babybuddy" {
 		//	continue
-		//}
+		// }
 		d := Domain{
 			name:      name,
 			camelName: strcase.ToCamel(name),
@@ -92,13 +93,22 @@ func (sl *ServiceList) setParameters(d *Domain) {
 			continue
 		}
 		s := &Service{
-			name:           k,
-			camelName:      fmt.Sprintf("%s%s", d.camelName, strcase.ToCamel(k)),
-			lowerCamelName: strcase.ToLowerCamel(fmt.Sprintf("%s%s", d.camelName, strcase.ToCamel(k))),
-			firstLetter:    string(d.name[0]),
-			parameters:     make(map[string]string),
-			description:    v.Path("description").String(),
+			name:             k,
+			camelName:        fmt.Sprintf("%s%s", d.camelName, strcase.ToCamel(k)),
+			lowerCamelName:   strcase.ToLowerCamel(fmt.Sprintf("%s%s", d.camelName, strcase.ToCamel(k))),
+			firstLetter:      string(d.name[0]),
+			parameters:       make(map[string]string),
+			responseRequired: false,
+			description:      v.Path("description").String(),
 		}
+		op := v.Path("response")
+		if op != nil {
+			sm := op.ChildrenMap()
+			if b, ok := sm["optional"]; ok {
+				s.responseRequired = b.Data().(bool) == false
+			}
+		}
+
 		for fn, f := range v.Path("fields").ChildrenMap() {
 			selector := f.Path("selector")
 
@@ -137,7 +147,7 @@ func (sl *ServiceList) setParameters(d *Domain) {
 								enumName = strings.ReplaceAll(enumName, " ", "")
 
 							}
-							//enumName = strcase.ToCamel(enumName)
+							// enumName = strcase.ToCamel(enumName)
 							sl.enums[strcase.ToCamel(fn)][enumName] = append(sl.enums[strcase.ToCamel(fn)][enumName], fmt.Sprintf("%s: %s", d.name, s.name))
 
 						}

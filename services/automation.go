@@ -17,11 +17,12 @@ func NewAutomationReload(target Target) *AutomationReload {
 	serviceService := "reload"
 	a := &AutomationReload{
 		ServiceBase: ServiceBase{
-			Domain:  &serviceDomain,
-			Id:      nil,
-			Service: &serviceService,
-			Target:  target,
-			Type:    &serviceType,
+			Domain:         &serviceDomain,
+			Id:             nil,
+			ReturnResponse: false,
+			Service:        &serviceService,
+			Target:         target,
+			Type:           &serviceType,
 		},
 		ServiceData: nil,
 	}
@@ -43,9 +44,6 @@ func (a *AutomationReload) Targets() []string {
 func (a *AutomationReload) Name() string {
 	return fmt.Sprintf("%s.%s", *a.Domain, *a.Service)
 }
-func (a *AutomationReload) SetID(id *int) {
-	a.Id = id
-}
 
 // NewAutomationToggle creates the object that can be sent to Home Assistant for domain automation, service toggle
 // "Toggle (enable / disable) an automation."
@@ -55,11 +53,12 @@ func NewAutomationToggle(target Target) *AutomationToggle {
 	serviceService := "toggle"
 	a := &AutomationToggle{
 		ServiceBase: ServiceBase{
-			Domain:  &serviceDomain,
-			Id:      nil,
-			Service: &serviceService,
-			Target:  target,
-			Type:    &serviceType,
+			Domain:         &serviceDomain,
+			Id:             nil,
+			ReturnResponse: false,
+			Service:        &serviceService,
+			Target:         target,
+			Type:           &serviceType,
 		},
 		ServiceData: nil,
 	}
@@ -81,9 +80,6 @@ func (a *AutomationToggle) Targets() []string {
 func (a *AutomationToggle) Name() string {
 	return fmt.Sprintf("%s.%s", *a.Domain, *a.Service)
 }
-func (a *AutomationToggle) SetID(id *int) {
-	a.Id = id
-}
 
 // NewAutomationTrigger creates the object that can be sent to Home Assistant for domain automation, service trigger
 // "Trigger the actions of an automation."
@@ -93,11 +89,12 @@ func NewAutomationTrigger(target Target) *AutomationTrigger {
 	serviceService := "trigger"
 	a := &AutomationTrigger{
 		ServiceBase: ServiceBase{
-			Domain:  &serviceDomain,
-			Id:      nil,
-			Service: &serviceService,
-			Target:  target,
-			Type:    &serviceType,
+			Domain:         &serviceDomain,
+			Id:             nil,
+			ReturnResponse: false,
+			Service:        &serviceService,
+			Target:         target,
+			Type:           &serviceType,
 		},
 		ServiceData: nil,
 	}
@@ -119,9 +116,6 @@ func (a *AutomationTrigger) Targets() []string {
 func (a *AutomationTrigger) Name() string {
 	return fmt.Sprintf("%s.%s", *a.Domain, *a.Service)
 }
-func (a *AutomationTrigger) SetID(id *int) {
-	a.Id = id
-}
 
 // NewAutomationTurnOff creates the object that can be sent to Home Assistant for domain automation, service turn_off
 // "Disable an automation."
@@ -131,11 +125,12 @@ func NewAutomationTurnOff(target Target) *AutomationTurnOff {
 	serviceService := "turn_off"
 	a := &AutomationTurnOff{
 		ServiceBase: ServiceBase{
-			Domain:  &serviceDomain,
-			Id:      nil,
-			Service: &serviceService,
-			Target:  target,
-			Type:    &serviceType,
+			Domain:         &serviceDomain,
+			Id:             nil,
+			ReturnResponse: false,
+			Service:        &serviceService,
+			Target:         target,
+			Type:           &serviceType,
 		},
 		ServiceData: nil,
 	}
@@ -157,9 +152,6 @@ func (a *AutomationTurnOff) Targets() []string {
 func (a *AutomationTurnOff) Name() string {
 	return fmt.Sprintf("%s.%s", *a.Domain, *a.Service)
 }
-func (a *AutomationTurnOff) SetID(id *int) {
-	a.Id = id
-}
 
 // NewAutomationTurnOn creates the object that can be sent to Home Assistant for domain automation, service turn_on
 // "Enable an automation."
@@ -169,11 +161,12 @@ func NewAutomationTurnOn(target Target) *AutomationTurnOn {
 	serviceService := "turn_on"
 	a := &AutomationTurnOn{
 		ServiceBase: ServiceBase{
-			Domain:  &serviceDomain,
-			Id:      nil,
-			Service: &serviceService,
-			Target:  target,
-			Type:    &serviceType,
+			Domain:         &serviceDomain,
+			Id:             nil,
+			ReturnResponse: false,
+			Service:        &serviceService,
+			Target:         target,
+			Type:           &serviceType,
 		},
 		ServiceData: nil,
 	}
@@ -194,7 +187,4 @@ func (a *AutomationTurnOn) Targets() []string {
 }
 func (a *AutomationTurnOn) Name() string {
 	return fmt.Sprintf("%s.%s", *a.Domain, *a.Service)
-}
-func (a *AutomationTurnOn) SetID(id *int) {
-	a.Id = id
 }

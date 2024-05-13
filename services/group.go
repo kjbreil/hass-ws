@@ -17,11 +17,12 @@ func NewGroupReload(target Target) *GroupReload {
 	serviceService := "reload"
 	g := &GroupReload{
 		ServiceBase: ServiceBase{
-			Domain:  &serviceDomain,
-			Id:      nil,
-			Service: &serviceService,
-			Target:  target,
-			Type:    &serviceType,
+			Domain:         &serviceDomain,
+			Id:             nil,
+			ReturnResponse: false,
+			Service:        &serviceService,
+			Target:         target,
+			Type:           &serviceType,
 		},
 		ServiceData: nil,
 	}
@@ -43,9 +44,6 @@ func (g *GroupReload) Targets() []string {
 func (g *GroupReload) Name() string {
 	return fmt.Sprintf("%s.%s", *g.Domain, *g.Service)
 }
-func (g *GroupReload) SetID(id *int) {
-	g.Id = id
-}
 
 // NewGroupRemove creates the object that can be sent to Home Assistant for domain group, service remove
 // "Remove a user group."
@@ -55,11 +53,12 @@ func NewGroupRemove(target Target) *GroupRemove {
 	serviceService := "remove"
 	g := &GroupRemove{
 		ServiceBase: ServiceBase{
-			Domain:  &serviceDomain,
-			Id:      nil,
-			Service: &serviceService,
-			Target:  target,
-			Type:    &serviceType,
+			Domain:         &serviceDomain,
+			Id:             nil,
+			ReturnResponse: false,
+			Service:        &serviceService,
+			Target:         target,
+			Type:           &serviceType,
 		},
 		ServiceData: nil,
 	}
@@ -81,9 +80,6 @@ func (g *GroupRemove) Targets() []string {
 func (g *GroupRemove) Name() string {
 	return fmt.Sprintf("%s.%s", *g.Domain, *g.Service)
 }
-func (g *GroupRemove) SetID(id *int) {
-	g.Id = id
-}
 
 // NewGroupSet creates the object that can be sent to Home Assistant for domain group, service set
 // "Create/Update a user group."
@@ -93,11 +89,12 @@ func NewGroupSet(target Target) *GroupSet {
 	serviceService := "set"
 	g := &GroupSet{
 		ServiceBase: ServiceBase{
-			Domain:  &serviceDomain,
-			Id:      nil,
-			Service: &serviceService,
-			Target:  target,
-			Type:    &serviceType,
+			Domain:         &serviceDomain,
+			Id:             nil,
+			ReturnResponse: false,
+			Service:        &serviceService,
+			Target:         target,
+			Type:           &serviceType,
 		},
 		ServiceData: GroupSetParams{},
 	}
@@ -130,7 +127,4 @@ func (g *GroupSet) Targets() []string {
 }
 func (g *GroupSet) Name() string {
 	return fmt.Sprintf("%s.%s", *g.Domain, *g.Service)
-}
-func (g *GroupSet) SetID(id *int) {
-	g.Id = id
 }

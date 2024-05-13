@@ -8,7 +8,11 @@ import (
 )
 
 func (c *Client) sendWithCallback(msg *model.Message, callback chan *model.Message) (int, error) {
-	msg.ID = c.NextID()
+
+	if msg.ID == nil {
+		id := c.NextID()
+		msg.ID = &id
+	}
 	c.callbacks.Set(c.id, callback)
 
 	d, _ := json.Marshal(msg)
@@ -27,9 +31,20 @@ func (c *Client) sendWithCallback(msg *model.Message, callback chan *model.Messa
 	return *msg.ID, nil
 }
 
+func (c *Client) sendStringWithCallback(msg string, callback chan *model.Message) error {
+	c.callbacks.Set(c.id, callback)
+
+	err := c.client.Write(c.ctx, websocket.MessageText, []byte(msg))
+	if err != nil {
+		return err
+	}
+	return nil
+}
+
 func (c *Client) send(msg *model.Message) error {
 	if msg.Type != model.MessageTypeAuth {
-		msg.ID = c.NextID()
+		id := c.NextID()
+		msg.ID = &id
 	}
 
 	d, _ := json.Marshal(msg)

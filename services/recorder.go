@@ -17,11 +17,12 @@ func NewRecorderDisable(target Target) *RecorderDisable {
 	serviceService := "disable"
 	r := &RecorderDisable{
 		ServiceBase: ServiceBase{
-			Domain:  &serviceDomain,
-			Id:      nil,
-			Service: &serviceService,
-			Target:  target,
-			Type:    &serviceType,
+			Domain:         &serviceDomain,
+			Id:             nil,
+			ReturnResponse: false,
+			Service:        &serviceService,
+			Target:         target,
+			Type:           &serviceType,
 		},
 		ServiceData: nil,
 	}
@@ -43,9 +44,6 @@ func (r *RecorderDisable) Targets() []string {
 func (r *RecorderDisable) Name() string {
 	return fmt.Sprintf("%s.%s", *r.Domain, *r.Service)
 }
-func (r *RecorderDisable) SetID(id *int) {
-	r.Id = id
-}
 
 // NewRecorderEnable creates the object that can be sent to Home Assistant for domain recorder, service enable
 // "Start the recording of events and state changes"
@@ -55,11 +53,12 @@ func NewRecorderEnable(target Target) *RecorderEnable {
 	serviceService := "enable"
 	r := &RecorderEnable{
 		ServiceBase: ServiceBase{
-			Domain:  &serviceDomain,
-			Id:      nil,
-			Service: &serviceService,
-			Target:  target,
-			Type:    &serviceType,
+			Domain:         &serviceDomain,
+			Id:             nil,
+			ReturnResponse: false,
+			Service:        &serviceService,
+			Target:         target,
+			Type:           &serviceType,
 		},
 		ServiceData: nil,
 	}
@@ -81,9 +80,6 @@ func (r *RecorderEnable) Targets() []string {
 func (r *RecorderEnable) Name() string {
 	return fmt.Sprintf("%s.%s", *r.Domain, *r.Service)
 }
-func (r *RecorderEnable) SetID(id *int) {
-	r.Id = id
-}
 
 // NewRecorderPurge creates the object that can be sent to Home Assistant for domain recorder, service purge
 // "Start purge task - to clean up old data from your database."
@@ -93,11 +89,12 @@ func NewRecorderPurge(target Target) *RecorderPurge {
 	serviceService := "purge"
 	r := &RecorderPurge{
 		ServiceBase: ServiceBase{
-			Domain:  &serviceDomain,
-			Id:      nil,
-			Service: &serviceService,
-			Target:  target,
-			Type:    &serviceType,
+			Domain:         &serviceDomain,
+			Id:             nil,
+			ReturnResponse: false,
+			Service:        &serviceService,
+			Target:         target,
+			Type:           &serviceType,
 		},
 		ServiceData: RecorderPurgeParams{},
 	}
@@ -126,9 +123,6 @@ func (r *RecorderPurge) Targets() []string {
 func (r *RecorderPurge) Name() string {
 	return fmt.Sprintf("%s.%s", *r.Domain, *r.Service)
 }
-func (r *RecorderPurge) SetID(id *int) {
-	r.Id = id
-}
 
 // NewRecorderPurgeEntities creates the object that can be sent to Home Assistant for domain recorder, service purge_entities
 // "Start purge task to remove specific entities from your database."
@@ -138,11 +132,12 @@ func NewRecorderPurgeEntities(target Target) *RecorderPurgeEntities {
 	serviceService := "purge_entities"
 	r := &RecorderPurgeEntities{
 		ServiceBase: ServiceBase{
-			Domain:  &serviceDomain,
-			Id:      nil,
-			Service: &serviceService,
-			Target:  target,
-			Type:    &serviceType,
+			Domain:         &serviceDomain,
+			Id:             nil,
+			ReturnResponse: false,
+			Service:        &serviceService,
+			Target:         target,
+			Type:           &serviceType,
 		},
 		ServiceData: nil,
 	}
@@ -163,7 +158,4 @@ func (r *RecorderPurgeEntities) Targets() []string {
 }
 func (r *RecorderPurgeEntities) Name() string {
 	return fmt.Sprintf("%s.%s", *r.Domain, *r.Service)
-}
-func (r *RecorderPurgeEntities) SetID(id *int) {
-	r.Id = id
 }

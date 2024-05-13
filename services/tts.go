@@ -17,11 +17,12 @@ func NewTtsClearCache(target Target) *TtsClearCache {
 	serviceService := "clear_cache"
 	t := &TtsClearCache{
 		ServiceBase: ServiceBase{
-			Domain:  &serviceDomain,
-			Id:      nil,
-			Service: &serviceService,
-			Target:  target,
-			Type:    &serviceType,
+			Domain:         &serviceDomain,
+			Id:             nil,
+			ReturnResponse: false,
+			Service:        &serviceService,
+			Target:         target,
+			Type:           &serviceType,
 		},
 		ServiceData: nil,
 	}
@@ -43,9 +44,6 @@ func (t *TtsClearCache) Targets() []string {
 func (t *TtsClearCache) Name() string {
 	return fmt.Sprintf("%s.%s", *t.Domain, *t.Service)
 }
-func (t *TtsClearCache) SetID(id *int) {
-	t.Id = id
-}
 
 // NewTtsCloudSay creates the object that can be sent to Home Assistant for domain tts, service cloud_say
 // "Say something using text-to-speech on a media player with cloud."
@@ -55,11 +53,12 @@ func NewTtsCloudSay(target Target) *TtsCloudSay {
 	serviceService := "cloud_say"
 	t := &TtsCloudSay{
 		ServiceBase: ServiceBase{
-			Domain:  &serviceDomain,
-			Id:      nil,
-			Service: &serviceService,
-			Target:  target,
-			Type:    &serviceType,
+			Domain:         &serviceDomain,
+			Id:             nil,
+			ReturnResponse: false,
+			Service:        &serviceService,
+			Target:         target,
+			Type:           &serviceType,
 		},
 		ServiceData: TtsCloudSayParams{},
 	}
@@ -93,9 +92,6 @@ func (t *TtsCloudSay) Targets() []string {
 func (t *TtsCloudSay) Name() string {
 	return fmt.Sprintf("%s.%s", *t.Domain, *t.Service)
 }
-func (t *TtsCloudSay) SetID(id *int) {
-	t.Id = id
-}
 
 // NewTtsGoogleTranslateSay creates the object that can be sent to Home Assistant for domain tts, service google_translate_say
 // "Say something using text-to-speech on a media player with google_translate."
@@ -105,11 +101,12 @@ func NewTtsGoogleTranslateSay(target Target) *TtsGoogleTranslateSay {
 	serviceService := "google_translate_say"
 	t := &TtsGoogleTranslateSay{
 		ServiceBase: ServiceBase{
-			Domain:  &serviceDomain,
-			Id:      nil,
-			Service: &serviceService,
-			Target:  target,
-			Type:    &serviceType,
+			Domain:         &serviceDomain,
+			Id:             nil,
+			ReturnResponse: false,
+			Service:        &serviceService,
+			Target:         target,
+			Type:           &serviceType,
 		},
 		ServiceData: TtsGoogleTranslateSayParams{},
 	}
@@ -142,7 +139,4 @@ func (t *TtsGoogleTranslateSay) Targets() []string {
 }
 func (t *TtsGoogleTranslateSay) Name() string {
 	return fmt.Sprintf("%s.%s", *t.Domain, *t.Service)
-}
-func (t *TtsGoogleTranslateSay) SetID(id *int) {
-	t.Id = id
 }

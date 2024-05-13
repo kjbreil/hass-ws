@@ -17,11 +17,12 @@ func NewNotifyNotify(target Target) *NotifyNotify {
 	serviceService := "notify"
 	n := &NotifyNotify{
 		ServiceBase: ServiceBase{
-			Domain:  &serviceDomain,
-			Id:      nil,
-			Service: &serviceService,
-			Target:  target,
-			Type:    &serviceType,
+			Domain:         &serviceDomain,
+			Id:             nil,
+			ReturnResponse: false,
+			Service:        &serviceService,
+			Target:         target,
+			Type:           &serviceType,
 		},
 		ServiceData: NotifyNotifyParams{},
 	}
@@ -33,9 +34,9 @@ type NotifyNotify struct {
 	ServiceData NotifyNotifyParams `json:"service_data,omitempty"`
 }
 type NotifyNotifyParams struct {
-	Data    *interface{} `json:"data,omitempty"`
-	Message *string      `json:"message,omitempty"`
-	Title   *string      `json:"title,omitempty"`
+	Data    interface{} `json:"data,omitempty"`
+	Message *string     `json:"message,omitempty"`
+	Title   *string     `json:"title,omitempty"`
 }
 
 func (n *NotifyNotify) Data(data interface{}) *NotifyNotify {
@@ -60,9 +61,6 @@ func (n *NotifyNotify) Targets() []string {
 func (n *NotifyNotify) Name() string {
 	return fmt.Sprintf("%s.%s", *n.Domain, *n.Service)
 }
-func (n *NotifyNotify) SetID(id *int) {
-	n.Id = id
-}
 
 // NewNotifyPersistentNotification creates the object that can be sent to Home Assistant for domain notify, service persistent_notification
 // "Sends a notification that is visible in the front-end."
@@ -72,11 +70,12 @@ func NewNotifyPersistentNotification(target Target) *NotifyPersistentNotificatio
 	serviceService := "persistent_notification"
 	n := &NotifyPersistentNotification{
 		ServiceBase: ServiceBase{
-			Domain:  &serviceDomain,
-			Id:      nil,
-			Service: &serviceService,
-			Target:  target,
-			Type:    &serviceType,
+			Domain:         &serviceDomain,
+			Id:             nil,
+			ReturnResponse: false,
+			Service:        &serviceService,
+			Target:         target,
+			Type:           &serviceType,
 		},
 		ServiceData: NotifyPersistentNotificationParams{},
 	}
@@ -109,7 +108,4 @@ func (n *NotifyPersistentNotification) Targets() []string {
 }
 func (n *NotifyPersistentNotification) Name() string {
 	return fmt.Sprintf("%s.%s", *n.Domain, *n.Service)
-}
-func (n *NotifyPersistentNotification) SetID(id *int) {
-	n.Id = id
 }

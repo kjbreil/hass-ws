@@ -17,11 +17,12 @@ func NewCoverCloseCover(target Target) *CoverCloseCover {
 	serviceService := "close_cover"
 	c := &CoverCloseCover{
 		ServiceBase: ServiceBase{
-			Domain:  &serviceDomain,
-			Id:      nil,
-			Service: &serviceService,
-			Target:  target,
-			Type:    &serviceType,
+			Domain:         &serviceDomain,
+			Id:             nil,
+			ReturnResponse: false,
+			Service:        &serviceService,
+			Target:         target,
+			Type:           &serviceType,
 		},
 		ServiceData: nil,
 	}
@@ -43,9 +44,6 @@ func (c *CoverCloseCover) Targets() []string {
 func (c *CoverCloseCover) Name() string {
 	return fmt.Sprintf("%s.%s", *c.Domain, *c.Service)
 }
-func (c *CoverCloseCover) SetID(id *int) {
-	c.Id = id
-}
 
 // NewCoverCloseCoverTilt creates the object that can be sent to Home Assistant for domain cover, service close_cover_tilt
 // "Close all or specified cover tilt."
@@ -55,11 +53,12 @@ func NewCoverCloseCoverTilt(target Target) *CoverCloseCoverTilt {
 	serviceService := "close_cover_tilt"
 	c := &CoverCloseCoverTilt{
 		ServiceBase: ServiceBase{
-			Domain:  &serviceDomain,
-			Id:      nil,
-			Service: &serviceService,
-			Target:  target,
-			Type:    &serviceType,
+			Domain:         &serviceDomain,
+			Id:             nil,
+			ReturnResponse: false,
+			Service:        &serviceService,
+			Target:         target,
+			Type:           &serviceType,
 		},
 		ServiceData: nil,
 	}
@@ -81,9 +80,6 @@ func (c *CoverCloseCoverTilt) Targets() []string {
 func (c *CoverCloseCoverTilt) Name() string {
 	return fmt.Sprintf("%s.%s", *c.Domain, *c.Service)
 }
-func (c *CoverCloseCoverTilt) SetID(id *int) {
-	c.Id = id
-}
 
 // NewCoverOpenCover creates the object that can be sent to Home Assistant for domain cover, service open_cover
 // "Open all or specified cover."
@@ -93,11 +89,12 @@ func NewCoverOpenCover(target Target) *CoverOpenCover {
 	serviceService := "open_cover"
 	c := &CoverOpenCover{
 		ServiceBase: ServiceBase{
-			Domain:  &serviceDomain,
-			Id:      nil,
-			Service: &serviceService,
-			Target:  target,
-			Type:    &serviceType,
+			Domain:         &serviceDomain,
+			Id:             nil,
+			ReturnResponse: false,
+			Service:        &serviceService,
+			Target:         target,
+			Type:           &serviceType,
 		},
 		ServiceData: nil,
 	}
@@ -119,9 +116,6 @@ func (c *CoverOpenCover) Targets() []string {
 func (c *CoverOpenCover) Name() string {
 	return fmt.Sprintf("%s.%s", *c.Domain, *c.Service)
 }
-func (c *CoverOpenCover) SetID(id *int) {
-	c.Id = id
-}
 
 // NewCoverOpenCoverTilt creates the object that can be sent to Home Assistant for domain cover, service open_cover_tilt
 // "Open all or specified cover tilt."
@@ -131,11 +125,12 @@ func NewCoverOpenCoverTilt(target Target) *CoverOpenCoverTilt {
 	serviceService := "open_cover_tilt"
 	c := &CoverOpenCoverTilt{
 		ServiceBase: ServiceBase{
-			Domain:  &serviceDomain,
-			Id:      nil,
-			Service: &serviceService,
-			Target:  target,
-			Type:    &serviceType,
+			Domain:         &serviceDomain,
+			Id:             nil,
+			ReturnResponse: false,
+			Service:        &serviceService,
+			Target:         target,
+			Type:           &serviceType,
 		},
 		ServiceData: nil,
 	}
@@ -157,9 +152,6 @@ func (c *CoverOpenCoverTilt) Targets() []string {
 func (c *CoverOpenCoverTilt) Name() string {
 	return fmt.Sprintf("%s.%s", *c.Domain, *c.Service)
 }
-func (c *CoverOpenCoverTilt) SetID(id *int) {
-	c.Id = id
-}
 
 // NewCoverSetCoverPosition creates the object that can be sent to Home Assistant for domain cover, service set_cover_position
 // "Move to specific position all or specified cover."
@@ -169,11 +161,12 @@ func NewCoverSetCoverPosition(target Target) *CoverSetCoverPosition {
 	serviceService := "set_cover_position"
 	c := &CoverSetCoverPosition{
 		ServiceBase: ServiceBase{
-			Domain:  &serviceDomain,
-			Id:      nil,
-			Service: &serviceService,
-			Target:  target,
-			Type:    &serviceType,
+			Domain:         &serviceDomain,
+			Id:             nil,
+			ReturnResponse: false,
+			Service:        &serviceService,
+			Target:         target,
+			Type:           &serviceType,
 		},
 		ServiceData: CoverSetCoverPositionParams{},
 	}
@@ -202,9 +195,6 @@ func (c *CoverSetCoverPosition) Targets() []string {
 func (c *CoverSetCoverPosition) Name() string {
 	return fmt.Sprintf("%s.%s", *c.Domain, *c.Service)
 }
-func (c *CoverSetCoverPosition) SetID(id *int) {
-	c.Id = id
-}
 
 // NewCoverSetCoverTiltPosition creates the object that can be sent to Home Assistant for domain cover, service set_cover_tilt_position
 // "Move to specific position all or specified cover tilt."
@@ -214,11 +204,12 @@ func NewCoverSetCoverTiltPosition(target Target) *CoverSetCoverTiltPosition {
 	serviceService := "set_cover_tilt_position"
 	c := &CoverSetCoverTiltPosition{
 		ServiceBase: ServiceBase{
-			Domain:  &serviceDomain,
-			Id:      nil,
-			Service: &serviceService,
-			Target:  target,
-			Type:    &serviceType,
+			Domain:         &serviceDomain,
+			Id:             nil,
+			ReturnResponse: false,
+			Service:        &serviceService,
+			Target:         target,
+			Type:           &serviceType,
 		},
 		ServiceData: CoverSetCoverTiltPositionParams{},
 	}
@@ -247,9 +238,6 @@ func (c *CoverSetCoverTiltPosition) Targets() []string {
 func (c *CoverSetCoverTiltPosition) Name() string {
 	return fmt.Sprintf("%s.%s", *c.Domain, *c.Service)
 }
-func (c *CoverSetCoverTiltPosition) SetID(id *int) {
-	c.Id = id
-}
 
 // NewCoverStopCover creates the object that can be sent to Home Assistant for domain cover, service stop_cover
 // "Stop all or specified cover."
@@ -259,11 +247,12 @@ func NewCoverStopCover(target Target) *CoverStopCover {
 	serviceService := "stop_cover"
 	c := &CoverStopCover{
 		ServiceBase: ServiceBase{
-			Domain:  &serviceDomain,
-			Id:      nil,
-			Service: &serviceService,
-			Target:  target,
-			Type:    &serviceType,
+			Domain:         &serviceDomain,
+			Id:             nil,
+			ReturnResponse: false,
+			Service:        &serviceService,
+			Target:         target,
+			Type:           &serviceType,
 		},
 		ServiceData: nil,
 	}
@@ -285,9 +274,6 @@ func (c *CoverStopCover) Targets() []string {
 func (c *CoverStopCover) Name() string {
 	return fmt.Sprintf("%s.%s", *c.Domain, *c.Service)
 }
-func (c *CoverStopCover) SetID(id *int) {
-	c.Id = id
-}
 
 // NewCoverStopCoverTilt creates the object that can be sent to Home Assistant for domain cover, service stop_cover_tilt
 // "Stop all or specified cover."
@@ -297,11 +283,12 @@ func NewCoverStopCoverTilt(target Target) *CoverStopCoverTilt {
 	serviceService := "stop_cover_tilt"
 	c := &CoverStopCoverTilt{
 		ServiceBase: ServiceBase{
-			Domain:  &serviceDomain,
-			Id:      nil,
-			Service: &serviceService,
-			Target:  target,
-			Type:    &serviceType,
+			Domain:         &serviceDomain,
+			Id:             nil,
+			ReturnResponse: false,
+			Service:        &serviceService,
+			Target:         target,
+			Type:           &serviceType,
 		},
 		ServiceData: nil,
 	}
@@ -323,9 +310,6 @@ func (c *CoverStopCoverTilt) Targets() []string {
 func (c *CoverStopCoverTilt) Name() string {
 	return fmt.Sprintf("%s.%s", *c.Domain, *c.Service)
 }
-func (c *CoverStopCoverTilt) SetID(id *int) {
-	c.Id = id
-}
 
 // NewCoverToggle creates the object that can be sent to Home Assistant for domain cover, service toggle
 // "Toggle a cover open/closed."
@@ -335,11 +319,12 @@ func NewCoverToggle(target Target) *CoverToggle {
 	serviceService := "toggle"
 	c := &CoverToggle{
 		ServiceBase: ServiceBase{
-			Domain:  &serviceDomain,
-			Id:      nil,
-			Service: &serviceService,
-			Target:  target,
-			Type:    &serviceType,
+			Domain:         &serviceDomain,
+			Id:             nil,
+			ReturnResponse: false,
+			Service:        &serviceService,
+			Target:         target,
+			Type:           &serviceType,
 		},
 		ServiceData: nil,
 	}
@@ -361,9 +346,6 @@ func (c *CoverToggle) Targets() []string {
 func (c *CoverToggle) Name() string {
 	return fmt.Sprintf("%s.%s", *c.Domain, *c.Service)
 }
-func (c *CoverToggle) SetID(id *int) {
-	c.Id = id
-}
 
 // NewCoverToggleCoverTilt creates the object that can be sent to Home Assistant for domain cover, service toggle_cover_tilt
 // "Toggle a cover tilt open/closed."
@@ -373,11 +355,12 @@ func NewCoverToggleCoverTilt(target Target) *CoverToggleCoverTilt {
 	serviceService := "toggle_cover_tilt"
 	c := &CoverToggleCoverTilt{
 		ServiceBase: ServiceBase{
-			Domain:  &serviceDomain,
-			Id:      nil,
-			Service: &serviceService,
-			Target:  target,
-			Type:    &serviceType,
+			Domain:         &serviceDomain,
+			Id:             nil,
+			ReturnResponse: false,
+			Service:        &serviceService,
+			Target:         target,
+			Type:           &serviceType,
 		},
 		ServiceData: nil,
 	}
@@ -398,7 +381,4 @@ func (c *CoverToggleCoverTilt) Targets() []string {
 }
 func (c *CoverToggleCoverTilt) Name() string {
 	return fmt.Sprintf("%s.%s", *c.Domain, *c.Service)
-}
-func (c *CoverToggleCoverTilt) SetID(id *int) {
-	c.Id = id
 }

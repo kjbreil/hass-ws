@@ -17,11 +17,12 @@ func NewHumidifierSetHumidity(target Target) *HumidifierSetHumidity {
 	serviceService := "set_humidity"
 	h := &HumidifierSetHumidity{
 		ServiceBase: ServiceBase{
-			Domain:  &serviceDomain,
-			Id:      nil,
-			Service: &serviceService,
-			Target:  target,
-			Type:    &serviceType,
+			Domain:         &serviceDomain,
+			Id:             nil,
+			ReturnResponse: false,
+			Service:        &serviceService,
+			Target:         target,
+			Type:           &serviceType,
 		},
 		ServiceData: HumidifierSetHumidityParams{},
 	}
@@ -50,9 +51,6 @@ func (h *HumidifierSetHumidity) Targets() []string {
 func (h *HumidifierSetHumidity) Name() string {
 	return fmt.Sprintf("%s.%s", *h.Domain, *h.Service)
 }
-func (h *HumidifierSetHumidity) SetID(id *int) {
-	h.Id = id
-}
 
 // NewHumidifierSetMode creates the object that can be sent to Home Assistant for domain humidifier, service set_mode
 // "Set mode for humidifier device."
@@ -62,11 +60,12 @@ func NewHumidifierSetMode(target Target) *HumidifierSetMode {
 	serviceService := "set_mode"
 	h := &HumidifierSetMode{
 		ServiceBase: ServiceBase{
-			Domain:  &serviceDomain,
-			Id:      nil,
-			Service: &serviceService,
-			Target:  target,
-			Type:    &serviceType,
+			Domain:         &serviceDomain,
+			Id:             nil,
+			ReturnResponse: false,
+			Service:        &serviceService,
+			Target:         target,
+			Type:           &serviceType,
 		},
 		ServiceData: HumidifierSetModeParams{},
 	}
@@ -95,9 +94,6 @@ func (h *HumidifierSetMode) Targets() []string {
 func (h *HumidifierSetMode) Name() string {
 	return fmt.Sprintf("%s.%s", *h.Domain, *h.Service)
 }
-func (h *HumidifierSetMode) SetID(id *int) {
-	h.Id = id
-}
 
 // NewHumidifierToggle creates the object that can be sent to Home Assistant for domain humidifier, service toggle
 // "Toggles a humidifier device."
@@ -107,11 +103,12 @@ func NewHumidifierToggle(target Target) *HumidifierToggle {
 	serviceService := "toggle"
 	h := &HumidifierToggle{
 		ServiceBase: ServiceBase{
-			Domain:  &serviceDomain,
-			Id:      nil,
-			Service: &serviceService,
-			Target:  target,
-			Type:    &serviceType,
+			Domain:         &serviceDomain,
+			Id:             nil,
+			ReturnResponse: false,
+			Service:        &serviceService,
+			Target:         target,
+			Type:           &serviceType,
 		},
 		ServiceData: nil,
 	}
@@ -133,9 +130,6 @@ func (h *HumidifierToggle) Targets() []string {
 func (h *HumidifierToggle) Name() string {
 	return fmt.Sprintf("%s.%s", *h.Domain, *h.Service)
 }
-func (h *HumidifierToggle) SetID(id *int) {
-	h.Id = id
-}
 
 // NewHumidifierTurnOff creates the object that can be sent to Home Assistant for domain humidifier, service turn_off
 // "Turn humidifier device off."
@@ -145,11 +139,12 @@ func NewHumidifierTurnOff(target Target) *HumidifierTurnOff {
 	serviceService := "turn_off"
 	h := &HumidifierTurnOff{
 		ServiceBase: ServiceBase{
-			Domain:  &serviceDomain,
-			Id:      nil,
-			Service: &serviceService,
-			Target:  target,
-			Type:    &serviceType,
+			Domain:         &serviceDomain,
+			Id:             nil,
+			ReturnResponse: false,
+			Service:        &serviceService,
+			Target:         target,
+			Type:           &serviceType,
 		},
 		ServiceData: nil,
 	}
@@ -171,9 +166,6 @@ func (h *HumidifierTurnOff) Targets() []string {
 func (h *HumidifierTurnOff) Name() string {
 	return fmt.Sprintf("%s.%s", *h.Domain, *h.Service)
 }
-func (h *HumidifierTurnOff) SetID(id *int) {
-	h.Id = id
-}
 
 // NewHumidifierTurnOn creates the object that can be sent to Home Assistant for domain humidifier, service turn_on
 // "Turn humidifier device on."
@@ -183,11 +175,12 @@ func NewHumidifierTurnOn(target Target) *HumidifierTurnOn {
 	serviceService := "turn_on"
 	h := &HumidifierTurnOn{
 		ServiceBase: ServiceBase{
-			Domain:  &serviceDomain,
-			Id:      nil,
-			Service: &serviceService,
-			Target:  target,
-			Type:    &serviceType,
+			Domain:         &serviceDomain,
+			Id:             nil,
+			ReturnResponse: false,
+			Service:        &serviceService,
+			Target:         target,
+			Type:           &serviceType,
 		},
 		ServiceData: nil,
 	}
@@ -208,7 +201,4 @@ func (h *HumidifierTurnOn) Targets() []string {
 }
 func (h *HumidifierTurnOn) Name() string {
 	return fmt.Sprintf("%s.%s", *h.Domain, *h.Service)
-}
-func (h *HumidifierTurnOn) SetID(id *int) {
-	h.Id = id
 }

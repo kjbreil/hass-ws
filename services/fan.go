@@ -17,11 +17,12 @@ func NewFanDecreaseSpeed(target Target) *FanDecreaseSpeed {
 	serviceService := "decrease_speed"
 	f := &FanDecreaseSpeed{
 		ServiceBase: ServiceBase{
-			Domain:  &serviceDomain,
-			Id:      nil,
-			Service: &serviceService,
-			Target:  target,
-			Type:    &serviceType,
+			Domain:         &serviceDomain,
+			Id:             nil,
+			ReturnResponse: false,
+			Service:        &serviceService,
+			Target:         target,
+			Type:           &serviceType,
 		},
 		ServiceData: FanDecreaseSpeedParams{},
 	}
@@ -50,9 +51,6 @@ func (f *FanDecreaseSpeed) Targets() []string {
 func (f *FanDecreaseSpeed) Name() string {
 	return fmt.Sprintf("%s.%s", *f.Domain, *f.Service)
 }
-func (f *FanDecreaseSpeed) SetID(id *int) {
-	f.Id = id
-}
 
 // NewFanIncreaseSpeed creates the object that can be sent to Home Assistant for domain fan, service increase_speed
 // "Increase the speed of the fan by one speed or a percentage_step."
@@ -62,11 +60,12 @@ func NewFanIncreaseSpeed(target Target) *FanIncreaseSpeed {
 	serviceService := "increase_speed"
 	f := &FanIncreaseSpeed{
 		ServiceBase: ServiceBase{
-			Domain:  &serviceDomain,
-			Id:      nil,
-			Service: &serviceService,
-			Target:  target,
-			Type:    &serviceType,
+			Domain:         &serviceDomain,
+			Id:             nil,
+			ReturnResponse: false,
+			Service:        &serviceService,
+			Target:         target,
+			Type:           &serviceType,
 		},
 		ServiceData: FanIncreaseSpeedParams{},
 	}
@@ -95,9 +94,6 @@ func (f *FanIncreaseSpeed) Targets() []string {
 func (f *FanIncreaseSpeed) Name() string {
 	return fmt.Sprintf("%s.%s", *f.Domain, *f.Service)
 }
-func (f *FanIncreaseSpeed) SetID(id *int) {
-	f.Id = id
-}
 
 // NewFanOscillate creates the object that can be sent to Home Assistant for domain fan, service oscillate
 // "Oscillate the fan."
@@ -107,11 +103,12 @@ func NewFanOscillate(target Target) *FanOscillate {
 	serviceService := "oscillate"
 	f := &FanOscillate{
 		ServiceBase: ServiceBase{
-			Domain:  &serviceDomain,
-			Id:      nil,
-			Service: &serviceService,
-			Target:  target,
-			Type:    &serviceType,
+			Domain:         &serviceDomain,
+			Id:             nil,
+			ReturnResponse: false,
+			Service:        &serviceService,
+			Target:         target,
+			Type:           &serviceType,
 		},
 		ServiceData: nil,
 	}
@@ -133,9 +130,6 @@ func (f *FanOscillate) Targets() []string {
 func (f *FanOscillate) Name() string {
 	return fmt.Sprintf("%s.%s", *f.Domain, *f.Service)
 }
-func (f *FanOscillate) SetID(id *int) {
-	f.Id = id
-}
 
 // NewFanSetDirection creates the object that can be sent to Home Assistant for domain fan, service set_direction
 // "Set the fan rotation."
@@ -145,11 +139,12 @@ func NewFanSetDirection(target Target) *FanSetDirection {
 	serviceService := "set_direction"
 	f := &FanSetDirection{
 		ServiceBase: ServiceBase{
-			Domain:  &serviceDomain,
-			Id:      nil,
-			Service: &serviceService,
-			Target:  target,
-			Type:    &serviceType,
+			Domain:         &serviceDomain,
+			Id:             nil,
+			ReturnResponse: false,
+			Service:        &serviceService,
+			Target:         target,
+			Type:           &serviceType,
 		},
 		ServiceData: FanSetDirectionParams{},
 	}
@@ -178,9 +173,6 @@ func (f *FanSetDirection) Targets() []string {
 func (f *FanSetDirection) Name() string {
 	return fmt.Sprintf("%s.%s", *f.Domain, *f.Service)
 }
-func (f *FanSetDirection) SetID(id *int) {
-	f.Id = id
-}
 
 // NewFanSetPercentage creates the object that can be sent to Home Assistant for domain fan, service set_percentage
 // "Set fan speed percentage."
@@ -190,11 +182,12 @@ func NewFanSetPercentage(target Target) *FanSetPercentage {
 	serviceService := "set_percentage"
 	f := &FanSetPercentage{
 		ServiceBase: ServiceBase{
-			Domain:  &serviceDomain,
-			Id:      nil,
-			Service: &serviceService,
-			Target:  target,
-			Type:    &serviceType,
+			Domain:         &serviceDomain,
+			Id:             nil,
+			ReturnResponse: false,
+			Service:        &serviceService,
+			Target:         target,
+			Type:           &serviceType,
 		},
 		ServiceData: FanSetPercentageParams{},
 	}
@@ -223,9 +216,6 @@ func (f *FanSetPercentage) Targets() []string {
 func (f *FanSetPercentage) Name() string {
 	return fmt.Sprintf("%s.%s", *f.Domain, *f.Service)
 }
-func (f *FanSetPercentage) SetID(id *int) {
-	f.Id = id
-}
 
 // NewFanSetPresetMode creates the object that can be sent to Home Assistant for domain fan, service set_preset_mode
 // "Set preset mode for a fan device."
@@ -235,11 +225,12 @@ func NewFanSetPresetMode(target Target) *FanSetPresetMode {
 	serviceService := "set_preset_mode"
 	f := &FanSetPresetMode{
 		ServiceBase: ServiceBase{
-			Domain:  &serviceDomain,
-			Id:      nil,
-			Service: &serviceService,
-			Target:  target,
-			Type:    &serviceType,
+			Domain:         &serviceDomain,
+			Id:             nil,
+			ReturnResponse: false,
+			Service:        &serviceService,
+			Target:         target,
+			Type:           &serviceType,
 		},
 		ServiceData: FanSetPresetModeParams{},
 	}
@@ -268,9 +259,6 @@ func (f *FanSetPresetMode) Targets() []string {
 func (f *FanSetPresetMode) Name() string {
 	return fmt.Sprintf("%s.%s", *f.Domain, *f.Service)
 }
-func (f *FanSetPresetMode) SetID(id *int) {
-	f.Id = id
-}
 
 // NewFanToggle creates the object that can be sent to Home Assistant for domain fan, service toggle
 // "Toggle the fan on/off."
@@ -280,11 +268,12 @@ func NewFanToggle(target Target) *FanToggle {
 	serviceService := "toggle"
 	f := &FanToggle{
 		ServiceBase: ServiceBase{
-			Domain:  &serviceDomain,
-			Id:      nil,
-			Service: &serviceService,
-			Target:  target,
-			Type:    &serviceType,
+			Domain:         &serviceDomain,
+			Id:             nil,
+			ReturnResponse: false,
+			Service:        &serviceService,
+			Target:         target,
+			Type:           &serviceType,
 		},
 		ServiceData: nil,
 	}
@@ -306,9 +295,6 @@ func (f *FanToggle) Targets() []string {
 func (f *FanToggle) Name() string {
 	return fmt.Sprintf("%s.%s", *f.Domain, *f.Service)
 }
-func (f *FanToggle) SetID(id *int) {
-	f.Id = id
-}
 
 // NewFanTurnOff creates the object that can be sent to Home Assistant for domain fan, service turn_off
 // "Turn fan off."
@@ -318,11 +304,12 @@ func NewFanTurnOff(target Target) *FanTurnOff {
 	serviceService := "turn_off"
 	f := &FanTurnOff{
 		ServiceBase: ServiceBase{
-			Domain:  &serviceDomain,
-			Id:      nil,
-			Service: &serviceService,
-			Target:  target,
-			Type:    &serviceType,
+			Domain:         &serviceDomain,
+			Id:             nil,
+			ReturnResponse: false,
+			Service:        &serviceService,
+			Target:         target,
+			Type:           &serviceType,
 		},
 		ServiceData: nil,
 	}
@@ -344,9 +331,6 @@ func (f *FanTurnOff) Targets() []string {
 func (f *FanTurnOff) Name() string {
 	return fmt.Sprintf("%s.%s", *f.Domain, *f.Service)
 }
-func (f *FanTurnOff) SetID(id *int) {
-	f.Id = id
-}
 
 // NewFanTurnOn creates the object that can be sent to Home Assistant for domain fan, service turn_on
 // "Turn fan on."
@@ -356,11 +340,12 @@ func NewFanTurnOn(target Target) *FanTurnOn {
 	serviceService := "turn_on"
 	f := &FanTurnOn{
 		ServiceBase: ServiceBase{
-			Domain:  &serviceDomain,
-			Id:      nil,
-			Service: &serviceService,
-			Target:  target,
-			Type:    &serviceType,
+			Domain:         &serviceDomain,
+			Id:             nil,
+			ReturnResponse: false,
+			Service:        &serviceService,
+			Target:         target,
+			Type:           &serviceType,
 		},
 		ServiceData: FanTurnOnParams{},
 	}
@@ -398,7 +383,4 @@ func (f *FanTurnOn) Targets() []string {
 }
 func (f *FanTurnOn) Name() string {
 	return fmt.Sprintf("%s.%s", *f.Domain, *f.Service)
-}
-func (f *FanTurnOn) SetID(id *int) {
-	f.Id = id
 }

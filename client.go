@@ -80,25 +80,37 @@ func (c *Client) WriteMessage(messageType websocket.MessageType, data []byte) er
 // GetStates requests all the current states and runs them through the handlers
 func (c *Client) GetStates() {
 	callback := make(chan *model.Message)
+	id := c.NextID()
+
 	_, _ = c.sendWithCallback(&model.Message{
+		ID:   &id,
 		Type: model.MessageTypeGetStates,
 	}, callback)
 	go func() {
-		message := <-callback
-		close(callback)
-		if c.OnGetState != nil {
-			c.OnGetState(message.Result)
-		}
 
-		c.OnType.RunStates(message)
-		c.OnEntity.RunStates(message)
 	}()
+
+	go func(id int) {
+		msg := c.handleCallback(id, callback)
+		if msg != nil {
+			if c.OnGetState != nil {
+				c.OnGetState(msg.Result)
+			}
+
+			c.OnType.RunStates(msg)
+			c.OnEntity.RunStates(msg)
+		}
+	}(id)
+
 	return
 }
 
 func (c *Client) GetEntityRegistry() *model.Message {
 	callback := make(chan *model.Message)
-	id, _ := c.sendWithCallback(&model.Message{
+	id := c.NextID()
+
+	_, _ = c.sendWithCallback(&model.Message{
+		ID:   &id,
 		Type: model.MessageTypeGetEntityRegistry,
 	}, callback)
 	return c.handleCallback(id, callback)
@@ -106,16 +118,19 @@ func (c *Client) GetEntityRegistry() *model.Message {
 
 func (c *Client) handleCallback(id int, callback chan *model.Message) *model.Message {
 	ticker := time.NewTicker(time.Second * 10)
-	select {
-	case <-ticker.C:
-		c.callbacks.Delete(id)
-		close(callback)
 
+	defer c.callbacks.Delete(id)
+	select {
+	case <-c.ctx.Done():
+		return nil
+	case <-ticker.C:
+		// TODO: Make error message
 		return nil
 	case message := <-callback:
-		close(callback)
 		return message
 	}
+
+	return nil
 }
 func (c *Client) GetDeviceRegistry() *model.Message {
 	callback := make(chan *model.Message)
@@ -133,38 +148,44 @@ func (c *Client) GetServices() *model.Message {
 	return c.handleCallback(id, callback)
 }
 
-func (c *Client) CallService(service services.Service) {
-	service.SetID(c.NextID())
+func (c *Client) CallService(service services.Service) *Response {
+	id := c.NextID()
+	service.SetID(&id)
 	callback := make(chan *model.Message)
+
+	rsp := NewResponse()
+
 	err := c.sendStringWithCallback(service.JSON(), callback)
 	if err != nil {
 		c.logger.Error(err.Error())
-		return
-	}
-	go func() {
-		message := <-callback
-		if message.Error != nil {
-			c.logger.Error(fmt.Sprintf("service %s error code: %s message: %s", service.Name(), message.Error.Code, message.Error.Message), "Error sending")
-
+		rsp.msg = &model.Message{
+			Type: "",
+			Error: &model.Error{
+				Code:    "",
+				Message: err.Error(),
+			},
 		}
-		close(callback)
-	}()
-	return
-}
-
-func (c *Client) NextID() *int {
-	c.id++
-	return &c.id
-}
-
-func (c *Client) sendStringWithCallback(msg string, callback chan *model.Message) error {
-	c.callbacks.Set(c.id, callback)
-
-	err := c.client.Write(c.ctx, websocket.MessageText, []byte(msg))
-	if err != nil {
-		return err
+		return rsp
 	}
-	return nil
+	go func(id int) {
+		msg := c.handleCallback(id, callback)
+		defer func() {
+			rsp.done <- struct{}{}
+		}()
+		if msg != nil {
+			if msg.Error != nil {
+				c.logger.Error(fmt.Sprintf("service %s error code: %s message: %s", service.Name(), msg.Error.Code, msg.Error.Message), "Error sending")
+			}
+		}
+		rsp.msg = msg
+
+	}(id)
+	return rsp
+}
+
+func (c *Client) NextID() int {
+	c.id++
+	return c.id
 }
 
 func (c *Client) read() (*model.Message, error) {

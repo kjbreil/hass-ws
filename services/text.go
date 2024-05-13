@@ -17,11 +17,12 @@ func NewTextSetValue(target Target) *TextSetValue {
 	serviceService := "set_value"
 	t := &TextSetValue{
 		ServiceBase: ServiceBase{
-			Domain:  &serviceDomain,
-			Id:      nil,
-			Service: &serviceService,
-			Target:  target,
-			Type:    &serviceType,
+			Domain:         &serviceDomain,
+			Id:             nil,
+			ReturnResponse: false,
+			Service:        &serviceService,
+			Target:         target,
+			Type:           &serviceType,
 		},
 		ServiceData: TextSetValueParams{},
 	}
@@ -49,7 +50,4 @@ func (t *TextSetValue) Targets() []string {
 }
 func (t *TextSetValue) Name() string {
 	return fmt.Sprintf("%s.%s", *t.Domain, *t.Service)
-}
-func (t *TextSetValue) SetID(id *int) {
-	t.Id = id
 }

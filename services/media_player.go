@@ -17,11 +17,12 @@ func NewMediaPlayerClearPlaylist(target Target) *MediaPlayerClearPlaylist {
 	serviceService := "clear_playlist"
 	m := &MediaPlayerClearPlaylist{
 		ServiceBase: ServiceBase{
-			Domain:  &serviceDomain,
-			Id:      nil,
-			Service: &serviceService,
-			Target:  target,
-			Type:    &serviceType,
+			Domain:         &serviceDomain,
+			Id:             nil,
+			ReturnResponse: false,
+			Service:        &serviceService,
+			Target:         target,
+			Type:           &serviceType,
 		},
 		ServiceData: nil,
 	}
@@ -43,9 +44,6 @@ func (m *MediaPlayerClearPlaylist) Targets() []string {
 func (m *MediaPlayerClearPlaylist) Name() string {
 	return fmt.Sprintf("%s.%s", *m.Domain, *m.Service)
 }
-func (m *MediaPlayerClearPlaylist) SetID(id *int) {
-	m.Id = id
-}
 
 // NewMediaPlayerJoin creates the object that can be sent to Home Assistant for domain media_player, service join
 // "Group players together. Only works on platforms with support for player groups."
@@ -55,11 +53,12 @@ func NewMediaPlayerJoin(target Target) *MediaPlayerJoin {
 	serviceService := "join"
 	m := &MediaPlayerJoin{
 		ServiceBase: ServiceBase{
-			Domain:  &serviceDomain,
-			Id:      nil,
-			Service: &serviceService,
-			Target:  target,
-			Type:    &serviceType,
+			Domain:         &serviceDomain,
+			Id:             nil,
+			ReturnResponse: false,
+			Service:        &serviceService,
+			Target:         target,
+			Type:           &serviceType,
 		},
 		ServiceData: nil,
 	}
@@ -81,9 +80,6 @@ func (m *MediaPlayerJoin) Targets() []string {
 func (m *MediaPlayerJoin) Name() string {
 	return fmt.Sprintf("%s.%s", *m.Domain, *m.Service)
 }
-func (m *MediaPlayerJoin) SetID(id *int) {
-	m.Id = id
-}
 
 // NewMediaPlayerMediaNextTrack creates the object that can be sent to Home Assistant for domain media_player, service media_next_track
 // "Send the media player the command for next track."
@@ -93,11 +89,12 @@ func NewMediaPlayerMediaNextTrack(target Target) *MediaPlayerMediaNextTrack {
 	serviceService := "media_next_track"
 	m := &MediaPlayerMediaNextTrack{
 		ServiceBase: ServiceBase{
-			Domain:  &serviceDomain,
-			Id:      nil,
-			Service: &serviceService,
-			Target:  target,
-			Type:    &serviceType,
+			Domain:         &serviceDomain,
+			Id:             nil,
+			ReturnResponse: false,
+			Service:        &serviceService,
+			Target:         target,
+			Type:           &serviceType,
 		},
 		ServiceData: nil,
 	}
@@ -119,9 +116,6 @@ func (m *MediaPlayerMediaNextTrack) Targets() []string {
 func (m *MediaPlayerMediaNextTrack) Name() string {
 	return fmt.Sprintf("%s.%s", *m.Domain, *m.Service)
 }
-func (m *MediaPlayerMediaNextTrack) SetID(id *int) {
-	m.Id = id
-}
 
 // NewMediaPlayerMediaPause creates the object that can be sent to Home Assistant for domain media_player, service media_pause
 // "Send the media player the command for pause."
@@ -131,11 +125,12 @@ func NewMediaPlayerMediaPause(target Target) *MediaPlayerMediaPause {
 	serviceService := "media_pause"
 	m := &MediaPlayerMediaPause{
 		ServiceBase: ServiceBase{
-			Domain:  &serviceDomain,
-			Id:      nil,
-			Service: &serviceService,
-			Target:  target,
-			Type:    &serviceType,
+			Domain:         &serviceDomain,
+			Id:             nil,
+			ReturnResponse: false,
+			Service:        &serviceService,
+			Target:         target,
+			Type:           &serviceType,
 		},
 		ServiceData: nil,
 	}
@@ -157,9 +152,6 @@ func (m *MediaPlayerMediaPause) Targets() []string {
 func (m *MediaPlayerMediaPause) Name() string {
 	return fmt.Sprintf("%s.%s", *m.Domain, *m.Service)
 }
-func (m *MediaPlayerMediaPause) SetID(id *int) {
-	m.Id = id
-}
 
 // NewMediaPlayerMediaPlay creates the object that can be sent to Home Assistant for domain media_player, service media_play
 // "Send the media player the command for play."
@@ -169,11 +161,12 @@ func NewMediaPlayerMediaPlay(target Target) *MediaPlayerMediaPlay {
 	serviceService := "media_play"
 	m := &MediaPlayerMediaPlay{
 		ServiceBase: ServiceBase{
-			Domain:  &serviceDomain,
-			Id:      nil,
-			Service: &serviceService,
-			Target:  target,
-			Type:    &serviceType,
+			Domain:         &serviceDomain,
+			Id:             nil,
+			ReturnResponse: false,
+			Service:        &serviceService,
+			Target:         target,
+			Type:           &serviceType,
 		},
 		ServiceData: nil,
 	}
@@ -195,9 +188,6 @@ func (m *MediaPlayerMediaPlay) Targets() []string {
 func (m *MediaPlayerMediaPlay) Name() string {
 	return fmt.Sprintf("%s.%s", *m.Domain, *m.Service)
 }
-func (m *MediaPlayerMediaPlay) SetID(id *int) {
-	m.Id = id
-}
 
 // NewMediaPlayerMediaPlayPause creates the object that can be sent to Home Assistant for domain media_player, service media_play_pause
 // "Toggle media player play/pause state."
@@ -207,11 +197,12 @@ func NewMediaPlayerMediaPlayPause(target Target) *MediaPlayerMediaPlayPause {
 	serviceService := "media_play_pause"
 	m := &MediaPlayerMediaPlayPause{
 		ServiceBase: ServiceBase{
-			Domain:  &serviceDomain,
-			Id:      nil,
-			Service: &serviceService,
-			Target:  target,
-			Type:    &serviceType,
+			Domain:         &serviceDomain,
+			Id:             nil,
+			ReturnResponse: false,
+			Service:        &serviceService,
+			Target:         target,
+			Type:           &serviceType,
 		},
 		ServiceData: nil,
 	}
@@ -233,9 +224,6 @@ func (m *MediaPlayerMediaPlayPause) Targets() []string {
 func (m *MediaPlayerMediaPlayPause) Name() string {
 	return fmt.Sprintf("%s.%s", *m.Domain, *m.Service)
 }
-func (m *MediaPlayerMediaPlayPause) SetID(id *int) {
-	m.Id = id
-}
 
 // NewMediaPlayerMediaPreviousTrack creates the object that can be sent to Home Assistant for domain media_player, service media_previous_track
 // "Send the media player the command for previous track."
@@ -245,11 +233,12 @@ func NewMediaPlayerMediaPreviousTrack(target Target) *MediaPlayerMediaPreviousTr
 	serviceService := "media_previous_track"
 	m := &MediaPlayerMediaPreviousTrack{
 		ServiceBase: ServiceBase{
-			Domain:  &serviceDomain,
-			Id:      nil,
-			Service: &serviceService,
-			Target:  target,
-			Type:    &serviceType,
+			Domain:         &serviceDomain,
+			Id:             nil,
+			ReturnResponse: false,
+			Service:        &serviceService,
+			Target:         target,
+			Type:           &serviceType,
 		},
 		ServiceData: nil,
 	}
@@ -271,9 +260,6 @@ func (m *MediaPlayerMediaPreviousTrack) Targets() []string {
 func (m *MediaPlayerMediaPreviousTrack) Name() string {
 	return fmt.Sprintf("%s.%s", *m.Domain, *m.Service)
 }
-func (m *MediaPlayerMediaPreviousTrack) SetID(id *int) {
-	m.Id = id
-}
 
 // NewMediaPlayerMediaSeek creates the object that can be sent to Home Assistant for domain media_player, service media_seek
 // "Send the media player the command to seek in current playing media."
@@ -283,11 +269,12 @@ func NewMediaPlayerMediaSeek(target Target) *MediaPlayerMediaSeek {
 	serviceService := "media_seek"
 	m := &MediaPlayerMediaSeek{
 		ServiceBase: ServiceBase{
-			Domain:  &serviceDomain,
-			Id:      nil,
-			Service: &serviceService,
-			Target:  target,
-			Type:    &serviceType,
+			Domain:         &serviceDomain,
+			Id:             nil,
+			ReturnResponse: false,
+			Service:        &serviceService,
+			Target:         target,
+			Type:           &serviceType,
 		},
 		ServiceData: MediaPlayerMediaSeekParams{},
 	}
@@ -316,9 +303,6 @@ func (m *MediaPlayerMediaSeek) Targets() []string {
 func (m *MediaPlayerMediaSeek) Name() string {
 	return fmt.Sprintf("%s.%s", *m.Domain, *m.Service)
 }
-func (m *MediaPlayerMediaSeek) SetID(id *int) {
-	m.Id = id
-}
 
 // NewMediaPlayerMediaStop creates the object that can be sent to Home Assistant for domain media_player, service media_stop
 // "Send the media player the stop command."
@@ -328,11 +312,12 @@ func NewMediaPlayerMediaStop(target Target) *MediaPlayerMediaStop {
 	serviceService := "media_stop"
 	m := &MediaPlayerMediaStop{
 		ServiceBase: ServiceBase{
-			Domain:  &serviceDomain,
-			Id:      nil,
-			Service: &serviceService,
-			Target:  target,
-			Type:    &serviceType,
+			Domain:         &serviceDomain,
+			Id:             nil,
+			ReturnResponse: false,
+			Service:        &serviceService,
+			Target:         target,
+			Type:           &serviceType,
 		},
 		ServiceData: nil,
 	}
@@ -354,9 +339,6 @@ func (m *MediaPlayerMediaStop) Targets() []string {
 func (m *MediaPlayerMediaStop) Name() string {
 	return fmt.Sprintf("%s.%s", *m.Domain, *m.Service)
 }
-func (m *MediaPlayerMediaStop) SetID(id *int) {
-	m.Id = id
-}
 
 // NewMediaPlayerPlayMedia creates the object that can be sent to Home Assistant for domain media_player, service play_media
 // "Send the media player the command for playing media."
@@ -366,11 +348,12 @@ func NewMediaPlayerPlayMedia(target Target) *MediaPlayerPlayMedia {
 	serviceService := "play_media"
 	m := &MediaPlayerPlayMedia{
 		ServiceBase: ServiceBase{
-			Domain:  &serviceDomain,
-			Id:      nil,
-			Service: &serviceService,
-			Target:  target,
-			Type:    &serviceType,
+			Domain:         &serviceDomain,
+			Id:             nil,
+			ReturnResponse: false,
+			Service:        &serviceService,
+			Target:         target,
+			Type:           &serviceType,
 		},
 		ServiceData: MediaPlayerPlayMediaParams{},
 	}
@@ -409,9 +392,6 @@ func (m *MediaPlayerPlayMedia) Targets() []string {
 func (m *MediaPlayerPlayMedia) Name() string {
 	return fmt.Sprintf("%s.%s", *m.Domain, *m.Service)
 }
-func (m *MediaPlayerPlayMedia) SetID(id *int) {
-	m.Id = id
-}
 
 // NewMediaPlayerRepeatSet creates the object that can be sent to Home Assistant for domain media_player, service repeat_set
 // "Set repeat mode"
@@ -421,11 +401,12 @@ func NewMediaPlayerRepeatSet(target Target) *MediaPlayerRepeatSet {
 	serviceService := "repeat_set"
 	m := &MediaPlayerRepeatSet{
 		ServiceBase: ServiceBase{
-			Domain:  &serviceDomain,
-			Id:      nil,
-			Service: &serviceService,
-			Target:  target,
-			Type:    &serviceType,
+			Domain:         &serviceDomain,
+			Id:             nil,
+			ReturnResponse: false,
+			Service:        &serviceService,
+			Target:         target,
+			Type:           &serviceType,
 		},
 		ServiceData: MediaPlayerRepeatSetParams{},
 	}
@@ -454,9 +435,6 @@ func (m *MediaPlayerRepeatSet) Targets() []string {
 func (m *MediaPlayerRepeatSet) Name() string {
 	return fmt.Sprintf("%s.%s", *m.Domain, *m.Service)
 }
-func (m *MediaPlayerRepeatSet) SetID(id *int) {
-	m.Id = id
-}
 
 // NewMediaPlayerSelectSoundMode creates the object that can be sent to Home Assistant for domain media_player, service select_sound_mode
 // "Send the media player the command to change sound mode."
@@ -466,11 +444,12 @@ func NewMediaPlayerSelectSoundMode(target Target) *MediaPlayerSelectSoundMode {
 	serviceService := "select_sound_mode"
 	m := &MediaPlayerSelectSoundMode{
 		ServiceBase: ServiceBase{
-			Domain:  &serviceDomain,
-			Id:      nil,
-			Service: &serviceService,
-			Target:  target,
-			Type:    &serviceType,
+			Domain:         &serviceDomain,
+			Id:             nil,
+			ReturnResponse: false,
+			Service:        &serviceService,
+			Target:         target,
+			Type:           &serviceType,
 		},
 		ServiceData: MediaPlayerSelectSoundModeParams{},
 	}
@@ -499,9 +478,6 @@ func (m *MediaPlayerSelectSoundMode) Targets() []string {
 func (m *MediaPlayerSelectSoundMode) Name() string {
 	return fmt.Sprintf("%s.%s", *m.Domain, *m.Service)
 }
-func (m *MediaPlayerSelectSoundMode) SetID(id *int) {
-	m.Id = id
-}
 
 // NewMediaPlayerSelectSource creates the object that can be sent to Home Assistant for domain media_player, service select_source
 // "Send the media player the command to change input source."
@@ -511,11 +487,12 @@ func NewMediaPlayerSelectSource(target Target) *MediaPlayerSelectSource {
 	serviceService := "select_source"
 	m := &MediaPlayerSelectSource{
 		ServiceBase: ServiceBase{
-			Domain:  &serviceDomain,
-			Id:      nil,
-			Service: &serviceService,
-			Target:  target,
-			Type:    &serviceType,
+			Domain:         &serviceDomain,
+			Id:             nil,
+			ReturnResponse: false,
+			Service:        &serviceService,
+			Target:         target,
+			Type:           &serviceType,
 		},
 		ServiceData: MediaPlayerSelectSourceParams{},
 	}
@@ -544,9 +521,6 @@ func (m *MediaPlayerSelectSource) Targets() []string {
 func (m *MediaPlayerSelectSource) Name() string {
 	return fmt.Sprintf("%s.%s", *m.Domain, *m.Service)
 }
-func (m *MediaPlayerSelectSource) SetID(id *int) {
-	m.Id = id
-}
 
 // NewMediaPlayerShuffleSet creates the object that can be sent to Home Assistant for domain media_player, service shuffle_set
 // "Set shuffling state."
@@ -556,11 +530,12 @@ func NewMediaPlayerShuffleSet(target Target) *MediaPlayerShuffleSet {
 	serviceService := "shuffle_set"
 	m := &MediaPlayerShuffleSet{
 		ServiceBase: ServiceBase{
-			Domain:  &serviceDomain,
-			Id:      nil,
-			Service: &serviceService,
-			Target:  target,
-			Type:    &serviceType,
+			Domain:         &serviceDomain,
+			Id:             nil,
+			ReturnResponse: false,
+			Service:        &serviceService,
+			Target:         target,
+			Type:           &serviceType,
 		},
 		ServiceData: nil,
 	}
@@ -582,9 +557,6 @@ func (m *MediaPlayerShuffleSet) Targets() []string {
 func (m *MediaPlayerShuffleSet) Name() string {
 	return fmt.Sprintf("%s.%s", *m.Domain, *m.Service)
 }
-func (m *MediaPlayerShuffleSet) SetID(id *int) {
-	m.Id = id
-}
 
 // NewMediaPlayerToggle creates the object that can be sent to Home Assistant for domain media_player, service toggle
 // "Toggles a media player power state."
@@ -594,11 +566,12 @@ func NewMediaPlayerToggle(target Target) *MediaPlayerToggle {
 	serviceService := "toggle"
 	m := &MediaPlayerToggle{
 		ServiceBase: ServiceBase{
-			Domain:  &serviceDomain,
-			Id:      nil,
-			Service: &serviceService,
-			Target:  target,
-			Type:    &serviceType,
+			Domain:         &serviceDomain,
+			Id:             nil,
+			ReturnResponse: false,
+			Service:        &serviceService,
+			Target:         target,
+			Type:           &serviceType,
 		},
 		ServiceData: nil,
 	}
@@ -620,9 +593,6 @@ func (m *MediaPlayerToggle) Targets() []string {
 func (m *MediaPlayerToggle) Name() string {
 	return fmt.Sprintf("%s.%s", *m.Domain, *m.Service)
 }
-func (m *MediaPlayerToggle) SetID(id *int) {
-	m.Id = id
-}
 
 // NewMediaPlayerTurnOff creates the object that can be sent to Home Assistant for domain media_player, service turn_off
 // "Turn a media player power off."
@@ -632,11 +602,12 @@ func NewMediaPlayerTurnOff(target Target) *MediaPlayerTurnOff {
 	serviceService := "turn_off"
 	m := &MediaPlayerTurnOff{
 		ServiceBase: ServiceBase{
-			Domain:  &serviceDomain,
-			Id:      nil,
-			Service: &serviceService,
-			Target:  target,
-			Type:    &serviceType,
+			Domain:         &serviceDomain,
+			Id:             nil,
+			ReturnResponse: false,
+			Service:        &serviceService,
+			Target:         target,
+			Type:           &serviceType,
 		},
 		ServiceData: nil,
 	}
@@ -658,9 +629,6 @@ func (m *MediaPlayerTurnOff) Targets() []string {
 func (m *MediaPlayerTurnOff) Name() string {
 	return fmt.Sprintf("%s.%s", *m.Domain, *m.Service)
 }
-func (m *MediaPlayerTurnOff) SetID(id *int) {
-	m.Id = id
-}
 
 // NewMediaPlayerTurnOn creates the object that can be sent to Home Assistant for domain media_player, service turn_on
 // "Turn a media player power on."
@@ -670,11 +638,12 @@ func NewMediaPlayerTurnOn(target Target) *MediaPlayerTurnOn {
 	serviceService := "turn_on"
 	m := &MediaPlayerTurnOn{
 		ServiceBase: ServiceBase{
-			Domain:  &serviceDomain,
-			Id:      nil,
-			Service: &serviceService,
-			Target:  target,
-			Type:    &serviceType,
+			Domain:         &serviceDomain,
+			Id:             nil,
+			ReturnResponse: false,
+			Service:        &serviceService,
+			Target:         target,
+			Type:           &serviceType,
 		},
 		ServiceData: nil,
 	}
@@ -696,9 +665,6 @@ func (m *MediaPlayerTurnOn) Targets() []string {
 func (m *MediaPlayerTurnOn) Name() string {
 	return fmt.Sprintf("%s.%s", *m.Domain, *m.Service)
 }
-func (m *MediaPlayerTurnOn) SetID(id *int) {
-	m.Id = id
-}
 
 // NewMediaPlayerUnjoin creates the object that can be sent to Home Assistant for domain media_player, service unjoin
 // "Unjoin the player from a group. Only works on platforms with support for player groups."
@@ -708,11 +674,12 @@ func NewMediaPlayerUnjoin(target Target) *MediaPlayerUnjoin {
 	serviceService := "unjoin"
 	m := &MediaPlayerUnjoin{
 		ServiceBase: ServiceBase{
-			Domain:  &serviceDomain,
-			Id:      nil,
-			Service: &serviceService,
-			Target:  target,
-			Type:    &serviceType,
+			Domain:         &serviceDomain,
+			Id:             nil,
+			ReturnResponse: false,
+			Service:        &serviceService,
+			Target:         target,
+			Type:           &serviceType,
 		},
 		ServiceData: nil,
 	}
@@ -734,9 +701,6 @@ func (m *MediaPlayerUnjoin) Targets() []string {
 func (m *MediaPlayerUnjoin) Name() string {
 	return fmt.Sprintf("%s.%s", *m.Domain, *m.Service)
 }
-func (m *MediaPlayerUnjoin) SetID(id *int) {
-	m.Id = id
-}
 
 // NewMediaPlayerVolumeDown creates the object that can be sent to Home Assistant for domain media_player, service volume_down
 // "Turn a media player volume down."
@@ -746,11 +710,12 @@ func NewMediaPlayerVolumeDown(target Target) *MediaPlayerVolumeDown {
 	serviceService := "volume_down"
 	m := &MediaPlayerVolumeDown{
 		ServiceBase: ServiceBase{
-			Domain:  &serviceDomain,
-			Id:      nil,
-			Service: &serviceService,
-			Target:  target,
-			Type:    &serviceType,
+			Domain:         &serviceDomain,
+			Id:             nil,
+			ReturnResponse: false,
+			Service:        &serviceService,
+			Target:         target,
+			Type:           &serviceType,
 		},
 		ServiceData: nil,
 	}
@@ -772,9 +737,6 @@ func (m *MediaPlayerVolumeDown) Targets() []string {
 func (m *MediaPlayerVolumeDown) Name() string {
 	return fmt.Sprintf("%s.%s", *m.Domain, *m.Service)
 }
-func (m *MediaPlayerVolumeDown) SetID(id *int) {
-	m.Id = id
-}
 
 // NewMediaPlayerVolumeMute creates the object that can be sent to Home Assistant for domain media_player, service volume_mute
 // "Mute a media player's volume."
@@ -784,11 +746,12 @@ func NewMediaPlayerVolumeMute(target Target) *MediaPlayerVolumeMute {
 	serviceService := "volume_mute"
 	m := &MediaPlayerVolumeMute{
 		ServiceBase: ServiceBase{
-			Domain:  &serviceDomain,
-			Id:      nil,
-			Service: &serviceService,
-			Target:  target,
-			Type:    &serviceType,
+			Domain:         &serviceDomain,
+			Id:             nil,
+			ReturnResponse: false,
+			Service:        &serviceService,
+			Target:         target,
+			Type:           &serviceType,
 		},
 		ServiceData: nil,
 	}
@@ -810,9 +773,6 @@ func (m *MediaPlayerVolumeMute) Targets() []string {
 func (m *MediaPlayerVolumeMute) Name() string {
 	return fmt.Sprintf("%s.%s", *m.Domain, *m.Service)
 }
-func (m *MediaPlayerVolumeMute) SetID(id *int) {
-	m.Id = id
-}
 
 // NewMediaPlayerVolumeSet creates the object that can be sent to Home Assistant for domain media_player, service volume_set
 // "Set a media player's volume level."
@@ -822,11 +782,12 @@ func NewMediaPlayerVolumeSet(target Target) *MediaPlayerVolumeSet {
 	serviceService := "volume_set"
 	m := &MediaPlayerVolumeSet{
 		ServiceBase: ServiceBase{
-			Domain:  &serviceDomain,
-			Id:      nil,
-			Service: &serviceService,
-			Target:  target,
-			Type:    &serviceType,
+			Domain:         &serviceDomain,
+			Id:             nil,
+			ReturnResponse: false,
+			Service:        &serviceService,
+			Target:         target,
+			Type:           &serviceType,
 		},
 		ServiceData: MediaPlayerVolumeSetParams{},
 	}
@@ -855,9 +816,6 @@ func (m *MediaPlayerVolumeSet) Targets() []string {
 func (m *MediaPlayerVolumeSet) Name() string {
 	return fmt.Sprintf("%s.%s", *m.Domain, *m.Service)
 }
-func (m *MediaPlayerVolumeSet) SetID(id *int) {
-	m.Id = id
-}
 
 // NewMediaPlayerVolumeUp creates the object that can be sent to Home Assistant for domain media_player, service volume_up
 // "Turn a media player volume up."
@@ -867,11 +825,12 @@ func NewMediaPlayerVolumeUp(target Target) *MediaPlayerVolumeUp {
 	serviceService := "volume_up"
 	m := &MediaPlayerVolumeUp{
 		ServiceBase: ServiceBase{
-			Domain:  &serviceDomain,
-			Id:      nil,
-			Service: &serviceService,
-			Target:  target,
-			Type:    &serviceType,
+			Domain:         &serviceDomain,
+			Id:             nil,
+			ReturnResponse: false,
+			Service:        &serviceService,
+			Target:         target,
+			Type:           &serviceType,
 		},
 		ServiceData: nil,
 	}
@@ -892,7 +851,4 @@ func (m *MediaPlayerVolumeUp) Targets() []string {
 }
 func (m *MediaPlayerVolumeUp) Name() string {
 	return fmt.Sprintf("%s.%s", *m.Domain, *m.Service)
-}
-func (m *MediaPlayerVolumeUp) SetID(id *int) {
-	m.Id = id
 }

@@ -17,11 +17,12 @@ func NewNumberSetValue(target Target) *NumberSetValue {
 	serviceService := "set_value"
 	n := &NumberSetValue{
 		ServiceBase: ServiceBase{
-			Domain:  &serviceDomain,
-			Id:      nil,
-			Service: &serviceService,
-			Target:  target,
-			Type:    &serviceType,
+			Domain:         &serviceDomain,
+			Id:             nil,
+			ReturnResponse: false,
+			Service:        &serviceService,
+			Target:         target,
+			Type:           &serviceType,
 		},
 		ServiceData: NumberSetValueParams{},
 	}
@@ -49,7 +50,4 @@ func (n *NumberSetValue) Targets() []string {
 }
 func (n *NumberSetValue) Name() string {
 	return fmt.Sprintf("%s.%s", *n.Domain, *n.Service)
-}
-func (n *NumberSetValue) SetID(id *int) {
-	n.Id = id
 }

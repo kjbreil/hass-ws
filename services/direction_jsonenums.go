@@ -3,8 +3,8 @@
 package services
 
 import (
+	"encoding/json"
 	"fmt"
-	"github.com/goccy/go-json"
 )
 
 var (

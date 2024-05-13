@@ -17,11 +17,12 @@ func NewCloudRemoteConnect(target Target) *CloudRemoteConnect {
 	serviceService := "remote_connect"
 	c := &CloudRemoteConnect{
 		ServiceBase: ServiceBase{
-			Domain:  &serviceDomain,
-			Id:      nil,
-			Service: &serviceService,
-			Target:  target,
-			Type:    &serviceType,
+			Domain:         &serviceDomain,
+			Id:             nil,
+			ReturnResponse: false,
+			Service:        &serviceService,
+			Target:         target,
+			Type:           &serviceType,
 		},
 		ServiceData: nil,
 	}
@@ -43,9 +44,6 @@ func (c *CloudRemoteConnect) Targets() []string {
 func (c *CloudRemoteConnect) Name() string {
 	return fmt.Sprintf("%s.%s", *c.Domain, *c.Service)
 }
-func (c *CloudRemoteConnect) SetID(id *int) {
-	c.Id = id
-}
 
 // NewCloudRemoteDisconnect creates the object that can be sent to Home Assistant for domain cloud, service remote_disconnect
 // "Disconnect UI from NabuCasa cloud"
@@ -55,11 +53,12 @@ func NewCloudRemoteDisconnect(target Target) *CloudRemoteDisconnect {
 	serviceService := "remote_disconnect"
 	c := &CloudRemoteDisconnect{
 		ServiceBase: ServiceBase{
-			Domain:  &serviceDomain,
-			Id:      nil,
-			Service: &serviceService,
-			Target:  target,
-			Type:    &serviceType,
+			Domain:         &serviceDomain,
+			Id:             nil,
+			ReturnResponse: false,
+			Service:        &serviceService,
+			Target:         target,
+			Type:           &serviceType,
 		},
 		ServiceData: nil,
 	}
@@ -80,7 +79,4 @@ func (c *CloudRemoteDisconnect) Targets() []string {
 }
 func (c *CloudRemoteDisconnect) Name() string {
 	return fmt.Sprintf("%s.%s", *c.Domain, *c.Service)
-}
-func (c *CloudRemoteDisconnect) SetID(id *int) {
-	c.Id = id
 }

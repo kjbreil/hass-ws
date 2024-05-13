@@ -17,11 +17,12 @@ func NewHomeassistantCheckConfig(target Target) *HomeassistantCheckConfig {
 	serviceService := "check_config"
 	h := &HomeassistantCheckConfig{
 		ServiceBase: ServiceBase{
-			Domain:  &serviceDomain,
-			Id:      nil,
-			Service: &serviceService,
-			Target:  target,
-			Type:    &serviceType,
+			Domain:         &serviceDomain,
+			Id:             nil,
+			ReturnResponse: false,
+			Service:        &serviceService,
+			Target:         target,
+			Type:           &serviceType,
 		},
 		ServiceData: nil,
 	}
@@ -43,9 +44,6 @@ func (h *HomeassistantCheckConfig) Targets() []string {
 func (h *HomeassistantCheckConfig) Name() string {
 	return fmt.Sprintf("%s.%s", *h.Domain, *h.Service)
 }
-func (h *HomeassistantCheckConfig) SetID(id *int) {
-	h.Id = id
-}
 
 // NewHomeassistantReloadConfigEntry creates the object that can be sent to Home Assistant for domain homeassistant, service reload_config_entry
 // "Reload a config entry that matches a target."
@@ -55,11 +53,12 @@ func NewHomeassistantReloadConfigEntry(target Target) *HomeassistantReloadConfig
 	serviceService := "reload_config_entry"
 	h := &HomeassistantReloadConfigEntry{
 		ServiceBase: ServiceBase{
-			Domain:  &serviceDomain,
-			Id:      nil,
-			Service: &serviceService,
-			Target:  target,
-			Type:    &serviceType,
+			Domain:         &serviceDomain,
+			Id:             nil,
+			ReturnResponse: false,
+			Service:        &serviceService,
+			Target:         target,
+			Type:           &serviceType,
 		},
 		ServiceData: HomeassistantReloadConfigEntryParams{},
 	}
@@ -88,9 +87,6 @@ func (h *HomeassistantReloadConfigEntry) Targets() []string {
 func (h *HomeassistantReloadConfigEntry) Name() string {
 	return fmt.Sprintf("%s.%s", *h.Domain, *h.Service)
 }
-func (h *HomeassistantReloadConfigEntry) SetID(id *int) {
-	h.Id = id
-}
 
 // NewHomeassistantReloadCoreConfig creates the object that can be sent to Home Assistant for domain homeassistant, service reload_core_config
 // "Reload the core configuration."
@@ -100,11 +96,12 @@ func NewHomeassistantReloadCoreConfig(target Target) *HomeassistantReloadCoreCon
 	serviceService := "reload_core_config"
 	h := &HomeassistantReloadCoreConfig{
 		ServiceBase: ServiceBase{
-			Domain:  &serviceDomain,
-			Id:      nil,
-			Service: &serviceService,
-			Target:  target,
-			Type:    &serviceType,
+			Domain:         &serviceDomain,
+			Id:             nil,
+			ReturnResponse: false,
+			Service:        &serviceService,
+			Target:         target,
+			Type:           &serviceType,
 		},
 		ServiceData: nil,
 	}
@@ -126,9 +123,6 @@ func (h *HomeassistantReloadCoreConfig) Targets() []string {
 func (h *HomeassistantReloadCoreConfig) Name() string {
 	return fmt.Sprintf("%s.%s", *h.Domain, *h.Service)
 }
-func (h *HomeassistantReloadCoreConfig) SetID(id *int) {
-	h.Id = id
-}
 
 // NewHomeassistantRestart creates the object that can be sent to Home Assistant for domain homeassistant, service restart
 // "Restart the Home Assistant service."
@@ -138,11 +132,12 @@ func NewHomeassistantRestart(target Target) *HomeassistantRestart {
 	serviceService := "restart"
 	h := &HomeassistantRestart{
 		ServiceBase: ServiceBase{
-			Domain:  &serviceDomain,
-			Id:      nil,
-			Service: &serviceService,
-			Target:  target,
-			Type:    &serviceType,
+			Domain:         &serviceDomain,
+			Id:             nil,
+			ReturnResponse: false,
+			Service:        &serviceService,
+			Target:         target,
+			Type:           &serviceType,
 		},
 		ServiceData: nil,
 	}
@@ -164,9 +159,6 @@ func (h *HomeassistantRestart) Targets() []string {
 func (h *HomeassistantRestart) Name() string {
 	return fmt.Sprintf("%s.%s", *h.Domain, *h.Service)
 }
-func (h *HomeassistantRestart) SetID(id *int) {
-	h.Id = id
-}
 
 // NewHomeassistantSavePersistentStates creates the object that can be sent to Home Assistant for domain homeassistant, service save_persistent_states
 // "Save the persistent states (for entities derived from RestoreEntity) immediately. Maintain the normal periodic saving interval."
@@ -176,11 +168,12 @@ func NewHomeassistantSavePersistentStates(target Target) *HomeassistantSavePersi
 	serviceService := "save_persistent_states"
 	h := &HomeassistantSavePersistentStates{
 		ServiceBase: ServiceBase{
-			Domain:  &serviceDomain,
-			Id:      nil,
-			Service: &serviceService,
-			Target:  target,
-			Type:    &serviceType,
+			Domain:         &serviceDomain,
+			Id:             nil,
+			ReturnResponse: false,
+			Service:        &serviceService,
+			Target:         target,
+			Type:           &serviceType,
 		},
 		ServiceData: nil,
 	}
@@ -202,9 +195,6 @@ func (h *HomeassistantSavePersistentStates) Targets() []string {
 func (h *HomeassistantSavePersistentStates) Name() string {
 	return fmt.Sprintf("%s.%s", *h.Domain, *h.Service)
 }
-func (h *HomeassistantSavePersistentStates) SetID(id *int) {
-	h.Id = id
-}
 
 // NewHomeassistantSetLocation creates the object that can be sent to Home Assistant for domain homeassistant, service set_location
 // "Update the Home Assistant location."
@@ -214,11 +204,12 @@ func NewHomeassistantSetLocation(target Target) *HomeassistantSetLocation {
 	serviceService := "set_location"
 	h := &HomeassistantSetLocation{
 		ServiceBase: ServiceBase{
-			Domain:  &serviceDomain,
-			Id:      nil,
-			Service: &serviceService,
-			Target:  target,
-			Type:    &serviceType,
+			Domain:         &serviceDomain,
+			Id:             nil,
+			ReturnResponse: false,
+			Service:        &serviceService,
+			Target:         target,
+			Type:           &serviceType,
 		},
 		ServiceData: HomeassistantSetLocationParams{},
 	}
@@ -252,9 +243,6 @@ func (h *HomeassistantSetLocation) Targets() []string {
 func (h *HomeassistantSetLocation) Name() string {
 	return fmt.Sprintf("%s.%s", *h.Domain, *h.Service)
 }
-func (h *HomeassistantSetLocation) SetID(id *int) {
-	h.Id = id
-}
 
 // NewHomeassistantStop creates the object that can be sent to Home Assistant for domain homeassistant, service stop
 // "Stop the Home Assistant service."
@@ -264,11 +252,12 @@ func NewHomeassistantStop(target Target) *HomeassistantStop {
 	serviceService := "stop"
 	h := &HomeassistantStop{
 		ServiceBase: ServiceBase{
-			Domain:  &serviceDomain,
-			Id:      nil,
-			Service: &serviceService,
-			Target:  target,
-			Type:    &serviceType,
+			Domain:         &serviceDomain,
+			Id:             nil,
+			ReturnResponse: false,
+			Service:        &serviceService,
+			Target:         target,
+			Type:           &serviceType,
 		},
 		ServiceData: nil,
 	}
@@ -290,9 +279,6 @@ func (h *HomeassistantStop) Targets() []string {
 func (h *HomeassistantStop) Name() string {
 	return fmt.Sprintf("%s.%s", *h.Domain, *h.Service)
 }
-func (h *HomeassistantStop) SetID(id *int) {
-	h.Id = id
-}
 
 // NewHomeassistantToggle creates the object that can be sent to Home Assistant for domain homeassistant, service toggle
 // "Generic service to toggle devices on/off under any domain"
@@ -302,11 +288,12 @@ func NewHomeassistantToggle(target Target) *HomeassistantToggle {
 	serviceService := "toggle"
 	h := &HomeassistantToggle{
 		ServiceBase: ServiceBase{
-			Domain:  &serviceDomain,
-			Id:      nil,
-			Service: &serviceService,
-			Target:  target,
-			Type:    &serviceType,
+			Domain:         &serviceDomain,
+			Id:             nil,
+			ReturnResponse: false,
+			Service:        &serviceService,
+			Target:         target,
+			Type:           &serviceType,
 		},
 		ServiceData: nil,
 	}
@@ -328,9 +315,6 @@ func (h *HomeassistantToggle) Targets() []string {
 func (h *HomeassistantToggle) Name() string {
 	return fmt.Sprintf("%s.%s", *h.Domain, *h.Service)
 }
-func (h *HomeassistantToggle) SetID(id *int) {
-	h.Id = id
-}
 
 // NewHomeassistantTurnOff creates the object that can be sent to Home Assistant for domain homeassistant, service turn_off
 // "Generic service to turn devices off under any domain."
@@ -340,11 +324,12 @@ func NewHomeassistantTurnOff(target Target) *HomeassistantTurnOff {
 	serviceService := "turn_off"
 	h := &HomeassistantTurnOff{
 		ServiceBase: ServiceBase{
-			Domain:  &serviceDomain,
-			Id:      nil,
-			Service: &serviceService,
-			Target:  target,
-			Type:    &serviceType,
+			Domain:         &serviceDomain,
+			Id:             nil,
+			ReturnResponse: false,
+			Service:        &serviceService,
+			Target:         target,
+			Type:           &serviceType,
 		},
 		ServiceData: nil,
 	}
@@ -366,9 +351,6 @@ func (h *HomeassistantTurnOff) Targets() []string {
 func (h *HomeassistantTurnOff) Name() string {
 	return fmt.Sprintf("%s.%s", *h.Domain, *h.Service)
 }
-func (h *HomeassistantTurnOff) SetID(id *int) {
-	h.Id = id
-}
 
 // NewHomeassistantTurnOn creates the object that can be sent to Home Assistant for domain homeassistant, service turn_on
 // "Generic service to turn devices on under any domain."
@@ -378,11 +360,12 @@ func NewHomeassistantTurnOn(target Target) *HomeassistantTurnOn {
 	serviceService := "turn_on"
 	h := &HomeassistantTurnOn{
 		ServiceBase: ServiceBase{
-			Domain:  &serviceDomain,
-			Id:      nil,
-			Service: &serviceService,
-			Target:  target,
-			Type:    &serviceType,
+			Domain:         &serviceDomain,
+			Id:             nil,
+			ReturnResponse: false,
+			Service:        &serviceService,
+			Target:         target,
+			Type:           &serviceType,
 		},
 		ServiceData: nil,
 	}
@@ -404,9 +387,6 @@ func (h *HomeassistantTurnOn) Targets() []string {
 func (h *HomeassistantTurnOn) Name() string {
 	return fmt.Sprintf("%s.%s", *h.Domain, *h.Service)
 }
-func (h *HomeassistantTurnOn) SetID(id *int) {
-	h.Id = id
-}
 
 // NewHomeassistantUpdateEntity creates the object that can be sent to Home Assistant for domain homeassistant, service update_entity
 // "Force one or more entities to update its data"
@@ -416,11 +396,12 @@ func NewHomeassistantUpdateEntity(target Target) *HomeassistantUpdateEntity {
 	serviceService := "update_entity"
 	h := &HomeassistantUpdateEntity{
 		ServiceBase: ServiceBase{
-			Domain:  &serviceDomain,
-			Id:      nil,
-			Service: &serviceService,
-			Target:  target,
-			Type:    &serviceType,
+			Domain:         &serviceDomain,
+			Id:             nil,
+			ReturnResponse: false,
+			Service:        &serviceService,
+			Target:         target,
+			Type:           &serviceType,
 		},
 		ServiceData: nil,
 	}
@@ -441,7 +422,4 @@ func (h *HomeassistantUpdateEntity) Targets() []string {
 }
 func (h *HomeassistantUpdateEntity) Name() string {
 	return fmt.Sprintf("%s.%s", *h.Domain, *h.Service)
-}
-func (h *HomeassistantUpdateEntity) SetID(id *int) {
-	h.Id = id
 }

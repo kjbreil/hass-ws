@@ -17,11 +17,12 @@ func NewLogbookLog(target Target) *LogbookLog {
 	serviceService := "log"
 	l := &LogbookLog{
 		ServiceBase: ServiceBase{
-			Domain:  &serviceDomain,
-			Id:      nil,
-			Service: &serviceService,
-			Target:  target,
-			Type:    &serviceType,
+			Domain:         &serviceDomain,
+			Id:             nil,
+			ReturnResponse: false,
+			Service:        &serviceService,
+			Target:         target,
+			Type:           &serviceType,
 		},
 		ServiceData: LogbookLogParams{},
 	}
@@ -59,7 +60,4 @@ func (l *LogbookLog) Targets() []string {
 }
 func (l *LogbookLog) Name() string {
 	return fmt.Sprintf("%s.%s", *l.Domain, *l.Service)
-}
-func (l *LogbookLog) SetID(id *int) {
-	l.Id = id
 }

@@ -17,11 +17,12 @@ func NewOpnsenseCloseNotice(target Target) *OpnsenseCloseNotice {
 	serviceService := "close_notice"
 	o := &OpnsenseCloseNotice{
 		ServiceBase: ServiceBase{
-			Domain:  &serviceDomain,
-			Id:      nil,
-			Service: &serviceService,
-			Target:  target,
-			Type:    &serviceType,
+			Domain:         &serviceDomain,
+			Id:             nil,
+			ReturnResponse: false,
+			Service:        &serviceService,
+			Target:         target,
+			Type:           &serviceType,
 		},
 		ServiceData: nil,
 	}
@@ -43,9 +44,6 @@ func (o *OpnsenseCloseNotice) Targets() []string {
 func (o *OpnsenseCloseNotice) Name() string {
 	return fmt.Sprintf("%s.%s", *o.Domain, *o.Service)
 }
-func (o *OpnsenseCloseNotice) SetID(id *int) {
-	o.Id = id
-}
 
 // NewOpnsenseFileNotice creates the object that can be sent to Home Assistant for domain opnsense, service file_notice
 // "Files a notice(s)."
@@ -55,11 +53,12 @@ func NewOpnsenseFileNotice(target Target) *OpnsenseFileNotice {
 	serviceService := "file_notice"
 	o := &OpnsenseFileNotice{
 		ServiceBase: ServiceBase{
-			Domain:  &serviceDomain,
-			Id:      nil,
-			Service: &serviceService,
-			Target:  target,
-			Type:    &serviceType,
+			Domain:         &serviceDomain,
+			Id:             nil,
+			ReturnResponse: false,
+			Service:        &serviceService,
+			Target:         target,
+			Type:           &serviceType,
 		},
 		ServiceData: nil,
 	}
@@ -81,9 +80,6 @@ func (o *OpnsenseFileNotice) Targets() []string {
 func (o *OpnsenseFileNotice) Name() string {
 	return fmt.Sprintf("%s.%s", *o.Domain, *o.Service)
 }
-func (o *OpnsenseFileNotice) SetID(id *int) {
-	o.Id = id
-}
 
 // NewOpnsenseRestartService creates the object that can be sent to Home Assistant for domain opnsense, service restart_service
 // "Restarts a service."
@@ -93,11 +89,12 @@ func NewOpnsenseRestartService(target Target) *OpnsenseRestartService {
 	serviceService := "restart_service"
 	o := &OpnsenseRestartService{
 		ServiceBase: ServiceBase{
-			Domain:  &serviceDomain,
-			Id:      nil,
-			Service: &serviceService,
-			Target:  target,
-			Type:    &serviceType,
+			Domain:         &serviceDomain,
+			Id:             nil,
+			ReturnResponse: false,
+			Service:        &serviceService,
+			Target:         target,
+			Type:           &serviceType,
 		},
 		ServiceData: nil,
 	}
@@ -119,9 +116,6 @@ func (o *OpnsenseRestartService) Targets() []string {
 func (o *OpnsenseRestartService) Name() string {
 	return fmt.Sprintf("%s.%s", *o.Domain, *o.Service)
 }
-func (o *OpnsenseRestartService) SetID(id *int) {
-	o.Id = id
-}
 
 // NewOpnsenseSendWol creates the object that can be sent to Home Assistant for domain opnsense, service send_wol
 // "Sends wake-on-lan magic packet."
@@ -131,11 +125,12 @@ func NewOpnsenseSendWol(target Target) *OpnsenseSendWol {
 	serviceService := "send_wol"
 	o := &OpnsenseSendWol{
 		ServiceBase: ServiceBase{
-			Domain:  &serviceDomain,
-			Id:      nil,
-			Service: &serviceService,
-			Target:  target,
-			Type:    &serviceType,
+			Domain:         &serviceDomain,
+			Id:             nil,
+			ReturnResponse: false,
+			Service:        &serviceService,
+			Target:         target,
+			Type:           &serviceType,
 		},
 		ServiceData: nil,
 	}
@@ -157,9 +152,6 @@ func (o *OpnsenseSendWol) Targets() []string {
 func (o *OpnsenseSendWol) Name() string {
 	return fmt.Sprintf("%s.%s", *o.Domain, *o.Service)
 }
-func (o *OpnsenseSendWol) SetID(id *int) {
-	o.Id = id
-}
 
 // NewOpnsenseStartService creates the object that can be sent to Home Assistant for domain opnsense, service start_service
 // "Starts a service."
@@ -169,11 +161,12 @@ func NewOpnsenseStartService(target Target) *OpnsenseStartService {
 	serviceService := "start_service"
 	o := &OpnsenseStartService{
 		ServiceBase: ServiceBase{
-			Domain:  &serviceDomain,
-			Id:      nil,
-			Service: &serviceService,
-			Target:  target,
-			Type:    &serviceType,
+			Domain:         &serviceDomain,
+			Id:             nil,
+			ReturnResponse: false,
+			Service:        &serviceService,
+			Target:         target,
+			Type:           &serviceType,
 		},
 		ServiceData: nil,
 	}
@@ -195,9 +188,6 @@ func (o *OpnsenseStartService) Targets() []string {
 func (o *OpnsenseStartService) Name() string {
 	return fmt.Sprintf("%s.%s", *o.Domain, *o.Service)
 }
-func (o *OpnsenseStartService) SetID(id *int) {
-	o.Id = id
-}
 
 // NewOpnsenseStopService creates the object that can be sent to Home Assistant for domain opnsense, service stop_service
 // "Stops a service."
@@ -207,11 +197,12 @@ func NewOpnsenseStopService(target Target) *OpnsenseStopService {
 	serviceService := "stop_service"
 	o := &OpnsenseStopService{
 		ServiceBase: ServiceBase{
-			Domain:  &serviceDomain,
-			Id:      nil,
-			Service: &serviceService,
-			Target:  target,
-			Type:    &serviceType,
+			Domain:         &serviceDomain,
+			Id:             nil,
+			ReturnResponse: false,
+			Service:        &serviceService,
+			Target:         target,
+			Type:           &serviceType,
 		},
 		ServiceData: nil,
 	}
@@ -233,9 +224,6 @@ func (o *OpnsenseStopService) Targets() []string {
 func (o *OpnsenseStopService) Name() string {
 	return fmt.Sprintf("%s.%s", *o.Domain, *o.Service)
 }
-func (o *OpnsenseStopService) SetID(id *int) {
-	o.Id = id
-}
 
 // NewOpnsenseSystemHalt creates the object that can be sent to Home Assistant for domain opnsense, service system_halt
 // "Halts the system."
@@ -245,11 +233,12 @@ func NewOpnsenseSystemHalt(target Target) *OpnsenseSystemHalt {
 	serviceService := "system_halt"
 	o := &OpnsenseSystemHalt{
 		ServiceBase: ServiceBase{
-			Domain:  &serviceDomain,
-			Id:      nil,
-			Service: &serviceService,
-			Target:  target,
-			Type:    &serviceType,
+			Domain:         &serviceDomain,
+			Id:             nil,
+			ReturnResponse: false,
+			Service:        &serviceService,
+			Target:         target,
+			Type:           &serviceType,
 		},
 		ServiceData: nil,
 	}
@@ -271,9 +260,6 @@ func (o *OpnsenseSystemHalt) Targets() []string {
 func (o *OpnsenseSystemHalt) Name() string {
 	return fmt.Sprintf("%s.%s", *o.Domain, *o.Service)
 }
-func (o *OpnsenseSystemHalt) SetID(id *int) {
-	o.Id = id
-}
 
 // NewOpnsenseSystemReboot creates the object that can be sent to Home Assistant for domain opnsense, service system_reboot
 // "Reboots the system."
@@ -283,11 +269,12 @@ func NewOpnsenseSystemReboot(target Target) *OpnsenseSystemReboot {
 	serviceService := "system_reboot"
 	o := &OpnsenseSystemReboot{
 		ServiceBase: ServiceBase{
-			Domain:  &serviceDomain,
-			Id:      nil,
-			Service: &serviceService,
-			Target:  target,
-			Type:    &serviceType,
+			Domain:         &serviceDomain,
+			Id:             nil,
+			ReturnResponse: false,
+			Service:        &serviceService,
+			Target:         target,
+			Type:           &serviceType,
 		},
 		ServiceData: nil,
 	}
@@ -308,7 +295,4 @@ func (o *OpnsenseSystemReboot) Targets() []string {
 }
 func (o *OpnsenseSystemReboot) Name() string {
 	return fmt.Sprintf("%s.%s", *o.Domain, *o.Service)
-}
-func (o *OpnsenseSystemReboot) SetID(id *int) {
-	o.Id = id
 }

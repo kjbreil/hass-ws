@@ -17,11 +17,12 @@ func NewHueActivateScene(target Target) *HueActivateScene {
 	serviceService := "activate_scene"
 	h := &HueActivateScene{
 		ServiceBase: ServiceBase{
-			Domain:  &serviceDomain,
-			Id:      nil,
-			Service: &serviceService,
-			Target:  target,
-			Type:    &serviceType,
+			Domain:         &serviceDomain,
+			Id:             nil,
+			ReturnResponse: false,
+			Service:        &serviceService,
+			Target:         target,
+			Type:           &serviceType,
 		},
 		ServiceData: HueActivateSceneParams{},
 	}
@@ -60,9 +61,6 @@ func (h *HueActivateScene) Targets() []string {
 func (h *HueActivateScene) Name() string {
 	return fmt.Sprintf("%s.%s", *h.Domain, *h.Service)
 }
-func (h *HueActivateScene) SetID(id *int) {
-	h.Id = id
-}
 
 // NewHueHueActivateScene creates the object that can be sent to Home Assistant for domain hue, service hue_activate_scene
 // "Activate a hue scene stored in the hue hub."
@@ -72,11 +70,12 @@ func NewHueHueActivateScene(target Target) *HueHueActivateScene {
 	serviceService := "hue_activate_scene"
 	h := &HueHueActivateScene{
 		ServiceBase: ServiceBase{
-			Domain:  &serviceDomain,
-			Id:      nil,
-			Service: &serviceService,
-			Target:  target,
-			Type:    &serviceType,
+			Domain:         &serviceDomain,
+			Id:             nil,
+			ReturnResponse: false,
+			Service:        &serviceService,
+			Target:         target,
+			Type:           &serviceType,
 		},
 		ServiceData: HueHueActivateSceneParams{},
 	}
@@ -109,7 +108,4 @@ func (h *HueHueActivateScene) Targets() []string {
 }
 func (h *HueHueActivateScene) Name() string {
 	return fmt.Sprintf("%s.%s", *h.Domain, *h.Service)
-}
-func (h *HueHueActivateScene) SetID(id *int) {
-	h.Id = id
 }

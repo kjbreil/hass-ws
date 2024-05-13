@@ -35,12 +35,9 @@ func (c *Client) run() {
 			}
 
 			if message.ID != nil {
-				for i, callback := range c.callbacks.GetMap() {
-					if i == *message.ID {
-						c.callbacks.Delete(i)
-						callback <- message
-						continue mainLoop
-					}
+				if callback, ok := c.callbacks.Get(*message.ID); ok {
+					callback <- message
+					continue mainLoop
 				}
 			}
 
@@ -64,7 +61,7 @@ func (c *Client) run() {
 			case <-ticker.C:
 
 				callback := make(chan *model.Message)
-				_, err := c.sendWithCallback(&model.Message{
+				id, err := c.sendWithCallback(&model.Message{
 					Type: model.MessageTypePing,
 				}, callback)
 				if err != nil {
@@ -81,7 +78,8 @@ func (c *Client) run() {
 					c.logger.Info("reconnect succeeded")
 					return
 				}
-				go func() {
+				go func(id int) {
+					defer c.callbacks.Delete(id)
 					// ping needs to come back within a second or connection needs restarting
 					restartTicker := time.NewTicker(time.Second)
 					select {
@@ -101,7 +99,7 @@ func (c *Client) run() {
 						c.logger.Info("reconnect succeeded")
 
 					}
-				}()
+				}(id)
 			}
 		}
 	}()

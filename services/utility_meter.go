@@ -17,11 +17,12 @@ func NewUtilityMeterCalibrate(target Target) *UtilityMeterCalibrate {
 	serviceService := "calibrate"
 	u := &UtilityMeterCalibrate{
 		ServiceBase: ServiceBase{
-			Domain:  &serviceDomain,
-			Id:      nil,
-			Service: &serviceService,
-			Target:  target,
-			Type:    &serviceType,
+			Domain:         &serviceDomain,
+			Id:             nil,
+			ReturnResponse: false,
+			Service:        &serviceService,
+			Target:         target,
+			Type:           &serviceType,
 		},
 		ServiceData: UtilityMeterCalibrateParams{},
 	}
@@ -50,9 +51,6 @@ func (u *UtilityMeterCalibrate) Targets() []string {
 func (u *UtilityMeterCalibrate) Name() string {
 	return fmt.Sprintf("%s.%s", *u.Domain, *u.Service)
 }
-func (u *UtilityMeterCalibrate) SetID(id *int) {
-	u.Id = id
-}
 
 // NewUtilityMeterReset creates the object that can be sent to Home Assistant for domain utility_meter, service reset
 // "Resets all counters of a utility meter."
@@ -62,11 +60,12 @@ func NewUtilityMeterReset(target Target) *UtilityMeterReset {
 	serviceService := "reset"
 	u := &UtilityMeterReset{
 		ServiceBase: ServiceBase{
-			Domain:  &serviceDomain,
-			Id:      nil,
-			Service: &serviceService,
-			Target:  target,
-			Type:    &serviceType,
+			Domain:         &serviceDomain,
+			Id:             nil,
+			ReturnResponse: false,
+			Service:        &serviceService,
+			Target:         target,
+			Type:           &serviceType,
 		},
 		ServiceData: nil,
 	}
@@ -87,7 +86,4 @@ func (u *UtilityMeterReset) Targets() []string {
 }
 func (u *UtilityMeterReset) Name() string {
 	return fmt.Sprintf("%s.%s", *u.Domain, *u.Service)
-}
-func (u *UtilityMeterReset) SetID(id *int) {
-	u.Id = id
 }

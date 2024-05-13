@@ -17,11 +17,12 @@ func NewInputBooleanReload(target Target) *InputBooleanReload {
 	serviceService := "reload"
 	i := &InputBooleanReload{
 		ServiceBase: ServiceBase{
-			Domain:  &serviceDomain,
-			Id:      nil,
-			Service: &serviceService,
-			Target:  target,
-			Type:    &serviceType,
+			Domain:         &serviceDomain,
+			Id:             nil,
+			ReturnResponse: false,
+			Service:        &serviceService,
+			Target:         target,
+			Type:           &serviceType,
 		},
 		ServiceData: nil,
 	}
@@ -43,9 +44,6 @@ func (i *InputBooleanReload) Targets() []string {
 func (i *InputBooleanReload) Name() string {
 	return fmt.Sprintf("%s.%s", *i.Domain, *i.Service)
 }
-func (i *InputBooleanReload) SetID(id *int) {
-	i.Id = id
-}
 
 // NewInputBooleanToggle creates the object that can be sent to Home Assistant for domain input_boolean, service toggle
 // "Toggle an input boolean"
@@ -55,11 +53,12 @@ func NewInputBooleanToggle(target Target) *InputBooleanToggle {
 	serviceService := "toggle"
 	i := &InputBooleanToggle{
 		ServiceBase: ServiceBase{
-			Domain:  &serviceDomain,
-			Id:      nil,
-			Service: &serviceService,
-			Target:  target,
-			Type:    &serviceType,
+			Domain:         &serviceDomain,
+			Id:             nil,
+			ReturnResponse: false,
+			Service:        &serviceService,
+			Target:         target,
+			Type:           &serviceType,
 		},
 		ServiceData: nil,
 	}
@@ -81,9 +80,6 @@ func (i *InputBooleanToggle) Targets() []string {
 func (i *InputBooleanToggle) Name() string {
 	return fmt.Sprintf("%s.%s", *i.Domain, *i.Service)
 }
-func (i *InputBooleanToggle) SetID(id *int) {
-	i.Id = id
-}
 
 // NewInputBooleanTurnOff creates the object that can be sent to Home Assistant for domain input_boolean, service turn_off
 // "Turn off an input boolean"
@@ -93,11 +89,12 @@ func NewInputBooleanTurnOff(target Target) *InputBooleanTurnOff {
 	serviceService := "turn_off"
 	i := &InputBooleanTurnOff{
 		ServiceBase: ServiceBase{
-			Domain:  &serviceDomain,
-			Id:      nil,
-			Service: &serviceService,
-			Target:  target,
-			Type:    &serviceType,
+			Domain:         &serviceDomain,
+			Id:             nil,
+			ReturnResponse: false,
+			Service:        &serviceService,
+			Target:         target,
+			Type:           &serviceType,
 		},
 		ServiceData: nil,
 	}
@@ -119,9 +116,6 @@ func (i *InputBooleanTurnOff) Targets() []string {
 func (i *InputBooleanTurnOff) Name() string {
 	return fmt.Sprintf("%s.%s", *i.Domain, *i.Service)
 }
-func (i *InputBooleanTurnOff) SetID(id *int) {
-	i.Id = id
-}
 
 // NewInputBooleanTurnOn creates the object that can be sent to Home Assistant for domain input_boolean, service turn_on
 // "Turn on an input boolean"
@@ -131,11 +125,12 @@ func NewInputBooleanTurnOn(target Target) *InputBooleanTurnOn {
 	serviceService := "turn_on"
 	i := &InputBooleanTurnOn{
 		ServiceBase: ServiceBase{
-			Domain:  &serviceDomain,
-			Id:      nil,
-			Service: &serviceService,
-			Target:  target,
-			Type:    &serviceType,
+			Domain:         &serviceDomain,
+			Id:             nil,
+			ReturnResponse: false,
+			Service:        &serviceService,
+			Target:         target,
+			Type:           &serviceType,
 		},
 		ServiceData: nil,
 	}
@@ -156,7 +151,4 @@ func (i *InputBooleanTurnOn) Targets() []string {
 }
 func (i *InputBooleanTurnOn) Name() string {
 	return fmt.Sprintf("%s.%s", *i.Domain, *i.Service)
-}
-func (i *InputBooleanTurnOn) SetID(id *int) {
-	i.Id = id
 }

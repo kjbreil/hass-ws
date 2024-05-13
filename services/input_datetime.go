@@ -17,11 +17,12 @@ func NewInputDatetimeReload(target Target) *InputDatetimeReload {
 	serviceService := "reload"
 	i := &InputDatetimeReload{
 		ServiceBase: ServiceBase{
-			Domain:  &serviceDomain,
-			Id:      nil,
-			Service: &serviceService,
-			Target:  target,
-			Type:    &serviceType,
+			Domain:         &serviceDomain,
+			Id:             nil,
+			ReturnResponse: false,
+			Service:        &serviceService,
+			Target:         target,
+			Type:           &serviceType,
 		},
 		ServiceData: nil,
 	}
@@ -43,9 +44,6 @@ func (i *InputDatetimeReload) Targets() []string {
 func (i *InputDatetimeReload) Name() string {
 	return fmt.Sprintf("%s.%s", *i.Domain, *i.Service)
 }
-func (i *InputDatetimeReload) SetID(id *int) {
-	i.Id = id
-}
 
 // NewInputDatetimeSetDatetime creates the object that can be sent to Home Assistant for domain input_datetime, service set_datetime
 // "This can be used to dynamically set the date and/or time."
@@ -55,11 +53,12 @@ func NewInputDatetimeSetDatetime(target Target) *InputDatetimeSetDatetime {
 	serviceService := "set_datetime"
 	i := &InputDatetimeSetDatetime{
 		ServiceBase: ServiceBase{
-			Domain:  &serviceDomain,
-			Id:      nil,
-			Service: &serviceService,
-			Target:  target,
-			Type:    &serviceType,
+			Domain:         &serviceDomain,
+			Id:             nil,
+			ReturnResponse: false,
+			Service:        &serviceService,
+			Target:         target,
+			Type:           &serviceType,
 		},
 		ServiceData: InputDatetimeSetDatetimeParams{},
 	}
@@ -97,7 +96,4 @@ func (i *InputDatetimeSetDatetime) Targets() []string {
 }
 func (i *InputDatetimeSetDatetime) Name() string {
 	return fmt.Sprintf("%s.%s", *i.Domain, *i.Service)
-}
-func (i *InputDatetimeSetDatetime) SetID(id *int) {
-	i.Id = id
 }

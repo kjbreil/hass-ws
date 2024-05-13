@@ -17,11 +17,12 @@ func NewFrontendReloadThemes(target Target) *FrontendReloadThemes {
 	serviceService := "reload_themes"
 	f := &FrontendReloadThemes{
 		ServiceBase: ServiceBase{
-			Domain:  &serviceDomain,
-			Id:      nil,
-			Service: &serviceService,
-			Target:  target,
-			Type:    &serviceType,
+			Domain:         &serviceDomain,
+			Id:             nil,
+			ReturnResponse: false,
+			Service:        &serviceService,
+			Target:         target,
+			Type:           &serviceType,
 		},
 		ServiceData: nil,
 	}
@@ -43,9 +44,6 @@ func (f *FrontendReloadThemes) Targets() []string {
 func (f *FrontendReloadThemes) Name() string {
 	return fmt.Sprintf("%s.%s", *f.Domain, *f.Service)
 }
-func (f *FrontendReloadThemes) SetID(id *int) {
-	f.Id = id
-}
 
 // NewFrontendSetTheme creates the object that can be sent to Home Assistant for domain frontend, service set_theme
 // "Set a theme unless the client selected per-device theme."
@@ -55,11 +53,12 @@ func NewFrontendSetTheme(target Target) *FrontendSetTheme {
 	serviceService := "set_theme"
 	f := &FrontendSetTheme{
 		ServiceBase: ServiceBase{
-			Domain:  &serviceDomain,
-			Id:      nil,
-			Service: &serviceService,
-			Target:  target,
-			Type:    &serviceType,
+			Domain:         &serviceDomain,
+			Id:             nil,
+			ReturnResponse: false,
+			Service:        &serviceService,
+			Target:         target,
+			Type:           &serviceType,
 		},
 		ServiceData: FrontendSetThemeParams{},
 	}
@@ -87,7 +86,4 @@ func (f *FrontendSetTheme) Targets() []string {
 }
 func (f *FrontendSetTheme) Name() string {
 	return fmt.Sprintf("%s.%s", *f.Domain, *f.Service)
-}
-func (f *FrontendSetTheme) SetID(id *int) {
-	f.Id = id
 }

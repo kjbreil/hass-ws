@@ -17,11 +17,12 @@ func NewSystemLogClear(target Target) *SystemLogClear {
 	serviceService := "clear"
 	s := &SystemLogClear{
 		ServiceBase: ServiceBase{
-			Domain:  &serviceDomain,
-			Id:      nil,
-			Service: &serviceService,
-			Target:  target,
-			Type:    &serviceType,
+			Domain:         &serviceDomain,
+			Id:             nil,
+			ReturnResponse: false,
+			Service:        &serviceService,
+			Target:         target,
+			Type:           &serviceType,
 		},
 		ServiceData: nil,
 	}
@@ -43,9 +44,6 @@ func (s *SystemLogClear) Targets() []string {
 func (s *SystemLogClear) Name() string {
 	return fmt.Sprintf("%s.%s", *s.Domain, *s.Service)
 }
-func (s *SystemLogClear) SetID(id *int) {
-	s.Id = id
-}
 
 // NewSystemLogWrite creates the object that can be sent to Home Assistant for domain system_log, service write
 // "Write log entry."
@@ -55,11 +53,12 @@ func NewSystemLogWrite(target Target) *SystemLogWrite {
 	serviceService := "write"
 	s := &SystemLogWrite{
 		ServiceBase: ServiceBase{
-			Domain:  &serviceDomain,
-			Id:      nil,
-			Service: &serviceService,
-			Target:  target,
-			Type:    &serviceType,
+			Domain:         &serviceDomain,
+			Id:             nil,
+			ReturnResponse: false,
+			Service:        &serviceService,
+			Target:         target,
+			Type:           &serviceType,
 		},
 		ServiceData: SystemLogWriteParams{},
 	}
@@ -97,7 +96,4 @@ func (s *SystemLogWrite) Targets() []string {
 }
 func (s *SystemLogWrite) Name() string {
 	return fmt.Sprintf("%s.%s", *s.Domain, *s.Service)
-}
-func (s *SystemLogWrite) SetID(id *int) {
-	s.Id = id
 }

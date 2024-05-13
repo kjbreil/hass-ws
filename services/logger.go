@@ -17,11 +17,12 @@ func NewLoggerSetDefaultLevel(target Target) *LoggerSetDefaultLevel {
 	serviceService := "set_default_level"
 	l := &LoggerSetDefaultLevel{
 		ServiceBase: ServiceBase{
-			Domain:  &serviceDomain,
-			Id:      nil,
-			Service: &serviceService,
-			Target:  target,
-			Type:    &serviceType,
+			Domain:         &serviceDomain,
+			Id:             nil,
+			ReturnResponse: false,
+			Service:        &serviceService,
+			Target:         target,
+			Type:           &serviceType,
 		},
 		ServiceData: LoggerSetDefaultLevelParams{},
 	}
@@ -50,9 +51,6 @@ func (l *LoggerSetDefaultLevel) Targets() []string {
 func (l *LoggerSetDefaultLevel) Name() string {
 	return fmt.Sprintf("%s.%s", *l.Domain, *l.Service)
 }
-func (l *LoggerSetDefaultLevel) SetID(id *int) {
-	l.Id = id
-}
 
 // NewLoggerSetLevel creates the object that can be sent to Home Assistant for domain logger, service set_level
 // "Set log level for integrations."
@@ -62,11 +60,12 @@ func NewLoggerSetLevel(target Target) *LoggerSetLevel {
 	serviceService := "set_level"
 	l := &LoggerSetLevel{
 		ServiceBase: ServiceBase{
-			Domain:  &serviceDomain,
-			Id:      nil,
-			Service: &serviceService,
-			Target:  target,
-			Type:    &serviceType,
+			Domain:         &serviceDomain,
+			Id:             nil,
+			ReturnResponse: false,
+			Service:        &serviceService,
+			Target:         target,
+			Type:           &serviceType,
 		},
 		ServiceData: nil,
 	}
@@ -87,7 +86,4 @@ func (l *LoggerSetLevel) Targets() []string {
 }
 func (l *LoggerSetLevel) Name() string {
 	return fmt.Sprintf("%s.%s", *l.Domain, *l.Service)
-}
-func (l *LoggerSetLevel) SetID(id *int) {
-	l.Id = id
 }

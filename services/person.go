@@ -17,11 +17,12 @@ func NewPersonReload(target Target) *PersonReload {
 	serviceService := "reload"
 	p := &PersonReload{
 		ServiceBase: ServiceBase{
-			Domain:  &serviceDomain,
-			Id:      nil,
-			Service: &serviceService,
-			Target:  target,
-			Type:    &serviceType,
+			Domain:         &serviceDomain,
+			Id:             nil,
+			ReturnResponse: false,
+			Service:        &serviceService,
+			Target:         target,
+			Type:           &serviceType,
 		},
 		ServiceData: nil,
 	}
@@ -42,7 +43,4 @@ func (p *PersonReload) Targets() []string {
 }
 func (p *PersonReload) Name() string {
 	return fmt.Sprintf("%s.%s", *p.Domain, *p.Service)
-}
-func (p *PersonReload) SetID(id *int) {
-	p.Id = id
 }

@@ -17,11 +17,12 @@ func NewCastShowLovelaceView(target Target) *CastShowLovelaceView {
 	serviceService := "show_lovelace_view"
 	c := &CastShowLovelaceView{
 		ServiceBase: ServiceBase{
-			Domain:  &serviceDomain,
-			Id:      nil,
-			Service: &serviceService,
-			Target:  target,
-			Type:    &serviceType,
+			Domain:         &serviceDomain,
+			Id:             nil,
+			ReturnResponse: false,
+			Service:        &serviceService,
+			Target:         target,
+			Type:           &serviceType,
 		},
 		ServiceData: CastShowLovelaceViewParams{},
 	}
@@ -54,7 +55,4 @@ func (c *CastShowLovelaceView) Targets() []string {
 }
 func (c *CastShowLovelaceView) Name() string {
 	return fmt.Sprintf("%s.%s", *c.Domain, *c.Service)
-}
-func (c *CastShowLovelaceView) SetID(id *int) {
-	c.Id = id
 }

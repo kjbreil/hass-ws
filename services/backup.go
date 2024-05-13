@@ -17,11 +17,12 @@ func NewBackupCreate(target Target) *BackupCreate {
 	serviceService := "create"
 	b := &BackupCreate{
 		ServiceBase: ServiceBase{
-			Domain:  &serviceDomain,
-			Id:      nil,
-			Service: &serviceService,
-			Target:  target,
-			Type:    &serviceType,
+			Domain:         &serviceDomain,
+			Id:             nil,
+			ReturnResponse: false,
+			Service:        &serviceService,
+			Target:         target,
+			Type:           &serviceType,
 		},
 		ServiceData: nil,
 	}
@@ -42,7 +43,4 @@ func (b *BackupCreate) Targets() []string {
 }
 func (b *BackupCreate) Name() string {
 	return fmt.Sprintf("%s.%s", *b.Domain, *b.Service)
-}
-func (b *BackupCreate) SetID(id *int) {
-	b.Id = id
 }

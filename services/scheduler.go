@@ -17,11 +17,12 @@ func NewSchedulerAdd(target Target) *SchedulerAdd {
 	serviceService := "add"
 	s := &SchedulerAdd{
 		ServiceBase: ServiceBase{
-			Domain:  &serviceDomain,
-			Id:      nil,
-			Service: &serviceService,
-			Target:  target,
-			Type:    &serviceType,
+			Domain:         &serviceDomain,
+			Id:             nil,
+			ReturnResponse: false,
+			Service:        &serviceService,
+			Target:         target,
+			Type:           &serviceType,
 		},
 		ServiceData: SchedulerAddParams{},
 	}
@@ -55,9 +56,6 @@ func (s *SchedulerAdd) Targets() []string {
 func (s *SchedulerAdd) Name() string {
 	return fmt.Sprintf("%s.%s", *s.Domain, *s.Service)
 }
-func (s *SchedulerAdd) SetID(id *int) {
-	s.Id = id
-}
 
 // NewSchedulerCopy creates the object that can be sent to Home Assistant for domain scheduler, service copy
 // "Duplicate a schedule entity"
@@ -67,11 +65,12 @@ func NewSchedulerCopy(target Target) *SchedulerCopy {
 	serviceService := "copy"
 	s := &SchedulerCopy{
 		ServiceBase: ServiceBase{
-			Domain:  &serviceDomain,
-			Id:      nil,
-			Service: &serviceService,
-			Target:  target,
-			Type:    &serviceType,
+			Domain:         &serviceDomain,
+			Id:             nil,
+			ReturnResponse: false,
+			Service:        &serviceService,
+			Target:         target,
+			Type:           &serviceType,
 		},
 		ServiceData: SchedulerCopyParams{},
 	}
@@ -100,9 +99,6 @@ func (s *SchedulerCopy) Targets() []string {
 func (s *SchedulerCopy) Name() string {
 	return fmt.Sprintf("%s.%s", *s.Domain, *s.Service)
 }
-func (s *SchedulerCopy) SetID(id *int) {
-	s.Id = id
-}
 
 // NewSchedulerEdit creates the object that can be sent to Home Assistant for domain scheduler, service edit
 // "Edit a schedule entity"
@@ -112,11 +108,12 @@ func NewSchedulerEdit(target Target) *SchedulerEdit {
 	serviceService := "edit"
 	s := &SchedulerEdit{
 		ServiceBase: ServiceBase{
-			Domain:  &serviceDomain,
-			Id:      nil,
-			Service: &serviceService,
-			Target:  target,
-			Type:    &serviceType,
+			Domain:         &serviceDomain,
+			Id:             nil,
+			ReturnResponse: false,
+			Service:        &serviceService,
+			Target:         target,
+			Type:           &serviceType,
 		},
 		ServiceData: SchedulerEditParams{},
 	}
@@ -150,9 +147,6 @@ func (s *SchedulerEdit) Targets() []string {
 func (s *SchedulerEdit) Name() string {
 	return fmt.Sprintf("%s.%s", *s.Domain, *s.Service)
 }
-func (s *SchedulerEdit) SetID(id *int) {
-	s.Id = id
-}
 
 // NewSchedulerRemove creates the object that can be sent to Home Assistant for domain scheduler, service remove
 // "Remove a schedule entity"
@@ -162,11 +156,12 @@ func NewSchedulerRemove(target Target) *SchedulerRemove {
 	serviceService := "remove"
 	s := &SchedulerRemove{
 		ServiceBase: ServiceBase{
-			Domain:  &serviceDomain,
-			Id:      nil,
-			Service: &serviceService,
-			Target:  target,
-			Type:    &serviceType,
+			Domain:         &serviceDomain,
+			Id:             nil,
+			ReturnResponse: false,
+			Service:        &serviceService,
+			Target:         target,
+			Type:           &serviceType,
 		},
 		ServiceData: nil,
 	}
@@ -188,9 +183,6 @@ func (s *SchedulerRemove) Targets() []string {
 func (s *SchedulerRemove) Name() string {
 	return fmt.Sprintf("%s.%s", *s.Domain, *s.Service)
 }
-func (s *SchedulerRemove) SetID(id *int) {
-	s.Id = id
-}
 
 // NewSchedulerRunAction creates the object that can be sent to Home Assistant for domain scheduler, service run_action
 // "Execute the action of a schedule, optionally at a given time."
@@ -200,11 +192,12 @@ func NewSchedulerRunAction(target Target) *SchedulerRunAction {
 	serviceService := "run_action"
 	s := &SchedulerRunAction{
 		ServiceBase: ServiceBase{
-			Domain:  &serviceDomain,
-			Id:      nil,
-			Service: &serviceService,
-			Target:  target,
-			Type:    &serviceType,
+			Domain:         &serviceDomain,
+			Id:             nil,
+			ReturnResponse: false,
+			Service:        &serviceService,
+			Target:         target,
+			Type:           &serviceType,
 		},
 		ServiceData: nil,
 	}
@@ -225,7 +218,4 @@ func (s *SchedulerRunAction) Targets() []string {
 }
 func (s *SchedulerRunAction) Name() string {
 	return fmt.Sprintf("%s.%s", *s.Domain, *s.Service)
-}
-func (s *SchedulerRunAction) SetID(id *int) {
-	s.Id = id
 }

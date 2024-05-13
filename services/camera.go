@@ -17,11 +17,12 @@ func NewCameraDisableMotionDetection(target Target) *CameraDisableMotionDetectio
 	serviceService := "disable_motion_detection"
 	c := &CameraDisableMotionDetection{
 		ServiceBase: ServiceBase{
-			Domain:  &serviceDomain,
-			Id:      nil,
-			Service: &serviceService,
-			Target:  target,
-			Type:    &serviceType,
+			Domain:         &serviceDomain,
+			Id:             nil,
+			ReturnResponse: false,
+			Service:        &serviceService,
+			Target:         target,
+			Type:           &serviceType,
 		},
 		ServiceData: nil,
 	}
@@ -43,9 +44,6 @@ func (c *CameraDisableMotionDetection) Targets() []string {
 func (c *CameraDisableMotionDetection) Name() string {
 	return fmt.Sprintf("%s.%s", *c.Domain, *c.Service)
 }
-func (c *CameraDisableMotionDetection) SetID(id *int) {
-	c.Id = id
-}
 
 // NewCameraEnableMotionDetection creates the object that can be sent to Home Assistant for domain camera, service enable_motion_detection
 // "Enable the motion detection in a camera."
@@ -55,11 +53,12 @@ func NewCameraEnableMotionDetection(target Target) *CameraEnableMotionDetection 
 	serviceService := "enable_motion_detection"
 	c := &CameraEnableMotionDetection{
 		ServiceBase: ServiceBase{
-			Domain:  &serviceDomain,
-			Id:      nil,
-			Service: &serviceService,
-			Target:  target,
-			Type:    &serviceType,
+			Domain:         &serviceDomain,
+			Id:             nil,
+			ReturnResponse: false,
+			Service:        &serviceService,
+			Target:         target,
+			Type:           &serviceType,
 		},
 		ServiceData: nil,
 	}
@@ -81,9 +80,6 @@ func (c *CameraEnableMotionDetection) Targets() []string {
 func (c *CameraEnableMotionDetection) Name() string {
 	return fmt.Sprintf("%s.%s", *c.Domain, *c.Service)
 }
-func (c *CameraEnableMotionDetection) SetID(id *int) {
-	c.Id = id
-}
 
 // NewCameraPlayStream creates the object that can be sent to Home Assistant for domain camera, service play_stream
 // "Play camera stream on supported media player."
@@ -93,11 +89,12 @@ func NewCameraPlayStream(target Target) *CameraPlayStream {
 	serviceService := "play_stream"
 	c := &CameraPlayStream{
 		ServiceBase: ServiceBase{
-			Domain:  &serviceDomain,
-			Id:      nil,
-			Service: &serviceService,
-			Target:  target,
-			Type:    &serviceType,
+			Domain:         &serviceDomain,
+			Id:             nil,
+			ReturnResponse: false,
+			Service:        &serviceService,
+			Target:         target,
+			Type:           &serviceType,
 		},
 		ServiceData: CameraPlayStreamParams{},
 	}
@@ -126,9 +123,6 @@ func (c *CameraPlayStream) Targets() []string {
 func (c *CameraPlayStream) Name() string {
 	return fmt.Sprintf("%s.%s", *c.Domain, *c.Service)
 }
-func (c *CameraPlayStream) SetID(id *int) {
-	c.Id = id
-}
 
 // NewCameraRecord creates the object that can be sent to Home Assistant for domain camera, service record
 // "Record live camera feed."
@@ -138,11 +132,12 @@ func NewCameraRecord(target Target) *CameraRecord {
 	serviceService := "record"
 	c := &CameraRecord{
 		ServiceBase: ServiceBase{
-			Domain:  &serviceDomain,
-			Id:      nil,
-			Service: &serviceService,
-			Target:  target,
-			Type:    &serviceType,
+			Domain:         &serviceDomain,
+			Id:             nil,
+			ReturnResponse: false,
+			Service:        &serviceService,
+			Target:         target,
+			Type:           &serviceType,
 		},
 		ServiceData: CameraRecordParams{},
 	}
@@ -181,9 +176,6 @@ func (c *CameraRecord) Targets() []string {
 func (c *CameraRecord) Name() string {
 	return fmt.Sprintf("%s.%s", *c.Domain, *c.Service)
 }
-func (c *CameraRecord) SetID(id *int) {
-	c.Id = id
-}
 
 // NewCameraSnapshot creates the object that can be sent to Home Assistant for domain camera, service snapshot
 // "Take a snapshot from a camera."
@@ -193,11 +185,12 @@ func NewCameraSnapshot(target Target) *CameraSnapshot {
 	serviceService := "snapshot"
 	c := &CameraSnapshot{
 		ServiceBase: ServiceBase{
-			Domain:  &serviceDomain,
-			Id:      nil,
-			Service: &serviceService,
-			Target:  target,
-			Type:    &serviceType,
+			Domain:         &serviceDomain,
+			Id:             nil,
+			ReturnResponse: false,
+			Service:        &serviceService,
+			Target:         target,
+			Type:           &serviceType,
 		},
 		ServiceData: CameraSnapshotParams{},
 	}
@@ -226,9 +219,6 @@ func (c *CameraSnapshot) Targets() []string {
 func (c *CameraSnapshot) Name() string {
 	return fmt.Sprintf("%s.%s", *c.Domain, *c.Service)
 }
-func (c *CameraSnapshot) SetID(id *int) {
-	c.Id = id
-}
 
 // NewCameraTurnOff creates the object that can be sent to Home Assistant for domain camera, service turn_off
 // "Turn off camera."
@@ -238,11 +228,12 @@ func NewCameraTurnOff(target Target) *CameraTurnOff {
 	serviceService := "turn_off"
 	c := &CameraTurnOff{
 		ServiceBase: ServiceBase{
-			Domain:  &serviceDomain,
-			Id:      nil,
-			Service: &serviceService,
-			Target:  target,
-			Type:    &serviceType,
+			Domain:         &serviceDomain,
+			Id:             nil,
+			ReturnResponse: false,
+			Service:        &serviceService,
+			Target:         target,
+			Type:           &serviceType,
 		},
 		ServiceData: nil,
 	}
@@ -264,9 +255,6 @@ func (c *CameraTurnOff) Targets() []string {
 func (c *CameraTurnOff) Name() string {
 	return fmt.Sprintf("%s.%s", *c.Domain, *c.Service)
 }
-func (c *CameraTurnOff) SetID(id *int) {
-	c.Id = id
-}
 
 // NewCameraTurnOn creates the object that can be sent to Home Assistant for domain camera, service turn_on
 // "Turn on camera."
@@ -276,11 +264,12 @@ func NewCameraTurnOn(target Target) *CameraTurnOn {
 	serviceService := "turn_on"
 	c := &CameraTurnOn{
 		ServiceBase: ServiceBase{
-			Domain:  &serviceDomain,
-			Id:      nil,
-			Service: &serviceService,
-			Target:  target,
-			Type:    &serviceType,
+			Domain:         &serviceDomain,
+			Id:             nil,
+			ReturnResponse: false,
+			Service:        &serviceService,
+			Target:         target,
+			Type:           &serviceType,
 		},
 		ServiceData: nil,
 	}
@@ -301,7 +290,4 @@ func (c *CameraTurnOn) Targets() []string {
 }
 func (c *CameraTurnOn) Name() string {
 	return fmt.Sprintf("%s.%s", *c.Domain, *c.Service)
-}
-func (c *CameraTurnOn) SetID(id *int) {
-	c.Id = id
 }

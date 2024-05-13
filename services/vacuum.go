@@ -17,11 +17,12 @@ func NewVacuumCleanSpot(target Target) *VacuumCleanSpot {
 	serviceService := "clean_spot"
 	v := &VacuumCleanSpot{
 		ServiceBase: ServiceBase{
-			Domain:  &serviceDomain,
-			Id:      nil,
-			Service: &serviceService,
-			Target:  target,
-			Type:    &serviceType,
+			Domain:         &serviceDomain,
+			Id:             nil,
+			ReturnResponse: false,
+			Service:        &serviceService,
+			Target:         target,
+			Type:           &serviceType,
 		},
 		ServiceData: nil,
 	}
@@ -43,9 +44,6 @@ func (v *VacuumCleanSpot) Targets() []string {
 func (v *VacuumCleanSpot) Name() string {
 	return fmt.Sprintf("%s.%s", *v.Domain, *v.Service)
 }
-func (v *VacuumCleanSpot) SetID(id *int) {
-	v.Id = id
-}
 
 // NewVacuumLocate creates the object that can be sent to Home Assistant for domain vacuum, service locate
 // "Locate the vacuum cleaner robot."
@@ -55,11 +53,12 @@ func NewVacuumLocate(target Target) *VacuumLocate {
 	serviceService := "locate"
 	v := &VacuumLocate{
 		ServiceBase: ServiceBase{
-			Domain:  &serviceDomain,
-			Id:      nil,
-			Service: &serviceService,
-			Target:  target,
-			Type:    &serviceType,
+			Domain:         &serviceDomain,
+			Id:             nil,
+			ReturnResponse: false,
+			Service:        &serviceService,
+			Target:         target,
+			Type:           &serviceType,
 		},
 		ServiceData: nil,
 	}
@@ -81,9 +80,6 @@ func (v *VacuumLocate) Targets() []string {
 func (v *VacuumLocate) Name() string {
 	return fmt.Sprintf("%s.%s", *v.Domain, *v.Service)
 }
-func (v *VacuumLocate) SetID(id *int) {
-	v.Id = id
-}
 
 // NewVacuumPause creates the object that can be sent to Home Assistant for domain vacuum, service pause
 // "Pause the cleaning task."
@@ -93,11 +89,12 @@ func NewVacuumPause(target Target) *VacuumPause {
 	serviceService := "pause"
 	v := &VacuumPause{
 		ServiceBase: ServiceBase{
-			Domain:  &serviceDomain,
-			Id:      nil,
-			Service: &serviceService,
-			Target:  target,
-			Type:    &serviceType,
+			Domain:         &serviceDomain,
+			Id:             nil,
+			ReturnResponse: false,
+			Service:        &serviceService,
+			Target:         target,
+			Type:           &serviceType,
 		},
 		ServiceData: nil,
 	}
@@ -119,9 +116,6 @@ func (v *VacuumPause) Targets() []string {
 func (v *VacuumPause) Name() string {
 	return fmt.Sprintf("%s.%s", *v.Domain, *v.Service)
 }
-func (v *VacuumPause) SetID(id *int) {
-	v.Id = id
-}
 
 // NewVacuumReturnToBase creates the object that can be sent to Home Assistant for domain vacuum, service return_to_base
 // "Tell the vacuum cleaner to return to its dock."
@@ -131,11 +125,12 @@ func NewVacuumReturnToBase(target Target) *VacuumReturnToBase {
 	serviceService := "return_to_base"
 	v := &VacuumReturnToBase{
 		ServiceBase: ServiceBase{
-			Domain:  &serviceDomain,
-			Id:      nil,
-			Service: &serviceService,
-			Target:  target,
-			Type:    &serviceType,
+			Domain:         &serviceDomain,
+			Id:             nil,
+			ReturnResponse: false,
+			Service:        &serviceService,
+			Target:         target,
+			Type:           &serviceType,
 		},
 		ServiceData: nil,
 	}
@@ -157,9 +152,6 @@ func (v *VacuumReturnToBase) Targets() []string {
 func (v *VacuumReturnToBase) Name() string {
 	return fmt.Sprintf("%s.%s", *v.Domain, *v.Service)
 }
-func (v *VacuumReturnToBase) SetID(id *int) {
-	v.Id = id
-}
 
 // NewVacuumSendCommand creates the object that can be sent to Home Assistant for domain vacuum, service send_command
 // "Send a raw command to the vacuum cleaner."
@@ -169,11 +161,12 @@ func NewVacuumSendCommand(target Target) *VacuumSendCommand {
 	serviceService := "send_command"
 	v := &VacuumSendCommand{
 		ServiceBase: ServiceBase{
-			Domain:  &serviceDomain,
-			Id:      nil,
-			Service: &serviceService,
-			Target:  target,
-			Type:    &serviceType,
+			Domain:         &serviceDomain,
+			Id:             nil,
+			ReturnResponse: false,
+			Service:        &serviceService,
+			Target:         target,
+			Type:           &serviceType,
 		},
 		ServiceData: VacuumSendCommandParams{},
 	}
@@ -202,9 +195,6 @@ func (v *VacuumSendCommand) Targets() []string {
 func (v *VacuumSendCommand) Name() string {
 	return fmt.Sprintf("%s.%s", *v.Domain, *v.Service)
 }
-func (v *VacuumSendCommand) SetID(id *int) {
-	v.Id = id
-}
 
 // NewVacuumSetFanSpeed creates the object that can be sent to Home Assistant for domain vacuum, service set_fan_speed
 // "Set the fan speed of the vacuum cleaner."
@@ -214,11 +204,12 @@ func NewVacuumSetFanSpeed(target Target) *VacuumSetFanSpeed {
 	serviceService := "set_fan_speed"
 	v := &VacuumSetFanSpeed{
 		ServiceBase: ServiceBase{
-			Domain:  &serviceDomain,
-			Id:      nil,
-			Service: &serviceService,
-			Target:  target,
-			Type:    &serviceType,
+			Domain:         &serviceDomain,
+			Id:             nil,
+			ReturnResponse: false,
+			Service:        &serviceService,
+			Target:         target,
+			Type:           &serviceType,
 		},
 		ServiceData: VacuumSetFanSpeedParams{},
 	}
@@ -247,9 +238,6 @@ func (v *VacuumSetFanSpeed) Targets() []string {
 func (v *VacuumSetFanSpeed) Name() string {
 	return fmt.Sprintf("%s.%s", *v.Domain, *v.Service)
 }
-func (v *VacuumSetFanSpeed) SetID(id *int) {
-	v.Id = id
-}
 
 // NewVacuumStart creates the object that can be sent to Home Assistant for domain vacuum, service start
 // "Start or resume the cleaning task."
@@ -259,11 +247,12 @@ func NewVacuumStart(target Target) *VacuumStart {
 	serviceService := "start"
 	v := &VacuumStart{
 		ServiceBase: ServiceBase{
-			Domain:  &serviceDomain,
-			Id:      nil,
-			Service: &serviceService,
-			Target:  target,
-			Type:    &serviceType,
+			Domain:         &serviceDomain,
+			Id:             nil,
+			ReturnResponse: false,
+			Service:        &serviceService,
+			Target:         target,
+			Type:           &serviceType,
 		},
 		ServiceData: nil,
 	}
@@ -285,9 +274,6 @@ func (v *VacuumStart) Targets() []string {
 func (v *VacuumStart) Name() string {
 	return fmt.Sprintf("%s.%s", *v.Domain, *v.Service)
 }
-func (v *VacuumStart) SetID(id *int) {
-	v.Id = id
-}
 
 // NewVacuumStartPause creates the object that can be sent to Home Assistant for domain vacuum, service start_pause
 // "Start, pause, or resume the cleaning task."
@@ -297,11 +283,12 @@ func NewVacuumStartPause(target Target) *VacuumStartPause {
 	serviceService := "start_pause"
 	v := &VacuumStartPause{
 		ServiceBase: ServiceBase{
-			Domain:  &serviceDomain,
-			Id:      nil,
-			Service: &serviceService,
-			Target:  target,
-			Type:    &serviceType,
+			Domain:         &serviceDomain,
+			Id:             nil,
+			ReturnResponse: false,
+			Service:        &serviceService,
+			Target:         target,
+			Type:           &serviceType,
 		},
 		ServiceData: nil,
 	}
@@ -323,9 +310,6 @@ func (v *VacuumStartPause) Targets() []string {
 func (v *VacuumStartPause) Name() string {
 	return fmt.Sprintf("%s.%s", *v.Domain, *v.Service)
 }
-func (v *VacuumStartPause) SetID(id *int) {
-	v.Id = id
-}
 
 // NewVacuumStop creates the object that can be sent to Home Assistant for domain vacuum, service stop
 // "Stop the current cleaning task."
@@ -335,11 +319,12 @@ func NewVacuumStop(target Target) *VacuumStop {
 	serviceService := "stop"
 	v := &VacuumStop{
 		ServiceBase: ServiceBase{
-			Domain:  &serviceDomain,
-			Id:      nil,
-			Service: &serviceService,
-			Target:  target,
-			Type:    &serviceType,
+			Domain:         &serviceDomain,
+			Id:             nil,
+			ReturnResponse: false,
+			Service:        &serviceService,
+			Target:         target,
+			Type:           &serviceType,
 		},
 		ServiceData: nil,
 	}
@@ -361,9 +346,6 @@ func (v *VacuumStop) Targets() []string {
 func (v *VacuumStop) Name() string {
 	return fmt.Sprintf("%s.%s", *v.Domain, *v.Service)
 }
-func (v *VacuumStop) SetID(id *int) {
-	v.Id = id
-}
 
 // NewVacuumToggle creates the object that can be sent to Home Assistant for domain vacuum, service toggle
 // ""
@@ -373,11 +355,12 @@ func NewVacuumToggle(target Target) *VacuumToggle {
 	serviceService := "toggle"
 	v := &VacuumToggle{
 		ServiceBase: ServiceBase{
-			Domain:  &serviceDomain,
-			Id:      nil,
-			Service: &serviceService,
-			Target:  target,
-			Type:    &serviceType,
+			Domain:         &serviceDomain,
+			Id:             nil,
+			ReturnResponse: false,
+			Service:        &serviceService,
+			Target:         target,
+			Type:           &serviceType,
 		},
 		ServiceData: nil,
 	}
@@ -399,9 +382,6 @@ func (v *VacuumToggle) Targets() []string {
 func (v *VacuumToggle) Name() string {
 	return fmt.Sprintf("%s.%s", *v.Domain, *v.Service)
 }
-func (v *VacuumToggle) SetID(id *int) {
-	v.Id = id
-}
 
 // NewVacuumTurnOff creates the object that can be sent to Home Assistant for domain vacuum, service turn_off
 // "Stop the current cleaning task and return to home."
@@ -411,11 +391,12 @@ func NewVacuumTurnOff(target Target) *VacuumTurnOff {
 	serviceService := "turn_off"
 	v := &VacuumTurnOff{
 		ServiceBase: ServiceBase{
-			Domain:  &serviceDomain,
-			Id:      nil,
-			Service: &serviceService,
-			Target:  target,
-			Type:    &serviceType,
+			Domain:         &serviceDomain,
+			Id:             nil,
+			ReturnResponse: false,
+			Service:        &serviceService,
+			Target:         target,
+			Type:           &serviceType,
 		},
 		ServiceData: nil,
 	}
@@ -437,9 +418,6 @@ func (v *VacuumTurnOff) Targets() []string {
 func (v *VacuumTurnOff) Name() string {
 	return fmt.Sprintf("%s.%s", *v.Domain, *v.Service)
 }
-func (v *VacuumTurnOff) SetID(id *int) {
-	v.Id = id
-}
 
 // NewVacuumTurnOn creates the object that can be sent to Home Assistant for domain vacuum, service turn_on
 // "Start a new cleaning task."
@@ -449,11 +427,12 @@ func NewVacuumTurnOn(target Target) *VacuumTurnOn {
 	serviceService := "turn_on"
 	v := &VacuumTurnOn{
 		ServiceBase: ServiceBase{
-			Domain:  &serviceDomain,
-			Id:      nil,
-			Service: &serviceService,
-			Target:  target,
-			Type:    &serviceType,
+			Domain:         &serviceDomain,
+			Id:             nil,
+			ReturnResponse: false,
+			Service:        &serviceService,
+			Target:         target,
+			Type:           &serviceType,
 		},
 		ServiceData: nil,
 	}
@@ -474,7 +453,4 @@ func (v *VacuumTurnOn) Targets() []string {
 }
 func (v *VacuumTurnOn) Name() string {
 	return fmt.Sprintf("%s.%s", *v.Domain, *v.Service)
-}
-func (v *VacuumTurnOn) SetID(id *int) {
-	v.Id = id
 }

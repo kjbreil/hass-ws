@@ -17,11 +17,12 @@ func NewScheduleReload(target Target) *ScheduleReload {
 	serviceService := "reload"
 	s := &ScheduleReload{
 		ServiceBase: ServiceBase{
-			Domain:  &serviceDomain,
-			Id:      nil,
-			Service: &serviceService,
-			Target:  target,
-			Type:    &serviceType,
+			Domain:         &serviceDomain,
+			Id:             nil,
+			ReturnResponse: false,
+			Service:        &serviceService,
+			Target:         target,
+			Type:           &serviceType,
 		},
 		ServiceData: nil,
 	}
@@ -42,7 +43,4 @@ func (s *ScheduleReload) Targets() []string {
 }
 func (s *ScheduleReload) Name() string {
 	return fmt.Sprintf("%s.%s", *s.Domain, *s.Service)
-}
-func (s *ScheduleReload) SetID(id *int) {
-	s.Id = id
 }

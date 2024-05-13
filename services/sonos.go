@@ -17,11 +17,12 @@ func NewSonosClearSleepTimer(target Target) *SonosClearSleepTimer {
 	serviceService := "clear_sleep_timer"
 	s := &SonosClearSleepTimer{
 		ServiceBase: ServiceBase{
-			Domain:  &serviceDomain,
-			Id:      nil,
-			Service: &serviceService,
-			Target:  target,
-			Type:    &serviceType,
+			Domain:         &serviceDomain,
+			Id:             nil,
+			ReturnResponse: false,
+			Service:        &serviceService,
+			Target:         target,
+			Type:           &serviceType,
 		},
 		ServiceData: nil,
 	}
@@ -43,9 +44,6 @@ func (s *SonosClearSleepTimer) Targets() []string {
 func (s *SonosClearSleepTimer) Name() string {
 	return fmt.Sprintf("%s.%s", *s.Domain, *s.Service)
 }
-func (s *SonosClearSleepTimer) SetID(id *int) {
-	s.Id = id
-}
 
 // NewSonosPlayQueue creates the object that can be sent to Home Assistant for domain sonos, service play_queue
 // "Start playing the queue from the first item."
@@ -55,11 +53,12 @@ func NewSonosPlayQueue(target Target) *SonosPlayQueue {
 	serviceService := "play_queue"
 	s := &SonosPlayQueue{
 		ServiceBase: ServiceBase{
-			Domain:  &serviceDomain,
-			Id:      nil,
-			Service: &serviceService,
-			Target:  target,
-			Type:    &serviceType,
+			Domain:         &serviceDomain,
+			Id:             nil,
+			ReturnResponse: false,
+			Service:        &serviceService,
+			Target:         target,
+			Type:           &serviceType,
 		},
 		ServiceData: SonosPlayQueueParams{},
 	}
@@ -88,9 +87,6 @@ func (s *SonosPlayQueue) Targets() []string {
 func (s *SonosPlayQueue) Name() string {
 	return fmt.Sprintf("%s.%s", *s.Domain, *s.Service)
 }
-func (s *SonosPlayQueue) SetID(id *int) {
-	s.Id = id
-}
 
 // NewSonosRemoveFromQueue creates the object that can be sent to Home Assistant for domain sonos, service remove_from_queue
 // "Removes an item from the queue."
@@ -100,11 +96,12 @@ func NewSonosRemoveFromQueue(target Target) *SonosRemoveFromQueue {
 	serviceService := "remove_from_queue"
 	s := &SonosRemoveFromQueue{
 		ServiceBase: ServiceBase{
-			Domain:  &serviceDomain,
-			Id:      nil,
-			Service: &serviceService,
-			Target:  target,
-			Type:    &serviceType,
+			Domain:         &serviceDomain,
+			Id:             nil,
+			ReturnResponse: false,
+			Service:        &serviceService,
+			Target:         target,
+			Type:           &serviceType,
 		},
 		ServiceData: SonosRemoveFromQueueParams{},
 	}
@@ -133,9 +130,6 @@ func (s *SonosRemoveFromQueue) Targets() []string {
 func (s *SonosRemoveFromQueue) Name() string {
 	return fmt.Sprintf("%s.%s", *s.Domain, *s.Service)
 }
-func (s *SonosRemoveFromQueue) SetID(id *int) {
-	s.Id = id
-}
 
 // NewSonosRestore creates the object that can be sent to Home Assistant for domain sonos, service restore
 // "Restore a snapshot of the media player."
@@ -145,11 +139,12 @@ func NewSonosRestore(target Target) *SonosRestore {
 	serviceService := "restore"
 	s := &SonosRestore{
 		ServiceBase: ServiceBase{
-			Domain:  &serviceDomain,
-			Id:      nil,
-			Service: &serviceService,
-			Target:  target,
-			Type:    &serviceType,
+			Domain:         &serviceDomain,
+			Id:             nil,
+			ReturnResponse: false,
+			Service:        &serviceService,
+			Target:         target,
+			Type:           &serviceType,
 		},
 		ServiceData: nil,
 	}
@@ -171,9 +166,6 @@ func (s *SonosRestore) Targets() []string {
 func (s *SonosRestore) Name() string {
 	return fmt.Sprintf("%s.%s", *s.Domain, *s.Service)
 }
-func (s *SonosRestore) SetID(id *int) {
-	s.Id = id
-}
 
 // NewSonosSetSleepTimer creates the object that can be sent to Home Assistant for domain sonos, service set_sleep_timer
 // "Set a Sonos timer."
@@ -183,11 +175,12 @@ func NewSonosSetSleepTimer(target Target) *SonosSetSleepTimer {
 	serviceService := "set_sleep_timer"
 	s := &SonosSetSleepTimer{
 		ServiceBase: ServiceBase{
-			Domain:  &serviceDomain,
-			Id:      nil,
-			Service: &serviceService,
-			Target:  target,
-			Type:    &serviceType,
+			Domain:         &serviceDomain,
+			Id:             nil,
+			ReturnResponse: false,
+			Service:        &serviceService,
+			Target:         target,
+			Type:           &serviceType,
 		},
 		ServiceData: SonosSetSleepTimerParams{},
 	}
@@ -216,9 +209,6 @@ func (s *SonosSetSleepTimer) Targets() []string {
 func (s *SonosSetSleepTimer) Name() string {
 	return fmt.Sprintf("%s.%s", *s.Domain, *s.Service)
 }
-func (s *SonosSetSleepTimer) SetID(id *int) {
-	s.Id = id
-}
 
 // NewSonosSnapshot creates the object that can be sent to Home Assistant for domain sonos, service snapshot
 // "Take a snapshot of the media player."
@@ -228,11 +218,12 @@ func NewSonosSnapshot(target Target) *SonosSnapshot {
 	serviceService := "snapshot"
 	s := &SonosSnapshot{
 		ServiceBase: ServiceBase{
-			Domain:  &serviceDomain,
-			Id:      nil,
-			Service: &serviceService,
-			Target:  target,
-			Type:    &serviceType,
+			Domain:         &serviceDomain,
+			Id:             nil,
+			ReturnResponse: false,
+			Service:        &serviceService,
+			Target:         target,
+			Type:           &serviceType,
 		},
 		ServiceData: nil,
 	}
@@ -254,9 +245,6 @@ func (s *SonosSnapshot) Targets() []string {
 func (s *SonosSnapshot) Name() string {
 	return fmt.Sprintf("%s.%s", *s.Domain, *s.Service)
 }
-func (s *SonosSnapshot) SetID(id *int) {
-	s.Id = id
-}
 
 // NewSonosUpdateAlarm creates the object that can be sent to Home Assistant for domain sonos, service update_alarm
 // "Updates an alarm with new time and volume settings."
@@ -266,11 +254,12 @@ func NewSonosUpdateAlarm(target Target) *SonosUpdateAlarm {
 	serviceService := "update_alarm"
 	s := &SonosUpdateAlarm{
 		ServiceBase: ServiceBase{
-			Domain:  &serviceDomain,
-			Id:      nil,
-			Service: &serviceService,
-			Target:  target,
-			Type:    &serviceType,
+			Domain:         &serviceDomain,
+			Id:             nil,
+			ReturnResponse: false,
+			Service:        &serviceService,
+			Target:         target,
+			Type:           &serviceType,
 		},
 		ServiceData: SonosUpdateAlarmParams{},
 	}
@@ -303,7 +292,4 @@ func (s *SonosUpdateAlarm) Targets() []string {
 }
 func (s *SonosUpdateAlarm) Name() string {
 	return fmt.Sprintf("%s.%s", *s.Domain, *s.Service)
-}
-func (s *SonosUpdateAlarm) SetID(id *int) {
-	s.Id = id
 }

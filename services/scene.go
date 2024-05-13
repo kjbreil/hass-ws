@@ -17,11 +17,12 @@ func NewSceneApply(target Target) *SceneApply {
 	serviceService := "apply"
 	s := &SceneApply{
 		ServiceBase: ServiceBase{
-			Domain:  &serviceDomain,
-			Id:      nil,
-			Service: &serviceService,
-			Target:  target,
-			Type:    &serviceType,
+			Domain:         &serviceDomain,
+			Id:             nil,
+			ReturnResponse: false,
+			Service:        &serviceService,
+			Target:         target,
+			Type:           &serviceType,
 		},
 		ServiceData: SceneApplyParams{},
 	}
@@ -50,9 +51,6 @@ func (s *SceneApply) Targets() []string {
 func (s *SceneApply) Name() string {
 	return fmt.Sprintf("%s.%s", *s.Domain, *s.Service)
 }
-func (s *SceneApply) SetID(id *int) {
-	s.Id = id
-}
 
 // NewSceneCreate creates the object that can be sent to Home Assistant for domain scene, service create
 // "Creates a new scene."
@@ -62,11 +60,12 @@ func NewSceneCreate(target Target) *SceneCreate {
 	serviceService := "create"
 	s := &SceneCreate{
 		ServiceBase: ServiceBase{
-			Domain:  &serviceDomain,
-			Id:      nil,
-			Service: &serviceService,
-			Target:  target,
-			Type:    &serviceType,
+			Domain:         &serviceDomain,
+			Id:             nil,
+			ReturnResponse: false,
+			Service:        &serviceService,
+			Target:         target,
+			Type:           &serviceType,
 		},
 		ServiceData: SceneCreateParams{},
 	}
@@ -95,9 +94,6 @@ func (s *SceneCreate) Targets() []string {
 func (s *SceneCreate) Name() string {
 	return fmt.Sprintf("%s.%s", *s.Domain, *s.Service)
 }
-func (s *SceneCreate) SetID(id *int) {
-	s.Id = id
-}
 
 // NewSceneReload creates the object that can be sent to Home Assistant for domain scene, service reload
 // "Reload the scene configuration."
@@ -107,11 +103,12 @@ func NewSceneReload(target Target) *SceneReload {
 	serviceService := "reload"
 	s := &SceneReload{
 		ServiceBase: ServiceBase{
-			Domain:  &serviceDomain,
-			Id:      nil,
-			Service: &serviceService,
-			Target:  target,
-			Type:    &serviceType,
+			Domain:         &serviceDomain,
+			Id:             nil,
+			ReturnResponse: false,
+			Service:        &serviceService,
+			Target:         target,
+			Type:           &serviceType,
 		},
 		ServiceData: nil,
 	}
@@ -133,9 +130,6 @@ func (s *SceneReload) Targets() []string {
 func (s *SceneReload) Name() string {
 	return fmt.Sprintf("%s.%s", *s.Domain, *s.Service)
 }
-func (s *SceneReload) SetID(id *int) {
-	s.Id = id
-}
 
 // NewSceneTurnOn creates the object that can be sent to Home Assistant for domain scene, service turn_on
 // "Activate a scene."
@@ -145,11 +139,12 @@ func NewSceneTurnOn(target Target) *SceneTurnOn {
 	serviceService := "turn_on"
 	s := &SceneTurnOn{
 		ServiceBase: ServiceBase{
-			Domain:  &serviceDomain,
-			Id:      nil,
-			Service: &serviceService,
-			Target:  target,
-			Type:    &serviceType,
+			Domain:         &serviceDomain,
+			Id:             nil,
+			ReturnResponse: false,
+			Service:        &serviceService,
+			Target:         target,
+			Type:           &serviceType,
 		},
 		ServiceData: SceneTurnOnParams{},
 	}
@@ -177,7 +172,4 @@ func (s *SceneTurnOn) Targets() []string {
 }
 func (s *SceneTurnOn) Name() string {
 	return fmt.Sprintf("%s.%s", *s.Domain, *s.Service)
-}
-func (s *SceneTurnOn) SetID(id *int) {
-	s.Id = id
 }

@@ -17,11 +17,12 @@ func NewUpdateClearSkipped(target Target) *UpdateClearSkipped {
 	serviceService := "clear_skipped"
 	u := &UpdateClearSkipped{
 		ServiceBase: ServiceBase{
-			Domain:  &serviceDomain,
-			Id:      nil,
-			Service: &serviceService,
-			Target:  target,
-			Type:    &serviceType,
+			Domain:         &serviceDomain,
+			Id:             nil,
+			ReturnResponse: false,
+			Service:        &serviceService,
+			Target:         target,
+			Type:           &serviceType,
 		},
 		ServiceData: nil,
 	}
@@ -43,9 +44,6 @@ func (u *UpdateClearSkipped) Targets() []string {
 func (u *UpdateClearSkipped) Name() string {
 	return fmt.Sprintf("%s.%s", *u.Domain, *u.Service)
 }
-func (u *UpdateClearSkipped) SetID(id *int) {
-	u.Id = id
-}
 
 // NewUpdateInstall creates the object that can be sent to Home Assistant for domain update, service install
 // "Install an update for this device or service"
@@ -55,11 +53,12 @@ func NewUpdateInstall(target Target) *UpdateInstall {
 	serviceService := "install"
 	u := &UpdateInstall{
 		ServiceBase: ServiceBase{
-			Domain:  &serviceDomain,
-			Id:      nil,
-			Service: &serviceService,
-			Target:  target,
-			Type:    &serviceType,
+			Domain:         &serviceDomain,
+			Id:             nil,
+			ReturnResponse: false,
+			Service:        &serviceService,
+			Target:         target,
+			Type:           &serviceType,
 		},
 		ServiceData: UpdateInstallParams{},
 	}
@@ -88,9 +87,6 @@ func (u *UpdateInstall) Targets() []string {
 func (u *UpdateInstall) Name() string {
 	return fmt.Sprintf("%s.%s", *u.Domain, *u.Service)
 }
-func (u *UpdateInstall) SetID(id *int) {
-	u.Id = id
-}
 
 // NewUpdateSkip creates the object that can be sent to Home Assistant for domain update, service skip
 // "Mark currently available update as skipped."
@@ -100,11 +96,12 @@ func NewUpdateSkip(target Target) *UpdateSkip {
 	serviceService := "skip"
 	u := &UpdateSkip{
 		ServiceBase: ServiceBase{
-			Domain:  &serviceDomain,
-			Id:      nil,
-			Service: &serviceService,
-			Target:  target,
-			Type:    &serviceType,
+			Domain:         &serviceDomain,
+			Id:             nil,
+			ReturnResponse: false,
+			Service:        &serviceService,
+			Target:         target,
+			Type:           &serviceType,
 		},
 		ServiceData: nil,
 	}
@@ -125,7 +122,4 @@ func (u *UpdateSkip) Targets() []string {
 }
 func (u *UpdateSkip) Name() string {
 	return fmt.Sprintf("%s.%s", *u.Domain, *u.Service)
-}
-func (u *UpdateSkip) SetID(id *int) {
-	u.Id = id
 }

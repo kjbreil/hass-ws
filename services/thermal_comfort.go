@@ -17,11 +17,12 @@ func NewThermalComfortReload(target Target) *ThermalComfortReload {
 	serviceService := "reload"
 	t := &ThermalComfortReload{
 		ServiceBase: ServiceBase{
-			Domain:  &serviceDomain,
-			Id:      nil,
-			Service: &serviceService,
-			Target:  target,
-			Type:    &serviceType,
+			Domain:         &serviceDomain,
+			Id:             nil,
+			ReturnResponse: false,
+			Service:        &serviceService,
+			Target:         target,
+			Type:           &serviceType,
 		},
 		ServiceData: nil,
 	}
@@ -42,7 +43,4 @@ func (t *ThermalComfortReload) Targets() []string {
 }
 func (t *ThermalComfortReload) Name() string {
 	return fmt.Sprintf("%s.%s", *t.Domain, *t.Service)
-}
-func (t *ThermalComfortReload) SetID(id *int) {
-	t.Id = id
 }

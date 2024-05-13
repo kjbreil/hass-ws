@@ -17,11 +17,12 @@ func NewRemoteDeleteCommand(target Target) *RemoteDeleteCommand {
 	serviceService := "delete_command"
 	r := &RemoteDeleteCommand{
 		ServiceBase: ServiceBase{
-			Domain:  &serviceDomain,
-			Id:      nil,
-			Service: &serviceService,
-			Target:  target,
-			Type:    &serviceType,
+			Domain:         &serviceDomain,
+			Id:             nil,
+			ReturnResponse: false,
+			Service:        &serviceService,
+			Target:         target,
+			Type:           &serviceType,
 		},
 		ServiceData: RemoteDeleteCommandParams{},
 	}
@@ -50,9 +51,6 @@ func (r *RemoteDeleteCommand) Targets() []string {
 func (r *RemoteDeleteCommand) Name() string {
 	return fmt.Sprintf("%s.%s", *r.Domain, *r.Service)
 }
-func (r *RemoteDeleteCommand) SetID(id *int) {
-	r.Id = id
-}
 
 // NewRemoteLearnCommand creates the object that can be sent to Home Assistant for domain remote, service learn_command
 // "Learns a command or a list of commands from a device."
@@ -62,11 +60,12 @@ func NewRemoteLearnCommand(target Target) *RemoteLearnCommand {
 	serviceService := "learn_command"
 	r := &RemoteLearnCommand{
 		ServiceBase: ServiceBase{
-			Domain:  &serviceDomain,
-			Id:      nil,
-			Service: &serviceService,
-			Target:  target,
-			Type:    &serviceType,
+			Domain:         &serviceDomain,
+			Id:             nil,
+			ReturnResponse: false,
+			Service:        &serviceService,
+			Target:         target,
+			Type:           &serviceType,
 		},
 		ServiceData: RemoteLearnCommandParams{},
 	}
@@ -105,9 +104,6 @@ func (r *RemoteLearnCommand) Targets() []string {
 func (r *RemoteLearnCommand) Name() string {
 	return fmt.Sprintf("%s.%s", *r.Domain, *r.Service)
 }
-func (r *RemoteLearnCommand) SetID(id *int) {
-	r.Id = id
-}
 
 // NewRemoteSendCommand creates the object that can be sent to Home Assistant for domain remote, service send_command
 // "Sends a command or a list of commands to a device."
@@ -117,11 +113,12 @@ func NewRemoteSendCommand(target Target) *RemoteSendCommand {
 	serviceService := "send_command"
 	r := &RemoteSendCommand{
 		ServiceBase: ServiceBase{
-			Domain:  &serviceDomain,
-			Id:      nil,
-			Service: &serviceService,
-			Target:  target,
-			Type:    &serviceType,
+			Domain:         &serviceDomain,
+			Id:             nil,
+			ReturnResponse: false,
+			Service:        &serviceService,
+			Target:         target,
+			Type:           &serviceType,
 		},
 		ServiceData: RemoteSendCommandParams{},
 	}
@@ -165,9 +162,6 @@ func (r *RemoteSendCommand) Targets() []string {
 func (r *RemoteSendCommand) Name() string {
 	return fmt.Sprintf("%s.%s", *r.Domain, *r.Service)
 }
-func (r *RemoteSendCommand) SetID(id *int) {
-	r.Id = id
-}
 
 // NewRemoteToggle creates the object that can be sent to Home Assistant for domain remote, service toggle
 // "Toggles a device."
@@ -177,11 +171,12 @@ func NewRemoteToggle(target Target) *RemoteToggle {
 	serviceService := "toggle"
 	r := &RemoteToggle{
 		ServiceBase: ServiceBase{
-			Domain:  &serviceDomain,
-			Id:      nil,
-			Service: &serviceService,
-			Target:  target,
-			Type:    &serviceType,
+			Domain:         &serviceDomain,
+			Id:             nil,
+			ReturnResponse: false,
+			Service:        &serviceService,
+			Target:         target,
+			Type:           &serviceType,
 		},
 		ServiceData: nil,
 	}
@@ -203,9 +198,6 @@ func (r *RemoteToggle) Targets() []string {
 func (r *RemoteToggle) Name() string {
 	return fmt.Sprintf("%s.%s", *r.Domain, *r.Service)
 }
-func (r *RemoteToggle) SetID(id *int) {
-	r.Id = id
-}
 
 // NewRemoteTurnOff creates the object that can be sent to Home Assistant for domain remote, service turn_off
 // "Sends the Power Off Command."
@@ -215,11 +207,12 @@ func NewRemoteTurnOff(target Target) *RemoteTurnOff {
 	serviceService := "turn_off"
 	r := &RemoteTurnOff{
 		ServiceBase: ServiceBase{
-			Domain:  &serviceDomain,
-			Id:      nil,
-			Service: &serviceService,
-			Target:  target,
-			Type:    &serviceType,
+			Domain:         &serviceDomain,
+			Id:             nil,
+			ReturnResponse: false,
+			Service:        &serviceService,
+			Target:         target,
+			Type:           &serviceType,
 		},
 		ServiceData: nil,
 	}
@@ -241,9 +234,6 @@ func (r *RemoteTurnOff) Targets() []string {
 func (r *RemoteTurnOff) Name() string {
 	return fmt.Sprintf("%s.%s", *r.Domain, *r.Service)
 }
-func (r *RemoteTurnOff) SetID(id *int) {
-	r.Id = id
-}
 
 // NewRemoteTurnOn creates the object that can be sent to Home Assistant for domain remote, service turn_on
 // "Sends the Power On Command."
@@ -253,11 +243,12 @@ func NewRemoteTurnOn(target Target) *RemoteTurnOn {
 	serviceService := "turn_on"
 	r := &RemoteTurnOn{
 		ServiceBase: ServiceBase{
-			Domain:  &serviceDomain,
-			Id:      nil,
-			Service: &serviceService,
-			Target:  target,
-			Type:    &serviceType,
+			Domain:         &serviceDomain,
+			Id:             nil,
+			ReturnResponse: false,
+			Service:        &serviceService,
+			Target:         target,
+			Type:           &serviceType,
 		},
 		ServiceData: RemoteTurnOnParams{},
 	}
@@ -285,7 +276,4 @@ func (r *RemoteTurnOn) Targets() []string {
 }
 func (r *RemoteTurnOn) Name() string {
 	return fmt.Sprintf("%s.%s", *r.Domain, *r.Service)
-}
-func (r *RemoteTurnOn) SetID(id *int) {
-	r.Id = id
 }

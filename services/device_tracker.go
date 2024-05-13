@@ -17,11 +17,12 @@ func NewDeviceTrackerSee(target Target) *DeviceTrackerSee {
 	serviceService := "see"
 	d := &DeviceTrackerSee{
 		ServiceBase: ServiceBase{
-			Domain:  &serviceDomain,
-			Id:      nil,
-			Service: &serviceService,
-			Target:  target,
-			Type:    &serviceType,
+			Domain:         &serviceDomain,
+			Id:             nil,
+			ReturnResponse: false,
+			Service:        &serviceService,
+			Target:         target,
+			Type:           &serviceType,
 		},
 		ServiceData: DeviceTrackerSeeParams{},
 	}
@@ -74,7 +75,4 @@ func (d *DeviceTrackerSee) Targets() []string {
 }
 func (d *DeviceTrackerSee) Name() string {
 	return fmt.Sprintf("%s.%s", *d.Domain, *d.Service)
-}
-func (d *DeviceTrackerSee) SetID(id *int) {
-	d.Id = id
 }

@@ -17,11 +17,12 @@ func NewMinMaxReload(target Target) *MinMaxReload {
 	serviceService := "reload"
 	m := &MinMaxReload{
 		ServiceBase: ServiceBase{
-			Domain:  &serviceDomain,
-			Id:      nil,
-			Service: &serviceService,
-			Target:  target,
-			Type:    &serviceType,
+			Domain:         &serviceDomain,
+			Id:             nil,
+			ReturnResponse: false,
+			Service:        &serviceService,
+			Target:         target,
+			Type:           &serviceType,
 		},
 		ServiceData: nil,
 	}
@@ -42,7 +43,4 @@ func (m *MinMaxReload) Targets() []string {
 }
 func (m *MinMaxReload) Name() string {
 	return fmt.Sprintf("%s.%s", *m.Domain, *m.Service)
-}
-func (m *MinMaxReload) SetID(id *int) {
-	m.Id = id
 }

@@ -17,11 +17,12 @@ func NewZoneReload(target Target) *ZoneReload {
 	serviceService := "reload"
 	z := &ZoneReload{
 		ServiceBase: ServiceBase{
-			Domain:  &serviceDomain,
-			Id:      nil,
-			Service: &serviceService,
-			Target:  target,
-			Type:    &serviceType,
+			Domain:         &serviceDomain,
+			Id:             nil,
+			ReturnResponse: false,
+			Service:        &serviceService,
+			Target:         target,
+			Type:           &serviceType,
 		},
 		ServiceData: nil,
 	}
@@ -42,7 +43,4 @@ func (z *ZoneReload) Targets() []string {
 }
 func (z *ZoneReload) Name() string {
 	return fmt.Sprintf("%s.%s", *z.Domain, *z.Service)
-}
-func (z *ZoneReload) SetID(id *int) {
-	z.Id = id
 }

@@ -17,11 +17,12 @@ func NewScriptReload(target Target) *ScriptReload {
 	serviceService := "reload"
 	s := &ScriptReload{
 		ServiceBase: ServiceBase{
-			Domain:  &serviceDomain,
-			Id:      nil,
-			Service: &serviceService,
-			Target:  target,
-			Type:    &serviceType,
+			Domain:         &serviceDomain,
+			Id:             nil,
+			ReturnResponse: false,
+			Service:        &serviceService,
+			Target:         target,
+			Type:           &serviceType,
 		},
 		ServiceData: nil,
 	}
@@ -43,9 +44,6 @@ func (s *ScriptReload) Targets() []string {
 func (s *ScriptReload) Name() string {
 	return fmt.Sprintf("%s.%s", *s.Domain, *s.Service)
 }
-func (s *ScriptReload) SetID(id *int) {
-	s.Id = id
-}
 
 // NewScriptTestScript creates the object that can be sent to Home Assistant for domain script, service test_script
 // ""
@@ -55,11 +53,12 @@ func NewScriptTestScript(target Target) *ScriptTestScript {
 	serviceService := "test_script"
 	s := &ScriptTestScript{
 		ServiceBase: ServiceBase{
-			Domain:  &serviceDomain,
-			Id:      nil,
-			Service: &serviceService,
-			Target:  target,
-			Type:    &serviceType,
+			Domain:         &serviceDomain,
+			Id:             nil,
+			ReturnResponse: false,
+			Service:        &serviceService,
+			Target:         target,
+			Type:           &serviceType,
 		},
 		ServiceData: nil,
 	}
@@ -81,9 +80,6 @@ func (s *ScriptTestScript) Targets() []string {
 func (s *ScriptTestScript) Name() string {
 	return fmt.Sprintf("%s.%s", *s.Domain, *s.Service)
 }
-func (s *ScriptTestScript) SetID(id *int) {
-	s.Id = id
-}
 
 // NewScriptToggle creates the object that can be sent to Home Assistant for domain script, service toggle
 // "Toggle script"
@@ -93,11 +89,12 @@ func NewScriptToggle(target Target) *ScriptToggle {
 	serviceService := "toggle"
 	s := &ScriptToggle{
 		ServiceBase: ServiceBase{
-			Domain:  &serviceDomain,
-			Id:      nil,
-			Service: &serviceService,
-			Target:  target,
-			Type:    &serviceType,
+			Domain:         &serviceDomain,
+			Id:             nil,
+			ReturnResponse: false,
+			Service:        &serviceService,
+			Target:         target,
+			Type:           &serviceType,
 		},
 		ServiceData: nil,
 	}
@@ -119,9 +116,6 @@ func (s *ScriptToggle) Targets() []string {
 func (s *ScriptToggle) Name() string {
 	return fmt.Sprintf("%s.%s", *s.Domain, *s.Service)
 }
-func (s *ScriptToggle) SetID(id *int) {
-	s.Id = id
-}
 
 // NewScriptTurnOff creates the object that can be sent to Home Assistant for domain script, service turn_off
 // "Turn off script"
@@ -131,11 +125,12 @@ func NewScriptTurnOff(target Target) *ScriptTurnOff {
 	serviceService := "turn_off"
 	s := &ScriptTurnOff{
 		ServiceBase: ServiceBase{
-			Domain:  &serviceDomain,
-			Id:      nil,
-			Service: &serviceService,
-			Target:  target,
-			Type:    &serviceType,
+			Domain:         &serviceDomain,
+			Id:             nil,
+			ReturnResponse: false,
+			Service:        &serviceService,
+			Target:         target,
+			Type:           &serviceType,
 		},
 		ServiceData: nil,
 	}
@@ -157,9 +152,6 @@ func (s *ScriptTurnOff) Targets() []string {
 func (s *ScriptTurnOff) Name() string {
 	return fmt.Sprintf("%s.%s", *s.Domain, *s.Service)
 }
-func (s *ScriptTurnOff) SetID(id *int) {
-	s.Id = id
-}
 
 // NewScriptTurnOn creates the object that can be sent to Home Assistant for domain script, service turn_on
 // "Turn on script"
@@ -169,11 +161,12 @@ func NewScriptTurnOn(target Target) *ScriptTurnOn {
 	serviceService := "turn_on"
 	s := &ScriptTurnOn{
 		ServiceBase: ServiceBase{
-			Domain:  &serviceDomain,
-			Id:      nil,
-			Service: &serviceService,
-			Target:  target,
-			Type:    &serviceType,
+			Domain:         &serviceDomain,
+			Id:             nil,
+			ReturnResponse: false,
+			Service:        &serviceService,
+			Target:         target,
+			Type:           &serviceType,
 		},
 		ServiceData: nil,
 	}
@@ -194,7 +187,4 @@ func (s *ScriptTurnOn) Targets() []string {
 }
 func (s *ScriptTurnOn) Name() string {
 	return fmt.Sprintf("%s.%s", *s.Domain, *s.Service)
-}
-func (s *ScriptTurnOn) SetID(id *int) {
-	s.Id = id
 }

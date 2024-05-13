@@ -17,11 +17,12 @@ func NewMqttDump(target Target) *MqttDump {
 	serviceService := "dump"
 	m := &MqttDump{
 		ServiceBase: ServiceBase{
-			Domain:  &serviceDomain,
-			Id:      nil,
-			Service: &serviceService,
-			Target:  target,
-			Type:    &serviceType,
+			Domain:         &serviceDomain,
+			Id:             nil,
+			ReturnResponse: false,
+			Service:        &serviceService,
+			Target:         target,
+			Type:           &serviceType,
 		},
 		ServiceData: MqttDumpParams{},
 	}
@@ -55,9 +56,6 @@ func (m *MqttDump) Targets() []string {
 func (m *MqttDump) Name() string {
 	return fmt.Sprintf("%s.%s", *m.Domain, *m.Service)
 }
-func (m *MqttDump) SetID(id *int) {
-	m.Id = id
-}
 
 // NewMqttPublish creates the object that can be sent to Home Assistant for domain mqtt, service publish
 // "Publish a message to an MQTT topic."
@@ -67,11 +65,12 @@ func NewMqttPublish(target Target) *MqttPublish {
 	serviceService := "publish"
 	m := &MqttPublish{
 		ServiceBase: ServiceBase{
-			Domain:  &serviceDomain,
-			Id:      nil,
-			Service: &serviceService,
-			Target:  target,
-			Type:    &serviceType,
+			Domain:         &serviceDomain,
+			Id:             nil,
+			ReturnResponse: false,
+			Service:        &serviceService,
+			Target:         target,
+			Type:           &serviceType,
 		},
 		ServiceData: MqttPublishParams{},
 	}
@@ -110,9 +109,6 @@ func (m *MqttPublish) Targets() []string {
 func (m *MqttPublish) Name() string {
 	return fmt.Sprintf("%s.%s", *m.Domain, *m.Service)
 }
-func (m *MqttPublish) SetID(id *int) {
-	m.Id = id
-}
 
 // NewMqttReload creates the object that can be sent to Home Assistant for domain mqtt, service reload
 // "Reload all MQTT entities from YAML."
@@ -122,11 +118,12 @@ func NewMqttReload(target Target) *MqttReload {
 	serviceService := "reload"
 	m := &MqttReload{
 		ServiceBase: ServiceBase{
-			Domain:  &serviceDomain,
-			Id:      nil,
-			Service: &serviceService,
-			Target:  target,
-			Type:    &serviceType,
+			Domain:         &serviceDomain,
+			Id:             nil,
+			ReturnResponse: false,
+			Service:        &serviceService,
+			Target:         target,
+			Type:           &serviceType,
 		},
 		ServiceData: nil,
 	}
@@ -147,7 +144,4 @@ func (m *MqttReload) Targets() []string {
 }
 func (m *MqttReload) Name() string {
 	return fmt.Sprintf("%s.%s", *m.Domain, *m.Service)
-}
-func (m *MqttReload) SetID(id *int) {
-	m.Id = id
 }

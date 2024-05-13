@@ -17,11 +17,12 @@ func NewInputButtonPress(target Target) *InputButtonPress {
 	serviceService := "press"
 	i := &InputButtonPress{
 		ServiceBase: ServiceBase{
-			Domain:  &serviceDomain,
-			Id:      nil,
-			Service: &serviceService,
-			Target:  target,
-			Type:    &serviceType,
+			Domain:         &serviceDomain,
+			Id:             nil,
+			ReturnResponse: false,
+			Service:        &serviceService,
+			Target:         target,
+			Type:           &serviceType,
 		},
 		ServiceData: nil,
 	}
@@ -43,9 +44,6 @@ func (i *InputButtonPress) Targets() []string {
 func (i *InputButtonPress) Name() string {
 	return fmt.Sprintf("%s.%s", *i.Domain, *i.Service)
 }
-func (i *InputButtonPress) SetID(id *int) {
-	i.Id = id
-}
 
 // NewInputButtonReload creates the object that can be sent to Home Assistant for domain input_button, service reload
 // ""
@@ -55,11 +53,12 @@ func NewInputButtonReload(target Target) *InputButtonReload {
 	serviceService := "reload"
 	i := &InputButtonReload{
 		ServiceBase: ServiceBase{
-			Domain:  &serviceDomain,
-			Id:      nil,
-			Service: &serviceService,
-			Target:  target,
-			Type:    &serviceType,
+			Domain:         &serviceDomain,
+			Id:             nil,
+			ReturnResponse: false,
+			Service:        &serviceService,
+			Target:         target,
+			Type:           &serviceType,
 		},
 		ServiceData: nil,
 	}
@@ -80,7 +79,4 @@ func (i *InputButtonReload) Targets() []string {
 }
 func (i *InputButtonReload) Name() string {
 	return fmt.Sprintf("%s.%s", *i.Domain, *i.Service)
-}
-func (i *InputButtonReload) SetID(id *int) {
-	i.Id = id
 }

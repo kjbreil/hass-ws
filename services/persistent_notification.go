@@ -17,11 +17,12 @@ func NewPersistentNotificationCreate(target Target) *PersistentNotificationCreat
 	serviceService := "create"
 	p := &PersistentNotificationCreate{
 		ServiceBase: ServiceBase{
-			Domain:  &serviceDomain,
-			Id:      nil,
-			Service: &serviceService,
-			Target:  target,
-			Type:    &serviceType,
+			Domain:         &serviceDomain,
+			Id:             nil,
+			ReturnResponse: false,
+			Service:        &serviceService,
+			Target:         target,
+			Type:           &serviceType,
 		},
 		ServiceData: PersistentNotificationCreateParams{},
 	}
@@ -60,9 +61,6 @@ func (p *PersistentNotificationCreate) Targets() []string {
 func (p *PersistentNotificationCreate) Name() string {
 	return fmt.Sprintf("%s.%s", *p.Domain, *p.Service)
 }
-func (p *PersistentNotificationCreate) SetID(id *int) {
-	p.Id = id
-}
 
 // NewPersistentNotificationDismiss creates the object that can be sent to Home Assistant for domain persistent_notification, service dismiss
 // "Remove a notification from the frontend."
@@ -72,11 +70,12 @@ func NewPersistentNotificationDismiss(target Target) *PersistentNotificationDism
 	serviceService := "dismiss"
 	p := &PersistentNotificationDismiss{
 		ServiceBase: ServiceBase{
-			Domain:  &serviceDomain,
-			Id:      nil,
-			Service: &serviceService,
-			Target:  target,
-			Type:    &serviceType,
+			Domain:         &serviceDomain,
+			Id:             nil,
+			ReturnResponse: false,
+			Service:        &serviceService,
+			Target:         target,
+			Type:           &serviceType,
 		},
 		ServiceData: PersistentNotificationDismissParams{},
 	}
@@ -105,9 +104,6 @@ func (p *PersistentNotificationDismiss) Targets() []string {
 func (p *PersistentNotificationDismiss) Name() string {
 	return fmt.Sprintf("%s.%s", *p.Domain, *p.Service)
 }
-func (p *PersistentNotificationDismiss) SetID(id *int) {
-	p.Id = id
-}
 
 // NewPersistentNotificationMarkRead creates the object that can be sent to Home Assistant for domain persistent_notification, service mark_read
 // "Mark a notification read."
@@ -117,11 +113,12 @@ func NewPersistentNotificationMarkRead(target Target) *PersistentNotificationMar
 	serviceService := "mark_read"
 	p := &PersistentNotificationMarkRead{
 		ServiceBase: ServiceBase{
-			Domain:  &serviceDomain,
-			Id:      nil,
-			Service: &serviceService,
-			Target:  target,
-			Type:    &serviceType,
+			Domain:         &serviceDomain,
+			Id:             nil,
+			ReturnResponse: false,
+			Service:        &serviceService,
+			Target:         target,
+			Type:           &serviceType,
 		},
 		ServiceData: PersistentNotificationMarkReadParams{},
 	}
@@ -149,7 +146,4 @@ func (p *PersistentNotificationMarkRead) Targets() []string {
 }
 func (p *PersistentNotificationMarkRead) Name() string {
 	return fmt.Sprintf("%s.%s", *p.Domain, *p.Service)
-}
-func (p *PersistentNotificationMarkRead) SetID(id *int) {
-	p.Id = id
 }

@@ -17,11 +17,12 @@ func NewShellCommandShutdownTyr(target Target) *ShellCommandShutdownTyr {
 	serviceService := "shutdown_tyr"
 	s := &ShellCommandShutdownTyr{
 		ServiceBase: ServiceBase{
-			Domain:  &serviceDomain,
-			Id:      nil,
-			Service: &serviceService,
-			Target:  target,
-			Type:    &serviceType,
+			Domain:         &serviceDomain,
+			Id:             nil,
+			ReturnResponse: false,
+			Service:        &serviceService,
+			Target:         target,
+			Type:           &serviceType,
 		},
 		ServiceData: nil,
 	}
@@ -43,9 +44,6 @@ func (s *ShellCommandShutdownTyr) Targets() []string {
 func (s *ShellCommandShutdownTyr) Name() string {
 	return fmt.Sprintf("%s.%s", *s.Domain, *s.Service)
 }
-func (s *ShellCommandShutdownTyr) SetID(id *int) {
-	s.Id = id
-}
 
 // NewShellCommandStartNcbp creates the object that can be sent to Home Assistant for domain shell_command, service start_ncbp
 // ""
@@ -55,11 +53,12 @@ func NewShellCommandStartNcbp(target Target) *ShellCommandStartNcbp {
 	serviceService := "start_ncbp"
 	s := &ShellCommandStartNcbp{
 		ServiceBase: ServiceBase{
-			Domain:  &serviceDomain,
-			Id:      nil,
-			Service: &serviceService,
-			Target:  target,
-			Type:    &serviceType,
+			Domain:         &serviceDomain,
+			Id:             nil,
+			ReturnResponse: false,
+			Service:        &serviceService,
+			Target:         target,
+			Type:           &serviceType,
 		},
 		ServiceData: nil,
 	}
@@ -81,9 +80,6 @@ func (s *ShellCommandStartNcbp) Targets() []string {
 func (s *ShellCommandStartNcbp) Name() string {
 	return fmt.Sprintf("%s.%s", *s.Domain, *s.Service)
 }
-func (s *ShellCommandStartNcbp) SetID(id *int) {
-	s.Id = id
-}
 
 // NewShellCommandStopNcbp creates the object that can be sent to Home Assistant for domain shell_command, service stop_ncbp
 // ""
@@ -93,11 +89,12 @@ func NewShellCommandStopNcbp(target Target) *ShellCommandStopNcbp {
 	serviceService := "stop_ncbp"
 	s := &ShellCommandStopNcbp{
 		ServiceBase: ServiceBase{
-			Domain:  &serviceDomain,
-			Id:      nil,
-			Service: &serviceService,
-			Target:  target,
-			Type:    &serviceType,
+			Domain:         &serviceDomain,
+			Id:             nil,
+			ReturnResponse: false,
+			Service:        &serviceService,
+			Target:         target,
+			Type:           &serviceType,
 		},
 		ServiceData: nil,
 	}
@@ -118,7 +115,4 @@ func (s *ShellCommandStopNcbp) Targets() []string {
 }
 func (s *ShellCommandStopNcbp) Name() string {
 	return fmt.Sprintf("%s.%s", *s.Domain, *s.Service)
-}
-func (s *ShellCommandStopNcbp) SetID(id *int) {
-	s.Id = id
 }
