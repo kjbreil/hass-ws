@@ -9,6 +9,7 @@ import (
 	"github.com/goccy/go-json"
 	"github.com/kjbreil/hass-ws/logger"
 	"github.com/kjbreil/hass-ws/model"
+	"github.com/kjbreil/hass-ws/rest"
 	"github.com/kjbreil/hass-ws/services"
 	"log/slog"
 	"nhooyr.io/websocket"
@@ -21,6 +22,8 @@ type Client struct {
 	config  Config
 	id      int
 	running bool
+
+	restClient *rest.Client
 
 	subscriptions map[model.EventType]int
 	OnMessage     func(message model.Message)

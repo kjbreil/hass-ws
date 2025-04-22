@@ -9,7 +9,9 @@ import (
 	hass_ws "github.com/kjbreil/hass-ws"
 	"github.com/kjbreil/hass-ws/helpers/HassWSService/services"
 	"github.com/kjbreil/hass-ws/model"
+	"github.com/kjbreil/hass-ws/rest"
 	"log"
+	"net/url"
 	"os"
 	"os/signal"
 	"time"
@@ -21,6 +23,18 @@ func main() {
 	signal.Notify(interrupt, os.Interrupt)
 
 	cfg, _ := hass_ws.ParseConfig("config.yml")
+
+	rc := rest.New(cfg.Host, cfg.Port, cfg.Token, cfg.SSL)
+
+	values := url.Values{}
+	values.Set("type", "call_service")
+
+	api, err := rc.GetState("light.light_main_floor_bathroom")
+	if err != nil {
+		return
+	}
+
+	fmt.Println(api)
 
 	c, _ := hass_ws.NewClient(cfg)
 
@@ -61,7 +75,7 @@ func main() {
 	}
 	c.InitStates = true
 
-	err := c.Connect()
+	err = c.Connect()
 	if err != nil {
 		log.Panicln(err)
 	}

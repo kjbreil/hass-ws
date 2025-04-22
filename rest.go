@@ -4,6 +4,7 @@ import (
 	"fmt"
 	"github.com/goccy/go-json"
 	"github.com/kjbreil/hass-ws/model"
+	"github.com/kjbreil/hass-ws/rest"
 	"io"
 	"log"
 	"net/http"
@@ -11,6 +12,18 @@ import (
 	"strings"
 	"time"
 )
+
+func (c *Client) GetRestStates() (*model.States, error) {
+	return c.restClient.GetStates()
+}
+
+func (c *Client) GetApi() (*rest.Api, error) {
+	return c.restClient.GetApi()
+}
+
+func (c *Client) GetState(domainEntity string) (*model.State, error) {
+	return c.restClient.GetState(domainEntity)
+}
 
 func (c *Client) GetHistory(start, end time.Time, entities ...string) (*model.Histories, error) {
 

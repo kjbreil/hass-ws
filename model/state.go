@@ -5,6 +5,8 @@ import (
 	"time"
 )
 
+type States []*State
+
 type State struct {
 	EntityId    *string                `json:"entity_id,omitempty"`
 	LastChanged *time.Time             `json:"last_changed,omitempty"`
@@ -33,4 +35,11 @@ func (s *State) Entity() string {
 		return ""
 	}
 	return split[1]
+}
+
+func (s *State) DomainEntity() string {
+	if s.EntityId != nil {
+		return *s.EntityId
+	}
+	return ""
 }

@@ -36,6 +36,7 @@ func (c *Client) run() {
 
 			if message.ID != nil {
 				if callback, ok := c.callbacks.Get(*message.ID); ok {
+					// TODO: Investigate callback being closed
 					callback <- message
 					continue mainLoop
 				}
@@ -81,7 +82,7 @@ func (c *Client) run() {
 				go func(id int) {
 					defer c.callbacks.Delete(id)
 					// ping needs to come back within a second or connection needs restarting
-					restartTicker := time.NewTicker(time.Second)
+					restartTicker := time.NewTicker(time.Second * 5)
 					select {
 					case <-callback:
 					case <-restartTicker.C:

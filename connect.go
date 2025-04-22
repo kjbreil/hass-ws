@@ -6,6 +6,7 @@ import (
 	"fmt"
 	"github.com/goccy/go-yaml"
 	"github.com/kjbreil/hass-ws/model"
+	"github.com/kjbreil/hass-ws/rest"
 	"net/url"
 	"nhooyr.io/websocket"
 	"os"
@@ -44,6 +45,8 @@ func (c *Client) Connect() error {
 	c.ctx, c.cancel = context.WithCancel(context.Background())
 	c.callbacks = newCallbacks()
 	c.id = 0
+
+	c.restClient = rest.New(c.config.Host, c.config.Port, c.config.Token, c.config.SSL)
 
 	var err error
 	scheme := "ws"

@@ -1,0 +1,85 @@
+{
+  "id": 1,
+  "type": "result",
+  "success": true,
+  "service_result": {
+    "weather": {
+      "get_forecast": {
+        "description": "Get weather forecast.",
+        "fields": {
+          "type": {
+            "description": "Forecast type: daily, hourly or twice daily.",
+            "name": "Forecast type",
+            "required": true,
+            "selector": {
+              "select": {
+                "options": [
+                  "daily",
+                  "hourly",
+                  "twice_daily"
+                ],
+                "translation_key": "forecast_type"
+              }
+            }
+          }
+        },
+        "name": "Get forecast",
+        "response": {
+          "optional": false
+        },
+        "target": {
+          "entity": [
+            {
+              "domain": [
+                "weather"
+              ],
+              "supported_features": [
+                1,
+                2,
+                4
+              ]
+            }
+          ]
+        }
+      },
+      "get_forecasts": {
+        "description": "Get weather forecasts.",
+        "fields": {
+          "type": {
+            "description": "Forecast type: daily, hourly or twice daily.",
+            "name": "Forecast type",
+            "required": true,
+            "selector": {
+              "select": {
+                "options": [
+                  "daily",
+                  "hourly",
+                  "twice_daily"
+                ],
+                "translation_key": "forecast_type"
+              }
+            }
+          }
+        },
+        "name": "Get forecasts",
+        "response": {
+          "optional": false
+        },
+        "target": {
+          "entity": [
+            {
+              "domain": [
+                "weather"
+              ],
+              "supported_features": [
+                1,
+                2,
+                4
+              ]
+            }
+          ]
+        }
+      }
+    }
+  }
+}
