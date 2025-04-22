@@ -8,6 +8,7 @@ import (
 	"strings"
 )
 
+// ServiceList represents a list of Home Assistant service domains and their metadata, as parsed from JSON.
 type ServiceList struct {
 	services     []Domain
 	serviceNames []string
@@ -15,6 +16,7 @@ type ServiceList struct {
 	enums        map[string]map[string][]string
 }
 
+// Domain represents a Home Assistant service domain, containing its name and a set of services.
 type Domain struct {
 	name        string
 	camelName   string
@@ -22,6 +24,7 @@ type Domain struct {
 	servicesKey []string
 }
 
+// Service represents a single Home Assistant service, including its name, parameters, and description.
 type Service struct {
 	name             string
 	camelName        string
@@ -33,6 +36,7 @@ type Service struct {
 	responseRequired bool
 }
 
+// ServicesInit loads service data from a JSON file and returns a populated ServiceList struct.
 func ServicesInit(servicesJSON string) ServiceList {
 	var serviceList ServiceList
 
@@ -53,6 +57,7 @@ func ServicesInit(servicesJSON string) ServiceList {
 	return serviceList
 }
 
+// ServicesInitJson loads service data from a JSON byte slice and returns a populated ServiceList struct.
 func ServicesInitJson(data []byte) ServiceList {
 	var serviceList ServiceList
 
@@ -76,15 +81,19 @@ func ServicesInitJson(data []byte) ServiceList {
 	return serviceList
 }
 
+// setServiceNames populates the serviceNames field of the ServiceList by extracting domain names from the JSON.
+// It searches for the "service_result" key in the JSON and appends each child key to the serviceNames slice.
 func (sl *ServiceList) setServiceNames() {
 	deviceServices := sl.json.Search("service_result")
 	// this will range over each service in the json
 	for k := range deviceServices.ChildrenMap() {
 		sl.serviceNames = append(sl.serviceNames, k)
 	}
-
 }
 
+// setParameters populates the parameters and metadata for all services in a given domain.
+// It searches for the "service_result" key in the JSON with the given domain name, and for each service,
+// it extracts the parameters, description, and response required flag, and populates the Service struct.
 func (sl *ServiceList) setParameters(d *Domain) {
 	deviceServices := sl.json.Search("service_result", d.name)
 	// this will range over each service in the json

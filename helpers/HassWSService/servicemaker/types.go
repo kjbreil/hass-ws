@@ -5,6 +5,7 @@ import (
 	"github.com/dave/jennifer/jen"
 )
 
+// makeTypesFile generates the types.go file for service code generation, including interfaces and base types.
 func makeTypesFile(enumKeys []string, services map[string]*jen.File) {
 	// // Make the types.go file
 	// make the generate comment for stringer

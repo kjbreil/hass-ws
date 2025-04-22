@@ -7,6 +7,7 @@ import (
 	"sort"
 )
 
+// GenEntities generates Go files for all Home Assistant entities and their models using Jennifer for code generation.
 func GenEntities() error {
 	devices := DevicesInit()
 
@@ -141,6 +142,7 @@ func GenEntities() error {
 	return nil
 }
 
+// makeRunOnTypeHandlers generates a method to run event handlers for each entity type based on the event's entity type.
 func makeRunOnTypeHandlers(models map[string]*jen.File, v string, sortedKeys []string) {
 	models[v].Func().Params(
 		jen.Id("o").Op("*").Id("OnTypeHandlers"),
@@ -178,6 +180,7 @@ func makeRunOnTypeHandlers(models map[string]*jen.File, v string, sortedKeys []s
 	)
 }
 
+// makeRunStatesOnTypeHandlers generates a method to run handlers for state updates for each entity type.
 func makeRunStatesOnTypeHandlers(models map[string]*jen.File, v string, sortedKeys []string) {
 	models[v].Func().Params(
 		jen.Id("o").Op("*").Id("OnTypeHandlers"),
@@ -235,6 +238,7 @@ func makeRunStatesOnTypeHandlers(models map[string]*jen.File, v string, sortedKe
 	)
 }
 
+// makeRunOnEntityHandlers generates a method to run handlers for entity-specific events.
 func makeRunOnEntityHandlers(models map[string]*jen.File, v string) {
 	models[v].Func().Params(
 		jen.Id("o").Id("OnEntityHandlers"),
@@ -255,6 +259,7 @@ func makeRunOnEntityHandlers(models map[string]*jen.File, v string) {
 	)
 }
 
+// makeRunStatesOnEntityHandlers generates a method to run handlers for state updates on specific entities.
 func makeRunStatesOnEntityHandlers(models map[string]*jen.File, v string) {
 	models[v].Func().Params(
 		jen.Id("o").Id("OnEntityHandlers"),

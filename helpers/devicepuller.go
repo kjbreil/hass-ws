@@ -13,6 +13,7 @@ import (
 	"os"
 )
 
+// DeviceNames is a list of supported Home Assistant device types for which documentation is available.
 var DeviceNames = []string{
 	"introduction",
 	"air-quality",
@@ -41,34 +42,40 @@ var DeviceNames = []string{
 	"weather",
 }
 
+// Device represents a Home Assistant device with a name and a map of its attributes.
 type Device struct {
 	Name       string
 	Attributes map[string]attributes
 }
 
+// PullNew determines whether to forcibly fetch new documentation files, even if cached versions exist.
 var PullNew = false
 
+// DevicesInit initializes a slice of Device structs for all known device types, populating their attributes.
 func DevicesInit() (retval []Device) {
 	for _, name := range DeviceNames {
 		d := Device{
 			Name: name,
 		}
-		d.init()
+		d.init() // Populate device attributes
 		retval = append(retval, d)
 	}
 	return retval
 }
 
+// init populates the Device's Attributes field by parsing its documentation.
 func (dev *Device) init() {
 	dev.Attributes, _ = splitDocument(dev.Name)
 }
 
+// attributes holds metadata for a single device attribute, including its name, data type, and whether it is required.
 type attributes struct {
 	Name     string
 	DataType string
 	Required bool
 }
 
+// splitDocument fetches and parses the documentation for a device type, extracting its attributes from markdown tables.
 func splitDocument(devicename string) (map[string]attributes, error) {
 
 	data, err := fetchDocument(devicename)
@@ -145,11 +152,13 @@ func splitDocument(devicename string) (map[string]attributes, error) {
 
 }
 
+// exists checks if a file exists at the given path.
 func exists(path string) bool {
 	_, err := os.Stat(path)
 	return !errors.Is(err, os.ErrNotExist)
 }
 
+// fetchDocument retrieves the markdown documentation for a device type from cache or downloads it from the Home Assistant repo.
 func fetchDocument(devicename string) ([]byte, error) {
 
 	url := "https://raw.githubusercontent.com/home-assistant/developers.home-assistant/master/docs/core/entity/" + devicename + ".md"
@@ -189,6 +198,7 @@ func fetchDocument(devicename string) ([]byte, error) {
 
 }
 
+// Unquote removes surrounding double quotes from a string, if present.
 func Unquote(s string) string {
 	if len(s) > 0 && s[0] == '"' {
 		s = s[1:]
@@ -198,6 +208,7 @@ func Unquote(s string) string {
 	}
 	return s
 }
+// FieldAdder creates a Jennifer statement for a struct field based on the attribute key and type.
 func FieldAdder(key string, t string) *jen.Statement {
 
 	return TypeTranslator(t, jen.Id(strcase.ToCamel(
@@ -213,6 +224,7 @@ func FieldAdder(key string, t string) *jen.Statement {
 	))).Tag(map[string]string{"json": key + ",omitempty"})
 }
 
+// TypeTranslator applies the correct Go type to a Jennifer statement based on the attribute type string.
 func TypeTranslator(t string, s *jen.Statement) *jen.Statement {
 
 	v := Unquote(t)

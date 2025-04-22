@@ -9,6 +9,8 @@ import (
 	"strings"
 )
 
+// GenServices is a convenience function that loads the list of Home Assistant services from a JSON file
+// and generates Go code for them in the default 'services' folder.
 func GenServices() error {
 	servicesFolder := "services"
 
@@ -17,6 +19,8 @@ func GenServices() error {
 	return err
 }
 
+// Gen generates Go code for all Home Assistant services in the specified folder, using the provided ServiceList.
+// It creates one file per service and additional files for types and enums.
 func Gen(servicesFolder string, servicesList ServiceList) error {
 	err := os.MkdirAll(servicesFolder, os.ModePerm)
 	if err != nil {
@@ -349,6 +353,7 @@ func Gen(servicesFolder string, servicesList ServiceList) error {
 	return nil
 }
 
+// codeGetter returns a Jennifer code representation for a given string, used for code generation.
 func codeGetter(s string) jen.Code {
 	switch s {
 	case "string":
@@ -360,12 +365,17 @@ func codeGetter(s string) jen.Code {
 	}
 }
 
+// codeAssigner returns a Jennifer code assignment for a given function name and code string.
+// It takes a function name and a code string as parameters, and returns the corresponding Jennifer code assignment.
+// The function name is converted to lower camel case before being used in the assignment.
 func (sl *ServiceList) codeAssigner(fn string, code string) jen.Code {
 	fn = strcase.ToLowerCamel(fn)
 	switch code {
 	case "string":
+		// Assign a string literal "data" to the function name.
 		return jen.Id(fn).Op(":=").Lit("data")
 	case "float64":
+		// Assign a float64 literal 1.2 to the function name.
 		return jen.Id(fn).Op(":=").Lit(1.2)
 	case "[]byte":
 		return jen.Id(fn).Op(":=").Lit("data")
