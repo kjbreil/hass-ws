@@ -10,7 +10,7 @@ import (
 ////////////////////////////////////////////////////////////////////////////////
 
 // NewLogbookLog creates the object that can be sent to Home Assistant for domain logbook, service log
-// "Create a custom entry in your logbook."
+// "Creates a custom entry in the logbook."
 func NewLogbookLog(target Target) *LogbookLog {
 	serviceDomain := "logbook"
 	serviceType := "call_service"

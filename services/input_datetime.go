@@ -10,7 +10,7 @@ import (
 ////////////////////////////////////////////////////////////////////////////////
 
 // NewInputDatetimeReload creates the object that can be sent to Home Assistant for domain input_datetime, service reload
-// "Reload the input_datetime configuration."
+// "Reloads helpers from the YAML-configuration."
 func NewInputDatetimeReload(target Target) *InputDatetimeReload {
 	serviceDomain := "input_datetime"
 	serviceType := "call_service"
@@ -46,7 +46,7 @@ func (i *InputDatetimeReload) Name() string {
 }
 
 // NewInputDatetimeSetDatetime creates the object that can be sent to Home Assistant for domain input_datetime, service set_datetime
-// "This can be used to dynamically set the date and/or time."
+// "Sets the date and/or time."
 func NewInputDatetimeSetDatetime(target Target) *InputDatetimeSetDatetime {
 	serviceDomain := "input_datetime"
 	serviceType := "call_service"

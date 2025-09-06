@@ -10,7 +10,7 @@ import (
 ////////////////////////////////////////////////////////////////////////////////
 
 // NewRecorderDisable creates the object that can be sent to Home Assistant for domain recorder, service disable
-// "Stop the recording of events and state changes"
+// "Stops the recording of events and state changes."
 func NewRecorderDisable(target Target) *RecorderDisable {
 	serviceDomain := "recorder"
 	serviceType := "call_service"
@@ -46,7 +46,7 @@ func (r *RecorderDisable) Name() string {
 }
 
 // NewRecorderEnable creates the object that can be sent to Home Assistant for domain recorder, service enable
-// "Start the recording of events and state changes"
+// "Starts the recording of events and state changes."
 func NewRecorderEnable(target Target) *RecorderEnable {
 	serviceDomain := "recorder"
 	serviceType := "call_service"
@@ -81,8 +81,56 @@ func (r *RecorderEnable) Name() string {
 	return fmt.Sprintf("%s.%s", *r.Domain, *r.Service)
 }
 
+// NewRecorderGetStatistics creates the object that can be sent to Home Assistant for domain recorder, service get_statistics
+// "Retrieves statistics data for entities within a specific time period."
+func NewRecorderGetStatistics(target Target) *RecorderGetStatistics {
+	serviceDomain := "recorder"
+	serviceType := "call_service"
+	serviceService := "get_statistics"
+	r := &RecorderGetStatistics{
+		ServiceBase: ServiceBase{
+			Domain:         &serviceDomain,
+			Id:             nil,
+			ReturnResponse: true,
+			Service:        &serviceService,
+			Target:         target,
+			Type:           &serviceType,
+		},
+		ServiceData: RecorderGetStatisticsParams{},
+	}
+	return r
+}
+
+type RecorderGetStatistics struct {
+	ServiceBase
+	ServiceData RecorderGetStatisticsParams `json:"service_data,omitempty"`
+}
+type RecorderGetStatisticsParams struct {
+	Period *Period `json:"period,omitempty"`
+	Types  *Types  `json:"types,omitempty"`
+}
+
+func (r *RecorderGetStatistics) Period(period Period) *RecorderGetStatistics {
+	r.ServiceData.Period = &period
+	return r
+}
+func (r *RecorderGetStatistics) Types(types Types) *RecorderGetStatistics {
+	r.ServiceData.Types = &types
+	return r
+}
+func (r *RecorderGetStatistics) JSON() string {
+	data, _ := gojson.Marshal(r)
+	return string(data)
+}
+func (r *RecorderGetStatistics) Targets() []string {
+	return r.Target.EntityId
+}
+func (r *RecorderGetStatistics) Name() string {
+	return fmt.Sprintf("%s.%s", *r.Domain, *r.Service)
+}
+
 // NewRecorderPurge creates the object that can be sent to Home Assistant for domain recorder, service purge
-// "Start purge task - to clean up old data from your database."
+// "Starts purge task - to clean up old data from your database."
 func NewRecorderPurge(target Target) *RecorderPurge {
 	serviceDomain := "recorder"
 	serviceType := "call_service"
@@ -125,7 +173,7 @@ func (r *RecorderPurge) Name() string {
 }
 
 // NewRecorderPurgeEntities creates the object that can be sent to Home Assistant for domain recorder, service purge_entities
-// "Start purge task to remove specific entities from your database."
+// "Starts a purge task to remove the data related to specific entities from your database."
 func NewRecorderPurgeEntities(target Target) *RecorderPurgeEntities {
 	serviceDomain := "recorder"
 	serviceType := "call_service"
@@ -139,16 +187,23 @@ func NewRecorderPurgeEntities(target Target) *RecorderPurgeEntities {
 			Target:         target,
 			Type:           &serviceType,
 		},
-		ServiceData: nil,
+		ServiceData: RecorderPurgeEntitiesParams{},
 	}
 	return r
 }
 
 type RecorderPurgeEntities struct {
 	ServiceBase
-	ServiceData interface{} `json:"service_data,omitempty"`
+	ServiceData RecorderPurgeEntitiesParams `json:"service_data,omitempty"`
+}
+type RecorderPurgeEntitiesParams struct {
+	KeepDays *float64 `json:"keep_days,omitempty"`
 }
 
+func (r *RecorderPurgeEntities) KeepDays(keepDays float64) *RecorderPurgeEntities {
+	r.ServiceData.KeepDays = &keepDays
+	return r
+}
 func (r *RecorderPurgeEntities) JSON() string {
 	data, _ := gojson.Marshal(r)
 	return string(data)

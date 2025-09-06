@@ -10,7 +10,7 @@ import (
 ////////////////////////////////////////////////////////////////////////////////
 
 // NewCloudRemoteConnect creates the object that can be sent to Home Assistant for domain cloud, service remote_connect
-// "Make instance UI available outside over NabuCasa cloud"
+// "Makes the instance UI accessible from outside of the local network by enabling your Home Assistant Cloud connection."
 func NewCloudRemoteConnect(target Target) *CloudRemoteConnect {
 	serviceDomain := "cloud"
 	serviceType := "call_service"
@@ -46,7 +46,7 @@ func (c *CloudRemoteConnect) Name() string {
 }
 
 // NewCloudRemoteDisconnect creates the object that can be sent to Home Assistant for domain cloud, service remote_disconnect
-// "Disconnect UI from NabuCasa cloud"
+// "Disconnects the instance UI from Home Assistant Cloud. This disables access to it from outside your local network."
 func NewCloudRemoteDisconnect(target Target) *CloudRemoteDisconnect {
 	serviceDomain := "cloud"
 	serviceType := "call_service"

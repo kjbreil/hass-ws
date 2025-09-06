@@ -10,7 +10,7 @@ import (
 ////////////////////////////////////////////////////////////////////////////////
 
 // NewPersistentNotificationCreate creates the object that can be sent to Home Assistant for domain persistent_notification, service create
-// "Show a notification in the frontend."
+// "Shows a notification on the notifications panel."
 func NewPersistentNotificationCreate(target Target) *PersistentNotificationCreate {
 	serviceDomain := "persistent_notification"
 	serviceType := "call_service"
@@ -63,7 +63,7 @@ func (p *PersistentNotificationCreate) Name() string {
 }
 
 // NewPersistentNotificationDismiss creates the object that can be sent to Home Assistant for domain persistent_notification, service dismiss
-// "Remove a notification from the frontend."
+// "Deletes a notification from the notifications panel."
 func NewPersistentNotificationDismiss(target Target) *PersistentNotificationDismiss {
 	serviceDomain := "persistent_notification"
 	serviceType := "call_service"
@@ -105,13 +105,13 @@ func (p *PersistentNotificationDismiss) Name() string {
 	return fmt.Sprintf("%s.%s", *p.Domain, *p.Service)
 }
 
-// NewPersistentNotificationMarkRead creates the object that can be sent to Home Assistant for domain persistent_notification, service mark_read
-// "Mark a notification read."
-func NewPersistentNotificationMarkRead(target Target) *PersistentNotificationMarkRead {
+// NewPersistentNotificationDismissAll creates the object that can be sent to Home Assistant for domain persistent_notification, service dismiss_all
+// "Deletes all notifications from the notifications panel."
+func NewPersistentNotificationDismissAll(target Target) *PersistentNotificationDismissAll {
 	serviceDomain := "persistent_notification"
 	serviceType := "call_service"
-	serviceService := "mark_read"
-	p := &PersistentNotificationMarkRead{
+	serviceService := "dismiss_all"
+	p := &PersistentNotificationDismissAll{
 		ServiceBase: ServiceBase{
 			Domain:         &serviceDomain,
 			Id:             nil,
@@ -120,30 +120,23 @@ func NewPersistentNotificationMarkRead(target Target) *PersistentNotificationMar
 			Target:         target,
 			Type:           &serviceType,
 		},
-		ServiceData: PersistentNotificationMarkReadParams{},
+		ServiceData: nil,
 	}
 	return p
 }
 
-type PersistentNotificationMarkRead struct {
+type PersistentNotificationDismissAll struct {
 	ServiceBase
-	ServiceData PersistentNotificationMarkReadParams `json:"service_data,omitempty"`
-}
-type PersistentNotificationMarkReadParams struct {
-	NotificationId *string `json:"notification_id,omitempty"`
+	ServiceData interface{} `json:"service_data,omitempty"`
 }
 
-func (p *PersistentNotificationMarkRead) NotificationId(notificationId string) *PersistentNotificationMarkRead {
-	p.ServiceData.NotificationId = &notificationId
-	return p
-}
-func (p *PersistentNotificationMarkRead) JSON() string {
+func (p *PersistentNotificationDismissAll) JSON() string {
 	data, _ := gojson.Marshal(p)
 	return string(data)
 }
-func (p *PersistentNotificationMarkRead) Targets() []string {
+func (p *PersistentNotificationDismissAll) Targets() []string {
 	return p.Target.EntityId
 }
-func (p *PersistentNotificationMarkRead) Name() string {
+func (p *PersistentNotificationDismissAll) Name() string {
 	return fmt.Sprintf("%s.%s", *p.Domain, *p.Service)
 }

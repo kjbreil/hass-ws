@@ -70,3 +70,25 @@ func TestTtsGoogleTranslateSay_JSON(t *testing.T) {
 		})
 	}
 }
+func TestTtsSpeak_JSON(t *testing.T) {
+	language := "data"
+	message := "data"
+
+	tests := []struct {
+		name   string
+		fields *TtsSpeak
+		want   string
+	}{{
+		fields: NewTtsSpeak(Targets("climate.kitchen")).Language(language).Message(message),
+		name:   "base",
+		want:   "{\"id\":null,\"type\":\"call_service\",\"domain\":\"tts\",\"service\":\"speak\",\"target\":{\"entity_id\":[\"climate.kitchen\"]},\"service_data\":{\"language\":\"data\",\"message\":\"data\"}}",
+	}}
+	for _, tt := range tests {
+		t.Run(tt.name, func(t *testing.T) {
+			d := tt.fields
+			if got := d.JSON(); got != tt.want {
+				t.Errorf("JSON() = %v, want %v", got, tt.want)
+			}
+		})
+	}
+}

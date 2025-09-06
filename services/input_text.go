@@ -10,7 +10,7 @@ import (
 ////////////////////////////////////////////////////////////////////////////////
 
 // NewInputTextReload creates the object that can be sent to Home Assistant for domain input_text, service reload
-// "Reload the input_text configuration."
+// "Reloads helpers from the YAML-configuration."
 func NewInputTextReload(target Target) *InputTextReload {
 	serviceDomain := "input_text"
 	serviceType := "call_service"
@@ -46,7 +46,7 @@ func (i *InputTextReload) Name() string {
 }
 
 // NewInputTextSetValue creates the object that can be sent to Home Assistant for domain input_text, service set_value
-// "Set the value of an input text entity."
+// "Sets the value."
 func NewInputTextSetValue(target Target) *InputTextSetValue {
 	serviceDomain := "input_text"
 	serviceType := "call_service"

@@ -1,0 +1,13 @@
+package services
+
+////////////////////////////////////////////////////////////////////////////////
+// Do not modify this file, it is automatically generated
+////////////////////////////////////////////////////////////////////////////////
+
+type GetForecastsType int
+
+const (
+	GetForecastsTypedaily GetForecastsType = iota
+	GetForecastsTypehourly
+	GetForecastsTypetwice_daily
+)

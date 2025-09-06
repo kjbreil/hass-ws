@@ -10,7 +10,7 @@ import (
 ////////////////////////////////////////////////////////////////////////////////
 
 // NewCameraDisableMotionDetection creates the object that can be sent to Home Assistant for domain camera, service disable_motion_detection
-// "Disable the motion detection in a camera."
+// "Disables the motion detection."
 func NewCameraDisableMotionDetection(target Target) *CameraDisableMotionDetection {
 	serviceDomain := "camera"
 	serviceType := "call_service"
@@ -46,7 +46,7 @@ func (c *CameraDisableMotionDetection) Name() string {
 }
 
 // NewCameraEnableMotionDetection creates the object that can be sent to Home Assistant for domain camera, service enable_motion_detection
-// "Enable the motion detection in a camera."
+// "Enables the motion detection."
 func NewCameraEnableMotionDetection(target Target) *CameraEnableMotionDetection {
 	serviceDomain := "camera"
 	serviceType := "call_service"
@@ -82,7 +82,7 @@ func (c *CameraEnableMotionDetection) Name() string {
 }
 
 // NewCameraPlayStream creates the object that can be sent to Home Assistant for domain camera, service play_stream
-// "Play camera stream on supported media player."
+// "Plays the camera stream on a supported media player."
 func NewCameraPlayStream(target Target) *CameraPlayStream {
 	serviceDomain := "camera"
 	serviceType := "call_service"
@@ -125,7 +125,7 @@ func (c *CameraPlayStream) Name() string {
 }
 
 // NewCameraRecord creates the object that can be sent to Home Assistant for domain camera, service record
-// "Record live camera feed."
+// "Creates a recording of a live camera feed."
 func NewCameraRecord(target Target) *CameraRecord {
 	serviceDomain := "camera"
 	serviceType := "call_service"
@@ -178,7 +178,7 @@ func (c *CameraRecord) Name() string {
 }
 
 // NewCameraSnapshot creates the object that can be sent to Home Assistant for domain camera, service snapshot
-// "Take a snapshot from a camera."
+// "Takes a snapshot from a camera."
 func NewCameraSnapshot(target Target) *CameraSnapshot {
 	serviceDomain := "camera"
 	serviceType := "call_service"
@@ -221,7 +221,7 @@ func (c *CameraSnapshot) Name() string {
 }
 
 // NewCameraTurnOff creates the object that can be sent to Home Assistant for domain camera, service turn_off
-// "Turn off camera."
+// "Turns off the camera."
 func NewCameraTurnOff(target Target) *CameraTurnOff {
 	serviceDomain := "camera"
 	serviceType := "call_service"
@@ -257,7 +257,7 @@ func (c *CameraTurnOff) Name() string {
 }
 
 // NewCameraTurnOn creates the object that can be sent to Home Assistant for domain camera, service turn_on
-// "Turn on camera."
+// "Turns on the camera."
 func NewCameraTurnOn(target Target) *CameraTurnOn {
 	serviceDomain := "camera"
 	serviceType := "call_service"

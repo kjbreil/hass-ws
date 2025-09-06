@@ -26,17 +26,36 @@ func TestHomeassistantCheckConfig_JSON(t *testing.T) {
 		})
 	}
 }
+func TestHomeassistantReloadAll_JSON(t *testing.T) {
+
+	tests := []struct {
+		name   string
+		fields *HomeassistantReloadAll
+		want   string
+	}{{
+		fields: NewHomeassistantReloadAll(Targets("climate.kitchen")),
+		name:   "base",
+		want:   "{\"id\":null,\"type\":\"call_service\",\"domain\":\"homeassistant\",\"service\":\"reload_all\",\"target\":{\"entity_id\":[\"climate.kitchen\"]}}",
+	}}
+	for _, tt := range tests {
+		t.Run(tt.name, func(t *testing.T) {
+			d := tt.fields
+			if got := d.JSON(); got != tt.want {
+				t.Errorf("JSON() = %v, want %v", got, tt.want)
+			}
+		})
+	}
+}
 func TestHomeassistantReloadConfigEntry_JSON(t *testing.T) {
-	entryId := "data"
 
 	tests := []struct {
 		name   string
 		fields *HomeassistantReloadConfigEntry
 		want   string
 	}{{
-		fields: NewHomeassistantReloadConfigEntry(Targets("climate.kitchen")).EntryId(entryId),
+		fields: NewHomeassistantReloadConfigEntry(Targets("climate.kitchen")),
 		name:   "base",
-		want:   "{\"id\":null,\"type\":\"call_service\",\"domain\":\"homeassistant\",\"service\":\"reload_config_entry\",\"target\":{\"entity_id\":[\"climate.kitchen\"]},\"service_data\":{\"entry_id\":\"data\"}}",
+		want:   "{\"id\":null,\"type\":\"call_service\",\"domain\":\"homeassistant\",\"service\":\"reload_config_entry\",\"target\":{\"entity_id\":[\"climate.kitchen\"]}}",
 	}}
 	for _, tt := range tests {
 		t.Run(tt.name, func(t *testing.T) {
@@ -57,6 +76,26 @@ func TestHomeassistantReloadCoreConfig_JSON(t *testing.T) {
 		fields: NewHomeassistantReloadCoreConfig(Targets("climate.kitchen")),
 		name:   "base",
 		want:   "{\"id\":null,\"type\":\"call_service\",\"domain\":\"homeassistant\",\"service\":\"reload_core_config\",\"target\":{\"entity_id\":[\"climate.kitchen\"]}}",
+	}}
+	for _, tt := range tests {
+		t.Run(tt.name, func(t *testing.T) {
+			d := tt.fields
+			if got := d.JSON(); got != tt.want {
+				t.Errorf("JSON() = %v, want %v", got, tt.want)
+			}
+		})
+	}
+}
+func TestHomeassistantReloadCustomTemplates_JSON(t *testing.T) {
+
+	tests := []struct {
+		name   string
+		fields *HomeassistantReloadCustomTemplates
+		want   string
+	}{{
+		fields: NewHomeassistantReloadCustomTemplates(Targets("climate.kitchen")),
+		name:   "base",
+		want:   "{\"id\":null,\"type\":\"call_service\",\"domain\":\"homeassistant\",\"service\":\"reload_custom_templates\",\"target\":{\"entity_id\":[\"climate.kitchen\"]}}",
 	}}
 	for _, tt := range tests {
 		t.Run(tt.name, func(t *testing.T) {
@@ -108,17 +147,18 @@ func TestHomeassistantSavePersistentStates_JSON(t *testing.T) {
 	}
 }
 func TestHomeassistantSetLocation_JSON(t *testing.T) {
-	latitude := "data"
-	longitude := "data"
+	elevation := 1.2
+	latitude := 1.2
+	longitude := 1.2
 
 	tests := []struct {
 		name   string
 		fields *HomeassistantSetLocation
 		want   string
 	}{{
-		fields: NewHomeassistantSetLocation(Targets("climate.kitchen")).Latitude(latitude).Longitude(longitude),
+		fields: NewHomeassistantSetLocation(Targets("climate.kitchen")).Elevation(elevation).Latitude(latitude).Longitude(longitude),
 		name:   "base",
-		want:   "{\"id\":null,\"type\":\"call_service\",\"domain\":\"homeassistant\",\"service\":\"set_location\",\"target\":{\"entity_id\":[\"climate.kitchen\"]},\"service_data\":{\"latitude\":\"data\",\"longitude\":\"data\"}}",
+		want:   "{\"id\":null,\"type\":\"call_service\",\"domain\":\"homeassistant\",\"service\":\"set_location\",\"target\":{\"entity_id\":[\"climate.kitchen\"]},\"service_data\":{\"elevation\":1.2,\"latitude\":1.2,\"longitude\":1.2}}",
 	}}
 	for _, tt := range tests {
 		t.Run(tt.name, func(t *testing.T) {

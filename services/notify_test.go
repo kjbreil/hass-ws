@@ -30,6 +30,7 @@ func TestNotifyNotify_JSON(t *testing.T) {
 	}
 }
 func TestNotifyPersistentNotification_JSON(t *testing.T) {
+	data := "data"
 	message := "data"
 	title := "data"
 
@@ -38,9 +39,31 @@ func TestNotifyPersistentNotification_JSON(t *testing.T) {
 		fields *NotifyPersistentNotification
 		want   string
 	}{{
-		fields: NewNotifyPersistentNotification(Targets("climate.kitchen")).Message(message).Title(title),
+		fields: NewNotifyPersistentNotification(Targets("climate.kitchen")).Data(data).Message(message).Title(title),
 		name:   "base",
-		want:   "{\"id\":null,\"type\":\"call_service\",\"domain\":\"notify\",\"service\":\"persistent_notification\",\"target\":{\"entity_id\":[\"climate.kitchen\"]},\"service_data\":{\"message\":\"data\",\"title\":\"data\"}}",
+		want:   "{\"id\":null,\"type\":\"call_service\",\"domain\":\"notify\",\"service\":\"persistent_notification\",\"target\":{\"entity_id\":[\"climate.kitchen\"]},\"service_data\":{\"data\":\"data\",\"message\":\"data\",\"title\":\"data\"}}",
+	}}
+	for _, tt := range tests {
+		t.Run(tt.name, func(t *testing.T) {
+			d := tt.fields
+			if got := d.JSON(); got != tt.want {
+				t.Errorf("JSON() = %v, want %v", got, tt.want)
+			}
+		})
+	}
+}
+func TestNotifySendMessage_JSON(t *testing.T) {
+	message := "data"
+	title := "data"
+
+	tests := []struct {
+		name   string
+		fields *NotifySendMessage
+		want   string
+	}{{
+		fields: NewNotifySendMessage(Targets("climate.kitchen")).Message(message).Title(title),
+		name:   "base",
+		want:   "{\"id\":null,\"type\":\"call_service\",\"domain\":\"notify\",\"service\":\"send_message\",\"target\":{\"entity_id\":[\"climate.kitchen\"]},\"service_data\":{\"message\":\"data\",\"title\":\"data\"}}",
 	}}
 	for _, tt := range tests {
 		t.Run(tt.name, func(t *testing.T) {

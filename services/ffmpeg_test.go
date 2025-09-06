@@ -6,18 +6,16 @@ import "testing"
 // Do not modify this file, it is automatically generated
 ////////////////////////////////////////////////////////////////////////////////
 
-func TestMqttDump_JSON(t *testing.T) {
-	duration := 1.2
-	topic := "data"
+func TestFfmpegRestart_JSON(t *testing.T) {
 
 	tests := []struct {
 		name   string
-		fields *MqttDump
+		fields *FfmpegRestart
 		want   string
 	}{{
-		fields: NewMqttDump(Targets("climate.kitchen")).Duration(duration).Topic(topic),
+		fields: NewFfmpegRestart(Targets("climate.kitchen")),
 		name:   "base",
-		want:   "{\"id\":null,\"type\":\"call_service\",\"domain\":\"mqtt\",\"service\":\"dump\",\"target\":{\"entity_id\":[\"climate.kitchen\"]},\"service_data\":{\"duration\":1.2,\"topic\":\"data\"}}",
+		want:   "{\"id\":null,\"type\":\"call_service\",\"domain\":\"ffmpeg\",\"service\":\"restart\",\"target\":{\"entity_id\":[\"climate.kitchen\"]}}",
 	}}
 	for _, tt := range tests {
 		t.Run(tt.name, func(t *testing.T) {
@@ -28,18 +26,16 @@ func TestMqttDump_JSON(t *testing.T) {
 		})
 	}
 }
-func TestMqttPublish_JSON(t *testing.T) {
-	qos := Qos0
-	topic := "data"
+func TestFfmpegStart_JSON(t *testing.T) {
 
 	tests := []struct {
 		name   string
-		fields *MqttPublish
+		fields *FfmpegStart
 		want   string
 	}{{
-		fields: NewMqttPublish(Targets("climate.kitchen")).Qos(qos).Topic(topic),
+		fields: NewFfmpegStart(Targets("climate.kitchen")),
 		name:   "base",
-		want:   "{\"id\":null,\"type\":\"call_service\",\"domain\":\"mqtt\",\"service\":\"publish\",\"target\":{\"entity_id\":[\"climate.kitchen\"]},\"service_data\":{\"qos\":\"0\",\"topic\":\"data\"}}",
+		want:   "{\"id\":null,\"type\":\"call_service\",\"domain\":\"ffmpeg\",\"service\":\"start\",\"target\":{\"entity_id\":[\"climate.kitchen\"]}}",
 	}}
 	for _, tt := range tests {
 		t.Run(tt.name, func(t *testing.T) {
@@ -50,16 +46,16 @@ func TestMqttPublish_JSON(t *testing.T) {
 		})
 	}
 }
-func TestMqttReload_JSON(t *testing.T) {
+func TestFfmpegStop_JSON(t *testing.T) {
 
 	tests := []struct {
 		name   string
-		fields *MqttReload
+		fields *FfmpegStop
 		want   string
 	}{{
-		fields: NewMqttReload(Targets("climate.kitchen")),
+		fields: NewFfmpegStop(Targets("climate.kitchen")),
 		name:   "base",
-		want:   "{\"id\":null,\"type\":\"call_service\",\"domain\":\"mqtt\",\"service\":\"reload\",\"target\":{\"entity_id\":[\"climate.kitchen\"]}}",
+		want:   "{\"id\":null,\"type\":\"call_service\",\"domain\":\"ffmpeg\",\"service\":\"stop\",\"target\":{\"entity_id\":[\"climate.kitchen\"]}}",
 	}}
 	for _, tt := range tests {
 		t.Run(tt.name, func(t *testing.T) {

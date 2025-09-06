@@ -10,7 +10,7 @@ import (
 ////////////////////////////////////////////////////////////////////////////////
 
 // NewScriptReload creates the object that can be sent to Home Assistant for domain script, service reload
-// "Reload all the available scripts"
+// "Reloads all the available scripts."
 func NewScriptReload(target Target) *ScriptReload {
 	serviceDomain := "script"
 	serviceType := "call_service"
@@ -45,44 +45,8 @@ func (s *ScriptReload) Name() string {
 	return fmt.Sprintf("%s.%s", *s.Domain, *s.Service)
 }
 
-// NewScriptTestScript creates the object that can be sent to Home Assistant for domain script, service test_script
-// ""
-func NewScriptTestScript(target Target) *ScriptTestScript {
-	serviceDomain := "script"
-	serviceType := "call_service"
-	serviceService := "test_script"
-	s := &ScriptTestScript{
-		ServiceBase: ServiceBase{
-			Domain:         &serviceDomain,
-			Id:             nil,
-			ReturnResponse: false,
-			Service:        &serviceService,
-			Target:         target,
-			Type:           &serviceType,
-		},
-		ServiceData: nil,
-	}
-	return s
-}
-
-type ScriptTestScript struct {
-	ServiceBase
-	ServiceData interface{} `json:"service_data,omitempty"`
-}
-
-func (s *ScriptTestScript) JSON() string {
-	data, _ := gojson.Marshal(s)
-	return string(data)
-}
-func (s *ScriptTestScript) Targets() []string {
-	return s.Target.EntityId
-}
-func (s *ScriptTestScript) Name() string {
-	return fmt.Sprintf("%s.%s", *s.Domain, *s.Service)
-}
-
 // NewScriptToggle creates the object that can be sent to Home Assistant for domain script, service toggle
-// "Toggle script"
+// "Starts a script if it isn't running, stops it otherwise."
 func NewScriptToggle(target Target) *ScriptToggle {
 	serviceDomain := "script"
 	serviceType := "call_service"
@@ -118,7 +82,7 @@ func (s *ScriptToggle) Name() string {
 }
 
 // NewScriptTurnOff creates the object that can be sent to Home Assistant for domain script, service turn_off
-// "Turn off script"
+// "Stops a running script."
 func NewScriptTurnOff(target Target) *ScriptTurnOff {
 	serviceDomain := "script"
 	serviceType := "call_service"
@@ -154,7 +118,7 @@ func (s *ScriptTurnOff) Name() string {
 }
 
 // NewScriptTurnOn creates the object that can be sent to Home Assistant for domain script, service turn_on
-// "Turn on script"
+// "Runs the sequence of actions defined in a script."
 func NewScriptTurnOn(target Target) *ScriptTurnOn {
 	serviceDomain := "script"
 	serviceType := "call_service"

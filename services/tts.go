@@ -10,7 +10,7 @@ import (
 ////////////////////////////////////////////////////////////////////////////////
 
 // NewTtsClearCache creates the object that can be sent to Home Assistant for domain tts, service clear_cache
-// "Remove all text-to-speech cache files and RAM cache."
+// "Removes all cached text-to-speech files and purges the memory."
 func NewTtsClearCache(target Target) *TtsClearCache {
 	serviceDomain := "tts"
 	serviceType := "call_service"
@@ -138,5 +138,53 @@ func (t *TtsGoogleTranslateSay) Targets() []string {
 	return t.Target.EntityId
 }
 func (t *TtsGoogleTranslateSay) Name() string {
+	return fmt.Sprintf("%s.%s", *t.Domain, *t.Service)
+}
+
+// NewTtsSpeak creates the object that can be sent to Home Assistant for domain tts, service speak
+// "Speaks something using text-to-speech on a media player."
+func NewTtsSpeak(target Target) *TtsSpeak {
+	serviceDomain := "tts"
+	serviceType := "call_service"
+	serviceService := "speak"
+	t := &TtsSpeak{
+		ServiceBase: ServiceBase{
+			Domain:         &serviceDomain,
+			Id:             nil,
+			ReturnResponse: false,
+			Service:        &serviceService,
+			Target:         target,
+			Type:           &serviceType,
+		},
+		ServiceData: TtsSpeakParams{},
+	}
+	return t
+}
+
+type TtsSpeak struct {
+	ServiceBase
+	ServiceData TtsSpeakParams `json:"service_data,omitempty"`
+}
+type TtsSpeakParams struct {
+	Language *string `json:"language,omitempty"`
+	Message  *string `json:"message,omitempty"`
+}
+
+func (t *TtsSpeak) Language(language string) *TtsSpeak {
+	t.ServiceData.Language = &language
+	return t
+}
+func (t *TtsSpeak) Message(message string) *TtsSpeak {
+	t.ServiceData.Message = &message
+	return t
+}
+func (t *TtsSpeak) JSON() string {
+	data, _ := gojson.Marshal(t)
+	return string(data)
+}
+func (t *TtsSpeak) Targets() []string {
+	return t.Target.EntityId
+}
+func (t *TtsSpeak) Name() string {
 	return fmt.Sprintf("%s.%s", *t.Domain, *t.Service)
 }

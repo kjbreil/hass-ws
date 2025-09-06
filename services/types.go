@@ -1,27 +1,17 @@
-//go:generate stringer -type=ColorName -trimprefix=ColorName
-//go:generate stringer -type=CommandType -trimprefix=CommandType
-//go:generate stringer -type=Direction -trimprefix=Direction
-//go:generate stringer -type=Enqueue -trimprefix=Enqueue
-//go:generate stringer -type=Flash -trimprefix=Flash
 //go:generate stringer -type=Format -trimprefix=Format
-//go:generate stringer -type=HvacMode -trimprefix=HvacMode
+//go:generate stringer -type=GetForecastsType -trimprefix=GetForecastsType
 //go:generate stringer -type=Level -trimprefix=Level
 //go:generate stringer -type=Mode -trimprefix=Mode
+//go:generate stringer -type=Period -trimprefix=Period
 //go:generate stringer -type=Qos -trimprefix=Qos
-//go:generate stringer -type=Repeat -trimprefix=Repeat
-//go:generate stringer -type=RepeatType -trimprefix=RepeatType
-//go:generate jsonenums -type=ColorName
-//go:generate jsonenums -type=CommandType
-//go:generate jsonenums -type=Direction
-//go:generate jsonenums -type=Enqueue
-//go:generate jsonenums -type=Flash
+//go:generate stringer -type=Types -trimprefix=Types
 //go:generate jsonenums -type=Format
-//go:generate jsonenums -type=HvacMode
+//go:generate jsonenums -type=GetForecastsType
 //go:generate jsonenums -type=Level
 //go:generate jsonenums -type=Mode
+//go:generate jsonenums -type=Period
 //go:generate jsonenums -type=Qos
-//go:generate jsonenums -type=Repeat
-//go:generate jsonenums -type=RepeatType
+//go:generate jsonenums -type=Types
 
 package services
 
@@ -63,3 +53,15 @@ func Targets(entities ...string) Target {
 	}
 	return t
 }
+
+type Types int
+
+const (
+	Typeschange Types = iota
+	Typeslast_reset
+	Typesmax
+	Typesmean
+	Typesmin
+	Typesstate
+	Typessum
+)

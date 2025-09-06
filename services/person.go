@@ -10,7 +10,7 @@ import (
 ////////////////////////////////////////////////////////////////////////////////
 
 // NewPersonReload creates the object that can be sent to Home Assistant for domain person, service reload
-// "Reload the person configuration."
+// "Reloads persons from the YAML-configuration."
 func NewPersonReload(target Target) *PersonReload {
 	serviceDomain := "person"
 	serviceType := "call_service"

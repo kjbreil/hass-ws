@@ -10,7 +10,7 @@ import (
 ////////////////////////////////////////////////////////////////////////////////
 
 // NewLightToggle creates the object that can be sent to Home Assistant for domain light, service toggle
-// "Toggles one or more lights, from on to off, or, off to on, based on their current state.\n"
+// "Toggles one or more lights, from on to off, or off to on, based on their current state."
 func NewLightToggle(target Target) *LightToggle {
 	serviceDomain := "light"
 	serviceType := "call_service"
@@ -34,47 +34,22 @@ type LightToggle struct {
 	ServiceData LightToggleParams `json:"service_data,omitempty"`
 }
 type LightToggleParams struct {
-	Brightness    *float64   `json:"brightness,omitempty"`
-	BrightnessPct *float64   `json:"brightness_pct,omitempty"`
-	ColorName     *ColorName `json:"color_name,omitempty"`
-	ColorTemp     *float64   `json:"color_temp,omitempty"`
-	Effect        *string    `json:"effect,omitempty"`
-	Flash         *Flash     `json:"flash,omitempty"`
-	Kelvin        *float64   `json:"kelvin,omitempty"`
-	Profile       *string    `json:"profile,omitempty"`
-	Transition    *float64   `json:"transition,omitempty"`
+	BrightnessPct   *float64 `json:"brightness_pct,omitempty"`
+	ColorTempKelvin *float64 `json:"color_temp_kelvin,omitempty"`
+	Effect          *string  `json:"effect,omitempty"`
+	Transition      *float64 `json:"transition,omitempty"`
 }
 
-func (l *LightToggle) Brightness(brightness float64) *LightToggle {
-	l.ServiceData.Brightness = &brightness
-	return l
-}
 func (l *LightToggle) BrightnessPct(brightnessPct float64) *LightToggle {
 	l.ServiceData.BrightnessPct = &brightnessPct
 	return l
 }
-func (l *LightToggle) ColorName(colorName ColorName) *LightToggle {
-	l.ServiceData.ColorName = &colorName
-	return l
-}
-func (l *LightToggle) ColorTemp(colorTemp float64) *LightToggle {
-	l.ServiceData.ColorTemp = &colorTemp
+func (l *LightToggle) ColorTempKelvin(colorTempKelvin float64) *LightToggle {
+	l.ServiceData.ColorTempKelvin = &colorTempKelvin
 	return l
 }
 func (l *LightToggle) Effect(effect string) *LightToggle {
 	l.ServiceData.Effect = &effect
-	return l
-}
-func (l *LightToggle) Flash(flash Flash) *LightToggle {
-	l.ServiceData.Flash = &flash
-	return l
-}
-func (l *LightToggle) Kelvin(kelvin float64) *LightToggle {
-	l.ServiceData.Kelvin = &kelvin
-	return l
-}
-func (l *LightToggle) Profile(profile string) *LightToggle {
-	l.ServiceData.Profile = &profile
 	return l
 }
 func (l *LightToggle) Transition(transition float64) *LightToggle {
@@ -117,14 +92,9 @@ type LightTurnOff struct {
 	ServiceData LightTurnOffParams `json:"service_data,omitempty"`
 }
 type LightTurnOffParams struct {
-	Flash      *Flash   `json:"flash,omitempty"`
 	Transition *float64 `json:"transition,omitempty"`
 }
 
-func (l *LightTurnOff) Flash(flash Flash) *LightTurnOff {
-	l.ServiceData.Flash = &flash
-	return l
-}
 func (l *LightTurnOff) Transition(transition float64) *LightTurnOff {
 	l.ServiceData.Transition = &transition
 	return l
@@ -141,7 +111,7 @@ func (l *LightTurnOff) Name() string {
 }
 
 // NewLightTurnOn creates the object that can be sent to Home Assistant for domain light, service turn_on
-// "Turn on one or more lights and adjust properties of the light, even when they are turned on already.\n"
+// "Turns on one or more lights and adjusts their properties, even when they are turned on already."
 func NewLightTurnOn(target Target) *LightTurnOn {
 	serviceDomain := "light"
 	serviceType := "call_service"
@@ -165,66 +135,31 @@ type LightTurnOn struct {
 	ServiceData LightTurnOnParams `json:"service_data,omitempty"`
 }
 type LightTurnOnParams struct {
-	Brightness        *float64   `json:"brightness,omitempty"`
-	BrightnessPct     *float64   `json:"brightness_pct,omitempty"`
-	BrightnessStep    *float64   `json:"brightness_step,omitempty"`
-	BrightnessStepPct *float64   `json:"brightness_step_pct,omitempty"`
-	ColorName         *ColorName `json:"color_name,omitempty"`
-	ColorTemp         *float64   `json:"color_temp,omitempty"`
-	Effect            *string    `json:"effect,omitempty"`
-	Flash             *Flash     `json:"flash,omitempty"`
-	Kelvin            *float64   `json:"kelvin,omitempty"`
-	Profile           *string    `json:"profile,omitempty"`
-	Transition        *float64   `json:"transition,omitempty"`
-	White             *float64   `json:"white,omitempty"`
+	BrightnessPct     *float64 `json:"brightness_pct,omitempty"`
+	BrightnessStepPct *float64 `json:"brightness_step_pct,omitempty"`
+	ColorTempKelvin   *float64 `json:"color_temp_kelvin,omitempty"`
+	Effect            *string  `json:"effect,omitempty"`
+	Transition        *float64 `json:"transition,omitempty"`
 }
 
-func (l *LightTurnOn) Brightness(brightness float64) *LightTurnOn {
-	l.ServiceData.Brightness = &brightness
-	return l
-}
 func (l *LightTurnOn) BrightnessPct(brightnessPct float64) *LightTurnOn {
 	l.ServiceData.BrightnessPct = &brightnessPct
-	return l
-}
-func (l *LightTurnOn) BrightnessStep(brightnessStep float64) *LightTurnOn {
-	l.ServiceData.BrightnessStep = &brightnessStep
 	return l
 }
 func (l *LightTurnOn) BrightnessStepPct(brightnessStepPct float64) *LightTurnOn {
 	l.ServiceData.BrightnessStepPct = &brightnessStepPct
 	return l
 }
-func (l *LightTurnOn) ColorName(colorName ColorName) *LightTurnOn {
-	l.ServiceData.ColorName = &colorName
-	return l
-}
-func (l *LightTurnOn) ColorTemp(colorTemp float64) *LightTurnOn {
-	l.ServiceData.ColorTemp = &colorTemp
+func (l *LightTurnOn) ColorTempKelvin(colorTempKelvin float64) *LightTurnOn {
+	l.ServiceData.ColorTempKelvin = &colorTempKelvin
 	return l
 }
 func (l *LightTurnOn) Effect(effect string) *LightTurnOn {
 	l.ServiceData.Effect = &effect
 	return l
 }
-func (l *LightTurnOn) Flash(flash Flash) *LightTurnOn {
-	l.ServiceData.Flash = &flash
-	return l
-}
-func (l *LightTurnOn) Kelvin(kelvin float64) *LightTurnOn {
-	l.ServiceData.Kelvin = &kelvin
-	return l
-}
-func (l *LightTurnOn) Profile(profile string) *LightTurnOn {
-	l.ServiceData.Profile = &profile
-	return l
-}
 func (l *LightTurnOn) Transition(transition float64) *LightTurnOn {
 	l.ServiceData.Transition = &transition
-	return l
-}
-func (l *LightTurnOn) White(white float64) *LightTurnOn {
-	l.ServiceData.White = &white
 	return l
 }
 func (l *LightTurnOn) JSON() string {
