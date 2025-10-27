@@ -15,7 +15,7 @@ import (
 	"github.com/kjbreil/hass-ws/internal/websocket"
 	"github.com/kjbreil/hass-ws/logger"
 	"github.com/kjbreil/hass-ws/model"
-	"github.com/kjbreil/hass-ws/rest"
+	"github.com/kjbreil/hass-ws/pkg/rest"
 	"github.com/kjbreil/hass-ws/services"
 	ws "nhooyr.io/websocket"
 )

@@ -14,7 +14,7 @@ import (
 
 	"github.com/kjbreil/hass-ws/model"
 	"github.com/kjbreil/hass-ws/pkg/hass"
-	"github.com/kjbreil/hass-ws/rest"
+	"github.com/kjbreil/hass-ws/pkg/rest"
 	"github.com/kjbreil/hass-ws/services"
 )
 

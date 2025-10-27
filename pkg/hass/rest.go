@@ -11,7 +11,7 @@ import (
 
 	"github.com/goccy/go-json"
 	"github.com/kjbreil/hass-ws/model"
-	"github.com/kjbreil/hass-ws/rest"
+	"github.com/kjbreil/hass-ws/pkg/rest"
 )
 
 // GetRestStates retrieves all states via the REST API

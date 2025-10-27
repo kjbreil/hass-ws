@@ -10,7 +10,7 @@ import (
 
 	"github.com/kjbreil/hass-ws/internal/callbacks"
 	"github.com/kjbreil/hass-ws/model"
-	"github.com/kjbreil/hass-ws/rest"
+	"github.com/kjbreil/hass-ws/pkg/rest"
 	ws "nhooyr.io/websocket"
 )
 
