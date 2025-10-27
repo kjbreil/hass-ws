@@ -1,23 +1,23 @@
-package hass_ws
+package callbacks
 
 import (
 	"github.com/kjbreil/hass-ws/model"
 	"sync"
 )
 
-type callbacks struct {
+type Callbacks struct {
 	callbacks map[int]chan *model.Message
 	m         *sync.Mutex
 }
 
-func newCallbacks() *callbacks {
-	return &callbacks{
+func New() *Callbacks {
+	return &Callbacks{
 		callbacks: make(map[int]chan *model.Message),
 		m:         &sync.Mutex{},
 	}
 }
 
-func (c *callbacks) Get(key int) (chan *model.Message, bool) {
+func (c *Callbacks) Get(key int) (chan *model.Message, bool) {
 	c.m.Lock()
 	defer c.m.Unlock()
 	if cb, ok := c.callbacks[key]; ok {
@@ -26,12 +26,12 @@ func (c *callbacks) Get(key int) (chan *model.Message, bool) {
 	return nil, false
 }
 
-func (c *callbacks) Set(key int, value chan *model.Message) {
+func (c *Callbacks) Set(key int, value chan *model.Message) {
 	c.m.Lock()
 	defer c.m.Unlock()
 	c.callbacks[key] = value
 }
-func (c *callbacks) Delete(key int) {
+func (c *Callbacks) Delete(key int) {
 	c.m.Lock()
 	defer c.m.Unlock()
 	if cb, ok := c.callbacks[key]; ok {
@@ -40,7 +40,7 @@ func (c *callbacks) Delete(key int) {
 	}
 }
 
-func (c *callbacks) Len() int {
+func (c *Callbacks) Len() int {
 	c.m.Lock()
 	defer c.m.Unlock()
 	return len(c.callbacks)

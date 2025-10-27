@@ -10,7 +10,7 @@ import (
 ////////////////////////////////////////////////////////////////////////////////
 
 // NewFrontendReloadThemes creates the object that can be sent to Home Assistant for domain frontend, service reload_themes
-// "Reloads themes from the YAML-configuration."
+// "Reload themes from YAML configuration."
 func NewFrontendReloadThemes(target Target) *FrontendReloadThemes {
 	serviceDomain := "frontend"
 	serviceType := "call_service"
@@ -46,7 +46,7 @@ func (f *FrontendReloadThemes) Name() string {
 }
 
 // NewFrontendSetTheme creates the object that can be sent to Home Assistant for domain frontend, service set_theme
-// "Sets the default theme Home Assistant uses. Can be overridden by a user."
+// "Set a theme unless the client selected per-device theme."
 func NewFrontendSetTheme(target Target) *FrontendSetTheme {
 	serviceDomain := "frontend"
 	serviceType := "call_service"

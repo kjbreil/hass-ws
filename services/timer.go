@@ -10,7 +10,7 @@ import (
 ////////////////////////////////////////////////////////////////////////////////
 
 // NewTimerCancel creates the object that can be sent to Home Assistant for domain timer, service cancel
-// "Resets a timer's duration to the last known initial value without firing the timer finished event."
+// "Cancel a timer."
 func NewTimerCancel(target Target) *TimerCancel {
 	serviceDomain := "timer"
 	serviceType := "call_service"
@@ -45,51 +45,8 @@ func (t *TimerCancel) Name() string {
 	return fmt.Sprintf("%s.%s", *t.Domain, *t.Service)
 }
 
-// NewTimerChange creates the object that can be sent to Home Assistant for domain timer, service change
-// "Changes a timer by adding or subtracting a given duration."
-func NewTimerChange(target Target) *TimerChange {
-	serviceDomain := "timer"
-	serviceType := "call_service"
-	serviceService := "change"
-	t := &TimerChange{
-		ServiceBase: ServiceBase{
-			Domain:         &serviceDomain,
-			Id:             nil,
-			ReturnResponse: false,
-			Service:        &serviceService,
-			Target:         target,
-			Type:           &serviceType,
-		},
-		ServiceData: TimerChangeParams{},
-	}
-	return t
-}
-
-type TimerChange struct {
-	ServiceBase
-	ServiceData TimerChangeParams `json:"service_data,omitempty"`
-}
-type TimerChangeParams struct {
-	Duration *string `json:"duration,omitempty"`
-}
-
-func (t *TimerChange) Duration(duration string) *TimerChange {
-	t.ServiceData.Duration = &duration
-	return t
-}
-func (t *TimerChange) JSON() string {
-	data, _ := gojson.Marshal(t)
-	return string(data)
-}
-func (t *TimerChange) Targets() []string {
-	return t.Target.EntityId
-}
-func (t *TimerChange) Name() string {
-	return fmt.Sprintf("%s.%s", *t.Domain, *t.Service)
-}
-
 // NewTimerFinish creates the object that can be sent to Home Assistant for domain timer, service finish
-// "Finishes a running timer earlier than scheduled."
+// "Finish a timer."
 func NewTimerFinish(target Target) *TimerFinish {
 	serviceDomain := "timer"
 	serviceType := "call_service"
@@ -125,7 +82,7 @@ func (t *TimerFinish) Name() string {
 }
 
 // NewTimerPause creates the object that can be sent to Home Assistant for domain timer, service pause
-// "Pauses a running timer, retaining the remaining duration for later continuation."
+// "Pause a timer."
 func NewTimerPause(target Target) *TimerPause {
 	serviceDomain := "timer"
 	serviceType := "call_service"
@@ -161,7 +118,7 @@ func (t *TimerPause) Name() string {
 }
 
 // NewTimerReload creates the object that can be sent to Home Assistant for domain timer, service reload
-// "Reloads timers from the YAML-configuration."
+// ""
 func NewTimerReload(target Target) *TimerReload {
 	serviceDomain := "timer"
 	serviceType := "call_service"
@@ -197,7 +154,7 @@ func (t *TimerReload) Name() string {
 }
 
 // NewTimerStart creates the object that can be sent to Home Assistant for domain timer, service start
-// "Starts a timer or restarts it with a provided duration."
+// "Start a timer"
 func NewTimerStart(target Target) *TimerStart {
 	serviceDomain := "timer"
 	serviceType := "call_service"

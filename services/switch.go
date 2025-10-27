@@ -10,7 +10,7 @@ import (
 ////////////////////////////////////////////////////////////////////////////////
 
 // NewSwitchToggle creates the object that can be sent to Home Assistant for domain switch, service toggle
-// "Toggles a switch on/off."
+// "Toggles a switch state"
 func NewSwitchToggle(target Target) *SwitchToggle {
 	serviceDomain := "switch"
 	serviceType := "call_service"
@@ -46,7 +46,7 @@ func (s *SwitchToggle) Name() string {
 }
 
 // NewSwitchTurnOff creates the object that can be sent to Home Assistant for domain switch, service turn_off
-// "Turns a switch off."
+// "Turn a switch off"
 func NewSwitchTurnOff(target Target) *SwitchTurnOff {
 	serviceDomain := "switch"
 	serviceType := "call_service"
@@ -82,7 +82,7 @@ func (s *SwitchTurnOff) Name() string {
 }
 
 // NewSwitchTurnOn creates the object that can be sent to Home Assistant for domain switch, service turn_on
-// "Turns a switch on."
+// "Turn a switch on"
 func NewSwitchTurnOn(target Target) *SwitchTurnOn {
 	serviceDomain := "switch"
 	serviceType := "call_service"

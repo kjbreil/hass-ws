@@ -46,28 +46,6 @@ func TestRecorderEnable_JSON(t *testing.T) {
 		})
 	}
 }
-func TestRecorderGetStatistics_JSON(t *testing.T) {
-	period := Period5minute
-	types := Typeschange
-
-	tests := []struct {
-		name   string
-		fields *RecorderGetStatistics
-		want   string
-	}{{
-		fields: NewRecorderGetStatistics(Targets("climate.kitchen")).Period(period).Types(types),
-		name:   "base",
-		want:   "{\"id\":null,\"type\":\"call_service\",\"domain\":\"recorder\",\"service\":\"get_statistics\",\"target\":{\"entity_id\":[\"climate.kitchen\"]},\"service_data\":{\"period\":\"5minute\",\"types\":\"change\"}}",
-	}}
-	for _, tt := range tests {
-		t.Run(tt.name, func(t *testing.T) {
-			d := tt.fields
-			if got := d.JSON(); got != tt.want {
-				t.Errorf("JSON() = %v, want %v", got, tt.want)
-			}
-		})
-	}
-}
 func TestRecorderPurge_JSON(t *testing.T) {
 	keepDays := 1.2
 
@@ -90,16 +68,15 @@ func TestRecorderPurge_JSON(t *testing.T) {
 	}
 }
 func TestRecorderPurgeEntities_JSON(t *testing.T) {
-	keepDays := 1.2
 
 	tests := []struct {
 		name   string
 		fields *RecorderPurgeEntities
 		want   string
 	}{{
-		fields: NewRecorderPurgeEntities(Targets("climate.kitchen")).KeepDays(keepDays),
+		fields: NewRecorderPurgeEntities(Targets("climate.kitchen")),
 		name:   "base",
-		want:   "{\"id\":null,\"type\":\"call_service\",\"domain\":\"recorder\",\"service\":\"purge_entities\",\"target\":{\"entity_id\":[\"climate.kitchen\"]},\"service_data\":{\"keep_days\":1.2}}",
+		want:   "{\"id\":null,\"type\":\"call_service\",\"domain\":\"recorder\",\"service\":\"purge_entities\",\"target\":{\"entity_id\":[\"climate.kitchen\"]}}",
 	}}
 	for _, tt := range tests {
 		t.Run(tt.name, func(t *testing.T) {

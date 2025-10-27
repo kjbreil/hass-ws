@@ -6,9 +6,7 @@ package entities
 
 type BinarySensor struct {
 	Additional   Additional `json:"additional,omitempty"`
-	DeviceClass  *string    `json:"device_class,omitempty"`
 	FriendlyName *string    `json:"friendly_name,omitempty"`
-	IsOn         *bool      `json:"is_on,omitempty"`
 }
 
 func GetBinarySensor(attributes map[string]interface{}) *BinarySensor {

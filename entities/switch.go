@@ -5,11 +5,8 @@ package entities
 ////////////////////////////////////////////////////////////////////////////////
 
 type Switch struct {
-	Additional     Additional `json:"additional,omitempty"`
-	CurrentPowerW  *float64   `json:"current_power_w,omitempty"`
-	FriendlyName   *string    `json:"friendly_name,omitempty"`
-	IsOn           *bool      `json:"is_on,omitempty"`
-	TodayEnergyKwh *float64   `json:"today_energy_kwh,omitempty"`
+	Additional   Additional `json:"additional,omitempty"`
+	FriendlyName *string    `json:"friendly_name,omitempty"`
 }
 
 func GetSwitch(attributes map[string]interface{}) *Switch {

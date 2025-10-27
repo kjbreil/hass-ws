@@ -10,7 +10,7 @@ import (
 ////////////////////////////////////////////////////////////////////////////////
 
 // NewLoggerSetDefaultLevel creates the object that can be sent to Home Assistant for domain logger, service set_default_level
-// "Sets the default log level for integrations."
+// "Set the default log level for integrations."
 func NewLoggerSetDefaultLevel(target Target) *LoggerSetDefaultLevel {
 	serviceDomain := "logger"
 	serviceType := "call_service"
@@ -53,7 +53,7 @@ func (l *LoggerSetDefaultLevel) Name() string {
 }
 
 // NewLoggerSetLevel creates the object that can be sent to Home Assistant for domain logger, service set_level
-// "Sets the log level for one or more integrations."
+// "Set log level for integrations."
 func NewLoggerSetLevel(target Target) *LoggerSetLevel {
 	serviceDomain := "logger"
 	serviceType := "call_service"

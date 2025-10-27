@@ -16,6 +16,7 @@
 
 .idea
 .DS_Store
-helpers/cache/**
-/helpers/HassWSService/services/**
+internal/generator/cache/**
+/cmd/hassws-gen/services/**
 config.yml
+.serena/

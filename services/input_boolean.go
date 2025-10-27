@@ -10,7 +10,7 @@ import (
 ////////////////////////////////////////////////////////////////////////////////
 
 // NewInputBooleanReload creates the object that can be sent to Home Assistant for domain input_boolean, service reload
-// "Reloads helpers from the YAML-configuration."
+// "Reload the input_boolean configuration"
 func NewInputBooleanReload(target Target) *InputBooleanReload {
 	serviceDomain := "input_boolean"
 	serviceType := "call_service"
@@ -46,7 +46,7 @@ func (i *InputBooleanReload) Name() string {
 }
 
 // NewInputBooleanToggle creates the object that can be sent to Home Assistant for domain input_boolean, service toggle
-// "Toggles the helper on/off."
+// "Toggle an input boolean"
 func NewInputBooleanToggle(target Target) *InputBooleanToggle {
 	serviceDomain := "input_boolean"
 	serviceType := "call_service"
@@ -82,7 +82,7 @@ func (i *InputBooleanToggle) Name() string {
 }
 
 // NewInputBooleanTurnOff creates the object that can be sent to Home Assistant for domain input_boolean, service turn_off
-// "Turns off the helper."
+// "Turn off an input boolean"
 func NewInputBooleanTurnOff(target Target) *InputBooleanTurnOff {
 	serviceDomain := "input_boolean"
 	serviceType := "call_service"
@@ -118,7 +118,7 @@ func (i *InputBooleanTurnOff) Name() string {
 }
 
 // NewInputBooleanTurnOn creates the object that can be sent to Home Assistant for domain input_boolean, service turn_on
-// "Turns on the helper."
+// "Turn on an input boolean"
 func NewInputBooleanTurnOn(target Target) *InputBooleanTurnOn {
 	serviceDomain := "input_boolean"
 	serviceType := "call_service"

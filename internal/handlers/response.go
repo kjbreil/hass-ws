@@ -1,4 +1,4 @@
-package hass_ws
+package handlers
 
 import (
 	"github.com/kjbreil/hass-ws/model"
@@ -7,19 +7,19 @@ import (
 
 type Response struct {
 	msg     *model.Message
-	done    chan struct{}
+	Done    chan struct{}
 	timeout chan struct{}
 }
 
 func NewResponse() *Response {
 
 	r := &Response{
-		done: make(chan struct{}),
+		Done: make(chan struct{}),
 	}
 	go func() {
-		<-r.done
+		<-r.Done
 		defer func() {
-			close(r.done)
+			close(r.Done)
 			if _ = recover(); r != nil {
 				return
 			}
@@ -30,6 +30,11 @@ func NewResponse() *Response {
 	}()
 
 	return r
+}
+
+// SetMessage sets the response message (used internally by client)
+func (r *Response) SetMessage(msg *model.Message) {
+	r.msg = msg
 }
 
 func (r *Response) Timeout(d time.Duration) *model.Message {

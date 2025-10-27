@@ -26,23 +26,3 @@ func TestBackupCreate_JSON(t *testing.T) {
 		})
 	}
 }
-func TestBackupCreateAutomatic_JSON(t *testing.T) {
-
-	tests := []struct {
-		name   string
-		fields *BackupCreateAutomatic
-		want   string
-	}{{
-		fields: NewBackupCreateAutomatic(Targets("climate.kitchen")),
-		name:   "base",
-		want:   "{\"id\":null,\"type\":\"call_service\",\"domain\":\"backup\",\"service\":\"create_automatic\",\"target\":{\"entity_id\":[\"climate.kitchen\"]}}",
-	}}
-	for _, tt := range tests {
-		t.Run(tt.name, func(t *testing.T) {
-			d := tt.fields
-			if got := d.JSON(); got != tt.want {
-				t.Errorf("JSON() = %v, want %v", got, tt.want)
-			}
-		})
-	}
-}

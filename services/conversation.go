@@ -10,7 +10,7 @@ import (
 ////////////////////////////////////////////////////////////////////////////////
 
 // NewConversationProcess creates the object that can be sent to Home Assistant for domain conversation, service process
-// "Launches a conversation from a transcribed text."
+// "Launch a conversation from a transcribed text."
 func NewConversationProcess(target Target) *ConversationProcess {
 	serviceDomain := "conversation"
 	serviceType := "call_service"
@@ -34,19 +34,9 @@ type ConversationProcess struct {
 	ServiceData ConversationProcessParams `json:"service_data,omitempty"`
 }
 type ConversationProcessParams struct {
-	ConversationId *string `json:"conversation_id,omitempty"`
-	Language       *string `json:"language,omitempty"`
-	Text           *string `json:"text,omitempty"`
+	Text *string `json:"text,omitempty"`
 }
 
-func (c *ConversationProcess) ConversationId(conversationId string) *ConversationProcess {
-	c.ServiceData.ConversationId = &conversationId
-	return c
-}
-func (c *ConversationProcess) Language(language string) *ConversationProcess {
-	c.ServiceData.Language = &language
-	return c
-}
 func (c *ConversationProcess) Text(text string) *ConversationProcess {
 	c.ServiceData.Text = &text
 	return c
@@ -63,7 +53,7 @@ func (c *ConversationProcess) Name() string {
 }
 
 // NewConversationReload creates the object that can be sent to Home Assistant for domain conversation, service reload
-// "Reloads the intent configuration."
+// ""
 func NewConversationReload(target Target) *ConversationReload {
 	serviceDomain := "conversation"
 	serviceType := "call_service"
@@ -77,23 +67,16 @@ func NewConversationReload(target Target) *ConversationReload {
 			Target:         target,
 			Type:           &serviceType,
 		},
-		ServiceData: ConversationReloadParams{},
+		ServiceData: nil,
 	}
 	return c
 }
 
 type ConversationReload struct {
 	ServiceBase
-	ServiceData ConversationReloadParams `json:"service_data,omitempty"`
-}
-type ConversationReloadParams struct {
-	Language *string `json:"language,omitempty"`
+	ServiceData interface{} `json:"service_data,omitempty"`
 }
 
-func (c *ConversationReload) Language(language string) *ConversationReload {
-	c.ServiceData.Language = &language
-	return c
-}
 func (c *ConversationReload) JSON() string {
 	data, _ := gojson.Marshal(c)
 	return string(data)

@@ -5,10 +5,8 @@ package entities
 ////////////////////////////////////////////////////////////////////////////////
 
 type Remote struct {
-	ActivityList    *[]string  `json:"activity_list,omitempty"`
-	Additional      Additional `json:"additional,omitempty"`
-	CurrentActivity *string    `json:"current_activity,omitempty"`
-	FriendlyName    *string    `json:"friendly_name,omitempty"`
+	Additional   Additional `json:"additional,omitempty"`
+	FriendlyName *string    `json:"friendly_name,omitempty"`
 }
 
 func GetRemote(attributes map[string]interface{}) *Remote {

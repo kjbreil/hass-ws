@@ -128,16 +128,15 @@ func TestInputSelectSelectPrevious_JSON(t *testing.T) {
 	}
 }
 func TestInputSelectSetOptions_JSON(t *testing.T) {
-	options := "data"
 
 	tests := []struct {
 		name   string
 		fields *InputSelectSetOptions
 		want   string
 	}{{
-		fields: NewInputSelectSetOptions(Targets("climate.kitchen")).Options(options),
+		fields: NewInputSelectSetOptions(Targets("climate.kitchen")),
 		name:   "base",
-		want:   "{\"id\":null,\"type\":\"call_service\",\"domain\":\"input_select\",\"service\":\"set_options\",\"target\":{\"entity_id\":[\"climate.kitchen\"]},\"service_data\":{\"options\":\"data\"}}",
+		want:   "{\"id\":null,\"type\":\"call_service\",\"domain\":\"input_select\",\"service\":\"set_options\",\"target\":{\"entity_id\":[\"climate.kitchen\"]}}",
 	}}
 	for _, tt := range tests {
 		t.Run(tt.name, func(t *testing.T) {

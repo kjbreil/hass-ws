@@ -2,10 +2,11 @@ package main
 
 import (
 	"flag"
-	"github.com/goccy/go-json"
-	hass_ws "github.com/kjbreil/hass-ws"
-	"github.com/kjbreil/hass-ws/helpers/HassWSService/servicemaker"
 	"os"
+
+	"github.com/goccy/go-json"
+	"github.com/kjbreil/hass-ws/cmd/hassws-gen/servicemaker"
+	"github.com/kjbreil/hass-ws/pkg/hass"
 )
 
 // Command-line flags for configuration
@@ -23,10 +24,10 @@ func main() {
 	flag.Parse()
 
 	// Parse the Home Assistant configuration
-	cfg, _ := hass_ws.ParseConfig(*configLocation)
+	cfg, _ := hass.ParseConfig(*configLocation)
 
 	// Create and connect the client
-	c, _ := hass_ws.NewClient(cfg)
+	c, _ := hass.NewClient(cfg)
 	err := c.Connect()
 	if err != nil {
 		panic(err) // Panic if connection fails

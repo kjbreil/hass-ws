@@ -48,26 +48,6 @@ func TestSceneCreate_JSON(t *testing.T) {
 		})
 	}
 }
-func TestSceneDelete_JSON(t *testing.T) {
-
-	tests := []struct {
-		name   string
-		fields *SceneDelete
-		want   string
-	}{{
-		fields: NewSceneDelete(Targets("climate.kitchen")),
-		name:   "base",
-		want:   "{\"id\":null,\"type\":\"call_service\",\"domain\":\"scene\",\"service\":\"delete\",\"target\":{\"entity_id\":[\"climate.kitchen\"]}}",
-	}}
-	for _, tt := range tests {
-		t.Run(tt.name, func(t *testing.T) {
-			d := tt.fields
-			if got := d.JSON(); got != tt.want {
-				t.Errorf("JSON() = %v, want %v", got, tt.want)
-			}
-		})
-	}
-}
 func TestSceneReload_JSON(t *testing.T) {
 
 	tests := []struct {

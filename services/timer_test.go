@@ -26,27 +26,6 @@ func TestTimerCancel_JSON(t *testing.T) {
 		})
 	}
 }
-func TestTimerChange_JSON(t *testing.T) {
-	duration := "data"
-
-	tests := []struct {
-		name   string
-		fields *TimerChange
-		want   string
-	}{{
-		fields: NewTimerChange(Targets("climate.kitchen")).Duration(duration),
-		name:   "base",
-		want:   "{\"id\":null,\"type\":\"call_service\",\"domain\":\"timer\",\"service\":\"change\",\"target\":{\"entity_id\":[\"climate.kitchen\"]},\"service_data\":{\"duration\":\"data\"}}",
-	}}
-	for _, tt := range tests {
-		t.Run(tt.name, func(t *testing.T) {
-			d := tt.fields
-			if got := d.JSON(); got != tt.want {
-				t.Errorf("JSON() = %v, want %v", got, tt.want)
-			}
-		})
-	}
-}
 func TestTimerFinish_JSON(t *testing.T) {
 
 	tests := []struct {

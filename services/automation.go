@@ -10,7 +10,7 @@ import (
 ////////////////////////////////////////////////////////////////////////////////
 
 // NewAutomationReload creates the object that can be sent to Home Assistant for domain automation, service reload
-// "Reloads the automation configuration."
+// "Reload the automation configuration."
 func NewAutomationReload(target Target) *AutomationReload {
 	serviceDomain := "automation"
 	serviceType := "call_service"
@@ -46,7 +46,7 @@ func (a *AutomationReload) Name() string {
 }
 
 // NewAutomationToggle creates the object that can be sent to Home Assistant for domain automation, service toggle
-// "Toggles (enable / disable) an automation."
+// "Toggle (enable / disable) an automation."
 func NewAutomationToggle(target Target) *AutomationToggle {
 	serviceDomain := "automation"
 	serviceType := "call_service"
@@ -82,7 +82,7 @@ func (a *AutomationToggle) Name() string {
 }
 
 // NewAutomationTrigger creates the object that can be sent to Home Assistant for domain automation, service trigger
-// "Triggers the actions of an automation."
+// "Trigger the actions of an automation."
 func NewAutomationTrigger(target Target) *AutomationTrigger {
 	serviceDomain := "automation"
 	serviceType := "call_service"
@@ -118,7 +118,7 @@ func (a *AutomationTrigger) Name() string {
 }
 
 // NewAutomationTurnOff creates the object that can be sent to Home Assistant for domain automation, service turn_off
-// "Disables an automation."
+// "Disable an automation."
 func NewAutomationTurnOff(target Target) *AutomationTurnOff {
 	serviceDomain := "automation"
 	serviceType := "call_service"
@@ -154,7 +154,7 @@ func (a *AutomationTurnOff) Name() string {
 }
 
 // NewAutomationTurnOn creates the object that can be sent to Home Assistant for domain automation, service turn_on
-// "Enables an automation."
+// "Enable an automation."
 func NewAutomationTurnOn(target Target) *AutomationTurnOn {
 	serviceDomain := "automation"
 	serviceType := "call_service"

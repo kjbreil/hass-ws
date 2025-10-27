@@ -14,7 +14,7 @@ import (
 func GenServices() error {
 	servicesFolder := "services"
 
-	servicesList := ServicesInit("./helpers/services.json")
+	servicesList := ServicesInit("./internal/generator/data/services.json")
 	err := Gen(servicesFolder, servicesList)
 	return err
 }

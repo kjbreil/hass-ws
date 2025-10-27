@@ -10,7 +10,7 @@ import (
 ////////////////////////////////////////////////////////////////////////////////
 
 // NewInputNumberDecrement creates the object that can be sent to Home Assistant for domain input_number, service decrement
-// "Decrements the current value by 1 step."
+// "Decrement the value of an input number entity by its stepping."
 func NewInputNumberDecrement(target Target) *InputNumberDecrement {
 	serviceDomain := "input_number"
 	serviceType := "call_service"
@@ -46,7 +46,7 @@ func (i *InputNumberDecrement) Name() string {
 }
 
 // NewInputNumberIncrement creates the object that can be sent to Home Assistant for domain input_number, service increment
-// "Increments the current value by 1 step."
+// "Increment the value of an input number entity by its stepping."
 func NewInputNumberIncrement(target Target) *InputNumberIncrement {
 	serviceDomain := "input_number"
 	serviceType := "call_service"
@@ -82,7 +82,7 @@ func (i *InputNumberIncrement) Name() string {
 }
 
 // NewInputNumberReload creates the object that can be sent to Home Assistant for domain input_number, service reload
-// "Reloads helpers from the YAML-configuration."
+// "Reload the input_number configuration."
 func NewInputNumberReload(target Target) *InputNumberReload {
 	serviceDomain := "input_number"
 	serviceType := "call_service"
@@ -118,7 +118,7 @@ func (i *InputNumberReload) Name() string {
 }
 
 // NewInputNumberSetValue creates the object that can be sent to Home Assistant for domain input_number, service set_value
-// "Sets the value."
+// "Set the value of an input number entity."
 func NewInputNumberSetValue(target Target) *InputNumberSetValue {
 	serviceDomain := "input_number"
 	serviceType := "call_service"

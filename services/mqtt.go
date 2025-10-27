@@ -10,7 +10,7 @@ import (
 ////////////////////////////////////////////////////////////////////////////////
 
 // NewMqttDump creates the object that can be sent to Home Assistant for domain mqtt, service dump
-// "Writes all messages on a specific topic into the `mqtt_dump.txt` file in your configuration folder."
+// "Dump messages on a topic selector to the 'mqtt_dump.txt' file in your configuration folder."
 func NewMqttDump(target Target) *MqttDump {
 	serviceDomain := "mqtt"
 	serviceType := "call_service"
@@ -58,7 +58,7 @@ func (m *MqttDump) Name() string {
 }
 
 // NewMqttPublish creates the object that can be sent to Home Assistant for domain mqtt, service publish
-// "Publishes a message to an MQTT topic."
+// "Publish a message to an MQTT topic."
 func NewMqttPublish(target Target) *MqttPublish {
 	serviceDomain := "mqtt"
 	serviceType := "call_service"
@@ -82,10 +82,15 @@ type MqttPublish struct {
 	ServiceData MqttPublishParams `json:"service_data,omitempty"`
 }
 type MqttPublishParams struct {
-	Qos   *Qos    `json:"qos,omitempty"`
-	Topic *string `json:"topic,omitempty"`
+	Payload *string `json:"payload,omitempty"`
+	Qos     *Qos    `json:"qos,omitempty"`
+	Topic   *string `json:"topic,omitempty"`
 }
 
+func (m *MqttPublish) Payload(payload string) *MqttPublish {
+	m.ServiceData.Payload = &payload
+	return m
+}
 func (m *MqttPublish) Qos(qos Qos) *MqttPublish {
 	m.ServiceData.Qos = &qos
 	return m
@@ -106,7 +111,7 @@ func (m *MqttPublish) Name() string {
 }
 
 // NewMqttReload creates the object that can be sent to Home Assistant for domain mqtt, service reload
-// "Reloads MQTT entities from the YAML-configuration."
+// "Reload all MQTT entities from YAML."
 func NewMqttReload(target Target) *MqttReload {
 	serviceDomain := "mqtt"
 	serviceType := "call_service"

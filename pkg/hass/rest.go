@@ -1,32 +1,36 @@
-package hass_ws
+package hass
 
 import (
 	"fmt"
-	"github.com/goccy/go-json"
-	"github.com/kjbreil/hass-ws/model"
-	"github.com/kjbreil/hass-ws/rest"
 	"io"
 	"log"
 	"net/http"
 	"net/url"
 	"strings"
 	"time"
+
+	"github.com/goccy/go-json"
+	"github.com/kjbreil/hass-ws/model"
+	"github.com/kjbreil/hass-ws/rest"
 )
 
+// GetRestStates retrieves all states via the REST API
 func (c *Client) GetRestStates() (*model.States, error) {
-	return c.restClient.GetStates()
+	return c.RestClient().GetStates()
 }
 
+// GetApi retrieves API information via the REST API
 func (c *Client) GetApi() (*rest.Api, error) {
-	return c.restClient.GetApi()
+	return c.RestClient().GetApi()
 }
 
+// GetState retrieves a single entity state via the REST API
 func (c *Client) GetState(domainEntity string) (*model.State, error) {
-	return c.restClient.GetState(domainEntity)
+	return c.RestClient().GetState(domainEntity)
 }
 
+// GetHistory retrieves historical data for entities
 func (c *Client) GetHistory(start, end time.Time, entities ...string) (*model.Histories, error) {
-
 	scheme := "http"
 	if c.config.SSL {
 		scheme = "https"
@@ -65,8 +69,6 @@ func (c *Client) GetHistory(start, end time.Time, entities ...string) (*model.Hi
 			panic(err)
 		}
 	}(resp.Body)
-
-	// fmt.Println(u.String())
 
 	body, err := io.ReadAll(resp.Body)
 	if err != nil {

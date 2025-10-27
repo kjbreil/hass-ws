@@ -1,7 +1,7 @@
 package main
 
 import (
-	"github.com/kjbreil/hass-ws/helpers/HassWSService/servicemaker"
+	"github.com/kjbreil/hass-ws/cmd/hassws-gen/servicemaker"
 )
 
 // main is the entry point for the helpers tool. It generates Home Assistant services and entities by calling

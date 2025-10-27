@@ -10,7 +10,7 @@ import (
 ////////////////////////////////////////////////////////////////////////////////
 
 // NewInputButtonPress creates the object that can be sent to Home Assistant for domain input_button, service press
-// "Mimics the physical button press on the device."
+// "Press the input button entity."
 func NewInputButtonPress(target Target) *InputButtonPress {
 	serviceDomain := "input_button"
 	serviceType := "call_service"
@@ -46,7 +46,7 @@ func (i *InputButtonPress) Name() string {
 }
 
 // NewInputButtonReload creates the object that can be sent to Home Assistant for domain input_button, service reload
-// "Reloads helpers from the YAML-configuration."
+// ""
 func NewInputButtonReload(target Target) *InputButtonReload {
 	serviceDomain := "input_button"
 	serviceType := "call_service"

@@ -6,10 +6,7 @@ package entities
 
 type AlarmControlPanel struct {
 	Additional   Additional `json:"additional,omitempty"`
-	ChangedBy    *string    `json:"changed_by,omitempty"`
-	CodeFormat   *string    `json:"code_format,omitempty"`
 	FriendlyName *string    `json:"friendly_name,omitempty"`
-	State        *string    `json:"state,omitempty"`
 }
 
 func GetAlarmControlPanel(attributes map[string]interface{}) *AlarmControlPanel {

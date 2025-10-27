@@ -50,16 +50,17 @@ func TestPersistentNotificationDismiss_JSON(t *testing.T) {
 		})
 	}
 }
-func TestPersistentNotificationDismissAll_JSON(t *testing.T) {
+func TestPersistentNotificationMarkRead_JSON(t *testing.T) {
+	notificationId := "data"
 
 	tests := []struct {
 		name   string
-		fields *PersistentNotificationDismissAll
+		fields *PersistentNotificationMarkRead
 		want   string
 	}{{
-		fields: NewPersistentNotificationDismissAll(Targets("climate.kitchen")),
+		fields: NewPersistentNotificationMarkRead(Targets("climate.kitchen")).NotificationId(notificationId),
 		name:   "base",
-		want:   "{\"id\":null,\"type\":\"call_service\",\"domain\":\"persistent_notification\",\"service\":\"dismiss_all\",\"target\":{\"entity_id\":[\"climate.kitchen\"]}}",
+		want:   "{\"id\":null,\"type\":\"call_service\",\"domain\":\"persistent_notification\",\"service\":\"mark_read\",\"target\":{\"entity_id\":[\"climate.kitchen\"]},\"service_data\":{\"notification_id\":\"data\"}}",
 	}}
 	for _, tt := range tests {
 		t.Run(tt.name, func(t *testing.T) {

@@ -9,8 +9,71 @@ import (
 // Do not modify this file, it is automatically generated
 ////////////////////////////////////////////////////////////////////////////////
 
+// NewCounterConfigure creates the object that can be sent to Home Assistant for domain counter, service configure
+// "Change counter parameters."
+func NewCounterConfigure(target Target) *CounterConfigure {
+	serviceDomain := "counter"
+	serviceType := "call_service"
+	serviceService := "configure"
+	c := &CounterConfigure{
+		ServiceBase: ServiceBase{
+			Domain:         &serviceDomain,
+			Id:             nil,
+			ReturnResponse: false,
+			Service:        &serviceService,
+			Target:         target,
+			Type:           &serviceType,
+		},
+		ServiceData: CounterConfigureParams{},
+	}
+	return c
+}
+
+type CounterConfigure struct {
+	ServiceBase
+	ServiceData CounterConfigureParams `json:"service_data,omitempty"`
+}
+type CounterConfigureParams struct {
+	Initial *float64 `json:"initial,omitempty"`
+	Maximum *float64 `json:"maximum,omitempty"`
+	Minimum *float64 `json:"minimum,omitempty"`
+	Step    *float64 `json:"step,omitempty"`
+	Value   *float64 `json:"value,omitempty"`
+}
+
+func (c *CounterConfigure) Initial(initial float64) *CounterConfigure {
+	c.ServiceData.Initial = &initial
+	return c
+}
+func (c *CounterConfigure) Maximum(maximum float64) *CounterConfigure {
+	c.ServiceData.Maximum = &maximum
+	return c
+}
+func (c *CounterConfigure) Minimum(minimum float64) *CounterConfigure {
+	c.ServiceData.Minimum = &minimum
+	return c
+}
+func (c *CounterConfigure) Step(step float64) *CounterConfigure {
+	c.ServiceData.Step = &step
+	return c
+}
+func (c *CounterConfigure) Value(value float64) *CounterConfigure {
+	c.ServiceData.Value = &value
+	return c
+}
+func (c *CounterConfigure) JSON() string {
+	data, _ := gojson.Marshal(c)
+	return string(data)
+}
+func (c *CounterConfigure) Targets() []string {
+	return c.Target.EntityId
+}
+func (c *CounterConfigure) Name() string {
+	return fmt.Sprintf("%s.%s", *c.Domain, *c.Service)
+}
+
 // NewCounterDecrement creates the object that can be sent to Home Assistant for domain counter, service decrement
-// "Decrements a counter by its step size."
+// "Decrement a counter."
 func NewCounterDecrement(target Target) *CounterDecrement {
 	serviceDomain := "counter"
 	serviceType := "call_service"
@@ -46,7 +109,7 @@ func (c *CounterDecrement) Name() string {
 }
 
 // NewCounterIncrement creates the object that can be sent to Home Assistant for domain counter, service increment
-// "Increments a counter by its step size."
+// "Increment a counter."
 func NewCounterIncrement(target Target) *CounterIncrement {
 	serviceDomain := "counter"
 	serviceType := "call_service"
@@ -82,7 +145,7 @@ func (c *CounterIncrement) Name() string {
 }
 
 // NewCounterReset creates the object that can be sent to Home Assistant for domain counter, service reset
-// "Resets a counter to its initial value."
+// "Reset a counter."
 func NewCounterReset(target Target) *CounterReset {
 	serviceDomain := "counter"
 	serviceType := "call_service"
@@ -114,48 +177,5 @@ func (c *CounterReset) Targets() []string {
 	return c.Target.EntityId
 }
 func (c *CounterReset) Name() string {
-	return fmt.Sprintf("%s.%s", *c.Domain, *c.Service)
-}
-
-// NewCounterSetValue creates the object that can be sent to Home Assistant for domain counter, service set_value
-// "Sets the counter to a specific value."
-func NewCounterSetValue(target Target) *CounterSetValue {
-	serviceDomain := "counter"
-	serviceType := "call_service"
-	serviceService := "set_value"
-	c := &CounterSetValue{
-		ServiceBase: ServiceBase{
-			Domain:         &serviceDomain,
-			Id:             nil,
-			ReturnResponse: false,
-			Service:        &serviceService,
-			Target:         target,
-			Type:           &serviceType,
-		},
-		ServiceData: CounterSetValueParams{},
-	}
-	return c
-}
-
-type CounterSetValue struct {
-	ServiceBase
-	ServiceData CounterSetValueParams `json:"service_data,omitempty"`
-}
-type CounterSetValueParams struct {
-	Value *float64 `json:"value,omitempty"`
-}
-
-func (c *CounterSetValue) Value(value float64) *CounterSetValue {
-	c.ServiceData.Value = &value
-	return c
-}
-func (c *CounterSetValue) JSON() string {
-	data, _ := gojson.Marshal(c)
-	return string(data)
-}
-func (c *CounterSetValue) Targets() []string {
-	return c.Target.EntityId
-}
-func (c *CounterSetValue) Name() string {
 	return fmt.Sprintf("%s.%s", *c.Domain, *c.Service)
 }

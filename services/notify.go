@@ -63,7 +63,7 @@ func (n *NotifyNotify) Name() string {
 }
 
 // NewNotifyPersistentNotification creates the object that can be sent to Home Assistant for domain notify, service persistent_notification
-// "Sends a notification that is visible in the notifications panel."
+// "Sends a notification that is visible in the front-end."
 func NewNotifyPersistentNotification(target Target) *NotifyPersistentNotification {
 	serviceDomain := "notify"
 	serviceType := "call_service"
@@ -87,15 +87,10 @@ type NotifyPersistentNotification struct {
 	ServiceData NotifyPersistentNotificationParams `json:"service_data,omitempty"`
 }
 type NotifyPersistentNotificationParams struct {
-	Data    interface{} `json:"data,omitempty"`
-	Message *string     `json:"message,omitempty"`
-	Title   *string     `json:"title,omitempty"`
+	Message *string `json:"message,omitempty"`
+	Title   *string `json:"title,omitempty"`
 }
 
-func (n *NotifyPersistentNotification) Data(data interface{}) *NotifyPersistentNotification {
-	n.ServiceData.Data = &data
-	return n
-}
 func (n *NotifyPersistentNotification) Message(message string) *NotifyPersistentNotification {
 	n.ServiceData.Message = &message
 	return n
@@ -112,53 +107,5 @@ func (n *NotifyPersistentNotification) Targets() []string {
 	return n.Target.EntityId
 }
 func (n *NotifyPersistentNotification) Name() string {
-	return fmt.Sprintf("%s.%s", *n.Domain, *n.Service)
-}
-
-// NewNotifySendMessage creates the object that can be sent to Home Assistant for domain notify, service send_message
-// "Sends a notification message."
-func NewNotifySendMessage(target Target) *NotifySendMessage {
-	serviceDomain := "notify"
-	serviceType := "call_service"
-	serviceService := "send_message"
-	n := &NotifySendMessage{
-		ServiceBase: ServiceBase{
-			Domain:         &serviceDomain,
-			Id:             nil,
-			ReturnResponse: false,
-			Service:        &serviceService,
-			Target:         target,
-			Type:           &serviceType,
-		},
-		ServiceData: NotifySendMessageParams{},
-	}
-	return n
-}
-
-type NotifySendMessage struct {
-	ServiceBase
-	ServiceData NotifySendMessageParams `json:"service_data,omitempty"`
-}
-type NotifySendMessageParams struct {
-	Message *string `json:"message,omitempty"`
-	Title   *string `json:"title,omitempty"`
-}
-
-func (n *NotifySendMessage) Message(message string) *NotifySendMessage {
-	n.ServiceData.Message = &message
-	return n
-}
-func (n *NotifySendMessage) Title(title string) *NotifySendMessage {
-	n.ServiceData.Title = &title
-	return n
-}
-func (n *NotifySendMessage) JSON() string {
-	data, _ := gojson.Marshal(n)
-	return string(data)
-}
-func (n *NotifySendMessage) Targets() []string {
-	return n.Target.EntityId
-}
-func (n *NotifySendMessage) Name() string {
 	return fmt.Sprintf("%s.%s", *n.Domain, *n.Service)
 }

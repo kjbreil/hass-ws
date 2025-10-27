@@ -10,7 +10,7 @@ import (
 ////////////////////////////////////////////////////////////////////////////////
 
 // NewSceneApply creates the object that can be sent to Home Assistant for domain scene, service apply
-// "Activates a scene with configuration."
+// "Activate a scene with configuration."
 func NewSceneApply(target Target) *SceneApply {
 	serviceDomain := "scene"
 	serviceType := "call_service"
@@ -95,44 +95,8 @@ func (s *SceneCreate) Name() string {
 	return fmt.Sprintf("%s.%s", *s.Domain, *s.Service)
 }
 
-// NewSceneDelete creates the object that can be sent to Home Assistant for domain scene, service delete
-// "Deletes a dynamically created scene."
-func NewSceneDelete(target Target) *SceneDelete {
-	serviceDomain := "scene"
-	serviceType := "call_service"
-	serviceService := "delete"
-	s := &SceneDelete{
-		ServiceBase: ServiceBase{
-			Domain:         &serviceDomain,
-			Id:             nil,
-			ReturnResponse: false,
-			Service:        &serviceService,
-			Target:         target,
-			Type:           &serviceType,
-		},
-		ServiceData: nil,
-	}
-	return s
-}
-
-type SceneDelete struct {
-	ServiceBase
-	ServiceData interface{} `json:"service_data,omitempty"`
-}
-
-func (s *SceneDelete) JSON() string {
-	data, _ := gojson.Marshal(s)
-	return string(data)
-}
-func (s *SceneDelete) Targets() []string {
-	return s.Target.EntityId
-}
-func (s *SceneDelete) Name() string {
-	return fmt.Sprintf("%s.%s", *s.Domain, *s.Service)
-}
-
 // NewSceneReload creates the object that can be sent to Home Assistant for domain scene, service reload
-// "Reloads the scenes from the YAML-configuration."
+// "Reload the scene configuration."
 func NewSceneReload(target Target) *SceneReload {
 	serviceDomain := "scene"
 	serviceType := "call_service"
@@ -168,7 +132,7 @@ func (s *SceneReload) Name() string {
 }
 
 // NewSceneTurnOn creates the object that can be sent to Home Assistant for domain scene, service turn_on
-// "Activates a scene."
+// "Activate a scene."
 func NewSceneTurnOn(target Target) *SceneTurnOn {
 	serviceDomain := "scene"
 	serviceType := "call_service"

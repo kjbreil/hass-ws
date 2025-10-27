@@ -7,8 +7,6 @@ import "testing"
 ////////////////////////////////////////////////////////////////////////////////
 
 func TestConversationProcess_JSON(t *testing.T) {
-	conversationId := "data"
-	language := "data"
 	text := "data"
 
 	tests := []struct {
@@ -16,9 +14,9 @@ func TestConversationProcess_JSON(t *testing.T) {
 		fields *ConversationProcess
 		want   string
 	}{{
-		fields: NewConversationProcess(Targets("climate.kitchen")).ConversationId(conversationId).Language(language).Text(text),
+		fields: NewConversationProcess(Targets("climate.kitchen")).Text(text),
 		name:   "base",
-		want:   "{\"id\":null,\"type\":\"call_service\",\"domain\":\"conversation\",\"service\":\"process\",\"target\":{\"entity_id\":[\"climate.kitchen\"]},\"service_data\":{\"conversation_id\":\"data\",\"language\":\"data\",\"text\":\"data\"}}",
+		want:   "{\"id\":null,\"type\":\"call_service\",\"domain\":\"conversation\",\"service\":\"process\",\"target\":{\"entity_id\":[\"climate.kitchen\"]},\"service_data\":{\"text\":\"data\"}}",
 	}}
 	for _, tt := range tests {
 		t.Run(tt.name, func(t *testing.T) {
@@ -30,16 +28,15 @@ func TestConversationProcess_JSON(t *testing.T) {
 	}
 }
 func TestConversationReload_JSON(t *testing.T) {
-	language := "data"
 
 	tests := []struct {
 		name   string
 		fields *ConversationReload
 		want   string
 	}{{
-		fields: NewConversationReload(Targets("climate.kitchen")).Language(language),
+		fields: NewConversationReload(Targets("climate.kitchen")),
 		name:   "base",
-		want:   "{\"id\":null,\"type\":\"call_service\",\"domain\":\"conversation\",\"service\":\"reload\",\"target\":{\"entity_id\":[\"climate.kitchen\"]},\"service_data\":{\"language\":\"data\"}}",
+		want:   "{\"id\":null,\"type\":\"call_service\",\"domain\":\"conversation\",\"service\":\"reload\",\"target\":{\"entity_id\":[\"climate.kitchen\"]}}",
 	}}
 	for _, tt := range tests {
 		t.Run(tt.name, func(t *testing.T) {

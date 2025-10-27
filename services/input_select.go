@@ -10,7 +10,7 @@ import (
 ////////////////////////////////////////////////////////////////////////////////
 
 // NewInputSelectReload creates the object that can be sent to Home Assistant for domain input_select, service reload
-// "Reloads helpers from the YAML-configuration."
+// "Reload the input_select configuration."
 func NewInputSelectReload(target Target) *InputSelectReload {
 	serviceDomain := "input_select"
 	serviceType := "call_service"
@@ -46,7 +46,7 @@ func (i *InputSelectReload) Name() string {
 }
 
 // NewInputSelectSelectFirst creates the object that can be sent to Home Assistant for domain input_select, service select_first
-// "Selects the first option."
+// "Select the first option of an input select entity."
 func NewInputSelectSelectFirst(target Target) *InputSelectSelectFirst {
 	serviceDomain := "input_select"
 	serviceType := "call_service"
@@ -82,7 +82,7 @@ func (i *InputSelectSelectFirst) Name() string {
 }
 
 // NewInputSelectSelectLast creates the object that can be sent to Home Assistant for domain input_select, service select_last
-// "Selects the last option."
+// "Select the last option of an input select entity."
 func NewInputSelectSelectLast(target Target) *InputSelectSelectLast {
 	serviceDomain := "input_select"
 	serviceType := "call_service"
@@ -118,7 +118,7 @@ func (i *InputSelectSelectLast) Name() string {
 }
 
 // NewInputSelectSelectNext creates the object that can be sent to Home Assistant for domain input_select, service select_next
-// "Selects the next option."
+// "Select the next options of an input select entity."
 func NewInputSelectSelectNext(target Target) *InputSelectSelectNext {
 	serviceDomain := "input_select"
 	serviceType := "call_service"
@@ -154,7 +154,7 @@ func (i *InputSelectSelectNext) Name() string {
 }
 
 // NewInputSelectSelectOption creates the object that can be sent to Home Assistant for domain input_select, service select_option
-// "Selects an option."
+// "Select an option of an input select entity."
 func NewInputSelectSelectOption(target Target) *InputSelectSelectOption {
 	serviceDomain := "input_select"
 	serviceType := "call_service"
@@ -197,7 +197,7 @@ func (i *InputSelectSelectOption) Name() string {
 }
 
 // NewInputSelectSelectPrevious creates the object that can be sent to Home Assistant for domain input_select, service select_previous
-// "Selects the previous option."
+// "Select the previous options of an input select entity."
 func NewInputSelectSelectPrevious(target Target) *InputSelectSelectPrevious {
 	serviceDomain := "input_select"
 	serviceType := "call_service"
@@ -233,7 +233,7 @@ func (i *InputSelectSelectPrevious) Name() string {
 }
 
 // NewInputSelectSetOptions creates the object that can be sent to Home Assistant for domain input_select, service set_options
-// "Sets the options."
+// "Set the options of an input select entity."
 func NewInputSelectSetOptions(target Target) *InputSelectSetOptions {
 	serviceDomain := "input_select"
 	serviceType := "call_service"
@@ -247,23 +247,16 @@ func NewInputSelectSetOptions(target Target) *InputSelectSetOptions {
 			Target:         target,
 			Type:           &serviceType,
 		},
-		ServiceData: InputSelectSetOptionsParams{},
+		ServiceData: nil,
 	}
 	return i
 }
 
 type InputSelectSetOptions struct {
 	ServiceBase
-	ServiceData InputSelectSetOptionsParams `json:"service_data,omitempty"`
-}
-type InputSelectSetOptionsParams struct {
-	Options *string `json:"options,omitempty"`
+	ServiceData interface{} `json:"service_data,omitempty"`
 }
 
-func (i *InputSelectSetOptions) Options(options string) *InputSelectSetOptions {
-	i.ServiceData.Options = &options
-	return i
-}
 func (i *InputSelectSetOptions) JSON() string {
 	data, _ := gojson.Marshal(i)
 	return string(data)

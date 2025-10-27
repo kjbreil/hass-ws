@@ -10,7 +10,7 @@ import (
 ////////////////////////////////////////////////////////////////////////////////
 
 // NewZoneReload creates the object that can be sent to Home Assistant for domain zone, service reload
-// "Reloads zones from the YAML-configuration."
+// "Reload the YAML-based zone configuration."
 func NewZoneReload(target Target) *ZoneReload {
 	serviceDomain := "zone"
 	serviceType := "call_service"

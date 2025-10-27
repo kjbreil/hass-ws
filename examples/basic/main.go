@@ -6,15 +6,16 @@ package main
 
 import (
 	"fmt"
-	hass_ws "github.com/kjbreil/hass-ws"
-	"github.com/kjbreil/hass-ws/helpers/HassWSService/services"
-	"github.com/kjbreil/hass-ws/model"
-	"github.com/kjbreil/hass-ws/rest"
 	"log"
 	"net/url"
 	"os"
 	"os/signal"
 	"time"
+
+	"github.com/kjbreil/hass-ws/model"
+	"github.com/kjbreil/hass-ws/pkg/hass"
+	"github.com/kjbreil/hass-ws/rest"
+	"github.com/kjbreil/hass-ws/services"
 )
 
 func main() {
@@ -22,7 +23,7 @@ func main() {
 	interrupt := make(chan os.Signal, 1)
 	signal.Notify(interrupt, os.Interrupt)
 
-	cfg, _ := hass_ws.ParseConfig("config.yml")
+	cfg, _ := hass.ParseConfig("config.yml")
 
 	rc := rest.New(cfg.Host, cfg.Port, cfg.Token, cfg.SSL)
 
@@ -36,7 +37,7 @@ func main() {
 
 	fmt.Println(api)
 
-	c, _ := hass_ws.NewClient(cfg)
+	c, _ := hass.NewClient(cfg)
 
 	// c.Logger(setupLogging())
 
@@ -86,8 +87,8 @@ func main() {
 	// 	TargetTempHigh(78)
 	// c.CallService(service)
 
-	service := services.NewWeatherGetForecast(services.Targets("weather.forecast_merritt_ave_se"))
-	service.GetForecastType(services.GetForecastTypehourly)
+	service := services.NewWeatherGetForecasts(services.Targets("weather.forecast_merritt_ave_se"))
+	service.GetForecastsType(services.GetForecastsTypehourly)
 
 	rsp := c.CallService(service)
 

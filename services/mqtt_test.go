@@ -29,6 +29,7 @@ func TestMqttDump_JSON(t *testing.T) {
 	}
 }
 func TestMqttPublish_JSON(t *testing.T) {
+	payload := "data"
 	qos := Qos0
 	topic := "data"
 
@@ -37,9 +38,9 @@ func TestMqttPublish_JSON(t *testing.T) {
 		fields *MqttPublish
 		want   string
 	}{{
-		fields: NewMqttPublish(Targets("climate.kitchen")).Qos(qos).Topic(topic),
+		fields: NewMqttPublish(Targets("climate.kitchen")).Payload(payload).Qos(qos).Topic(topic),
 		name:   "base",
-		want:   "{\"id\":null,\"type\":\"call_service\",\"domain\":\"mqtt\",\"service\":\"publish\",\"target\":{\"entity_id\":[\"climate.kitchen\"]},\"service_data\":{\"qos\":\"0\",\"topic\":\"data\"}}",
+		want:   "{\"id\":null,\"type\":\"call_service\",\"domain\":\"mqtt\",\"service\":\"publish\",\"target\":{\"entity_id\":[\"climate.kitchen\"]},\"service_data\":{\"payload\":\"data\",\"qos\":\"0\",\"topic\":\"data\"}}",
 	}}
 	for _, tt := range tests {
 		t.Run(tt.name, func(t *testing.T) {

@@ -10,7 +10,7 @@ import (
 ////////////////////////////////////////////////////////////////////////////////
 
 // NewSystemLogClear creates the object that can be sent to Home Assistant for domain system_log, service clear
-// "Deletes all log entries."
+// "Clear all log entries."
 func NewSystemLogClear(target Target) *SystemLogClear {
 	serviceDomain := "system_log"
 	serviceType := "call_service"
