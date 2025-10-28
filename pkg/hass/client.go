@@ -20,6 +20,9 @@ import (
 	ws "nhooyr.io/websocket"
 )
 
+// Response is a type alias for handlers.Response to expose it publicly
+type Response = handlers.Response
+
 // Client is the main Home Assistant WebSocket client
 type Client struct {
 	conn       *websocket.Connection
@@ -235,7 +238,7 @@ func (c *Client) GetServices() *model.Message {
 }
 
 // CallService calls a Home Assistant service
-func (c *Client) CallService(service services.Service) *handlers.Response {
+func (c *Client) CallService(service services.Service) *Response {
 	id := c.NextID()
 	service.SetID(&id)
 	callback := make(chan *model.Message)
