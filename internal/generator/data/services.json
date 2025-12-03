@@ -2084,7 +2084,7 @@
               "object": null
             }
           },
-          "kelvin": {
+          "color_temp_kelvin": {
             "advanced": true,
             "description": "Color temperature for the light in Kelvin.",
             "name": "Color temperature (Kelvin)",
@@ -2435,7 +2435,7 @@
               "object": null
             }
           },
-          "kelvin": {
+          "color_temp_kelvin": {
             "advanced": true,
             "description": "Color temperature for the light in Kelvin.",
             "name": "Color temperature (Kelvin)",

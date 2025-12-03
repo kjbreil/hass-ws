@@ -34,15 +34,15 @@ type LightToggle struct {
 	ServiceData LightToggleParams `json:"service_data,omitempty"`
 }
 type LightToggleParams struct {
-	Brightness    *float64   `json:"brightness,omitempty"`
-	BrightnessPct *float64   `json:"brightness_pct,omitempty"`
-	ColorName     *ColorName `json:"color_name,omitempty"`
-	ColorTemp     *float64   `json:"color_temp,omitempty"`
-	Effect        *string    `json:"effect,omitempty"`
-	Flash         *Flash     `json:"flash,omitempty"`
-	Kelvin        *float64   `json:"kelvin,omitempty"`
-	Profile       *string    `json:"profile,omitempty"`
-	Transition    *float64   `json:"transition,omitempty"`
+	Brightness      *float64   `json:"brightness,omitempty"`
+	BrightnessPct   *float64   `json:"brightness_pct,omitempty"`
+	ColorName       *ColorName `json:"color_name,omitempty"`
+	ColorTemp       *float64   `json:"color_temp,omitempty"`
+	ColorTempKelvin *float64   `json:"color_temp_kelvin,omitempty"`
+	Effect          *string    `json:"effect,omitempty"`
+	Flash           *Flash     `json:"flash,omitempty"`
+	Profile         *string    `json:"profile,omitempty"`
+	Transition      *float64   `json:"transition,omitempty"`
 }
 
 func (l *LightToggle) Brightness(brightness float64) *LightToggle {
@@ -61,16 +61,16 @@ func (l *LightToggle) ColorTemp(colorTemp float64) *LightToggle {
 	l.ServiceData.ColorTemp = &colorTemp
 	return l
 }
+func (l *LightToggle) ColorTempKelvin(colorTempKelvin float64) *LightToggle {
+	l.ServiceData.ColorTempKelvin = &colorTempKelvin
+	return l
+}
 func (l *LightToggle) Effect(effect string) *LightToggle {
 	l.ServiceData.Effect = &effect
 	return l
 }
 func (l *LightToggle) Flash(flash Flash) *LightToggle {
 	l.ServiceData.Flash = &flash
-	return l
-}
-func (l *LightToggle) Kelvin(kelvin float64) *LightToggle {
-	l.ServiceData.Kelvin = &kelvin
 	return l
 }
 func (l *LightToggle) Profile(profile string) *LightToggle {
@@ -171,9 +171,9 @@ type LightTurnOnParams struct {
 	BrightnessStepPct *float64   `json:"brightness_step_pct,omitempty"`
 	ColorName         *ColorName `json:"color_name,omitempty"`
 	ColorTemp         *float64   `json:"color_temp,omitempty"`
+	ColorTempKelvin   *float64   `json:"color_temp_kelvin,omitempty"`
 	Effect            *string    `json:"effect,omitempty"`
 	Flash             *Flash     `json:"flash,omitempty"`
-	Kelvin            *float64   `json:"kelvin,omitempty"`
 	Profile           *string    `json:"profile,omitempty"`
 	Transition        *float64   `json:"transition,omitempty"`
 	White             *float64   `json:"white,omitempty"`
@@ -203,16 +203,16 @@ func (l *LightTurnOn) ColorTemp(colorTemp float64) *LightTurnOn {
 	l.ServiceData.ColorTemp = &colorTemp
 	return l
 }
+func (l *LightTurnOn) ColorTempKelvin(colorTempKelvin float64) *LightTurnOn {
+	l.ServiceData.ColorTempKelvin = &colorTempKelvin
+	return l
+}
 func (l *LightTurnOn) Effect(effect string) *LightTurnOn {
 	l.ServiceData.Effect = &effect
 	return l
 }
 func (l *LightTurnOn) Flash(flash Flash) *LightTurnOn {
 	l.ServiceData.Flash = &flash
-	return l
-}
-func (l *LightTurnOn) Kelvin(kelvin float64) *LightTurnOn {
-	l.ServiceData.Kelvin = &kelvin
 	return l
 }
 func (l *LightTurnOn) Profile(profile string) *LightTurnOn {
